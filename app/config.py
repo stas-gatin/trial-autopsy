@@ -58,9 +58,11 @@ AGENTS = [
     {"name": "Genetics", "kind": "code", "does": "Fetches target-disease genetics from Open Targets"},
     {"name": "Literature", "kind": "code", "does": "Finds trial papers and pre-cut-off genetics papers (Europe PMC) or the frozen archive"},
     {"name": "Extraction", "kind": "ai", "group": "extraction", "tier": "fast",
-     "recommended": "meterless:meterless/fast", "alternative": "anthropic:claude-haiku-4-5",
+     "recommended": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b", "alternative": "anthropic:claude-haiku-4-5",
      "does": "Reads each document and copies out numbers with verbatim quotes",
-     "why": "Many calls per case and a narrow task. Every quote is verified against the source by code, so a fast, cheap model is enough."},
+     "why": "Many calls per case and a narrow task: copying numbers exactly. Nemotron 3.5 Super with reasoning off does it "
+            "best, and every quote is verified against the source by code. Straight through NVIDIA's API, because "
+            "Nightshift does not pass the reasoning switch on to the model."},
     {"name": "MechanismAnalyst", "kind": "ai", "group": "reasoning", "tier": "top",
      "recommended": "meterless:meterless/deep", "alternative": "anthropic:claude-opus-5-5",
      "does": "Decides the causal pathway and chooses which numbers the calculator gets",
@@ -81,9 +83,10 @@ AGENTS = [
      "why": "A different model from the analyst (Nemotron 3.5 Super, not Ultra) with its own prompt catches errors the analyst's model would repeat. Strong but independent."},
     {"name": "Refine", "kind": "code", "does": "Targeted search for evidence the critic asked for"},
     {"name": "ReadThrough", "kind": "ai", "group": "extraction", "tier": "fast",
-     "recommended": "meterless:meterless/fast", "alternative": "anthropic:claude-haiku-4-5",
+     "recommended": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b", "alternative": "anthropic:claude-haiku-4-5",
      "does": "Finds rival drugs on the same target and reads their phase 2 results",
-     "why": "Short abstract extraction, verified by code; the forecast itself is computed by the calculator."},
+     "why": "Short abstract extraction, verified by code; the forecast itself is computed by the calculator. Like "
+            "extraction, it runs with reasoning off, straight through NVIDIA's API."},
     {"name": "Reporter", "kind": "ai", "group": "reporter", "tier": "mid",
      "recommended": "meterless:meterless/fast", "alternative": "anthropic:claude-sonnet-5-5",
      "does": "Writes the analyst-facing report from the finished analysis",
