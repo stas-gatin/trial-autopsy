@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import os
 import re
+import secrets
 import time
 
 from app import config
@@ -334,8 +335,11 @@ def _test_meterless(model: str | None) -> dict:
         from openai import APIStatusError
         for attempt in range(3):   # 499: Nightshift aborted the fetch while a lane was waking up; try again
             try:
+                # A unique reference: Nightshift would otherwise answer a repeated test from its cache, which
+                # proves nothing about the model
                 response = client.chat.completions.create(model=route, max_tokens=600,   # room for the reasoning
-                                                          messages=[{"role": "user", "content": "Reply with the word OK."}])
+                                                          messages=[{"role": "user", "content": "Reply with the word OK. "
+                                                                     f"(connection check {secrets.token_hex(12)})"}])
                 break
             except APIStatusError as exc:
                 if exc.status_code != 499 or attempt == 2:
