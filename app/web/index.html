@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trial Autopsy</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/fonts/fonts.css">
+  <link rel="stylesheet" href="/static/styles.css?v=69">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/">
+      <svg class="pulse" viewBox="0 0 120 28" aria-hidden="true"><polyline points="0,14 30,14 38,4 46,24 54,8 60,14 120,14"/></svg>
+      <div>
+        <div class="brand-name">Trial Autopsy
+          <svg class="heart" viewBox="0 0 32 28" aria-hidden="true">
+            <path class="heart-shape" d="M16 27 C 6 20 1 14.5 1 8.5 C 1 4.2 4.3 1 8.4 1 C 11.6 1 14.3 2.8 16 5.6 C 17.7 2.8 20.4 1 23.6 1 C 27.7 1 31 4.2 31 8.5 C 31 14.5 26 20 16 27 Z"/>
+            <polyline class="heart-ecg" points="4,13 10,13 12.5,9 15,18 17.5,6 20,15 22,13 28,13"/>
+          </svg>
+          <span class="scope-badge">Cardiovascular</span></div>
+        <div class="brand-tag">Why cardiovascular drug trials fail &mdash; and who is next</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="#/" data-nav="home">Home</a>
+      <a href="#/problem" data-nav="problem">The problem</a>
+      <a href="#/analyses" data-nav="analyses">All analyses</a>
+      <a href="#/compare" data-nav="compare">Compare</a>
+      <a href="#/settings" data-nav="settings" title="Settings">&#9881; Settings</a>
+      <a href="#/new" data-nav="new" class="nav-cta">New analysis</a>
+    </nav>
+    <div class="topbar-right">
+      <span id="modeChip" class="chip chip-muted">checking&hellip;</span>
+    </div>
+  </header>
+
+  <main id="homeView" class="home hidden">
+    <section class="hero hero2">
+      <div class="hero-text">
+        <div class="eyebrow">Cardiovascular drug trials · AI agents that explain why</div>
+        <h1>Why did the trial fail &mdash; and who is next?</h1>
+        <p class="lede">When a phase 3 heart drug trial misses, markets move in hours but the explanation takes years.
+          Trial Autopsy's agents read the registry, human genetics, the literature and company filings, run four fixed checks
+          and write an evidence-backed diagnosis in minutes. Every number links to a verbatim quote.</p>
+        <div class="hero-cta">
+          <a class="btn-primary inline" href="#/new">Analyse a trial</a>
+          <a class="btn-ghost" href="#/run/example-pelacarsen">Open the pelacarsen example</a>
+        </div>
+        <a class="new-here" href="#/problem">New to drug trials? Read the problem in 3 minutes &rarr;</a>
+      </div>
+      <div class="hero-demo" id="heroDemo"></div>
+    </section>
+
+    <div class="proof" id="proofStrip"></div>
+
+    <section class="home-section">
+      <h2 class="home-h2">How it works</h2>
+      <p class="home-sub">Agents read and reason; plain, tested code calculates and checks. A separate critic can send the work back.</p>
+      <ol class="flow">
+        <li class="fl-code"><span class="fl-tag">code</span><b>Gather</b>Registry, genetics, papers, company filings &mdash; only documents dated before the cut-off</li>
+        <li class="fl-ai"><span class="fl-tag">AI + code</span><b>Read</b>AI copies out every number with a verbatim quote; code rejects any quote not in the source</li>
+        <li class="fl-ai"><span class="fl-tag">AI</span><b>Reason</b>The mechanism analyst picks which numbers describe this trial</li>
+        <li class="fl-code"><span class="fl-tag">code</span><b>Calculate</b>Four fixed checks: genetics, biomarker, effect size, trial power</li>
+        <li class="fl-ai"><span class="fl-tag">AI</span><b>Diagnose</b>The investigator weighs all 11 possible causes, for and against</li>
+        <li class="fl-critic"><span class="fl-tag">AI critic</span><b>Challenge</b>A second model checks citations and numbers &mdash; and can send the work back <span class="fl-back">↩ up to 2 rounds</span></li>
+        <li class="fl-out"><span class="fl-tag">report</span><b>Explain</b>Verdict, cause, confidence, and what it means for rival drugs</li>
+      </ol>
+      <div class="mode-cards compact">
+        <div class="mode-card"><div class="mode-tag forecast">Before the result</div><h3>Forecast</h3>
+          <p>A planned or running trial: its chance of success and the weakest link that could sink it. For the sponsor deciding whether to launch, and investors before the readout.</p></div>
+        <div class="mode-card"><div class="mode-tag autopsy">After the result</div><h3>Autopsy</h3>
+          <p>A finished or stopped trial: why it failed or succeeded, and what that means for every other drug on the same target. For analysts on the day of the announcement.</p></div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-h2">The four checks: a drug only works if every link holds</h2>
+      <ol class="home-chain">
+        <li><span class="hc-n">1</span><div class="hc-path">Target → disease</div><b>Does the target cause the disease?</b><p>Human genetics: are people born with less of the target protected?</p></li>
+        <li><span class="hc-n">2</span><div class="hc-path">Drug → biomarker</div><b>Does the drug move what matters?</b><p>Lowering LDL, apoB or Lp(a) helps; raising HDL or blocking Lp-PLA2 does nothing.</p></li>
+        <li><span class="hc-n">3</span><div class="hc-path">Biomarker → fewer events</div><b>How big should the benefit be?</b><p>A fixed, tested formula turns the biomarker change into fewer heart attacks and strokes.</p></li>
+        <li><span class="hc-n">4</span><div class="hc-path">Benefit → trial result</div><b>Could the trial see it?</b><p>Compare the expected effect with what a trial of this size can prove.</p></li>
+      </ol>
+      <div class="scope-inline">
+        <span class="sc-full"><b>Full analysis:</b> cholesterol, Lp(a) and blood-pressure drugs</span>
+        <span class="sc-part"><b>Evidence-only:</b> GLP-1, SGLT2, anti-inflammatory drugs (no effect-size formula)</span>
+        <span class="sc-out"><b>Out of scope:</b> non-cardiovascular trials</span>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-h2">What history shows: genetics predicts which targets work</h2>
+      <p class="home-sub" id="tmapLead">Every trial we analysed, grouped by whether human genetics says its target and biomarker cause heart disease.</p>
+      <div id="targetMap" class="tmap"></div>
+    </section>
+
+    <section class="home-section">
+      <div class="home-row"><h2 class="home-h2">Start here: four cases worth opening</h2>
+        <a class="btn-ghost" href="#/compare?a=bt-clear_outcomes&b=bt-accelerate">Compare two trials side by side →</a></div>
+      <div class="featured" id="featured"></div>
+    </section>
+
+    <section class="home-section" id="analysesSection">
+      <div class="home-row">
+        <h2 class="home-h2">All analyses</h2>
+        <div class="filters" id="filters">
+          <button data-f="all" class="active">All</button>
+          <button data-f="autopsy">Autopsy</button>
+          <button data-f="forecast">Forecast</button>
+          <button data-f="backtest">Historical backtests</button>
+        </div>
+      </div>
+      <p class="home-note" id="analysesNote">Historical backtests replay a past trial: the agents saw only documents published before its result day.</p>
+      <div id="analysesGrid" class="an-list"></div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-h2">How accurate is it?</h2>
+      <div id="accuracy" class="accuracy"></div>
+    </section>
+
+    <section class="home-section hidden">
+      <h2 class="home-h2">Runs on open NVIDIA models</h2>
+      <p class="home-sub">Every agent runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). The same blind test with Claude, side by side.</p>
+      <div id="benchmark" class="benchmark"></div>
+    </section>
+
+    <section class="home-section">
+      <h2 class="home-h2">Built with</h2>
+      <div class="built-with">
+        <div class="bw-card"><img src="/static/vendor/logos/zetaris.svg" alt="Zetaris" class="bw-logo">
+          <p><b>Data layer.</b> The trial registry, medical papers and company filings are read through Zetaris with SQL, and the date cut-off runs inside the query.</p></div>
+        <div class="bw-card"><img src="/static/vendor/logos/meterless.svg" alt="Meterless" class="bw-logo bw-sq"><b class="bw-name">Meterless</b>
+          <p><b>World Model.</b> Every verified fact is stored with its quote, source and date in the official Meterless engine, running on this machine.</p></div>
+        <div class="bw-card"><img src="/static/vendor/logos/nvidia.svg" alt="NVIDIA" class="bw-logo bw-nv">
+          <p><b>NVIDIA Nemotron.</b> Open models that power the agents, so the same analysis can run inside a company's own walls.</p></div>
+      </div>
+    </section>
+
+
+    <footer class="report-foot muted"><span>Open Agent Hackathon 2026 · Track 2: The Agent That Can Explain Why</span><span class="made-by">Made by <b>CurrentSky</b></span><span>Research tool. Not medical or investment advice.</span>
+      <span class="tm-note">NVIDIA and Nemotron are trademarks of NVIDIA Corporation; Claude of Anthropic, PBC; Zetaris and Meterless of their owners.</span></footer>
+  </main>
+
+  <main id="problemView" class="home problem hidden">
+    <section class="pb-hero">
+      <div class="eyebrow">The problem</div>
+      <h1>A failed heart-drug trial costs hundreds of millions of dollars, and the reason often stays unknown for years.</h1>
+      <p class="lede">This page explains, without jargon, why that happens and what Trial Autopsy does about it.</p>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">1</div>
+      <div>
+        <h2>How a new heart drug is tested</h2>
+        <p>Before a drug reaches patients it goes through three stages of human trials. The last one, <b>phase 3</b>, is the
+          big one: thousands of patients, several years, and costs from tens to hundreds of millions of dollars. It answers one
+          question: does the drug actually prevent heart attacks, strokes and deaths?</p>
+        <div class="pipeline">
+          <div class="pl"><b>Phase 1</b><span>dozens of people<br>is it safe?</span></div>
+          <div class="pl-arrow">&rarr;</div>
+          <div class="pl"><b>Phase 2</b><span>hundreds<br>does it change cholesterol, blood pressure&hellip;?</span></div>
+          <div class="pl-arrow">&rarr;</div>
+          <div class="pl big"><b>Phase 3</b><span>thousands, 3&ndash;5 years<br>does it prevent heart attacks?</span></div>
+          <div class="pl-arrow">&rarr;</div>
+          <div class="pl"><b>Approval</b><span>patients</span></div>
+        </div>
+        <p class="pb-fact">The most common reason a late-stage drug fails is simple: <b>it does not work well enough</b>. In one
+          analysis of drugs that failed in late development, 57% failed for lack of efficacy.<sup><a href="#src1">1</a></sup></p>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">2</div>
+      <div>
+        <h2>When a trial fails, people need an answer the same day</h2>
+        <p>On 4 September 2026 Novartis announced that its Lp(a) drug <b>pelacarsen</b> missed its goal in a phase 3 trial of
+          8,323 patients.<sup><a href="#src2">2</a></sup> Within days, <b>Amgen</b> shares fell about 10% (8 September),
+          as reported in the financial press<sup><a href="#src3">3</a></sup>. Amgen had not failed. It owns a different drug
+          against the same target. Analysts asked whether the drug, the trial or the whole idea was wrong. Nobody could say.</p>
+        <div class="who-grid">
+          <div><b>Investors</b><span>Sell, hold or buy, today?</span></div>
+          <div><b>Competitors</b><span>Does this doom our drug on the same target?</span></div>
+          <div><b>The company</b><span>Stop the programme, or fix the trial?</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">3</div>
+      <div>
+        <h2>Why the answer takes years</h2>
+        <p>Trials are designed to answer <i>whether</i> a drug works, not <i>why</i> it did not. The public trial registry usually
+          records the reason for stopping in a few words:</p>
+        <div class="registry-card">
+          <div class="rc-label">ClinicalTrials.gov &middot; &ldquo;Why stopped&rdquo;</div>
+          <div class="rc-text">&ldquo;Due to futility&rdquo;</div>
+        </div>
+        <p class="pb-fact">We checked 500 stopped phase 3 trials: the median explanation is <b>7 words</b>, and only <b>9 of 500</b>
+          mention anything about the biology.<sup><a href="#src4">4</a></sup> The real explanation usually comes from studies
+          published years later. Two cholesterol drugs of the CETP class failed in 2012 and 2015. The genetic study that
+          explained why appeared in 2017.<sup><a href="#src5">5</a></sup></p>
+        <div class="ty-wrap">
+          <svg viewBox="0 0 960 252" role="img" aria-label="Timeline of the CETP inhibitor failures and their explanation"><line x1="30" y1="110" x2="934" y2="110" class="ty-axis"/><line x1="40" y1="106" x2="40" y2="114" class="ty-tick"/><text x="40" y="190" text-anchor="middle" class="ty-y">2006</text><line x1="112" y1="106" x2="112" y2="114" class="ty-tick"/><text x="112" y="190" text-anchor="middle" class="ty-y">2007</text><line x1="184" y1="106" x2="184" y2="114" class="ty-tick"/><text x="184" y="190" text-anchor="middle" class="ty-y">2008</text><line x1="256" y1="106" x2="256" y2="114" class="ty-tick"/><text x="256" y="190" text-anchor="middle" class="ty-y">2009</text><line x1="328" y1="106" x2="328" y2="114" class="ty-tick"/><text x="328" y="190" text-anchor="middle" class="ty-y">2010</text><line x1="400" y1="106" x2="400" y2="114" class="ty-tick"/><text x="400" y="190" text-anchor="middle" class="ty-y">2011</text><line x1="472" y1="106" x2="472" y2="114" class="ty-tick"/><text x="472" y="190" text-anchor="middle" class="ty-y">2012</text><line x1="544" y1="106" x2="544" y2="114" class="ty-tick"/><text x="544" y="190" text-anchor="middle" class="ty-y">2013</text><line x1="616" y1="106" x2="616" y2="114" class="ty-tick"/><text x="616" y="190" text-anchor="middle" class="ty-y">2014</text><line x1="688" y1="106" x2="688" y2="114" class="ty-tick"/><text x="688" y="190" text-anchor="middle" class="ty-y">2015</text><line x1="760" y1="106" x2="760" y2="114" class="ty-tick"/><text x="760" y="190" text-anchor="middle" class="ty-y">2016</text><line x1="832" y1="106" x2="832" y2="114" class="ty-tick"/><text x="832" y="190" text-anchor="middle" class="ty-y">2017</text><line x1="904" y1="106" x2="904" y2="114" class="ty-tick"/><text x="904" y="190" text-anchor="middle" class="ty-y">2018</text><rect x="106" y="206" width="768" height="8" rx="4" class="ty-span"/><text x="490" y="234" text-anchor="middle" class="ty-spanl">almost 11 years from the first failure to a full explanation</text><circle cx="106" cy="110" r="7" class="ty-fail"/><line x1="106" y1="86" x2="106" y2="103" class="ty-stem"/><text x="106" y="70" text-anchor="middle" class="ty-l">ILLUMINATE</text><text x="106" y="84" text-anchor="middle" class="ty-s">stopped: harm</text><circle cx="496" cy="110" r="7" class="ty-fail"/><line x1="496" y1="86" x2="496" y2="103" class="ty-stem"/><text x="496" y="70" text-anchor="middle" class="ty-l">dal-OUTCOMES</text><text x="496" y="84" text-anchor="middle" class="ty-s">stopped: no benefit</text><circle cx="502" cy="110" r="7" class="ty-why"/><line x1="502" y1="134" x2="502" y2="117" class="ty-stem"/><text x="502" y="150" text-anchor="middle" class="ty-l">HDL genetics</text><text x="502" y="164" text-anchor="middle" class="ty-s">HDL is not a cause</text><circle cx="742" cy="110" r="7" class="ty-fail"/><line x1="742" y1="86" x2="742" y2="103" class="ty-stem"/><text x="742" y="70" text-anchor="middle" class="ty-l">ACCELERATE</text><text x="742" y="84" text-anchor="middle" class="ty-s">stopped: no benefit</text><circle cx="862" cy="110" r="7" class="ty-ok"/><line x1="862" y1="134" x2="862" y2="117" class="ty-stem"/><text x="862" y="150" text-anchor="middle" class="ty-l">REVEAL</text><text x="862" y="164" text-anchor="middle" class="ty-s">small benefit</text><circle cx="874" cy="110" r="7" class="ty-why"/><line x1="874" y1="58" x2="874" y2="103" class="ty-stem"/><text x="874" y="38" text-anchor="middle" class="ty-l">CETP genetics</text><text x="874" y="52" text-anchor="middle" class="ty-s">only apoB lowering helps</text></svg>
+          <div class="ty-legend"><span><i class="ty-dot ty-fail"></i> trial failed</span><span><i class="ty-dot ty-ok"></i> trial succeeded</span>
+            <span><i class="ty-dot ty-why"></i> study that explained why</span></div>
+          <a class="ty-call" href="#/run/bt-dal_outcomes"><b>Trial Autopsy, replaying 7 May 2012</b> with only the documents of that day:
+            &ldquo;Drug moves the wrong biomarker&rdquo; &mdash; in minutes, not years. Open the backtest &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">4</div>
+      <div>
+        <h2>The key insight: nature has already run the experiment</h2>
+        <p>Some people are born with natural gene variants that switch a protein down for life, much as a drug would. If
+          those people have fewer heart attacks, a drug that blocks the same protein should help too. If they don't, the drug
+          is unlikely to work. Scientists call this <b>Mendelian randomization</b>.</p>
+        <div class="nature-card">
+          <div><span class="nc-dot a"></span><b>Born with the protein switched down</b><span>fewer heart attacks? &rarr; the target is real</span></div>
+          <div><span class="nc-dot b"></span><b>Born with the normal gene</b><span>the comparison group</span></div>
+        </div>
+        <p class="pb-fact">Drugs whose target has this kind of human genetic support are about <b>2.6 times</b> more likely to
+          succeed.<sup><a href="#src6">6</a></sup> Trials stopped for lack of efficacy tend to <b>lack</b> such
+          support.<sup><a href="#src7">7</a></sup></p>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">5</div>
+      <div>
+        <h2>Three common ways a heart drug fails</h2>
+        <div class="fail-cards">
+          <div class="fc">
+            <div class="fc-tag">Wrong target</div>
+            <h3>The protein does not cause the disease</h3>
+            <p><b>Darapladib</b> blocked the enzyme Lp-PLA2 by about 65% in two trials with 29,000 patients. People born with an
+              inactive version of that enzyme have no fewer heart attacks. No effect was possible.</p>
+          </div>
+          <div class="fc">
+            <div class="fc-tag">Wrong biomarker</div>
+            <h3>The drug moves a number that doesn't matter</h3>
+            <p><b>Dalcetrapib</b> and <b>niacin</b> raised &ldquo;good&rdquo; HDL cholesterol. Genetics shows raising HDL itself does
+              not prevent heart attacks. The trials failed.</p>
+          </div>
+          <div class="fc">
+            <div class="fc-tag">Effect too small</div>
+            <h3>The drug works a little, but the trial can't see it</h3>
+            <p><b>Evacetrapib</b> lowered the harmful particles (apoB) by only about 15%, worth roughly a 5&ndash;7% benefit. The trial
+              was sized to detect about 14%. It almost had to fail.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">6</div>
+      <div>
+        <h2>What a better answer is worth</h2>
+        <p>A large cardiovascular outcome trial enrols 10,000&ndash;30,000 patients for 4&ndash;6 years and costs hundreds of
+          millions of dollars. The value of a good explanation comes at three moments:</p>
+        <div class="fail-cards value-cards">
+          <div class="fc">
+            <div class="fc-tag">Before phase 3 &middot; the drug's owner</div>
+            <h3>Don't run a trial that cannot succeed</h3>
+            <p>Four CETP-inhibitor outcome trials enrolled <b>73,479 patients</b> (ILLUMINATE 15,067; dal-OUTCOMES 15,871;
+              ACCELERATE 12,092; REVEAL 30,449).<sup><a href="#src8">8</a></sup> Only REVEAL showed a benefit, and a small one.
+              From evidence published <i>before</i> each result, our agents named the cause for dal-OUTCOMES and ACCELERATE:
+              the drug moved a biomarker (HDL) that does not cause heart disease. An undersized trial, like pelacarsen's
+              (about a 50% chance of detecting its expected benefit), can instead be enlarged before it starts, which costs far less than losing it.</p>
+            <div class="vc-num">One avoided or resized trial: <b>~$100M&ndash;$1B</b> and 4&ndash;6 years</div>
+          </div>
+          <div class="fc">
+            <div class="fc-tag">Result day &middot; investors and competitors</div>
+            <h3>Know in minutes whether the target or the trial failed</h3>
+            <p>After the pelacarsen news, Amgen, with a different drug on the same target, fell about 10% in days.<sup><a href="#src3">3</a></sup>
+              For a company of that size, that is billions of dollars of market value moving on one question: is the Lp(a)
+              hypothesis wrong, or was this trial too small? Trial Autopsy answers it with quotes the same day.</p>
+            <div class="vc-num">Market value at stake: <b>billions</b>, decided in hours</div>
+          </div>
+          <div class="fc">
+            <div class="fc-tag">Every day &middot; analysts</div>
+            <h3>Turn weeks of reading into minutes</h3>
+            <p>A careful manual autopsy means reading the registry, genetics and every relevant paper: days to weeks of expert
+              time, roughly $8,000&ndash;16,000 per trial at typical analyst rates. A Trial Autopsy run reads the same sources in
+              about ten minutes, on open NVIDIA Nemotron models, and code checks every quote and number.</p>
+            <div class="vc-num">Per analysis: <b>weeks and ~$10,000 → about ten minutes</b></div>
+          </div>
+        </div>
+        <p class="pb-fact">These are order-of-magnitude estimates, not guarantees. In blind tests the agents got 9 of 10 outcome
+          forecasts and 13 of 14 causes right, so Trial Autopsy is an early warning and a second opinion with its evidence
+          attached, not a replacement for experts. But helping avoid a single doomed outcome trial is worth more than running
+          the tool for decades.</p>
+      </div>
+    </section>
+
+    <section class="pb-step">
+      <div class="pb-num">7</div>
+      <div>
+        <h2>What Trial Autopsy does</h2>
+        <p>It does in minutes what normally takes experts weeks or years. Its agents collect the registry record, human genetics,
+          published trial data and the company's announcement. They run four fixed checks: target, biomarker, effect size,
+          detectability. Then they write a diagnosis in which every number links to a verbatim quote. Before a trial reads out,
+          the same engine gives a <b>forecast</b>: the chance of success and the weakest link.</p>
+        <div class="hero-cta">
+          <a class="btn-primary inline" href="#/run/example-pelacarsen">See the pelacarsen autopsy</a>
+          <a class="btn-ghost" href="#/">How it works &amp; all analyses</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-sources">
+      <h3>Sources</h3>
+      <ol>
+        <li id="src1">Hwang TJ et al. Failure of investigational drugs in late-stage clinical development and publication of trial results. <i>JAMA Intern Med</i> 2016. <a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2565686" target="_blank" rel="noopener">link</a></li>
+        <li id="src2">Ionis Pharmaceuticals, Form 8-K Exhibit 99.1, 4 September 2026 (SEC EDGAR). <a href="https://www.sec.gov/Archives/edgar/data/0000874015/000114036126035802/ef20081690_ex99-1.htm" target="_blank" rel="noopener">link</a></li>
+        <li id="src3">24/7 Wall St., 8 September 2026: &ldquo;Amgen falls 10% as Novartis trial failure clouds a cholesterol drug class&rdquo; (financial press). <a href="https://247wallst.com/investing/2026/09/08/amgen-falls-10-as-novartis-trial-failure-clouds-a-cholesterol-drug-class-nvs-stock-drops-14/" target="_blank" rel="noopener">link</a></li>
+        <li id="src4">Our analysis of 500 terminated phase 3 trials in ClinicalTrials.gov, October 2026 (keyword count; approximate).</li>
+        <li id="src5">Ference BA et al. Association of genetic variants related to CETP inhibitors and statins with lipoprotein levels and cardiovascular risk. <i>JAMA</i> 2017. <a href="https://pubmed.ncbi.nlm.nih.gov/28846118/" target="_blank" rel="noopener">link</a></li>
+        <li id="src6">Minikel EV et al. Refining the impact of genetic evidence on clinical success. <i>Nature</i> 2024. <a href="https://www.nature.com/articles/s41586-024-07316-0" target="_blank" rel="noopener">link</a></li>
+        <li id="src7">Razuvayevskaya O et al. Genetic factors associated with reasons for clinical trial stoppage. <i>Nature Genetics</i> 2024. <a href="https://www.nature.com/articles/s41588-024-01854-z" target="_blank" rel="noopener">link</a></li>
+        <li id="src8">ClinicalTrials.gov enrolment (actual): ILLUMINATE NCT00134264, dal-OUTCOMES NCT00658515, ACCELERATE NCT01687998, REVEAL NCT01252953; REVEAL result HR 0.91 (0.85&ndash;0.97), the other three showed no benefit or harm. <a href="https://clinicaltrials.gov/study/NCT01252953" target="_blank" rel="noopener">link</a></li>
+      </ol>
+    </section>
+    <footer class="report-foot muted"><span>Open Agent Hackathon 2026 · Track 2</span><span class="made-by">Made by <b>CurrentSky</b></span><span>Research tool. Not medical or investment advice.</span></footer>
+  </main>
+
+  <main id="compareView" class="home compare hidden">
+    <div class="eyebrow">Compare</div>
+    <h1 class="cmp-h1">Two trials side by side</h1>
+    <p class="home-sub">Same four checks, two drugs. The link that breaks in one trial and holds in the other is usually the whole story.</p>
+    <div class="cmp-pick">
+      <label>Trial A <select id="cmpA"></select></label><span class="cmp-vs">vs</span><label>Trial B <select id="cmpB"></select></label>
+    </div>
+    <div id="cmpDiff" class="cmp-diff"></div>
+    <div id="cmpCols" class="cmp-cols"></div>
+    <footer class="report-foot muted"><span>Open Agent Hackathon 2026 · Track 2</span><span class="made-by">Made by <b>CurrentSky</b></span><span>Research tool. Not medical or investment advice.</span></footer>
+  </main>
+
+  <main id="settingsView" class="home settings hidden">
+    <div class="settings-head">
+      <h1>Settings</h1>
+      <p class="lede">Choose which data sources the agents may use, connect your AI provider and tune how a run behaves.
+        Changes are saved to this server's local <code>.env</code> file (never committed) and apply to the next run.</p>
+    </div>
+
+    <section class="set-section">
+      <h2 class="home-h2">How it fits together</h2>
+      <p class="home-note">The whole system on one map: where the data comes from, the order the agents work in, where every fact is
+        stored and which model runtime answers each AI step. Sponsor logos mark where each sponsor's technology is used.</p>
+      <div class="smap-wrap"><div id="sysMap" class="smap"></div><div id="sysMapInfo" class="smap-info" aria-live="polite"></div></div>
+      <div class="smap-legend">
+        <span><i class="lg lg-z"></i>read through Zetaris</span><span><i class="lg lg-ot"></i>read directly</span>
+        <span><i class="lg lg-flow"></i>agent order</span><span><i class="lg lg-back"></i>critic loop</span>
+        <span><i class="lg lg-wm"></i>World Model: write / read</span><span><i class="lg lg-model"></i>model calls</span>
+      </div>
+    </section>
+
+    <section class="set-section">
+      <h2 class="home-h2">Data sources</h2>
+      <p class="home-note">Switching a source off makes the agents skip it and say so in the report. Recorded examples were made
+        with all sources on, so changing sources needs a live AI key to re-run them.</p>
+      <div id="setSources" class="set-grid"></div>
+    </section>
+
+    <section class="set-section">
+      <h2 class="home-h2">AI models &amp; API keys</h2>
+      <p class="home-note">Keys are sent only to this server, stored in <code>.env</code>, and never shown again in full.
+        Without a key, a role replays recorded outputs (enough for the demo cases).</p>
+      <div id="setProviders" class="set-grid"></div>
+    </section>
+
+    <section class="set-section">
+      <div class="home-row">
+        <h2 class="home-h2">Agents</h2>
+        <button type="button" class="btn-small" id="applyRecommended">Apply all recommendations</button>
+      </div>
+      <p class="home-note">The pipeline in graph order. Code steps need no model. Each AI agent can use its own model;
+        the recommendation says how much capability that job needs and why. Choosing a model here never breaks the recorded examples.</p>
+      <ol id="setAgents" class="set-agents"></ol>
+    </section>
+
+    <section class="set-section">
+      <h2 class="home-h2">Run options</h2>
+      <div id="setRun" class="set-grid"></div>
+    </section>
+
+    <div class="set-actions">
+      <span id="setStatus" class="muted"></span>
+      <button class="btn-primary inline" id="setSave" type="button">Save settings</button>
+    </div>
+  </main>
+
+  <main id="workView" class="layout hidden">
+    <aside class="panel intake">
+      <a class="back-link" href="#/">&larr; All analyses &amp; how it works</a>
+      <h2 class="panel-title"><span class="step-num">1</span> New case</h2>
+      <form id="caseForm" autocomplete="off">
+        <div class="field">
+          <span class="field-row"><label for="trial">ClinicalTrials.gov ID</label>
+            <button type="button" class="info-btn" id="idHelpBtn" aria-label="Where do I find a trial ID?">ⓘ Where do I find an ID?</button></span>
+          <input id="trial" name="trial" placeholder="NCT04023552" pattern="NCT\d{8}">
+        </div>
+        <div class="field">
+          <span>Mode</span>
+          <div class="segmented" id="modeSeg">
+            <button type="button" data-mode="auto" class="active">Auto</button>
+            <button type="button" data-mode="autopsy">Autopsy</button>
+            <button type="button" data-mode="forecast">Forecast</button>
+          </div>
+          <small class="hint" id="modeHint">Autopsy if results are out, forecast if the trial is still running.</small>
+        </div>
+        <label class="field">
+          <span>Topline readout text <em>(optional)</em></span>
+          <textarea id="readout" rows="5" placeholder="Paste the press release announcing the result&hellip;"></textarea>
+        </label>
+        <details class="advanced">
+          <summary>Advanced</summary>
+          <label class="field"><span>Evidence cut-off (as of)</span><input id="asOf" type="date"></label>
+          <label class="field"><span>Backtest archive</span><input id="archiveCase" placeholder="accelerate"></label>
+        </details>
+        <button class="btn-primary" id="runBtn" type="submit">Run investigation</button>
+      </form>
+
+      <p class="form-note">Want to see a finished report first? Browse <a href="#/analyses">all analyses</a>:
+        demo cases and historical backtests open instantly, no API key needed.</p>
+    </aside>
+
+    <section class="workspace">
+      <div id="emptyState" class="empty">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30"/><polyline points="8,34 22,34 27,22 33,44 38,28 42,34 56,34"/></svg>
+        <h3>Open a case</h3>
+        <p>Enter a phase 3 cardiovascular trial ID on the left, or open a finished report from <a href="#/analyses">All analyses</a>.</p>
+      </div>
+
+      <div id="progress" class="panel progress hidden">
+        <h2 class="panel-title"><span class="step-num">2</span> Investigation in progress <span id="elapsed" class="mono muted"></span></h2>
+        <div class="ecg-monitor" aria-hidden="true"><svg viewBox="0 0 600 60" preserveAspectRatio="none"><polyline class="ecg-trace" points="0,30 30,30 36,26 42,30 48,30 52,34 56,6 60,48 64,30 74,30 82,24 90,30 100,30 100,30 130,30 136,26 142,30 148,30 152,34 156,6 160,48 164,30 174,30 182,24 190,30 200,30 200,30 230,30 236,26 242,30 248,30 252,34 256,6 260,48 264,30 274,30 282,24 290,30 300,30 300,30 330,30 336,26 342,30 348,30 352,34 356,6 360,48 364,30 374,30 382,24 390,30 400,30 400,30 430,30 436,26 442,30 448,30 452,34 456,6 460,48 464,30 474,30 482,24 490,30 500,30 500,30 530,30 536,26 542,30 548,30 552,34 556,6 560,48 564,30 574,30 582,24 590,30 600,30 600,30 630,30 636,26 642,30 648,30 652,34 656,6 660,48 664,30 674,30 682,24 690,30 700,30 700,30 730,30 736,26 742,30 748,30 752,34 756,6 760,48 764,30 774,30 782,24 790,30 800,30 800,30 830,30 836,26 842,30 848,30 852,34 856,6 860,48 864,30 874,30 882,24 890,30 900,30 900,30 930,30 936,26 942,30 948,30 952,34 956,6 960,48 964,30 974,30 982,24 990,30 1000,30 1000,30 1030,30 1036,26 1042,30 1048,30 1052,34 1056,6 1060,48 1064,30 1074,30 1082,24 1090,30 1100,30 1100,30 1130,30 1136,26 1142,30 1148,30 1152,34 1156,6 1160,48 1164,30 1174,30 1182,24 1190,30 1200,30"/></svg><span class="ecg-label">agents at work</span></div>
+        <div id="liveGraph" class="agent-graph"></div>
+        <ol id="agentSteps" class="agent-steps hidden"></ol>
+        <div id="liveLog" class="live-log mono"></div>
+      </div>
+
+      <div id="errorBox" class="panel error hidden"></div>
+
+      <article id="report" class="report hidden">
+        <div class="print-head" id="printHead"></div>
+        <!-- 1. The answer -->
+        <section class="panel answer">
+          <div class="answer-top">
+            <div>
+              <div class="label">Case file</div>
+              <h1 id="caseTitle"></h1>
+              <div id="caseSub" class="muted"></div>
+            </div>
+            <div id="outcomeBadge" class="outcome-badge"></div>
+          </div>
+          <div id="poweredBy" class="powered-by"></div>
+          <div id="modeBanner" class="mode-banner"></div>
+          <ol id="timeline" class="timeline"></ol>
+          <p id="headline" class="headline"></p>
+          <div id="divergence" class="divergence hidden"></div>
+          <div id="prereg" class="prereg hidden"></div>
+          <div class="answer-grid">
+            <div class="answer-card">
+              <div class="answer-q"><span class="qn">1</span> <span id="ansWhatTitle">What happened</span></div>
+              <p id="ansWhat"></p>
+              <p id="ansPredicted" class="predicted"></p>
+            </div>
+            <div class="answer-card why">
+              <div class="answer-q"><span class="qn">2</span> Why &mdash; our explanation</div>
+              <div id="primaryCause" class="cause-text"></div>
+              <p id="ansWhy"></p>
+            </div>
+            <div class="answer-card">
+              <div class="answer-q"><span class="qn">3</span> Who is next: other drugs on this target</div>
+              <p id="ansOthers"></p>
+            </div>
+          </div>
+          <div class="answer-foot">
+            <span id="confidenceChip" class="tag"></span>
+            <span id="confidenceNote" class="muted"></span>
+            <button type="button" class="btn-small replay-top" id="mapTop">Show how we got here</button>
+            <button type="button" class="btn-small" id="replayTop">▶ Watch the agents work</button>
+            <button type="button" class="btn-small" id="cmpBtn">Compare with another trial</button>
+            <button type="button" class="btn-small" id="printBtn">Save as PDF</button>
+            <span class="term-hint">Tip: hover any <span class="term-demo">dotted term</span> for a plain-language explanation</span>
+          </div>
+        </section>
+
+        <!-- Target protein in 3D -->
+        <section class="panel target-panel hidden" id="targetPanel">
+          <h2 class="panel-title">Target protein &mdash; structure &amp; function</h2>
+          <div class="target-grid">
+            <div class="mol-wrap">
+              <div id="mol" class="mol"></div>
+              <div class="mol-controls">
+                <button type="button" class="btn-small" id="molSpin">Pause rotation</button>
+                <button type="button" class="btn-small" id="molStyle">Show surface</button>
+                <button type="button" class="btn-small" id="molReset">Reset view</button>
+                <button type="button" class="btn-small mol-bind hidden" id="molBind">Show where the drug binds</button>
+                <label class="mol-color">Colour by <select id="molColor"><option value="rainbow">start → end of chain</option></select></label>
+              </div>
+              <div class="mol-legend" id="molLegend"></div>
+              <div class="mol-bindnote hidden" id="molBindNote"></div>
+            </div>
+            <div class="target-info" id="targetInfo"></div>
+          </div>
+        </section>
+
+        <!-- Where the drug acts: cholesterol and plaque pathway -->
+        <section class="panel pathway-panel hidden" id="pathwayPanel">
+          <h2 class="panel-title">Where this drug acts in the body</h2>
+          <p class="chain-intro">How cholesterol moves from food and the liver into the blood and the artery wall, and where each
+            drug class steps in. This trial's drug is highlighted; click any other target to compare.</p>
+          <div id="pathway" class="pathway"></div>
+          <div id="pathwayNote" class="pathway-note"></div>
+        </section>
+
+        <!-- 2. How we know -->
+        <section class="panel">
+          <h2 class="panel-title" id="chainTitle">How we know &mdash; the causal chain, link by link</h2>
+          <p class="chain-intro" id="chainIntro"></p>
+          <div id="chain" class="chain"></div>
+          <div class="chart-block">
+            <div class="chart-title" id="chartTitle">If the drug works as expected, would this trial prove it?</div>
+            <p id="chartCaption" class="chart-caption"></p>
+            <div id="forest" class="forest"></div>
+            <div class="legend" id="chartLegend"></div>
+            <div class="whatif hidden" id="whatIf"></div>
+            <p class="chart-help muted">Hazard ratio (HR): 1.0 = no effect, 0.80 = 20% fewer heart attacks and strokes.
+              Points further left mean a stronger benefit.</p>
+          </div>
+        </section>
+
+        <!-- The critic's review: what it found and what changed -->
+        <section class="panel critic-panel hidden" id="criticPanel">
+          <h2 class="panel-title" id="criticTitle">The critic's review</h2>
+          <div id="criticReview"></div>
+        </section>
+
+        <!-- Time machine: what the agents could and could not see -->
+        <section class="panel tm-panel hidden" id="tmPanel">
+          <h2 class="panel-title">Time machine &mdash; what the agents could and could not see</h2>
+          <p class="chain-intro" id="tmIntro"></p>
+          <div id="tmChart" class="tm-chart"></div>
+          <div class="tm-controls"><input type="range" id="tmSlider" aria-label="Evidence date"><span id="tmDate" class="mono"></span>
+            <button type="button" class="btn-small" id="tmReset">Back to the analysis date</button></div>
+          <p id="tmCount" class="tm-count"></p>
+        </section>
+
+        <!-- 3. Details, one tab at a time -->
+        <section class="panel details">
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="tabReport">Full report</button>
+            <button class="tab" data-tab="tabMap">Evidence map</button>
+            <button class="tab" data-tab="tabHyp">All explanations considered</button>
+            <button class="tab" data-tab="tabRt" id="tabRtBtn">Other drugs on this target</button>
+            <button class="tab" data-tab="tabEvidence">Evidence &amp; sources</button>
+            <button class="tab" data-tab="tabInputs">Numbers used</button>
+            <button class="tab" data-tab="tabTrace">How the agents worked</button>
+          </div>
+
+          <div id="tabMap" class="tab-pane hidden">
+            <p class="pane-intro">How the verdict was built, left to right: <b>source documents</b> → the <b>verbatim quotes</b> taken from them →
+              the <b>numbers the analyst used</b> → the <b>calculation</b> → the <b>verdict</b>. Click any box to light up its whole path;
+              hover a quote to read it. Orange marks are the critic's open notes. Only facts that fed the calculation are drawn.</p>
+            <div id="evMap" class="ev-map"></div>
+          </div>
+          <div id="tabReport" class="tab-pane">
+            <p id="summary" class="summary"></p>
+            <ul id="keyEvidence" class="key-evidence"></ul>
+            <div class="callout">
+              <div class="label">What would change this conclusion</div>
+              <p id="wouldChange"></p>
+            </div>
+          </div>
+
+          <div id="tabHyp" class="tab-pane hidden">
+            <div class="pane-intro legend-box">
+              <b>How to read this.</b> The Investigator agent (AI) weighed every possible explanation using only the
+              cited facts; the Critic agent then checked it. Each explanation gets one of three labels:
+              <div class="status-legend">
+                <span><span class="status s-supported">Supported by the facts</span> the evidence points to this explanation</span>
+                <span><span class="status s-weakened">Ruled out by the facts</span> the evidence argues against it</span>
+                <span><span class="status s-undetermined">Not enough data</span> cannot be judged yet</span>
+              </div>
+              Click a grey reference (e.g. <span class="ref">f_1a2b3c</span>) to see the exact quote it rests on;
+              <span class="ref">calculator</span> means the number came from the deterministic calculator.
+            </div>
+            <div id="secondaryCauses" class="tags"></div>
+            <div id="hypotheses" class="hypotheses"></div>
+          </div>
+
+          <div id="tabRt" class="tab-pane hidden">
+            <p id="readthroughNote" class="pane-intro"></p>
+            <div id="readthrough" class="rt-grid"></div>
+          </div>
+
+          <div id="tabEvidence" class="tab-pane hidden">
+            <div class="panel-title-row">
+              <p class="muted pane-intro">Every number the agents used, with the verbatim quote it was taken from.
+                Quotes are checked against the source text by code.</p>
+              <input id="factFilter" class="filter" placeholder="Filter facts&hellip;">
+            </div>
+            <div class="table-scroll"><table class="facts">
+              <thead><tr><th>Fact</th><th>Value</th><th>Context</th><th>Source</th><th>Quote</th></tr></thead>
+              <tbody id="factRows"></tbody>
+            </table></div>
+            <h3 class="sub-title">Sources</h3>
+            <ul id="sources" class="sources"></ul>
+          </div>
+
+          <div id="tabInputs" class="tab-pane hidden">
+            <p class="muted pane-intro">The exact inputs the deterministic calculator received, and what it computed.</p>
+            <div class="gauge-row">
+              <svg id="gauge" viewBox="0 0 120 70" class="gauge"></svg>
+              <div class="muted">Probability that a trial of this size detects the expected effect (statistical power).</div>
+            </div>
+            <table id="inputsTable" class="kv"></table>
+            <div id="verifyBox"></div>
+          </div>
+
+          <div id="tabTrace" class="tab-pane hidden">
+            <p class="muted pane-intro">The agents run as a <b>LangGraph state graph</b> (<span class="mono">app/graph.py</span>): each agent is a node,
+              and after the critic a conditional edge either accepts the analysis or sends it back for more evidence.
+              Press replay to watch the recorded run step by step.</p>
+            <div class="replay-bar"><button type="button" class="btn-small" id="replayBtn">▶ Replay the investigation</button>
+              <button type="button" class="btn-small" id="replaySpeed">Speed 1×</button><span id="replayStatus" class="muted mono"></span></div>
+            <div id="replayGraph" class="agent-graph"></div>
+            <div class="rf-head no-print"><b>Agent decisions, step by step</b> <span class="muted" id="replayCount"></span>
+              <span class="muted rf-hint">Scroll to browse · click a step to see the graph at that moment</span></div>
+            <div id="replayFeed" class="replay-feed"></div>
+            <h3 class="sub-title">What this analysis used</h3>
+            <div id="costPanel" class="cost-panel"></div>
+            <details class="lg-details no-print" id="lgDetails">
+              <summary>Technical view: the compiled LangGraph, generated from the code</summary>
+              <p class="muted lg-note">This diagram is not drawn by hand: LangGraph exports it from the compiled <span class="mono">StateGraph</span>.
+                Grey nodes are plain code, teal nodes call a model, orange is the critic; dotted arrows are the critic's decision
+                (<i>accept</i> → read-through and report, <i>refine</i> → targeted search, then back to the mechanism analyst).</p>
+              <div id="graphView" class="graph-view"></div>
+            </details>
+            <h3 class="sub-title">Critic review</h3>
+            <div id="critic" class="critic"></div>
+            <h3 class="sub-title no-print">Step-by-step log</h3>
+            <ol id="trace" class="trace mono"></ol>
+          </div>
+        </section>
+
+        <footer class="report-foot muted">
+          <span id="footMeta"></span>
+          <span class="made-by">Made by <b>CurrentSky</b></span>
+          <span class="tm-note">NVIDIA and Nemotron are trademarks of NVIDIA Corporation; Claude of Anthropic, PBC; Zetaris and Meterless of their owners.</span>
+          <span>Research tool. Not medical or investment advice.</span>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <div id="drawer" class="drawer hidden" role="dialog" aria-modal="true">
+    <div class="drawer-card">
+      <button class="drawer-close" id="drawerClose" aria-label="Close">&times;</button>
+      <div id="drawerBody"></div>
+    </div>
+  </div>
+
+  <!-- Vendored copies (see static/vendor/README.md) so the demo works without internet. -->
+  <script src="/static/vendor/mermaid.min.js"></script>
+  <script src="/static/vendor/3Dmol-min.js"></script>
+  <script src="/static/glossary.js?v=15"></script>
+  <script src="/static/app.js?v=108"></script>
+  <script src="/static/motion.js?v=3"></script>
+</body>
+</html>
