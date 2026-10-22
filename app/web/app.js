@@ -674,6 +674,7 @@ function renderAgents() {
   const d = settingsData;
   const provOptions = (sel) => d.providers.map((p) => `<option value="${esc(p.id)}" ${p.id === sel ? "selected" : ""}>${esc(p.label)}</option>`).join("") +
     `<option value="replay" ${sel === "replay" ? "selected" : ""}>Recorded outputs only</option>`;
+  const routes = (d.providers.find((p) => p.id === "meterless") || { models: [] }).models;
   let step = 0;
   $("setAgents").innerHTML = d.agents.map((a) => {
     step += 1;
@@ -681,50 +682,54 @@ function renderAgents() {
       return `<li class="ag-card code"><span class="ag-n">${step}</span><div class="ag-main"><div class="set-name">${esc(a.name)} <span class="pill">code</span></div>
         <div class="set-desc">${esc(a.does)}</div></div><div class="ag-side muted">Runs as code: no model needed</div></li>`;
     }
-    const models = (d.providers.find((p) => p.id === a.provider) || { models: [] }).models;
-    const info = a.model_info ? `${a.model_info.tier} · ${a.model_info.price}` : "custom model";
+    // unsaved changes show as they will be saved
+    const p = pending.agents[a.name], cur = p && !p.reset && p.provider ? { ...a, provider: p.provider, model: p.model } : a;
+    const viaNightshift = cur.provider === "meterless";
+    const models = (d.providers.find((x) => x.id === cur.provider) || { models: [] }).models;
+    const info = cur.model === a.model && a.model_info ? `${a.model_info.tier} · ${a.model_info.price}` : "custom model";
     const rec = a.recommended, alt = a.alternative;
+    // Through Nightshift the app chooses a routing mode and Nightshift picks the Nemotron lane that answers
+    const routeList = routes.includes(cur.model) ? routes : [cur.model, ...routes];
+    const modelField = viaNightshift
+      ? `<label class="field"><span>Routing mode · Nightshift picks the lane</span><select data-ag-model="${esc(a.name)}">${routeList.map((m) =>
+          `<option value="${esc(m)}" ${m === cur.model ? "selected" : ""}>${esc(m)}</option>`).join("")}</select></label>`
+      : `<label class="field"><span>Model</span><input list="ag-models-${esc(a.name)}" data-ag-model="${esc(a.name)}" value="${esc(cur.model)}" spellcheck="false"></label>
+        <datalist id="ag-models-${esc(a.name)}">${models.map((m) => `<option value="${esc(m)}">`).join("")}</datalist>`;
     return `<li class="ag-card ai tier-${esc(a.tier)}"><span class="ag-n">${step}</span>
       <div class="ag-main">
-        <div class="set-name">${providerOf(`${a.provider}:${a.model}`) ? logoImg(providerOf(`${a.provider}:${a.model}`), 16) + " " : ""}${esc(a.name)} <span class="pill ai">AI</span> ${a.live ? '<span class="pill live">live</span>' : '<span class="pill">recorded</span>'}</div>
+        <div class="set-name">${providerOf(`${cur.provider}:${cur.model}`) ? logoImg(providerOf(`${cur.provider}:${cur.model}`), 16) + " " : ""}${esc(a.name)} <span class="pill ai">AI</span> ${a.live ? '<span class="pill live">live</span>' : '<span class="pill">recorded</span>'}</div>
         <div class="set-desc">${esc(a.does)}</div>
         <div class="ag-tier"><span class="tier-chip t-${esc(a.tier)}">${esc(a.tier_label)}</span></div>
         <div class="ag-why">${esc(a.why)}</div>
         <div class="ag-rec">Recommended: <b>${esc(modelName(rec.model))}</b> <span class="muted">${esc(rec.tier || "")}${rec.price ? " · " + esc(rec.price) : ""}</span>
-          ${a.is_recommended ? '<span class="rec-ok">✓ in use</span>' : `<button type="button" class="btn-small" data-use="${esc(a.name)}" data-p="${esc(rec.provider)}" data-m="${esc(rec.model)}">Use it</button>`}
+          ${a.is_recommended && cur === a ? '<span class="rec-ok">✓ in use</span>' : `<button type="button" class="btn-small" data-use="${esc(a.name)}" data-p="${esc(rec.provider)}" data-m="${esc(rec.model)}">Use it</button>`}
           <span class="ag-alt">or <button type="button" class="link-btn" data-use="${esc(a.name)}" data-p="${esc(alt.provider)}" data-m="${esc(alt.model)}">${esc(modelName(alt.model))}</button> <span class="muted">${esc(alt.price || "")}</span></span>
         </div>
       </div>
       <div class="ag-side">
-        <label class="field"><span>Provider</span><select data-ag-prov="${esc(a.name)}">${provOptions(a.provider)}</select></label>
-        <label class="field"><span>Model${a.provider === "meterless" ? " · chosen by Nightshift" : ""}</span><input list="ag-models-${esc(a.name)}" data-ag-model="${esc(a.name)}" value="${esc(a.model)}" spellcheck="false" ${a.provider === "meterless" ? 'disabled title="Nightshift picks the Nemotron lane that answers; the app only asks for a route (deep or fast)"' : ""}></label>
-        <datalist id="ag-models-${esc(a.name)}">${models.map((m) => `<option value="${esc(m)}">`).join("")}</datalist>
-        <div class="ag-info">${a.provider === "meterless" ? `Nightshift picks the lane · ${esc(a.model.replace("meterless/", ""))} route` : esc(info)}${a.own_setting ? ` · <button type="button" class="link-btn" data-reset="${esc(a.name)}">reset to default</button>` : ""}</div>
+        <label class="field"><span>Provider</span><select data-ag-prov="${esc(a.name)}">${provOptions(cur.provider)}</select></label>
+        ${modelField}
+        <div class="ag-info">${viaNightshift ? "Nightshift serves the request from a Nemotron lane; its Apps panel can bind the whole app to one mode" : esc(info)}${a.own_setting ? ` · <button type="button" class="link-btn" data-reset="${esc(a.name)}">reset to default</button>` : ""}</div>
       </div></li>`;
   }).join("");
 
   const mark = () => { $("setStatus").textContent = "Unsaved changes"; renderSystemMap(); };
-  document.querySelectorAll("[data-ag-prov], [data-ag-model]").forEach((el) => el.addEventListener("change", () => {
-    const name = el.dataset.agProv || el.dataset.agModel;
-    if (el.dataset.agProv) {
-      // Through Meterless the model is Nightshift's choice: the field shows the route and is locked; another
-      // provider unlocks it with that provider's first model.
-      const input = document.querySelector(`[data-ag-model="${name}"]`), agent = settingsData.agents.find((x) => x.name === name);
-      const viaNightshift = el.value === "meterless";
-      if (viaNightshift) input.value = agent && agent.recommended.provider === "meterless" ? agent.recommended.model : "meterless/fast";
-      else if (input.disabled) input.value = ((settingsData.providers.find((p) => p.id === el.value) || {}).models || [""])[0] || "";
-      input.disabled = viaNightshift;
-    }
-    pending.agents[name] = { provider: document.querySelector(`[data-ag-prov="${name}"]`).value,
-                             model: document.querySelector(`[data-ag-model="${name}"]`).value };
+  const choose = (name, provider, model) => { pending.agents[name] = { provider, model }; renderAgents(); mark(); };
+  document.querySelectorAll("[data-ag-prov]").forEach((el) => el.addEventListener("change", () => {
+    // a new provider starts from its recommended routing mode (Nightshift) or its first model
+    const name = el.dataset.agProv, agent = settingsData.agents.find((x) => x.name === name);
+    const model = el.value === "meterless"
+      ? (agent && agent.recommended.provider === "meterless" ? agent.recommended.model : "meterless/fast")
+      : el.value === agent.provider && agent.provider !== "meterless" ? agent.model
+      : ((settingsData.providers.find((x) => x.id === el.value) || {}).models || [""])[0] || "";
+    choose(name, el.value, model);
+  }));
+  document.querySelectorAll("[data-ag-model]").forEach((el) => el.addEventListener("change", () => {
+    const name = el.dataset.agModel;
+    pending.agents[name] = { provider: document.querySelector(`[data-ag-prov="${name}"]`).value, model: el.value };
     mark();
   }));
-  document.querySelectorAll("[data-use]").forEach((el) => el.addEventListener("click", () => {
-    document.querySelector(`[data-ag-prov="${el.dataset.use}"]`).value = el.dataset.p;
-    document.querySelector(`[data-ag-model="${el.dataset.use}"]`).value = el.dataset.m;
-    pending.agents[el.dataset.use] = { provider: el.dataset.p, model: el.dataset.m };
-    mark();
-  }));
+  document.querySelectorAll("[data-use]").forEach((el) => el.addEventListener("click", () => choose(el.dataset.use, el.dataset.p, el.dataset.m)));
   document.querySelectorAll("[data-reset]").forEach((el) => el.addEventListener("click", async () => {
     pending.agents[el.dataset.reset] = { reset: true }; await saveSettings();
   }));
