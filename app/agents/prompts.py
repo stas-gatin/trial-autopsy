@@ -170,6 +170,10 @@ Judge the inputs against what the public evidence can contain. Before an outcome
 its own biomarker effect is not public: the placebo-adjusted phase 2 change at the dose closest to the outcome trial's
 is the accepted input. Missing phase 3 biomarker data is a caveat (severity medium), never a reason to drop a
 quantified, verified input, and never ask for a number to be set to null.
+In mode "autopsy" the trial's topline announcement is part of the evidence on purpose: its result (whether the
+primary endpoint was met, the hazard ratio) may be cited to explain what happened, so never ask to remove it. Only
+evidence published after the cut-off is out of bounds, and the result is never a calculator input other than
+observed_hr and observed_ci.
 
 Return JSON only:
 {"issues": [{"severity": "high|medium|low", "issue": "...", "target_agent": "case_builder|mechanism|investigator",
