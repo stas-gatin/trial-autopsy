@@ -206,14 +206,21 @@ def evaluate(case: CaseInput) -> Result:
         unquantified_reason = f"{case.pathway} pathway"
     elif intended and intended not in rules.QUANTIFIED_BIOMARKERS and intended not in rules.NON_CAUSAL_BIOMARKERS:
         unquantified_reason = f"main mechanism via {intended}"
-    quantifiable = unquantified_reason is None
+    # A sized mechanism with no measured value anywhere in the facts is unknown, not zero: sizing it as "no change"
+    # would turn missing data into a confident "failure". A target proven non-causal fails whatever the size.
+    not_measured = (unquantified_reason is None and eq is None and not sbp and intended in rules.QUANTIFIED_BIOMARKERS
+                    and case.target_genetics != "not_causal")
+    if not_measured:
+        basis = f"{intended} change not measured"
+        notes.append(f"no measured change in {intended} or another sized lipid: the effect is unknown, not zero")
+    quantifiable = unquantified_reason is None and not not_measured
     lipid_hr = rules.LDL_RR_PER_MMOL_5Y ** (g * (eq or 0.0))
     expected_hr = lipid_hr * bp_factor if quantifiable else None
     # The causal effect is everything the sized mechanisms predict: lipids and blood pressure together. A drug or a
     # strategy that only lowers blood pressure (SPRINT) would otherwise score no effect at all.
     causal_rrr = 1 - lipid_hr * bp_factor if quantifiable else None
     partial_hr = None
-    if not quantifiable:
+    if unquantified_reason:
         notes.append(f"{unquantified_reason} has no validated trial-scale coefficient; effect size not computable")
         hba1c = next((c for c in case.changes if canonical(c.biomarker) == "HbA1c" and c.abs_change is not None), None)
         hba1c_factor = rules.HBA1C_RR_PER_POINT_UNCERTAIN ** (-hba1c.abs_change * g) if hba1c else 1.0
@@ -245,7 +252,7 @@ def evaluate(case: CaseInput) -> Result:
         outcome=outcome,
         category=category,
         secondary=secondary,
-        weakest_link=_weakest_link(case, causal_rrr, pw),
+        weakest_link=f"{intended} change not measured" if not_measured else _weakest_link(case, causal_rrr, pw),
         consistent_with_observed=consistent,
         assumptions=assumptions,
         notes=notes,
