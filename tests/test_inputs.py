@@ -205,3 +205,21 @@ class ReadoutStatements(unittest.TestCase):
 
     def test_an_explicit_primary_statement_wins(self):
         self.assertEqual(self.classify("did not meet its primary endpoint but significantly reduced LDL-C"), "failure")
+
+
+class DrugUnderTest(unittest.TestCase):
+    def test_the_experimental_arm_drug_is_tried_before_the_background_one(self):
+        from types import SimpleNamespace
+        from unittest import mock
+        from app.agents import intake
+        trial = {"arm_groups": [{"label": "Eze/Simva", "type": "EXPERIMENTAL"},
+                                {"label": "Simva", "type": "ACTIVE_COMPARATOR"}],
+                 "interventions": [{"type": "DRUG", "name": "simvastatin", "arms": ["Eze/Simva", "Simva"]},
+                                   {"type": "DRUG", "name": "ezetimibe", "arms": ["Eze/Simva"]}]}
+        found = lambda name, tracer=None: {"id": "CHEMBL" + name, "name": name}
+        profile = {"name": "x", "mechanismsOfAction": {"rows": []}, "synonyms": [], "tradeNames": []}
+        state = SimpleNamespace(request={}, trial=trial, tracer=None, warnings=[], drug=None)
+        with mock.patch.object(intake.opentargets, "find_drug", side_effect=found), \
+                mock.patch.object(intake.opentargets, "drug_profile", return_value=profile):
+            intake._resolve_drug(state)
+        self.assertEqual(state.drug["chembl_id"], "CHEMBLezetimibe")

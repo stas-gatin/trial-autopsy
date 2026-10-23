@@ -85,7 +85,14 @@ def _resolve_drug(state: RunState):
     names = []
     if state.request.get("drug"):
         names.append(state.request["drug"])
-    for i in state.trial.get("interventions", []):
+    # The drug under test first: an intervention given only in experimental arms, before one that the comparator
+    # arm gets too (the background statin in "ezetimibe + simvastatin vs simvastatin").
+    arm_type = {g.get("label"): g.get("type") for g in state.trial.get("arm_groups") or []}
+
+    def only_experimental(i):
+        types = {arm_type.get(label) for label in i.get("arms") or []}
+        return "EXPERIMENTAL" in types and not any(t and "COMPARATOR" in t for t in types)
+    for i in sorted(state.trial.get("interventions", []), key=lambda i: not only_experimental(i)):
         if i.get("type") in ("DRUG", "BIOLOGICAL") and not PLACEBO.search(i.get("name") or ""):
             names.append(i["name"])
             names += i.get("other_names") or []
