@@ -120,3 +120,35 @@ class MalformedChanges(unittest.TestCase):
         m = {"changes": None}
         self.assertEqual(_keep_change_objects(m), [])
         self.assertIsNone(m["changes"])
+
+
+class NormaliseAnalystOutput(unittest.TestCase):
+    def test_names_numbers_ids_units_and_ci_are_cleaned(self):
+        from app.agents.analysis import normalise_mechanism
+        m = {"intended_biomarker": ["LDL cholesterol"], "events": "1,612", "followup_years": 0,
+             "observed_ci": ["0.91", 0.78], "events_fact_ids": "f_1",
+             "changes": [{"biomarker": "LDL cholesterol", "abs_change": "-1.2 mmol/L", "fact_ids": "f_2"},
+                         {"biomarker": "Apo B", "abs_change": -0.3, "unit": "g/L", "baseline": 0}]}
+        notes = normalise_mechanism(m)
+        self.assertTrue(notes)
+        self.assertEqual(m["intended_biomarker"], "LDL-C")
+        self.assertEqual(m["events"], 1612)
+        self.assertIsNone(m["followup_years"])
+        self.assertEqual(m["observed_ci"], [0.78, 0.91])
+        self.assertEqual(m["events_fact_ids"], ["f_1"])
+        ldl, apob = m["changes"]
+        self.assertEqual((ldl["biomarker"], ldl["abs_change"], ldl["unit"], ldl["fact_ids"]), ("LDL-C", -1.2, "mmol/L", ["f_2"]))
+        self.assertEqual((apob["biomarker"], apob["abs_change"], apob["unit"], apob["baseline"]), ("apoB", -30.0, "mg/dL", None))
+
+    def test_well_formed_output_is_untouched(self):
+        from app.agents.analysis import normalise_mechanism
+        m = {"intended_biomarker": "LDL-C", "events": 1612, "followup_years": 2.2, "observed_ci": [0.69, 0.80],
+             "changes": [{"biomarker": "LDL-C", "abs_change": -1.45, "unit": "mmol/L", "fact_ids": ["f_1"]}]}
+        before = repr(m)
+        self.assertEqual(normalise_mechanism(m), [])
+        self.assertEqual(repr(m), before)
+
+    def test_critic_issues_given_as_strings_become_objects(self):
+        from app.agents.analysis import normalise_issues
+        data = {"issues": ["events not verified", {"severity": "high", "issue": "x"}]}
+        self.assertEqual(normalise_issues(data)[0], {"severity": "medium", "issue": "events not verified"})

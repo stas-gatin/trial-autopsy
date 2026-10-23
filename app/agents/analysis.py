@@ -7,7 +7,7 @@ from dataclasses import asdict
 
 from app.agents import prompts, verifier
 from app.agents.state import RunState
-from app.core.calculator import BiomarkerChange, CaseInput, evaluate
+from app.core.calculator import BiomarkerChange, CaseInput, canonical, evaluate
 from app.llm import generator
 from app.tools import reference
 
@@ -84,10 +84,10 @@ def mechanism(state: RunState):
         genetics=_genetics_block(state), reference=_reference_block(), facts=facts_text,
         feedback=_feedback(state, "mechanism"))
     data, response = _llm(state, "reasoning", prompts.MECHANISM_SYSTEM, prompt, "mechanism", "MechanismAnalyst")
-    dropped = _keep_change_objects(data)
-    if dropped:
-        state.tracer.log("MechanismAnalyst", "drop_malformed", output_summary=f"{len(dropped)} biomarker change(s) "
-                         f"were not objects and were left out: {dropped}"[:500], status="warning", deterministic=True)
+    cleaned = normalise_mechanism(data)
+    if cleaned:
+        state.tracer.log("MechanismAnalyst", "normalise_output", output_summary="; ".join(cleaned)[:700],
+                         status="warning", target_agent="Calculator", deterministic=True)
     filled = complete_inputs(data, facts)
     state.mechanism = data
     state.case_input = to_case_input(state, data)
@@ -124,6 +124,105 @@ def _keep_change_objects(m: dict) -> list:
     if dropped:
         m["changes"] = [c for c in changes if isinstance(c, dict)]
     return dropped
+
+
+_NUMBER = re.compile(r"[-+]?\d[\d,]*(?:\.\d+)?")
+
+
+def _number_in(x):
+    """A number from a model value: 12, "12", "-1.2 mmol/L", "1,612", "−0.5". Returns (number, rest of text)."""
+    if isinstance(x, bool) or x is None:
+        return None, ""
+    if isinstance(x, (int, float)):
+        return float(x), ""
+    if not isinstance(x, str):
+        return None, ""
+    text = x.replace("\u2212", "-").replace("\u2013", "-").strip()
+    m = _NUMBER.search(text)
+    if not m:
+        return None, ""
+    try:
+        return float(m.group().replace(",", "")), text[m.end():].strip()
+    except ValueError:
+        return None, ""
+
+
+def _id_list(x) -> list:
+    if isinstance(x, str):
+        return [x] if x.strip() else []
+    return [i for i in x if isinstance(i, str)] if isinstance(x, (list, tuple)) else []
+
+
+def normalise_mechanism(m: dict) -> list[str]:
+    """One pass over the analyst's answer before any code uses it: biomarker names to the calculator's vocabulary,
+    numbers written as text to numbers, fact ids to lists, apoB in g/L to mg/dL, a reversed or textual confidence
+    interval to an ordered pair, and impossible values (a zero or negative baseline or follow-up) to unknown.
+    Returns a note per change made; well-formed output is returned untouched."""
+    notes = [f"left out {len(d)} biomarker change(s) that were not objects" for d in [_keep_change_objects(m)] if d]
+    for c in m.get("changes") or []:
+        raw = c.get("biomarker")
+        name = canonical(raw)
+        if isinstance(raw, str) and name and name != raw.strip():
+            c["biomarker"], c["reported_as"] = name, raw
+            notes.append(f"'{raw}' read as {name}")
+        for k in ("abs_change", "pct_change", "baseline"):
+            v = c.get(k)
+            if isinstance(v, str) or isinstance(v, bool):
+                n, rest = _number_in(v)
+                c[k] = n
+                if k != "pct_change" and rest and not c.get("unit") and n is not None:
+                    c["unit"] = rest.split()[0]
+                notes.append(f"{name} {k} '{v}' read as {n}")
+        if isinstance(c.get("baseline"), (int, float)) and c["baseline"] <= 0:
+            notes.append(f"{name} baseline {c['baseline']} is impossible: treated as unknown")
+            c["baseline"] = None
+        if "fact_ids" in c and not isinstance(c["fact_ids"], list):
+            c["fact_ids"] = _id_list(c["fact_ids"])
+        unit = (c.get("unit") or "").lower().replace(" ", "")
+        if name == "apoB" and "g/l" in unit and "mg/l" not in unit:
+            for k in ("abs_change", "baseline"):
+                if isinstance(c.get(k), (int, float)):
+                    c[k] = round(c[k] * 100, 3)
+            c["unit"] = "mg/dL"
+            notes.append("apoB converted from g/L to mg/dL (x100)")
+    for k in ("events", "followup_years", "observed_hr", "alpha_two_sided", "sbp_change_mmhg"):
+        v = m.get(k)
+        if isinstance(v, str) or isinstance(v, bool):
+            m[k], _ = _number_in(v)
+            notes.append(f"{k} '{v}' read as {m[k]}")
+    if isinstance(m.get("events"), float):
+        m["events"] = int(round(m["events"]))
+    if isinstance(m.get("followup_years"), (int, float)) and m["followup_years"] <= 0:
+        notes.append(f"follow-up {m['followup_years']} years is impossible: treated as unknown")
+        m["followup_years"] = None
+    ci = m.get("observed_ci")
+    if ci is not None:
+        pair = [_number_in(x)[0] for x in ci] if isinstance(ci, (list, tuple)) else []
+        fixed = sorted(pair) if len(pair) == 2 and None not in pair else None
+        if fixed != ci:
+            notes.append(f"observed CI {ci} read as {fixed}")
+        m["observed_ci"] = fixed
+    intended = m.get("intended_biomarker")
+    if intended is not None and not isinstance(intended, str):
+        m["intended_biomarker"] = canonical(intended)
+        notes.append(f"intended biomarker {intended} read as {m['intended_biomarker']}")
+    elif isinstance(intended, str) and intended.strip() and canonical(intended) != intended.strip():
+        m["intended_biomarker"] = canonical(intended)
+        notes.append(f"intended biomarker '{intended}' read as {m['intended_biomarker']}")
+    for k in [k for k in m if k.endswith("fact_ids") and not isinstance(m[k], list)]:
+        m[k] = _id_list(m[k])
+    return notes
+
+
+def normalise_issues(data: dict) -> list[dict]:
+    """The critic's issues as objects; a bare string becomes a medium-severity issue for no particular agent."""
+    issues = data.get("issues")
+    if isinstance(issues, dict):
+        issues = [issues]
+    if not isinstance(issues, list):
+        issues = []
+    data["issues"] = [i if isinstance(i, dict) else {"severity": "medium", "issue": str(i)} for i in issues]
+    return data["issues"]
 
 
 def _lpa_threshold(facts: dict) -> dict | None:
@@ -315,6 +414,7 @@ def critique(state: RunState) -> dict:
         calc=calc_json(state.calc),
         hypotheses=json.dumps(state.investigation, ensure_ascii=False), facts=facts_text)
     data, response = _llm(state, "critic", prompts.CRITIC_SYSTEM, prompt, f"critic:{len(state.critiques)}", "Critic")
+    normalise_issues(data)
     state.critiques.append(data)
     high = [i for i in data.get("issues") or [] if i.get("severity") == "high"]
     state.tracer.log("Critic", "review", output_summary=f"{len(data.get('issues') or [])} issues ({len(high)} high); "

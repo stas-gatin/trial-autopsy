@@ -17,6 +17,14 @@ NON_CAUSAL_BIOMARKERS = {
 # Biomarkers with a trial-scale benefit coefficient the calculator can use.
 QUANTIFIED_BIOMARKERS = {"LDL-C", "non-HDL-C", "apoB", "Lp(a)", "SBP", "triglycerides"}
 
+# Which measured values size a drug whose main mechanism is this biomarker. LDL-C, non-HDL-C and apoB measure the
+# same atherogenic particles; a triglyceride drug acts on TG-rich particles that only non-HDL-C and apoB count.
+# "" = no intended biomarker named: any sized value will do.
+_APOB_PARTICLES = ("LDL-C", "non-HDL-C", "apoB")
+MEASURED_BY = {"LDL-C": _APOB_PARTICLES, "non-HDL-C": _APOB_PARTICLES, "apoB": _APOB_PARTICLES,
+               "triglycerides": ("non-HDL-C", "apoB"), "Lp(a)": ("Lp(a)",), "SBP": ("SBP",),
+               "": _APOB_PARTICLES + ("Lp(a)", "SBP")}
+
 # The calculator only sizes a drug whose MAIN mechanism is quantified (or proven non-causal).
 # Anything else - GLP-1 (weight, glucose), SGLT2 (glucose, haemodynamics), colchicine or
 # anti-cytokines (inflammation) - is "not computable": partial lipid/BP effects are shown as an
@@ -55,6 +63,9 @@ DEFAULT_BASELINE = {"LDL-C": 2.0, "non-HDL-C": 2.6, "apoB": 80.0}  # mmol/L, mmo
 # If LDL-C and apoB percent changes differ by more than this ratio, the LDL
 # assay is treated as unreliable and apoB is used (e.g. CETP inhibitors).
 DISCORDANCE_RATIO = 1.5
+# ...and only when they also differ by at least this many percentage points (CETP inhibitors: 20 or more), so a
+# small or rounded value ("minimal effect" written as 0%) cannot switch the measure.
+DISCORDANCE_MIN_POINTS = 10.0
 
 # Below this expected relative risk reduction no feasible outcome trial can
 # detect the effect: the causal part is treated as negligible.
