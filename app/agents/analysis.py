@@ -88,6 +88,11 @@ def mechanism(state: RunState):
     if cleaned:
         state.tracer.log("MechanismAnalyst", "normalise_output", output_summary="; ".join(cleaned)[:700],
                          status="warning", target_agent="Calculator", deterministic=True)
+    if state.mechanism and state.critiques:
+        kept = keep_verified_inputs(state.mechanism, data, state.critiques[-1].get("issues") or [], facts)
+        if kept:
+            state.tracer.log("MechanismAnalyst", "keep_verified_inputs", output_summary="; ".join(kept)[:700],
+                             status="warning", target_agent="Calculator", deterministic=True)
     filled = complete_inputs(data, facts)
     state.mechanism = data
     state.case_input = to_case_input(state, data)
@@ -159,6 +164,11 @@ def normalise_mechanism(m: dict) -> list[str]:
     interval to an ordered pair, and impossible values (a zero or negative baseline or follow-up) to unknown.
     Returns a note per change made; well-formed output is returned untouched."""
     notes = [f"left out {len(d)} biomarker change(s) that were not objects" for d in [_keep_change_objects(m)] if d]
+    empty = [c for c in m.get("changes") or [] if not canonical(c.get("biomarker"))
+             and all(c.get(k) in (None, "") for k in ("abs_change", "pct_change"))]
+    if empty:
+        m["changes"] = [c for c in m["changes"] if c not in empty]
+        notes.append(f"left out {len(empty)} biomarker change(s) with no name and no value")
     for c in m.get("changes") or []:
         raw = c.get("biomarker")
         name = canonical(raw)
@@ -212,6 +222,45 @@ def normalise_mechanism(m: dict) -> list[str]:
     for k in [k for k in m if k.endswith("fact_ids") and not isinstance(m[k], list)]:
         m[k] = _id_list(m[k])
     return notes
+
+
+_MENTIONS = {"LDL-C": ("ldl",), "non-HDL-C": ("non-hdl", "non hdl"), "apoB": ("apob", "apo b", "apolipoprotein b"),
+             "Lp(a)": ("lp(a)", "lipoprotein(a)", "lipoprotein (a)"), "HDL-C": ("hdl",), "triglycerides": ("triglycer",),
+             "SBP": ("blood pressure", "sbp")}
+
+
+def _has_value(c: dict) -> bool:
+    return any(isinstance(c.get(k), (int, float)) and not isinstance(c.get(k), bool) for k in ("abs_change", "pct_change"))
+
+
+def keep_verified_inputs(previous: dict, current: dict, issues: list, facts: dict) -> list[str]:
+    """A refinement round must not lose what the previous round had verified. A biomarker change that had a value
+    and cited verified facts, and that the critic did not question, is restored if the revision dropped it or left
+    it empty; so are the event count and the follow-up. Code does this, not the prompt. Returns what was restored."""
+    asked = " ".join(f"{i.get('issue', '')} {i.get('request', '')}" for i in issues if isinstance(i, dict)).lower()
+
+    def questioned(name: str) -> bool:
+        return any(t in asked for t in _MENTIONS.get(name, (name.lower(),)))
+
+    def verified(ids) -> bool:
+        return bool(ids) and all(i in facts for i in ids)
+
+    restored = []
+    now = {canonical(c.get("biomarker")): c for c in current.get("changes") or []}
+    for old in previous.get("changes") or []:
+        name = canonical(old.get("biomarker"))
+        if not name or not _has_value(old) or not verified(old.get("fact_ids")) or questioned(name):
+            continue
+        new = now.get(name)
+        if new is None or not _has_value(new):
+            current["changes"] = [c for c in current.get("changes") or [] if c is not new] + [dict(old)]
+            restored.append(f"{name} change restored from the previous round (verified, not questioned by the critic)")
+    for key, ids, words in (("events", "events_fact_ids", ("event",)), ("followup_years", "followup_fact_ids", ("follow",))):
+        if previous.get(key) is not None and current.get(key) is None and verified(previous.get(ids)) \
+                and not any(w in asked for w in words):
+            current[key], current[ids] = previous[key], previous.get(ids)
+            restored.append(f"{key} {previous[key]} restored from the previous round")
+    return restored
 
 
 def normalise_issues(data: dict) -> list[dict]:

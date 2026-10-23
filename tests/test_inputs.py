@@ -165,3 +165,24 @@ class NormaliseAnalystOutput(unittest.TestCase):
         from app.agents.analysis import normalise_issues
         data = {"issues": ["events not verified", {"severity": "high", "issue": "x"}]}
         self.assertEqual(normalise_issues(data)[0], {"severity": "medium", "issue": "events not verified"})
+
+
+class KeepVerifiedInputs(unittest.TestCase):
+    facts = {"f_1": {"fact_id": "f_1"}, "f_2": {"fact_id": "f_2"}}
+    previous = {"events": 1640, "events_fact_ids": ["f_2"],
+                "changes": [{"biomarker": "LDL-C", "abs_change": -0.63, "fact_ids": ["f_1"]}]}
+
+    def test_a_dropped_verified_change_is_restored(self):
+        from app.agents.analysis import keep_verified_inputs
+        current = {"events": None, "changes": [{"biomarker": "", "abs_change": None}]}
+        kept = keep_verified_inputs(self.previous, current, [{"issue": "remove the trial's own HR from hypotheses"}], self.facts)
+        self.assertEqual(len(kept), 2)
+        self.assertIn({"biomarker": "LDL-C", "abs_change": -0.63, "fact_ids": ["f_1"]}, current["changes"])
+        self.assertEqual(current["events"], 1640)
+
+    def test_a_change_the_critic_questioned_is_left_as_revised(self):
+        from app.agents.analysis import keep_verified_inputs
+        current = {"events": 1640, "changes": []}
+        kept = keep_verified_inputs(self.previous, current, [{"issue": "LDL-C value is not placebo-adjusted"}], self.facts)
+        self.assertEqual(kept, [])
+        self.assertEqual(current["changes"], [])
