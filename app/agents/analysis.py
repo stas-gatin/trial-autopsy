@@ -499,21 +499,45 @@ def report(state: RunState):
                      model=f"{response.provider}:{response.model}", cached=response.cached)
 
 
-# What a readout says, strongest first: an explicit statement about the primary endpoint, then a trial stopped for
-# benefit, then a trial stopped or abandoned, then a significant reduction. "Stopped" or "discontinued" alone is not
-# a failure ("stopped early for efficacy", "discontinuation rates were similar").
+# What a readout says, strongest first: an explicit statement about the primary endpoint; a trial stopped early for
+# benefit or for harm; a trial stopped or abandoned without benefit; a significant reduction in events. "Stopped" or
+# "discontinued" alone is not a failure ("stopped early for efficacy", "discontinuation rates were similar"), and a
+# biomarker that fell significantly is not a result.
 _TRIAL = r"(?:trial|study|program|programme|development|outcomes? study)"
+_STOP = r"(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
+_EVENTS = r"(?:events?|risk|mortality|deaths?|heart attacks?|strokes?|mace|endpoint|morbidity)"
+_PATIENTS_REACHED = re.compile(r"\b(patients|participants|subjects)\b[^.]{0,80}\b(met|achieved|reached)\b", re.I)
+_NEGATED = re.compile(r"\b(no|not|without|lack of|failed to)\b[^.]{0,40}\b(benefit|reduc\w*|decreas\w*|lower\w*|efficacy)", re.I)
 READOUT_RULES = [
-    ("failure", re.compile(r"did not (meet|achieve|reach|benefit)|did not significantly reduce|not met|missed (its|the) primary|fail(ed|s)? to (meet|achieve|show|demonstrate|reduce)|"
-                           r"no (statistically )?significant (reduction|difference|benefit) in (the )?primary", re.I)),
-    ("success", re.compile(r"\bmet (its|the|both) (\w+ )?primary|achieved (its|the) primary|reached (its|the) primary", re.I)),
-    ("success", re.compile(r"(stopped|closes?|closed|ended|terminated|halted) early (\w+ ){0,3}(for|due to|because of|after) "
-                           r"(\w+ ){0,4}(efficacy|benefit|positive)", re.I)),
-    ("failure", re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate)|"
-                           rf"(stop|stopped|halt|halted|terminat\w*|discontinu\w*|end|ended) (the |its |a )?([\w()\-]+ ){{0,6}}{_TRIAL}|"
-                           rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
-    ("success", re.compile(r"significant(ly)? reduc", re.I)),
+    ("failure", 0, re.compile(r"\b(did not|does not|didn't|failed to|fails? to) (meet|achieve|reach) (its|the|their) (\w+ ){0,2}primary|"
+                              r"primary (\w+ ){0,3}(was |were )?not (met|achieved|reached)|missed (its|the) (\w+ ){0,2}primary|"
+                              r"no (statistically )?significant (difference|reduction|benefit) in (the )?(\w+ ){0,2}primary", re.I)),
+    ("success", 0, re.compile(r"\b(met|meets|achieved|achieves) (its|the|their|both) (\w+ ){0,2}primary|"
+                              r"primary (\w+ ){0,3}(was|were) (met|achieved)", re.I)),
+    ("stopped_harm", 1, re.compile(rf"{_STOP}[^.]{{0,120}}\b(imbalance|excess|increase\w*|higher)\b[^.]{{0,40}}\b(mortality|deaths?|"
+                                   rf"cardiovascular events|harm)|{_STOP}[^.]{{0,80}}\b(safety (concerns?|reasons?)|harm)\b", re.I)),
+    ("success", 1, re.compile(rf"{_STOP}\b[^.]{{0,40}}\bearly\b[^.]{{0,120}}\b(efficacy|benefit\w*|positive|reduc\w*|superior\w*|"
+                              rf"overwhelming)", re.I)),
+    ("failure", 2, re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate|meet|achieve|be met|be achieved)|"
+                              rf"did not (benefit|show a (significant )?benefit)|\bno (significant )?(clinical )?benefit|"
+                              rf"\b(did|do|does) not (\w+ ){{0,2}}(reduce|lower|decrease) (\w+ ){{0,6}}{_EVENTS}|"
+                              rf"{_STOP} (the |its |a |all )?([\w()\-\"'\u201c\u201d]+ ){{0,6}}{_TRIAL}|"
+                              rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
+    ("success", 3, re.compile(rf"significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}", re.I)),
+    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)", re.I)),
 ]
+
+
+def classify_readout(text: str):
+    """(outcome, rank) for the strongest statement in one sentence or title, or None."""
+    for outcome, rank, rule in READOUT_RULES:
+        if rank == 0 and outcome == "success" and _PATIENTS_REACHED.search(text):
+            continue
+        if rule.search(text) and not (rank in (1, 3) and outcome == "success" and _NEGATED.search(text)):
+            return outcome, rank
+    return None
+
+
 SUCCESS_CODES = {"robust_success", "narrow_success", "success_with_caveats"}
 
 
@@ -528,18 +552,34 @@ def actual_outcome(state: RunState) -> tuple[str | None, str]:
         if ci[0] > 1:
             return "stopped_harm", f"observed HR CI {ci[0]}-{ci[1]} is above 1"
         return "failure", f"observed HR CI {ci[0]}-{ci[1]} includes 1"
+    # The outcome facts extracted for this trial first; only if they state nothing, the announcement itself (its
+    # title, then each sentence), which may also speak of other trials of the same programme.
     readout_types = {"user_input", "press_release", "registry"}
     doc_types = {d.source_id: d.type for d in state.docs}
-    best = None
+    facts = []
     for f in state.context.facts(state.case_id):
         if f["key"] not in ("readout_statement", "stopped_early", "primary_endpoint"):
             continue
         if doc_types.get(f["source_id"]) not in readout_types and not f["source_id"].startswith(("user:", "announcement:")):
             continue
-        text = str(f["value"]) + " " + f["quote"]
-        rank = next((i for i, (_, rule) in enumerate(READOUT_RULES) if rule.search(text)), None)
-        if rank is not None and (best is None or rank < best[0]):
-            best = (rank, READOUT_RULES[rank][0], f"readout: \"{f['quote'][:140]}\" ({f['source_id']})")
+        facts.append((str(f["value"]) + " " + f["quote"], f["source_id"]))
+    texts = []
+    for d in state.docs:
+        if d.type in ("press_release", "user_input") or d.source_id.startswith(("announcement:", "user:")):
+            texts.append((d.title or "", d.source_id))
+            texts += [(x, d.source_id) for x in re.split(r"(?<=[.!?])\s+", d.text or "") if x.strip()]
+    def strongest(candidates):
+        best = None
+        for text, source in candidates:
+            hit = classify_readout(text)
+            if hit and (best is None or hit[1] < best[0]):
+                best = (hit[1], hit[0], f"readout: \"{text.strip()[:140]}\" ({source})")
+        return best
+    # An explicit statement about the primary endpoint in the announcement outranks a weaker fact.
+    from_facts, from_text = strongest(facts), strongest(texts)
+    best = from_facts
+    if from_text and (best is None or (from_text[0] == 0 and best[0] > 0)):
+        best = from_text
     return (best[1], best[2]) if best else (None, "outcome not stated in the evidence")
 
 

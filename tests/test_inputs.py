@@ -190,14 +190,27 @@ class KeepVerifiedInputs(unittest.TestCase):
 
 class ReadoutStatements(unittest.TestCase):
     def classify(self, text):
-        from app.agents.analysis import READOUT_RULES
-        return next((outcome for outcome, rule in READOUT_RULES if rule.search(text)), None)
+        from app.agents.analysis import classify_readout
+        hit = classify_readout(text)
+        return hit[0] if hit else None
 
     def test_stopping_is_read_with_its_reason(self):
         self.assertEqual(self.classify("The trial was stopped early for efficacy"), "success")
         self.assertEqual(self.classify("Outcomes Study Closes Early Due To Unequivocal Evidence Of Benefit"), "success")
         self.assertEqual(self.classify("The study was stopped for futility"), "failure")
         self.assertEqual(self.classify("KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) PROMINENT CARDIOVASCULAR OUTCOMES STUDY"), "failure")
+
+    def test_common_announcement_wordings(self):
+        self.assertEqual(self.classify("The study will be stopped early because there is unequivocal evidence of a "
+                                       "reduction in cardiovascular morbidity"), "success")
+        self.assertEqual(self.classify("Combination lipid therapies do not reduce combined cardiovascular events"), "failure")
+        self.assertEqual(self.classify("the DSMB concluded that the primary endpoint was unlikely to be met"), "failure")
+        self.assertEqual(self.classify("a statistically significant 21 percent reduction in risk"), "success")
+        self.assertEqual(self.classify("Patients receiving hemodialysis did not benefit from statin therapy"), "failure")
+
+    def test_patients_reaching_an_endpoint_is_an_event_not_a_result(self):
+        self.assertIsNone(self.classify("396 patients in the rosuvastatin group and 408 in the placebo group reached the "
+                                        "primary end point"))
 
     def test_words_about_patients_are_not_a_readout(self):
         self.assertIsNone(self.classify("discontinuation rates were similar between groups"))
@@ -232,3 +245,11 @@ class InconsistentChange(unittest.TestCase):
         self.assertTrue(any("disagree" in i for i in check_inputs(m, {})))
         m["changes"][0]["abs_change"] = -1.25
         self.assertFalse(any("disagree" in i for i in check_inputs(m, {})))
+
+
+class NegatedReductions(unittest.TestCase):
+    def test_a_negated_reduction_is_a_failure(self):
+        from app.agents.analysis import classify_readout
+        hit = classify_readout("adding niacin to statin therapy did not significantly further reduce the risk of "
+                               "the combination of coronary deaths")
+        self.assertEqual(hit[0], "failure")
