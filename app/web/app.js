@@ -1893,7 +1893,7 @@ async function renderTimeMachine(res) {
     document.querySelector(".tm-cut-l").textContent = t === cut ? `cut-off ${label}` : label;
     $("tmDate").textContent = label;
     let n = 0;
-    document.querySelectorAll(".tm-dot").forEach((c) => { const on = docs[Number(c.dataset.i)].t <= t; c.classList.toggle("tm-off", !on); n += on; });
+    $("tmChart").querySelectorAll(".tm-dot").forEach((c) => { const on = docs[Number(c.dataset.i)].t <= t; c.classList.toggle("tm-off", !on); n += on; });
     const notYet = docs.filter((d) => d.t > t);
     $("tmCount").innerHTML = `On <b>${label}</b> an analyst could read <b>${n}</b> of these ${docs.length} documents.` +
       (notYet.length ? ` Not yet published: ${notYet.slice(0, 3).map((d) => `<i>${esc((d.title || "").slice(0, 70))}</i> (${esc(String(d.date).slice(0, 4))})`).join("; ")}${notYet.length > 3 ? ` and ${notYet.length - 3} more` : ""}.` : "");
@@ -1902,7 +1902,7 @@ async function renderTimeMachine(res) {
   $("tmReset").onclick = () => { slider.value = cut; setDate(cut); };
   setDate(cut);
   const tip = $("tmTip"), chart = $("tmChart");
-  document.querySelectorAll(".tm-dot").forEach((c) => {
+  chart.querySelectorAll(".tm-dot").forEach((c) => {
     c.addEventListener("mouseenter", () => {
       const d = docs[Number(c.dataset.i)], box = chart.getBoundingClientRect(), r = c.getBoundingClientRect();
       tip.innerHTML = `<b>${esc(String(d.date).slice(0, 10))}</b> · ${esc(d.type || "")}<br>${esc((d.title || "").slice(0, 90))}<br>${d.seen ? "read by the agents" : "hidden: published after the cut-off"}`;

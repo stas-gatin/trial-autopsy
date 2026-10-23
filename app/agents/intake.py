@@ -45,7 +45,9 @@ def _load_archive(state: RunState, case_id: str):
     registry = next((d for d in state.docs if d.type == "registry"), None)
     state.trial = dict((registry.meta or {}).get("summary", {})) if registry else {}
     state.trial.setdefault("nct_id", nct)
-    state.trial.setdefault("acronym", manifest.get("acronym"))
+    # The registry has no acronym for some trials (AURORA, JUPITER): take the archive's short name, never a null.
+    if not state.trial.get("acronym"):
+        state.trial["acronym"] = (manifest.get("acronym") or "").split(" (")[0].strip() or None
     state.trial.setdefault("title", manifest.get("title"))
     state.trial["readout_date"] = manifest.get("readout_date")
     state.request.setdefault("drug", manifest.get("drug"))
