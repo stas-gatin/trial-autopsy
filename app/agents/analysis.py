@@ -84,6 +84,10 @@ def mechanism(state: RunState):
         genetics=_genetics_block(state), reference=_reference_block(), facts=facts_text,
         feedback=_feedback(state, "mechanism"))
     data, response = _llm(state, "reasoning", prompts.MECHANISM_SYSTEM, prompt, "mechanism", "MechanismAnalyst")
+    dropped = _keep_change_objects(data)
+    if dropped:
+        state.tracer.log("MechanismAnalyst", "drop_malformed", output_summary=f"{len(dropped)} biomarker change(s) "
+                         f"were not objects and were left out: {dropped}"[:500], status="warning", deterministic=True)
     filled = complete_inputs(data, facts)
     state.mechanism = data
     state.case_input = to_case_input(state, data)
@@ -102,6 +106,24 @@ def mechanism(state: RunState):
     if state.auto_issues:
         state.tracer.log("MechanismAnalyst", "self_check", output_summary="; ".join(state.auto_issues)[:700],
                          status="warning", target_agent="Critic")
+
+
+def _keep_change_objects(m: dict) -> list:
+    """The analyst must return each biomarker change as an object; anything else (a bare note string) is left out
+    here, in code, so later steps never see it. Returns what was left out; well-formed output is not touched."""
+    changes = m.get("changes")
+    if changes is None:
+        return []
+    if isinstance(changes, dict):
+        m["changes"] = [changes]
+        return []
+    if not isinstance(changes, list):
+        m["changes"] = []
+        return [changes]
+    dropped = [c for c in changes if not isinstance(c, dict)]
+    if dropped:
+        m["changes"] = [c for c in changes if isinstance(c, dict)]
+    return dropped
 
 
 def _lpa_threshold(facts: dict) -> dict | None:

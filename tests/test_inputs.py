@@ -106,3 +106,17 @@ class ResolveDrugName(unittest.TestCase):
                                     {"rosuvastatin": "CHEMBL1496", "Brand": "CHEMBL0"})
         self.assertEqual(drug["chembl_id"], "CHEMBL1496")
         self.assertNotIn("Brand", tried)
+
+
+class MalformedChanges(unittest.TestCase):
+    def test_note_strings_in_changes_are_left_out(self):
+        from app.agents.analysis import _keep_change_objects
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -17}, "HDL-C change not placebo-adjusted"]}
+        self.assertEqual(_keep_change_objects(m), ["HDL-C change not placebo-adjusted"])
+        self.assertEqual(m["changes"], [{"biomarker": "LDL-C", "pct_change": -17}])
+
+    def test_well_formed_output_is_not_touched(self):
+        from app.agents.analysis import _keep_change_objects
+        m = {"changes": None}
+        self.assertEqual(_keep_change_objects(m), [])
+        self.assertIsNone(m["changes"])
