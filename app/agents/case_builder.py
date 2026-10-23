@@ -14,7 +14,7 @@ from app.agents import prompts
 from app.agents.state import RunState
 from app.llm import generator
 from app.tools import archive, europepmc, opentargets
-from app.tools.documents import Document, verify_quote
+from app.tools.documents import Document, _normalize, verify_quote
 
 AGENT = "CaseBuilder"
 MAX_LITERATURE_DOCS = 6
@@ -275,7 +275,7 @@ DOWN = re.compile(r"\b(decreas|reduc|lower|fell|fall|declin|drop|cut)\w*", re.I)
 UP = re.compile(r"\b(increas|rais|elevat|ros[ei]|higher|gain)\w*", re.I)
 
 
-def change_direction(quote: str, value) -> int:
+def change_direction(quote: str, value, window: int = 160) -> int:
     """+1 or -1 when the quote says in words which way the number moved ("decreased LDL-C by 8%"), else 0.
     The nearest direction word before the number decides; an explicit sign in the quote always wins."""
     try:
@@ -294,12 +294,31 @@ def change_direction(quote: str, value) -> int:
                 return -1
             if UP.match(word):
                 return 1
-        before = quote[max(0, m.start() - 160):m.start()]
+        before = quote[max(0, m.start() - window):m.start()]
         downs = [x.end() for x in DOWN.finditer(before)]
         ups = [x.end() for x in UP.finditer(before)]
         if downs or ups:
             return -1 if (max(downs) if downs else -1) > (max(ups) if ups else -1) else 1
     return 0
+
+
+def _number_in(quote: str, value) -> bool:
+    """True if the change's own number is written in the quote (not, say, a difference computed from two levels)."""
+    try:
+        text = f"{abs(float(value)):g}"
+    except (TypeError, ValueError):
+        return False
+    return re.search(rf"(?<![\d.]){re.escape(text)}(?![\d.])", quote) is not None
+
+
+def sentence_before(document_text: str, quote: str, chars: int = 400) -> str:
+    """The start of the quote's sentence in the document, when the quote begins mid-sentence ("and by 63% ...",
+    after "reduced LDL-C by 66%"). Normalised like the quote check; empty if the quote is not found."""
+    doc, q = _normalize(document_text), _normalize(quote)
+    at = doc.find(q)
+    if at <= 0:
+        return ""
+    return re.split(r"[.;:]\s", doc[max(0, at - chars):at])[-1]
 
 
 def _extract(state: RunState, doc: Document):
@@ -325,13 +344,18 @@ def _extract(state: RunState, doc: Document):
         ok = verify_quote(doc.text, quote)
         attrs = fact.get("attrs") or {}
         if fact.get("key") == "biomarker_change" and ok and attrs.get("kind") in ("percent", "absolute", None):
-            # Code, not the model, sets the direction of a change: the quote's own words decide.
-            direction = change_direction(quote, fact.get("value"))
+            # Code, not the model, sets the direction of a change: the quote's own words decide, and when the quote
+            # has none ("and by 63% vs placebo"), the words earlier in the same sentence of the document do.
+            direction, said_by = change_direction(quote, fact.get("value")), "quote"
+            if not direction and _number_in(quote, fact.get("value")) and not (DOWN.search(quote) or UP.search(quote)):
+                before = sentence_before(doc.text, quote)
+                if before:
+                    direction, said_by = change_direction(f"{before} {_normalize(quote)}", fact.get("value"), window=480), "sentence"
             try:
                 v = float(fact.get("value"))
                 if direction and (v < 0) != (direction < 0):
                     fact["value"] = -v
-                    attrs["sign_set_by_code"] = f"quote says {'decrease' if direction < 0 else 'increase'}"
+                    attrs["sign_set_by_code"] = f"{said_by} says {'decrease' if direction < 0 else 'increase'}"
             except (TypeError, ValueError):
                 pass
         if fact.get("key") == "genetic_association":
