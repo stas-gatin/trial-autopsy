@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22085343&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*74 mg[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22085343' LIMIT 5",
+ "rows": [
+  [
+   "38 mmol per liter), and lowered the LDL cholesterol level from 74 mg per deciliter (1"
+  ]
+ ],
+ "error": null
+}

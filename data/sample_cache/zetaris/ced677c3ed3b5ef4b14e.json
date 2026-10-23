@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24188894+OR+EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*138\\.1[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24188894' AND r.abstractText LIKE '%138.1%' LIMIT 5",
+ "rows": [
+  [
+   "8% (estimated using the Friedewald equation) and increase high-density lipoprotein (HDL) cholesterol by 138.1%, with an acceptable side-effect profile, in patients with or at high risk for coronary heart disease in the Determining the Efficacy and Tolerability of CETP Inhibition With Anacetrapib (DEFINE) trial"
+  ]
+ ],
+ "error": null
+}

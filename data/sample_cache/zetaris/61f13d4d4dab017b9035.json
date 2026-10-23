@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID%3APMC5147039&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*123\\.2 mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5147039' LIMIT 5",
+ "rows": [
+  [
+   ""
+  ]
+ ],
+ "error": null
+}

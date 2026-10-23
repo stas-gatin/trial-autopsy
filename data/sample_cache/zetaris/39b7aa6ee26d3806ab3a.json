@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22089718+OR+EXT_ID%3A24786356+OR+EXT_ID%3A26678626+OR+PMCID%3APMC4284021&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*103%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24786356' LIMIT 5",
+ "rows": [
+  [
+   " In combination with atorvastatin 10 mg, evacetrapib 100 mg increased HDL-C levels by 103% and decreased LDL-C levels by 15% and CETP activity by 68% versus atorvastatin alone"
+  ]
+ ],
+ "error": null
+}

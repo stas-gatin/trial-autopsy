@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24825642+OR+EXT_ID%3A26920601&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*63%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24825642' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Results</h4>Evolocumab reduced LDL-C levels by 66% (95% CI, 58% to 73%) to 75% (95% CI, 65% to 84%) (every 2 weeks) and by 63% (95% CI, 54% to 71%) to 75% (95% CI, 67% to 83%) (monthly) vs placebo at the mean of weeks 10 and 12 in the moderate- and high-intensity statin-treated groups; the LDL-C reductions at week 12 were comparable"
+  ]
+ ],
+ "error": null
+}
