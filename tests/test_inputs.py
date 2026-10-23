@@ -11,6 +11,19 @@ class DirectionFromQuote(unittest.TestCase):
         self.assertEqual(change_direction(q, 8), -1)
         self.assertEqual(change_direction(q, 29), 1)
 
+    def test_a_direction_word_of_another_clause_is_not_used(self):
+        # "increased" belongs to HDL-C; LDL-C's own clause has a verb and no direction, so the direction is unknown
+        self.assertEqual(change_direction("increased HDL-C by 133%, and LDL-C was 31.1%", 31.1), 0)
+        self.assertEqual(change_direction("increased HDL-C by 133%, and LDL-C was 31.1% relatively lower", 31.1), -1)
+        # "elevated" describes the patients, not the change
+        self.assertEqual(change_direction("In patients with elevated Lp(a), the placebo-adjusted change in Lp(a) was 35%", 35), 0)
+        self.assertEqual(change_direction("LDL-C decreased 30% while HDL increased 10%", 30), -1)
+        self.assertEqual(change_direction("LDL-C decreased 30% while HDL increased 10%", 10), 1)
+
+    def test_a_direction_word_after_the_number(self):
+        self.assertEqual(change_direction("a 27.2% decrease in LDL-C", 27.2), -1)
+        self.assertEqual(change_direction("LDL-C fell by 50% (p<0.001) and HDL rose", 50), -1)
+
     def test_explicit_sign_and_no_direction(self):
         self.assertEqual(change_direction("LDL-C −59% vs placebo", 59), -1)
         self.assertEqual(change_direction("increases (+19% to +24%)", 24), 1)
@@ -120,3 +133,123 @@ class MalformedChanges(unittest.TestCase):
         m = {"changes": None}
         self.assertEqual(_keep_change_objects(m), [])
         self.assertIsNone(m["changes"])
+
+
+class NormaliseAnalystOutput(unittest.TestCase):
+    def test_names_numbers_ids_units_and_ci_are_cleaned(self):
+        from app.agents.analysis import normalise_mechanism
+        m = {"intended_biomarker": ["LDL cholesterol"], "events": "1,612", "followup_years": 0,
+             "observed_ci": ["0.91", 0.78], "events_fact_ids": "f_1",
+             "changes": [{"biomarker": "LDL cholesterol", "abs_change": "-1.2 mmol/L", "fact_ids": "f_2"},
+                         {"biomarker": "Apo B", "abs_change": -0.3, "unit": "g/L", "baseline": 0}]}
+        notes = normalise_mechanism(m)
+        self.assertTrue(notes)
+        self.assertEqual(m["intended_biomarker"], "LDL-C")
+        self.assertEqual(m["events"], 1612)
+        self.assertIsNone(m["followup_years"])
+        self.assertEqual(m["observed_ci"], [0.78, 0.91])
+        self.assertEqual(m["events_fact_ids"], ["f_1"])
+        ldl, apob = m["changes"]
+        self.assertEqual((ldl["biomarker"], ldl["abs_change"], ldl["unit"], ldl["fact_ids"]), ("LDL-C", -1.2, "mmol/L", ["f_2"]))
+        self.assertEqual((apob["biomarker"], apob["abs_change"], apob["unit"], apob["baseline"]), ("apoB", -30.0, "mg/dL", None))
+
+    def test_well_formed_output_is_untouched(self):
+        from app.agents.analysis import normalise_mechanism
+        m = {"intended_biomarker": "LDL-C", "events": 1612, "followup_years": 2.2, "observed_ci": [0.69, 0.80],
+             "changes": [{"biomarker": "LDL-C", "abs_change": -1.45, "unit": "mmol/L", "fact_ids": ["f_1"]}]}
+        before = repr(m)
+        self.assertEqual(normalise_mechanism(m), [])
+        self.assertEqual(repr(m), before)
+
+    def test_critic_issues_given_as_strings_become_objects(self):
+        from app.agents.analysis import normalise_issues
+        data = {"issues": ["events not verified", {"severity": "high", "issue": "x"}]}
+        self.assertEqual(normalise_issues(data)[0], {"severity": "medium", "issue": "events not verified"})
+
+
+class KeepVerifiedInputs(unittest.TestCase):
+    facts = {"f_1": {"fact_id": "f_1"}, "f_2": {"fact_id": "f_2"}}
+    previous = {"events": 1640, "events_fact_ids": ["f_2"],
+                "changes": [{"biomarker": "LDL-C", "abs_change": -0.63, "fact_ids": ["f_1"]}]}
+
+    def test_a_dropped_verified_change_is_restored(self):
+        from app.agents.analysis import keep_verified_inputs
+        current = {"events": None, "changes": [{"biomarker": "", "abs_change": None}]}
+        kept = keep_verified_inputs(self.previous, current, [{"issue": "remove the trial's own HR from hypotheses"}], self.facts)
+        self.assertEqual(len(kept), 2)
+        self.assertIn({"biomarker": "LDL-C", "abs_change": -0.63, "fact_ids": ["f_1"]}, current["changes"])
+        self.assertEqual(current["events"], 1640)
+
+    def test_a_change_the_critic_questioned_is_left_as_revised(self):
+        from app.agents.analysis import keep_verified_inputs
+        current = {"events": 1640, "changes": []}
+        kept = keep_verified_inputs(self.previous, current, [{"issue": "LDL-C value is not placebo-adjusted"}], self.facts)
+        self.assertEqual(kept, [])
+        self.assertEqual(current["changes"], [])
+
+
+class ReadoutStatements(unittest.TestCase):
+    def classify(self, text):
+        from app.agents.analysis import classify_readout
+        hit = classify_readout(text)
+        return hit[0] if hit else None
+
+    def test_stopping_is_read_with_its_reason(self):
+        self.assertEqual(self.classify("The trial was stopped early for efficacy"), "success")
+        self.assertEqual(self.classify("Outcomes Study Closes Early Due To Unequivocal Evidence Of Benefit"), "success")
+        self.assertEqual(self.classify("The study was stopped for futility"), "failure")
+        self.assertEqual(self.classify("KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) PROMINENT CARDIOVASCULAR OUTCOMES STUDY"), "failure")
+
+    def test_common_announcement_wordings(self):
+        self.assertEqual(self.classify("The study will be stopped early because there is unequivocal evidence of a "
+                                       "reduction in cardiovascular morbidity"), "success")
+        self.assertEqual(self.classify("Combination lipid therapies do not reduce combined cardiovascular events"), "failure")
+        self.assertEqual(self.classify("the DSMB concluded that the primary endpoint was unlikely to be met"), "failure")
+        self.assertEqual(self.classify("a statistically significant 21 percent reduction in risk"), "success")
+        self.assertEqual(self.classify("Patients receiving hemodialysis did not benefit from statin therapy"), "failure")
+
+    def test_patients_reaching_an_endpoint_is_an_event_not_a_result(self):
+        self.assertIsNone(self.classify("396 patients in the rosuvastatin group and 408 in the placebo group reached the "
+                                        "primary end point"))
+
+    def test_words_about_patients_are_not_a_readout(self):
+        self.assertIsNone(self.classify("discontinuation rates were similar between groups"))
+        self.assertIsNone(self.classify("treatment was discontinued in 5% of patients"))
+
+    def test_an_explicit_primary_statement_wins(self):
+        self.assertEqual(self.classify("did not meet its primary endpoint but significantly reduced LDL-C"), "failure")
+
+
+class DrugUnderTest(unittest.TestCase):
+    def test_the_experimental_arm_drug_is_tried_before_the_background_one(self):
+        from types import SimpleNamespace
+        from unittest import mock
+        from app.agents import intake
+        trial = {"arm_groups": [{"label": "Eze/Simva", "type": "EXPERIMENTAL"},
+                                {"label": "Simva", "type": "ACTIVE_COMPARATOR"}],
+                 "interventions": [{"type": "DRUG", "name": "simvastatin", "arms": ["Eze/Simva", "Simva"]},
+                                   {"type": "DRUG", "name": "ezetimibe", "arms": ["Eze/Simva"]}]}
+        found = lambda name, tracer=None: {"id": "CHEMBL" + name, "name": name}
+        profile = {"name": "x", "mechanismsOfAction": {"rows": []}, "synonyms": [], "tradeNames": []}
+        state = SimpleNamespace(request={}, trial=trial, tracer=None, warnings=[], drug=None)
+        with mock.patch.object(intake.opentargets, "find_drug", side_effect=found), \
+                mock.patch.object(intake.opentargets, "drug_profile", return_value=profile):
+            intake._resolve_drug(state)
+        self.assertEqual(state.drug["chembl_id"], "CHEMBLezetimibe")
+
+
+class InconsistentChange(unittest.TestCase):
+    def test_absolute_and_percent_that_disagree_are_flagged(self):
+        from app.agents.analysis import check_inputs
+        m = {"changes": [{"biomarker": "LDL-C", "abs_change": -0.1, "pct_change": -50, "baseline": 2.5, "fact_ids": []}]}
+        self.assertTrue(any("disagree" in i for i in check_inputs(m, {})))
+        m["changes"][0]["abs_change"] = -1.25
+        self.assertFalse(any("disagree" in i for i in check_inputs(m, {})))
+
+
+class NegatedReductions(unittest.TestCase):
+    def test_a_negated_reduction_is_a_failure(self):
+        from app.agents.analysis import classify_readout
+        hit = classify_readout("adding niacin to statin therapy did not significantly further reduce the risk of "
+                               "the combination of coronary deaths")
+        self.assertEqual(hit[0], "failure")

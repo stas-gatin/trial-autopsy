@@ -45,7 +45,9 @@ def _load_archive(state: RunState, case_id: str):
     registry = next((d for d in state.docs if d.type == "registry"), None)
     state.trial = dict((registry.meta or {}).get("summary", {})) if registry else {}
     state.trial.setdefault("nct_id", nct)
-    state.trial.setdefault("acronym", manifest.get("acronym"))
+    # The registry has no acronym for some trials (AURORA, JUPITER): take the archive's short name, never a null.
+    if not state.trial.get("acronym"):
+        state.trial["acronym"] = (manifest.get("acronym") or "").split(" (")[0].strip() or None
     state.trial.setdefault("title", manifest.get("title"))
     state.trial["readout_date"] = manifest.get("readout_date")
     state.request.setdefault("drug", manifest.get("drug"))
@@ -74,11 +76,23 @@ def _load_live(state: RunState, req: dict):
                                     f"N {state.trial.get('enrollment')} | results posted {state.trial.get('has_results')}")
 
 
+# Synonyms that only name a salt or chemical form ("... free acid", "... sodium") match papers about other products.
+SALT_FORM = re.compile(r"\b(free acid|free base|sodium|calcium|potassium|magnesium|hydrochloride|mesylate|besylate|"
+                       r"hydrate|anhydrous)\b", re.I)
+
+
 def _resolve_drug(state: RunState):
     names = []
     if state.request.get("drug"):
         names.append(state.request["drug"])
-    for i in state.trial.get("interventions", []):
+    # The drug under test first: an intervention given only in experimental arms, before one that the comparator
+    # arm gets too (the background statin in "ezetimibe + simvastatin vs simvastatin").
+    arm_type = {g.get("label"): g.get("type") for g in state.trial.get("arm_groups") or []}
+
+    def only_experimental(i):
+        types = {arm_type.get(label) for label in i.get("arms") or []}
+        return "EXPERIMENTAL" in types and not any(t and "COMPARATOR" in t for t in types)
+    for i in sorted(state.trial.get("interventions", []), key=lambda i: not only_experimental(i)):
         if i.get("type") in ("DRUG", "BIOLOGICAL") and not PLACEBO.search(i.get("name") or ""):
             names.append(i["name"])
             names += i.get("other_names") or []
@@ -103,7 +117,7 @@ def _resolve_drug(state: RunState):
                        for m in mechs for t in m.get("targets") or []}
             aliases = sorted({x["label"] for x in (profile.get("synonyms") or []) + (profile.get("tradeNames") or [])
                               if x.get("label") and x["label"].lower() != profile.get("name", "").lower()
-                              and "free acid" not in x["label"].lower()})
+                              and not SALT_FORM.search(x["label"])})
             state.drug = {"name": profile.get("name", hit["name"]).lower(), "chembl_id": hit["id"], "aliases": aliases,
                           "drug_type": profile.get("drugType"),
                           "mechanisms": sorted({m["mechanismOfAction"] for m in mechs}),

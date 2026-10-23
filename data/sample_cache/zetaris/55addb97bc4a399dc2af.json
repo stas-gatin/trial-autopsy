@@ -1,0 +1,15 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22180633+OR+EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*29[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22180633' AND r.abstractText LIKE '%29%' LIMIT 5",
+ "rows": [
+  [
+   "22180633",
+   "PMC3276477",
+   "Changes in lipoprotein subfraction concentration and composition in healthy individuals treated with the CETP inhibitor anacetrapib.",
+   "2011-12-17",
+   " ANA 150 mg/day versus placebo resulted in significant decreases in LDL-cholesterol (26%) and apo B (29%) and increases in HDL-cholesterol (82%)"
+  ]
+ ],
+ "error": null
+}

@@ -91,7 +91,13 @@ _AFTER_READOUT = re.compile(r"\b(resultsSection|hasResults|statusModule|derivedS
                             r"annotationSection|citedByCount|commentCorrectionList|dateOfRevision)\b", re.I)
 _FORBIDDEN = re.compile(r"\b(insert|update|delete|drop|create|alter|grant|revoke|truncate|merge|call|exec|execute|"
                         r"set|use|show|describe|refresh|cache|uncache|load|add|msck|lightning)\b", re.I)
+# A container that holds a forbidden field returns it whole: protocolSection holds statusModule, designModule holds
+# enrollmentInfo. Selecting the container (or wrapping it in to_json) is a way round the field list.
+_CONTAINERS = re.compile(r"(?<![\w.])(?:(?:registry|papers)\.)?(?:protocolSection|protocolSection\.designModule)(?![\w.])",
+                         re.I)
 _TABLE_REF = re.compile(r"\b(from|join)\s+([A-Za-z_][\w.]*)", re.I)
+# FROM inside a function is not a table: EXTRACT(year FROM d), TRIM(BOTH 'x' FROM s), SUBSTRING(s FROM 2)
+_FROM_IN_CALL = re.compile(r"\b(extract|trim|substring|overlay|position)\s*\([^()]*\)", re.I)
 
 
 def safe_sql(sql: str, real: dict[str, str], cutoff: bool = False) -> str:
@@ -104,18 +110,31 @@ def safe_sql(sql: str, real: dict[str, str], cutoff: bool = False) -> str:
         raise UnsafeSQL("one statement only, no comments")
     if _FORBIDDEN.search(re.sub(r"'[^']*'", "''", s)):
         raise UnsafeSQL("statement contains a keyword that is not allowed")
+    if "`" in s or '"' in s:
+        raise UnsafeSQL("quoted identifiers are not allowed")
+    bare = _FROM_IN_CALL.sub("f()", re.sub(r"'[^']*'", "''", s))
     if cutoff:
-        bare = re.sub(r"'[^']*'", "''", s)
-        if _AFTER_READOUT.search(bare) or re.search(r"\*", bare):
+        # the field names are checked in the statement as written too, so protocolSection['statusModule'] or
+        # get_json_object(x, '$.statusModule') cannot hide one inside a string
+        starred = re.sub(r"(?i)\bcount\s*\(\s*\*\s*\)", "count(1)", bare)
+        if _AFTER_READOUT.search(s) or _CONTAINERS.search(bare) or "*" in starred:
             raise UnsafeSQL("with an evidence cut-off only design-time fields may be read (no results, status, "
-                            "enrollment or SELECT *)")
-    refs = _TABLE_REF.findall(re.sub(r"'[^']*'", "''", s))
+                            "enrollment, whole sections or SELECT *)")
+    for clause in re.findall(r"(?is)\bfrom\b(.*?)(?=\bwhere\b|\bgroup\b|\border\b|\blimit\b|\bhaving\b|\bunion\b|"
+                             r"\bjoin\b|\bleft\b|\binner\b|\bright\b|\bcross\b|\)|$)", bare):
+        if "," in clause:
+            raise UnsafeSQL("read the tables with JOIN, not a comma list")
+    refs = _TABLE_REF.findall(bare)
     if not refs:
         raise UnsafeSQL("statement reads no table")
     for _, name in refs:
         if name not in real:
             raise UnsafeSQL(f"unknown table {name}: use {', '.join(sorted(real))}")
+    calls = {}
+    s = _FROM_IN_CALL.sub(lambda m: calls.setdefault(f"__call{len(calls)}__", m.group(0)) and f"__call{len(calls) - 1}__", s)
     s = _TABLE_REF.sub(lambda m: f"{m.group(1)} session.{real[m.group(2)]}", s)
+    for k, v in calls.items():
+        s = s.replace(k, v)
     if not re.search(r"(?i)\blimit\s+\d+\s*$", s):
         s += f" LIMIT {MAX_ROWS}"
     return s

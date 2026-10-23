@@ -1,0 +1,15 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*61[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%61%' LIMIT 5",
+ "rows": [
+  [
+   "28454801",
+   "PMC5419667",
+   "Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial of the clinical effects of anacetrapib among people with established vascular disease: Trial design, recruitment, and baseline characteristics.",
+   "2017-02-21",
+   " At the randomization visit (after at least 8weeks on a protocol-defined atorvastatin regimen), mean plasma LDL cholesterol was 61 (15) mg/dL and HDL cholesterol was 40 (10) mg/dL"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15842977+OR+EXT_ID%3A19958854+OR+EXT_ID%3A22345126+OR+EXT_ID%3A22424025&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*(?:56%|56 percent)[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22345126' LIMIT 5",
+ "rows": [
+  [
+   " After 4, 24, and 36 weeks of treatment with dalcetrapib, CETP activity decreased by 51, 53, and 56% (placebo corrected, all P < 0"
+  ]
+ ],
+ "error": null
+}

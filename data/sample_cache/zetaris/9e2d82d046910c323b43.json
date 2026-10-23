@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18376000&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*720[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18376000' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Methods</h4>We conducted a double-blind, randomized, 24-month trial comparing the effects of daily therapy with 80 mg of simvastatin either with placebo or with 10 mg of ezetimibe in 720 patients with familial hypercholesterolemia"
+  ]
+ ],
+ "error": null
+}

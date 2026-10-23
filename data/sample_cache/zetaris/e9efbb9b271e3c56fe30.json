@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24825642+OR+EXT_ID%3A26920601&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*89[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24825642' AND r.abstractText LIKE '%89%' LIMIT 5",
+ "rows": [
+  [
+   " After a 4-week lipid-stabilization period, patients (n = 1899) were randomized to compare evolocumab (140 mg every 2 weeks or 420 mg monthly) with placebo (every 2 weeks or monthly) or ezetimibe (10 mg or placebo daily; atorvastatin patients only) when added to statin therapies"
+  ]
+ ],
+ "error": null
+}

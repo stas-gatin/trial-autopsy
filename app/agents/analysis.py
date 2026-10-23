@@ -7,7 +7,7 @@ from dataclasses import asdict
 
 from app.agents import prompts, verifier
 from app.agents.state import RunState
-from app.core.calculator import BiomarkerChange, CaseInput, evaluate
+from app.core.calculator import BiomarkerChange, CaseInput, canonical, evaluate
 from app.llm import generator
 from app.tools import reference
 
@@ -84,10 +84,15 @@ def mechanism(state: RunState):
         genetics=_genetics_block(state), reference=_reference_block(), facts=facts_text,
         feedback=_feedback(state, "mechanism"))
     data, response = _llm(state, "reasoning", prompts.MECHANISM_SYSTEM, prompt, "mechanism", "MechanismAnalyst")
-    dropped = _keep_change_objects(data)
-    if dropped:
-        state.tracer.log("MechanismAnalyst", "drop_malformed", output_summary=f"{len(dropped)} biomarker change(s) "
-                         f"were not objects and were left out: {dropped}"[:500], status="warning", deterministic=True)
+    cleaned = normalise_mechanism(data)
+    if cleaned:
+        state.tracer.log("MechanismAnalyst", "normalise_output", output_summary="; ".join(cleaned)[:700],
+                         status="warning", target_agent="Calculator", deterministic=True)
+    if state.mechanism and state.critiques:
+        kept = keep_verified_inputs(state.mechanism, data, state.critiques[-1].get("issues") or [], facts)
+        if kept:
+            state.tracer.log("MechanismAnalyst", "keep_verified_inputs", output_summary="; ".join(kept)[:700],
+                             status="warning", target_agent="Calculator", deterministic=True)
     filled = complete_inputs(data, facts)
     state.mechanism = data
     state.case_input = to_case_input(state, data)
@@ -124,6 +129,149 @@ def _keep_change_objects(m: dict) -> list:
     if dropped:
         m["changes"] = [c for c in changes if isinstance(c, dict)]
     return dropped
+
+
+_NUMBER = re.compile(r"[-+]?\d[\d,]*(?:\.\d+)?")
+
+
+def _number_in(x):
+    """A number from a model value: 12, "12", "-1.2 mmol/L", "1,612", "−0.5". Returns (number, rest of text)."""
+    if isinstance(x, bool) or x is None:
+        return None, ""
+    if isinstance(x, (int, float)):
+        return float(x), ""
+    if not isinstance(x, str):
+        return None, ""
+    text = x.replace("\u2212", "-").replace("\u2013", "-").strip()
+    m = _NUMBER.search(text)
+    if not m:
+        return None, ""
+    try:
+        return float(m.group().replace(",", "")), text[m.end():].strip()
+    except ValueError:
+        return None, ""
+
+
+def _id_list(x) -> list:
+    if isinstance(x, str):
+        return [x] if x.strip() else []
+    return [i for i in x if isinstance(i, str)] if isinstance(x, (list, tuple)) else []
+
+
+def normalise_mechanism(m: dict) -> list[str]:
+    """One pass over the analyst's answer before any code uses it: biomarker names to the calculator's vocabulary,
+    numbers written as text to numbers, fact ids to lists, apoB in g/L to mg/dL, a reversed or textual confidence
+    interval to an ordered pair, and impossible values (a zero or negative baseline or follow-up) to unknown.
+    Returns a note per change made; well-formed output is returned untouched."""
+    notes = [f"left out {len(d)} biomarker change(s) that were not objects" for d in [_keep_change_objects(m)] if d]
+    empty = [c for c in m.get("changes") or [] if not canonical(c.get("biomarker"))
+             and all(c.get(k) in (None, "") for k in ("abs_change", "pct_change"))]
+    if empty:
+        m["changes"] = [c for c in m["changes"] if c not in empty]
+        notes.append(f"left out {len(empty)} biomarker change(s) with no name and no value")
+    for c in m.get("changes") or []:
+        raw = c.get("biomarker")
+        name = canonical(raw)
+        if isinstance(raw, str) and name and name != raw.strip():
+            c["biomarker"], c["reported_as"] = name, raw
+            notes.append(f"'{raw}' read as {name}")
+        for k in ("abs_change", "pct_change", "baseline"):
+            v = c.get(k)
+            if isinstance(v, str) or isinstance(v, bool):
+                n, rest = _number_in(v)
+                c[k] = n
+                if k != "pct_change" and rest and not c.get("unit") and n is not None:
+                    c["unit"] = rest.split()[0]
+                notes.append(f"{name} {k} '{v}' read as {n}")
+        if isinstance(c.get("baseline"), (int, float)) and c["baseline"] <= 0:
+            notes.append(f"{name} baseline {c['baseline']} is impossible: treated as unknown")
+            c["baseline"] = None
+        if "fact_ids" in c and not isinstance(c["fact_ids"], list):
+            c["fact_ids"] = _id_list(c["fact_ids"])
+        unit = (c.get("unit") or "").lower().replace(" ", "")
+        if name == "apoB" and "g/l" in unit and "mg/l" not in unit:
+            for k in ("abs_change", "baseline"):
+                if isinstance(c.get(k), (int, float)):
+                    c[k] = round(c[k] * 100, 3)
+            c["unit"] = "mg/dL"
+            notes.append("apoB converted from g/L to mg/dL (x100)")
+    for k in ("events", "followup_years", "observed_hr", "alpha_two_sided", "sbp_change_mmhg"):
+        v = m.get(k)
+        if isinstance(v, str) or isinstance(v, bool):
+            m[k], _ = _number_in(v)
+            notes.append(f"{k} '{v}' read as {m[k]}")
+    if isinstance(m.get("events"), float):
+        m["events"] = int(round(m["events"]))
+    if isinstance(m.get("followup_years"), (int, float)) and m["followup_years"] <= 0:
+        notes.append(f"follow-up {m['followup_years']} years is impossible: treated as unknown")
+        m["followup_years"] = None
+    ci = m.get("observed_ci")
+    if ci is not None:
+        pair = [_number_in(x)[0] for x in ci] if isinstance(ci, (list, tuple)) else []
+        fixed = sorted(pair) if len(pair) == 2 and None not in pair else None
+        if fixed != ci:
+            notes.append(f"observed CI {ci} read as {fixed}")
+        m["observed_ci"] = fixed
+    intended = m.get("intended_biomarker")
+    if intended is not None and not isinstance(intended, str):
+        m["intended_biomarker"] = canonical(intended)
+        notes.append(f"intended biomarker {intended} read as {m['intended_biomarker']}")
+    elif isinstance(intended, str) and intended.strip() and canonical(intended) != intended.strip():
+        m["intended_biomarker"] = canonical(intended)
+        notes.append(f"intended biomarker '{intended}' read as {m['intended_biomarker']}")
+    for k in [k for k in m if k.endswith("fact_ids") and not isinstance(m[k], list)]:
+        m[k] = _id_list(m[k])
+    return notes
+
+
+_MENTIONS = {"LDL-C": ("ldl",), "non-HDL-C": ("non-hdl", "non hdl"), "apoB": ("apob", "apo b", "apolipoprotein b"),
+             "Lp(a)": ("lp(a)", "lipoprotein(a)", "lipoprotein (a)"), "HDL-C": ("hdl",), "triglycerides": ("triglycer",),
+             "SBP": ("blood pressure", "sbp")}
+
+
+def _has_value(c: dict) -> bool:
+    return any(isinstance(c.get(k), (int, float)) and not isinstance(c.get(k), bool) for k in ("abs_change", "pct_change"))
+
+
+def keep_verified_inputs(previous: dict, current: dict, issues: list, facts: dict) -> list[str]:
+    """A refinement round must not lose what the previous round had verified. A biomarker change that had a value
+    and cited verified facts, and that the critic did not question, is restored if the revision dropped it or left
+    it empty; so are the event count and the follow-up. Code does this, not the prompt. Returns what was restored."""
+    asked = " ".join(f"{i.get('issue', '')} {i.get('request', '')}" for i in issues if isinstance(i, dict)).lower()
+
+    def questioned(name: str) -> bool:
+        return any(t in asked for t in _MENTIONS.get(name, (name.lower(),)))
+
+    def verified(ids) -> bool:
+        return bool(ids) and all(i in facts for i in ids)
+
+    restored = []
+    now = {canonical(c.get("biomarker")): c for c in current.get("changes") or []}
+    for old in previous.get("changes") or []:
+        name = canonical(old.get("biomarker"))
+        if not name or not _has_value(old) or not verified(old.get("fact_ids")) or questioned(name):
+            continue
+        new = now.get(name)
+        if new is None or not _has_value(new):
+            current["changes"] = [c for c in current.get("changes") or [] if c is not new] + [dict(old)]
+            restored.append(f"{name} change restored from the previous round (verified, not questioned by the critic)")
+    for key, ids, words in (("events", "events_fact_ids", ("event",)), ("followup_years", "followup_fact_ids", ("follow",))):
+        if previous.get(key) is not None and current.get(key) is None and verified(previous.get(ids)) \
+                and not any(w in asked for w in words):
+            current[key], current[ids] = previous[key], previous.get(ids)
+            restored.append(f"{key} {previous[key]} restored from the previous round")
+    return restored
+
+
+def normalise_issues(data: dict) -> list[dict]:
+    """The critic's issues as objects; a bare string becomes a medium-severity issue for no particular agent."""
+    issues = data.get("issues")
+    if isinstance(issues, dict):
+        issues = [issues]
+    if not isinstance(issues, list):
+        issues = []
+    data["issues"] = [i if isinstance(i, dict) else {"severity": "medium", "issue": str(i)} for i in issues]
+    return data["issues"]
 
 
 def _lpa_threshold(facts: dict) -> dict | None:
@@ -264,6 +412,10 @@ def check_inputs(m: dict, facts: dict) -> list[str]:
         if within:
             issues.append(f"{c.get('biomarker')} change uses within-arm values {within} (not placebo-adjusted): "
                           f"use the difference from the comparator arm if the source gives one")
+        a, pct, base = _num(c.get("abs_change")), _num(c.get("pct_change")), _num(c.get("baseline"))
+        if a is not None and pct is not None and base and abs(a - pct / 100 * base) > 0.25 * max(abs(a), abs(pct / 100 * base)):
+            issues.append(f"{c.get('biomarker')} abs_change {a} and pct_change {pct}% of baseline {base} disagree "
+                          f"(the calculator uses abs_change)")
         if c.get("biomarker") in ("LDL-C", "non-HDL-C") and abs(_num(c.get("abs_change")) or 0) > 3:
             issues.append(f"{c.get('biomarker')} change {c.get('abs_change')} mmol/L is implausibly large (unit error?)")
     return issues
@@ -315,6 +467,7 @@ def critique(state: RunState) -> dict:
         calc=calc_json(state.calc),
         hypotheses=json.dumps(state.investigation, ensure_ascii=False), facts=facts_text)
     data, response = _llm(state, "critic", prompts.CRITIC_SYSTEM, prompt, f"critic:{len(state.critiques)}", "Critic")
+    normalise_issues(data)
     state.critiques.append(data)
     high = [i for i in data.get("issues") or [] if i.get("severity") == "high"]
     state.tracer.log("Critic", "review", output_summary=f"{len(data.get('issues') or [])} issues ({len(high)} high); "
@@ -346,10 +499,45 @@ def report(state: RunState):
                      model=f"{response.provider}:{response.model}", cached=response.cached)
 
 
-NOT_MET = re.compile(r"did not (meet|achieve)|not met|missed|fail(ed)? to|futility|lack of efficacy|"
-                     r"insufficient efficacy|no (significant )?(reduction|benefit)|discontinu|stopped|halted|"
-                     r"terminat|unlikely to (show|demonstrate)", re.I)
-MET = re.compile(r"\bmet (its|the) primary|achieved (its|the) primary|significant(ly)? reduc", re.I)
+# What a readout says, strongest first: an explicit statement about the primary endpoint; a trial stopped early for
+# benefit or for harm; a trial stopped or abandoned without benefit; a significant reduction in events. "Stopped" or
+# "discontinued" alone is not a failure ("stopped early for efficacy", "discontinuation rates were similar"), and a
+# biomarker that fell significantly is not a result.
+_TRIAL = r"(?:trial|study|program|programme|development|outcomes? study)"
+_STOP = r"(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
+_EVENTS = r"(?:events?|risk|mortality|deaths?|heart attacks?|strokes?|mace|endpoint|morbidity)"
+_PATIENTS_REACHED = re.compile(r"\b(patients|participants|subjects)\b[^.]{0,80}\b(met|achieved|reached)\b", re.I)
+_NEGATED = re.compile(r"\b(no|not|without|lack of|failed to)\b[^.]{0,40}\b(benefit|reduc\w*|decreas\w*|lower\w*|efficacy)", re.I)
+READOUT_RULES = [
+    ("failure", 0, re.compile(r"\b(did not|does not|didn't|failed to|fails? to) (meet|achieve|reach) (its|the|their) (\w+ ){0,2}primary|"
+                              r"primary (\w+ ){0,3}(was |were )?not (met|achieved|reached)|missed (its|the) (\w+ ){0,2}primary|"
+                              r"no (statistically )?significant (difference|reduction|benefit) in (the )?(\w+ ){0,2}primary", re.I)),
+    ("success", 0, re.compile(r"\b(met|meets|achieved|achieves) (its|the|their|both) (\w+ ){0,2}primary|"
+                              r"primary (\w+ ){0,3}(was|were) (met|achieved)", re.I)),
+    ("stopped_harm", 1, re.compile(rf"{_STOP}[^.]{{0,120}}\b(imbalance|excess|increase\w*|higher)\b[^.]{{0,40}}\b(mortality|deaths?|"
+                                   rf"cardiovascular events|harm)|{_STOP}[^.]{{0,80}}\b(safety (concerns?|reasons?)|harm)\b", re.I)),
+    ("success", 1, re.compile(rf"{_STOP}\b[^.]{{0,40}}\bearly\b[^.]{{0,120}}\b(efficacy|benefit\w*|positive|reduc\w*|superior\w*|"
+                              rf"overwhelming)", re.I)),
+    ("failure", 2, re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate|meet|achieve|be met|be achieved)|"
+                              rf"did not (benefit|show a (significant )?benefit)|\bno (significant )?(clinical )?benefit|"
+                              rf"\b(did|do|does) not (\w+ ){{0,2}}(reduce|lower|decrease) (\w+ ){{0,6}}{_EVENTS}|"
+                              rf"{_STOP} (the |its |a |all )?([\w()\-\"'\u201c\u201d]+ ){{0,6}}{_TRIAL}|"
+                              rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
+    ("success", 3, re.compile(rf"significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}", re.I)),
+    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)", re.I)),
+]
+
+
+def classify_readout(text: str):
+    """(outcome, rank) for the strongest statement in one sentence or title, or None."""
+    for outcome, rank, rule in READOUT_RULES:
+        if rank == 0 and outcome == "success" and _PATIENTS_REACHED.search(text):
+            continue
+        if rule.search(text) and not (rank in (1, 3) and outcome == "success" and _NEGATED.search(text)):
+            return outcome, rank
+    return None
+
+
 SUCCESS_CODES = {"robust_success", "narrow_success", "success_with_caveats"}
 
 
@@ -364,19 +552,35 @@ def actual_outcome(state: RunState) -> tuple[str | None, str]:
         if ci[0] > 1:
             return "stopped_harm", f"observed HR CI {ci[0]}-{ci[1]} is above 1"
         return "failure", f"observed HR CI {ci[0]}-{ci[1]} includes 1"
+    # The outcome facts extracted for this trial first; only if they state nothing, the announcement itself (its
+    # title, then each sentence), which may also speak of other trials of the same programme.
     readout_types = {"user_input", "press_release", "registry"}
     doc_types = {d.source_id: d.type for d in state.docs}
+    facts = []
     for f in state.context.facts(state.case_id):
         if f["key"] not in ("readout_statement", "stopped_early", "primary_endpoint"):
             continue
         if doc_types.get(f["source_id"]) not in readout_types and not f["source_id"].startswith(("user:", "announcement:")):
             continue
-        text = str(f["value"]) + " " + f["quote"]
-        if NOT_MET.search(text):
-            return "failure", f"readout: \"{f['quote'][:140]}\" ({f['source_id']})"
-        if MET.search(text):
-            return "success", f"readout: \"{f['quote'][:140]}\" ({f['source_id']})"
-    return None, "outcome not stated in the evidence"
+        facts.append((str(f["value"]) + " " + f["quote"], f["source_id"]))
+    texts = []
+    for d in state.docs:
+        if d.type in ("press_release", "user_input") or d.source_id.startswith(("announcement:", "user:")):
+            texts.append((d.title or "", d.source_id))
+            texts += [(x, d.source_id) for x in re.split(r"(?<=[.!?])\s+", d.text or "") if x.strip()]
+    def strongest(candidates):
+        best = None
+        for text, source in candidates:
+            hit = classify_readout(text)
+            if hit and (best is None or hit[1] < best[0]):
+                best = (hit[1], hit[0], f"readout: \"{text.strip()[:140]}\" ({source})")
+        return best
+    # An explicit statement about the primary endpoint in the announcement outranks a weaker fact.
+    from_facts, from_text = strongest(facts), strongest(texts)
+    best = from_facts
+    if from_text and (best is None or (from_text[0] == 0 and best[0] > 0)):
+        best = from_text
+    return (best[1], best[2]) if best else (None, "outcome not stated in the evidence")
 
 
 def verdict_block(state: RunState) -> dict:

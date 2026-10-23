@@ -1,0 +1,14 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10027849+OR+EXT_ID%3A20863951+OR+EXT_ID%3A21602519+OR+EXT_ID%3A21989792&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*83\\.6[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21989792' AND r.abstractText LIKE '%83.6%' LIMIT 5",
+ "rows": [
+  [
+   "21989792",
+   "Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome.",
+   "2011-12-01",
+   " At 8 weeks of treatment (primary endpoint), varespladib methyl reduced median sPLA(2)-IIA levels by -83.6% in diabetic patients and by -82"
+  ]
+ ],
+ "error": null
+}

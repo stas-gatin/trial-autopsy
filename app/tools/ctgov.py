@@ -51,8 +51,10 @@ def summarize(study: dict) -> dict:
         "phases": design.get("phases", []),
         "enrollment": design.get("enrollmentInfo", {}).get("count"),
         "enrollment_type": design.get("enrollmentInfo", {}).get("type"),
-        "interventions": [{"name": i.get("name"), "type": i.get("type"), "other_names": i.get("otherNames", [])}
+        "interventions": [{"name": i.get("name"), "type": i.get("type"), "other_names": i.get("otherNames", []),
+                           "arms": i.get("armGroupLabels", [])}
                           for i in arms.get("interventions", [])],
+        "arm_groups": [{"label": g.get("label"), "type": g.get("type")} for g in arms.get("armGroups", [])],
         "conditions": p.get("conditionsModule", {}).get("conditions", []),
         "primary_outcomes": [o.get("measure") + (f" [{o.get('timeFrame')}]" if o.get("timeFrame") else "")
                              for o in p.get("outcomesModule", {}).get("primaryOutcomes", [])],

@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22819432+OR+PMCID%3APMC5396348&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*21\\\\.5%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22819432' AND r.abstractText LIKE '%21.5%%' LIMIT 5",
+ "rows": [
+  [
+   " AMR101 4 and 2 g/day significantly decreased TG levels by 21.5% (p <0"
+  ]
+ ],
+ "error": null
+}

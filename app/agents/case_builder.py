@@ -24,7 +24,21 @@ KEY_TERMS = re.compile(
     r"phospholipase|blood pressure|hazard ratio|HR|95% CI|confidence interval|events?|randomi[sz]ed|follow-up|"
     r"power|placebo|primary end ?point|primary outcome|enrolled|median)\b", re.I)
 NUMBER = re.compile(r"\d")
-GENERIC_TOKENS = {"sodium", "calcium", "acid", "hydrochloride", "tablet", "injection", "placebo", "ionis", "free"}
+# Words in drug names that would match unrelated papers: salt and dosage forms. The sponsor's own name (a company
+# prefix in code names such as "IONIS-APO(a)-LRx") is added per trial from the registry.
+GENERIC_TOKENS = {"sodium", "calcium", "potassium", "magnesium", "acid", "hydrochloride", "mesylate", "besylate",
+                  "tablet", "tablets", "capsule", "injection", "solution", "placebo", "free"}
+
+
+def generic_tokens_for(sponsor: str | None, names: list[str]) -> set[str]:
+    """Words to leave out of the loose literature search: salt and dosage forms, the sponsor's name, and a company
+    prefix in a code name ("IONIS-APO(a)-LRx", "AKCEA-APO(a)-L Rx"), which would match every paper of that company."""
+    prefixes = {m.group(1).lower() for n in names for m in [re.match(r"([A-Za-z]{4,})-(?=[^ ]*[\d(])", n or "")] if m}
+    return GENERIC_TOKENS | prefixes | {t.lower() for t in re.split(r"[^A-Za-z0-9]+", sponsor or "") if len(t) >= 4}
+
+
+def generic_tokens(state: RunState, names: list[str]) -> set[str]:
+    return generic_tokens_for(state.trial.get("sponsor"), names)
 
 
 def _skip(state: RunState, source: str, what: str) -> bool:
@@ -90,8 +104,9 @@ def gather_literature(state: RunState, extra_terms: str | None = None) -> list[D
         queries.append(f'"{acronym}"')
     trial_types = ('PUB_TYPE:"Clinical Trial, Phase II" OR PUB_TYPE:"Clinical Trial, Phase III" OR '
                    'PUB_TYPE:"Randomized Controlled Trial"')
+    generic = generic_tokens(state, names)
     tokens = sorted({t for n in names for t in re.split(r"[^A-Za-z0-9]+", n)
-                     if (len(t) >= 5 or any(ch.isdigit() for ch in t)) and t.lower() not in GENERIC_TOKENS})
+                     if (len(t) >= 5 or any(ch.isdigit() for ch in t)) and t.lower() not in generic})
     if tokens:
         # Unquoted tokens catch code names typeset differently, e.g. "AKCEA-APO(a)-L Rx".
         queries.append(f"({' OR '.join(tokens[:8])}) AND ({trial_types})")
@@ -275,30 +290,42 @@ DOWN = re.compile(r"\b(decreas|reduc|lower|fell|fall|declin|drop|cut)\w*", re.I)
 UP = re.compile(r"\b(increas|rais|elevat|ros[ei]|higher|gain)\w*", re.I)
 
 
+_CLAUSE = re.compile(r"[,;]|\b(?:and|but|while|whereas)\b", re.I)
+_OWN_VERB = re.compile(r"\b(?:was|were|is|are|remained|changed|showed|had|did)\b", re.I)
+_STOP_AFTER = re.compile(r"[,;(]|\b(?:and|but|vs|versus|compared|while|whereas)\b", re.I)
+
+
 def change_direction(quote: str, value, window: int = 160) -> int:
     """+1 or -1 when the quote says in words which way the number moved ("decreased LDL-C by 8%"), else 0.
-    The nearest direction word before the number decides; an explicit sign in the quote always wins."""
+    An explicit sign wins; then a direction word up to three words after the number, within its clause ("a 27%
+    decrease", "31% relatively lower"); then the clauses before it, nearest first. A clause with a direction word
+    decides; a clause with its own verb but no direction ("LDL-C was 31%") ends the search, so a word that belongs
+    to another biomarker or to the patients ("increased HDL-C by 133%, and LDL-C was 31%", "in patients with
+    elevated Lp(a), the change was 35%") is never used; a clause without a verb ("and LDL-C by 8%", "and by 63%")
+    shares the verb of the clause before it."""
     try:
         magnitude = abs(float(value))
     except (TypeError, ValueError):
         return 0
     text = f"{magnitude:g}"
-    for m in re.finditer(rf"([-+−]?)\b{re.escape(text)}(?![\d.])", quote):
+    for m in re.finditer(rf"([-+\u2212]?)\b{re.escape(text)}(?![\d.])", quote):
         if m.group(1):
-            return -1 if m.group(1) in "-−" else 1
-        # "a 27.2% decrease": a direction word right after the number (within three words) decides first.
-        after = re.match(r"\s*(?:%|percent|mg/dl|mmol/l|nmol/l)?\s*(?:\S+\s+){0,2}?(\S+)", quote[m.end():m.end() + 60], re.I)
-        if after:
-            word = after.group(1)
+            return -1 if m.group(1) in "-\u2212" else 1
+        after = re.sub(r"^\s*(?:%|percent|mg/dl|mmol/l|nmol/l|g/l|mmhg)?", "", quote[m.end():m.end() + 80], flags=re.I)
+        stop = _STOP_AFTER.search(after)
+        for word in (after[:stop.start()] if stop else after).split()[:3]:
             if DOWN.match(word):
                 return -1
             if UP.match(word):
                 return 1
         before = quote[max(0, m.start() - window):m.start()]
-        downs = [x.end() for x in DOWN.finditer(before)]
-        ups = [x.end() for x in UP.finditer(before)]
-        if downs or ups:
-            return -1 if (max(downs) if downs else -1) > (max(ups) if ups else -1) else 1
+        for clause in reversed(_CLAUSE.split(before)):
+            downs = [x.end() for x in DOWN.finditer(clause)]
+            ups = [x.end() for x in UP.finditer(clause)]
+            if downs or ups:
+                return -1 if (max(downs) if downs else -1) > (max(ups) if ups else -1) else 1
+            if _OWN_VERB.search(clause):
+                break
     return 0
 
 

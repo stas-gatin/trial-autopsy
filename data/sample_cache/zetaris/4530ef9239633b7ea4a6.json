@@ -1,0 +1,7 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10027849+OR+EXT_ID%3A20863951+OR+EXT_ID%3A21602519+OR+EXT_ID%3A21989792&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*87[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21602519' AND r.abstractText LIKE '%87%' LIMIT 5",
+ "rows": [],
+ "error": "Zetaris HTTP 400: {\"msg\":\"[FIELD_NOT_FOUND] No such struct field `pmcid` in `abstractText`, `affiliation`, `authMan`, `authorIdList`, `authorList`, `authorString`, `chemicalList`, `citedByCount`, `commentCorrectionList`, `dataLinksTagsList`, `dateOfCompletion`, `dateOfCreation`, `dateOfRevision`, `d"
+}

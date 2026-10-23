@@ -93,7 +93,8 @@ def main():
     aliases = [drug["name"].lower()] + [x["label"] for x in (drug.get("synonyms") or [])] if drug else names
     record_stub = {"title": "", "abstract": ""}
     tokens = sorted({t for n in aliases for t in re.split(r"[^A-Za-z0-9]+", n)
-                     if (len(t) >= 5 or any(ch.isdigit() for ch in t)) and t.lower() not in case_builder.GENERIC_TOKENS})
+                     if (len(t) >= 5 or any(ch.isdigit() for ch in t))
+                     and t.lower() not in case_builder.generic_tokens_for(summary.get("sponsor"), aliases)})
     name_clause = " OR ".join(f'TITLE:"{n}" OR ABSTRACT:"{n}"' for n in aliases[:6])
     queries = [f"({name_clause})", f"({' OR '.join(tokens[:8])}) AND (PUB_TYPE:\"Clinical Trial, Phase II\" OR "
                                    f"PUB_TYPE:\"Clinical Trial, Phase III\" OR PUB_TYPE:\"Randomized Controlled Trial\")"]

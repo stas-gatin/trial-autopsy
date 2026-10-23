@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22089718+OR+EXT_ID%3A24786356+OR+EXT_ID%3A26678626+OR+PMCID%3APMC3910017+OR+PMCID%3APMC4284021&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*144\\.3[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22089718' LIMIT 5",
+ "rows": [
+  [
+   "3) mg/dL and the mean baseline LDL-C level was 144.3 (SD, 26"
+  ]
+ ],
+ "error": null
+}

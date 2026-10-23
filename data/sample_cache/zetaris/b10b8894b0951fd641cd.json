@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18765397+OR+EXT_ID%3A20934559+OR+EXT_ID%3A23439604&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*59%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18765397' LIMIT 5",
+ "rows": [
+  [
+   " In contrast, Lp-PLA(2) activity was inhibited by 59% with darapladib (P<0"
+  ]
+ ],
+ "error": null
+}
