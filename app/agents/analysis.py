@@ -412,6 +412,10 @@ def check_inputs(m: dict, facts: dict) -> list[str]:
         if within:
             issues.append(f"{c.get('biomarker')} change uses within-arm values {within} (not placebo-adjusted): "
                           f"use the difference from the comparator arm if the source gives one")
+        a, pct, base = _num(c.get("abs_change")), _num(c.get("pct_change")), _num(c.get("baseline"))
+        if a is not None and pct is not None and base and abs(a - pct / 100 * base) > 0.25 * max(abs(a), abs(pct / 100 * base)):
+            issues.append(f"{c.get('biomarker')} abs_change {a} and pct_change {pct}% of baseline {base} disagree "
+                          f"(the calculator uses abs_change)")
         if c.get("biomarker") in ("LDL-C", "non-HDL-C") and abs(_num(c.get("abs_change")) or 0) > 3:
             issues.append(f"{c.get('biomarker')} change {c.get('abs_change')} mmol/L is implausibly large (unit error?)")
     return issues

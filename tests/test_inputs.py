@@ -223,3 +223,12 @@ class DrugUnderTest(unittest.TestCase):
                 mock.patch.object(intake.opentargets, "drug_profile", return_value=profile):
             intake._resolve_drug(state)
         self.assertEqual(state.drug["chembl_id"], "CHEMBLezetimibe")
+
+
+class InconsistentChange(unittest.TestCase):
+    def test_absolute_and_percent_that_disagree_are_flagged(self):
+        from app.agents.analysis import check_inputs
+        m = {"changes": [{"biomarker": "LDL-C", "abs_change": -0.1, "pct_change": -50, "baseline": 2.5, "fact_ids": []}]}
+        self.assertTrue(any("disagree" in i for i in check_inputs(m, {})))
+        m["changes"][0]["abs_change"] = -1.25
+        self.assertFalse(any("disagree" in i for i in check_inputs(m, {})))
