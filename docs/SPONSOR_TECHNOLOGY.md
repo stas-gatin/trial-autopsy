@@ -1,6 +1,6 @@
 # Sponsor technology in Trial Autopsy
 
-How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. Every claim points to the code and to a way to check it. The numbers come from the 16 recorded analyses in `data/library/` (14 blind backtests and 2 examples, run live on 22 and 23 October 2026; the third example is the ACCELERATE backtest itself). Their logs are in `logs/`.
+How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. Every claim points to the code and to a way to check it. The numbers come from the 26 recorded analyses in `data/library/` (24 blind backtests and 2 examples, run live on 22 and 23 October 2026; the third example is the ACCELERATE backtest itself). Their logs are in `logs/`.
 
 | Sponsor | Role in the product | Code |
 |---|---|---|
@@ -37,7 +37,7 @@ SELECT to_json(r) FROM session.ta_<id> LATERAL VIEW explode(resultList.result) A
 
 A contradiction goes to the critic as a serious issue, and the critic can send the work back (up to two rounds). Without Zetaris, the report says its numbers were not independently verified and lowers its confidence one level. Each report's *Numbers used* tab shows the verdict, the sentence found and the SQL for every number.
 
-**Across the 16 analyses** the Verifier checked 77 numbers: 45 confirmed, 28 not found in the abstract or registry, 4 contradictions. Each contradiction reached the critic:
+**Across the 26 analyses** the Verifier checked 95 numbers: 63 confirmed, 28 not found in the abstract or registry, 4 contradictions. Each contradiction reached the critic:
 - **IMPROVE-IT:** the source reported the LDL-C difference with the opposite sign to the input. The critic sent the work back, and the second round's expected hazard ratio, 0.899, matched the answer key's 0.898.
 - **Pelacarsen:** the follow-up of 2.5 years was a *minimum*, not the median. The critic sent the work back, and the second round used 3.25 years.
 - **FOURIER (two):** two baseline LDL-C values were ranges in the source (89–94 and 123–126 mg/dL), not single values.
@@ -58,17 +58,17 @@ A contradiction goes to the critic as a serious issue, and the critic can send t
 
 The provider keys stay in Nightshift. Each response's `model` field names the lane that answered, and the trace records it. Answers are stored under the model that actually answered, so one lane's answer is never replayed as another model's.
 
-**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 16 recorded runs all 132 of those calls went through Nightshift and none needed the direct fallback. Nightshift answered 131 of them from Nemotron 3 Ultra. A full analysis took a median of 10 minutes (5 to 33). The per-run table is in `docs/evidence/nightshift_runs.md`.
+**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 26 recorded runs 228 of those 233 calls went through Nightshift; 5 went to NVIDIA's API directly after Nightshift cut the same request twice. Nightshift answered 222 of its 228 from Nemotron 3 Ultra. A full analysis took a median of 11 minutes (5 to 26); reruns that reused the recordings of unchanged steps are among the faster ones. The per-run table is in `docs/evidence/nightshift_runs.md`.
 
-**What we learned running a pipeline through Nightshift.** Nightshift is built first for chat. A pipeline of strict steps needs a few settings, and we measured each:
+**What I learned running a pipeline through Nightshift.** Nightshift is built first for chat. A pipeline of strict steps needs a few settings, and I measured each:
 
-| What we found | Effect on the pipeline | How we handle it |
+| What I found | Effect on the pipeline | How the app handles it |
 |---|---|---|
 | Build 0.92.0 hid NVIDIA's models in the lane picker: `web-env.js` left `nvidia` out of `byokProviders` | Nemotron could not be added to a lane | Reported with the one-line fix ([Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4)); Meterless shipped 0.92.1 the same night |
 | *Tier-split*, on by default, adds a planner phase ("You are a careful planner...") before the request | Strict extraction rules were diluted: one document gave 9 facts straight through NVIDIA and 0 through Nightshift | Tier-split off (*Setup → Preferences*). The model then sees the app's own system prompt, which we confirmed |
 | `chat_template_kwargs` (the reasoning switch) is not among the parameters Nightshift passes on | Extraction with reasoning on found 0 to 3 facts where reasoning off found 9, and took minutes instead of seconds | Extraction and read-through call NVIDIA's API directly with reasoning off; every reasoning step goes through Nightshift |
 | For an identified app, the mode bound in the Console's connected apps decides the routing; the requested mode is recorded | One routing mode for the whole app | The app is bound to `fast`; Nightshift picks the lane |
-| A cloud request with no first token after 45 s is cut, and the cut learns from observed latency | On a busy Nemotron 3 Ultra, long reasoning prompts were cut | Streamed requests, a watchdog for silent streams, retries, and a direct NVIDIA call after two cuts, recorded in the trace. In the final runs it was needed 0 times |
+| A cloud request with no first token after 45 s is cut, and the cut learns from observed latency | On a busy Nemotron 3 Ultra, long reasoning prompts were cut | Streamed requests, a watchdog for silent streams, retries, and a direct NVIDIA call after two cuts, recorded in the trace. In the final runs it was needed for 5 of 233 calls. I reported it, and Meterless is making the limit configurable |
 | An answer cache keyed on the last 4,000 characters of the prompt, with replay for near-identical prompts | Two runs of one case differ mostly in their numbers, and one run got the previous run's report back word for word; a repeated connection test was answered from the cache in 0.3 s | Every request, and the connection test, carries a unique reference, so its cache key is new and its similarity stays below the replay floor |
 
 **How to check it.**
@@ -86,7 +86,7 @@ The provider keys stay in Nightshift. Each response's `model` field names the la
 
 Facts whose quote failed the word-for-word check are stored too, marked unverified with low confidence, so the record of everything extracted is complete; only verified facts reach the calculator and the report. The engine keeps an event-sourced, audited, idempotent world state in `data/meterless/.world/<run>.json`. `app/engines/world_model.py` implements the same three services the Meterless engine guides describe (WorldStore, IngestPipeline, ContextBuilder), and the analyst, the calculator, the Verifier and the investigator build their context from them.
 
-Across the 16 analyses the engine stored 350 entities, 1,250 facts, 418 links and 3,168 audit entries; each run's audit log is `logs/world-<run_id>.jsonl`.
+Across the 26 analyses the engine stored 563 entities, 2,176 facts, 639 links and 5,422 audit entries; each run's audit log is `logs/world-<run_id>.jsonl`.
 
 **How to check it.**
 - `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass (`docs/evidence/meterless_world_model_conformance.txt`).
@@ -111,7 +111,7 @@ Nightshift picks the lane for each request; with the app bound to `fast`, it ser
 
 **Built for open models.**
 - The critic has its own instructions and reviews the analyst's work, and the Verifier checks the numbers against the sources, so the steps check each other.
-- Calls are paced under the API's rate limit; malformed JSON is repaired by the same model.
+- Calls are paced under the API's rate limit; malformed JSON is repaired by the same model, and a reasoning reply that holds no JSON (one cut off mid-thought) is asked once more.
 
 **Code does the checks a model could get wrong.** Numbers come from verified quotes, and code:
 - sets the direction of a change from the source's own words, reading the start of the sentence when a quote begins mid-sentence;
@@ -120,16 +120,16 @@ Nightshift picks the lane for each request; with the app bound to `fast`, it ser
 
 The run trace records each such step.
 
-**Measured.** The same 14 finished trials, replayed blind and scored against the explanations experts published later (`eval/results/backtest_2026-10-23.md`):
+**Measured.** The same 24 finished trials, replayed blind and scored against the explanations experts published later (`eval/results/backtest_2026-10-23.md`):
 
 | What is scored | NVIDIA Nemotron through Meterless Nightshift |
 |---|---|
-| Success or failure called right, where the trial could be sized | **9/9** |
-| Experts' cause as the main cause | **10/14** |
-| Experts' cause among those named | **11/14** |
-| Expected hazard ratio within 0.03 of the answer key | **10/13** |
+| Success or failure called right, where the trial could be sized | **13/16** |
+| Experts' cause as the main cause | **14/24** |
+| Experts' cause among those named | **21/24** |
+| Expected hazard ratio within 0.03 of the answer key | **13/20** |
 
-**Why open models.** A drug company cannot send unpublished trial data to a cloud AI it does not control. Because every step runs on open Nemotron models, the same analysis can run on the company's own hardware, for example an NVIDIA DGX Spark, which Nightshift supports. In Trial Autopsy the switch is one setting, the model address; the agents, prompts and checks stay the same. We ran on NVIDIA's API and on Nightshift on a Mac; we have not run the system on a DGX Spark.
+**Why open models.** A drug company cannot send unpublished trial data to a cloud AI it does not control. Because every step runs on open Nemotron models, the same analysis can run on the company's own hardware, for example an NVIDIA DGX Spark, which Nightshift supports. In Trial Autopsy the switch is one setting, the model address; the agents, prompts and checks stay the same. I ran on NVIDIA's API and on Nightshift on a Mac; I have not run the system on a DGX Spark.
 
 **How to check it.**
 - Settings page: every AI step shows the NVIDIA logo and its Nemotron route or model.
@@ -140,5 +140,5 @@ The run trace records each such step.
 
 - **Zetaris enforces the time machine at the data layer.** A blind analysis cannot leak future information, because SQL removes later papers before any agent sees them.
 - **Zetaris is how the numbers are checked.** Nemotron writes the SQL, code guards it, Zetaris runs it against the registry and the papers, and a contradiction goes to the critic. In IMPROVE-IT that loop moved the expected hazard ratio from 0.81 to 0.899, against 0.898 in the answer key.
-- **Meterless in both required roles.** Nightshift is the primary model runtime: every reasoning call in the recorded runs went through it. The World Model engine runs unchanged and passes its conformance suite. Along the way we found a Nightshift bug, reported its cause and fix (Meterless/Meterless#4), and Meterless shipped the fix the same night; we also measured how Nightshift's tier-split, routing bind, reasoning switch, time limit and answer cache affect a pipeline, and documented the settings that work.
+- **Meterless in both required roles.** Nightshift is the primary model runtime: 228 of the 233 reasoning calls in the recorded runs went through it. The World Model engine runs unchanged and passes its conformance suite. Along the way I found a Nightshift bug, reported its cause and fix (Meterless/Meterless#4), and Meterless shipped the fix the same night; I also reported the first-token limit, which Meterless is making configurable, and measured how Nightshift's tier-split, routing bind, reasoning switch, time limit and answer cache affect a pipeline, and documented the settings that work.
 - **The whole pipeline runs on open NVIDIA models, and it is measured** on blind backtests against expert explanations, with every recorded run reproducible offline.

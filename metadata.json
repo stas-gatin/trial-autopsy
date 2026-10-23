@@ -19,7 +19,7 @@
         "app/tools/europepmc.py",
         "app/agents/verifier.py"
       ],
-      "how": "ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through a local Zetaris instance: each request becomes a Zetaris REST session table read back with Lightning SQL. For the literature the as_of cut-off runs inside that SQL, so papers published after the cut-off never reach the agents. The Verifier has Nemotron write one Lightning SQL query per number the calculator used, over the registry record and the cited papers; code guards the SQL, Zetaris runs it, and Nemotron judges each number confirmed, not found or contradicts. A contradiction goes to the critic, which can send the work back. Across the 16 recorded analyses: 77 numbers checked, 45 confirmed, 28 not found, 4 contradictions."
+      "how": "ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through a local Zetaris instance: each request becomes a Zetaris REST session table read back with Lightning SQL. For the literature the as_of cut-off runs inside that SQL, so papers published after the cut-off never reach the agents. The Verifier has Nemotron write one Lightning SQL query per number the calculator used, over the registry record and the cited papers; code guards the SQL, Zetaris runs it, and Nemotron judges each number confirmed, not found or contradicts. A contradiction goes to the critic, which can send the work back. Across the 26 recorded analyses: 95 numbers checked, 63 confirmed, 28 not found, 4 contradictions."
     },
     "meterless": {
       "role": "Power: Meterless Nightshift is the primary model provider. Build: the official World Model engine stores every source, entity and fact with provenance",
@@ -34,7 +34,7 @@
         "app/engines/meterless.py",
         "app/engines/world_model.py"
       ],
-      "how": "Nightshift: the app calls Nightshift's OpenAI-compatible endpoint with the runtime token, the meterless-app and meterless-scope headers and a routing mode chosen per step in Settings; the NVIDIA key stays in Nightshift. In the 16 recorded runs all 132 reasoning calls went through Nightshift with no fallback, answered by NVIDIA Nemotron. We reported a Nightshift bug with its fix (github.com/Meterless/Meterless/issues/4), fixed by Meterless the same night, and documented the Nightshift settings a strict pipeline needs (tier-split off, app bound to fast; extraction calls NVIDIA directly because the reasoning switch is not passed on). World Model: the official reference engine, unchanged, passes its conformance suite 8/8 and runs as a local service; every source, entity and fact is stored with provenance (350 entities, 1,250 facts, 418 links across the 16 analyses)."
+      "how": "Nightshift: the app calls Nightshift's OpenAI-compatible endpoint with the runtime token, the meterless-app and meterless-scope headers and a routing mode chosen per step in Settings; the NVIDIA key stays in Nightshift. In the 26 recorded runs 228 of the 233 reasoning calls went through Nightshift, answered by NVIDIA Nemotron; 5 went to NVIDIA directly after Nightshift cut the same request twice (its first-token limit, which Meterless is making configurable after my report). I reported a Nightshift bug with its fix (github.com/Meterless/Meterless/issues/4), fixed by Meterless the same night, and documented the Nightshift settings a strict pipeline needs (tier-split off, app bound to fast; extraction calls NVIDIA directly because the reasoning switch is not passed on). World Model: the official reference engine, unchanged, passes its conformance suite 8/8 and runs as a local service; every source, entity and fact is stored with provenance (563 entities, 2,176 facts, 639 links across the 26 analyses)."
     },
     "nvidia": {
       "role": "Models behind every AI step",
@@ -51,7 +51,7 @@
         "app/config.py",
         "app/llm/generator.py"
       ],
-      "how": "Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). Blind backtest on 14 finished trials: outcome 9/9 where the trial could be sized, experts' main cause 10/14, cause among those named 11/14, expected hazard ratio within 0.03 of the answer key 10/13. Open models, so a company can run the same analysis on its own hardware, for example an NVIDIA DGX Spark."
+      "how": "Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). Blind backtest on 24 finished trials: outcome 13/16 where the trial could be sized, experts' main cause 14/24, cause among those named 21/24, expected hazard ratio within 0.03 of the answer key 13/20. Open models, so a company can run the same analysis on its own hardware, for example an NVIDIA DGX Spark."
     }
   },
   "open_source": {
@@ -63,7 +63,7 @@
   },
   "explanation": "docs/SPONSOR_TECHNOLOGY.md",
   "evidence": [
-    "logs/ (step logs and World Model audit logs of the 16 recorded runs)",
+    "logs/ (step logs and World Model audit logs of the 26 recorded runs)",
     "docs/evidence/nightshift_runs.md",
     "docs/evidence/meterless_world_model_conformance.txt",
     "eval/results/backtest_2026-10-23.json",
