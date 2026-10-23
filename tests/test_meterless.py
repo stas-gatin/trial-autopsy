@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
 
 class JsonRetryTests(unittest.TestCase):
-    """A reply cut off before any JSON is asked once more, under its own recording; a normal reply is not."""
+    """A reply that neither parses nor repairs is asked once more, under its own recording; a normal reply is not."""
 
     def _run(self, replies):
         from unittest import mock
@@ -89,9 +89,11 @@ class JsonRetryTests(unittest.TestCase):
         return data, calls
 
     def test_reply_without_json_is_retried_once(self):
-        data, calls = self._run(["Let me analyze this case carefully. Key issues:", '{"issues": []}'])
+        # A cut-off reply that quotes ['f_1'] still holds no JSON object; the repair pass answers in prose too.
+        data, calls = self._run(["Let me analyze this. Facts ['f_1'] do not match", "I can't verify that.",
+                                 '{"issues": []}'])
         self.assertEqual(data, {"issues": []})
-        self.assertEqual(calls, ["case:critic:0", "case:critic:0:retry"])
+        self.assertEqual(calls, ["case:critic:0", "case:critic:0:json-repair", "case:critic:0:retry"])
 
     def test_normal_reply_is_not_retried(self):
         data, calls = self._run(['{"issues": [1]}'])
