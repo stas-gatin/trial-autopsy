@@ -495,10 +495,21 @@ def report(state: RunState):
                      model=f"{response.provider}:{response.model}", cached=response.cached)
 
 
-NOT_MET = re.compile(r"did not (meet|achieve)|not met|missed|fail(ed)? to|futility|lack of efficacy|"
-                     r"insufficient efficacy|no (significant )?(reduction|benefit)|discontinu|stopped|halted|"
-                     r"terminat|unlikely to (show|demonstrate)", re.I)
-MET = re.compile(r"\bmet (its|the) primary|achieved (its|the) primary|significant(ly)? reduc", re.I)
+# What a readout says, strongest first: an explicit statement about the primary endpoint, then a trial stopped for
+# benefit, then a trial stopped or abandoned, then a significant reduction. "Stopped" or "discontinued" alone is not
+# a failure ("stopped early for efficacy", "discontinuation rates were similar").
+_TRIAL = r"(?:trial|study|program|programme|development|outcomes? study)"
+READOUT_RULES = [
+    ("failure", re.compile(r"did not (meet|achieve|reach|benefit)|did not significantly reduce|not met|missed (its|the) primary|fail(ed|s)? to (meet|achieve|show|demonstrate|reduce)|"
+                           r"no (statistically )?significant (reduction|difference|benefit) in (the )?primary", re.I)),
+    ("success", re.compile(r"\bmet (its|the|both) (\w+ )?primary|achieved (its|the) primary|reached (its|the) primary", re.I)),
+    ("success", re.compile(r"(stopped|closes?|closed|ended|terminated|halted) early (\w+ ){0,3}(for|due to|because of|after) "
+                           r"(\w+ ){0,4}(efficacy|benefit|positive)", re.I)),
+    ("failure", re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate)|"
+                           rf"(stop|stopped|halt|halted|terminat\w*|discontinu\w*|end|ended) (the |its |a )?([\w()\-]+ ){{0,6}}{_TRIAL}|"
+                           rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
+    ("success", re.compile(r"significant(ly)? reduc", re.I)),
+]
 SUCCESS_CODES = {"robust_success", "narrow_success", "success_with_caveats"}
 
 
@@ -515,17 +526,17 @@ def actual_outcome(state: RunState) -> tuple[str | None, str]:
         return "failure", f"observed HR CI {ci[0]}-{ci[1]} includes 1"
     readout_types = {"user_input", "press_release", "registry"}
     doc_types = {d.source_id: d.type for d in state.docs}
+    best = None
     for f in state.context.facts(state.case_id):
         if f["key"] not in ("readout_statement", "stopped_early", "primary_endpoint"):
             continue
         if doc_types.get(f["source_id"]) not in readout_types and not f["source_id"].startswith(("user:", "announcement:")):
             continue
         text = str(f["value"]) + " " + f["quote"]
-        if NOT_MET.search(text):
-            return "failure", f"readout: \"{f['quote'][:140]}\" ({f['source_id']})"
-        if MET.search(text):
-            return "success", f"readout: \"{f['quote'][:140]}\" ({f['source_id']})"
-    return None, "outcome not stated in the evidence"
+        rank = next((i for i, (_, rule) in enumerate(READOUT_RULES) if rule.search(text)), None)
+        if rank is not None and (best is None or rank < best[0]):
+            best = (rank, READOUT_RULES[rank][0], f"readout: \"{f['quote'][:140]}\" ({f['source_id']})")
+    return (best[1], best[2]) if best else (None, "outcome not stated in the evidence")
 
 
 def verdict_block(state: RunState) -> dict:

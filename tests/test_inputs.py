@@ -186,3 +186,22 @@ class KeepVerifiedInputs(unittest.TestCase):
         kept = keep_verified_inputs(self.previous, current, [{"issue": "LDL-C value is not placebo-adjusted"}], self.facts)
         self.assertEqual(kept, [])
         self.assertEqual(current["changes"], [])
+
+
+class ReadoutStatements(unittest.TestCase):
+    def classify(self, text):
+        from app.agents.analysis import READOUT_RULES
+        return next((outcome for outcome, rule in READOUT_RULES if rule.search(text)), None)
+
+    def test_stopping_is_read_with_its_reason(self):
+        self.assertEqual(self.classify("The trial was stopped early for efficacy"), "success")
+        self.assertEqual(self.classify("Outcomes Study Closes Early Due To Unequivocal Evidence Of Benefit"), "success")
+        self.assertEqual(self.classify("The study was stopped for futility"), "failure")
+        self.assertEqual(self.classify("KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) PROMINENT CARDIOVASCULAR OUTCOMES STUDY"), "failure")
+
+    def test_words_about_patients_are_not_a_readout(self):
+        self.assertIsNone(self.classify("discontinuation rates were similar between groups"))
+        self.assertIsNone(self.classify("treatment was discontinued in 5% of patients"))
+
+    def test_an_explicit_primary_statement_wins(self):
+        self.assertEqual(self.classify("did not meet its primary endpoint but significantly reduced LDL-C"), "failure")
