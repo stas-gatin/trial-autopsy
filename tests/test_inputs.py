@@ -11,6 +11,19 @@ class DirectionFromQuote(unittest.TestCase):
         self.assertEqual(change_direction(q, 8), -1)
         self.assertEqual(change_direction(q, 29), 1)
 
+    def test_a_direction_word_of_another_clause_is_not_used(self):
+        # "increased" belongs to HDL-C; LDL-C's own clause has a verb and no direction, so the direction is unknown
+        self.assertEqual(change_direction("increased HDL-C by 133%, and LDL-C was 31.1%", 31.1), 0)
+        self.assertEqual(change_direction("increased HDL-C by 133%, and LDL-C was 31.1% relatively lower", 31.1), -1)
+        # "elevated" describes the patients, not the change
+        self.assertEqual(change_direction("In patients with elevated Lp(a), the placebo-adjusted change in Lp(a) was 35%", 35), 0)
+        self.assertEqual(change_direction("LDL-C decreased 30% while HDL increased 10%", 30), -1)
+        self.assertEqual(change_direction("LDL-C decreased 30% while HDL increased 10%", 10), 1)
+
+    def test_a_direction_word_after_the_number(self):
+        self.assertEqual(change_direction("a 27.2% decrease in LDL-C", 27.2), -1)
+        self.assertEqual(change_direction("LDL-C fell by 50% (p<0.001) and HDL rose", 50), -1)
+
     def test_explicit_sign_and_no_direction(self):
         self.assertEqual(change_direction("LDL-C −59% vs placebo", 59), -1)
         self.assertEqual(change_direction("increases (+19% to +24%)", 24), 1)

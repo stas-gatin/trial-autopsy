@@ -275,30 +275,42 @@ DOWN = re.compile(r"\b(decreas|reduc|lower|fell|fall|declin|drop|cut)\w*", re.I)
 UP = re.compile(r"\b(increas|rais|elevat|ros[ei]|higher|gain)\w*", re.I)
 
 
+_CLAUSE = re.compile(r"[,;]|\b(?:and|but|while|whereas)\b", re.I)
+_OWN_VERB = re.compile(r"\b(?:was|were|is|are|remained|changed|showed|had|did)\b", re.I)
+_STOP_AFTER = re.compile(r"[,;(]|\b(?:and|but|vs|versus|compared|while|whereas)\b", re.I)
+
+
 def change_direction(quote: str, value, window: int = 160) -> int:
     """+1 or -1 when the quote says in words which way the number moved ("decreased LDL-C by 8%"), else 0.
-    The nearest direction word before the number decides; an explicit sign in the quote always wins."""
+    An explicit sign wins; then a direction word up to three words after the number, within its clause ("a 27%
+    decrease", "31% relatively lower"); then the clauses before it, nearest first. A clause with a direction word
+    decides; a clause with its own verb but no direction ("LDL-C was 31%") ends the search, so a word that belongs
+    to another biomarker or to the patients ("increased HDL-C by 133%, and LDL-C was 31%", "in patients with
+    elevated Lp(a), the change was 35%") is never used; a clause without a verb ("and LDL-C by 8%", "and by 63%")
+    shares the verb of the clause before it."""
     try:
         magnitude = abs(float(value))
     except (TypeError, ValueError):
         return 0
     text = f"{magnitude:g}"
-    for m in re.finditer(rf"([-+−]?)\b{re.escape(text)}(?![\d.])", quote):
+    for m in re.finditer(rf"([-+\u2212]?)\b{re.escape(text)}(?![\d.])", quote):
         if m.group(1):
-            return -1 if m.group(1) in "-−" else 1
-        # "a 27.2% decrease": a direction word right after the number (within three words) decides first.
-        after = re.match(r"\s*(?:%|percent|mg/dl|mmol/l|nmol/l)?\s*(?:\S+\s+){0,2}?(\S+)", quote[m.end():m.end() + 60], re.I)
-        if after:
-            word = after.group(1)
+            return -1 if m.group(1) in "-\u2212" else 1
+        after = re.sub(r"^\s*(?:%|percent|mg/dl|mmol/l|nmol/l|g/l|mmhg)?", "", quote[m.end():m.end() + 80], flags=re.I)
+        stop = _STOP_AFTER.search(after)
+        for word in (after[:stop.start()] if stop else after).split()[:3]:
             if DOWN.match(word):
                 return -1
             if UP.match(word):
                 return 1
         before = quote[max(0, m.start() - window):m.start()]
-        downs = [x.end() for x in DOWN.finditer(before)]
-        ups = [x.end() for x in UP.finditer(before)]
-        if downs or ups:
-            return -1 if (max(downs) if downs else -1) > (max(ups) if ups else -1) else 1
+        for clause in reversed(_CLAUSE.split(before)):
+            downs = [x.end() for x in DOWN.finditer(clause)]
+            ups = [x.end() for x in UP.finditer(clause)]
+            if downs or ups:
+                return -1 if (max(downs) if downs else -1) > (max(ups) if ups else -1) else 1
+            if _OWN_VERB.search(clause):
+                break
     return 0
 
 
