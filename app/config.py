@@ -45,6 +45,18 @@ def sample_mode() -> bool:
     return _flag("SAMPLE_MODE")
 
 
+def runs_dir() -> pathlib.Path:
+    """Where a finished run is saved. An offline replay (SAMPLE_MODE) goes to data/runs/replay/, so it can never
+    overwrite the result of a live run."""
+    return DATA / "runs" / "replay" if sample_mode() else DATA / "runs"
+
+
+def logs_dir() -> pathlib.Path:
+    """Where a run's trace and World Model audit log go: logs/ for live runs, logs/replay/ for offline replays,
+    so the logs of the real runs stay as they were written."""
+    return LOGS / "replay" if sample_mode() else LOGS
+
+
 def role(name: str) -> Role:
     spec = os.getenv(f"ROLE_{name.upper()}", ROLE_DEFAULTS[name])
     provider, _, model = spec.partition(":")

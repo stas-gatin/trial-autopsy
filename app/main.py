@@ -24,6 +24,7 @@ from app import config, orchestrator
 app = FastAPI(title="Trial Autopsy", version="0.1.0")
 WEB = config.ROOT / "app" / "web"
 RUNS = config.DATA / "runs"
+REPLAYS = RUNS / "replay"          # offline replays, kept apart from live runs
 LIBRARY = config.DATA / "library"
 _jobs: dict[str, dict] = {}
 
@@ -53,8 +54,9 @@ def _execute(req: RunRequest, run_id: str) -> dict:
         import os
         os.environ["SAMPLE_MODE"] = "true" if req.options.sample_mode else "false"
     result = orchestrator.run(req.input.model_dump(exclude_none=True), run_id=run_id)
-    RUNS.mkdir(parents=True, exist_ok=True)
-    (RUNS / f"{run_id}.json").write_text(json.dumps(result, indent=2, ensure_ascii=False, default=str))
+    folder = config.runs_dir()
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / f"{run_id}.json").write_text(json.dumps(result, indent=2, ensure_ascii=False, default=str))
     return result
 
 
@@ -90,7 +92,7 @@ def run_async(req: RunRequest):
 def run_status(run_id: str):
     if run_id in _jobs:
         return _jobs[run_id]
-    for folder in (RUNS, LIBRARY):
+    for folder in (RUNS, REPLAYS, LIBRARY):
         path = folder / f"{run_id}.json"
         if path.exists():
             return {"status": "done", "result": json.loads(path.read_text())}
@@ -103,7 +105,7 @@ def run_timeline(run_id: str):
     appeared later and were hidden from them (post-cutoff genetics, and for historical backtests the
     answer key's sources such as the full results paper)."""
     result = None
-    for folder in (RUNS, LIBRARY):
+    for folder in (RUNS, REPLAYS, LIBRARY):
         path = folder / f"{run_id}.json"
         if path.exists():
             result = json.loads(path.read_text())
@@ -135,9 +137,10 @@ def run_timeline(run_id: str):
 
 @app.get("/api/runs/{run_id}/trace")
 def run_trace(run_id: str):
-    path = config.LOGS / f"trace-{run_id}.jsonl"
-    if not path.exists():
-        path = config.DATA / "library" / "traces" / f"trace-{run_id}.jsonl"
+    for path in (config.LOGS / f"trace-{run_id}.jsonl", config.LOGS / "replay" / f"trace-{run_id}.jsonl",
+                 config.DATA / "library" / "traces" / f"trace-{run_id}.jsonl"):
+        if path.exists():
+            break
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -185,7 +188,7 @@ def _summary(result: dict, origin: str) -> dict:
 def analyses():
     """Every finished analysis: the committed library plus runs made on this machine."""
     seen, items = set(), []
-    for folder, origin in ((RUNS, "recent"), (LIBRARY, "library")):
+    for folder, origin in ((RUNS, "recent"), (REPLAYS, "recent"), (LIBRARY, "library")):
         for path in sorted(folder.glob("*.json")) if folder.exists() else []:
             try:
                 result = json.loads(path.read_text())

@@ -18,7 +18,8 @@ import sqlite3
 import threading
 from datetime import datetime, timezone
 
-from app.config import LOGS, WORLD_DB_DIR
+from app import config
+from app.config import WORLD_DB_DIR
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS sources (
@@ -46,7 +47,7 @@ def fact_id(case_id: str, entity_id: str, key: str, value, source_id: str, quote
 class WorldStoreService:
     def __init__(self, run_id: str, db_name: str = "world.db"):
         WORLD_DB_DIR.mkdir(parents=True, exist_ok=True)
-        LOGS.mkdir(parents=True, exist_ok=True)
+        config.logs_dir().mkdir(parents=True, exist_ok=True)
         self.run_id = run_id
         self.db = sqlite3.connect(WORLD_DB_DIR / db_name, check_same_thread=False, timeout=60)
         self.db.executescript(SCHEMA)
@@ -54,7 +55,7 @@ class WorldStoreService:
         self.db.execute("DELETE FROM facts WHERE run_id=?", (run_id,))
         self.db.execute("DELETE FROM relationships WHERE run_id=?", (run_id,))
         self.db.commit()
-        self.audit_path = LOGS / f"world-{run_id}.jsonl"
+        self.audit_path = config.logs_dir() / f"world-{run_id}.jsonl"
         self.audit_path.write_text("")
         self._lock = threading.Lock()
         from app.engines.meterless import MeterlessClient
