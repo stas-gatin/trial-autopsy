@@ -29,7 +29,7 @@ Roughly half of phase 3 cardiovascular outcome trials miss their primary endpoin
 
 That explanation usually takes years. After the CETP inhibitors failed in 2012, the genetic explanation was published in 2017.
 
-Trial Autopsy answers in about ten minutes, the way a pathologist works: collect the evidence, run fixed tests, weigh a differential diagnosis, and write a report in which every number links to a verbatim quote from its source.
+Trial Autopsy answers in about a quarter of an hour (median 14 minutes in the recorded runs), the way a pathologist works: collect the evidence, run fixed tests, weigh a differential diagnosis, and write a report in which every number links to a verbatim quote from its source.
 
 - **Autopsy** (after the result): why did it fail or succeed?
 - **Forecast** (before the result): what is the risk, and where is the weakest link?
