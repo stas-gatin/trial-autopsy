@@ -72,7 +72,13 @@ The evidence map links each source document to its quotes, to what the analyst u
 | ![Side-by-side comparison of two trials](docs/images/compare.png) | ![The time machine: what the agents could and could not see](docs/images/timeline.png) |
 | **Compare:** two trials side by side, with the decisive difference | **Time machine:** what the agents could see before the cut-off date |
 
-The report also has a 3D view of the target protein with the drug's binding site, a replay of every step the agents took, and a PDF export.
+### Meet the target in 3D
+
+The report shows the drug's target protein in 3D, coloured by its domains or by AlphaFold confidence, and zooms to the place where the drug binds with the surrounding amino acids labelled.
+
+![3D view of the target protein with the drug's binding site highlighted](docs/images/mol_binding.png)
+
+The report also has a replay of every step the agents took and a PDF export.
 
 ---
 
@@ -158,23 +164,26 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 
 - ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through Zetaris: each request becomes a REST session table read back with Lightning SQL (`app/tools/zetaris.py`).
 - The blind-test cut-off runs in that SQL, so a paper from after the cut-off never reaches an agent.
-- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 17 analyses it checked 85 numbers: 50 confirmed, 31 not found in the abstract or registry, 4 contradictions, each of which reached the critic.
+- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 16 recorded analyses it checked 77 numbers: 45 confirmed, 28 not found in the abstract or registry, 4 contradictions, each of which reached the critic.
 - If Zetaris is down, reads fall back to the source directly, the Verifier cannot run, and the report says its numbers were not independently verified.
 
 ### Meterless World Model: the evidence store (Build)
 
 - The official Meterless World Model reference engine, unchanged (Apache-2.0), runs as a local service in `services/meterless/`; `run.py` starts it.
-- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 17 analyses: 374 entities, 1,331 facts, 445 links, 3,373 audit entries.
+- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 16 analyses: 350 entities, 1,250 facts, 418 links, 3,168 audit entries, with each run's audit log in `logs/world-<run_id>.jsonl`.
 - The app's own store (`app/engines/world_model.py`) implements the same three services, WorldStore, IngestPipeline and ContextBuilder, and the analyst, calculator, Verifier and investigator build their context from it.
 - `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass ([evidence](docs/evidence/meterless_world_model_conformance.txt)).
 
 ### Meterless Nightshift: the model runtime (Power)
 
 - Nightshift is the primary model provider (`app/llm/meterless_runtime.py`, Meterless Runtime provider contract): the app calls its OpenAI-compatible endpoint with the runtime token, the `meterless-app` and `meterless-scope` headers and a routing mode chosen per step on the Settings page. The NVIDIA key stays in Nightshift.
-- In the 16 live runs, all 132 reasoning calls went through Nightshift, with no direct fallback, and every answer came from NVIDIA Nemotron ([evidence](docs/evidence/nightshift_runs.md)). Each step's trace records the model that answered.
+- In the 16 recorded runs, all 132 reasoning calls went through Nightshift, with no direct fallback, and every answer came from NVIDIA Nemotron ([evidence](docs/evidence/nightshift_runs.md)). Each step's trace records the model that answered.
 - Settings has Auto Detect, connect-link paste and a connection test that names the Nemotron lane that answered.
 
-![Nightshift lanes on its NVIDIA provider: Nemotron 3 Ultra and Nemotron 3.5 Super, both ready](docs/images/nightshift_lanes_nvidia.png)
+| | |
+|---|---|
+| ![Nightshift lanes on its NVIDIA provider: Nemotron 3 Ultra and Nemotron 3.5 Super, both ready](docs/images/nightshift_lanes_nvidia.png) | ![The Meterless card on the Settings page after a connection test: Nightshift online, the routing modes it serves and the Nemotron lane that answered](docs/images/nightshift_settings.png) |
+| In Nightshift: two NVIDIA Nemotron lanes | In the app: Nightshift online, and the lane that answered |
 
 **What we learned running a full pipeline through Nightshift.** Nightshift is built first for chat, and a pipeline of strict steps needs a few settings. We measured each one and handled it:
 
@@ -213,10 +222,12 @@ What the misses teach:
 - **Success has shades.** ODYSSEY OUTCOMES and IMPROVE-IT were called narrow successes or successes with caveats where the experts' labels differ by one step.
 - **One bug found by the backtests.** In the first pass, a quote that began mid-sentence ("and by 63% ... vs placebo") carried no direction word, so FOURIER's LDL-C reduction became +63% and the calculator expected harm. Code now reads the start of the sentence in that case (with tests), and FOURIER was rerun: expected HR 0.751 against 0.789 in the answer key.
 
+**A prediction you can check.** Lp(a)HORIZON missed its primary endpoint, but its full results are only due at the AHA Scientific Sessions on 7 November 2026. Before that, we committed the prediction that follows from the diagnosis "effect too small": the overall hazard ratio should land between 0.89 and 1.02, most likely 0.90 to 0.95; a point estimate above 1.02 would prove the diagnosis wrong ([`eval/predictions/2026-10-23_preregistered.md`](eval/predictions/2026-10-23_preregistered.md)). The pelacarsen report shows it with its commit.
+
 Other checks:
 - **Calculator on the answer key** (development set): `python -m eval.run_calculator`.
 - **Counterfactual tests** (`tests/test_calculator.py`): change the biomarker effect and the verdict must flip, so conclusions follow the data, not the drug's name.
-- **Reproducible offline:** all 17 recorded analyses replay offline with the same outcome, expected HR, power and fact count as the live runs.
+- **Reproducible offline:** `python scripts/check_replay.py` replays all 16 recorded analyses offline; each gives the same outcome, expected HR, power and fact count as its live run.
 
 ---
 
@@ -289,7 +300,9 @@ The response holds the verdict, the report, the four checks, the calculator inpu
 
 Every step, handoff, query and send-back is a line in `logs/trace-<run_id>.jsonl`, in the hackathon's log format (timestamp, run_id, agent_name, action, input_summary, output_summary, target_agent, confidence, retry_count, status), mirrored to stdout as `[INFO] run_id=…`. The library keeps each recorded run's trace in `data/library/traces/`.
 
-Examples: `input_examples/` (three requests) and `output_examples/` (their responses). Example 3 is the ACCELERATE backtest, so its output replays that backtest's recorded answers.
+The logs of the 16 recorded runs are committed in `logs/` (`trace-<run_id>.jsonl` for the steps, `world-<run_id>.jsonl` for the World Model audit). An offline replay writes its result and logs to `data/runs/replay/` and `logs/replay/`, so it never overwrites a live run.
+
+Examples: `input_examples/` (three requests) and `output_examples/` (their responses, each with its `log_file`). Example 3 is the ACCELERATE blind backtest itself, the same run as `bt-accelerate`.
 
 ---
 
@@ -310,10 +323,11 @@ app/                 pipeline (agents, graph), calculator, data tools, World Mod
 services/meterless/  the official Meterless World Model engine, run as a local service
 data/                answer key, reference coefficients, frozen archives, recordings, analysis library, offline cache
 eval/                calculator and backtest evaluation, scores
-scripts/             archive and library builders, offline check, smoke test
+scripts/             archive and library builders, offline check, replay check, smoke test
 tests/               unit and offline end-to-end tests
 docs/                sponsor technology write-up, evidence, images
-input_examples/  output_examples/  logs/
+input_examples/  output_examples/
+logs/                the step logs and World Model audit logs of the recorded runs
 ```
 
 ## Data sources and licences

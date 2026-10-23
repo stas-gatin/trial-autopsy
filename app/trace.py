@@ -8,7 +8,7 @@ import threading
 import time
 from datetime import datetime, timezone
 
-from app.config import LOGS
+from app import config
 
 _SECRET = re.compile(r"(sk-[A-Za-z0-9_\-]{6})[A-Za-z0-9_\-]+|(nvapi-[A-Za-z0-9_\-]{4})[A-Za-z0-9_\-]+")
 
@@ -24,14 +24,15 @@ class Tracer:
         self.started = time.time()
         self.events: list[dict] = []
         self._lock = threading.Lock()
-        LOGS.mkdir(parents=True, exist_ok=True)
+        folder = config.logs_dir()
+        folder.mkdir(parents=True, exist_ok=True)
         self.trace_id = f"trace-{run_id}"
-        self.path = LOGS / f"trace-{run_id}.jsonl"
+        self.path = folder / f"trace-{run_id}.jsonl"
         self.path.write_text("")
 
     @property
     def log_file(self) -> str:
-        return f"logs/{self.path.name}"
+        return self.path.relative_to(config.ROOT).as_posix()
 
     def log(self, agent: str, action: str, *, input_summary: str = "", output_summary: str = "",
             target_agent: str | None = None, confidence: float | None = None, retry_count: int = 0,
