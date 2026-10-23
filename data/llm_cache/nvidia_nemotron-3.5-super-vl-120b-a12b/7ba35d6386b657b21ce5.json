@@ -1,0 +1,15 @@
+{
+  "key": "7ba35d6386b657b21ce5",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-22T21:16:34+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: CANTOS NCT01327846 - Cardiovascular Risk Reduction Study (Reduction in Recurrent Major CV Disease Events)\nInvestigational drug: canakinumab\nDocument: Phagocytosis imprints heterogeneity in tissue-resident macrophages. (journal, published 2017-04-21, source pmid:28432199)\n\n--- DOCUMENT TEXT ---\nPhagocytosis imprints heterogeneity in tissue-resident macrophages.\n\nTissue-resident macrophages display varying phenotypic and functional properties that are largely specified by their local environment. One of these functions, phagocytosis, mediates the natural disposal of billions of cells, but its mechanisms and consequences within living tissues are poorly defined. Using a parabiosis-based strategy, we identified and isolated macrophages from multiple tissues as they phagocytosed blood-borne cellular material. Phagocytosis was circadianally regulated and mediated by distinct repertoires of receptors, opsonins, and transcription factors in macrophages from each tissue. Although the tissue of residence defined the core signature of macrophages, phagocytosis imprinted a distinct antiinflammatory profile. Phagocytic macrophages expressed CD206, displayed blunted expression of Il1b , and supported tissue homeostasis. Thus, phagocytosis is a source of macrophage heterogeneity that acts together with tissue-derived factors to preserve homeostasis.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 501,
+    "output_tokens": 7
+  }
+}
