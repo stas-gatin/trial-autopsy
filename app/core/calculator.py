@@ -186,11 +186,16 @@ def evaluate(case: CaseInput) -> Result:
         assumptions.append("follow-up unknown, effect shown at 5 years")
     g = time_factor(years)
 
+    # Systolic BP: the dedicated field, or else an SBP row among the biomarker changes (never both).
+    sbp = case.sbp_change_mmhg
+    if sbp is None:
+        row = next((c for c in case.changes if canonical(c.biomarker) == "SBP" and c.abs_change is not None), None)
+        sbp = row.abs_change if row else None
     bp_factor = 1.0
-    if case.sbp_change_mmhg:
-        bp_factor = rules.SBP_RR_PER_10MMHG ** (-case.sbp_change_mmhg / 10 * g)
+    if sbp:
+        bp_factor = rules.SBP_RR_PER_10MMHG ** (-sbp / 10 * g)
         if bp_factor > 1:
-            notes.append(f"systolic BP +{case.sbp_change_mmhg} mmHg adds HR x{bp_factor:.3f}")
+            notes.append(f"systolic BP +{sbp} mmHg adds HR x{bp_factor:.3f}")
 
     # Size the drug only if its MAIN mechanism is something the calculator can quantify (or a
     # biomarker genetics proves non-causal). "No LDL change" does not mean "no benefit": a GLP-1,
