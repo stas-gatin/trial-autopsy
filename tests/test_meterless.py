@@ -70,3 +70,30 @@ class NightshiftRecordingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class JsonRetryTests(unittest.TestCase):
+    """A reply cut off before any JSON is asked once more, under its own recording; a normal reply is not."""
+
+    def _run(self, replies):
+        from unittest import mock
+        from app.llm import generator
+        calls = []
+
+        def fake(role, system, prompt, tag="", agent=None):
+            calls.append(tag)
+            return mock.Mock(text=replies[len(calls) - 1])
+
+        with mock.patch.object(generator, "generate", side_effect=fake):
+            data, _ = generator.generate_json("critic", "system", "prompt", tag="case:critic:0")
+        return data, calls
+
+    def test_reply_without_json_is_retried_once(self):
+        data, calls = self._run(["Let me analyze this case carefully. Key issues:", '{"issues": []}'])
+        self.assertEqual(data, {"issues": []})
+        self.assertEqual(calls, ["case:critic:0", "case:critic:0:retry"])
+
+    def test_normal_reply_is_not_retried(self):
+        data, calls = self._run(['{"issues": [1]}'])
+        self.assertEqual(data, {"issues": [1]})
+        self.assertEqual(calls, ["case:critic:0"])

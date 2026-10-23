@@ -402,6 +402,11 @@ def _as_object(data, list_key: str | None):
 def generate_json(role: str, system: str, prompt: str, tag: str = "", agent: str | None = None,
                   list_key: str | None = None):
     response = generate(role, system, prompt, tag, agent)
+    if not re.search(r"[{\[]", response.text):
+        # No JSON at all (a reply cut off while the model was still thinking aloud): nothing to repair, so ask once
+        # more. The retry has its own prompt, hence its own recording, and replays exactly like the live run.
+        response = generate(role, system, prompt + "\n\nReturn only the JSON object, with no text before it.",
+                            f"{tag}:retry", agent)
     try:
         return _as_object(parse_json(response.text), list_key), response
     except ValueError:
