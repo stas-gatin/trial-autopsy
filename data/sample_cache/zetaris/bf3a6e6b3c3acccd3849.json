@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22089718+OR+EXT_ID%3A26678626+OR+PMCID%3APMC3910017&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*36%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26678626' AND r.abstractText LIKE '%36%%' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Background</h4>Potent pharmacologic inhibition of cholesteryl ester transferase protein by the investigational agent evacetrapib increases high-density lipoprotein cholesterol by 54% to 129%, reduces low-density lipoprotein cholesterol by 14% to 36%, and enhances cellular cholesterol efflux capacity"
+  ]
+ ],
+ "error": null
+}

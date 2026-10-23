@@ -1,0 +1,1944 @@
+{
+  "run_id": "bt-solid_timi52",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2014-05-13",
+  "backtest": true,
+  "readout_date": "2014-05-13",
+  "analysis_date": "2014-05-13",
+  "trial": {
+    "nct_id": "NCT01000727",
+    "acronym": "SOLID-TIMI 52",
+    "title": "The Stabilization Of pLaques usIng Darapladib-Thrombolysis In Myocardial Infarction 52 Trial",
+    "sponsor": "GlaxoSmithKline",
+    "status": "COMPLETED",
+    "enrollment": 13026,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Acute Coronary Syndrome"
+    ],
+    "primary_completion": "2014-04-01"
+  },
+  "drug": {
+    "name": "darapladib",
+    "chembl_id": "CHEMBL204021",
+    "aliases": [
+      "SB-480848",
+      "sb480848"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "LDL-associated phospholipase A2 inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000146070",
+        "symbol": "PLA2G7",
+        "name": "phospholipase A2 group VII"
+      }
+    ],
+    "searched_as": "darapladib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-solid_timi52",
+  "log_file": "logs/trace-bt-solid_timi52.jsonl",
+  "execution_time_seconds": 373.4,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "observed HR CI 0.85-1.03 includes 1",
+      "predicted_outcome": "failure",
+      "consistency": "consistent with the calculator (probability of success 2%)",
+      "primary_category": "target_not_causal",
+      "secondary_categories": [
+        "biomarker_not_causal"
+      ],
+      "calculator_category": "target_not_causal",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.025,
+      "weakest_link": "target genetics: not_causal"
+    },
+    "report": {
+      "headline": "SOLID-TIMI 52 failed to demonstrate that darapladib reduces major adverse cardiovascular events in post-ACS patients, consistent with a non-causal target (PLA2G7 genetic score 0.0).",
+      "summary": "The SOLID-TIMI 52 trial randomized 13,026 patients after acute coronary syndrome to darapladib or placebo, targeting a 15.5% relative risk reduction in the composite of cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke with 90% power and 1,500 planned events over 3 years. The trial did not meet its primary endpoint. Observed results from the related STABILITY programme (15,828 stable CHD patients, 3.7-year median follow-up, 1,588 events) showed a hazard ratio of 0.94 (95% CI 0.85–1.03), which includes the null. The calculator, incorporating zero human genetic support for PLA2G7 (association score 0.0), predicted an expected HR of 1.0 and a 2.5% probability of success, matching the observed failure. Phase 2 data confirmed robust target engagement (Lp-PLA2 activity inhibition of 80–81%), but genetics indicate the target itself is not causal for coronary artery disease. No major safety concerns were reported.",
+      "key_evidence": [
+        "Planned enrollment: 13,026 participants (ClinicalTrials.gov NCT01000727 SOLID-TIMI 52)",
+        "Primary endpoint: composite of cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke (Study design and rationale for the Stabilization of pLaques usIng Darapladib-Thrombolysis in Myocardial Infarction (SOLID-TIMI 52) trial in patients after an acute coronary syndrome.)",
+        "Planned events: 1,500 primary end point events; power: 90%; assumed RRR: 15.5%; planned median follow-up: 3 years (Study design and rationale for the Stabilization of pLaques usIng Darapladib-Thrombolysis in Myocardial Infarction (SOLID-TIMI 52) trial in patients after an acute coronary syndrome.)",
+        "Observed hazard ratio: 0.94 (95% CI 0.85–1.03) from 1,588 events (769 treatment, 819 control) in 15,828 patients over 3.7-year median follow-up (Darapladib for preventing ischemic events in stable coronary heart disease.)",
+        "Trial readout: darapladib did not achieve the primary endpoint of a reduction of major coronary events versus placebo (GSK announces phase III study with darapladib did not meet primary endpoint in patients following an acute coronary syndrome (13 May 2014))",
+        "Phase 2 biomarker engagement: Lp-PLA2 activity inhibited by 80–81% (Effect of darapladib treatment on endarterectomy carotid plaque lipoprotein-associated phospholipase A2 activity: a randomized, controlled trial.)",
+        "Genetic evidence: PLA2G7 association score 0.0 (opentargets:PLA2G7)",
+        "Calculator prediction: expected HR 1.0, causal RRR 0.0, probability of success 2.5% (calculator)",
+        "Safety: no major safety concerns; no significant between-group differences in all-cause mortality (GSK announces phase III study with darapladib did not meet primary endpoint in patients following an acute coronary syndrome (13 May 2014); Darapladib for preventing ischemic events in stable coronary heart disease.)"
+      ],
+      "what_would_change_this": "Human genetic evidence linking PLA2G7 variants that alter Lp-PLA2 activity to coronary artery disease risk would be required to support target causality and justify further development.",
+      "readthrough_note": "The parallel STABILITY trial in stable coronary heart disease showed an identical null result (HR 0.94, 95% CI 0.85–1.03), reinforcing that Lp-PLA2 inhibition does not translate into clinical benefit across coronary disease populations."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "not_causal",
+        "detail": "Open Targets genetic association 0.0 for PLA2G7",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "Lp-PLA2 activity",
+        "detail": "intended biomarker Lp-PLA2 activity is NOT causal; LDL-equivalent change None mmol/L via no lipid change",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.0,
+        "detail": "expected HR 1.0 at 3.7 y (relative risk reduction 0%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.025,
+        "detail": "power 2% with 1588 events; smallest detectable HR 0.869",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "solid_timi52",
+      "ldl_equivalent_mmol": null,
+      "basis": "no lipid change",
+      "time_factor": 0.842,
+      "expected_hr": 1.0,
+      "causal_rrr": 0.0,
+      "bp_factor": 1.0,
+      "power": 0.025,
+      "mde_hr_80": 0.869,
+      "outcome": "failure",
+      "category": "target_not_causal",
+      "secondary": [],
+      "weakest_link": "target genetics: not_causal",
+      "consistent_with_observed": true,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "solid_timi52",
+      "mode": "autopsy",
+      "target_genetics": "not_causal",
+      "intended_biomarker": "Lp-PLA2 activity",
+      "changes": [
+        {
+          "biomarker": "Lp-PLA2 activity",
+          "abs_change": null,
+          "unit": "nmol/min/mL",
+          "pct_change": -80.5,
+          "baseline": 144.1,
+          "method": "placebo-adjusted percent change at Day 15 in phase 2 at 80 mg daily (closest dose to outcome trial's 160 mg daily); baseline from placebo arm of same study",
+          "source": "pmcid:PMC3930668"
+        }
+      ],
+      "followup_years": 3.7,
+      "events": 1588,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.94,
+      "observed_ci": [
+        0.85,
+        1.03
+      ]
+    },
+    "mechanism": {
+      "target_genetics": "not_causal",
+      "target_genetics_rationale": "PLA2G7 genetic association score 0.0 with 0 evidence items for coronary artery disorder (f_46465376eb5e12). Reference table lists Lp-PLA2 activity as causal=no. Genetic studies show PLA2G7 variants (A379V) associate with weakly higher Lp-PLA2 activity but no significant CHD risk (OR 1.17, 95% CI 0.82-1.17; f_b2dd6fe427d8d8) or protective direction without precision (f_b11c4fc9619c16). Consistent with non-causal biomarker.",
+      "intended_biomarker": "Lp-PLA2 activity",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "Lp-PLA2 activity",
+          "abs_change": null,
+          "pct_change": -80.5,
+          "baseline": 144.1,
+          "unit": "nmol/min/mL",
+          "method": "placebo-adjusted percent change at Day 15 in phase 2 at 80 mg daily (closest dose to outcome trial's 160 mg daily); baseline from placebo arm of same study",
+          "fact_ids": [
+            "f_19e45b9e7249e1",
+            "f_3f32201b6e3f8e",
+            "f_ef14cf90759821"
+          ]
+        }
+      ],
+      "followup_years": 3.7,
+      "followup_fact_ids": [
+        "f_00248cff4e529c"
+      ],
+      "events": 1588,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_c7bd417241759e",
+        "f_4dfadb3ed26861"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.94,
+      "observed_ci": [
+        0.85,
+        1.03
+      ],
+      "outcome_fact_ids": [
+        "f_b6445fee1a92dd",
+        "f_c3cd9094f0d877",
+        "f_e8ae37cca3f063",
+        "f_82dd95b6460fe3",
+        "f_f22590f852e124",
+        "f_c7bd417241759e",
+        "f_4dfadb3ed26861",
+        "f_00248cff4e529c"
+      ],
+      "missing": [
+        "sbp_change_mmhg"
+      ],
+      "notes": "Lp-PLA2 activity change derived from phase 2 placebo-adjusted data at 80 mg (average of -80% and -81% at Day 15) because phase 3 SOLID-TIMI 52 (160 mg daily) did not report a specific numeric Lp-PLA2 activity change in available facts (f_ab6085e80d2af7 shows 'None none'). Baseline 144.1 nmol/min/mL from placebo arm of same phase 2 study (pmcid:PMC3930668). Dose discrepancy (80 mg vs 160 mg) and early timepoint (Day 15 vs years) noted. No SBP change data available. Genetics evidence supports non-causal role of Lp-PLA2 activity for CHD."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "PLA2G7 genetic association score is 0.0 with 0 evidence items before the cutoff, providing no human genetic support for the target itself.",
+            "refs": [
+              "f_46465376eb5e12"
+            ]
+          },
+          {
+            "text": "Calculator assigns expected_hr 1.0 and causal_rrr 0.0 because the target is not causal, and the result is consistent with the observed HR 0.94 (95% CI 0.85–1.03).",
+            "refs": [
+              "calculator",
+              "f_e8ae37cca3f063",
+              "f_82dd95b6460fe3",
+              "f_f22590f852e124"
+            ]
+          },
+          {
+            "text": "Trial readout states darapladib did not significantly reduce the primary composite endpoint of major adverse cardiovascular events.",
+            "refs": [
+              "f_b6445fee1a92dd",
+              "f_c3cd9094f0d877"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 2 achieved robust placebo-adjusted Lp-PLA2 inhibition (−80% at 80 mg Day 15; −81% at 80 mg Day 15), confirming target engagement but not target causality.",
+            "refs": [
+              "f_19e45b9e7249e1",
+              "f_3f32201b6e3f8e"
+            ]
+          }
+        ],
+        "would_settle": "Human genetic evidence linking PLA2G7 variants that alter Lp-PLA2 activity to coronary artery disease risk."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Darapladib moved its intended biomarker (Lp-PLA2 activity) as planned in phase 2.",
+            "refs": [
+              "f_19e45b9e7249e1",
+              "f_3f32201b6e3f8e"
+            ]
+          },
+          {
+            "text": "Genetics and reference table indicate Lp-PLA2 activity is not causal for coronary artery disease.",
+            "refs": [
+              "calculator",
+              "f_46465376eb5e12"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "This is subsumed by target_not_causal: PLA2G7 itself has zero genetic association evidence, so the target rather than merely the biomarker is the fundamental issue.",
+            "refs": [
+              "f_46465376eb5e12"
+            ]
+          }
+        ],
+        "would_settle": "Genetic evidence connecting PLA2G7/Lp-PLA2 to coronary artery disease."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Observed HR 0.94 is numerically below 1 and the upper 95% CI bound is 1.03, close to the null, leaving room for a small benefit.",
+            "refs": [
+              "f_e8ae37cca3f063",
+              "f_f22590f852e124"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator expects HR 1.0 (causal_rrr 0.0) because the target is not causal, so the trial was testing a null mechanism rather than being merely underpowered for a small effect.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Trial accrued 1,588 events over 3.7 years in 15,828 patients, providing adequate information for the effect it was designed to detect.",
+            "refs": [
+              "f_4dfadb3ed26861",
+              "f_c7bd417241759e",
+              "f_00248cff4e529c",
+              "f_c36ab637194e5f"
+            ]
+          }
+        ],
+        "would_settle": "Larger outcome data or meta-analysis, though existing genetics argue against a true causal benefit."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "No off-target harm signal is identified in the available facts.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 3 readout reports no major safety concerns and no significant between-group differences in all-cause mortality; observed HR 0.94 shows no harm signal.",
+            "refs": [
+              "f_ef10aae7c16f78",
+              "f_93a9823070a97e",
+              "f_e8ae37cca3f063"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable; no off-target harm signal is present."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "No execution problem is identified in the available facts.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial randomized 15,828 patients, followed for a median of 3.7 years, and accrued 1,588 primary events; no early stopping for futility or harm is indicated.",
+            "refs": [
+              "f_c36ab637194e5f",
+              "f_00248cff4e529c",
+              "f_4dfadb3ed26861",
+              "f_c7bd417241759e"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable."
+      },
+      {
+        "category": "population",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "The enrolled chronic coronary heart disease population may harbor an untested subgroup in which benefit exists.",
+            "refs": [
+              "calculator",
+              "f_8480f355cf4b3d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary analysis was negative in the overall enrolled population and no subgroup evidence is provided.",
+            "refs": [
+              "f_b6445fee1a92dd",
+              "f_c3cd9094f0d877"
+            ]
+          }
+        ],
+        "would_settle": "Pre-specified subgroup analyses or individual-participant-data meta-analysis."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "A composite MACE endpoint could dilute a component-specific benefit if darapladib affected only one component.",
+            "refs": [
+              "calculator",
+              "f_8480f355cf4b3d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The endpoint is a standard cardiovascular composite, and the null result is fully explained by target non-causality without invoking endpoint dilution.",
+            "refs": [
+              "calculator",
+              "f_46465376eb5e12"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific endpoint analyses."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Biomarker change input uses placebo-adjusted phase 2 data at 80 mg (Day 15) for an outcome trial that used 160 mg daily. Placebo-adjusted data at 160 mg is not in verified facts (only non-placebo-adjusted: 67% at 4 weeks, -59% at 12 months). The 'closest dose' rationale is acceptable but the dose gap and lack of placebo-adjusted 160 mg data should be explicitly caveated in calculator notes.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted Lp-PLA2 activity change at 160 mg daily in phase 2 (pmid:23439604, pmid:18765397, pmcid:PMC3930668). If none exists, add a calculator assumption noting the dose extrapolation from 80 mg to 160 mg and the use of Day 15 vs chronic dosing."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input pct_change -80.5% appears to be an average of two values (-80% from f_19e45b9e7249e1 and -81% from f_3f32201b6e3f8e), both from pmcid:PMC3930668 at 80 mg Day 15 placebo-adjusted. The source does not explain why these two values differ or why the average is used. Should use a single primary value or justify the average.",
+            "target_agent": "mechanism",
+            "request": "Clarify whether -80% and -81% represent independent measurements (e.g., different cohorts/assays) or duplicate reporting. Use the primary prespecified value from the phase 2 paper and document the choice."
+          },
+          {
+            "severity": "medium",
+            "issue": "Verified facts show conflicting primary endpoint definitions for SOLID-TIMI 52: announcement (f_8480f355cf4b3d, f_2e2ba34b58f1a9) describes 'major coronary events' (CHD death, MI, urgent revascularization), while the primary results paper (f_be04eba137a4c6, f_b6445fee1a92dd, pmid:24678955) describes 'cardiovascular death, MI, or stroke' (MACE). The calculator uses observed_hr 0.94 (95% CI 0.85-1.03) from pmid:24678955 but the endpoint label is ambiguous.",
+            "target_agent": "case_builder",
+            "request": "Confirm the exact primary endpoint definition used in the SOLID-TIMI 52 primary publication (pmid:24678955) and whether the HR 0.94 corresponds to major coronary events or MACE. Search terms: 'SOLID-TIMI 52 primary endpoint definition pmid:24678955', 'darapladib major coronary events vs MACE'."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses for 'population' and 'design_or_endpoint' are rated 'undetermined' with generic 'for' arguments that cite only 'calculator' and f_8480f355cf4b3d (which is the endpoint definition, not subgroup evidence). These add little analytical value and could be omitted or strengthened with specific subgroup/endpoint-component data.",
+            "target_agent": "investigator",
+            "request": "Search for prespecified subgroup analyses in SOLID-TIMI 52 (pmid:24678955, announcement:solid_timi52) and component-specific endpoint results to evaluate population and design_or_endpoint hypotheses with evidence."
+          },
+          {
+            "severity": "low",
+            "issue": "The 'off_target_harm' hypothesis 'for' argument has no fact references (refs: []). While the 'against' argument is well-supported, the 'for' side should either cite a specific safety review or be removed.",
+            "target_agent": "investigator",
+            "request": "Verify if any safety signals (e.g., hypertensive crisis in NCT01916720 per f_c3830679cdefbd, or other AEs) were reported in SOLID-TIMI 52 specifically. If none, remove the empty 'for' entry."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_19e45b9e7249e1",
+          "claim": "c1",
+          "used_as": "Lp-PLA2 activity change used by the calculator",
+          "key": "biomarker_change",
+          "value": -80,
+          "unit": "percent",
+          "source_id": "pmcid:PMC3930668",
+          "status": "confirmed",
+          "found": "80% decrease compared with placebo",
+          "note": "Row shows 80% decrease vs placebo, matching claim.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*80%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3930668' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_3f32201b6e3f8e",
+          "claim": "c2",
+          "used_as": "Lp-PLA2 activity change used by the calculator",
+          "key": "biomarker_change",
+          "value": -81,
+          "unit": "percent",
+          "source_id": "pmcid:PMC3930668",
+          "status": "confirmed",
+          "found": "Darapladib 40 mg and 80 mg reduced ... by 52% and 81%, respectively, versus placebo",
+          "note": "Row explicitly states 81% reduction for 80 mg vs placebo.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*81%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3930668' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_ef14cf90759821",
+          "claim": "c3",
+          "used_as": "Lp-PLA2 activity change used by the calculator",
+          "key": "baseline_level",
+          "value": 144.1,
+          "unit": "nmol/min/mL",
+          "source_id": "pmcid:PMC3930668",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain baseline value 144.1.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*144\\.1[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3930668' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_c7bd417241759e",
+          "claim": "c4",
+          "used_as": "number of primary events",
+          "key": "events_control",
+          "value": 819,
+          "unit": "patients",
+          "source_id": "pmid:24678955",
+          "status": "confirmed",
+          "found": "819 of 7904 patients (10",
+          "note": "Row shows 819 events in placebo group.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*819[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24678955' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4dfadb3ed26861",
+          "claim": "c5",
+          "used_as": "number of primary events",
+          "key": "events_treatment",
+          "value": 769,
+          "unit": "patients",
+          "source_id": "pmid:24678955",
+          "status": "confirmed",
+          "found": "769 of 7924 patients (9",
+          "note": "Row shows 769 events in darapladib group.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*769[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24678955' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_00248cff4e529c",
+          "claim": "c6",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 3.7,
+          "unit": "years",
+          "source_id": "pmid:24678955",
+          "status": "confirmed",
+          "found": "During a median follow-up period of 3.7 years",
+          "note": "Row states median follow-up of 3.7 years.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*3\\.7 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24678955' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 5,
+        "not_found": 1,
+        "contradicts": 0
+      },
+      "queries": 6
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PLA2G7",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.141,
+        "genetic_association_score": 0.0,
+        "evidence_count": 0,
+        "top_evidence": [],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_4ef334c501c643",
+        "entity": "biomarker:hs-ctni",
+        "key": "biomarker_change",
+        "value": 0.294,
+        "unit": "ng/L",
+        "attrs": {
+          "biomarker": "hs-cTnI",
+          "phase": "phase2",
+          "timepoint": "longer term follow-up",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute"
+        },
+        "source_id": "pmid:22963982",
+        "quote": "mean hsTnI value in ACS patients: 1.180 versus 0.886 ng/L in non-ACS patients",
+        "pub_date": "2012-08-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22963982"
+      },
+      {
+        "fact_id": "f_7fae8274120da0",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 67,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:18436114",
+        "quote": "Baseline low-density lipoprotein cholesterol (LDL-C) was 67 +/- 22 mg/dl.",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18436114"
+      },
+      {
+        "fact_id": "f_0554aa7b4f1f3c",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "baseline_level",
+        "value": 133.5,
+        "unit": "nmol/min/mL",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "40 mg"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Baseline plasma Lp-PLA2 activity*, nmol/min/mL (mean ± SD) | 144.1±33.6 | 133.5±30.9 | 134.2±30.1 |",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_8d2f837d6781f8",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "baseline_level",
+        "value": 134.2,
+        "unit": "nmol/min/mL",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "80 mg"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Baseline plasma Lp-PLA2 activity*, nmol/min/mL (mean ± SD) | 144.1±33.6 | 133.5±30.9 | 134.2±30.1 |",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_ef14cf90759821",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "baseline_level",
+        "value": 144.1,
+        "unit": "nmol/min/mL",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "placebo"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Baseline plasma Lp-PLA2 activity*, nmol/min/mL (mean ± SD) | 144.1±33.6 | 133.5±30.9 | 134.2±30.1 |",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_0eafa626e022e0",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": 67,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "4-week",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "160 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23439604",
+        "quote": "All darapladib doses produced sustained dose-dependent inhibition of Lp-PLA2 activity of approximately 49%, 58%, and 67%, respectively",
+        "pub_date": "2013-02-23",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23439604"
+      },
+      {
+        "fact_id": "f_19e45b9e7249e1",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -80,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "Day 15",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "80 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "The adjusted mean difference in plaque Lp-PLA2 activity between the darapladib 80-mg group and the placebo group was −1.60 nmol of PAF/min/mg of total protein (97.5% CI, −2.02 nmol/min/mg to −1.19 nmol/min/mg, P<0.001), which equates to an approximately 80% (97.5% CI, −69% to −87%) reduction in plaque Lp-PLA2 activity.",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_1f14218ced2973",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": 49,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "4-week",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23439604",
+        "quote": "All darapladib doses produced sustained dose-dependent inhibition of Lp-PLA2 activity of approximately 49%, 58%, and 67%, respectively",
+        "pub_date": "2013-02-23",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23439604"
+      },
+      {
+        "fact_id": "f_22495b5f21f5b6",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -52,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "Day 15",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "40 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "At 24 hours following the last dose of study medication, Lp-PLA2 activity in the excised plaque was approximately 52% (97.5% CI, −28% to −68%) lower in the darapladib 40-mg group compared with the placebo group",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_273695ff278108",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -52,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "Day 15",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "40 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Respectively, treatment with darapladib 40 mg and 80 mg resulted in a 52% (95% CI, −44% to −60%) and an 81% (95% CI, −73% to −89%) reduction in adjusted mean plasma Lp-PLA2 activity versus placebo.",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_2b36510a30c95a",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:21570531",
+        "quote": "Darapladib, a novel Lp-PLA(2) inhibitor, was equally effective in reducing Lp-PLA(2) activity levels in subjects with and without PAD.",
+        "pub_date": "2011-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21570531"
+      },
+      {
+        "fact_id": "f_3f32201b6e3f8e",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -81,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "Day 15",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "80 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Respectively, treatment with darapladib 40 mg and 80 mg resulted in a 52% (95% CI, −44% to −60%) and an 81% (95% CI, −73% to −89%) reduction in adjusted mean plasma Lp-PLA2 activity versus placebo.",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_ab6085e80d2af7",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "none",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:24678955",
+        "quote": "Darapladib is a selective oral inhibitor of lipoprotein-associated phospholipase A2",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_c49f2cd476e256",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": 58,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "4-week",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23439604",
+        "quote": "All darapladib doses produced sustained dose-dependent inhibition of Lp-PLA2 activity of approximately 49%, 58%, and 67%, respectively",
+        "pub_date": "2013-02-23",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23439604"
+      },
+      {
+        "fact_id": "f_e0979caa39a443",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": -59,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "160 mg daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:18765397",
+        "quote": "Lp-PLA(2) activity was inhibited by 59% with darapladib",
+        "pub_date": "2008-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18765397"
+      },
+      {
+        "fact_id": "f_f7ef9197907c12",
+        "entity": "biomarker:lp-pla2 activity",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "NA",
+        "attrs": {
+          "trial": "STABILITY",
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "Prespecified substudies include 24-hour ambulatory blood pressure monitoring, albuminuria progression, changes in cognitive function, and pharmacokinetic and biomarker analyses.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_46465376eb5e12",
+        "entity": "target:pla2g7",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 0,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:PLA2G7",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000146070"
+      },
+      {
+        "fact_id": "f_a81fa028849980",
+        "entity": "trial:nct01000727",
+        "key": "assumed_rrr",
+        "value": 15.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The study will continue until 1,500 primary end points have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_c127a49e3b0e64",
+        "entity": "trial:nct01000727",
+        "key": "assumed_rrr",
+        "value": 15.5,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "The study will continue until approximately 1,500 primary end point events have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_f22590f852e124",
+        "entity": "trial:nct01000727",
+        "key": "ci_high",
+        "value": 1.03,
+        "unit": "95% CI",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "95% confidence interval [CI], 0.85 to 1.03",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_82dd95b6460fe3",
+        "entity": "trial:nct01000727",
+        "key": "ci_low",
+        "value": 0.85,
+        "unit": "95% CI",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "95% confidence interval [CI], 0.85 to 1.03",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_c7bd417241759e",
+        "entity": "trial:nct01000727",
+        "key": "events_control",
+        "value": 819,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "and 819 of 7904 patients (10.4%) in the placebo group",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_4dfadb3ed26861",
+        "entity": "trial:nct01000727",
+        "key": "events_treatment",
+        "value": 769,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "the primary end point occurred in 769 of 7924 patients (9.7%) in the darapladib group",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_e8ae37cca3f063",
+        "entity": "trial:nct01000727",
+        "key": "hr",
+        "value": 0.94,
+        "unit": "hazard ratio",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "hazard ratio in the darapladib group, 0.94",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_3e94c3c22fbbdf",
+        "entity": "trial:nct01000727",
+        "key": "inclusion_threshold",
+        "value": 30,
+        "unit": "days",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "ctgov:NCT01000727@2014-05-13",
+        "quote": "Hospitalization for acute coronary syndrome (ACS) within 30 days prior to study entry.",
+        "pub_date": "2009-10-23",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01000727"
+      },
+      {
+        "fact_id": "f_00248cff4e529c",
+        "entity": "trial:nct01000727",
+        "key": "median_followup",
+        "value": 3.7,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "During a median follow-up period of 3.7 years",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_9baadf9a5fee2c",
+        "entity": "trial:nct01000727",
+        "key": "median_followup",
+        "value": 3,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "The median treatment duration is anticipated to be approximately 3 years, with a total study duration of approximately 4.1 years.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_e3ca4dde200b8b",
+        "entity": "trial:nct01000727",
+        "key": "median_followup",
+        "value": 2.75,
+        "unit": "years",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The median treatment duration is anticipated to be 2.75 years.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_0a14f0d4192673",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 323,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:22963982",
+        "quote": "A total of 323 (161 ACS and 162 non-ACS patients) were included.",
+        "pub_date": "2012-08-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22963982"
+      },
+      {
+        "fact_id": "f_4390da58bfca90",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 330,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:18765397",
+        "quote": "in 330 patients with angiographically documented coronary disease",
+        "pub_date": "2008-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18765397"
+      },
+      {
+        "fact_id": "f_5659b44caab6c7",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 13000,
+        "unit": "subjects",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "Approximately 13,000 subjects are being randomized to darapladib (160 mg enteric-coated tablet daily) or matching placebo within 30 days of hospitalization with an acute coronary syndrome.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_69fb6efe4cc9d3",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 107,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:23439604",
+        "quote": "This was a 4-week, multicenter, randomized, double-blind, placebo-controlled, parallel-group, dose-ranging trial of darapladib in 107 Japanese patients with dyslipidemia receiving statins.",
+        "pub_date": "2013-02-23",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23439604"
+      },
+      {
+        "fact_id": "f_796a52a50d1025",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 959,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:18436114",
+        "quote": "Coronary heart disease (CHD) and CHD-risk equivalent patients (n = 959) receiving atorvastatin (20 or 80 mg) were randomized to oral darapladib 40 mg, 80 mg, 160 mg, or placebo once daily for 12 weeks.",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18436114"
+      },
+      {
+        "fact_id": "f_95ac9dd2294265",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 13000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SOLID-TIMI 52",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:solid_timi52",
+        "quote": "The randomised, placebo-controlled, double-blind, parallel group multi-centre study enrolled more than 13,000 patients across 36 countries.",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/"
+      },
+      {
+        "fact_id": "f_9e996ca4f46c80",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 15828,
+        "unit": "patients",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The study has randomized 15,828 patients with chronic coronary heart disease (CHD) receiving standard of care to darapladib enteric-coated (EC) tablets, 160 mg or placebo.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_b6f7156371b63a",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 102,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT01916720"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "Patients undergoing elective carotid endarterectomy were randomized to darapladib 40 mg (n = 34), 80 mg (n = 34), or placebo (n = 34) for 14 days",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_c36ab637194e5f",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 15828,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "we randomly assigned 15,828 patients with stable coronary heart disease",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_c8b0cb548a2bfa",
+        "entity": "trial:nct01000727",
+        "key": "n_randomized",
+        "value": 13026,
+        "unit": "participants",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "ctgov:NCT01000727@2014-05-13",
+        "quote": "Enrollment: 13026 (ACTUAL)",
+        "pub_date": "2009-10-23",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01000727"
+      },
+      {
+        "fact_id": "f_8cf38f18e1b38e",
+        "entity": "trial:nct01000727",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "ctgov:NCT01000727@2014-05-13",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2009-10-23",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01000727"
+      },
+      {
+        "fact_id": "f_7533cd2fcf7fc7",
+        "entity": "trial:nct01000727",
+        "key": "planned_events",
+        "value": 1500,
+        "unit": "primary end point events",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "The study will continue until approximately 1,500 primary end point events have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_effd7921888a47",
+        "entity": "trial:nct01000727",
+        "key": "planned_events",
+        "value": 1500,
+        "unit": "primary end points",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The study will continue until 1,500 primary end points have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_213557244fb2a7",
+        "entity": "trial:nct01000727",
+        "key": "power",
+        "value": 90,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "The study will continue until approximately 1,500 primary end point events have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_f40d2f5a552f54",
+        "entity": "trial:nct01000727",
+        "key": "power",
+        "value": 90,
+        "unit": "percent",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The study will continue until 1,500 primary end points have occurred to achieve 90% power to detect a 15.5% reduction in the primary end point.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_219d2f8f0e03d4",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "composite of major adverse cardiovascular events (MACE): CV death, nonfatal myocardial infarction, and nonfatal stroke",
+        "unit": "NA",
+        "attrs": {
+          "trial": "STABILITY"
+        },
+        "source_id": "pmid:20934559",
+        "quote": "The primary end point is the composite of major adverse cardiovascular events (MACE): CV death, nonfatal myocardial infarction, and nonfatal stroke.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20934559"
+      },
+      {
+        "fact_id": "f_2e2ba34b58f1a9",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With First Occurrence of Any Event in the Composite of Major Coronary Events During the Time Period for Follow-up (FU) of Cardiovascular (CV) Event",
+        "unit": "participants",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "ctgov:NCT01000727@2014-05-13",
+        "quote": "Primary outcome(s): Number of Participants With First Occurrence of Any Event in the Composite of Major Coronary Events During the Time Period for Follow-up (FU) of Cardiovascular (CV) Event [From randomization until the End-of-Treatment visit or the last date on which endpoints were able to be assessed (up to 3.80 years)]",
+        "pub_date": "2009-10-23",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01000727"
+      },
+      {
+        "fact_id": "f_6282c3a40c03e0",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke",
+        "unit": "composite",
+        "attrs": {},
+        "source_id": "pmid:21982651",
+        "quote": "The primary end point is the composite of cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_8480f355cf4b3d",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "time to first occurrence of any event from the composite of coronary heart disease death, myocardial infarction and urgent coronary revascularisation for myocardial ischemia",
+        "unit": null,
+        "attrs": {
+          "trial": "SOLID-TIMI 52",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:solid_timi52",
+        "quote": "The primary endpoint measure in the SOLID-TIMI 52 study was time to first occurrence of any event from the composite of coronary heart disease death, myocardial infarction (heart attack) and urgent coronary revascularisation (medical procedures performed to restore normal blood flow in patients with atherosclerosis) for myocardial ischemia.",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/"
+      },
+      {
+        "fact_id": "f_a11719a9beb83f",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "Lp-PLA2 activity within the atherosclerotic plaque removed during carotid endarterectomy following 14 (±4) days of treatment with darapladib, adjusted by sex and statin use",
+        "unit": "nmol/min/mg protein",
+        "attrs": {
+          "trial": "NCT01916720"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "The primary end point measure of the study was Lp-PLA2 activity within the atherosclerotic plaque removed during carotid endarterectomy following 14 (±4) days of treatment with darapladib, adjusted by sex and statin use.",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_be04eba137a4c6",
+        "entity": "trial:nct01000727",
+        "key": "primary_endpoint",
+        "value": "cardiovascular death, myocardial infarction, or stroke",
+        "unit": "composite",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "The primary end point was a composite of cardiovascular death, myocardial infarction, or stroke",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_79aaaa79d95abd",
+        "entity": "trial:nct01000727",
+        "key": "readout_statement",
+        "value": "Lp-PLA(2) inhibition with darapladib prevented necrotic core expansion, a key determinant of plaque vulnerability.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:18765397",
+        "quote": "Lp-PLA(2) inhibition with darapladib prevented necrotic core expansion, a key determinant of plaque vulnerability.",
+        "pub_date": "2008-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18765397"
+      },
+      {
+        "fact_id": "f_8fd648a7c820ed",
+        "entity": "trial:nct01000727",
+        "key": "readout_statement",
+        "value": "darapladib did not achieve a statistically significant reduction in the primary endpoint of major adverse cardiovascular events (comprised of cardiovascular death, myocardial infarction and stroke) versus placebo in patients with chronic coronary heart disease",
+        "unit": null,
+        "attrs": {
+          "trial": "STABILITY",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:solid_timi52",
+        "quote": "In November 2013, GSK announced results of the first study, STABILITY, which showed that darapladib did not achieve a statistically significant reduction in the primary endpoint of major adverse cardiovascular events (comprised of cardiovascular death, myocardial infarction and stroke) versus placebo in patients with chronic coronary heart disease.",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/"
+      },
+      {
+        "fact_id": "f_a4151d9cc03795",
+        "entity": "trial:nct01000727",
+        "key": "readout_statement",
+        "value": "In patients with ACS, treatment with darapladib is associated with less increase in cardiac troponin I compared to standard of care alone.",
+        "unit": "NA",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:22963982",
+        "quote": "In patients with ACS, treatment with darapladib is associated with less increase in cardiac troponin I compared to standard of care alone.",
+        "pub_date": "2012-08-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22963982"
+      },
+      {
+        "fact_id": "f_b6445fee1a92dd",
+        "entity": "trial:nct01000727",
+        "key": "readout_statement",
+        "value": "darapladib did not significantly reduce the risk of the primary composite end point",
+        "unit": "none",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "darapladib did not significantly reduce the risk of the primary composite end point of cardiovascular death, myocardial infarction, or stroke",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_c3cd9094f0d877",
+        "entity": "trial:nct01000727",
+        "key": "readout_statement",
+        "value": "darapladib did not achieve the primary endpoint of a reduction of major coronary events versus placebo when added to standard of care",
+        "unit": null,
+        "attrs": {
+          "trial": "SOLID-TIMI 52",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:solid_timi52",
+        "quote": "In the study, darapladib did not achieve the primary endpoint of a reduction of major coronary events versus placebo when added to standard of care.",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/"
+      },
+      {
+        "fact_id": "f_016ce00ac6c884",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": "Lp-PLA2 activity",
+        "unit": "inhibition",
+        "attrs": {
+          "biomarker": "Lp-PLA2 activity",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "160 mg daily"
+        },
+        "source_id": "pmid:21982651",
+        "quote": "Darapladib inhibits Lp-PLA(2) activity in plasma and in arterial plaques and may confer clinical benefit in preventing cardiovascular events.",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982651"
+      },
+      {
+        "fact_id": "f_390b5ac85c4266",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": "Treatment with darapladib decreased the risk of elevation of hs-cTnI (OR 0.219; 95% CI: 0.087, 0.553, p = 0.0013)",
+        "unit": "NA",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:22963982",
+        "quote": "Logistic regression to predict any 2-fold increase in hs-cTnI by ACS status showed that in the ACS group, treatment with darapladib decreased the risk of elevation of hs-cTnI (OR 0.219; 95% CI: 0.087, 0.553, p = 0.0013).",
+        "pub_date": "2012-08-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22963982"
+      },
+      {
+        "fact_id": "f_6eb98e1266c9e0",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "none",
+        "attrs": {
+          "trial": "SOLID-TIMI 52"
+        },
+        "source_id": "pmid:18436114",
+        "quote": "No major safety concerns were noted.",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18436114"
+      },
+      {
+        "fact_id": "f_93a9823070a97e",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": "no significant between-group differences in ... all-cause mortality",
+        "unit": "none",
+        "attrs": {},
+        "source_id": "pmid:24678955",
+        "quote": "There were also no significant between-group differences in the rates of the individual components of the primary end point or in all-cause mortality",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24678955"
+      },
+      {
+        "fact_id": "f_c3830679cdefbd",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": "hypertensive crisis while receiving anesthesia in preparation for carotid endarterectomy",
+        "unit": "adverse event",
+        "attrs": {
+          "trial": "NCT01916720",
+          "dose": "80 mg"
+        },
+        "source_id": "pmcid:PMC3930668",
+        "quote": "One subject in the darapladib 80-mg group withdrew from the study prematurely because of an adverse event; this subject experienced a hypertensive crisis while receiving anesthesia in preparation for carotid endarterectomy, 1 day following the completion of study medication.",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24586490"
+      },
+      {
+        "fact_id": "f_ef10aae7c16f78",
+        "entity": "trial:nct01000727",
+        "key": "safety_signal",
+        "value": "no major safety concerns",
+        "unit": null,
+        "attrs": {
+          "trial": "SOLID-TIMI 52",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:solid_timi52",
+        "quote": "The overall safety profile for darapladib showed no major safety concerns and was generally consistent with the safety data seen in the previously reported phase III study, STABILITY.",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/"
+      },
+      {
+        "fact_id": "f_b01e268c1ecd06",
+        "entity": "trial:nct01000727",
+        "key": "unknown",
+        "value": null,
+        "unit": "direction",
+        "attrs": {
+          "gene": "APOC1",
+          "variant_or_score": "rs4420638",
+          "outcome": "CHD",
+          "direction": "harmful",
+          "effect_on_biomarker": "decreased Lp-PLA2 activity",
+          "n": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "source_id": "pmid:22003152",
+        "quote": "Four of the polymorphisms (in APOC1, CELSR2, SCARB1, ZNF259), but not PLA2G7, were significantly associated with CHD in a second study.",
+        "pub_date": "2011-10-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22003152"
+      },
+      {
+        "fact_id": "f_b11c4fc9619c16",
+        "entity": "trial:nct01000727",
+        "key": "unknown",
+        "value": null,
+        "unit": "direction",
+        "attrs": {
+          "gene": "PLA2G7",
+          "variant_or_score": "A379V polymorphism (V379 allele)",
+          "outcome": "future cardiovascular events",
+          "direction": "protective",
+          "effect_on_biomarker": "weak increase of plasma PAF-AH activity",
+          "n": 1314,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "source_id": "pmid:15115767",
+        "quote": "The V379 allele was less frequent in CAD patients than in controls and was associated with a lower risk of future cardiovascular events, suggesting that this allele might be protective against the development of CAD.",
+        "pub_date": "2004-04-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15115767"
+      },
+      {
+        "fact_id": "f_b2dd6fe427d8d8",
+        "entity": "trial:nct01000727",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "PLA2G7",
+          "variant_or_score": "rs1051931 (A379V)",
+          "outcome": "CHD events",
+          "direction": null,
+          "effect_on_biomarker": "VV subjects having 7.2% higher activity than AAs",
+          "n": 5523,
+          "ci_low": 0.82,
+          "ci_high": 1.17
+        },
+        "source_id": "pmid:20479152",
+        "quote": "Genotype was not associated with risk markers, angiographic coronary disease (odds ratio, 1.03; 95% confidence interval, 0.80 to 1.32), or CHD events (odds ratio, 0.98; 95% confidence interval, 0.82 to 1.17).",
+        "pub_date": "2010-05-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20479152"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01000727@2014-05-13",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01000727 SOLID-TIMI 52",
+        "url": "https://clinicaltrials.gov/study/NCT01000727",
+        "pub_date": "2009-10-23",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01000727",
+            "acronym": "SOLID-TIMI 52",
+            "title": "The Stabilization Of pLaques usIng Darapladib-Thrombolysis In Myocardial Infarction 52 Trial",
+            "official_title": "A Clinical Outcomes Study of Darapladib Versus Placebo in Subjects Following Acute Coronary Syndrome to Compare the Incidence of Major Adverse Cardiovascular Events (MACE).",
+            "sponsor": "GlaxoSmithKline",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2009-12-01",
+            "primary_completion": "2014-04-01",
+            "first_posted": "2009-10-23",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 13026,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Darapladib 160 mg",
+                "type": "DRUG",
+                "other_names": [
+                  "SB-480848"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": []
+              },
+              {
+                "name": "Standard Therapy",
+                "type": "OTHER",
+                "other_names": []
+              }
+            ],
+            "conditions": [
+              "Acute Coronary Syndrome"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With First Occurrence of Any Event in the Composite of Major Coronary Events During the Time Period for Follow-up (FU) of Cardiovascular (CV) Event [From randomization until the End-of-Treatment visit or the last date on which endpoints were able to be assessed (up to 3.80 years)]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 3977
+      },
+      {
+        "source_id": "pmid:24678955",
+        "type": "journal",
+        "title": "Darapladib for preventing ischemic events in stable coronary heart disease.",
+        "url": "https://europepmc.org/article/MED/24678955",
+        "pub_date": "2014-03-30",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24678955",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa1315878",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2022
+      },
+      {
+        "source_id": "pmcid:PMC3930668",
+        "type": "journal",
+        "title": "Effect of darapladib treatment on endarterectomy carotid plaque lipoprotein-associated phospholipase A2 activity: a randomized, controlled trial.",
+        "url": "https://europepmc.org/article/MED/24586490",
+        "pub_date": "2014-02-20",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "24586490",
+          "pmcid": "PMC3930668",
+          "doi": "10.1371/journal.pone.0089034",
+          "journal": "PloS one"
+        },
+        "chars": 37543
+      },
+      {
+        "source_id": "pmid:23439604",
+        "type": "journal",
+        "title": "Effect of darapladib on plasma lipoprotein-associated phospholipase A2 activity in Japanese dyslipidemic patients, with exploratory analysis of a PLA2G7 gene polymorphism of Val279Phe.",
+        "url": "https://europepmc.org/article/MED/23439604",
+        "pub_date": "2013-02-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23439604",
+          "pmcid": null,
+          "doi": "10.1253/circj.cj-12-0813",
+          "journal": "Circulation journal : official journal of the Japanese Circulation Society"
+        },
+        "chars": 1271
+      },
+      {
+        "source_id": "pmid:22963982",
+        "type": "journal",
+        "title": "Darapladib effect on circulating high sensitive troponin in patients with acute coronary syndromes.",
+        "url": "https://europepmc.org/article/MED/22963982",
+        "pub_date": "2012-08-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22963982",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2012.06.064",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1733
+      },
+      {
+        "source_id": "pmid:21982651",
+        "type": "journal",
+        "title": "Study design and rationale for the Stabilization of pLaques usIng Darapladib-Thrombolysis in Myocardial Infarction (SOLID-TIMI 52) trial in patients after an acute coronary syndrome.",
+        "url": "https://europepmc.org/article/MED/21982651",
+        "pub_date": "2011-09-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21982651",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2011.07.018",
+          "journal": "American heart journal"
+        },
+        "chars": 1543
+      },
+      {
+        "source_id": "pmid:21570531",
+        "type": "journal",
+        "title": "Peripheral artery disease, biomarkers, and darapladib.",
+        "url": "https://europepmc.org/article/MED/21570531",
+        "pub_date": "2011-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21570531",
+          "pmcid": "PMC3750980",
+          "doi": "10.1016/j.ahj.2011.01.017",
+          "journal": "American heart journal"
+        },
+        "chars": 1548
+      },
+      {
+        "source_id": "pmid:20934559",
+        "type": "journal",
+        "title": "Study design and rationale for the clinical outcomes of the STABILITY Trial (STabilization of Atherosclerotic plaque By Initiation of darapLadIb TherapY) comparing darapladib versus placebo in patients with coronary heart disease.",
+        "url": "https://europepmc.org/article/MED/20934559",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20934559",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2010.07.006",
+          "journal": "American heart journal"
+        },
+        "chars": 1821
+      },
+      {
+        "source_id": "pmid:18765397",
+        "type": "journal",
+        "title": "Effects of the direct lipoprotein-associated phospholipase A(2) inhibitor darapladib on human coronary atherosclerotic plaque.",
+        "url": "https://europepmc.org/article/MED/18765397",
+        "pub_date": "2008-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18765397",
+          "pmcid": null,
+          "doi": "10.1161/circulationaha.108.771899",
+          "journal": "Circulation"
+        },
+        "chars": 1360
+      },
+      {
+        "source_id": "pmid:18436114",
+        "type": "journal",
+        "title": "The effect of darapladib on plasma lipoprotein-associated phospholipase A2 activity and cardiovascular biomarkers in patients with stable coronary heart disease or coronary heart disease risk equivalent: the results of a multicenter, randomized, double-blind, placebo-controlled study.",
+        "url": "https://europepmc.org/article/MED/18436114",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18436114",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2007.11.079",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1896
+      },
+      {
+        "source_id": "pmid:23388174",
+        "type": "journal",
+        "title": "Diabetes and hypercholesterolemia increase blood-brain barrier permeability and brain amyloid deposition: beneficial effects of the LpPLA2 inhibitor darapladib.",
+        "url": "https://europepmc.org/article/MED/23388174",
+        "pub_date": "2013-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23388174",
+          "pmcid": null,
+          "doi": "10.3233/jad-122254",
+          "journal": "Journal of Alzheimer's disease : JAD"
+        },
+        "chars": 1845
+      },
+      {
+        "source_id": "pmid:20479152",
+        "type": "journal",
+        "title": "PLA2G7 genotype, lipoprotein-associated phospholipase A2 activity, and coronary heart disease risk in 10 494 cases and 15 624 controls of European Ancestry.",
+        "url": "https://europepmc.org/article/MED/20479152",
+        "pub_date": "2010-05-17",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20479152",
+          "pmcid": "PMC3377948",
+          "doi": "10.1161/circulationaha.109.923383",
+          "journal": "Circulation",
+          "purpose": "genetics"
+        },
+        "chars": 2187
+      },
+      {
+        "source_id": "pmid:15115767",
+        "type": "journal",
+        "title": "Platelet-activating factor-acetylhydrolase and PAF-receptor gene haplotypes in relation to future cardiovascular event in patients with coronary artery disease.",
+        "url": "https://europepmc.org/article/MED/15115767",
+        "pub_date": "2004-04-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15115767",
+          "pmcid": null,
+          "doi": "10.1093/hmg/ddh145",
+          "journal": "Human molecular genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1820
+      },
+      {
+        "source_id": "pmid:22003152",
+        "type": "journal",
+        "title": "Eight genetic loci associated with variation in lipoprotein-associated phospholipase A2 mass and activity and coronary heart disease: meta-analysis of genome-wide association studies from five community-based studies.",
+        "url": "https://europepmc.org/article/MED/22003152",
+        "pub_date": "2011-10-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22003152",
+          "pmcid": "PMC3258449",
+          "doi": "10.1093/eurheartj/ehr372",
+          "journal": "European heart journal",
+          "purpose": "genetics"
+        },
+        "chars": 1779
+      },
+      {
+        "source_id": "announcement:solid_timi52",
+        "type": "press_release",
+        "title": "GSK announces phase III study with darapladib did not meet primary endpoint in patients following an acute coronary syndrome (13 May 2014)",
+        "url": "https://www.gsk.com/en-gb/media/press-releases/gsk-announces-phase-iii-study-with-darapladib-did-not-meet-primary-endpoint-in-patients-following-an-acute-coronary-syndrome/",
+        "pub_date": "2014-05-13",
+        "access": "press_release",
+        "meta": {},
+        "chars": 5241
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 23,
+      "facts": 67,
+      "relationships": 24,
+      "events": 177,
+      "audit_entries": 177,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 18796,
+        "output_tokens": 7095,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 4016,
+        "output_tokens": 4632,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 2224,
+        "output_tokens": 3520,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 3657,
+        "output_tokens": 1454,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 4822,
+        "output_tokens": 3642,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6016,
+        "output_tokens": 3980,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

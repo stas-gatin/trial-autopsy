@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24188894+OR+EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*40[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%40%' LIMIT 5",
+ "rows": [
+  [
+   " Inhibition of cholesteryl ester transfer protein by anacetrapib reduces low-density lipoprotein (LDL) cholesterol by around 25% to 40% and more than doubles high-density lipoprotein (HDL) cholesterol"
+  ]
+ ],
+ "error": null
+}

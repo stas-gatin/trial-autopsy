@@ -1,0 +1,2331 @@
+{
+  "run_id": "bt-dal_outcomes",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2012-05-07",
+  "backtest": true,
+  "readout_date": "2012-05-07",
+  "analysis_date": "2012-05-07",
+  "trial": {
+    "nct_id": "NCT00658515",
+    "acronym": null,
+    "title": "A Study of RO4607381 in Stable Coronary Heart Disease Patients With Recent Acute Coronary Syndrome",
+    "sponsor": "Hoffmann-La Roche",
+    "status": "COMPLETED",
+    "enrollment": 15871,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Coronary Heart Disease"
+    ],
+    "primary_completion": "2012-09"
+  },
+  "drug": {
+    "name": "dalcetrapib",
+    "chembl_id": "CHEMBL313006",
+    "aliases": [
+      "JTT-705",
+      "RO-4607381",
+      "RO4607381"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Cholesteryl ester transfer protein inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000087237",
+        "symbol": "CETP",
+        "name": "cholesteryl ester transfer protein"
+      }
+    ],
+    "searched_as": "dalcetrapib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-dal_outcomes",
+  "log_file": "logs/trace-bt-dal_outcomes.jsonl",
+  "execution_time_seconds": 670.6,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "outcome not stated in the evidence",
+      "predicted_outcome": "failure",
+      "consistency": "",
+      "primary_category": "biomarker_not_causal",
+      "secondary_categories": [
+        "target_not_causal",
+        "effect_too_small"
+      ],
+      "calculator_category": "biomarker_not_causal",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.072,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "The dal-OUTCOMES trial of dalcetrapib in 15,871 patients with recent acute coronary syndrome was stopped early for futility after an independent DSMB found no clinically meaningful efficacy, consistent with the calculator's prediction of low probability of success (7.2%) due to HDL-C being a non-causal biomarker for cardiovascular disease.",
+      "summary": "The phase III dal-OUTCOMES trial randomized 15,871 patients with stable coronary heart disease and recent acute coronary syndrome to dalcetrapib 600 mg daily or placebo, with a planned 1,600 primary endpoint events and median follow-up of 2.5 years. The trial was stopped early for futility after the independent data monitoring committee concluded that dalcetrapib did not provide benefit, and Roche subsequently terminated the entire dal-HEART programme. No safety signal was identified. The calculator predicted a 7.2% probability of success based on an expected hazard ratio of 0.975 (2.5% relative risk reduction) derived from a modest LDL-C reduction of -5% observed in phase 2, categorizing the programme as biomarker_not_causal because the intended biomarker (HDL-C elevation via CETP inhibition) lacks causal genetic support (CETP genetic association score 0.736 with zero evidence before trial launch). The primary failure category is biomarker_not_causal, with target_not_causal and effect_too_small as secondary contributors; confidence in this assessment is high.",
+      "key_evidence": [
+        "15,871 patients randomized (ClinicalTrials.gov NCT00658515)",
+        "1,600 planned primary endpoint events (Rationale and design of the dal-OUTCOMES trial)",
+        "Median follow-up 2.5 years (Rationale and design of the dal-OUTCOMES trial)",
+        "Trial stopped early for futility (Roche provides update on Phase III study of dalcetrapib (Basel, 7 May 2012))",
+        "Readout: 'dalcetrapib didn't provide benefit to the patients in our study' (Roche provides update on Phase III study of dalcetrapib (Basel, 7 May 2012))",
+        "No safety signal (Roche provides update on Phase III study of dalcetrapib (Basel, 7 May 2012))",
+        "HDL-C increased 31% in phase 2 (not placebo-adjusted, 12 weeks) (Effect of dalcetrapib plus pravastatin on lipoprotein metabolism and high-density lipoprotein composition and function in dyslipidemic patients: results of a phase IIb dose-ranging study)",
+        "CETP activity decreased 53% (placebo-adjusted, phase 3, 24 weeks) (Vascular effects and safety of dalcetrapib in patients with or at risk of coronary heart disease: the dal-VESSEL randomized clinical trial)",
+        "LDL-C change -5% (phase 2, not placebo-adjusted) (Effectiveness of inhibition of cholesteryl ester transfer protein by JTT-705 in combination with pravastatin in type II dyslipidemia)",
+        "Calculator: expected HR 0.975, causal RRR 2.5%, power 7.2%, category biomarker_not_causal, weakest link target genetics: uncertain (calculator)",
+        "CETP genetic association score 0.736 with evidence_before_cutoff=0 (opentargets:CETP)"
+      ],
+      "what_would_change_this": "Publication of the full dal-OUTCOMES results with observed hazard ratio and confidence interval would confirm the magnitude of effect; Mendelian randomization evidence for CETP inhibition on cardiovascular outcomes published after 2012 would clarify whether the target itself is causal.",
+      "readthrough_note": "No read-through programmes were identified in the provided evidence."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.736 for CETP",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.1 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.025,
+        "detail": "expected HR 0.975 at 5 y (relative risk reduction 2.5%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.072,
+        "detail": "power 7% with 1600 events; smallest detectable HR 0.869",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "dal_outcomes",
+      "ldl_equivalent_mmol": 0.1,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 0.975,
+      "causal_rrr": 0.025,
+      "bp_factor": 1.0,
+      "power": 0.072,
+      "mde_hr_80": 0.869,
+      "outcome": "failure",
+      "category": "biomarker_not_causal",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0",
+        "follow-up unknown, effect shown at 5 years"
+      ],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "dal_outcomes",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": 31.0,
+          "baseline": null,
+          "method": "phase2, not placebo-adjusted, 12 weeks, 600 mg",
+          "source": "pmid:22424025"
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -5.0,
+          "baseline": null,
+          "method": "phase2, not placebo-adjusted, 4 weeks, 600 mg",
+          "source": "pmid:15842977"
+        },
+        {
+          "biomarker": "CETP activity",
+          "abs_change": null,
+          "unit": "%",
+          "pct_change": -53.0,
+          "baseline": null,
+          "method": "phase3, placebo-adjusted, 24 weeks, 600 mg/day",
+          "source": "pmid:22345126"
+        }
+      ],
+      "followup_years": null,
+      "events": 1600,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "At the evidence cut-off (2012-05-07), Open Targets shows 0 genetic studies for CETP–coronary artery disease published before cut-off (evidence_before_cutoff=0). Although the overall genetic association score is 0.736, all 13 supporting studies were published after the trial began. With no pre-trial genetic evidence linking CETP inhibition to coronary disease, target genetics were uncertain at trial inception.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 31.0,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "phase2, not placebo-adjusted, 12 weeks, 600 mg",
+          "fact_ids": [
+            "f_085f80df612591"
+          ]
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -5.0,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "phase2, not placebo-adjusted, 4 weeks, 600 mg",
+          "fact_ids": [
+            "f_d316462bafdc04"
+          ]
+        },
+        {
+          "biomarker": "CETP activity",
+          "abs_change": null,
+          "pct_change": -53.0,
+          "baseline": null,
+          "unit": "%",
+          "method": "phase3, placebo-adjusted, 24 weeks, 600 mg/day",
+          "fact_ids": [
+            "f_6775972a55d105"
+          ]
+        }
+      ],
+      "followup_years": null,
+      "followup_fact_ids": [],
+      "events": 1600,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_a050303d0a35c8"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_36c3cf328f2e1c",
+        "f_992714ddfc7c6c"
+      ],
+      "missing": [
+        "median_followup_years",
+        "actual_primary_events",
+        "placebo_adjusted_HDL-C_change_in_outcome_trial_population",
+        "placebo_adjusted_LDL-C_change_at_600mg_steady_state"
+      ],
+      "notes": "Median follow-up at early stop not available in verified facts; design paper (pmid:19958854) states 80% of evaluable subjects followed for at least 2.5 years, but this is not median follow-up. Actual primary events at early stop not reported in available facts. HDL-C change of 31% is from phase 2 (600 mg, 12 weeks) and not placebo-adjusted; no placebo-adjusted HDL-C change in phase 3 population available. LDL-C change of -5% is from phase 2 (600 mg, 4 weeks) and not placebo-adjusted; no placebo-adjusted LDL-C change at 600 mg in phase 2/3 at steady state available. CETP activity reduction of 53% is from phase 3 (dal-VESSEL, 600 mg/day, 24 weeks) and is placebo-adjusted. Target genetics uncertain at trial inception (no pre-cutoff genetic studies linking CETP to coronary disease). Trial stopped early for futility."
+    },
+    "hypotheses": [
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Dalcetrapib 600 mg increased HDL-C by 31% in phase 2 (not placebo-adjusted, 12 weeks)",
+            "refs": [
+              "f_085f80df612591"
+            ]
+          },
+          {
+            "text": "CETP activity decreased 53% (placebo-adjusted, phase 3, 24 weeks), confirming target engagement",
+            "refs": [
+              "f_6775972a55d105"
+            ]
+          },
+          {
+            "text": "Genetic association score for CETP is 0.736 with zero evidence before cutoff, indicating uncertain causal support for HDL-C raising via CETP inhibition",
+            "refs": [
+              "f_b6386f090061e7"
+            ]
+          },
+          {
+            "text": "Calculator category is biomarker_not_causal; expected HR 0.975 based on LDL-C change (pathway=null), power only 7.2%",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator used LDL-C change (-5%) as basis because pathway=null, not the intended biomarker HDL-C",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization evidence for CETP inhibition and CVD outcomes; observed HR/CI from dal-OUTCOMES"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Genetic association score for CETP target is 0.736 with evidence_before_cutoff=0 (13 total evidence items), indicating weak/uncertain genetic support for the target itself",
+            "refs": [
+              "f_b6386f090061e7"
+            ]
+          },
+          {
+            "text": "Calculator identifies 'target genetics: uncertain' as weakest link",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetic score 0.736 is not zero; some genetic evidence exists (13 items) though not before cutoff",
+            "refs": [
+              "f_b6386f090061e7"
+            ]
+          }
+        ],
+        "would_settle": "Large-scale human genetics studies of CETP variants and coronary outcomes"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Expected HR 0.975 (2.5% RRR) based on LDL-C reduction of -5% (phase 2, not placebo-adjusted)",
+            "refs": [
+              "calculator",
+              "f_d316462bafdc04"
+            ]
+          },
+          {
+            "text": "Trial power only 7.2% to detect this effect; MDE HR for 80% power is 0.869",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Planned 1600 events but trial stopped early for futility, suggesting observed effect near null",
+            "refs": [
+              "f_a050303d0a35c8",
+              "f_992714ddfc7c6c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Per rules, biomarker_not_causal is preferred over effect_too_small when intended biomarker (HDL-C) is non-causal",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and confidence interval from the trial"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No safety signal in dal-OUTCOMES (safety_signal: False)",
+            "refs": [
+              "f_d580e9b0d4be0a"
+            ]
+          },
+          {
+            "text": "Phase 2 trials showed no clinically relevant differences vs placebo in adverse events, blood pressure, or cardiovascular AEs",
+            "refs": [
+              "f_7f3abcde5ad973",
+              "f_bf9802b050922f"
+            ]
+          }
+        ],
+        "would_settle": "Full safety dataset from dal-OUTCOMES"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Enrolled 15,871 patients ≥45 years with stable CHD and recent ACS",
+            "refs": [
+              "f_eb82021111c0b0",
+              "f_f28a0eb1c2e383",
+              "f_abd51af6950efd"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Population appropriate for secondary prevention; no evidence of mismatch",
+            "refs": [
+              "f_480edfbab08953"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses by ACS recency, baseline lipids"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Standard MACE composite primary endpoint; median follow-up 2.5 years",
+            "refs": [
+              "f_480edfbab08953",
+              "f_f6c84f4c540769"
+            ]
+          },
+          {
+            "text": "Trial stopped early for futility (not safety)",
+            "refs": [
+              "f_992714ddfc7c6c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Early stopping for futility is a consequence of no effect, not a design flaw",
+            "refs": [
+              "f_36c3cf328f2e1c"
+            ]
+          }
+        ],
+        "would_settle": "IDMC charter and futility boundary details"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Trial stopped early by IDMC for futility per protocol",
+            "refs": [
+              "f_992714ddfc7c6c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No evidence of execution problems; proper conduct and oversight",
+            "refs": [
+              "f_76f2b2016dcc24"
+            ]
+          }
+        ],
+        "would_settle": "Trial conduct report and IDMC minutes"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Readout states 'dalcetrapib didn't provide benefit' but no HR/CI published yet",
+            "refs": [
+              "f_36c3cf328f2e1c"
+            ]
+          },
+          {
+            "text": "Announcement lists n_randomized as None for dal-OUTCOMES",
+            "refs": [
+              "f_2f9b073109488e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator inputs and verified facts provide substantial mechanistic and design data",
+            "refs": [
+              "calculator",
+              "f_a050303d0a35c8",
+              "f_1a4ad3f3cb2b95"
+            ]
+          }
+        ],
+        "would_settle": "Full publication of dal-OUTCOMES results with HR, CI, and event counts"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "The calculator uses median follow-up of 2.5 years (f_f6c84f4c540769), but the verifier contradicts this: the source states '80% of evaluable subjects have been followed for at least 2.5 years', which is not a median follow-up. The actual median follow-up at the time of early stop is likely different and directly affects the time_factor (0.697) and thus expected HR, power, and MDE.",
+            "target_agent": "mechanism",
+            "request": "Replace followup_years with the true median follow-up from the dal-OUTCOMES publication or clinical study report. If unavailable, estimate from Kaplan-Meier curves or use the follow-up at interim analysis."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C change of -5% (f_d316462bafdc04) is from a phase 2 study, not placebo-adjusted, and measured at 4 weeks. The outcome trial used 600 mg for a longer duration; the placebo-adjusted LDL-C effect at steady state in the phase 3 population is unknown. The calculator uses this value to compute expected HR (0.983), so any bias propagates directly.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted LDL-C change at 600 mg in phase 2/3 studies (e.g., dal-VESSEL, dal-PLAQUE, or the phase 3 biomarker substudy) at a timepoint closer to steady state. If none exists, add a caveat that the -5% is unadjusted and from an early timepoint."
+          },
+          {
+            "severity": "medium",
+            "issue": "HDL-C change of 31% (f_085f80df612591) is from phase 2, not placebo-adjusted, and the verifier did not find the number in the abstract (pmid:22424025). Although the fact exists in the verified set, the lack of placebo adjustment may overstate the on-target effect. This biomarker is not used in the expected HR calculation (pathway=null), but it underpins the 'biomarker_not_causal' hypothesis.",
+            "target_agent": "mechanism",
+            "request": "Confirm the 31% HDL-C increase in the full text of pmid:22424025. If a placebo-adjusted value is available (e.g., from the same study), use that instead. Otherwise, note the limitation."
+          },
+          {
+            "severity": "low",
+            "issue": "CETP activity change of -53% (f_6775972a55d105) is from phase 3, placebo-adjusted, but the verifier did not find the number in the abstract (pmid:22345126). The fact is in the verified set, so this is likely an abstract omission. No action needed beyond noting the source is the full text.",
+            "target_agent": "case_builder",
+            "request": "No change required; the fact is verified in the database. Keep as supporting evidence for on-target engagement."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator's weakest_link is 'target genetics: uncertain', but the primary category is 'biomarker_not_causal' (HDL-C not causal). The weakest link should reflect the biomarker genetics (HDL-C not causal) rather than the target genetics (CETP uncertain). This is a minor labeling inconsistency.",
+            "target_agent": "mechanism",
+            "request": "Update weakest_link to 'biomarker genetics: not causal' or similar to align with the category."
+          },
+          {
+            "severity": "low",
+            "issue": "Observed HR and CI are missing (calculator observed_hr: null). The trial was stopped for futility and the readout states no benefit, but the exact HR would allow a direct comparison with the expected HR (0.983) and the MDE (0.869).",
+            "target_agent": "case_builder",
+            "request": "Search for the published dal-OUTCOMES results (e.g., NEJM 2015 or later) to obtain the observed HR and 95% CI for the primary endpoint."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "HDL-C change (31%) used in calculator is from phase 2, not placebo-adjusted, and the Verifier did not find this value in the abstract of pmid:22424025 (though it exists in full text per verified fact f_085f80df612591). The automatic check flags that within-arm values were used; placebo-adjusted difference should be used if available.",
+            "target_agent": "mechanism",
+            "request": "Confirm whether a placebo-adjusted HDL-C change for dalcetrapib 600 mg at 12 weeks exists in phase 2 data; if not, document caveat that input is not placebo-adjusted."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C change (-5%) used as basis for expected HR is from phase 2, not placebo-adjusted (verified fact f_d316462bafdc04). The automatic check similarly flags within-arm values. Since pathway=null, the calculator falls back to LDL-C; a non-placebo-adjusted LDL-C change may overestimate the true drug effect.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted LDL-C change at 600 mg in phase 2 or phase 3; if unavailable, note caveat in calculator assumptions."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input followup_years is null, but verified fact f_f6c84f4c540769 gives median follow-up of 2.5 years for dal-OUTCOMES. The calculator assumes effect shown at 5 years (time_factor=1.0), which may not match the actual trial duration and could affect power calculation.",
+            "target_agent": "case_builder",
+            "request": "Update calculator input with followup_years=2.5 (or appropriate planned follow-up) and recalculate expected HR, power, and MDE."
+          },
+          {
+            "severity": "low",
+            "issue": "CETP activity change (-53%) from phase 3 (pmid:22345126) was not found in the abstract by Verifier, though verified facts (f_6775972a55d105, f_a0030ded22da41, f_b50b986d4ec6a6) confirm it from full text. This does not affect the calculator's primary basis (LDL-C) but is a minor verification gap.",
+            "target_agent": "mechanism",
+            "request": "Verify CETP activity change values from full text of pmid:22345126 to ensure accuracy."
+          },
+          {
+            "severity": "low",
+            "issue": "Trial stopped early for futility; actual number of primary events at stop is unknown. Calculator uses planned events (1600) for power calculation. For post-hoc assessment, actual events would give a more accurate achieved power.",
+            "target_agent": "investigator",
+            "request": "Find actual number of primary events accrued at the time of early stopping (e.g., from IDMC announcement or publication)."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_085f80df612591",
+          "claim": "c1",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 31,
+          "unit": "percent",
+          "source_id": "pmid:22424025",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract for pmid:22424025 does not contain a sentence with 31% or 31 percent for HDL-C change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*(?:31%|31 percent)[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22424025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d316462bafdc04",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -5,
+          "unit": "percent",
+          "source_id": "pmid:15842977",
+          "status": "confirmed",
+          "found": "a 5% decrease in low-density lipoprotein cholesterol (p <0",
+          "note": "The abstract states a 5% decrease in LDL-C, matching the -5 percent claim.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*(?:5%|5 percent) decrease[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '15842977' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_6775972a55d105",
+          "claim": "c3",
+          "used_as": "CETP activity change used by the calculator",
+          "key": "biomarker_change",
+          "value": -53.0,
+          "unit": "%",
+          "source_id": "pmid:22345126",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract for pmid:22345126 does not contain a sentence with 53% for CETP activity change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*(?:53%|53 percent)[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22345126' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_a050303d0a35c8",
+          "claim": "c4",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 1600,
+          "unit": "primary end point events",
+          "source_id": "pmid:19958854",
+          "status": "confirmed",
+          "found": "The trial will continue until 1,600 primary end point events have occurred",
+          "note": "The abstract explicitly states 1,600 primary endpoint events as planned.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1,?600[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19958854' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 2,
+        "contradicts": 0
+      },
+      "queries": 4
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "CETP",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.661,
+        "genetic_association_score": 0.736,
+        "evidence_count": 13,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.982,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.03727168,
+            "p": "4.620999813079834e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.981,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.004391835319535299,
+            "p": "3.2086009979248047e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.978,
+            "study_id": "GCST005196",
+            "trait": "Coronary artery disease",
+            "n": 250736,
+            "publication_date": "2017-12-06",
+            "pmid": "29212778",
+            "variant": "rs1800775",
+            "beta": -0.0405,
+            "p": "6e-10",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.975,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs247617",
+            "beta": null,
+            "p": "1e-149",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.966,
+            "study_id": "GCST90668074",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 310368,
+            "publication_date": "2025-09-29",
+            "pmid": "41022758",
+            "variant": "rs247616",
+            "beta": -6.8670974,
+            "p": "7e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.962,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00602080072392998,
+            "p": "2.3929998874664307e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.96,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00566730664302942,
+            "p": "6.335000038146973e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.943,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12446515",
+            "beta": -0.00478232983009403,
+            "p": "9.745523452758789e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_fce2b5e3cb2856",
+        "entity": "biomarker:apo a-i",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apo A-I",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "increased HDL-C, apolipoproteins (apo) A-I and A-II",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_bf01d8daae1b3f",
+        "entity": "biomarker:apo a-ii",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apo A-II",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "increased HDL-C, apolipoproteins (apo) A-I and A-II",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_6775972a55d105",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": -53.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg/day",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "After 4, 24, and 36 weeks of treatment with dalcetrapib, CETP activity decreased by 51, 53, and 56% (placebo corrected, all P",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_a0030ded22da41",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": -56.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase3",
+          "timepoint": "36 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg/day",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "After 4, 24, and 36 weeks of treatment with dalcetrapib, CETP activity decreased by 51, 53, and 56% (placebo corrected, all P",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_b50b986d4ec6a6",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": -51.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase3",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg/day",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "After 4, 24, and 36 weeks of treatment with dalcetrapib, CETP activity decreased by 51, 53, and 56% (placebo corrected, all P",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_db169f8a36a1d0",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "decreased CETP activity",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_35fae5ce185e9a",
+        "entity": "biomarker:cetp mass",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "CETP mass",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "increased HDL-C, apolipoproteins (apo) A-I and A-II, and CETP mass",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_085f80df612591",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "Dalcetrapib up to 600 mg, combined with pravastatin, increased HDL-C",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_329d71a0fe43f9",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 28,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg"
+        },
+        "source_id": "pmid:15842977",
+        "quote": "a 28% increase in HDL cholesterol (p <0.001)",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15842977"
+      },
+      {
+        "fact_id": "f_47b8bb9a7208a3",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 33.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Percent change in HDL-C was 33.4% for dalcetrapib vs. 3.5% for placebo at Week 24",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_544aee49a95942",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 13.8,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 48",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "and 13.8 mg/dL at Week 48",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_676576beed6842",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 12.8,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "The absolute change in HDL-C (least squares mean) with dalcetrapib was 12.8 mg/dL at Week 24",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_69a19b517f1bda",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 36,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "900 mg"
+        },
+        "source_id": "pmid:19576325",
+        "quote": "Dalcetrapib increased high-density lipoprotein cholesterol by up to 36% and apolipoprotein A-I by up to 16%.",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19576325"
+      },
+      {
+        "fact_id": "f_a1af40dbd6e675",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 29.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "day 7",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg",
+          "kind": "percent",
+          "trial": "NCT00658515"
+        },
+        "source_id": "pmid:21175438",
+        "quote": "High-density lipoprotein cholesterol increases associated with co-administration of dalcetrapib with ezetimibe (+29.8%) were comparable with those with dalcetrapib alone (+25.6%)",
+        "pub_date": "2010-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21175438"
+      },
+      {
+        "fact_id": "f_c912de391984c4",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 33.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 48",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "and 33.8 vs. 3.7% at Week 48",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_d31d8a123244a6",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "with little further change at a 900-mg dose",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_2dd46e0d3e0a9e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -20.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 7",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "trial": "NCT00658515"
+        },
+        "source_id": "pmid:21175438",
+        "quote": "while the reduction in low-density lipoprotein cholesterol with co-administration (-35.9%) was greater than with ezetimibe alone (-20.9%)",
+        "pub_date": "2010-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21175438"
+      },
+      {
+        "fact_id": "f_ab15702e92d9a6",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -35.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 7",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg",
+          "kind": "percent",
+          "trial": "NCT00658515"
+        },
+        "source_id": "pmid:21175438",
+        "quote": "while the reduction in low-density lipoprotein cholesterol with co-administration (-35.9%) was greater than with ezetimibe alone (-20.9%)",
+        "pub_date": "2010-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21175438"
+      },
+      {
+        "fact_id": "f_d316462bafdc04",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg"
+        },
+        "source_id": "pmid:15842977",
+        "quote": "a 5% decrease in low-density lipoprotein cholesterol (p <0.03)",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15842977"
+      },
+      {
+        "fact_id": "f_4b87dfad2868b0",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -37.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:11994249",
+        "quote": "Treatment with 900 mg JTT-705 for 4 weeks led to a 37% decrease in CETP activity",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11994249"
+      },
+      {
+        "fact_id": "f_5a035abeffb4fb",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 16.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 48",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "increased apolipoprotein A-I (11.4%, Week 24; 16.4%, Week 48)",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_5c9621266944fe",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -56.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 48",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "−56.5% at Week 48)",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_649c7c30e02ad3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 16,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmid:19576325",
+        "quote": "Dalcetrapib increased high-density lipoprotein cholesterol by up to 36% and apolipoprotein A-I by up to 16%.",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19576325"
+      },
+      {
+        "fact_id": "f_738ab813e27337",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 86.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 48",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "86.5% at Week 48)",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_7e7e6129402441",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 80.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "CETP mass increased (80.8% at Week 24",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_adb40ab24fa7e2",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -53.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "CETP activity decreased (−53.5% at Week 24",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_b95e40ba3d95cb",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -4.01,
+        "unit": "mm(2)",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "24 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg/day",
+          "kind": "absolute",
+          "trial": "dal-PLAQUE"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "MRI-derived change in total vessel area was reduced in patients given dalcetrapib compared with those given placebo after 24 months; absolute change from baseline relative to placebo was -4·01 mm(2) (90% CI -7·23 to -0·80; nominal p=0·04).",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_bd21d36fcb701e",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 11.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "900 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Apolipoprotein A-I increased from baseline in both groups; this was significantly greater for dalcetrapib vs. placebo at both Week 24 (11.4 vs. 4.4%",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_d4b0debbf61cbb",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -30,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg"
+        },
+        "source_id": "pmid:15842977",
+        "quote": "a 30% decrease in CETP activity (p <0.001)",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15842977"
+      },
+      {
+        "fact_id": "f_d9340efeff978c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "Adenosine 5'-triphosphate-binding cassette A1- and scavenger receptor type BI-mediated cholesterol efflux increased",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_f6c321c797717c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -7.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg/day",
+          "kind": "percent",
+          "trial": "dal-PLAQUE"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "carotid artery analysis showed a 7% reduction in most-diseased-segment TBR in the dalcetrapib group compared with the placebo group (-7·3 [90% CI -13·5 to -0·8]; nominal p=0·07).",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_b6386f090061e7",
+        "entity": "target:cetp",
+        "key": "genetic_association_score",
+        "value": 0.736,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 13,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:CETP",
+        "quote": "\"genetic_association_score\": 0.736",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000087237"
+      },
+      {
+        "fact_id": "f_e68001ed924fd1",
+        "entity": "trial:nct00658515",
+        "key": "inclusion_threshold",
+        "value": "600 mg",
+        "unit": "dalcetrapib daily",
+        "attrs": {
+          "trial": "dal-PLAQUE"
+        },
+        "source_id": "pmid:21835280",
+        "quote": "Patients with CHD or CHD-risk equivalents were randomized to receive 600 mg dalcetrapib or placebo daily for 24 months",
+        "pub_date": "2011-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21835280"
+      },
+      {
+        "fact_id": "f_eb82021111c0b0",
+        "entity": "trial:nct00658515",
+        "key": "inclusion_threshold",
+        "value": 45,
+        "unit": "years",
+        "attrs": {
+          "trial": "NCT00658515"
+        },
+        "source_id": "ctgov:NCT00658515@2012-05-07",
+        "quote": "adult patients, \\>=45 years of age;",
+        "pub_date": "2008-04-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00658515"
+      },
+      {
+        "fact_id": "f_f28a0eb1c2e383",
+        "entity": "trial:nct00658515",
+        "key": "inclusion_threshold",
+        "value": "recent acute coronary syndrome",
+        "unit": "NA",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "beginning 4 to 12 weeks after an index ACS event",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_f6c84f4c540769",
+        "entity": "trial:nct00658515",
+        "key": "median_followup",
+        "value": 2.5,
+        "unit": "years",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "80% of evaluable subjects have been followed for at least 2.5 years",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_041ade4486694c",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 838,
+        "unit": "participants",
+        "attrs": {
+          "trial": "4 pooled 4-week phase IIa trials and 1 12-week phase IIb trial",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:19576325",
+        "quote": "The efficacy and clinical safety of dalcetrapib 300, 600, and 900 mg or placebo were assessed (n = 838) in 4 pooled 4-week phase IIa trials (1 monotherapy, n = 193; 3 statin combination, n = 353) and 1 12-week phase IIb trial (with pravastatin, n = 292).",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19576325"
+      },
+      {
+        "fact_id": "f_0f7c021685d486",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 476,
+        "unit": "patients",
+        "attrs": {
+          "trial": "dal-VESSEL"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "Four hundred seventy-six patients were randomized.",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_104eb7931419db",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 130,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "dal-PLAQUE"
+        },
+        "source_id": "pmid:21835280",
+        "quote": "In total, 189 subjects entered screening, and 130 were randomized.",
+        "pub_date": "2011-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21835280"
+      },
+      {
+        "fact_id": "f_10f5bb637f6cf5",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 155,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:15842977",
+        "quote": "155 patients with type II dyslipidemia using pravastatin 40 mg were treated with placebo or JTT-705 300 or 600 mg",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15842977"
+      },
+      {
+        "fact_id": "f_1a4ad3f3cb2b95",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 15600,
+        "unit": "patients",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "The study will randomize approximately 15,600 patients to receive daily doses of dalcetrapib 600 mg or matching placebo",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_2b686f4127382d",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 198,
+        "unit": "subjects",
+        "attrs": {
+          "phase": "phase2"
+        },
+        "source_id": "pmid:11994249",
+        "quote": "we evaluated the efficacy and safety of daily treatment with 300, 600, and 900 mg JTT-705 in 198 healthy subjects with mild hyperlipidemia",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11994249"
+      },
+      {
+        "fact_id": "f_2f9b073109488e",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "announcement:dal_outcomes",
+        "quote": "The dal-OUTCOMES trial evaluated the efficacy and safety profile of dalcetrapib when added to existing standard of care in patients with stable coronary heart disease (CHD) following an acute coronary syndrome (ACS)",
+        "pub_date": "2012-05-07",
+        "access": "press_release",
+        "url": "https://www.roche.com/media/releases/med-cor-2012-05-07.htm"
+      },
+      {
+        "fact_id": "f_76af25668ef077",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 130,
+        "unit": "patients",
+        "attrs": {
+          "trial": "dal-PLAQUE",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "189 patients were screened and 130 randomly assigned to placebo (66 patients) or dalcetrapib (64 patients).",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_abd51af6950efd",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 15871,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00658515"
+        },
+        "source_id": "ctgov:NCT00658515@2012-05-07",
+        "quote": "Enrollment: 15871 (ACTUAL)",
+        "pub_date": "2008-04-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00658515"
+      },
+      {
+        "fact_id": "f_b02ec1b89f10d7",
+        "entity": "trial:nct00658515",
+        "key": "n_randomized",
+        "value": 135,
+        "unit": "participants",
+        "attrs": {
+          "trial": "NCT00353522"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Overall, 135 participants (89 dalcetrapib and 46 placebo) were enrolled.",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_a050303d0a35c8",
+        "entity": "trial:nct00658515",
+        "key": "planned_events",
+        "value": 1600,
+        "unit": "primary end point events",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "The trial will continue until 1,600 primary end point events have occurred",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_007b2632f5eeb9",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "MRI-assessed indices (total vessel area, wall area, wall thickness, and normalised wall index [average carotid]) after 24 months and (18)F-FDG PET/CT assessment of arterial inflammation within an index vessel after 6 months",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-PLAQUE",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "Coprimary endpoints were MRI-assessed indices (total vessel area, wall area, wall thickness, and normalised wall index [average carotid]) after 24 months and (18)F-fluorodeoxyglucose ((18)F-FDG) PET/CT assessment of arterial inflammation within an index vessel (right carotid, left carotid, or ascending thoracic aorta) after 6 months",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_480edfbab08953",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "time to first occurrence of coronary heart disease death, nonfatal acute myocardial infarction, unstable angina requiring hospital admission, resuscitated cardiac arrest, or atherothrombotic stroke",
+        "unit": "NA",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "The primary efficacy measure is time to first occurrence of coronary heart disease death, nonfatal acute myocardial infarction, unstable angina requiring hospital admission, resuscitated cardiac arrest, or atherothrombotic stroke",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_493292e8a2d7e4",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "18F-fluorodeoxyglucose positron emission tomography target-to-background ratio after 6 months and magnetic resonance imaging plaque burden after 12 months",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-PLAQUE"
+        },
+        "source_id": "pmid:21835280",
+        "quote": "The primary outcomes are the effect of dalcetrapib on 18F-fluorodeoxyglucose positron emission tomography target-to-background ratio after 6 months and magnetic resonance imaging (MRI) plaque burden (wall area, wall thickness, total vessel area, and wall area/total vessel area ratio) after 12 months.",
+        "pub_date": "2011-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21835280"
+      },
+      {
+        "fact_id": "f_7044f3b2afafa5",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "Incidence of Cardiovascular Mortality and Morbidity",
+        "unit": "",
+        "attrs": {
+          "trial": "NCT00658515"
+        },
+        "source_id": "ctgov:NCT00658515@2012-05-07",
+        "quote": "Primary outcome(s): Incidence of Cardiovascular Mortality and Morbidity [From date of randomization to first event up to 48 months]",
+        "pub_date": "2008-04-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00658515"
+      },
+      {
+        "fact_id": "f_a019dfc1c58773",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "percent and absolute change from baseline in HDL-C",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "NCT00353522"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Primary efficacy parameters were percent and absolute change from baseline in HDL-C, measured at 24 weeks (core phase) and 48 weeks (extension phase) using standard methods.",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_b1e841951d2945",
+        "entity": "trial:nct00658515",
+        "key": "primary_endpoint",
+        "value": "change from baseline of flow-mediated dilatation (%FMD) of the right brachial artery after 5 min of cuff occlusion at 12 weeks and the 24 h ambulatory blood pressure monitoring (ABPM) at week 4",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-VESSEL"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "The primary outcome measures were the change from baseline of flow-mediated dilatation (%FMD) of the right brachial artery after 5 min of cuff occlusion at 12 weeks and the 24 h ambulatory blood pressure monitoring (ABPM) at week 4.",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_051b24eeb2bcd2",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "Dalcetrapib 900 mg administered for up to 48 weeks showed no clinically relevant changes in lymph nodes, BP, or other safety parameters. Dalcetrapib effectively increased HDL-C over 48 weeks of treatment.",
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT00353522"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Dalcetrapib 900 mg administered for up to 48 weeks showed no clinically relevant changes in lymph nodes, BP, or other safety parameters. Dalcetrapib effectively increased HDL-C over 48 weeks of treatment.",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_12a4df4c588cc4",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": 1,
+        "unit": "boolean",
+        "attrs": {
+          "trial": "NCT00658515"
+        },
+        "source_id": "pmid:22424025",
+        "quote": "The impact on cardiovascular events in dyslipidemic patients is being evaluated.",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22424025"
+      },
+      {
+        "fact_id": "f_36c3cf328f2e1c",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "dalcetrapib didn't provide benefit to the patients in our study",
+        "unit": "",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "announcement:dal_outcomes",
+        "quote": "we are disappointed by the fact that this drug didn't provide benefit to the patients in our study",
+        "pub_date": "2012-05-07",
+        "access": "press_release",
+        "url": "https://www.roche.com/media/releases/med-cor-2012-05-07.htm"
+      },
+      {
+        "fact_id": "f_6ecefa5fba528f",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "Dalcetrapib reduced CETP activity and increased HDL-C levels without affecting NO-dependent endothelial function, blood pressure, or markers of inflammation and oxidative stress.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-VESSEL"
+        },
+        "source_id": "pmid:22345126",
+        "quote": "Dalcetrapib reduced CETP activity and increased HDL-C levels without affecting NO-dependent endothelial function, blood pressure, or markers of inflammation and oxidative stress.",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22345126"
+      },
+      {
+        "fact_id": "f_76f2b2016dcc24",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "Dal-OUTCOMES will determine whether CETP inhibition with dalcetrapib, added to current evidence-based care, reduces cardiovascular morbidity and mortality after ACS.",
+        "unit": "NA",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmid:19958854",
+        "quote": "Dal-OUTCOMES will determine whether CETP inhibition with dalcetrapib, added to current evidence-based care, reduces cardiovascular morbidity and mortality after ACS.",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19958854"
+      },
+      {
+        "fact_id": "f_a380fc38deb323",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "This study will evaluate the potential of RO4607381 to reduce cardiovascular morbidity and mortality in stable coronary heart disease patients with recent Acute Coronary Syndrome (ACS) and evaluate the long term safety profile of the drug.",
+        "unit": "",
+        "attrs": {
+          "trial": "NCT00658515"
+        },
+        "source_id": "ctgov:NCT00658515@2012-05-07",
+        "quote": "Brief summary: This study will evaluate the potential of RO4607381 to reduce cardiovascular morbidity and mortality in stable coronary heart disease patients with recent Acute Coronary Syndrome (ACS) and evaluate the long term safety profile of the drug.",
+        "pub_date": "2008-04-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00658515"
+      },
+      {
+        "fact_id": "f_bf9802b050922f",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "dalcetrapib alone or in combination with statins was effective at increasing high-density lipoprotein cholesterol and was well tolerated, without clinically relevant changes in blood pressure or cardiovascular AEs and no effects on aldosterone production as assessed nonclinically",
+        "unit": "",
+        "attrs": {
+          "trial": "4 pooled 4-week phase IIa trials and 1 12-week phase IIb trial",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:19576325",
+        "quote": "In conclusion, dalcetrapib alone or in combination with statins was effective at increasing high-density lipoprotein cholesterol and was well tolerated, without clinically relevant changes in blood pressure or cardiovascular AEs and no effects on aldosterone production as assessed nonclinically.",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19576325"
+      },
+      {
+        "fact_id": "f_cf10d3d216303b",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "Dalcetrapib showed no evidence of a pathological effect related to the arterial wall over 24 months. Moreover, this trial suggests possible beneficial vascular effects of dalcetrapib, including the reduction in total vessel enlargement over 24 months, but long-term safety and clinical outcomes efficacy of dalcetrapib need to be analysed.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-PLAQUE",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "Dalcetrapib showed no evidence of a pathological effect related to the arterial wall over 24 months. Moreover, this trial suggests possible beneficial vascular effects of dalcetrapib, including the reduction in total vessel enlargement over 24 months, but long-term safety and clinical outcomes efficacy of dalcetrapib need to be analysed.",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_fffc8b09e55c10",
+        "entity": "trial:nct00658515",
+        "key": "readout_statement",
+        "value": "the dose of dalcetrapib studied (900 mg) was higher than the 600 mg dose chosen for further development and the placebo-controlled phase III dal-OUTCOMES trial, in which dalcetrapib is being evaluated in clinically stable patients with recent acute coronary syndrome (ACS) (n = 15 600)",
+        "unit": "none",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "the dose of dalcetrapib studied (900 mg) was higher than the 600 mg dose chosen for further development and the placebo-controlled phase III dal-OUTCOMES trial, in which dalcetrapib is being evaluated in clinically stable patients with recent acute coronary syndrome (ACS) (n = 15 600)",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_2b11dac5fd1262",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": "minor gastrointestinal side effects",
+        "unit": "",
+        "attrs": {
+          "phase": "phase2"
+        },
+        "source_id": "pmid:11994249",
+        "quote": "raise HDL cholesterol levels with minor gastrointestinal side effects",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11994249"
+      },
+      {
+        "fact_id": "f_7f3abcde5ad973",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": "no clinically relevant differences vs. placebo in adverse events",
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT00353522"
+        },
+        "source_id": "pmcid:PMC2821630",
+        "quote": "Dalcetrapib showed no clinically relevant differences vs. placebo in adverse events, laboratory parameters including aldosterone, electrocardiograms, and vital signs including blood pressure (BP).",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/20097702"
+      },
+      {
+        "fact_id": "f_8373ed05003296",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": "Dalcetrapib did not increase office blood pressure and the frequency of adverse events was similar between groups.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "dal-PLAQUE",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21908036",
+        "quote": "Dalcetrapib did not increase office blood pressure and the frequency of adverse events was similar between groups.",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21908036"
+      },
+      {
+        "fact_id": "f_92848898ce202a",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": 1,
+        "unit": "boolean",
+        "attrs": {},
+        "source_id": "pmid:15842977",
+        "quote": "Combination therapy using JTT-705 and pravastatin effectively increases HDL cholesterol levels and is safe and well tolerated up to 4 weeks of administration.",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15842977"
+      },
+      {
+        "fact_id": "f_d580e9b0d4be0a",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": false,
+        "unit": "",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "announcement:dal_outcomes",
+        "quote": "No safety signals relating to the dal-OUTCOMES trial were reported from the DSMB",
+        "pub_date": "2012-05-07",
+        "access": "press_release",
+        "url": "https://www.roche.com/media/releases/med-cor-2012-05-07.htm"
+      },
+      {
+        "fact_id": "f_ded1d448f7f40b",
+        "entity": "trial:nct00658515",
+        "key": "safety_signal",
+        "value": 58,
+        "unit": "%",
+        "attrs": {
+          "trial": "pooled 4-week studies",
+          "phase": "phase2",
+          "dose": "900 mg",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:19576325",
+        "quote": "The incidence of adverse events (AEs) was similar between placebo (42%) and dalcetrapib 300 mg (50%) and 600 mg (42%), with more events with dalcetrapib 900 mg (58%) (p <0.05, pooled 4-week studies).",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19576325"
+      },
+      {
+        "fact_id": "f_992714ddfc7c6c",
+        "entity": "trial:nct00658515",
+        "key": "stopped_early",
+        "value": true,
+        "unit": "",
+        "attrs": {
+          "trial": "dal-OUTCOMES"
+        },
+        "source_id": "announcement:dal_outcomes",
+        "quote": "the independent Data and Safety Monitoring Board (DSMB) has recommended stopping the trial due to a lack of clinically meaningful efficacy",
+        "pub_date": "2012-05-07",
+        "access": "press_release",
+        "url": "https://www.roche.com/media/releases/med-cor-2012-05-07.htm"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00658515@2012-05-07",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00658515",
+        "url": "https://clinicaltrials.gov/study/NCT00658515",
+        "pub_date": "2008-04-15",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00658515",
+            "acronym": null,
+            "title": "A Study of RO4607381 in Stable Coronary Heart Disease Patients With Recent Acute Coronary Syndrome",
+            "official_title": "A Randomized, Double-blind, Placebo-controlled Study Assessing the Effect of RO4607381 on Cardiovascular Mortality and Morbidity in Clinically Stable Patients With a Recent Acute Coronary Syndrome",
+            "sponsor": "Hoffmann-La Roche",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2008-04",
+            "primary_completion": "2012-09",
+            "first_posted": "2008-04-15",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 15871,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Dalcetrapib (RO4607381)",
+                "type": "DRUG",
+                "other_names": []
+              },
+              {
+                "name": "Evidence-based medical care for Acute Coronary Syndrome",
+                "type": "DRUG",
+                "other_names": []
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": []
+              }
+            ],
+            "conditions": [
+              "Coronary Heart Disease"
+            ],
+            "primary_outcomes": [
+              "Incidence of Cardiovascular Mortality and Morbidity [From date of randomization to first event up to 48 months]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 1731
+      },
+      {
+        "source_id": "pmid:22345126",
+        "type": "journal",
+        "title": "Vascular effects and safety of dalcetrapib in patients with or at risk of coronary heart disease: the dal-VESSEL randomized clinical trial.",
+        "url": "https://europepmc.org/article/MED/22345126",
+        "pub_date": "2012-02-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22345126",
+          "pmcid": "PMC3345558",
+          "doi": "10.1093/eurheartj/ehs019",
+          "journal": "European heart journal"
+        },
+        "chars": 2448
+      },
+      {
+        "source_id": "pmid:22424025",
+        "type": "journal",
+        "title": "Effect of dalcetrapib plus pravastatin on lipoprotein metabolism and high-density lipoprotein composition and function in dyslipidemic patients: results of a phase IIb dose-ranging study.",
+        "url": "https://europepmc.org/article/MED/22424025",
+        "pub_date": "2012-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22424025",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2011.11.017",
+          "journal": "American heart journal"
+        },
+        "chars": 2106
+      },
+      {
+        "source_id": "pmid:21908036",
+        "type": "journal",
+        "title": "Safety and efficacy of dalcetrapib on atherosclerotic disease using novel non-invasive multimodality imaging (dal-PLAQUE): a randomised clinical trial.",
+        "url": "https://europepmc.org/article/MED/21908036",
+        "pub_date": "2011-09-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21908036",
+          "pmcid": "PMC4151875",
+          "doi": "10.1016/s0140-6736(11)61383-4",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 2822
+      },
+      {
+        "source_id": "pmid:21835280",
+        "type": "journal",
+        "title": "Rationale and design of dal-PLAQUE: a study assessing efficacy and safety of dalcetrapib on progression or regression of atherosclerosis using magnetic resonance imaging and 18F-fluorodeoxyglucose positron emission tomography/computed tomography.",
+        "url": "https://europepmc.org/article/MED/21835280",
+        "pub_date": "2011-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21835280",
+          "pmcid": "PMC4047820",
+          "doi": "10.1016/j.ahj.2011.05.006",
+          "journal": "American heart journal"
+        },
+        "chars": 2068
+      },
+      {
+        "source_id": "pmcid:PMC2821630",
+        "type": "journal",
+        "title": "Safety and tolerability of dalcetrapib (RO4607381/JTT-705): results from a 48-week trial.",
+        "url": "https://europepmc.org/article/MED/20097702",
+        "pub_date": "2010-01-22",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "20097702",
+          "pmcid": "PMC2821630",
+          "doi": "10.1093/eurheartj/ehp601",
+          "journal": "European heart journal"
+        },
+        "chars": 32271
+      },
+      {
+        "source_id": "pmid:21175438",
+        "type": "journal",
+        "title": "Lack of clinically relevant drug-drug interactions when dalcetrapib is co-administered with ezetimibe.",
+        "url": "https://europepmc.org/article/MED/21175438",
+        "pub_date": "2010-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21175438",
+          "pmcid": "PMC3014066",
+          "doi": "10.1111/j.1365-2125.2010.03763.x",
+          "journal": "British journal of clinical pharmacology"
+        },
+        "chars": 1983
+      },
+      {
+        "source_id": "pmid:19958854",
+        "type": "journal",
+        "title": "Rationale and design of the dal-OUTCOMES trial: efficacy and safety of dalcetrapib in patients with recent acute coronary syndrome.",
+        "url": "https://europepmc.org/article/MED/19958854",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19958854",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2009.09.017",
+          "journal": "American heart journal"
+        },
+        "chars": 1744
+      },
+      {
+        "source_id": "pmid:15842977",
+        "type": "journal",
+        "title": "Effectiveness of inhibition of cholesteryl ester transfer protein by JTT-705 in combination with pravastatin in type II dyslipidemia.",
+        "url": "https://europepmc.org/article/MED/15842977",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15842977",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2004.12.064",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 911
+      },
+      {
+        "source_id": "pmid:11994249",
+        "type": "journal",
+        "title": "Efficacy and safety of a novel cholesteryl ester transfer protein inhibitor, JTT-705, in humans: a randomized phase II dose-response study.",
+        "url": "https://europepmc.org/article/MED/11994249",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11994249",
+          "pmcid": null,
+          "doi": "10.1161/01.cir.0000015857.31889.7b",
+          "journal": "Circulation"
+        },
+        "chars": 1316
+      },
+      {
+        "source_id": "pmid:19576325",
+        "type": "journal",
+        "title": "Safety and tolerability of dalcetrapib.",
+        "url": "https://europepmc.org/article/MED/19576325",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19576325",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2009.02.061",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1954
+      },
+      {
+        "source_id": "pmid:18193043",
+        "type": "journal",
+        "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
+        "url": "https://europepmc.org/article/MED/18193043",
+        "pub_date": "2008-01-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18193043",
+          "pmcid": "PMC5206900",
+          "doi": "10.1038/ng.76",
+          "journal": "Nature genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1538
+      },
+      {
+        "source_id": "pmid:12034052",
+        "type": "journal",
+        "title": "Thyroid disease and lipids.",
+        "url": "https://europepmc.org/article/MED/12034052",
+        "pub_date": "2002-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12034052",
+          "pmcid": null,
+          "doi": "10.1089/10507250252949405",
+          "journal": "Thyroid : official journal of the American Thyroid Association",
+          "purpose": "genetics"
+        },
+        "chars": 2483
+      },
+      {
+        "source_id": "pmid:14559957",
+        "type": "journal",
+        "title": "Unique lipoprotein phenotype and genotype associated with exceptional longevity.",
+        "url": "https://europepmc.org/article/MED/14559957",
+        "pub_date": "2003-10-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14559957",
+          "pmcid": null,
+          "doi": "10.1001/jama.290.15.2030",
+          "journal": "JAMA",
+          "purpose": "genetics"
+        },
+        "chars": 2391
+      },
+      {
+        "source_id": "announcement:dal_outcomes",
+        "type": "press_release",
+        "title": "Roche provides update on Phase III study of dalcetrapib (Basel, 7 May 2012)",
+        "url": "https://www.roche.com/media/releases/med-cor-2012-05-07.htm",
+        "pub_date": "2012-05-07",
+        "access": "press_release",
+        "meta": {},
+        "chars": 2870
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 25,
+      "facts": 69,
+      "relationships": 30,
+      "events": 185,
+      "audit_entries": 185,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 17879,
+        "output_tokens": 8626,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 10800,
+        "output_tokens": 10234,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 3749,
+        "output_tokens": 5275,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 9308,
+        "output_tokens": 6905,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 12029,
+        "output_tokens": 11199,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 5999,
+        "output_tokens": 1954,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

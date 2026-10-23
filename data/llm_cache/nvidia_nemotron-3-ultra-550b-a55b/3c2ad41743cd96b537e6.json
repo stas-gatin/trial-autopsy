@@ -1,0 +1,15 @@
+{
+  "key": "3c2ad41743cd96b537e6",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-22T22:42:28+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: NCT00202878 - IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | LDL-C change used by the calculator | biomarker_change = -0.85 mmol/L | {\"biomarker\": \"LDL-C\", \"dose\": \"simvastatin 20 mg plus ezetimibe 10 mg daily\", \"kind\": \"absolute\", \"method\": \"not stated\", \"phase\": \"phase3\", \"placebo_adjusted\": true, \"timepoint\": \"average during follow-up\", \"trial\": \"SHARP\"} | source pmcid:PMC3145073 | quote: \"yielded an average LDL cholesterol difference of 0·85 mmol/L (SE 0·02; with about two-thirds compliance)\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*0[·.]85[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3145073' LIMIT 5 | rows: [[\" Allocation to simvastatin plus ezetimibe yielded an average LDL cholesterol difference of 0·85 mmol/L (SE 0·02; with about two-thirds compliance) during a median follow-up of 4·9 years and produced a 17% proportional reduction in major atherosclerotic events (526 [11·3%] simvastatin plus ezetimibe vs 619 [13·4%] placebo; rate ratio [RR] 0·83, 95% CI 0·74-0·94; log-rank p=0·0021)\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"contradicts\", \"found\": \"average LDL cholesterol difference of 0·85 mmol/L\", \"note\": \"Row reports a positive difference of 0·85 mmol/L, while claim states -0.85 mmol/L.\"}]}",
+  "usage": {
+    "input_tokens": 536,
+    "output_tokens": 2526
+  }
+}

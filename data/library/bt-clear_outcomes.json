@@ -1,0 +1,2373 @@
+{
+  "run_id": "bt-clear_outcomes",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2022-12-07",
+  "backtest": true,
+  "readout_date": "2022-12-07",
+  "analysis_date": "2022-12-07",
+  "trial": {
+    "nct_id": "NCT02993406",
+    "acronym": "CLEAR Outcomes",
+    "title": "Evaluation of Major Cardiovascular Events in Participants With, or at High Risk for, Cardiovascular Disease Who Are Statin Intolerant Treated With Bempedoic Acid (ETC-1002) or Placebo",
+    "sponsor": "Esperion Therapeutics, Inc.",
+    "status": "COMPLETED",
+    "enrollment": 13970,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Diseases",
+      "Statin Adverse Reaction"
+    ],
+    "primary_completion": "2022-11-07"
+  },
+  "drug": {
+    "name": "bempedoic acid",
+    "chembl_id": "CHEMBL3545313",
+    "aliases": [
+      "Acide bempedoique",
+      "Acido bempedoico",
+      "Bempedoic acid component of nexlizet",
+      "ESP-55016",
+      "ETC-1002",
+      "ETC1002",
+      "Nexletol",
+      "Nilemdo"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "ATP-citrate synthase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000131473",
+        "symbol": "ACLY",
+        "name": "ATP citrate lyase"
+      }
+    ],
+    "searched_as": "bempedoic acid"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-clear_outcomes",
+  "log_file": "logs/trace-bt-clear_outcomes.jsonl",
+  "execution_time_seconds": 549.1,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"Esperion (NASDAQ: ESPR) today announced that the landmark C holesterol L owering via B e mpedoic a cid, an ACL-Inhibiting R egimen (CLEAR) O\" (announcement:clear_outcomes)",
+      "predicted_outcome": "success",
+      "consistency": "consistent with the calculator (probability of success 60%)",
+      "primary_category": "narrow_success",
+      "secondary_categories": [
+        "effect_too_small"
+      ],
+      "calculator_category": "narrow_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.601,
+      "weakest_link": "expected effect only 10% relative risk reduction"
+    },
+    "report": {
+      "headline": "CLEAR Outcomes met its primary MACE-4 endpoint in statin-intolerant patients, achieving a narrow success consistent with the calculator's 60% predicted probability of success.",
+      "summary": "The CLEAR Outcomes trial (NCT02993406) randomized 14,014 statin-intolerant patients with LDL-C ≥100 mg/dL to bempedoic acid 180 mg or placebo, targeting 1,620 MACE-4 events over a projected 42-month median follow-up. The calculator predicted a 10.4% relative risk reduction (HR 0.896) based on a 17.4% LDL-C reduction observed in the CLEAR Wisdom phase 3 trial, yielding only 60% power at the 5% significance threshold. The trial met its primary endpoint of cardiovascular death, nonfatal MI, nonfatal stroke, or coronary revascularization, per the sponsor's press release. Safety signals include gout and tendon rupture, though myalgia rates were similar to placebo (4.7% vs 7.2%). Genetic evidence is mixed: Open Targets scores ACLY at 0.0 for coronary artery disease, but Mendelian randomization supports a causal role (HR 0.82). Confidence in the success verdict is high, though the observed hazard ratio and confidence interval remain unpublished.",
+      "key_evidence": [
+        "14,014 patients randomized (source: Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.)",
+        "LDL-C ≥100 mg/dL inclusion threshold (source: ClinicalTrials.gov NCT02993406 CLEAR Outcomes)",
+        "Primary endpoint: MACE-4 composite (CV death, MI, stroke, coronary revascularization) (source: Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.)",
+        "1,620 planned primary endpoint events (source: Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.)",
+        "42 months median follow-up (source: Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.)",
+        "Phase 3 placebo-adjusted LDL-C reduction of -17.4% in statin-intolerant patients (source: Effect of Bempedoic Acid vs Placebo Added to Maximally Tolerated Statins on Low-Density Lipoprotein Cholesterol in Patients at High Risk for Cardiovascular Disease: The CLEAR Wisdom Randomized Clinical Trial.)",
+        "Baseline LDL-C 120.4 mg/dL in statin-intolerant population (source: Effect of Bempedoic Acid vs Placebo Added to Maximally Tolerated Statins on Low-Density Lipoprotein Cholesterol in Patients at High Risk for Cardiovascular Disease: The CLEAR Wisdom Randomized Clinical Trial.)",
+        "Trial met primary endpoint per press release (source: Esperion Announces CLEAR Cardiovascular Outcomes Trial of NEXLETOL (bempedoic acid) Meets Primary Endpoint)",
+        "Calculator predicted 10.4% RRR (HR 0.896) with 60.1% power; MDE at 80% power HR 0.87 (source: calculator)",
+        "Safety: gout reported, tendon rupture mentioned; myalgia 4.7% vs 7.2% placebo (sources: Safety and Efficacy of Bempedoic Acid to Reduce LDL Cholesterol.; Esperion Announces CLEAR Cardiovascular Outcomes Trial of NEXLETOL (bempedoic acid) Meets Primary Endpoint; Efficacy and Safety of Bempedoic Acid in Patients With Hypercholesterolemia and Statin Intolerance.)",
+        "Genetic: Open Targets ACLY score 0.0; Mendelian randomization HR 0.82 (sources: opentargets:ACLY; Mendelian Randomization Study of ACLY and Cardiovascular Disease.)",
+        "Trial not stopped early (source: ClinicalTrials.gov NCT02993406 CLEAR Outcomes)"
+      ],
+      "what_would_change_this": "Publication of the observed hazard ratio, confidence interval, and p-value from CLEAR Outcomes would allow direct comparison with the calculator's expected HR of 0.896 and clarify whether the effect size is clinically meaningful. Full safety data from the outcomes trial would also resolve remaining uncertainties about gout and tendon rupture risks.",
+      "readthrough_note": "No read-through hypotheses to other programmes were identified in this analysis."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.0 for ACLY",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.542 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.104,
+        "detail": "expected HR 0.896 at 3.5 y (relative risk reduction 10.4%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.601,
+        "detail": "power 60% with 1620 events; smallest detectable HR 0.87",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "clear_outcomes",
+      "ldl_equivalent_mmol": 0.542,
+      "basis": "LDL-C",
+      "time_factor": 0.818,
+      "expected_hr": 0.896,
+      "causal_rrr": 0.104,
+      "bp_factor": 1.0,
+      "power": 0.601,
+      "mde_hr_80": 0.87,
+      "outcome": "success",
+      "category": "narrow_success",
+      "secondary": [],
+      "weakest_link": "expected effect only 10% relative risk reduction",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "clear_outcomes",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -17.4,
+          "baseline": 3.114,
+          "method": "phase3_placebo_adjusted_at_180mg_week12_CLEAR_Wisdom_statin_intolerant",
+          "source": "pmid:31714986"
+        }
+      ],
+      "followup_years": 3.5,
+      "events": 1620,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "Mendelian randomization study (pmid:30865797, f_e5f10161df91fe) shows ACLY genetic score associated with lower LDL-C and reduced cardiovascular events (HR 0.82, 95% CI 0.78-0.87), supporting causal role of ACLY inhibition for coronary disease. Open Targets score 0.0 but literature genetic evidence exists and is published before cut-off.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -17.4,
+          "baseline": 3.114,
+          "unit": "mmol/L",
+          "method": "phase3_placebo_adjusted_at_180mg_week12_CLEAR_Wisdom_statin_intolerant",
+          "fact_ids": [
+            "f_77a23c173de6bc",
+            "f_06c23b2a2c6517"
+          ]
+        }
+      ],
+      "followup_years": 3.5,
+      "followup_fact_ids": [
+        "f_ff949eee0e8d97"
+      ],
+      "events": 1620,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_d3ae35ede6f45d"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_e1d8c95944e195",
+        "f_74eaab4866bbe4",
+        "f_b837d3093b6a37"
+      ],
+      "missing": [
+        "actual_events",
+        "observed_hr",
+        "observed_ci",
+        "sbp_change_mmhg",
+        "apoB_baseline",
+        "non-HDL-C_baseline",
+        "CLEAR_Outcomes_LDL-C_baseline"
+      ],
+      "notes": "Target genetics set to causal based on Mendelian randomization (pmid:30865797) showing ACLY genetic score lowers LDL-C and CV events (HR 0.82, 95% CI 0.78-0.87), despite Open Targets score 0.0. LDL-C change from CLEAR Wisdom (phase 3, statin-intolerant, 180 mg, placebo-adjusted -17.4% at week 12, baseline 120.4 mg/dL) as best match for CLEAR Outcomes population. Pooled phase 3 analysis (pmcid:PMC6509724) shows -21.4% LDL-C and -15.0% apoB but in mixed population with higher baseline (157.6 mg/dL). CLEAR Outcomes median follow-up 42 months (3.5 years) from design paper; actual events and HR/CI not yet published in available facts. Trial met primary endpoint per announcement."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Open Targets genetic association score for ACLY is 0.0 with 0 evidence items for coronary artery disorder",
+            "refs": [
+              "f_af5e85be6cc1f6"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Mendelian randomization study (pmid:30865797, before cut-off) shows ACLY genetic score associated with lower LDL-C and lower CV events (HR 0.82, 95% CI 0.78-0.87), supporting causal role",
+            "refs": [
+              "f_e5f10161df91fe"
+            ]
+          }
+        ],
+        "would_settle": "Consensus on whether MR evidence overrides Open Targets score of 0.0"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is a well-established causal biomarker for cardiovascular disease; the drug's intended biomarker is LDL-C",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; LDL-C causality is established"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator predicts only 10.4% RRR (expected HR 0.896) with 60.1% power; MDE at 80% power is HR 0.87",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Calculator's weakest_link: 'expected effect only 10% relative risk reduction'",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial met its primary endpoint (MACE-4) per readout statement",
+            "refs": [
+              "f_e1d8c95944e195"
+            ]
+          },
+          {
+            "text": "Phase 3 placebo-adjusted LDL-C reduction of -17.4% at 180 mg in statin-intolerant patients (CLEAR Wisdom) supports the biomarker change used",
+            "refs": [
+              "f_77a23c173de6bc"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and CI from CLEAR Outcomes publication to compare with expected 0.896"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Gout reported in CLEAR Harmony",
+            "refs": [
+              "f_36d2ad1fd3b9e1"
+            ]
+          },
+          {
+            "text": "Tendon rupture mentioned in CLEAR Outcomes announcement",
+            "refs": [
+              "f_ab9efe599389ff"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Myalgia rates similar to placebo (4.7% vs 7.2%) in CLEAR Serenity",
+            "refs": [
+              "f_1390ce40de2bfb",
+              "f_d05778ca054f1a"
+            ]
+          },
+          {
+            "text": "Rates of AEs, muscle-related AEs, and discontinuations for AEs similar to placebo in phase 2",
+            "refs": [
+              "f_c39167a04c4bfe"
+            ]
+          },
+          {
+            "text": "Readout states \"Bempedoic acid offers a safe and effective oral therapeutic option\"",
+            "refs": [
+              "f_73fc59d4ff6a19"
+            ]
+          }
+        ],
+        "would_settle": "Full safety data from CLEAR Outcomes publication"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial enrolled statin-intolerant patients with LDL-C >=100 mg/dL, a high-risk population appropriate for LDL-lowering therapy",
+            "refs": [
+              "f_1504a355043a6d",
+              "f_d3d44f50485981"
+            ]
+          },
+          {
+            "text": "Baseline LDL-C in statin-intolerant phase 3 trial (CLEAR Wisdom) was 120.4 mg/dL (3.114 mmol/L), matching calculator input",
+            "refs": [
+              "f_06c23b2a2c6517"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; population is appropriate"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Primary endpoint is standard MACE-4 composite (CV death, MI, stroke, coronary revascularization)",
+            "refs": [
+              "f_74eaab4866bbe4",
+              "f_b837d3093b6a37",
+              "f_9c29c1cd05fdfc"
+            ]
+          },
+          {
+            "text": "Trial met its primary endpoint",
+            "refs": [
+              "f_e1d8c95944e195"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; design is standard and successful"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial not stopped early",
+            "refs": [
+              "f_56191e7b1df4d3",
+              "f_5708f6eb531617"
+            ]
+          },
+          {
+            "text": "Large randomization (13,970-14,014 participants)",
+            "refs": [
+              "f_66a8b978b68f8d",
+              "f_7e21df9d37d77d",
+              "f_96ef7015751d1d"
+            ]
+          },
+          {
+            "text": "Median follow-up 42 months (3.5 years), matching calculator input",
+            "refs": [
+              "f_ff949eee0e8d97"
+            ]
+          },
+          {
+            "text": "Planned events 1620, matching calculator input",
+            "refs": [
+              "f_d3ae35ede6f45d"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; execution appears sound"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Observed HR and CI not provided in verified facts; only readout statement that primary endpoint was met",
+            "refs": [
+              "f_e1d8c95944e195"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial readout confirms primary endpoint met",
+            "refs": [
+              "f_e1d8c95944e195"
+            ]
+          }
+        ],
+        "would_settle": "Publication of CLEAR Outcomes with observed HR, CI, and p-value"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Follow-up input (3.5 years) sourced from 'projected median treatment exposure' (f_ff949eee0e8d97) not actual median follow-up; Verifier notes this distinction. In event-driven trials, treatment exposure can differ from follow-up if discontinuation occurs. This affects the calculator's time_factor (0.818) and expected HR.",
+            "target_agent": "mechanism",
+            "request": "Confirm actual median follow-up from CLEAR Outcomes publication or primary results paper; if unavailable, note as caveat that 3.5 years is projected treatment exposure from design paper (pmid:33470195)."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'biomarker_not_causal' cites 'calculator' as reference for LDL-C causality statement. Should reference established guidelines or genetic evidence facts (e.g., CTT meta-analyses, PCSK9 MR studies) rather than the calculator itself.",
+            "target_agent": "case_builder",
+            "request": "Replace ref 'calculator' with a fact reference supporting LDL-C causality (e.g., CTT collaboration, Mendelian randomization of LDL-C)."
+          },
+          {
+            "severity": "low",
+            "issue": "Baseline LDL-C (3.114 mmol/L / 120.4 mg/dL) taken from CLEAR Wisdom (statin-intolerant phase 3) not CLEAR Outcomes itself. Verifier did not find '120.4 mg/dL' in the CLEAR Outcomes design paper abstract (pmid:33470195). While using matched baseline/change from the same population is acceptable per guidelines, the actual CLEAR Outcomes baseline may differ slightly.",
+            "target_agent": "investigator",
+            "request": "Search for actual baseline LDL-C in CLEAR Outcomes primary results publication when available; for now, note that calculator uses CLEAR Wisdom baseline as best available proxy for statin-intolerant population."
+          },
+          {
+            "severity": "low",
+            "issue": "Target genetics set to 'causal' based on Mendelian randomization (f_e5f10161df91fe, pmid:30865797) despite Open Targets score 0.0 with 0 evidence items. The MR study is pre-cutoff (2019-03-01) and supports causality, but the discrepancy between Open Targets and MR should be explicitly acknowledged in assumptions or notes.",
+            "target_agent": "mechanism",
+            "request": "Add note to calculator assumptions explaining why 'causal' was chosen over Open Targets score of 0.0 (i.e., MR evidence pmid:30865797 pre-dates cutoff and shows ACLY score associated with lower LDL-C and CV events HR 0.82)."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_77a23c173de6bc",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -17.4,
+          "unit": "percent",
+          "source_id": "pmid:31714986",
+          "status": "confirmed",
+          "found": "4%, respectively; difference, -17.4% [95% CI, -21",
+          "note": "The abstract reports a difference of -17.4% for LDL-C change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*-17\\.4%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '31714986' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_06c23b2a2c6517",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 120.4,
+          "unit": "mg/dL",
+          "source_id": "pmid:31714986",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract did not contain the exact phrase '120.4 mg/dL' in the extracted sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*120\\.4 mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '31714986' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d3ae35ede6f45d",
+          "claim": "c3",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 1620,
+          "unit": "patients",
+          "source_id": "pmid:33470195",
+          "status": "confirmed",
+          "found": "The trial will continue until 1620 patients experience a primary endpoint, with a minimum of 810 hard ischemic events...",
+          "note": "The abstract states the trial will continue until 1620 patients experience a primary endpoint.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1620[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '33470195' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_ff949eee0e8d97",
+          "claim": "c4",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 42,
+          "unit": "months",
+          "source_id": "pmid:33470195",
+          "status": "not_found",
+          "found": "The trial will continue until 1620 patients experience a primary endpoint, with a minimum of 810 hard ischemic events...",
+          "note": "The abstract mentions projected median treatment exposure of 42 months, not median follow-up.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*42 months[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '33470195' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 2,
+        "contradicts": 0
+      },
+      "queries": 4
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "ACLY",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.375,
+        "genetic_association_score": 0.0,
+        "evidence_count": 0,
+        "top_evidence": [],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_28fc043c7d24d0",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -17,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "ETC-1002 also dose dependently reduced apolipoprotein B by 15% to 17%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_ae6f07f62d3d88",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -15,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "ETC-1002 also dose dependently reduced apolipoprotein B by 15% to 17%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_f21cbccd2b6531",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -15.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "apolipoprotein B (−15.0%)",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_2a225e5bb2a85e",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -35.1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "bempedoic acid 180 mg and ezetimibe 10 mg",
+          "kind": "percent",
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "BA + EZE FDC reduced hsCRP by 35.1% compared with an increase of 21.6% in the placebo group (P < 0.001)",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_f21653cf3ad9d2",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -24.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "high‐sensitivity C‐reactive protein (−24.3%; P<0.001 for all comparisons)",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_06c23b2a2c6517",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 120.4,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "trial": "CLEAR Wisdom"
+        },
+        "source_id": "pmid:31714986",
+        "quote": "At baseline, mean LDL-C level was 120.4 (SD, 37.9) mg/dL",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/31714986"
+      },
+      {
+        "fact_id": "f_192557629c2af1",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 3.87,
+        "unit": "mmol/L",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "Among the 301 patients included in the primary analysis, the mean baseline low-density lipoprotein cholesterol level was 3.87 mmol/L (149.8 mg/dL).",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_2ef7d8493f73d6",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 157.6,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "mean baseline low‐density lipoprotein cholesterol was 157.6 mg/dL",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_be6949081ca3ef",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 103.2,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "CLEAR Harmony",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "The mean (±SD) LDL cholesterol level at baseline was 103.2±29.4 mg per deciliter.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_162b1785af0ecd",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "ETC-1002 reduced LDL-C 28.7% more than placebo (95% confidence interval, -35.4 to -22.1;",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_1ffcc109417249",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -27.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:27206943",
+        "quote": "ETC-1002 monotherapy with 120 mg or 180 mg reduced LDL-C by 27%",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_38a365e4a0a81d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -17,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "For LDL-C, the least-squares mean percent change ± standard error from baseline to week 12 was significantly greater with ETC-1002 120 mg (-17 ± 4%, p = 0.0055)",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_3e1502f9852400",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "than placebo (-4 ± 4%).",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_3f676bccc10672",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -18.1,
+        "unit": "percentage points",
+        "attrs": {
+          "trial": "CLEAR Harmony",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "difference vs. placebo in change from baseline, -18.1 percentage points; 95% confidence interval, -20.0 to -16.1",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_41f0c15b48345d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -38.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "bempedoic acid 180 mg and ezetimibe 10 mg",
+          "kind": "percent",
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "At week 12, the fixed-dose combination lowered low-density lipoprotein cholesterol (–36.2%) significantly more than placebo (1.8% (placebo-corrected difference –38.0%); P < 0.001)",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_485325d573ed4e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -21.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:27206943",
+        "quote": "EZE alone lowered LDL-C by 21%",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_72124517326b1f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "and ETC-1002 180 mg (-24 ± 4%, p <0.0001) than placebo (-4 ± 4%).",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_74c46a572e981b",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "CLEAR Tranquility",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29910030",
+        "quote": "Bempedoic acid added to background lipid-modifying therapy that included ezetimibe reduced LDL-C by 28.5% more than placebo",
+        "pub_date": "2018-06-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29910030"
+      },
+      {
+        "fact_id": "f_77a23c173de6bc",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -17.4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "180 mg",
+          "trial": "CLEAR Wisdom"
+        },
+        "source_id": "pmid:31714986",
+        "quote": "difference, -17.4% [95% CI, -21.0% to -13.9%]",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/31714986"
+      },
+      {
+        "fact_id": "f_aef7917b9436c7",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 29",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24385236",
+        "quote": "compared with a reduction of 4±2.5% by placebo at day 29",
+        "pub_date": "2014-01-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24385236"
+      },
+      {
+        "fact_id": "f_d31437baf2d23f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -30.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:27206943",
+        "quote": "ETC-1002 monotherapy with 120 mg or 180 mg reduced LDL-C by 27% (P = .0008 vs EZE) and 30%",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_df9e232638c36a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -21.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "placebo‐corrected difference, −21.4% [95% CI, −25.1% to −17.7%]; P<0.001",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_e2dcda886d2f50",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -43,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 29",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "80 mg QD for 2 weeks followed by 120 mg QD for 2 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24385236",
+        "quote": "ETC-1002 lowered low-density lipoprotein-cholesterol levels by 43±2.6% (least squares mean±SE), compared with a reduction of 4±2.5% by placebo at day 29",
+        "pub_date": "2014-01-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24385236"
+      },
+      {
+        "fact_id": "f_7d66a71edd1897",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -14,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "non-high-density lipoprotein cholesterol by 14% to 17%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_ad88b5c7d303cf",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -17,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "non-high-density lipoprotein cholesterol by 14% to 17%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_cd95e647fe8346",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -17.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "Significant reductions with bempedoic acid versus placebo were also observed in non–high‐density lipoprotein cholesterol (−17.9%)",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_14b84c890f3736",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -13,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "total cholesterol by 13% to 15%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_16510287f82ba5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -17,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "LDL particle number by 17% to 21%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_55b318389287c1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -15,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "total cholesterol by 13% to 15%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_883fef4ebe2314",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -14.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "180 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "total cholesterol (−14.8%)",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_aa94d0797cbb40",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -21,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "180 mg",
+          "kind": "percent",
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "LDL particle number by 17% to 21%",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_af5e85be6cc1f6",
+        "entity": "target:acly",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 0,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:ACLY",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000131473"
+      },
+      {
+        "fact_id": "f_5e3a96a93f5575",
+        "entity": "trial:nct02993406",
+        "key": "ci_high",
+        "value": -22.1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "ETC-1002 reduced LDL-C 28.7% more than placebo (95% confidence interval, -35.4 to -22.1;",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_935bbeb1b6ef07",
+        "entity": "trial:nct02993406",
+        "key": "ci_low",
+        "value": -35.4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "ETC-1002 reduced LDL-C 28.7% more than placebo (95% confidence interval, -35.4 to -22.1;",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_06b511c0d5e709",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "CLEAR Harmony"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "Patients had to have an LDL cholesterol level of at least 70 mg per deciliter while they were receiving maximally tolerated statin therapy with or without additional lipid-lowering therapy.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_1504a355043a6d",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "quote": "Fasting blood LDL-cholesterol ≥ 100 (2.6 mmol/L) at screening",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT02993406"
+      },
+      {
+        "fact_id": "f_303ca8d182e714",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "CLEAR Wisdom"
+        },
+        "source_id": "pmid:31714986",
+        "quote": "LDL-C level 70 mg/dL (1.8 mmol/L) or greater while receiving maximally tolerated lipid-lowering therapy",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/31714986"
+      },
+      {
+        "fact_id": "f_43755a08ea8a0f",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 2.6,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "Fasting LDL-cholesterol was required to be 2.6 mmol/L or greater (100 mg/dL;",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_5cf9ef5d473b72",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": "130 to 220 mg/dL",
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:27206943",
+        "quote": "hypercholesterolemic patients (LDL-C, 130 to 220 mg/dL)",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_93f6a2403aff7a",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 130,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3",
+          "population": "primary prevention patients"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "fasting calculated low‐density lipoprotein cholesterol (LDL‐C) was required to be ≥130 mg/dL for primary prevention patients",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_a60796cdffacf8",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "an LDL-C ≥100 mg/dL on maximally-tolerated lipid-lowering therapy.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_b257dfc6efb07d",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "CLEAR Tranquility"
+        },
+        "source_id": "pmid:29910030",
+        "quote": "enrolled patients with a history of statin intolerance and an LDL-C ≥100 mg/dL while on stable lipid-modifying therapy.",
+        "pub_date": "2018-06-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29910030"
+      },
+      {
+        "fact_id": "f_b35a226d60b486",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": "115 to 220",
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "randomized 134 hypercholesterolemic patients (LDL-C, 115 to 220 mg/dl) on stable background statin therapy",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_d3d44f50485981",
+        "entity": "trial:nct02993406",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "announcement:clear_outcomes",
+        "quote": "elevated LDL-cholesterol levels (fasting blood LDL-C ≥ 100 (2.6 mmol/L))",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html"
+      },
+      {
+        "fact_id": "f_ff949eee0e8d97",
+        "entity": "trial:nct02993406",
+        "key": "median_followup",
+        "value": 42,
+        "unit": "months",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "and a projected median treatment exposure of 42 months.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_34cd58bf1247cc",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 134,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "This phase 2b, multicenter, double-blind trial (NCT02072161) randomized 134 hypercholesterolemic patients",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_40e7da29afa980",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 779,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CLEAR Wisdom"
+        },
+        "source_id": "pmid:31714986",
+        "quote": "A total of 779 patients with atherosclerotic cardiovascular disease, heterozygous familial hypercholesterolemia, or both met randomization criteria",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/31714986"
+      },
+      {
+        "fact_id": "f_5764ae5583fa59",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 56,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "Patients (n = 56) were randomized in a 2:1 ratio to ETC-1002 60 mg daily or placebo.",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_66a8b978b68f8d",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 13970,
+        "unit": "participants",
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "quote": "Enrollment: 13970 (ACTUAL)",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT02993406"
+      },
+      {
+        "fact_id": "f_6c11c936a92e63",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 2230,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CLEAR Harmony"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "The trial involved 2230 patients, of whom 1488 were assigned to receive bempedoic acid and 742 to receive placebo.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_7bc84dfd2ef5ee",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 269,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CLEAR Tranquility"
+        },
+        "source_id": "pmid:29910030",
+        "quote": "The study population comprised 269 patients (181 bempedoic acid, 88 placebo).",
+        "pub_date": "2018-06-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29910030"
+      },
+      {
+        "fact_id": "f_7bdff772eac317",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 60,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:24385236",
+        "quote": "A single-center, double-blind, placebo-controlled trial evaluated 60 patients with type 2 diabetes mellitus and elevated low-density lipoprotein-cholesterol.",
+        "pub_date": "2014-01-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24385236"
+      },
+      {
+        "fact_id": "f_7e21df9d37d77d",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 14000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "announcement:clear_outcomes",
+        "quote": "The study included over 14,000 patients at over 1,200 sites in 32 countries.",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html"
+      },
+      {
+        "fact_id": "f_96ef7015751d1d",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 14014,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "The study randomized 14,014 patients to treatment with bempedoic acid 180 mg daily or matching placebo on a background of guideline-directed medical therapy.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_983f27f47a00ce",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 345,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "The phase 3, double‐blind, placebo‐controlled CLEAR (Cholesterol Lowering via Bempedoic acid, an ACL‐Inhibiting Regimen) Serenity study randomized 345 patients with hypercholesterolemia and a history of intolerance to at least 2 statins (1 at the lowest available dose) 2:1 to bempedoic acid 180 mg or placebo once daily for 24 weeks.",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_d41301f73aa53b",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 382,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "Of the 821 patients screened, 382 were randomly assigned to treatment with BA + EZE FDC (n = 108), bempedoic acid (n = 110), ezetimibe (n = 109) or placebo (n = 55)",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_fc0b600dde56ce",
+        "entity": "trial:nct02993406",
+        "key": "n_randomized",
+        "value": 348,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:27206943",
+        "quote": "with (n = 177) or without (n = 171) muscle-related intolerance to ≥2 statins",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_4ad4842132de2e",
+        "entity": "trial:nct02993406",
+        "key": "p_value",
+        "value": 0.0008,
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:27206943",
+        "quote": "P = .0008 vs EZE",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_8710688a4d8515",
+        "entity": "trial:nct02993406",
+        "key": "p_value",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "ETC-1002 reduced LDL-C 28.7% more than placebo (95% confidence interval, -35.4 to -22.1; P",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_8f517f7191a4aa",
+        "entity": "trial:nct02993406",
+        "key": "phase",
+        "value": "phase3",
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT02993406"
+      },
+      {
+        "fact_id": "f_d3ae35ede6f45d",
+        "entity": "trial:nct02993406",
+        "key": "planned_events",
+        "value": 1620,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "The trial will continue until 1620 patients experience a primary endpoint",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_0ad1c4e090b41d",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline in LDL-C level at week 12",
+        "unit": "percent",
+        "attrs": {
+          "trial": "CLEAR Wisdom"
+        },
+        "source_id": "pmid:31714986",
+        "quote": "The primary end point was percent change from baseline in LDL-C level at week 12",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/31714986"
+      },
+      {
+        "fact_id": "f_1155f4a7381ce8",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline to week 12 in LDL-C",
+        "unit": "percent",
+        "attrs": {
+          "trial": "CLEAR Tranquility"
+        },
+        "source_id": "pmid:29910030",
+        "quote": "The primary endpoint was the percent change from baseline to week 12 in LDL-C.",
+        "pub_date": "2018-06-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29910030"
+      },
+      {
+        "fact_id": "f_313d6f709c9a63",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "percentage change from baseline to week 8 in calculated LDL-C",
+        "unit": "percent",
+        "attrs": {
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "The primary end point was the percentage change from baseline to week 8 in calculated LDL-C.",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_74eaab4866bbe4",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "MACE-4",
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "announcement:clear_outcomes",
+        "quote": "demonstrating statistically significant risk reduction in MACE-4 in patients treated with 180 mg/day NEXLETOL compared to placebo",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html"
+      },
+      {
+        "fact_id": "f_8563912905136f",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "percent change in calculated LDL-C from baseline to week 12",
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "The primary efficacy end point was the percent change in calculated LDL-C from baseline to week 12.",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_9c29c1cd05fdfc",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, or coronary revascularization",
+        "unit": "time to first event",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "The primary outcome is a composite of the time to first cardiovascular death, nonfatal myocardial infarction, nonfatal stroke, or coronary revascularization.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_b837d3093b6a37",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With First Occurrence of Four Component Major Adverse Cardiovascular Events (MACE)",
+        "unit": "participants",
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "quote": "Primary outcome(s): Number of Participants With First Occurrence of Four Component Major Adverse Cardiovascular Events (MACE) [Up to 68 months]",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT02993406"
+      },
+      {
+        "fact_id": "f_b8d6ed28dfbfbc",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "safety",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLEAR Harmony"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "The primary end point was safety",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_df0b538467f598",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "mean percent change from baseline to week 12 in low-density lipoprotein cholesterol",
+        "unit": "percent",
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "The primary end point was mean percent change from baseline to week 12 in low‐density lipoprotein cholesterol.",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_e7c2b94c3b8fa6",
+        "entity": "trial:nct02993406",
+        "key": "primary_endpoint",
+        "value": "percentage change from baseline to week 12 in low-density lipoprotein cholesterol",
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT03337308"
+        },
+        "source_id": "pmcid:PMC7153222",
+        "quote": "The primary efficacy endpoint was the percentage change from baseline to week 12 in low-density lipoprotein cholesterol.",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/31357887"
+      },
+      {
+        "fact_id": "f_11482fff99aeb3",
+        "entity": "trial:nct02993406",
+        "key": "readout_statement",
+        "value": "CLEAR Outcomes will determine whether bempedoic acid 180 mg daily reduces the incidence of adverse cardiovascular events in high vascular risk patients with documented statin intolerance and elevated LDL-C levels.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "CLEAR Outcomes will determine whether bempedoic acid 180 mg daily reduces the incidence of adverse cardiovascular events in high vascular risk patients with documented statin intolerance and elevated LDL-C levels.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_73fc59d4ff6a19",
+        "entity": "trial:nct02993406",
+        "key": "readout_statement",
+        "value": "Bempedoic acid offers a safe and effective oral therapeutic option for lipid lowering in patients who cannot tolerate statins.",
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "Conclusions Bempedoic acid offers a safe and effective oral therapeutic option for lipid lowering in patients who cannot tolerate statins.",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_de769c5c41d74a",
+        "entity": "trial:nct02993406",
+        "key": "readout_statement",
+        "value": "In patients with and without statin intolerance, daily treatment with ETC-1002 120 mg and 180 mg alone or with EZE reduced LDL-C more than EZE alone and had a similar tolerability profile",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:27206943",
+        "quote": "In patients with and without statin intolerance, daily treatment with ETC-1002 120 mg and 180 mg alone or with EZE reduced LDL-C more than EZE alone and had a similar tolerability profile",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27206943"
+      },
+      {
+        "fact_id": "f_e1d8c95944e195",
+        "entity": "trial:nct02993406",
+        "key": "readout_statement",
+        "value": "CLEAR Outcomes trial met its primary endpoint",
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "announcement:clear_outcomes",
+        "quote": "Esperion (NASDAQ: ESPR) today announced that the landmark C holesterol L owering via B e mpedoic a cid, an ACL-Inhibiting R egimen (CLEAR) Outcomes trial met its primary endpoint",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html"
+      },
+      {
+        "fact_id": "f_1390ce40de2bfb",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": 4.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3",
+          "event": "myalgia",
+          "arm": "bempedoic acid"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "The most common muscle‐related adverse event, myalgia, occurred in 4.7% and 7.2% of patients who received bempedoic acid or placebo, respectively.",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_36d2ad1fd3b9e1",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": "gout",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLEAR Harmony"
+        },
+        "source_id": "pmid:30865796",
+        "quote": "as was the incidence of gout (18 patients [1.2%] vs. 2 [0.3%]).",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865796"
+      },
+      {
+        "fact_id": "f_ab9efe599389ff",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": "tendon rupture",
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "announcement:clear_outcomes",
+        "quote": "tendon rupture occurred in 0.5% of patients treated with NEXLETOL versus 0% of patients treated with placebo",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html"
+      },
+      {
+        "fact_id": "f_b56c83108b87ff",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": "well tolerated",
+        "unit": null,
+        "attrs": {
+          "trial": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance"
+        },
+        "source_id": "pmid:26073387",
+        "quote": "ETC-1002 appears to be effective at reducing LDL-C and was well tolerated in patients with statin-associated muscle complaints.",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26073387"
+      },
+      {
+        "fact_id": "f_c39167a04c4bfe",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": "Rates of adverse events (AEs), muscle-related AEs, and discontinuations for AEs with ETC-1002 were similar to placebo.",
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT02072161"
+        },
+        "source_id": "pmid:27138185",
+        "quote": "Rates of adverse events (AEs), muscle-related AEs, and discontinuations for AEs with ETC-1002 were similar to placebo.",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27138185"
+      },
+      {
+        "fact_id": "f_d05778ca054f1a",
+        "entity": "trial:nct02993406",
+        "key": "safety_signal",
+        "value": 7.2,
+        "unit": "%",
+        "attrs": {
+          "trial": "CLEAR Serenity",
+          "phase": "phase3",
+          "event": "myalgia",
+          "arm": "placebo"
+        },
+        "source_id": "pmcid:PMC6509724",
+        "quote": "The most common muscle‐related adverse event, myalgia, occurred in 4.7% and 7.2% of patients who received bempedoic acid or placebo, respectively.",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30922146"
+      },
+      {
+        "fact_id": "f_56191e7b1df4d3",
+        "entity": "trial:nct02993406",
+        "key": "stopped_early",
+        "value": false,
+        "unit": null,
+        "attrs": {
+          "trial": "CLEAR Outcomes"
+        },
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "quote": "Start date: 2016-12-22",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT02993406"
+      },
+      {
+        "fact_id": "f_5708f6eb531617",
+        "entity": "trial:nct02993406",
+        "key": "stopped_early",
+        "value": false,
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:33470195",
+        "quote": "The trial will continue until 1620 patients experience a primary endpoint, with a minimum of 810 hard ischemic events (cardiovascular death, nonfatal myocardial infarction or nonfatal stroke) and minimum treatment duration of 36 months and a projected median treatment exposure of 42 months.",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33470195"
+      },
+      {
+        "fact_id": "f_e5f10161df91fe",
+        "entity": "trial:nct02993406",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "ACLY",
+          "variant_or_score": "ACLY genetic score",
+          "outcome": "cardiovascular events",
+          "direction": "protective",
+          "effect_on_biomarker": "decrease in LDL cholesterol",
+          "n": 654783,
+          "ci_low": 0.78,
+          "ci_high": 0.87
+        },
+        "source_id": "pmid:30865797",
+        "quote": "odds ratio for cardiovascular events, 0.823 (95% confidence interval [CI], 0.78 to 0.87; P = 4.0×10 -14 ) for the ACLY score",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30865797"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT02993406@2022-12-07",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT02993406 CLEAR Outcomes",
+        "url": "https://clinicaltrials.gov/study/NCT02993406",
+        "pub_date": "2016-12-15",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT02993406",
+            "acronym": "CLEAR Outcomes",
+            "title": "Evaluation of Major Cardiovascular Events in Participants With, or at High Risk for, Cardiovascular Disease Who Are Statin Intolerant Treated With Bempedoic Acid (ETC-1002) or Placebo",
+            "official_title": "A Randomized, Double-blind, Placebo-controlled Study to Assess the Effects of Bempedoic Acid (ETC-1002) on the Occurrence of Major Cardiovascular Events in Patients With, or at High Risk for, Cardiovascular Disease Who Are Statin Intolerant",
+            "sponsor": "Esperion Therapeutics, Inc.",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2016-12-22",
+            "primary_completion": "2022-11-07",
+            "first_posted": "2016-12-15",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 13970,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Bempedoic acid 180 mg tablet",
+                "type": "DRUG",
+                "other_names": [
+                  "ETC-1002"
+                ]
+              },
+              {
+                "name": "Matching placebo tablet",
+                "type": "DRUG",
+                "other_names": [
+                  "placebo comparator"
+                ]
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Diseases",
+              "Statin Adverse Reaction"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With First Occurrence of Four Component Major Adverse Cardiovascular Events (MACE) [Up to 68 months]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 3085
+      },
+      {
+        "source_id": "pmid:33470195",
+        "type": "journal",
+        "title": "Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.",
+        "url": "https://europepmc.org/article/MED/33470195",
+        "pub_date": "2020-10-24",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "33470195",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2020.10.060",
+          "journal": "American heart journal"
+        },
+        "chars": 2093
+      },
+      {
+        "source_id": "pmid:30865796",
+        "type": "journal",
+        "title": "Safety and Efficacy of Bempedoic Acid to Reduce LDL Cholesterol.",
+        "url": "https://europepmc.org/article/MED/30865796",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "30865796",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa1803917",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2529
+      },
+      {
+        "source_id": "pmid:31714986",
+        "type": "journal",
+        "title": "Effect of Bempedoic Acid vs Placebo Added to Maximally Tolerated Statins on Low-Density Lipoprotein Cholesterol in Patients at High Risk for Cardiovascular Disease: The CLEAR Wisdom Randomized Clinical Trial.",
+        "url": "https://europepmc.org/article/MED/31714986",
+        "pub_date": "2019-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "31714986",
+          "pmcid": "PMC6865290",
+          "doi": "10.1001/jama.2019.16585",
+          "journal": "JAMA"
+        },
+        "chars": 2156
+      },
+      {
+        "source_id": "pmcid:PMC6509724",
+        "type": "journal",
+        "title": "Efficacy and Safety of Bempedoic Acid in Patients With Hypercholesterolemia and Statin Intolerance.",
+        "url": "https://europepmc.org/article/MED/30922146",
+        "pub_date": "2019-04-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "30922146",
+          "pmcid": "PMC6509724",
+          "doi": "10.1161/jaha.118.011662",
+          "journal": "Journal of the American Heart Association"
+        },
+        "chars": 48504
+      },
+      {
+        "source_id": "pmcid:PMC7153222",
+        "type": "journal",
+        "title": "Bempedoic acid plus ezetimibe fixed-dose combination in patients with hypercholesterolemia and high CVD risk treated with maximally tolerated statin therapy.",
+        "url": "https://europepmc.org/article/MED/31357887",
+        "pub_date": "2019-07-29",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "31357887",
+          "pmcid": "PMC7153222",
+          "doi": "10.1177/2047487319864671",
+          "journal": "European journal of preventive cardiology"
+        },
+        "chars": 44197
+      },
+      {
+        "source_id": "pmid:29910030",
+        "type": "journal",
+        "title": "Efficacy and safety of bempedoic acid added to ezetimibe in statin-intolerant patients with hypercholesterolemia: A randomized, placebo-controlled study.",
+        "url": "https://europepmc.org/article/MED/29910030",
+        "pub_date": "2018-06-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "29910030",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2018.06.002",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1452
+      },
+      {
+        "source_id": "pmid:27206943",
+        "type": "journal",
+        "title": "Treatment with ETC-1002 alone and in combination with ezetimibe lowers LDL cholesterol in hypercholesterolemic patients with or without statin intolerance.",
+        "url": "https://europepmc.org/article/MED/27206943",
+        "pub_date": "2016-01-06",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27206943",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2015.12.025",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1181
+      },
+      {
+        "source_id": "pmid:27138185",
+        "type": "journal",
+        "title": "Effect of ETC-1002 on Serum Low-Density Lipoprotein Cholesterol in Hypercholesterolemic Patients Receiving Statin Therapy.",
+        "url": "https://europepmc.org/article/MED/27138185",
+        "pub_date": "2016-04-06",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27138185",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2016.03.043",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1805
+      },
+      {
+        "source_id": "pmid:26073387",
+        "type": "journal",
+        "title": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance.",
+        "url": "https://europepmc.org/article/MED/26073387",
+        "pub_date": "2015-03-19",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26073387",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2015.03.003",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1315
+      },
+      {
+        "source_id": "pmid:24385236",
+        "type": "journal",
+        "title": "Efficacy and safety of ETC-1002, a novel investigational low-density lipoprotein-cholesterol-lowering therapy for the treatment of patients with hypercholesterolemia and type 2 diabetes mellitus.",
+        "url": "https://europepmc.org/article/MED/24385236",
+        "pub_date": "2014-01-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24385236",
+          "pmcid": null,
+          "doi": "10.1161/atvbaha.113.302677",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+        },
+        "chars": 1753
+      },
+      {
+        "source_id": "pmid:35031766",
+        "type": "journal",
+        "title": "Lipogenesis inhibitors: therapeutic opportunities and challenges.",
+        "url": "https://europepmc.org/article/MED/35031766",
+        "pub_date": "2022-01-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35031766",
+          "pmcid": "PMC8758994",
+          "doi": "10.1038/s41573-021-00367-2",
+          "journal": "Nature reviews. Drug discovery",
+          "purpose": "genetics"
+        },
+        "chars": 881
+      },
+      {
+        "source_id": "pmid:30865797",
+        "type": "journal",
+        "title": "Mendelian Randomization Study of &lt;i&gt;ACLY&lt;/i&gt; and Cardiovascular Disease.",
+        "url": "https://europepmc.org/article/MED/30865797",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "30865797",
+          "pmcid": "PMC7612927",
+          "doi": "10.1056/nejmoa1806747",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1997
+      },
+      {
+        "source_id": "pmid:34044180",
+        "type": "journal",
+        "title": "Insulin action, type 2 diabetes, and branched-chain amino acids: A two-way street.",
+        "url": "https://europepmc.org/article/MED/34044180",
+        "pub_date": "2021-05-24",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "34044180",
+          "pmcid": "PMC8513145",
+          "doi": "10.1016/j.molmet.2021.101261",
+          "journal": "Molecular metabolism",
+          "purpose": "genetics"
+        },
+        "chars": 1955
+      },
+      {
+        "source_id": "announcement:clear_outcomes",
+        "type": "press_release",
+        "title": "Esperion Announces CLEAR Cardiovascular Outcomes Trial of NEXLETOL (bempedoic acid) Meets Primary Endpoint",
+        "url": "https://www.globenewswire.com/news-release/2022/12/07/2569280/0/en/Esperion-Announces-CLEAR-Cardiovascular-Outcomes-Trial-of-NEXLETOL-bempedoic-acid-Meets-Primary-Endpoint.html",
+        "pub_date": "2022-12-07",
+        "access": "press_release",
+        "meta": {},
+        "chars": 7766
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 23,
+      "facts": 85,
+      "relationships": 31,
+      "events": 217,
+      "audit_entries": 217,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 22885,
+        "output_tokens": 8473,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 5291,
+        "output_tokens": 5273,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1743,
+        "output_tokens": 3588,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 4906,
+        "output_tokens": 2950,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 5944,
+        "output_tokens": 4724,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6314,
+        "output_tokens": 4029,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

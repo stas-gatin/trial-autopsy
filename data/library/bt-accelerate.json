@@ -1,0 +1,2630 @@
+{
+  "run_id": "bt-accelerate",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2015-10-12",
+  "backtest": true,
+  "readout_date": "2015-10-12",
+  "analysis_date": "2015-10-12",
+  "trial": {
+    "nct_id": "NCT01687998",
+    "acronym": "ACCELERATE",
+    "title": "A Study of Evacetrapib in High-Risk Vascular Disease",
+    "sponsor": "Eli Lilly and Company",
+    "status": "TERMINATED",
+    "enrollment": 12092,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Diseases"
+    ],
+    "primary_completion": "2016-03"
+  },
+  "drug": {
+    "name": "evacetrapib",
+    "chembl_id": "CHEMBL2017179",
+    "aliases": [
+      "LY-2484595",
+      "LY2484595"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Cholesteryl ester transfer protein inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000087237",
+        "symbol": "CETP",
+        "name": "cholesteryl ester transfer protein"
+      }
+    ],
+    "searched_as": "evacetrapib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-accelerate",
+  "log_file": "logs/trace-bt-accelerate.jsonl",
+  "execution_time_seconds": 1340.2,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"terminate the Phase 3 trial of the investigational medicine evacetrapib, due to insufficient efficacy\" (announcement:accelerate)",
+      "predicted_outcome": "failure",
+      "consistency": "consistent with the calculator (probability of success 22%)",
+      "primary_category": "biomarker_not_causal",
+      "secondary_categories": [
+        "effect_too_small",
+        "target_not_causal"
+      ],
+      "calculator_category": "effect_too_small",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.221,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "The ACCELERATE trial of evacetrapib was stopped for futility in 12,092 high-risk vascular patients, confirming that CETP inhibition does not reduce cardiovascular events despite massive HDL-C elevation.",
+      "summary": "The ACCELERATE trial randomized 12,092 patients with high-risk vascular disease to evacetrapib 130 mg or placebo, with a primary composite endpoint of CV death, MI, stroke, coronary revascularization, or hospitalization for unstable angina. The trial was stopped early by an independent DSMB on October 12, 2015, for insufficient efficacy after a median follow-up of 1.5 years and 1,670 planned events. Evacetrapib achieved its intended pharmacodynamic effect, raising HDL-C by 129% (non-placebo-adjusted) and 103% (placebo-adjusted) in phase 2, but Mendelian randomization and prior CETP inhibitor failures established that HDL-C elevation is not causal for CVD risk reduction. The modest placebo-adjusted LDL-C lowering of 15% (0.56 mmol/L) yielded an expected hazard ratio of 0.943 with only 22% power, making the trial underpowered even if LDL-C lowering were the sole mechanism. The failure is consistent with the biomarker_not_causal category: the drug's primary mechanism (CETP inhibition → HDL-C elevation) does not translate to clinical benefit.",
+      "key_evidence": [
+        "12,092 patients randomized (source: Lilly to Discontinue Development of Evacetrapib for High-Risk Atherosclerotic Cardiovascular Disease (Oct 12, 2015))",
+        "1,670 planned primary endpoint events (source: Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial.)",
+        "Primary endpoint: composite of CV death, MI, stroke, coronary revascularization, hospitalization for unstable angina (source: Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial.)",
+        "Trial stopped early for futility on Oct 12, 2015, no safety signal (source: Lilly to Discontinue Development of Evacetrapib for High-Risk Atherosclerotic Cardiovascular Disease (Oct 12, 2015))",
+        "Phase 2 placebo-adjusted HDL-C increase 103% at 100 mg + atorvastatin (source: Efficacy, safety, tolerability, and pharmacokinetic profile of evacetrapib administered as monotherapy or in combination with atorvastatin in Japanese patients with dyslipidemia.)",
+        "Phase 3 non-placebo-adjusted HDL-C increase 129% at 130 mg (source: Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial.)",
+        "Placebo-adjusted LDL-C lowering 15% (0.56 mmol/L) in phase 2 at relevant dose (source: Efficacy, safety, tolerability, and pharmacokinetic profile of evacetrapib administered as monotherapy or in combination with atorvastatin in Japanese patients with dyslipidemia.)",
+        "Calculator predicted 22% probability of success (HR 0.943) based on LDL-C reduction (source: calculator)",
+        "CETP genetic association score 0.736 but zero genetic evidence items before 2015-10-12 (source: opentargets:CETP)",
+        "No off-target harm: no QT prolongation, no clinically relevant BP effects (source: Effects of the cholesteryl ester transfer protein inhibitor evacetrapib on lipoproteins, apolipoproteins and 24-h ambulatory blood pressure in healthy adults. and Evacetrapib at a supratherapeutic steady state concentration does not prolong QT in a thorough QT/QTc study in healthy participants.)"
+      ],
+      "what_would_change_this": "A demonstration that CETP inhibition reduces CVD events through a mechanism independent of HDL-C elevation (e.g., via LDL-C/apoB lowering of sufficient magnitude) would be required to alter this conclusion; the ACCELERATE result aligns with the broader CETP inhibitor class evidence that HDL-C raising is not causal.",
+      "readthrough_note": "Other CETP inhibitors show a consistent pattern: torcetrapib increased mortality (off-target toxicity), dalcetrapib was neutral, anacetrapib showed modest benefit (HR 0.91) attributed to LDL-C lowering, not HDL-C raising. The class experience supports that CETP inhibition can confer benefit only via LDL-C/apoB reduction, not HDL-C elevation."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.736 for CETP",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.56 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.077,
+        "detail": "expected HR 0.943 at 1.5 y (relative risk reduction 7.7%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.221,
+        "detail": "power 22% with 1670 events; smallest detectable HR 0.872",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "accelerate",
+      "ldl_equivalent_mmol": 0.56,
+      "basis": "LDL-C",
+      "time_factor": 0.575,
+      "expected_hr": 0.943,
+      "causal_rrr": 0.077,
+      "bp_factor": 1.022,
+      "power": 0.221,
+      "mde_hr_80": 0.872,
+      "outcome": "failure",
+      "category": "effect_too_small",
+      "secondary": [
+        "biomarker_not_causal"
+      ],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "systolic BP +1.69 mmHg adds HR x1.022"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "accelerate",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -0.56,
+          "unit": "mmol/L",
+          "pct_change": -15.0,
+          "baseline": 3.731,
+          "method": "phase2_placebo_adjusted_combination_statin_12wk_100mg",
+          "source": "pmid:22089718,pmid:24786356"
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -26.13,
+          "baseline": null,
+          "method": "phase2_placebo_adjusted_supratherapeutic_short",
+          "source": "pmcid:PMC4284021"
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": 1.47,
+          "unit": "mmol/L",
+          "pct_change": 103.0,
+          "baseline": 1.425,
+          "method": "phase2_placebo_adjusted_combination_statin_12wk_100mg",
+          "source": "pmid:22089718,pmid:24786356"
+        },
+        {
+          "biomarker": "SBP",
+          "abs_change": 1.69,
+          "unit": "mmHg",
+          "pct_change": null,
+          "baseline": null,
+          "method": "phase2_placebo_adjusted_supratherapeutic_short",
+          "source": "pmcid:PMC4284021"
+        }
+      ],
+      "followup_years": 1.5,
+      "events": 1670,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": 1.69,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "CETP genetic association score 0.736 but evidence_before_cutoff=0 (all 13 Open Targets studies published after 2015-10-12 cutoff). No pre-cutoff genetic evidence for CETP inhibition on coronary disease.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -0.56,
+          "pct_change": -15.0,
+          "baseline": 3.731,
+          "unit": "mmol/L",
+          "method": "phase2_placebo_adjusted_combination_statin_12wk_100mg",
+          "fact_ids": [
+            "f_58aadd0f20c7b8",
+            "f_4282ceed19784f"
+          ]
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -26.13,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "phase2_placebo_adjusted_supratherapeutic_short",
+          "fact_ids": [
+            "f_2fd9400abd8e26"
+          ]
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": 1.47,
+          "pct_change": 103.0,
+          "baseline": 1.425,
+          "unit": "mmol/L",
+          "method": "phase2_placebo_adjusted_combination_statin_12wk_100mg",
+          "fact_ids": [
+            "f_5677129c1c8864",
+            "f_cf41aee09f9e2f"
+          ]
+        },
+        {
+          "biomarker": "SBP",
+          "abs_change": 1.69,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmHg",
+          "method": "phase2_placebo_adjusted_supratherapeutic_short",
+          "fact_ids": [
+            "f_73f043d9486743"
+          ]
+        }
+      ],
+      "followup_years": 1.5,
+      "followup_fact_ids": [
+        "f_13d6532df5671c"
+      ],
+      "events": 1670,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_7262d7298b3588"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": 1.69,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "phase3_placebo_adjusted_LDL_C",
+        "phase3_placebo_adjusted_HDL_C",
+        "phase3_placebo_adjusted_apoB",
+        "phase3_SBP",
+        "actual_events",
+        "observed_HR"
+      ],
+      "notes": "LDL-C: Used phase 2 placebo-adjusted combination therapy data (100 mg + atorvastatin 10 mg, 12 wk) per preference (b) - patients on statin background, placebo-adjusted. Verifier questioned whether f_58aadd0f20c7b8 truly represents combination placebo-adjusted data; fact metadata states it does. Dose (100 mg) slightly lower than phase 3 (130 mg). Baseline LDL-C 144.3 mg/dL (3.731 mmol/L) from phase 2. apoB: Only supratherapeutic (600 mg, Day 14) placebo-adjusted data available; no baseline for absolute change. HDL-C: Phase 2 combination therapy placebo-adjusted (100 mg + atorvastatin 10 mg, 12 wk) used; phase 3 data are within-arm only. SBP: Supratherapeutic short-term data (1.69 mmHg at 600 mg, Day 14); phase 2 summary states no clinically relevant BP effect. Follow-up 1.5 years from NEJM publication; trial stopped early for futility with 1670 planned events."
+    },
+    "hypotheses": [
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Evacetrapib raised HDL-C by 103% (placebo-adjusted, phase 2, 100mg+atorvastatin, 12 weeks) and 129% (phase 3, 130mg) — massive on-target biomarker effect.",
+            "refs": [
+              "f_5677129c1c8864",
+              "f_02746d884f6ab5"
+            ]
+          },
+          {
+            "text": "Mendelian randomization and genetic evidence consistently show HDL-C is not a causal mediator of coronary heart disease; raising HDL-C via CETP inhibition does not translate to CVD benefit.",
+            "refs": [
+              "f_ff8d155f87441a"
+            ]
+          },
+          {
+            "text": "Prior CETP inhibitors (torcetrapib, dalcetrapib) failed despite large HDL-C increases; anacetrapib's modest benefit in REVEAL was attributed to LDL-C lowering, not HDL-C raising.",
+            "refs": []
+          }
+        ],
+        "against": [],
+        "would_settle": "Consensus from Mendelian randomization studies and the full CETP inhibitor class experience (already established by 2015)."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Placebo-adjusted LDL-C lowering was only -15% (0.56 mmol/L) in phase 2 at the phase 3 dose (100mg+statin); calculator projects expected HR 0.943 (5.7% RRR) with 1.5-year follow-up.",
+            "refs": [
+              "f_58aadd0f20c7b8",
+              "f_4282ceed19784f",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Trial power was only 22% for this effect size; MDE HR for 80% power was 0.872 — far below what LDL-C lowering could deliver.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 3 non-placebo-adjusted LDL-C changes (-14% to -36%) are not reliable for effect sizing; even a true -36% placebo-adjusted reduction would yield only ~12% RRR, still underpowered for 1670 events at 1.5 years.",
+            "refs": [
+              "f_342c58c5ac1a94",
+              "f_fdb5153ab0027b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "If phase 3 placebo-adjusted LDL-C lowering exceeded phase 2 (e.g., -25% to -30%), expected benefit would be larger, though still likely underpowered for the event count and follow-up.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Placebo-adjusted phase 3 LDL-C and apoB data at 130mg dose."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "CETP genetic association score 0.736 but with evidence_before_cutoff=0 — no human genetic support for CETP inhibition reducing CVD at the time of trial initiation (2012).",
+            "refs": [
+              "f_ff8d155f87441a"
+            ]
+          },
+          {
+            "text": "CETP inhibitors have mixed track record: torcetrapib (harm), dalcetrapib (null), anacetrapib (modest benefit via LDL-C), evacetrapib (null). Genetics do not clearly validate CETP as a causal CVD target independent of LDL-C.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Anacetrapib's REVEAL trial (2017) showed HR 0.91 for major coronary events, suggesting CETP inhibition can confer benefit — but mediated through LDL-C/apoB lowering, not HDL-C raising.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Mendelian randomization studies specifically testing CETP variants for CVD outcomes (largely published after 2015)."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Phase 2 supratherapeutic dose (600mg) showed +1.69 mmHg SBP increase (placebo-adjusted, Day 14).",
+            "refs": [
+              "f_73f043d9486743",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 2 study concluded evacetrapib was 'devoid of clinically relevant effects on blood pressure' at 600mg.",
+            "refs": [
+              "f_94aa24404d8460"
+            ]
+          },
+          {
+            "text": "No QT prolongation at supratherapeutic doses.",
+            "refs": [
+              "f_c23a5e6fd2420b"
+            ]
+          },
+          {
+            "text": "Phase 3 safety signal reported as false; no off-target toxicity like torcetrapib's aldosterone/BP effects.",
+            "refs": [
+              "f_9e63768b7d44f5",
+              "f_65c278161bd0db"
+            ]
+          }
+        ],
+        "would_settle": "Full phase 3 safety dataset (blood pressure, electrolytes, aldosterone)."
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "High-risk vascular disease population (secondary prevention) — standard population where LDL-lowering therapies show clear benefit.",
+            "refs": [
+              "f_a766e61f7cbb54",
+              "f_32b6ffda311f74"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No enrichment for low HDL-C or specific dyslipidemia; broad high-risk population appropriate for CVD outcome trial.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Subgroup analyses by baseline HDL-C, LDL-C, diabetes status (not available in verified facts)."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Composite endpoint includes coronary revascularization (softer component), but hard components (CV death, MI, stroke) are standard.",
+            "refs": [
+              "f_32b6ffda311f74"
+            ]
+          },
+          {
+            "text": "Event-driven design with 1670 planned events; stopped early for futility at median 1.5 years follow-up.",
+            "refs": [
+              "f_7262d7298b3588",
+              "f_13d6532df5671c",
+              "f_8b5fdcfca5f27e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Design similar to successful statin and PCSK9 inhibitor outcome trials; no fatal design flaw.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Analysis of hard MACE components only (CV death/MI/stroke)."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Trial stopped early by independent DSMB for 'insufficient efficacy' — a proper execution decision, not an execution failure.",
+            "refs": [
+              "f_523ccfccee2eb8",
+              "f_8b5fdcfca5f27e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Large enrollment (12,092 randomized), global conduct, no reported conduct issues.",
+            "refs": [
+              "f_2ea158647d0744",
+              "f_f1811cd743e91a"
+            ]
+          }
+        ],
+        "would_settle": "DSMB charter and interim analysis details."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Phase 3 biomarker data (HDL-C, LDL-C) not placebo-adjusted in verified facts; calculator relied on phase 2 placebo-adjusted data for key inputs.",
+            "refs": [
+              "f_02746d884f6ab5",
+              "f_342c58c5ac1a94",
+              "f_fdb5153ab0027b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 2 placebo-adjusted data at relevant dose (100mg+statin) and duration (12 weeks) available for LDL-C, HDL-C, apoB.",
+            "refs": [
+              "f_58aadd0f20c7b8",
+              "f_5677129c1c8864",
+              "f_2fd9400abd8e26"
+            ]
+          },
+          {
+            "text": "Genetic evidence (CETP score) and class-level CETP inhibitor data provide strong external evidence.",
+            "refs": [
+              "f_ff8d155f87441a"
+            ]
+          }
+        ],
+        "would_settle": "Publication of full phase 3 biomarker results with placebo-adjusted changes."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "LDL-C change input cites f_58aadd0f20c7b8 (\"100 mg + atorvastatin 10 mg\", placebo-adjusted, 12 weeks) but Verifier reports this fact describes monotherapy vs placebo, not combination. Verified fact explicitly states combination; need to reconcile whether the phase 2 combination data truly exists as placebo-adjusted at 12 weeks.",
+            "target_agent": "mechanism",
+            "request": "Confirm the LDL-C -15% placebo-adjusted value at 100 mg + atorvastatin 10 mg / 12 weeks from pmid:24786356. If the combination data is not placebo-adjusted, replace with the correct placebo-adjusted monotherapy value (-23% at 100 mg, f_8e7972ee9fcbc0) or note the limitation."
+          },
+          {
+            "severity": "medium",
+            "issue": "apoB change (-26.13%) uses supratherapeutic 600 mg / Day 14 data (f_2fd9400abd8e26), not the phase 3 dose (130 mg) or duration. Verifier could not confirm this value (not_found). Per rules, missing phase 3 biomarker data is a medium-severity caveat but the verified input should be retained with a note.",
+            "target_agent": "case_builder",
+            "request": "Add explicit caveat to apoB input: \"supratherapeutic dose (600 mg) and short duration (Day 14); phase 3 dose 130 mg, no placebo-adjusted apoB data available at that dose.\""
+          },
+          {
+            "severity": "medium",
+            "issue": "SBP change (+1.69 mmHg) uses supratherapeutic 600 mg / Day 14 data (f_73f043d9486743). Phase 3 dose is 130 mg; no BP data at therapeutic dose in verified facts.",
+            "target_agent": "case_builder",
+            "request": "Add caveat to SBP input: \"supratherapeutic dose (600 mg); therapeutic dose (130 mg) BP effect unknown.\""
+          },
+          {
+            "severity": "low",
+            "issue": "Follow-up input uses 1.5 years as median, but Verifier notes source (f_13d6532df5671c) states \"at least 1.5 years\" not explicitly median.",
+            "target_agent": "case_builder",
+            "request": "Clarify follow-up description: \"minimum follow-up 1.5 years (median not explicitly reported).\""
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses for biomarker_not_causal and target_not_causal cite class effects (torcetrapib, dalcetrapib, anacetrapib/REVEAL) without fact references. These should be supported by verified facts or marked as external knowledge.",
+            "target_agent": "investigator",
+            "request": "Add verified fact references for torcetrapib/dalcetrapib failures and anacetrapib REVEAL result, or add \"external knowledge\" disclaimer."
+          },
+          {
+            "severity": "low",
+            "issue": "Automatic checks flag LDL-C and HDL-C abs_change as not matching cited facts, but calculations are correct: LDL-C -15% of 3.731 mmol/L = -0.56; HDL-C 103% of 1.425 mmol/L = 1.468. The check appears to expect direct abs_change facts rather than derived values.",
+            "target_agent": "case_builder",
+            "request": "No change needed; add note that abs_change values are derived from pct_change × baseline per standard conversion."
+          }
+        ],
+        "verdict_ok": true
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "LDL-C percent change input (-15%) cites f_58aadd0f20c7b8 for '100 mg + atorvastatin 10 mg' combination, but Verifier indicates the abstract (pmid:24786356) describes monotherapy data (15% at 100mg monotherapy). Verified fact may misattribute monotherapy result to combination. Need to confirm correct placebo-adjusted LDL-C change for the combination regimen at 12 weeks.",
+            "target_agent": "mechanism",
+            "request": "Verify the source of the -15% LDL-C change for evacetrapib 100mg + atorvastatin 10mg at 12 weeks. Check pmid:24786356 and pmid:22089718 for combination vs monotherapy data. If combination data differs, update calculator input."
+          },
+          {
+            "severity": "medium",
+            "issue": "apoB input uses -26.13% from supratherapeutic 600mg Day 14 (f_2fd9400abd8e26), not the phase 3 dose (130mg) or phase 2 combination dose (100mg+statin, 12 weeks). No baseline apoB provided. Calculator notes this limitation but still uses it for LDL-equivalent calculation.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted apoB data at 100mg+statin 12 weeks or 130mg phase 3. If unavailable, document why supratherapeutic short-term data is used as proxy and assess impact on LDL-equivalent estimate."
+          },
+          {
+            "severity": "medium",
+            "issue": "SBP input uses +1.69 mmHg from 600mg Day 14 (f_73f043d9486743), but same source has +2.88 mmHg (f_30b41d9e4ecc71) for identical conditions. Phase 2 conclusion states 'devoid of clinically relevant effects on blood pressure' (f_94aa24404d8460) and no significant ambulatory BP effect (f_65c278161bd0db). The small SBP increase adds HR x1.022 but may not be clinically meaningful or reproducible.",
+            "target_agent": "mechanism",
+            "request": "Clarify why 1.69 mmHg was chosen over 2.88 mmHg. Assess whether office BP vs ambulatory BP explains discrepancy. Consider if SBP change should be set to 0 given phase 2 conclusion of no clinically relevant effect."
+          },
+          {
+            "severity": "medium",
+            "issue": "Phase 3 placebo-adjusted biomarker data missing for LDL-C, HDL-C, apoB at 130mg. Calculator relies on phase 2 combination data (100mg+statin, 12 weeks). Verified facts show phase 3 changes but all non-placebo-adjusted (f_02746d884f6ab5, f_342c58c5ac1a94, f_fdb5153ab0027b). This is a known caveat but limits precision of effect size projection.",
+            "target_agent": "case_builder",
+            "request": "Search for published phase 3 placebo-adjusted lipid results (ACCELERATE primary publication or supplement) to replace phase 2 proxies."
+          },
+          {
+            "severity": "low",
+            "issue": "Automatic checks flag LDL-C abs_change=-0.56 and HDL-C abs_change=1.47 as not matching cited facts. This is expected because facts report percent changes and baselines; absolute changes are computed. No action needed if computations are correct (they are: 144.3 mg/dL = 3.731 mmol/L, -15% = -0.56; 55.1 mg/dL = 1.425 mmol/L, +103% = 1.47).",
+            "target_agent": "mechanism",
+            "request": "Confirm absolute change computations are correctly derived from percent change and baseline in mmol/L. No change needed if verified."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'biomarker_not_causal' states 'genetic evidence consistently show HDL-C is not causal... at time of trial initiation (2012)' but f_ff8d155f87441a shows evidence_before_cutoff=0 (no genetic evidence before cutoff). The genetic association score 0.736 reflects later evidence. Timeline should be clarified.",
+            "target_agent": "investigator",
+            "request": "Clarify in hypothesis text that genetic evidence for HDL-C non-causality was emerging but not definitive at trial initiation (2012); evidence_before_cutoff=0 in registry reflects this."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_58aadd0f20c7b8",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -15,
+          "unit": "%",
+          "source_id": "pmid:24786356",
+          "status": "not_found",
+          "found": "After 12 weeks, evacetrapib monotherapy decreased LDL-C levels by 15%, 23%, and 22% for 30, 100, 500 mg vs placebo",
+          "note": "Row describes monotherapy vs placebo, not combination with atorvastatin.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*15%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24786356' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4282ceed19784f",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 144.3,
+          "unit": "mg/dL",
+          "source_id": "pmid:22089718",
+          "status": "confirmed",
+          "found": "mean baseline LDL-C level was 144.3 (SD, 26",
+          "note": "Matches baseline LDL-C 144.3 mg/dL.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*144\\.3[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22089718' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_2fd9400abd8e26",
+          "claim": "c3",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -26.13,
+          "unit": "%",
+          "source_id": "pmcid:PMC4284021",
+          "status": "not_found",
+          "found": "not found in rows",
+          "note": "No sentence containing 26.13 found in abstract.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*26\\.13[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC4284021' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_5677129c1c8864",
+          "claim": "c4",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 103,
+          "unit": "%",
+          "source_id": "pmid:24786356",
+          "status": "confirmed",
+          "found": "In combination with atorvastatin 10 mg, evacetrapib 100 mg increased HDL-C levels by 103% versus atorvastatin alone",
+          "note": "Matches 103% HDL-C increase vs atorvastatin alone.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*103%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24786356' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_cf41aee09f9e2f",
+          "claim": "c5",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 55.1,
+          "unit": "mg/dL",
+          "source_id": "pmid:22089718",
+          "status": "confirmed",
+          "found": "The mean baseline HDL-C level was 55.1 (SD, 15",
+          "note": "Matches baseline HDL-C 55.1 mg/dL.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*55\\.1[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22089718' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_73f043d9486743",
+          "claim": "c6",
+          "used_as": "SBP change used by the calculator",
+          "key": "sbp_change",
+          "value": 1.69,
+          "unit": "mmHg",
+          "source_id": "pmcid:PMC4284021",
+          "status": "not_found",
+          "found": "not found in rows",
+          "note": "No sentence containing 1.69 found in abstract.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1\\.69[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC4284021' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_7262d7298b3588",
+          "claim": "c7",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 1670,
+          "unit": "patients",
+          "source_id": "pmid:26678626",
+          "status": "confirmed",
+          "found": "Treatment will continue until 1,670 patients reached the primary end point",
+          "note": "Matches planned events 1670 patients.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1,?670[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26678626' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_13d6532df5671c",
+          "claim": "c8",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 1.5,
+          "unit": "years",
+          "source_id": "pmid:26678626",
+          "status": "confirmed",
+          "found": "the last patient randomized has been followed up for at least 1.5 years",
+          "note": "Matches median follow-up 1.5 years.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1\\.5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26678626' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 5,
+        "not_found": 3,
+        "contradicts": 0
+      },
+      "queries": 8
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "CETP",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.661,
+        "genetic_association_score": 0.736,
+        "evidence_count": 13,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.982,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.03727168,
+            "p": "4.620999813079834e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.981,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.004391835319535299,
+            "p": "3.2086009979248047e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.978,
+            "study_id": "GCST005196",
+            "trait": "Coronary artery disease",
+            "n": 250736,
+            "publication_date": "2017-12-06",
+            "pmid": "29212778",
+            "variant": "rs1800775",
+            "beta": -0.0405,
+            "p": "6e-10",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.975,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs247617",
+            "beta": null,
+            "p": "1e-149",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.966,
+            "study_id": "GCST90668074",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 310368,
+            "publication_date": "2025-09-29",
+            "pmid": "41022758",
+            "variant": "rs247616",
+            "beta": -6.8670974,
+            "p": "7e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.962,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00602080072392998,
+            "p": "2.3929998874664307e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.96,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00566730664302942,
+            "p": "6.335000038146973e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.943,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12446515",
+            "beta": -0.00478232983009403,
+            "p": "9.745523452758789e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_2fd9400abd8e26",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -26.13,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "600 mg | 19 | −26.91 (−30.71, −23.11) | −28.56 (−34.76, −22.37)***",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_19554c16a897eb",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": -91.18,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "600 mg | 19 | −91.18 (−99.71, −82.66) | −92.66 (−104.92, −80.41)***",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_cb9f949e11ab08",
+        "entity": "biomarker:cetp activity",
+        "key": "biomarker_change",
+        "value": 93,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "CETP activity",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "After multiple doses, the highest dose of evacetrapib (600 mg) resulted in 93% inhibition of CETP activity, 87% increase in HDL-C and 29% decrease in LDL-C compared with placebo.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_4ca07a484eec43",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 55.1,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The mean LDL-C, HDL-C, and triglycerides were 144.3, 55.1, and 139.8 mg/dl, respectively",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_cf41aee09f9e2f",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 55.1,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "The mean baseline HDL-C level was 55.1 (SD, 15.3) mg/dL",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_02746d884f6ab5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 129,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "130 mg",
+          "kind": "percent",
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "increases high-density lipoprotein cholesterol by 54% to 129%",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_1817a1e0d276da",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 128.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "500 mg/d",
+          "kind": "percent",
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "As monotherapy, evacetrapib produced dose-dependent increases in HDL-C of 30.0 to 66.0 mg/dL (53.6% to 128.8%) compared with a decrease with placebo of -0.7 mg/dL (-3.0%; P",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_1eb20df33d4a31",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 53.6,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "30 mg/d",
+          "kind": "percent",
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "As monotherapy, evacetrapib produced dose-dependent increases in HDL-C of 30.0 to 66.0 mg/dL (53.6% to 128.8%) compared with a decrease with placebo of -0.7 mg/dL (-3.0%; P",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_246a468b52b219",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 74,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "30 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_308e0c4be1ed5f",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -3.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent",
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "compared with a decrease with placebo of -0.7 mg/dL (-3.0%; P",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_33d5456327ad3f",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 87,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "After multiple doses, the highest dose of evacetrapib (600 mg) resulted in 93% inhibition of CETP activity, 87% increase in HDL-C and 29% decrease in LDL-C compared with placebo.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_5677129c1c8864",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 103,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg + atorvastatin 10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "In combination with atorvastatin 10 mg, evacetrapib 100 mg increased HDL-C levels by 103% and decreased LDL-C levels by 15% and CETP activity by 68% versus atorvastatin alone.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_7aa2a1be68d87a",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 0.42,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "the estimated values for PLAC and STAT were 0.420 (% standard error of estimation = 407) and 2.28 (% standard error of estimation = 83.3) percent change in HDL-C from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_7e521fcc3b5fea",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 177,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "steady state",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The theoretical maximum effect of evacetrapib at steady state on HDL-C was 177% change from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_8da595169f44cc",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 136,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "500 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_aaadd947a9e5e5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 132,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "500 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "HDL-C increased 98% and 132% after 12 weeks of treatment with 100 and 500 mg evacetrapib, respectively.",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_c189c2edc8b726",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 2.28,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "statin",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "the estimated values for PLAC and STAT were 0.420 (% standard error of estimation = 407) and 2.28 (% standard error of estimation = 83.3) percent change in HDL-C from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_c934536ac3c34b",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 98,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "HDL-C increased 98% and 132% after 12 weeks of treatment with 100 and 500 mg evacetrapib, respectively.",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_cb33046bd5a5c0",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 81,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "14 days of placebo or evacetrapib monotherapy at once-daily doses of 100, 300, and 600 mg produced a dose-dependent increase in HDL-C ranging from 59% to 81%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_deb5b916e6b1a6",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 145.73,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "600 mg | 19 | 145.34 (133.29, 157.39) | 145.73 (128.99, 162.48)***",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_debea260e72b96",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 86.83,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "600 mg | 19 | 80.50 (73.05, 87.95) | 86.83 (75.96, 97.71)***",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_e2fd8dd91e734b",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 115,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_e68f2e17e6e7f7",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 59,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "14 days of placebo or evacetrapib monotherapy at once-daily doses of 100, 300, and 600 mg produced a dose-dependent increase in HDL-C ranging from 59% to 81%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_fde73e34804c2b",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 54,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "130 mg",
+          "kind": "percent",
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "increases high-density lipoprotein cholesterol by 54% to 129%",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_4282ceed19784f",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 144.3,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "and the mean baseline LDL-C level was 144.3 (SD, 26.6) mg/dL.",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_8c97247b8861fb",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 144.3,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The mean LDL-C, HDL-C, and triglycerides were 144.3, 55.1, and 139.8 mg/dl, respectively",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_229d5d210688d3",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -27,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "decrease in LDL-C from 24% to 27%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_3151846c95cda4",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 3.88,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "In a preliminary base structural model where the PLAC was included, the estimated value for PLAC was 3.88 (% standard error of estimation = 45.6) percent change in LDL-C from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_342c58c5ac1a94",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -14.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "130 mg",
+          "kind": "percent",
+          "trial": "ACCELERATE",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "reduces low-density lipoprotein cholesterol by 14% to 36%",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_58aadd0f20c7b8",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -15,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg + atorvastatin 10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "In combination with atorvastatin 10 mg, evacetrapib 100 mg increased HDL-C levels by 103% and decreased LDL-C levels by 15% and CETP activity by 68% versus atorvastatin alone.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_5f1d0bc435a073",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "decrease in LDL-C from 24% to 27%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_8e7972ee9fcbc0",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -23,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_97636a8a1ec37b",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -38.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "statin",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The model estimated statin LDL-C effect (STAT) was −38.7% change from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_9c1b1088a9e645",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -29,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "After multiple doses, the highest dose of evacetrapib (600 mg) resulted in 93% inhibition of CETP activity, 87% increase in HDL-C and 29% decrease in LDL-C compared with placebo.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_ae7134acca32c6",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -44.1,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "steady state",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The theoretical maximum effect of evacetrapib on LDL-C was −44.1% change from baseline",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_b80b4ed20c7c5c",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28.56,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "600 mg | 19 | −26.91 (−30.71, −23.11) | −28.56 (−34.76, −22.37)***",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_cdbec15c4d898a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -22,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "500 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_eda6c8f697a4b8",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -15,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "30 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_fdb5153ab0027b",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -36.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "130 mg",
+          "kind": "percent",
+          "trial": "ACCELERATE",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "reduces low-density lipoprotein cholesterol by 14% to 36%",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_ff78c5a0cdf262",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "At the highest dose tested (600 mg), evacetrapib increased HDL-C by 86.8% (P < 0.001 vs placebo) and decreased LDL by 28.6% (P < 0.001 vs placebo) from baseline to Day 14.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_09f375003d45a5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -65,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "decrease in CETP activity from 65% to 91%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_1f73beac10ad80",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -83,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_41f3f254cc4ed3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -68,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg + atorvastatin 10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "In combination with atorvastatin 10 mg, evacetrapib 100 mg increased HDL-C levels by 103% and decreased LDL-C levels by 15% and CETP activity by 68% versus atorvastatin alone.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_5fd09d8cfb9199",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -50,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "30 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_80bb4ee484179e",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -95,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "500 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:24786356",
+        "quote": "evacetrapib monotherapy increased HDL-C levels by 74%, 115%, and 136% and decreased LDL-C levels by 15%, 23%, and 22% and CETP activity by 50%, 83%, and 95% (for the 30-mg, 100-mg, and 500-mg dose groups, respectively) versus placebo.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_a86ec4a90131db",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -91,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "14 days",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "600 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "decrease in CETP activity from 65% to 91%",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_dd8d6f2da9f45a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 51,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "day 11",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "130 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "Cmax was 51% higher (90% CI: 28%-79%) in the fed state than in the fasted state",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_6a64839c5ff46e",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 139.8,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "The mean LDL-C, HDL-C, and triglycerides were 144.3, 55.1, and 139.8 mg/dl, respectively",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_ff8d155f87441a",
+        "entity": "target:cetp",
+        "key": "genetic_association_score",
+        "value": 0.736,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 13,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:CETP",
+        "quote": "\"genetic_association_score\": 0.736",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000087237"
+      },
+      {
+        "fact_id": "f_84aa78e606ac9d",
+        "entity": "trial:nct01687998",
+        "key": "inclusion_threshold",
+        "value": 180,
+        "unit": "mm Hg",
+        "attrs": {
+          "biomarker": "SBP"
+        },
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Any reading of systolic blood pressure ≥180 millimeter of mercury (mm Hg) or diastolic blood pressure ≥110 mm Hg at screening or randomization",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_93107b6fbdf92d",
+        "entity": "trial:nct01687998",
+        "key": "inclusion_threshold",
+        "value": 110,
+        "unit": "mm Hg",
+        "attrs": {
+          "biomarker": "SBP"
+        },
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Any reading of systolic blood pressure ≥180 millimeter of mercury (mm Hg) or diastolic blood pressure ≥110 mm Hg at screening or randomization",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_dc9ce380d87d9a",
+        "entity": "trial:nct01687998",
+        "key": "inclusion_threshold",
+        "value": 400,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "triglycerides"
+        },
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Have screening triglycerides (TG) ≤400 mg/dL (≤4.5 mmol/L)",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_13d6532df5671c",
+        "entity": "trial:nct01687998",
+        "key": "median_followup",
+        "value": 1.5,
+        "unit": "years",
+        "attrs": {
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "the last patient randomized has been followed up for at least 1.5 years.",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_059a9f2e3f2c28",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 398,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "Randomized controlled trial conducted among 398 patients with elevated low-density lipoprotein cholesterol (LDL-C) or low high-density lipoprotein cholesterol (HDL-C) levels from April 2010 to January 2011 at community and academic centers in the United States and Europe.",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_2ea158647d0744",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 12095,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ACCELERATE",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:accelerate",
+        "quote": "with 12,095 patients enrolled",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk"
+      },
+      {
+        "fact_id": "f_495e777f0e649c",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 398,
+        "unit": "patients",
+        "attrs": {
+          "trial": "phase II study in dyslipidemic patients"
+        },
+        "source_id": "pmcid:PMC3910017",
+        "quote": "A total of 398 patients were randomized to receive treatment",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24452615"
+      },
+      {
+        "fact_id": "f_4a525be821e0ae",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 165,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:24786356",
+        "quote": "In this study, 165 Japanese patients with elevated LDL-C or low HDL-C levels were randomly assigned to receive placebo, evacetrapib monotherapy 30 mg, 100 mg, or 500 mg, atorvastatin 10 mg, or evacetrapib 100 mg in combination with atorvastatin 10 mg.",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24786356"
+      },
+      {
+        "fact_id": "f_586b20d3180a36",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 40,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT01810432"
+        },
+        "source_id": "pmcid:PMC4536537",
+        "quote": "a planned interim analysis was performed using data from the 40 enrolled patients.",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/25736283"
+      },
+      {
+        "fact_id": "f_9d1ad54c100105",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 12092,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Enrollment: 12092 (ACTUAL)",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_f1811cd743e91a",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 12092,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "A total of 12,092 patients were randomized to evacetrapib 130 mg or placebo daily in addition to standard medical therapy.",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_fb4e294dacff1e",
+        "entity": "trial:nct01687998",
+        "key": "n_randomized",
+        "value": 6,
+        "unit": "treatment sequences",
+        "attrs": {
+          "trial": "ACCELERATE NCT01687998",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:24271137",
+        "quote": "Participants were randomized to 1 of 6 treatment sequences in which they received 1 of 3 treatments: evacetrapib 1200 mg daily for 10 days (supratherapeutic dose), moxifloxacin 400 mg for 1 day (positive control), or placebo for 10 days in each of the 3 separate treatment periods.",
+        "pub_date": "2013-11-22",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24271137"
+      },
+      {
+        "fact_id": "f_a766e61f7cbb54",
+        "entity": "trial:nct01687998",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_7262d7298b3588",
+        "entity": "trial:nct01687998",
+        "key": "planned_events",
+        "value": 1670,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "Treatment will continue until 1,670 patients reached the primary end point",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_32b6ffda311f74",
+        "entity": "trial:nct01687998",
+        "key": "primary_endpoint",
+        "value": "time to first event of CV death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCELERATE"
+        },
+        "source_id": "pmid:26678626",
+        "quote": "The primary efficacy end point is time to first event of CV death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization.",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26678626"
+      },
+      {
+        "fact_id": "f_7eff1c44458282",
+        "entity": "trial:nct01687998",
+        "key": "primary_endpoint",
+        "value": "time to first occurrence of any component of the composite cardiovascular events of cardiovascular death, myocardial infarction, stroke, coronary revascularization, or hospitalization for unstable angina",
+        "unit": null,
+        "attrs": {
+          "trial": "ACCELERATE",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:accelerate",
+        "quote": "The primary outcome measure was designed to be time to first occurrence of any component of the composite cardiovascular events of cardiovascular death, myocardial infarction, stroke, coronary revascularization, or hospitalization for unstable angina",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk"
+      },
+      {
+        "fact_id": "f_980995395ff99a",
+        "entity": "trial:nct01687998",
+        "key": "primary_endpoint",
+        "value": "comparison of evacetrapib effect on the population-corrected QT interval (QTcP) to that of placebo at 7 time points following dosing on day 10",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCELERATE NCT01687998",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:24271137",
+        "quote": "The primary end point was the comparison of evacetrapib effect on the population-corrected QT interval (QTcP) to that of placebo at 7 time points following dosing on day 10.",
+        "pub_date": "2013-11-22",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24271137"
+      },
+      {
+        "fact_id": "f_f1c4907add24a1",
+        "entity": "trial:nct01687998",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With Composite Primary Endpoint of Cardiovascular (CV) Death, Myocardial Infarction (MI), Stroke, Coronary Revascularization, or Hospitalization for Unstable Angina (UA)",
+        "unit": "participants",
+        "attrs": {
+          "timepoint": "Baseline to Study Completion (Up to 4 years)"
+        },
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "Primary outcome(s): Number of Participants With Composite Primary Endpoint of Cardiovascular (CV) Death, Myocardial Infarction (MI), Stroke, Coronary Revascularization, or Hospitalization for Unstable Angina (UA) [Baseline to Study Completion (Up to 4 years)]",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      },
+      {
+        "fact_id": "f_fd0f769fdbea1d",
+        "entity": "trial:nct01687998",
+        "key": "primary_endpoint",
+        "value": "percentage changes from baseline in HDL-C and LDL-C after 12 weeks of treatment",
+        "unit": "percentage",
+        "attrs": {
+          "trial": "NCT01105975"
+        },
+        "source_id": "pmid:22089718",
+        "quote": "The co-primary end points were percentage changes from baseline in HDL-C and LDL-C after 12 weeks of treatment.",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22089718"
+      },
+      {
+        "fact_id": "f_523ccfccee2eb8",
+        "entity": "trial:nct01687998",
+        "key": "readout_statement",
+        "value": "insufficient efficacy",
+        "unit": null,
+        "attrs": {
+          "trial": "ACCELERATE",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:accelerate",
+        "quote": "terminate the Phase 3 trial of the investigational medicine evacetrapib, due to insufficient efficacy",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk"
+      },
+      {
+        "fact_id": "f_94aa24404d8460",
+        "entity": "trial:nct01687998",
+        "key": "readout_statement",
+        "value": "Multiple doses of evacetrapib potently inhibited CETP activity, leading to substantial elevations in HDL-C and lowering of LDL-C. Evacetrapib was devoid of clinically relevant effects on blood pressure and mineralocorticoid levels.",
+        "unit": "",
+        "attrs": {
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "Multiple doses of evacetrapib potently inhibited CETP activity, leading to substantial elevations in HDL-C and lowering of LDL-C. Evacetrapib was devoid of clinically relevant effects on blood pressure and mineralocorticoid levels.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_65c278161bd0db",
+        "entity": "trial:nct01687998",
+        "key": "safety_signal",
+        "value": "Evacetrapib at the highest dose tested did not produce any significant effect on 24-h ambulatory systolic or diastolic blood pressure.",
+        "unit": "",
+        "attrs": {
+          "phase": "phase2",
+          "dose": "600 mg"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "Evacetrapib at the highest dose tested did not produce any significant effect on 24-h ambulatory systolic or diastolic blood pressure.",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_9e63768b7d44f5",
+        "entity": "trial:nct01687998",
+        "key": "safety_signal",
+        "value": false,
+        "unit": null,
+        "attrs": {
+          "trial": "ACCELERATE",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:accelerate",
+        "quote": "The study is not being stopped for safety findings",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk"
+      },
+      {
+        "fact_id": "f_c23a5e6fd2420b",
+        "entity": "trial:nct01687998",
+        "key": "safety_signal",
+        "value": "Evacetrapib is not associated with QT interval prolongation, even at supratherapeutic doses.",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCELERATE NCT01687998",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:24271137",
+        "quote": "Evacetrapib is not associated with QT interval prolongation, even at supratherapeutic doses.",
+        "pub_date": "2013-11-22",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24271137"
+      },
+      {
+        "fact_id": "f_30b41d9e4ecc71",
+        "entity": "trial:nct01687998",
+        "key": "sbp_change",
+        "value": 2.88,
+        "unit": "mmHg",
+        "attrs": {
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "placebo_adjusted": true,
+          "dose": "600 mg"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "Placebo | 13 | 67.55 (63.39, 71.71) | 74.56 (72.00, 77.12) | 2.88 (0.83, 4.93)",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_73f043d9486743",
+        "entity": "trial:nct01687998",
+        "key": "sbp_change",
+        "value": 1.69,
+        "unit": "mmHg",
+        "attrs": {
+          "phase": "phase2",
+          "timepoint": "Day 14",
+          "placebo_adjusted": true,
+          "dose": "600 mg"
+        },
+        "source_id": "pmcid:PMC4284021",
+        "quote": "Placebo | 13 | 109.29 (105.02, 113.57) | 118.34 (115.54, 121.14) | 1.69 (−0.68, 4.07)",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24961753"
+      },
+      {
+        "fact_id": "f_8b5fdcfca5f27e",
+        "entity": "trial:nct01687998",
+        "key": "stopped_early",
+        "value": true,
+        "unit": null,
+        "attrs": {
+          "trial": "ACCELERATE",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:accelerate",
+        "quote": "terminate the Phase 3 trial of the investigational medicine evacetrapib, due to insufficient efficacy",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk"
+      },
+      {
+        "fact_id": "f_a6354fe6147fcb",
+        "entity": "trial:nct01687998",
+        "key": "trial",
+        "value": "ACCELERATE",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "quote": "ClinicalTrials.gov record NCT01687998 (ACCELERATE)",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01687998"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01687998@2015-10-12",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01687998 ACCELERATE",
+        "url": "https://clinicaltrials.gov/study/NCT01687998",
+        "pub_date": "2012-09-19",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01687998",
+            "acronym": "ACCELERATE",
+            "title": "A Study of Evacetrapib in High-Risk Vascular Disease",
+            "official_title": "Assessment of Clinical Effects of Cholesteryl Ester Transfer Protein Inhibition With Evacetrapib in Patients at a High-Risk for Vascular Outcomes",
+            "sponsor": "Eli Lilly and Company",
+            "status": "TERMINATED",
+            "why_stopped": "Study termination due to insufficient efficacy.",
+            "start_date": "2012-10",
+            "primary_completion": "2016-03",
+            "first_posted": "2012-09-19",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 12092,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Evacetrapib",
+                "type": "DRUG",
+                "other_names": [
+                  "LY2484595"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": []
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Diseases"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With Composite Primary Endpoint of Cardiovascular (CV) Death, Myocardial Infarction (MI), Stroke, Coronary Revascularization, or Hospitalization for Unstable Angina (UA) [Baseline to Study Completion (Up to 4 years)]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 4697
+      },
+      {
+        "source_id": "pmid:26678626",
+        "type": "journal",
+        "title": "Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial.",
+        "url": "https://europepmc.org/article/MED/26678626",
+        "pub_date": "2015-09-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26678626",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2015.09.007",
+          "journal": "American heart journal"
+        },
+        "chars": 1800
+      },
+      {
+        "source_id": "pmcid:PMC4284021",
+        "type": "journal",
+        "title": "Effects of the cholesteryl ester transfer protein inhibitor evacetrapib on lipoproteins, apolipoproteins and 24-h ambulatory blood pressure in healthy adults.",
+        "url": "https://europepmc.org/article/MED/24961753",
+        "pub_date": "2014-06-24",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "24961753",
+          "pmcid": "PMC4284021",
+          "doi": "10.1111/jphp.12287",
+          "journal": "The Journal of pharmacy and pharmacology"
+        },
+        "chars": 34636
+      },
+      {
+        "source_id": "pmid:24786356",
+        "type": "journal",
+        "title": "Efficacy, safety, tolerability, and pharmacokinetic profile of evacetrapib administered as monotherapy or in combination with atorvastatin in Japanese patients with dyslipidemia.",
+        "url": "https://europepmc.org/article/MED/24786356",
+        "pub_date": "2014-04-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24786356",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2014.03.045",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1978
+      },
+      {
+        "source_id": "pmid:24271137",
+        "type": "journal",
+        "title": "Evacetrapib at a supratherapeutic steady state concentration does not prolong QT in a thorough QT/QTc study in healthy participants.",
+        "url": "https://europepmc.org/article/MED/24271137",
+        "pub_date": "2013-11-22",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24271137",
+          "pmcid": null,
+          "doi": "10.1177/1074248413510784",
+          "journal": "Journal of cardiovascular pharmacology and therapeutics"
+        },
+        "chars": 1295
+      },
+      {
+        "source_id": "pmid:22089718",
+        "type": "journal",
+        "title": "Effects of the CETP inhibitor evacetrapib administered as monotherapy or in combination with statins on HDL and LDL cholesterol: a randomized controlled trial.",
+        "url": "https://europepmc.org/article/MED/22089718",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22089718",
+          "pmcid": null,
+          "doi": "10.1001/jama.2011.1649",
+          "journal": "JAMA"
+        },
+        "chars": 1932
+      },
+      {
+        "source_id": "pmcid:PMC4536537",
+        "type": "journal",
+        "title": "A Multidose Study to Examine the Effect of Food on Evacetrapib Exposure at Steady State.",
+        "url": "https://europepmc.org/article/MED/25736283",
+        "pub_date": "2015-03-03",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "25736283",
+          "pmcid": "PMC4536537",
+          "doi": "10.1177/1074248415575153",
+          "journal": "Journal of cardiovascular pharmacology and therapeutics"
+        },
+        "chars": 28437
+      },
+      {
+        "source_id": "pmid:25651523",
+        "type": "journal",
+        "title": "Assessment of the persistence of anacetrapib and evacetrapib concentrations using two pharmacokinetic modeling approaches.",
+        "url": "https://europepmc.org/article/MED/25651523",
+        "pub_date": "2015-02-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25651523",
+          "pmcid": null,
+          "doi": "10.1002/jcph.472",
+          "journal": "Journal of clinical pharmacology"
+        },
+        "chars": 1734
+      },
+      {
+        "source_id": "pmcid:PMC3910017",
+        "type": "journal",
+        "title": "The pharmacokinetics and pharmacokinetic/pharmacodynamic relationships of evacetrapib administered as monotherapy or in combination with statins.",
+        "url": "https://europepmc.org/article/MED/24452615",
+        "pub_date": "2014-01-22",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "24452615",
+          "pmcid": "PMC3910017",
+          "doi": "10.1038/psp.2013.70",
+          "journal": "CPT: pharmacometrics & systems pharmacology"
+        },
+        "chars": 36020
+      },
+      {
+        "source_id": "pmid:21957197",
+        "type": "journal",
+        "title": "Evacetrapib is a novel, potent, and selective inhibitor of cholesteryl ester transfer protein that elevates HDL cholesterol without inducing aldosterone or increasing blood pressure.",
+        "url": "https://europepmc.org/article/MED/21957197",
+        "pub_date": "2011-09-25",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21957197",
+          "pmcid": "PMC3220285",
+          "doi": "10.1194/jlr.m018069",
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1765
+      },
+      {
+        "source_id": "pmid:23736814",
+        "type": "journal",
+        "title": "Recent clinical trials evaluating benefit of drug therapy for modification of HDL cholesterol.",
+        "url": "https://europepmc.org/article/MED/23736814",
+        "pub_date": "2013-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23736814",
+          "pmcid": null,
+          "doi": "10.1097/hco.0b013e328362059d",
+          "journal": "Current opinion in cardiology"
+        },
+        "chars": 1921
+      },
+      {
+        "source_id": "pmid:18193043",
+        "type": "journal",
+        "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
+        "url": "https://europepmc.org/article/MED/18193043",
+        "pub_date": "2008-01-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18193043",
+          "pmcid": "PMC5206900",
+          "doi": "10.1038/ng.76",
+          "journal": "Nature genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1538
+      },
+      {
+        "source_id": "pmid:12034052",
+        "type": "journal",
+        "title": "Thyroid disease and lipids.",
+        "url": "https://europepmc.org/article/MED/12034052",
+        "pub_date": "2002-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12034052",
+          "pmcid": null,
+          "doi": "10.1089/10507250252949405",
+          "journal": "Thyroid : official journal of the American Thyroid Association",
+          "purpose": "genetics"
+        },
+        "chars": 2483
+      },
+      {
+        "source_id": "pmid:25898129",
+        "type": "journal",
+        "title": "A multivariate genome-wide association analysis of 10 LDL subfractions, and their response to statin treatment, in 1868 Caucasians.",
+        "url": "https://europepmc.org/article/MED/25898129",
+        "pub_date": "2015-04-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25898129",
+          "pmcid": "PMC4405269",
+          "doi": "10.1371/journal.pone.0120758",
+          "journal": "PloS one",
+          "purpose": "genetics"
+        },
+        "chars": 2348
+      },
+      {
+        "source_id": "announcement:accelerate",
+        "type": "press_release",
+        "title": "Lilly to Discontinue Development of Evacetrapib for High-Risk Atherosclerotic Cardiovascular Disease (Oct 12, 2015)",
+        "url": "https://investor.lilly.com/news-releases/news-release-details/lilly-discontinue-development-evacetrapib-high-risk",
+        "pub_date": "2015-10-12",
+        "access": "press_release",
+        "meta": {},
+        "chars": 5181
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 24,
+      "facts": 81,
+      "relationships": 27,
+      "events": 205,
+      "audit_entries": 205,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 24228,
+        "output_tokens": 9486,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 11142,
+        "output_tokens": 6525,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 5310,
+        "output_tokens": 6693,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 10045,
+        "output_tokens": 9850,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 13770,
+        "output_tokens": 6628,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6879,
+        "output_tokens": 3213,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

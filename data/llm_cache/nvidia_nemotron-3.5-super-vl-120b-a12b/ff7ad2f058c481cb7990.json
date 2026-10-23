@@ -1,0 +1,15 @@
+{
+  "key": "ff7ad2f058c481cb7990",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-22T23:42:20+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: VISTA-16 NCT01130246 - VISTA-16 Trial: Evaluation of Safety and Efficacy of Short-term A-002 Treatment in Subjects With Acute Coronary Syndrome\nInvestigational drug: varespladib\nDocument: Role of polymorphic variants as genetic modulators of infection in neonatal sepsis. (journal, published 2010-10-01, source pmid:20463618)\n\n--- DOCUMENT TEXT ---\nRole of polymorphic variants as genetic modulators of infection in neonatal sepsis.\n\nThis study is a retrospective, case control study involving 535 preterm infants examining the roles of sequence polymorphisms in genes that mediate host immune responses to bacterial infection in newborn infants. A total of 49 single nucleotide polymorphisms (SNPs) in 19 candidate genes including inflammatory cytokines (IL6, IL10, IL1B, and TNF), cytokine receptors (IL1RN), toll-like receptors (TLR2, TLR4, and TLR5), and cell surface receptors (CD14) were genotyped. Subjects were stratified into three groups (sepsis, suspected sepsis, and control). The data were analyzed using a family-based transmission disequilibrium test. We found that birth weight, gestational age, duration of rupture of membranes, and presence of clinical chorioamnionitis were strongly associated with sepsis. Polymorphisms in TLR2 (rs3804099), TLR5 (rs5744105), IL10 (rs1800896), and PLA2G2A (rs1891320) genes were associated with sepsis. Allelic variants in PLA2G2A and TLR2 were associated with Gram-positive infections, whereas IL10 was associated with Gram-negative infections (p < 0.05). We conclude allelic variations in PLA2G2A, TLR2, TLR5, and IL10 may moderate the predisposition to sepsis in preterm infants.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 660,
+    "output_tokens": 7
+  }
+}
