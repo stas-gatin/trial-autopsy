@@ -78,9 +78,9 @@ The evidence map links each source document to its quotes, to what the analyst u
 
 ### Meet the target in 3D
 
-The report shows the drug's target protein in 3D, coloured by its domains or by AlphaFold confidence, and zooms to the place where the drug binds with the surrounding amino acids labelled.
+The report shows the drug's target protein in 3D, next to what it does in the body, what the drug does to it and what human genetics says. It can be coloured by its domains or by AlphaFold confidence, and it zooms to the place where the drug binds with the surrounding amino acids labelled.
 
-![3D view of the target protein with the drug's binding site highlighted](docs/images/mol_binding.png)
+![The target protein panel of the FOURIER report: PCSK9 in 3D coloured by its domains, with its function, the drug's action, the genetic evidence and the 3D model's source](docs/images/target_panel.png)
 
 The report also has a replay of every step the agents took and a PDF export.
 
