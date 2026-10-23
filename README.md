@@ -324,7 +324,7 @@ docker run --rm --network none -e SAMPLE_MODE=true trial-autopsy python scripts/
 ### Tests
 
 ```bash
-.venv/bin/python -m unittest discover tests      # 92 unit and offline end-to-end tests
+.venv/bin/python -m unittest discover tests      # 95 unit and offline end-to-end tests
 npm --prefix services/meterless run conformance  # the official Meterless World Model suite, 8 of 8
 ```
 
