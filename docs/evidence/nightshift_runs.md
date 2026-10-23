@@ -1,0 +1,33 @@
+# Runs through Meterless Nightshift
+
+The 17 recorded analyses in `data/library/`, run live on 22 and 23 October 2026 with Meterless Nightshift M1-M4 0.92.1 on
+127.0.0.1:8088. Nightshift lanes: Nemotron 3 Ultra 550B A55B and Nemotron 3.5 Super VL 120B A12B, both on its NVIDIA provider.
+Nightshift settings: tier-split off, the app (`meterless-app: trial-autopsy`) bound to `fast`.
+
+The five reasoning steps (mechanism analyst, Verifier, investigator, critic, reporter) were served by Nightshift. Extraction and
+read-through called NVIDIA's API directly with reasoning off, because Nightshift does not pass the reasoning switch on.
+Counts come from each run's `output.usage`; the lane is the `model` field of Nightshift's response.
+
+| Run | Time (s) | Reasoning calls through Nightshift | Lane that answered (calls) | Direct NVIDIA fallback | Extraction and read-through calls (NVIDIA API) |
+|---|---|---|---|---|---|
+| bt-accelerate | 1340 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 15 |
+| bt-aim_high | 498 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 12 |
+| bt-cantos | 459 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 15 |
+| bt-clear_outcomes | 549 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 15 |
+| bt-dal_outcomes | 671 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 15 |
+| bt-fourier | 739 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 15 |
+| bt-hps2_thrive | 1544 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 11 |
+| bt-illuminate | 596 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 14 |
+| bt-improve_it | 610 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 15 |
+| bt-odyssey_outcomes | 1983 | 9 | nemotron-3-ultra-550b-a55b (9) | 0 | 15 |
+| bt-reveal | 290 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 15 |
+| bt-solid_timi52 | 373 | 6 | nemotron-3-ultra-550b-a55b (5), nemotron-3.5-super-vl-120b-a12b (1) | 0 | 15 |
+| bt-stability | 459 | 6 | nemotron-3-ultra-550b-a55b (6) | 0 | 15 |
+| bt-vista16 | 318 | 4 | nemotron-3-ultra-550b-a55b (4) | 0 | 14 |
+| example-accelerate (replays the ACCELERATE backtest) | replay | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 15 |
+| example-olpasiran | 799 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 10 |
+| example-pelacarsen | 526 | 11 | nemotron-3-ultra-550b-a55b (11) | 0 | 12 |
+
+**Live runs (16):** 132 reasoning calls through Nightshift, 0 direct fallbacks; lanes: nemotron-3-ultra-550b-a55b 131, nemotron-3.5-super-vl-120b-a12b 1. 223 extraction and read-through calls went to NVIDIA's API.
+
+Example 3 (`example-accelerate`) is the same request as the ACCELERATE backtest, so it replays that backtest's recorded answers instead of making new calls.
