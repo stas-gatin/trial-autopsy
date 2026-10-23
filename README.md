@@ -8,6 +8,8 @@
 
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
 
+[![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
+
 | | |
 |---|---|
 | **Input** | A ClinicalTrials.gov ID (and, if you have it, the topline press release) |
@@ -290,6 +292,8 @@ docker run --rm --network none -e SAMPLE_MODE=true trial-autopsy python scripts/
 .venv/bin/python -m unittest discover tests      # 58 unit and offline end-to-end tests
 npm --prefix services/meterless run conformance  # the official Meterless World Model suite, 8 of 8
 ```
+
+GitHub Actions runs all of this on every push and pull request ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)): the tests, the offline check, a replay of every recorded analysis against its live result (`scripts/check_replay.py`), and the Meterless conformance suite.
 
 ---
 
