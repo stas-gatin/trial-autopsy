@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17984166&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*45\\\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '17984166' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Results</h4>As compared with the placebo group, patients in the rosuvastatin group had decreased levels of low-density lipoprotein cholesterol (difference between groups, 45.0%; P<0"
+  ]
+ ],
+ "error": null
+}

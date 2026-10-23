@@ -400,11 +400,26 @@ def _as_object(data, list_key: str | None):
 
 
 def generate_json(role: str, system: str, prompt: str, tag: str = "", agent: str | None = None,
-                  list_key: str | None = None):
+                  list_key: str | None = None, retry: bool = True):
     response = generate(role, system, prompt, tag, agent)
     try:
         return _as_object(parse_json(response.text), list_key), response
     except ValueError:
+        pass
+    try:
         # One repair pass by the same model: the content stays the model's own, only the syntax is fixed.
         fixed = generate(role, REPAIR_SYSTEM, response.text, f"{tag}:json-repair", agent)
         return _as_object(parse_json(fixed.text), list_key), response
+    except ValueError:
+        if not retry:
+            raise
+    # Nothing to repair (e.g. a reply cut off while the model was still reasoning aloud): ask once more. The retry
+    # has its own prompt, hence its own recording, and replays exactly like the live run. Extraction passes
+    # retry=False: it skips a document it cannot parse and logs it.
+    retry = generate(role, system, prompt + "\n\nReturn only the JSON object, with no text before it.",
+                     f"{tag}:retry", agent)
+    try:
+        return _as_object(parse_json(retry.text), list_key), retry
+    except ValueError:
+        fixed = generate(role, REPAIR_SYSTEM, retry.text, f"{tag}:retry:json-repair", agent)
+        return _as_object(parse_json(fixed.text), list_key), retry

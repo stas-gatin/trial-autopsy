@@ -1,0 +1,15 @@
+{
+  "key": "51ef16a8268c26a4c716",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-23T10:08:23+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: PROMINENT NCT03071692 - Pemafibrate to Reduce Cardiovascular OutcoMes by Reducing Triglycerides IN patiENts With diabeTes (PROMINENT)\nInvestigational drug: pemafibrate\nDocument: Paternally induced transgenerational environmental reprogramming of metabolic gene expression in mammals. (journal, published 2010-12-01, source pmid:21183072)\n\n--- DOCUMENT TEXT ---\nPaternally induced transgenerational environmental reprogramming of metabolic gene expression in mammals.\n\nEpigenetic information can be inherited through the mammalian germline and represents a plausible transgenerational carrier of environmental information. To test whether transgenerational inheritance of environmental information occurs in mammals, we carried out an expression profiling screen for genes in mice that responded to paternal diet. Offspring of males fed a low-protein diet exhibited elevated hepatic expression of many genes involved in lipid and cholesterol biosynthesis and decreased levels of cholesterol esters, relative to the offspring of males fed a control diet. Epigenomic profiling of offspring livers revealed numerous modest (∼20%) changes in cytosine methylation depending on paternal diet, including reproducible changes in methylation over a likely enhancer for the key lipid regulator Ppara. These results, in conjunction with recent human epidemiological data, indicate that parental diet can affect cholesterol and lipid metabolism in offspring and define a model system to study environmental reprogramming of the heritable epigenome.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 539,
+    "output_tokens": 7
+  }
+}

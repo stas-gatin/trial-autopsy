@@ -330,7 +330,7 @@ def _extract(state: RunState, doc: Document):
     try:
         data, response = generator.generate_json("extraction", system, prompt,
                                                  tag=f"{state.case_id}:extract:{doc.source_id}", agent="Extraction",
-                                                 list_key="facts")
+                                                 list_key="facts", retry=False)
     except generator.PendingModelCall as exc:
         return exc
     except (ValueError, json.JSONDecodeError) as exc:

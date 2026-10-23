@@ -1,0 +1,12 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18068514+OR+EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmcid, regexp_extract(r.abstractText, '([^.]*61[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%61%' LIMIT 5",
+ "rows": [
+  [
+   "PMC5419667",
+   " At the randomization visit (after at least 8weeks on a protocol-defined atorvastatin regimen), mean plasma LDL cholesterol was 61 (15) mg/dL and HDL cholesterol was 40 (10) mg/dL"
+  ]
+ ],
+ "error": null
+}

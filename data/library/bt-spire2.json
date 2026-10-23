@@ -1,0 +1,2019 @@
+{
+  "run_id": "bt-spire2",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2017-03-17",
+  "backtest": true,
+  "readout_date": "2017-03-17",
+  "analysis_date": "2017-03-17",
+  "trial": {
+    "nct_id": "NCT01975389",
+    "acronym": "SPIRE-2",
+    "title": "The Evaluation of Bococizumab (PF-04950615; RN316) in Reducing the Occurrence of Major Cardiovascular Events in High Risk Subjects",
+    "sponsor": "Pfizer",
+    "status": "TERMINATED",
+    "enrollment": 10564,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Disease"
+    ],
+    "primary_completion": "2017-04-03"
+  },
+  "drug": {
+    "name": "bococizumab",
+    "chembl_id": "CHEMBL3137349",
+    "aliases": [
+      "PF-04950615",
+      "RN-316",
+      "RN316"
+    ],
+    "drug_type": "Antibody",
+    "mechanisms": [
+      "Subtilisin/kexin type 9 inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000169174",
+        "symbol": "PCSK9",
+        "name": "proprotein convertase subtilisin/kexin type 9"
+      }
+    ],
+    "searched_as": "bococizumab"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-spire2",
+  "log_file": "logs/trace-bt-spire2.jsonl",
+  "execution_time_seconds": 1323.4,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"However, in patients at high cardiovascular risk who had baseline LDL of greater than 100 mg/dL, bococizumab significantly reduced the risk \" (announcement:spire2)",
+      "predicted_outcome": "failure",
+      "consistency": "calculator expected failure with 57% probability; the actual result falls in the remaining 42%",
+      "primary_category": "success_with_caveats",
+      "secondary_categories": [
+        "effect_too_small",
+        "design_or_endpoint",
+        "execution_or_nonscientific",
+        "insufficient_data"
+      ],
+      "calculator_category": "effect_too_small",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": 0.425,
+      "weakest_link": "power 43%"
+    },
+    "report": {
+      "headline": "SPIRE-2 stopped early for efficacy with HR 0.79 (21% RRR) but low power (43%), no confidence intervals, and immunogenicity-driven dose reductions limit confidence in the magnitude of benefit.",
+      "summary": "The SPIRE-2 trial (NCT01975389) randomized ~10,564 high-risk patients to bococizumab or placebo and was stopped at a pre-specified interim analysis after 403 primary endpoint events (179 vs 224) with a reported hazard ratio of 0.79. The calculator predicted failure (expected HR 0.838, 43% power) based on a phase 2 placebo-adjusted LDL-C reduction of -53.4 mg/dL (-1.38 mmol/L) and 12-month median follow-up. The observed 21% RRR exceeds the predicted 16%, but the early stoppage with low power typically inflates the point estimate, no confidence interval was reported, and the primary composite includes a softer component (hospitalization for unstable angina requiring urgent revascularization). Immunogenicity necessitated dose reductions in many participants, and only a press release is available as of the 2017-03-17 cutoff.",
+      "key_evidence": [
+        "HR 0.79 (21% RRR) for primary composite endpoint — PCSK9 Inhibition with Bococizumab Yields Mixed Results (American College of Cardiology press release, ACC.17)",
+        "403 primary events (179 treatment, 224 control) in ~10,564 randomized — PCSK9 Inhibition with Bococizumab Yields Mixed Results (American College of Cardiology press release, ACC.17)",
+        "Phase 2 placebo-adjusted LDL-C reduction -53.4 mg/dL at trial dose — Results of bococizumab, a monoclonal antibody against proprotein convertase subtilisin/kexin type 9, from a randomized, placebo-controlled, dose-ranging study in statin-treated subjects with hypercholesterolemia.",
+        "Calculator: expected HR 0.838, power 43%, MDE HR 0.756 at 80% power — calculator",
+        "Trial stopped early for efficacy per pre-specified interim analysis — PCSK9 Inhibition with Bococizumab Yields Mixed Results (American College of Cardiology press release, ACC.17)",
+        "Injection site reactions significantly more frequent with bococizumab; dose reductions in many subjects — PCSK9 Inhibition with Bococizumab Yields Mixed Results (American College of Cardiology press release, ACC.17) / Results of bococizumab...",
+        "No peer-reviewed publication or confidence intervals available as of 2017-03-17 — announcement:spire2"
+      ],
+      "what_would_change_this": "Full publication with confidence intervals, component-specific hazard ratios, on-treatment LDL-C trajectories, and complete safety data would clarify whether the observed benefit is robust and estimate the true effect size after accounting for early stoppage inflation.",
+      "readthrough_note": "Bococizumab development was discontinued after SPIRE-1/2 showed immunogenicity and attenuated LDL-C lowering over time; the PCSK9 class remains validated by evolocumab (FOURIER) and alirocumab (ODYSSEY OUTCOMES) which demonstrated consistent ~15% RRR with longer follow-up and no significant immunogenicity."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.949 for PCSK9",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 1.381 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.162,
+        "detail": "expected HR 0.838 at 1.0 y (relative risk reduction 16.2%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.425,
+        "detail": "power 42% with 403 events; smallest detectable HR 0.756",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "spire2",
+      "ldl_equivalent_mmol": 1.381,
+      "basis": "LDL-C",
+      "time_factor": 0.515,
+      "expected_hr": 0.838,
+      "causal_rrr": 0.162,
+      "bp_factor": 1.0,
+      "power": 0.425,
+      "mde_hr_80": 0.756,
+      "outcome": "failure",
+      "category": "effect_too_small",
+      "secondary": [],
+      "weakest_link": "power 43%",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "spire2",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -1.381,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": 2.59,
+          "method": "phase2_placebo_adjusted_at_outcome_trial_dose",
+          "source": "ctgov:NCT01975389@2017-03-17,pmid:25784512"
+        }
+      ],
+      "followup_years": 1.0,
+      "events": 403,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.79,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "PCSK9 has strong genetic evidence for coronary artery disease: Open Targets genetic association score 0.949 (51 evidence items). Pre-cutoff literature (pmid:16554528, 2006) shows PCSK9 sequence variations and nonsense mutations associate with lower LDL-C and lower CHD risk (f_3a7b303b4f1bc1, f_bd11193239317d).",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -1.381,
+          "pct_change": null,
+          "baseline": 2.59,
+          "unit": "mmol/L",
+          "method": "phase2_placebo_adjusted_at_outcome_trial_dose",
+          "fact_ids": [
+            "f_0d77d900b2865a",
+            "f_85d3d67aa089af"
+          ]
+        }
+      ],
+      "followup_years": 1.0,
+      "followup_fact_ids": [
+        "f_4e4f45e686c54f"
+      ],
+      "events": 403,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_049d63e9e8b813",
+        "f_ee42e66726abcc"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.79,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_f773116eda6184",
+        "f_049d63e9e8b813",
+        "f_ee42e66726abcc",
+        "f_4e4f45e686c54f"
+      ],
+      "missing": [
+        "observed_ci",
+        "sbp_change_mmhg",
+        "actual_mean_baseline_LDL_C_in_trial"
+      ],
+      "notes": "LDL-C change from phase 2 (pmid:25784512) at 150 mg Q14d (SPIRE-2 dose), placebo-adjusted -53.4 mg/dL = -1.38 mmol/L. Baseline LDL-C not reported in available facts; inclusion threshold LDL-C ≥100 mg/dL (2.59 mmol/L) used as conservative estimate (actual mean baseline likely higher). Phase 3 announcement reported -55% LDL-C reduction at week 12 but not placebo-adjusted (f_3b71db9df3b496), so excluded per calculator rules. Trial stopped early for efficacy at median 12-month follow-up with 403 primary events (HR 0.79). No CI reported in announcement. No SBP change data."
+    },
+    "hypotheses": [
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial stopped early for efficacy with observed HR 0.79 (21% RRR) for primary composite endpoint",
+            "refs": [
+              "f_1075fd835fb9e6",
+              "f_f773116eda6184",
+              "f_b8e4567f8e3abe"
+            ]
+          },
+          {
+            "text": "Large randomization (~10,564 patients) with 403 primary events provides substantial evidence",
+            "refs": [
+              "f_7326d5e920ffd3",
+              "f_049d63e9e8b813",
+              "f_ee42e66726abcc"
+            ]
+          },
+          {
+            "text": "PCSK9 target has strong human genetic validation for CHD protection",
+            "refs": [
+              "f_3a7b303b4f1bc1",
+              "f_bd11193239317d",
+              "f_1595e5ecba89ae"
+            ]
+          },
+          {
+            "text": "LDL-C lowering confirmed in phase 2 at trial dose: -53.4 mg/dL placebo-adjusted",
+            "refs": [
+              "f_0d77d900b2865a"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Early stoppage for efficacy with only 43% power likely inflates observed treatment effect (random high)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "No confidence interval reported for observed HR 0.79, limiting precision assessment",
+            "refs": [
+              "f_f773116eda6184"
+            ]
+          },
+          {
+            "text": "Safety signal: injection site reactions significantly more frequent with bococizumab",
+            "refs": [
+              "f_f3530b32052e63"
+            ]
+          },
+          {
+            "text": "Dose reductions required in many subjects during trial",
+            "refs": [
+              "f_737b966e2d71cb"
+            ]
+          },
+          {
+            "text": "Phase 3 LDL-C reduction (-55%) reported in announcement is not placebo-adjusted",
+            "refs": [
+              "f_3b71db9df3b496"
+            ]
+          }
+        ],
+        "would_settle": "Full publication with confidence intervals, adjusted analyses, complete safety dataset, and on-treatment LDL-C trajectories"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator predicted failure with expected HR 0.838 (16% RRR) and only 43% power (MDE HR 0.756)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 2 placebo-adjusted LDL-C reduction (-53.4 mg/dL = -1.38 mmol/L) at trial dose yields expected RRR ~16% per CTT meta-regression",
+            "refs": [
+              "f_0d77d900b2865a",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Observed HR 0.79 (21% RRR) exceeds calculator prediction, suggesting expected effect was underestimated",
+            "refs": [
+              "f_f773116eda6184",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Calculator baseline LDL-C (2.59 mmol/L) uses inclusion threshold; actual mean baseline in high-risk statin-treated patients likely higher (typically 2.5-3.0 mmol/L), which would increase absolute LDL-C reduction and expected benefit",
+            "refs": [
+              "f_85d3d67aa089af",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Early stoppage with low power tends to produce inflated observed effects; true effect may be closer to calculator prediction",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Primary endpoint includes softer component (hospitalization for unstable angina requiring urgent revascularization) which may be more sensitive to LDL lowering than hard MACE",
+            "refs": [
+              "f_37225337a6fc5a"
+            ]
+          }
+        ],
+        "would_settle": "Individual patient data meta-analysis with actual baseline LDL-C distribution and on-treatment LDL-C time course"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Primary endpoint composite includes hospitalization for unstable angina requiring urgent revascularization — a softer, more subjective component than MI/stroke/CV death",
+            "refs": [
+              "f_37225337a6fc5a"
+            ]
+          },
+          {
+            "text": "Softer endpoint components may be more responsive to LDL-C lowering and/or more susceptible to ascertainment bias in open-label context (though trial was double-blind)",
+            "refs": [
+              "f_37225337a6fc5a"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Similar composite endpoints used in FOURIER and ODYSSEY OUTCOMES which also showed benefit",
+            "refs": []
+          },
+          {
+            "text": "Trial was double-blind, reducing ascertainment bias for subjective components",
+            "refs": [
+              "f_37225337a6fc5a"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific hazard ratios to assess whether benefit driven by softer endpoints"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial stopped early for efficacy per pre-specified interim analysis",
+            "refs": [
+              "f_1075fd835fb9e6"
+            ]
+          },
+          {
+            "text": "Dose reductions implemented in many subjects during trial (immunogenicity concerns)",
+            "refs": [
+              "f_737b966e2d71cb"
+            ]
+          },
+          {
+            "text": "Large sample size (~10,564 randomized) and event count (403) exceed many CVOTs",
+            "refs": [
+              "f_7326d5e920ffd3",
+              "f_049d63e9e8b813",
+              "f_ee42e66726abcc"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Early stoppage limits long-term safety and efficacy assessment",
+            "refs": [
+              "f_1075fd835fb9e6"
+            ]
+          },
+          {
+            "text": "Dose reductions may have attenuated treatment effect vs. full-dose intention-to-treat",
+            "refs": [
+              "f_737b966e2d71cb"
+            ]
+          }
+        ],
+        "would_settle": "Full trial publication with per-protocol and as-treated analyses, immunogenicity substudy results"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Only announcement data available as of 2017-03-17; no peer-reviewed publication, no confidence intervals for primary HR",
+            "refs": [
+              "f_f773116eda6184",
+              "announcement:spire2"
+            ]
+          },
+          {
+            "text": "Phase 3 LDL-C reduction (-55%) not placebo-adjusted; on-treatment LDL-C trajectory unknown",
+            "refs": [
+              "f_3b71db9df3b496"
+            ]
+          },
+          {
+            "text": "Full safety dataset not available; only injection site reactions reported in announcement",
+            "refs": [
+              "f_f3530b32052e63"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Pre-specified interim analysis with independent DMC oversight supports validity of early stoppage",
+            "refs": [
+              "f_1075fd835fb9e6"
+            ]
+          }
+        ],
+        "would_settle": "Peer-reviewed primary manuscript with full results, confidence intervals, safety tables, and LDL-C time course"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Injection site reactions significantly more frequent with bococizumab",
+            "refs": [
+              "f_f3530b32052e63"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No other safety imbalances (UTI, neurocognitive, new-onset diabetes) reported in announcement",
+            "refs": [
+              "announcement:spire2"
+            ]
+          },
+          {
+            "text": "Full safety dataset from completed trial not available for independent review",
+            "refs": []
+          }
+        ],
+        "would_settle": "Complete safety dataset from final clinical study report"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 loss-of-function variants associated with lower LDL-C and lower CHD risk (HR 0.32-0.79 per 15-28% LDL-C reduction)",
+            "refs": [
+              "f_3a7b303b4f1bc1",
+              "f_bd11193239317d"
+            ]
+          },
+          {
+            "text": "Open Targets genetic association score 0.949 for coronary artery disorder (51 evidence items)",
+            "refs": [
+              "f_1595e5ecba89ae"
+            ]
+          }
+        ],
+        "would_settle": "N/A — genetics strongly support causality"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is established causal biomarker for atherosclerotic cardiovascular disease per Mendelian randomization and CTT meta-analyses",
+            "refs": [
+              "f_3a7b303b4f1bc1",
+              "f_bd11193239317d"
+            ]
+          }
+        ],
+        "would_settle": "N/A — LDL-C causality well-established"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator includes a non-placebo-adjusted LDL-C change (-55% from announcement, placebo_adjusted: false) as a second change entry. Only placebo-adjusted biomarker changes should be used for the causal model. The automatic check flagged this: 'LDL-C change uses within-arm values [f_3b71db9df3b496] (not placebo-adjusted)'.",
+            "target_agent": "mechanism",
+            "request": "Remove the second LDL-C change entry (pct_change: -55, source: announcement:spire2) from calculator inputs. Keep only the placebo-adjusted absolute change from phase 2 (-53.4 mg/dL = -1.38 mmol/L, source: pmid:25784512)."
+          },
+          {
+            "severity": "high",
+            "issue": "The 'design_or_endpoint' hypothesis has an 'against' point claiming 'Composite endpoint similar to other PCSK9 inhibitor outcome trials (FOURIER, ODYSSEY OUTCOMES) which showed benefit' but provides zero fact references (refs: []). This is an unsubstantiated claim.",
+            "target_agent": "case_builder",
+            "request": "Either add verified fact references supporting similarity to FOURIER/ODYSSEY endpoints, or remove this 'against' point."
+          },
+          {
+            "severity": "high",
+            "issue": "The calculator predicts 'failure' with category 'effect_too_small' (expected HR 0.869, power 29%), but the trial was stopped early for efficacy with observed HR 0.79 (21% RRR). The departure_from_calculator notes this contradiction, yet the 'effect_too_small' hypothesis is marked 'weakened' rather than properly reconciled. The calculator's expected effect (13% RRR) appears to underestimate the observed effect, possibly due to: (a) greater LDL-C lowering than phase 2 predicted (announcement -55% vs phase 2 -53.4 mg/dL), (b) pleiotropic effects, or (c) random high from early stoppage. This needs explicit discussion.",
+            "target_agent": "investigator",
+            "request": "Investigate why the calculator underestimated the effect: compare phase 2 LDL-C reduction (-53.4 mg/dL placebo-adjusted) vs announcement (-55%, not placebo-adjusted); check if baseline LDL-C assumption (2.0 mmol/L) is too low given inclusion threshold ≥100 mg/dL (2.59 mmol/L); assess whether early stoppage inflated the observed HR."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator assumes baseline LDL-C of 2.0 mmol/L (77 mg/dL) per 'assumptions: [\"LDL-C: no baseline given, assumed 2.0\"]', but inclusion criteria required LDL-C ≥100 mg/dL (2.59 mmol/dL) or non-HDL-C ≥130 mg/dL. Actual baseline in enrolled high-risk patients was likely higher, which would increase absolute LDL-C reduction and expected benefit.",
+            "target_agent": "mechanism",
+            "request": "Search for actual mean baseline LDL-C in SPIRE-2 (e.g., in pmid:27502861 or announcement). If unavailable, use inclusion threshold (2.59 mmol/L) as a more conservative estimate than 2.0 mmol/L, and note the assumption."
+          },
+          {
+            "severity": "medium",
+            "issue": "Multiple hypotheses have 'against' points with empty refs arrays: 'design_or_endpoint' (against), 'execution_or_nonscientific' (against: 'No conduct issues... reported in available facts' with refs: []), 'off_target_harm' (against: 'No cardiovascular harm signal reported in announcement' with refs: ['announcement:spire2'] - this is a negative claim citing the announcement).",
+            "target_agent": "case_builder",
+            "request": "For each empty refs array, either add verified fact references or remove the 'against' point. For negative claims (e.g., 'no harm signal'), cite specific safety data facts (e.g., f_f3530b32052e63 only mentions injection site reactions) or rephrase as 'available facts do not report cardiovascular harm signal' with appropriate refs."
+          },
+          {
+            "severity": "medium",
+            "issue": "The 'off_target_harm' hypothesis 'against' point cites 'announcement:spire2' for 'UTI or other serious imbalances not mentioned', but the announcement may not comprehensively report safety. The verified fact f_f3530b32052e63 only mentions injection site reactions. Full safety dataset is not available.",
+            "target_agent": "investigator",
+            "request": "Clarify that safety assessment is limited to announcement data; note that full safety dataset from completed trial would settle this."
+          },
+          {
+            "severity": "low",
+            "issue": "The 'population' hypothesis 'against' point references inclusion thresholds (f_85d3d67aa089af, f_a185e4220e0560, f_a22c9cd92b773a, f_46e2bd1aca68f2) but does not address whether the enrolled population (high-risk, LDL-C ≥100 mg/dL) is the appropriate population for PCSK9 inhibition. This is a weak 'against' point.",
+            "target_agent": "case_builder",
+            "request": "Strengthen or remove: either add facts about population representativeness (e.g., prior statin use, baseline risk) or acknowledge this is a standard secondary prevention population."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator's time_factor is 0.515 for 1-year follow-up. Verify this matches the model's time-scaling assumption (typically sqrt(t) or linear). If the model assumes linear scaling, 1 year should give time_factor=1.0 for a 1-year trial; if sqrt, sqrt(1)=1.0. The 0.515 suggests a different reference period (e.g., 3.7 years). Check consistency.",
+            "target_agent": "mechanism",
+            "request": "Verify time_factor calculation for 1-year follow-up in the causal model. If the reference period is ~3.7 years (as in CTT meta-analyses), document this assumption."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "The 'design_or_endpoint' hypothesis 'against' point claims composite endpoint similarity to FOURIER and ODYSSEY OUTCOMES but provides no fact references (refs array is empty). This claim needs supporting evidence or should be removed.",
+            "target_agent": "case_builder",
+            "request": "Add fact references for FOURIER and ODYSSEY OUTCOMES endpoint composition, or remove the unsupported 'against' point."
+          },
+          {
+            "severity": "medium",
+            "issue": "The 'off_target_harm' hypothesis 'against' point states 'Full safety dataset from completed trial not available for independent review' with empty refs array. This is a factual claim about data availability that should be referenced or removed.",
+            "target_agent": "case_builder",
+            "request": "Add a fact reference confirming the safety dataset status (e.g., from announcement or registry), or remove the unsupported point."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator input uses baseline LDL-C of 2.59 mmol/L (100 mg/dL inclusion threshold) rather than the actual mean baseline LDL-C of enrolled patients. While the inclusion threshold is a verified conservative estimate, the actual mean baseline in high-risk statin-treated patients is typically higher (2.5-3.0 mmol/L), which would increase the expected absolute LDL-C reduction and expected benefit. This limitation is acknowledged in the departure_from_calculator but should be explicitly noted in calculator assumptions.",
+            "target_agent": "mechanism",
+            "request": "Add an assumption note to the calculator output documenting that baseline LDL-C uses the inclusion threshold (100 mg/dL) and actual mean baseline is likely higher, which would increase expected benefit."
+          },
+          {
+            "severity": "low",
+            "issue": "The 'effect_too_small' hypothesis 'for' points reference the calculator's prediction of failure, but the hypothesis status is 'weakened' while the calculator's primary category is 'effect_too_small' with outcome 'failure'. The relationship between the calculator verdict and hypothesis status should be clarified in the departure_from_calculator.",
+            "target_agent": "case_builder",
+            "request": "Ensure the departure_from_calculator explicitly reconciles the calculator's 'failure/effect_too_small' verdict with the 'weakened' status of the effect_too_small hypothesis and the 'supported' primary category of success_with_caveats."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator result shows 'consistent_with_observed': null. Given the observed HR (0.79) is better than the expected HR (0.838), this field should reflect whether the observed result is consistent with the prediction (likely 'no' or 'better_than_expected').",
+            "target_agent": "mechanism",
+            "request": "Update the calculator's 'consistent_with_observed' field to indicate the observed HR 0.79 exceeds the expected HR 0.838 (i.e., better than predicted)."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_0d77d900b2865a",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -53.4,
+          "unit": "mg/dl",
+          "source_id": "pmid:25784512",
+          "status": "confirmed",
+          "found": "Compared with placebo, bococizumab 150 mg Q14 days reduced LDL-C at week 12 by 53.4 mg/dl",
+          "note": "The abstract states the placebo-adjusted LDL-C reduction at week 12 for 150 mg Q14 days is 53.4 mg/dl.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*53\\\\.4[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25784512' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_85d3d67aa089af",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 100,
+          "unit": "mg/dL",
+          "source_id": "ctgov:NCT01975389@2017-03-17",
+          "status": "confirmed",
+          "found": "Must have an LDL C \\>/=100 mg/dL",
+          "note": "The registry eligibility criteria specify LDL-C ≥100 mg/dL as an inclusion threshold.",
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*100 mg/dL[^.]*)', 1) AS sentence FROM registry LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PCSK9",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.732,
+        "genetic_association_score": 0.949,
+        "evidence_count": 51,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.971,
+            "study_id": "GCST010867",
+            "trait": "Coronary artery disease",
+            "n": 168228,
+            "publication_date": "2020-10-05",
+            "pmid": "33020668",
+            "variant": "rs151193009",
+            "beta": -0.447667,
+            "p": "1e-14",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.965,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs472495",
+            "beta": 0.006884953522584949,
+            "p": "3.7131738662719727e-13",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.951,
+            "study_id": "GCST90449059",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 185000,
+            "publication_date": "2024-11-13",
+            "pmid": "39537608",
+            "variant": "rs11206510",
+            "beta": -0.0255560596854,
+            "p": "2.8949999809265137e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.948,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.193186932710206,
+            "p": "9.26200008392334e-31",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs11206510",
+            "beta": -0.06765864847381481,
+            "p": "1e-8",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs11591147",
+            "beta": -0.010701321233358261,
+            "p": "1.431955337524414e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs11591147",
+            "beta": -0.012468438835740718,
+            "p": "1.3121823072433472e-14",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.203581973859205,
+            "p": "5.118000030517578e-26",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_45df4838f37727",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 15.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "day 43",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg Q28d",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "The largest mean increase from baseline in HDL‐C was 15.8%, observed on day 43.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_4d6594758cbd2e",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 7.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "day 8",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg Q28d",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Smaller increases in HDL‐C were observed at days 8 and 15, with increases from baseline of 7.9% and 11.7%, respectively.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_582f8592f17212",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 14.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1.0 mg/kg i.v.",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "For bococizumab, HDL‐C increased from baseline to day 15 with subjects receiving i.v. 1.0 mg/kg showing the highest mean percent increase from baseline (14.4% at day 15).",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_63841a458f0ffa",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 17.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "day 43",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3.0 mg/kg i.v.",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Subjects receiving RN317 i.v. 3.0 mg/kg had the greatest mean percentage increase from baseline in HDL‐C (17.4% at day 43).",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_8749827d729773",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 11.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg Q28d",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Smaller increases in HDL‐C were observed at days 8 and 15, with increases from baseline of 7.9% and 11.7%, respectively.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_0d77d900b2865a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -53.4,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg Q14 days",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25784512",
+        "quote": "Compared with placebo, bococizumab 150 mg Q14 days reduced LDL-C at week 12 by 53.4 mg/dl",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_119a85d1061b81",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -44.9,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "300 mg Q28 days",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25784512",
+        "quote": "and bococizumab 300 mg Q28 days reduced LDL-C by 44.9 mg/dl",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_149341ce9acc97",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -5.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "RN317, mean percentage decreases from baseline in LDL‐C ranged from 0.2–52.5% across the dose range, compared with 5.9–15.3% with placebo (Figure 2 a).",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_3b71db9df3b496",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -55,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "In the six trials focused on LDL levels, bococizumab significantly reduced LDL cholesterol by an average of 55 percent at week 12.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_3fcbbef56dd481",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -72.2,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg Q14 days",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25784512",
+        "quote": "Pharmacokinetic/pharmacodynamic model-based simulation assuming no dose reductions predicted that bococizumab would lower LDL-C levels by 72.2",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_53ea29769445cd",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -15.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Although we noted a sizeable placebo effect (with an up to 15% reduction from baseline levels in LDL‐C)",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_711536a89da5b4",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -55.4,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "300 mg Q28 days",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25784512",
+        "quote": "and 55.4 mg/dl, respectively",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_93d39aa63b3cc7",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -50.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 85",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg Q28d",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Multiple dosing of RN317 produced LDL‐C reductions of ∼50%, sustained over an 85‐day dosing interval.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_a4b1bac06c1828",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -53.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "RN317 significantly reduced LDL‐C following single‐dose administration, producing an up to 53% reduction from baseline levels",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_d1b1d7914ff727",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -52.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3.0 mg/kg s.c.",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "RN317 lowered LDL‐C by up to 52.5% (day 15) following a single s.c. dose of 3.0 mg/kg",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_d61ffd1f0f7286",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -70.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3.0 mg/kg s.c.",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "The same dose of bococizumab (s.c. 3.0 mg/kg) produced a greater percentage reduction from baseline in LDL‐C of 70% on day 15.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_e20020f8dca223",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -50.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 85",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg Q28d",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Following multiple‐dose administration (s.c. 300 mg Q28d), RN317 produced sustained reductions in LDL‐C (of ∼50% from baseline levels) throughout the 85‐day follow‐up.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_e7255243f109b3",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -15.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "RN317, mean percentage decreases from baseline in LDL‐C ranged from 0.2–52.5% across the dose range, compared with 5.9–15.3% with placebo (Figure 2 a).",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_fe503f3703d8c7",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 100,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 8",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3.0 mg/kg s.c.",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "An equivalent s.c. dose of bococizumab (3.0 mg/kg) resulted in 100% of subjects achieving a ≥ 50% reduction in LDL‐C from baseline at day 8.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_ffd14f0e671538",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 70,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3.0 mg/kg s.c.",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "vs. a maximum of 70% with single‐dose bococizumab s.c. 3.0 mg/kg.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_13e27a4be246a8",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "organogenesis",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg/kg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26382609",
+        "quote": "a corresponding dose-dependent decrease in fetal cholesterol levels",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26382609"
+      },
+      {
+        "fact_id": "f_510922db7f9ba9",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "organogenesis",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg/kg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26382609",
+        "quote": "Maternal cholesterol levels were decreased significantly, with reductions that were of a similar magnitude regardless of dose",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26382609"
+      },
+      {
+        "fact_id": "f_1595e5ecba89ae",
+        "entity": "target:pcsk9",
+        "key": "genetic_association_score",
+        "value": 0.949,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 51,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:PCSK9",
+        "quote": "\"genetic_association_score\": 0.949",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000169174"
+      },
+      {
+        "fact_id": "f_ee42e66726abcc",
+        "entity": "trial:nct01975389",
+        "key": "events_control",
+        "value": 224,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "arm": "placebo"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "In SPIRE-2, the primary endpoint occurred in 224 patients randomized to receive placebo and 179 patients randomized to receive bococizumab",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_049d63e9e8b813",
+        "entity": "trial:nct01975389",
+        "key": "events_treatment",
+        "value": 179,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "arm": "bococizumab"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "In SPIRE-2, the primary endpoint occurred in 224 patients randomized to receive placebo and 179 patients randomized to receive bococizumab",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_f773116eda6184",
+        "entity": "trial:nct01975389",
+        "key": "hr",
+        "value": 0.79,
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:spire2",
+        "quote": "which translated to a statistically significant 21 percent reduction in risk among those taking bococizumab over an average follow-up of 12 months.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_46e2bd1aca68f2",
+        "entity": "trial:nct01975389",
+        "key": "inclusion_threshold",
+        "value": 130,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "biomarker": "non-HDL-C"
+        },
+        "source_id": "ctgov:NCT01975389@2017-03-17",
+        "quote": "Must have an LDL C \\>/=100 mg/dL (2.6 mmol/L) OR non HDL C \\>/=130 mg/dL (3.4 mmol/L).",
+        "pub_date": "2013-11-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01975389"
+      },
+      {
+        "fact_id": "f_85d3d67aa089af",
+        "entity": "trial:nct01975389",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "ctgov:NCT01975389@2017-03-17",
+        "quote": "Must have an LDL C \\>/=100 mg/dL (2.6 mmol/L) OR non HDL C \\>/=130 mg/dL (3.4 mmol/L).",
+        "pub_date": "2013-11-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01975389"
+      },
+      {
+        "fact_id": "f_a185e4220e0560",
+        "entity": "trial:nct01975389",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "SPIRE-2",
+          "measure": "LDL cholesterol"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "The second, called SPIRE-2, enrolled 10,621 people with LDL cholesterol greater than or equal to 100 mg/dL, a level indicating higher cardiovascular risk.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_a22c9cd92b773a",
+        "entity": "trial:nct01975389",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "pmid:27502861",
+        "quote": "≥100 mg/dL (SPIRE-2, n = 11,000)",
+        "pub_date": "2016-05-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27502861"
+      },
+      {
+        "fact_id": "f_fe6ec4fcc4c65e",
+        "entity": "trial:nct01975389",
+        "key": "inclusion_threshold",
+        "value": 80,
+        "unit": "mg/dl",
+        "attrs": {},
+        "source_id": "pmid:25784512",
+        "quote": "subjects with LDL-C levels≥80 mg/dl on stable statin therapy",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_4e4f45e686c54f",
+        "entity": "trial:nct01975389",
+        "key": "median_followup",
+        "value": 12,
+        "unit": "months",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "Patients in SPIRE-1 and SPIRE-2 were followed for an average of seven and 12 months, respectively, before the trials were terminated.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_047c15f2cc7a71",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 8,
+        "unit": "rats/group",
+        "attrs": {
+          "trial": "rat PK/PD study"
+        },
+        "source_id": "pmid:26382609",
+        "quote": "bococizumab was administered intravenously to pregnant Sprague-Dawley (SD) rats (n = 8/group) at 0, 10, 30, and 100 mg/kg during organogenesis",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26382609"
+      },
+      {
+        "fact_id": "f_7326d5e920ffd3",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 10621,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "The second, called SPIRE-2, enrolled 10,621 people with LDL cholesterol greater than or equal to 100 mg/dL, a level indicating higher cardiovascular risk.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_755a311e14afb1",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 11000,
+        "unit": "participants",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "pmid:27502861",
+        "quote": "(SPIRE-2, n = 11,000)",
+        "pub_date": "2016-05-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27502861"
+      },
+      {
+        "fact_id": "f_7d95cf91df7529",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 354,
+        "unit": "subjects",
+        "attrs": {},
+        "source_id": "pmid:25784512",
+        "quote": "Of the 354 subjects randomized",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_a87fe16638f11e",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 20,
+        "unit": "rats/group",
+        "attrs": {
+          "trial": "definitive embryo-fetal development study"
+        },
+        "source_id": "pmid:26382609",
+        "quote": "bococizumab was administered to pregnant SD rats (n = 20/group) at 0, 10, 30, and 100 mg/kg",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26382609"
+      },
+      {
+        "fact_id": "f_cefa65b900d29e",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 133,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "NCT01720537"
+        },
+        "source_id": "pmcid:PMC5351011",
+        "quote": "Of 133 subjects randomized, 127 completed the study.",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27860267"
+      },
+      {
+        "fact_id": "f_f3e1e478e2dd48",
+        "entity": "trial:nct01975389",
+        "key": "n_randomized",
+        "value": 10564,
+        "unit": "participants",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "ctgov:NCT01975389@2017-03-17",
+        "quote": "Enrollment: 10564 (ACTUAL)",
+        "pub_date": "2013-11-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01975389"
+      },
+      {
+        "fact_id": "f_37225337a6fc5a",
+        "entity": "trial:nct01975389",
+        "key": "primary_endpoint",
+        "value": "composite of nonfatal heart attack, nonfatal stroke, hospitalization for unstable angina requiring urgent revascularization, or cardiovascular death",
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "The primary endpoint for both SPIRE-1 and SPIRE-2 was a composite of nonfatal heart attack, nonfatal stroke, hospitalization for unstable angina requiring urgent revascularization, or cardiovascular death.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_50ed7c1a7909c3",
+        "entity": "trial:nct01975389",
+        "key": "primary_endpoint",
+        "value": "incident vascular events",
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "pmid:27502861",
+        "quote": "assess the efficacy and safety of bococizumab in the prevention of incident vascular events in high-risk populations",
+        "pub_date": "2016-05-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27502861"
+      },
+      {
+        "fact_id": "f_9dc2d245f41774",
+        "entity": "trial:nct01975389",
+        "key": "primary_endpoint",
+        "value": "Event Rate Per 100 Participant-years for First Occurrence of Major Cardiovascular (CV) Event",
+        "unit": "events per 100 participant-years",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "ctgov:NCT01975389@2017-03-17",
+        "quote": "Primary outcome(s): Event Rate Per 100 Participant-years for First Occurrence of Major Cardiovascular (CV) Event [From baseline until the date of first adjudicated and confirmed occurrence of major CV event (maximum duration: up to 3.4 years)]",
+        "pub_date": "2013-11-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01975389"
+      },
+      {
+        "fact_id": "f_737b966e2d71cb",
+        "entity": "trial:nct01975389",
+        "key": "readout_statement",
+        "value": "bococizumab significantly reduced LDL-C across all doses despite dose reductions in many subjects",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:25784512",
+        "quote": "In conclusion, bococizumab significantly reduced LDL-C across all doses despite dose reductions in many subjects",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_b8e4567f8e3abe",
+        "entity": "trial:nct01975389",
+        "key": "readout_statement",
+        "value": "bococizumab significantly reduced the risk of cardiovascular events by 21 percent compared with placebo",
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "However, in patients at high cardiovascular risk who had baseline LDL of greater than 100 mg/dL, bococizumab significantly reduced the risk of cardiovascular events by 21 percent compared with placebo",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_ee7c98524298b2",
+        "entity": "trial:nct01975389",
+        "key": "readout_statement",
+        "value": "determine whether the addition of this PCSK9 inhibitor to standard treatment significantly reduces cardiovascular morbidity and mortality in high-risk patients",
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "pmid:27502861",
+        "quote": "determine whether the addition of this PCSK9 inhibitor to standard treatment significantly reduces cardiovascular morbidity and mortality in high-risk patients",
+        "pub_date": "2016-05-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27502861"
+      },
+      {
+        "fact_id": "f_33dddd6904cb5f",
+        "entity": "trial:nct01975389",
+        "key": "safety_signal",
+        "value": 2,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:25784512",
+        "quote": "Few subjects (n=7; 2%) discontinued treatment because of treatment-related adverse events",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/25784512"
+      },
+      {
+        "fact_id": "f_6f0ebf5bc52917",
+        "entity": "trial:nct01975389",
+        "key": "safety_signal",
+        "value": false,
+        "unit": "boolean",
+        "attrs": {
+          "trial": "definitive embryo-fetal development study"
+        },
+        "source_id": "pmid:26382609",
+        "quote": "no adverse maternal or developmental effects were observed up to 100 mg/kg",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/26382609"
+      },
+      {
+        "fact_id": "f_f3530b32052e63",
+        "entity": "trial:nct01975389",
+        "key": "safety_signal",
+        "value": "injection site reactions occurred significantly more frequently in patients receiving bococizumab",
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "Safety outcomes were not significantly different for bococizumab versus placebo with the exception of injection site reactions, which occurred significantly more frequently in patients receiving bococizumab.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_1075fd835fb9e6",
+        "entity": "trial:nct01975389",
+        "key": "stopped_early",
+        "value": true,
+        "unit": "",
+        "attrs": {
+          "trial": "SPIRE-2"
+        },
+        "source_id": "announcement:spire2",
+        "quote": "Pfizer, the trials' sponsor, announced on Nov. 1, 2016, that the company would discontinue development of bococizumab, citing an unanticipated attenuation of LDL lowering over time, as well as evidence of an immune response in some patients. At that point, all ongoing trials were terminated.",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results"
+      },
+      {
+        "fact_id": "f_3a7b303b4f1bc1",
+        "entity": "trial:nct01975389",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "sequence variation in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "15 percent reduction in LDL cholesterol",
+          "n": 9524,
+          "ci_low": 0.32,
+          "ci_high": 0.79
+        },
+        "source_id": "pmid:16554528",
+        "quote": "a sequence variation in PCSK9 that was associated with a 15 percent reduction in LDL cholesterol and a 47 percent reduction in the risk of CHD (hazard ratio, 0.50; 95 percent confidence interval, 0.32 to 0.79; P=0.003)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      },
+      {
+        "fact_id": "f_bd11193239317d",
+        "entity": "trial:nct01975389",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "nonsense mutations in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "28 percent reduction in mean LDL cholesterol",
+          "n": 3363,
+          "ci_low": 0.02,
+          "ci_high": 0.81
+        },
+        "source_id": "pmid:16554528",
+        "quote": "these mutations were associated with a 28 percent reduction in mean LDL cholesterol and an 88 percent reduction in the risk of CHD (P=0.008 for the reduction; hazard ratio, 0.11; 95 percent confidence interval, 0.02 to 0.81; P=0.03)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01975389@2017-03-17",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01975389 SPIRE-2",
+        "url": "https://clinicaltrials.gov/study/NCT01975389",
+        "pub_date": "2013-11-04",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01975389",
+            "acronym": "SPIRE-2",
+            "title": "The Evaluation of Bococizumab (PF-04950615; RN316) in Reducing the Occurrence of Major Cardiovascular Events in High Risk Subjects",
+            "official_title": "Phase 3 Multi Center, Double Blind, Randomized, Placebo Controlled, Parallel Group Evaluation Of The Efficacy, Safety, And Tolerability Of Bococizumab (Pf-04950615), In Reducing The Occurrence Of Major Cardiovascular Events In High Risk Subjects",
+            "sponsor": "Pfizer",
+            "status": "TERMINATED",
+            "why_stopped": "See Detailed Description",
+            "start_date": "2013-10-29",
+            "primary_completion": "2017-04-03",
+            "first_posted": "2013-11-04",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 10564,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "bococizumab (PF-04950615)",
+                "type": "DRUG",
+                "other_names": [
+                  "RN316"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": []
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Event Rate Per 100 Participant-years for First Occurrence of Major Cardiovascular (CV) Event [From baseline until the date of first adjudicated and confirmed occurrence of major CV event (maximum duration: up to 3.4 years)]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 2038
+      },
+      {
+        "source_id": "pmid:27502861",
+        "type": "journal",
+        "title": "Evaluating bococizumab, a monoclonal antibody to PCSK9, on lipid levels and clinical events in broad patient groups with and without prior cardiovascular events: Rationale and design of the Studies of PCSK9 Inhibition and the Reduction of vascular Events (SPIRE) Lipid Lowering and SPIRE Cardiovascular Outcomes Trials.",
+        "url": "https://europepmc.org/article/MED/27502861",
+        "pub_date": "2016-05-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27502861",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2016.05.010",
+          "journal": "American heart journal"
+        },
+        "chars": 2236
+      },
+      {
+        "source_id": "pmid:25784512",
+        "type": "journal",
+        "title": "Results of bococizumab, a monoclonal antibody against proprotein convertase subtilisin/kexin type 9, from a randomized, placebo-controlled, dose-ranging study in statin-treated subjects with hypercholesterolemia.",
+        "url": "https://europepmc.org/article/MED/25784512",
+        "pub_date": "2015-02-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25784512",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2015.02.006",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 2152
+      },
+      {
+        "source_id": "pmid:28181260",
+        "type": "journal",
+        "title": "A Mechanism-Based Pharmacokinetic/Pharmacodynamic Model for Bococizumab, a Humanized Monoclonal Antibody Against Proprotein Convertase Subtilisin/Kexin Type 9, and Its Application in Early Clinical Development.",
+        "url": "https://europepmc.org/article/MED/28181260",
+        "pub_date": "2017-02-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28181260",
+          "pmcid": null,
+          "doi": "10.1002/jcph.867",
+          "journal": "Journal of clinical pharmacology"
+        },
+        "chars": 1542
+      },
+      {
+        "source_id": "pmid:26382609",
+        "type": "journal",
+        "title": "Decreased maternal and fetal cholesterol following maternal bococizumab (anti-PCSK9 monoclonal antibody) administration does not affect rat embryo-fetal development.",
+        "url": "https://europepmc.org/article/MED/26382609",
+        "pub_date": "2015-09-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26382609",
+          "pmcid": null,
+          "doi": "10.1016/j.yrtph.2015.08.007",
+          "journal": "Regulatory toxicology and pharmacology : RTP"
+        },
+        "chars": 1646
+      },
+      {
+        "source_id": "pmid:28060539",
+        "type": "journal",
+        "title": "Bococizumab for the treatment of hypercholesterolaemia.",
+        "url": "https://europepmc.org/article/MED/28060539",
+        "pub_date": "2017-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28060539",
+          "pmcid": null,
+          "doi": "10.1080/14712598.2017.1279602",
+          "journal": "Expert opinion on biological therapy"
+        },
+        "chars": 1343
+      },
+      {
+        "source_id": "pmcid:PMC5351011",
+        "type": "journal",
+        "title": "A Phase I Randomized Study of a Specifically Engineered, pH-Sensitive PCSK9 Inhibitor RN317 (PF-05335810) in Hypercholesterolemic Subjects on Statin Therapy.",
+        "url": "https://europepmc.org/article/MED/27860267",
+        "pub_date": "2016-11-17",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "27860267",
+          "pmcid": "PMC5351011",
+          "doi": "10.1111/cts.12430",
+          "journal": "Clinical and translational science"
+        },
+        "chars": 41319
+      },
+      {
+        "source_id": "pmid:27483697",
+        "type": "journal",
+        "title": "NEW CLASS OF DRUGS: THERAPEUTIC RNAi INHIBITION OF PCSK9 AS A SPECIFIC LDL-C LOWERING THERAPY.",
+        "url": "https://europepmc.org/article/MED/27483697",
+        "pub_date": "2016-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27483697",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Revista medico-chirurgicala a Societatii de Medici si Naturalisti din Iasi"
+        },
+        "chars": 1444
+      },
+      {
+        "source_id": "pmid:27098076",
+        "type": "journal",
+        "title": "[Severe hypercholesterolaemia--when to use the proprotein convertase subtilisin-kexin type 9 protease inhibitors (PCSK9 inhibitors)? Polish Society of Cardiology experts' group statement].",
+        "url": "https://europepmc.org/article/MED/27098076",
+        "pub_date": "2016-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27098076",
+          "pmcid": null,
+          "doi": "10.5603/kp.2016.0051",
+          "journal": "Kardiologia polska"
+        },
+        "chars": 2983
+      },
+      {
+        "source_id": "pmid:26329686",
+        "type": "journal",
+        "title": "PCSK9 inhibitors--past, present and future.",
+        "url": "https://europepmc.org/article/MED/26329686",
+        "pub_date": "2015-09-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26329686",
+          "pmcid": null,
+          "doi": "10.1517/17425255.2015.1075506",
+          "journal": "Expert opinion on drug metabolism & toxicology"
+        },
+        "chars": 1405
+      },
+      {
+        "source_id": "pmid:26651519",
+        "type": "journal",
+        "title": "Antibodies to watch in 2016.",
+        "url": "https://europepmc.org/article/MED/26651519",
+        "pub_date": "2015-12-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26651519",
+          "pmcid": "PMC4966626",
+          "doi": "10.1080/19420862.2015.1125583",
+          "journal": "mAbs"
+        },
+        "chars": 1570
+      },
+      {
+        "source_id": "pmid:16554528",
+        "type": "journal",
+        "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease.",
+        "url": "https://europepmc.org/article/MED/16554528",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16554528",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa054013",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1719
+      },
+      {
+        "source_id": "pmid:25830891",
+        "type": "journal",
+        "title": "In vivo genome editing using Staphylococcus aureus Cas9.",
+        "url": "https://europepmc.org/article/MED/25830891",
+        "pub_date": "2015-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25830891",
+          "pmcid": "PMC4393360",
+          "doi": "10.1038/nature14299",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1088
+      },
+      {
+        "source_id": "pmid:18193043",
+        "type": "journal",
+        "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
+        "url": "https://europepmc.org/article/MED/18193043",
+        "pub_date": "2008-01-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18193043",
+          "pmcid": "PMC5206900",
+          "doi": "10.1038/ng.76",
+          "journal": "Nature genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1538
+      },
+      {
+        "source_id": "announcement:spire2",
+        "type": "press_release",
+        "title": "PCSK9 Inhibition with Bococizumab Yields Mixed Results (American College of Cardiology press release, ACC.17)",
+        "url": "https://www.acc.org/About-ACC/Press-Releases/2017/03/16/22/25/Fri-9am-PCSK9-Inhibition-with-Bococizumab-Yields-Mixed-Results",
+        "pub_date": "2017-03-17",
+        "access": "press_release",
+        "meta": {},
+        "chars": 9972
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 21,
+      "facts": 51,
+      "relationships": 13,
+      "events": 131,
+      "audit_entries": 131,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 19510,
+        "output_tokens": 5938,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 8264,
+        "output_tokens": 6304,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2473,
+        "output_tokens": 8684,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 7285,
+        "output_tokens": 7372,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 10131,
+        "output_tokens": 5148,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 5960,
+        "output_tokens": 1310,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

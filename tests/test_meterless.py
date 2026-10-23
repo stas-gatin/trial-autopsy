@@ -70,3 +70,40 @@ class NightshiftRecordingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class JsonRetryTests(unittest.TestCase):
+    """A reply that neither parses nor repairs is asked once more, under its own recording; a normal reply is not."""
+
+    def _run(self, replies):
+        from unittest import mock
+        from app.llm import generator
+        calls = []
+
+        def fake(role, system, prompt, tag="", agent=None):
+            calls.append(tag)
+            return mock.Mock(text=replies[len(calls) - 1])
+
+        with mock.patch.object(generator, "generate", side_effect=fake):
+            data, _ = generator.generate_json("critic", "system", "prompt", tag="case:critic:0")
+        return data, calls
+
+    def test_reply_without_json_is_retried_once(self):
+        # A cut-off reply that quotes ['f_1'] still holds no JSON object; the repair pass answers in prose too.
+        data, calls = self._run(["Let me analyze this. Facts ['f_1'] do not match", "I can't verify that.",
+                                 '{"issues": []}'])
+        self.assertEqual(data, {"issues": []})
+        self.assertEqual(calls, ["case:critic:0", "case:critic:0:json-repair", "case:critic:0:retry"])
+
+    def test_normal_reply_is_not_retried(self):
+        data, calls = self._run(['{"issues": [1]}'])
+        self.assertEqual(data, {"issues": [1]})
+        self.assertEqual(calls, ["case:critic:0"])
+
+    def test_extraction_can_opt_out_of_the_retry(self):
+        from unittest import mock
+        from app.llm import generator
+        replies = iter(["Facts ['f_1'] do not", "I can't verify that."])
+        with mock.patch.object(generator, "generate", side_effect=lambda *a, **k: mock.Mock(text=next(replies))):
+            with self.assertRaises(ValueError):
+                generator.generate_json("extraction", "system", "prompt", tag="case:extract:x", retry=False)

@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15325833&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*3\\\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '15325833' LIMIT 5",
+ "rows": [
+  [
+   " Median duration of follow-up was 3.9 years (IQR 3"
+  ]
+ ],
+ "error": null
+}

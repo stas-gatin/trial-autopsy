@@ -70,3 +70,53 @@ class CompleteInputs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ResolveDrugName(unittest.TestCase):
+    """A registry name like 'Epanova® (omega-3 carboxylic acids)' still resolves; names as written are tried first."""
+
+    def _resolve(self, request_drug, interventions, known):
+        from types import SimpleNamespace
+        from unittest import mock
+        from app.agents import intake
+        tried = []
+
+        def find(name, tracer=None):
+            tried.append(name)
+            return {"id": known[name], "name": name} if name in known else None
+
+        profile = {"name": "drug", "mechanismsOfAction": {"rows": []}, "synonyms": [], "tradeNames": []}
+        state = SimpleNamespace(request={"drug": request_drug}, trial={"interventions": interventions},
+                                tracer=None, warnings=[], drug=None)
+        with mock.patch.object(intake.opentargets, "find_drug", side_effect=find), \
+                mock.patch.object(intake.opentargets, "drug_profile", return_value=profile):
+            intake._resolve_drug(state)
+        return state.drug, tried
+
+    def test_brand_name_with_trademark_and_generic_in_brackets(self):
+        drug, tried = self._resolve("omega-3 carboxylic acids",
+                                    [{"type": "DRUG", "name": "Epanova® (omega-3 carboxylic acids)"},
+                                     {"type": "DRUG", "name": "corn oil control"}],
+                                    {"Epanova": "CHEMBL3137327"})
+        self.assertEqual(drug["chembl_id"], "CHEMBL3137327")
+        self.assertEqual(tried[:3], ["omega-3 carboxylic acids", "Epanova® (omega-3 carboxylic acids)", "corn oil control"])
+
+    def test_a_name_that_resolves_as_written_wins_over_variants(self):
+        drug, tried = self._resolve("Brand® (generic)", [{"type": "DRUG", "name": "rosuvastatin 10 mg"}],
+                                    {"rosuvastatin": "CHEMBL1496", "Brand": "CHEMBL0"})
+        self.assertEqual(drug["chembl_id"], "CHEMBL1496")
+        self.assertNotIn("Brand", tried)
+
+
+class MalformedChanges(unittest.TestCase):
+    def test_note_strings_in_changes_are_left_out(self):
+        from app.agents.analysis import _keep_change_objects
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -17}, "HDL-C change not placebo-adjusted"]}
+        self.assertEqual(_keep_change_objects(m), ["HDL-C change not placebo-adjusted"])
+        self.assertEqual(m["changes"], [{"biomarker": "LDL-C", "pct_change": -17}])
+
+    def test_well_formed_output_is_not_touched(self):
+        from app.agents.analysis import _keep_change_objects
+        m = {"changes": None}
+        self.assertEqual(_keep_change_objects(m), [])
+        self.assertIsNone(m["changes"])

@@ -1,0 +1,2050 @@
+{
+  "run_id": "bt-accord_lipid",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2010-03-14",
+  "backtest": true,
+  "readout_date": "2010-03-14",
+  "analysis_date": "2010-03-14",
+  "trial": {
+    "nct_id": "NCT00000620",
+    "acronym": "ACCORD",
+    "title": "Action to Control Cardiovascular Risk in Diabetes (ACCORD)",
+    "sponsor": "National Heart, Lung, and Blood Institute (NHLBI)",
+    "status": "COMPLETED",
+    "enrollment": 10251,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerosis",
+      "Cardiovascular Diseases",
+      "Hypercholesterolemia",
+      "Hypertension",
+      "Diabetes Mellitus, Type 2",
+      "Diabetes Mellitus",
+      "Coronary Disease"
+    ],
+    "primary_completion": "2009-06"
+  },
+  "drug": {
+    "name": "fenofibrate",
+    "chembl_id": "CHEMBL672",
+    "aliases": [
+      "Antara",
+      "Antara (micronized)",
+      "Fenofibrate (micronized)",
+      "Fenofibrate delayed release",
+      "Fenofibrate micronized",
+      "Fenofibrato",
+      "Fenogal",
+      "Fenoglide",
+      "Lipantil",
+      "Lipantil micro 200",
+      "Lipantil micro 267",
+      "Lipantil micro 67",
+      "Lipidil",
+      "Lipofen",
+      "NSC-281319",
+      "Supralip 160",
+      "Tricor",
+      "Tricor (micronized)",
+      "Triglide",
+      "feno",
+      "lcp-atorfen",
+      "lipidil supra",
+      "lofibra",
+      "micronized fenofibrate"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Peroxisome proliferator-activated receptor alpha agonist"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000186951",
+        "symbol": "PPARA",
+        "name": "peroxisome proliferator activated receptor alpha"
+      }
+    ],
+    "searched_as": "fenofibrate"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-accord_lipid",
+  "log_file": "logs/trace-bt-accord_lipid.jsonl",
+  "execution_time_seconds": 1576.0,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "outcome not stated in the evidence",
+      "predicted_outcome": "failure",
+      "consistency": "",
+      "primary_category": "target_not_causal",
+      "secondary_categories": [
+        "population",
+        "off_target_harm",
+        "design_or_endpoint",
+        "execution_or_nonscientific",
+        "insufficient_data"
+      ],
+      "calculator_category": "target_not_causal",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: not_causal"
+    },
+    "report": {
+      "headline": "ACCORD lipid trial (fenofibrate 160 mg/day added to simvastatin) did not reduce major cardiovascular events in type 2 diabetes patients with LDL-C <2.59 mmol/L; the PPARA target lacks human genetic support for CVD causality.",
+      "summary": "The ACCORD lipid trial randomized 5,518 type 2 diabetes patients on simvastatin with LDL-C <2.59 mmol/L to fenofibrate 160 mg/day or placebo. The primary endpoint — combined fatal or nonfatal cardiovascular disease events — was not significantly reduced (NIH/NHLBI news release: Landmark ACCORD Trial Finds Intensive Blood Pressure and Combination Lipid Therapies do not Reduce Combined Cardiovascular Events in Adults with Diabetes). The calculator predicts failure (expected HR 1.0, causal RRR 0%) because the PPARA genetic association score is 0.0 with no evidence items, indicating no human genetic support for a causal role in CVD (opentargets:PPARA). Multiple factors likely contributed: the trial tested combination therapy (fenofibrate + statin) versus statin alone, whereas the positive FIELD trial tested fenofibrate 200 mg/day monotherapy in statin-naive patients with marked dyslipidemia (TG ≥2.3 mmol/L, HDL-C ≤1.0 mmol/L) and showed an 11% RRR in total CVD events (HR 0.89, 95% CI 0.80–0.99, p=0.035) and a 27% RRR in the marked dyslipidemia subgroup (HR 0.73, 95% CI 0.58–0.91, p=0.005) (Effects of fenofibrate treatment on cardiovascular disease risk in 9,795 individuals with type 2 diabetes and various components of the metabolic syndrome: the Fenofibrate Intervention and Event Lowering in Diabetes (FIELD) study). No verified placebo-adjusted triglyceride change at the ACCORD dose (160 mg/day) in statin-treated patients exists in the evidence base; the only ACCORD-era biomarker datum is a 28% increase in FGF21, not triglyceride lowering (The circulating metabolic regulator FGF21 is induced by prolonged fasting and PPARalpha activation in man). A PPARA variant (rs4253623) is associated with increased nonfatal MI risk (OR 1.26, 95% CI 1.08–1.46), suggesting potential off-target harm (Cholesterol ester transfer protein, interleukin-8, peroxisome proliferator activator receptor alpha, and Toll-like receptor 4 genetic variations and risk of incident nonfatal myocardial infarction and ischemic stroke). Confidence is medium due to missing biomarker data and population differences.",
+      "key_evidence": [
+        "5,518 patients randomized in ACCORD lipid trial (Evolution of the lipid trial protocol of the Action to Control Cardiovascular Risk in Diabetes (ACCORD) trial.)",
+        "Primary endpoint: combined fatal or nonfatal cardiovascular disease events (NIH/NHLBI news release: Landmark ACCORD Trial Finds Intensive Blood Pressure and Combination Lipid Therapies do not Reduce Combined Cardiovascular Events in Adults with Diabetes)",
+        "PPARA genetic association score 0.0 with 0 evidence items (opentargets:PPARA)",
+        "FIELD trial (9,795 patients, fenofibrate 200 mg/day monotherapy) showed HR 0.89 (95% CI 0.80–0.99, p=0.035) for total CVD events and HR 0.73 (95% CI 0.58–0.91, p=0.005) in marked dyslipidemia subgroup (Effects of fenofibrate treatment on cardiovascular disease risk in 9,795 individuals with type 2 diabetes and various components of the metabolic syndrome: the Fenofibrate Intervention and Event Lowering in Diabetes (FIELD) study)",
+        "No verified placebo-adjusted triglyceride change at ACCORD dose (160 mg/day) in statin-treated patients; only biomarker datum is 28% FGF21 increase (The circulating metabolic regulator FGF21 is induced by prolonged fasting and PPARalpha activation in man)",
+        "PPARA variant rs4253623 associated with increased nonfatal MI risk (OR 1.26, 95% CI 1.08–1.46) (Cholesterol ester transfer protein, interleukin-8, peroxisome proliferator activator receptor alpha, and Toll-like receptor 4 genetic variations and risk of incident nonfatal myocardial infarction and ischemic stroke)",
+        "ACCORD tested combination therapy (fenofibrate + simvastatin) in patients with LDL-C <2.59 mmol/L; FIELD tested monotherapy in statin-naive patients with TG 1.0–5.0 mmol/L (Evolution of the lipid trial protocol of the Action to Control Cardiovascular Risk in Diabetes (ACCORD) trial.; Effects of long-term fenofibrate therapy on cardiovascular events in 9795 people with type 2 diabetes mellitus (the FIELD study): randomised controlled trial.)",
+        "Median follow-up 4.7 years (ClinicalTrials.gov NCT00000620 ACCORD); 208 vs 237 cardiovascular events in treatment vs control (NIH/NHLBI news release: Landmark ACCORD Trial Finds Intensive Blood Pressure and Combination Lipid Therapies do not Reduce Combined Cardiovascular Events in Adults with Diabetes)"
+      ],
+      "what_would_change_this": "A Mendelian randomization study of PPARA variants on CVD outcomes in diabetic populations on statin background, or a trial of fenofibrate monotherapy in statin-naive type 2 diabetes patients with marked dyslipidemia (high TG/low HDL) using a dose that achieves verified triglyceride lowering.",
+      "readthrough_note": "The failure of ACCORD lipid trial does not necessarily invalidate fibrates for all populations; FIELD showed benefit in marked dyslipidemia without statin background. Other PPARA agonists or combination strategies in selected high-TG/low-HDL subgroups warrant separate evaluation."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "not_causal",
+        "detail": "Open Targets genetic association 0.0 for PPARA",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "triglycerides",
+        "detail": "intended biomarker triglycerides is causal or unknown; LDL-equivalent change None mmol/L via no lipid change",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.0,
+        "detail": "expected HR 1.0 at 4.7 y (relative risk reduction 0%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "accord_lipid",
+      "ldl_equivalent_mmol": null,
+      "basis": "no lipid change",
+      "time_factor": 0.964,
+      "expected_hr": 1.0,
+      "causal_rrr": 0.0,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "failure",
+      "category": "target_not_causal",
+      "secondary": [],
+      "weakest_link": "target genetics: not_causal",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "accord_lipid",
+      "mode": "autopsy",
+      "target_genetics": "not_causal",
+      "intended_biomarker": "triglycerides",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "missing",
+          "source": ""
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": null,
+          "method": "missing",
+          "source": ""
+        }
+      ],
+      "followup_years": 4.7,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "not_causal",
+      "target_genetics_rationale": "Open Targets genetic association score for PPARA and coronary artery disorder is 0.0 with 0 evidence items (f_fac050fbabf852), indicating no genetic support for a causal role in coronary disease.",
+      "intended_biomarker": "triglycerides",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "missing",
+          "fact_ids": [],
+          "notes": "No verified placebo-adjusted LDL-C change for fenofibrate 160 mg/day in type 2 diabetes on statin background. FIELD study (200 mg/day) LDL-C change of 0% (f_88fcabb26e49b5) not verified in abstract per verifier (pmid:17988728)."
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "missing",
+          "fact_ids": [],
+          "notes": "No verified placebo-adjusted triglyceride change for fenofibrate 160 mg/day in ACCORD-like population. ACCORD phase 2 sub-study (f_c087cfd76a1e09) reports 28% change for 'other' biomarker (FGF21 increase), not placebo-adjusted, dose not stated, not confirmed as triglycerides. No placebo-adjusted phase 2 data at ~160 mg/day available in evidence store."
+        }
+      ],
+      "followup_years": 4.7,
+      "followup_fact_ids": [
+        "f_212fc65cab642b"
+      ],
+      "events": null,
+      "events_basis": "actual",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "placebo-adjusted LDL-C change for fenofibrate 160 mg/day in ACCORD-like population",
+        "placebo-adjusted triglyceride change for fenofibrate 160 mg/day in ACCORD-like population",
+        "total primary events in ACCORD lipid trial",
+        "observed HR and CI for ACCORD lipid trial primary endpoint"
+      ],
+      "notes": "ACCORD lipid trial (NCT00000620) tested fenofibrate 160 mg/day vs placebo added to simvastatin in 5518 patients with type 2 diabetes (f_16d556f7ab81ad, f_0e10b34b431436), median follow-up 4.7 years (f_212fc65cab642b). Target PPARA has no genetic support for coronary disease (score 0.0). Intended biomarker is triglycerides. No verified placebo-adjusted biomarker changes available at the trial dose and population; FIELD study (fenofibrate 200 mg/day monotherapy) provides phase 3 outcome data but not verified biomarker changes. Trial read out (announcement 2010-03-14, f_707ab5282f750b) but primary outcome events and HR not in verified facts."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "PPARA genetic association score is 0.0 with 0 evidence items before cutoff, indicating no human genetic support for the target's causal role in CVD.",
+            "refs": [
+              "f_fac050fbabf852"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "FIELD study (fenofibrate 200 mg/day monotherapy) showed a significant 11% RRR in total CVD events overall (HR 0.89, 95% CI 0.80–0.99, p=0.035) and a 27% RRR in the marked dyslipidemia subgroup (HR 0.73, 95% CI 0.58–0.91, p=0.005).",
+            "refs": [
+              "f_a2f2aed24df8a4",
+              "f_092331213eb6b9",
+              "f_da66cca726ac3f",
+              "f_02b725b4209b0a",
+              "f_53a8c9ffcd9a5b",
+              "f_a1fe8608d85da0",
+              "f_372032b81fa5a0",
+              "f_fb96a0cafa4f6c"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization studies of PPARA variants on CVD outcomes in diabetic populations on statin background."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "No verified placebo-adjusted triglyceride change at the ACCORD lipid trial dose (160 mg/day) is available. The only ACCORD-phase-2 sub-study reports a 28% change for an unspecified biomarker labeled 'other', not placebo-adjusted, dose not stated; the Verifier identifies this as a 28% increase in FGF21, not triglyceride lowering.",
+            "refs": [
+              "f_c087cfd76a1e09"
+            ]
+          },
+          {
+            "text": "FIELD study (phase 3, 200 mg/day) showed benefit concentrated in marked dyslipidemia (high TG/low HDL), suggesting triglyceride lowering may be causal in that subgroup, but ACCORD lipid trial enrolled patients with LDL-C <2.59 mmol/L on statin, a different lipid phenotype.",
+            "refs": [
+              "f_53a8c9ffcd9a5b",
+              "f_6fd2ffbd8db25f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Triglycerides are generally considered a causal risk factor for CVD; fibrates reliably lower triglycerides in other trials.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Placebo-adjusted phase 2 triglyceride change for fenofibrate at ~160 mg/day in statin-treated T2D patients, or ACCORD lipid trial's own measured TG change."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "supported",
+        "for": [
+          {
+            "text": "PPARA variant rs4253623 is associated with increased nonfatal MI risk (OR 1.26, 95% CI 1.08–1.46) in a genetic study, suggesting potential off-target harm from PPARA activation.",
+            "refs": [
+              "f_b1d05201c0aea9"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "FIELD study did not show excess harm; overall CVD events were reduced. The genetic variant may not reflect pharmacological modulation.",
+            "refs": [
+              "f_19858a3a86ac48",
+              "f_2384c71b6d40ea"
+            ]
+          }
+        ],
+        "would_settle": "Analysis of rs4253623 interaction with fenofibrate treatment in FIELD or ACCORD; larger genetic studies of PPARA variants and CVD."
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "ACCORD lipid trial enrolled 5,518 T2D patients on simvastatin with LDL-C <2.59 mmol/L (100 mg/dL), whereas FIELD enrolled 9,795 patients with total cholesterol 3.0–6.5 mmol/L and TG 1.0–5.0 mmol/L, not on statin. FIELD benefit was strongest in marked dyslipidemia (TG ≥2.3 mmol/L and HDL-C ≤1.0 mmol/L).",
+            "refs": [
+              "f_16d556f7ab81ad",
+              "f_6fd2ffbd8db25f",
+              "f_7e9b232c7a9d26",
+              "f_e0844228a6962f",
+              "f_53a8c9ffcd9a5b",
+              "f_a1fe8608d85da0"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "ACCORD lipid trial included patients with metabolic syndrome features; FIELD metabolic syndrome subgroup still showed HR 0.89 (CI 0.79–0.99, p=0.052).",
+            "refs": [
+              "f_155b26a755b64f",
+              "f_ce08a8f6d384a7",
+              "f_fecc70202f2cc7",
+              "f_da1efc914af2b3"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analysis of ACCORD lipid trial by baseline TG/HDL levels (marked dyslipidemia vs not)."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "supported",
+        "for": [
+          {
+            "text": "ACCORD lipid trial tested fenofibrate + statin vs statin alone (combination therapy), while FIELD tested fenofibrate vs placebo (monotherapy). The primary endpoint in ACCORD was combined fatal/nonfatal CVD events; FIELD's was coronary events (CHD death/nonfatal MI) with total CVD events as secondary.",
+            "refs": [
+              "f_06b6dfd3670d01",
+              "f_012f033cd7cbae",
+              "f_bf7994af4602fb"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Both trials used composite CVD endpoints; combination therapy could have attenuated incremental benefit if statin already lowered LDL-C maximally.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Direct comparison of fenofibrate monotherapy vs placebo in a statin-naive T2D population with similar lipid profile."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Dose difference: ACCORD used 160 mg/day fenofibrate; FIELD used 200 mg/day. Lower dose may yield smaller TG reduction.",
+            "refs": [
+              "f_0e10b34b431436",
+              "f_88fcabb26e49b5"
+            ]
+          },
+          {
+            "text": "Background statin therapy in ACCORD (simvastatin) may have reduced the incremental benefit of fenofibrate on residual risk.",
+            "refs": [
+              "f_bf7994af4602fb"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "FIELD used 200 mg/day but ACCORD dose was chosen for safety in combination with statin; 160 mg is a standard clinical dose.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Dose-response data for fenofibrate on triglycerides in statin-treated patients."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator inputs for both LDL-C and triglyceride changes are missing (null). No verified placebo-adjusted biomarker change at the ACCORD dose (160 mg/day) in the target population exists in the evidence base.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "ACCORD lipid trial's own biomarker measurements (LDL-C, TG, HDL-C changes) are not present in the verified facts.",
+            "refs": []
+          }
+        ],
+        "against": [],
+        "would_settle": "Publication of ACCORD lipid trial lipid parameter changes; or a phase 2 study of fenofibrate 160 mg/day + statin in T2D with placebo-adjusted TG/LDL-C measurements."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "LDL-C change input (0%) from f_88fcabb26e49b5 is not verified — Verifier reports 'not_found' in abstract (pmid:17988728). No sentence with 0% LDL-C change exists in the FIELD abstract. This input must be removed or replaced with a verified source.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted LDL-C change for fenofibrate 200 mg/day in FIELD study (pmid:17988728) or confirm LDL-C change is truly 0% from full text. If unverifiable, remove LDL-C change from calculator inputs."
+          },
+          {
+            "severity": "high",
+            "issue": "Triglycerides change input uses f_c087cfd76a1e09 (28%, phase 2 ACCORD sub-study) which is: (a) not placebo-adjusted (placebo_adjusted: false), (b) biomarker labeled 'other' not confirmed as triglycerides, (c) dose not stated, (d) Verifier notes this 28% is an *increase* in FGF21 during fenofibrate treatment, not triglyceride lowering. Automatic check flags within-arm values. Per protocol, placebo-adjusted phase 2 change at outcome trial dose (160 mg/day) is required.",
+            "target_agent": "mechanism",
+            "request": "Find placebo-adjusted phase 2 triglyceride change for fenofibrate at ~160 mg/day (ACCORD lipid trial dose per f_0e10b34b431436). If none exists, note as caveat (severity medium) but do not set to null — use best available placebo-adjusted phase 2 data at closest dose."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator basis is 'LDL-C' (ldl_equivalent_mmol: -0.0) but intended_biomarker is 'triglycerides'. With target_genetics: not_causal and pathway: null, the calculator returns expected_hr=1.0 regardless. However, if a triglyceride pathway were applied, the unverified/non-placebo-adjusted 28% would be used. The basis should match the intended biomarker or be explicitly justified.",
+            "target_agent": "case_builder",
+            "request": "Clarify whether calculator should use LDL-C basis (0% change → HR 1.0) or triglyceride pathway. If triglyceride pathway intended, ensure placebo-adjusted phase 2 TG change at 160 mg/day is sourced and pathway parameter set."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypothesis 'biomarker_not_causal' states 'Fenofibrate lowers triglycerides ~28% (ACCORD phase 2 sub-study)' — this overclaims. The 28% is not verified as triglyceride lowering, not placebo-adjusted, and Verifier identifies it as FGF21 increase. Hypothesis must reflect evidence quality.",
+            "target_agent": "investigator",
+            "request": "Revise hypothesis to: 'Triglyceride change in ACCORD not reliably quantified; phase 2 sub-study reports 28% change for unspecified biomarker (other), not placebo-adjusted, dose not stated. FGF21 increased 28% per Verifier. No verified placebo-adjusted TG change at 160 mg/day available.'"
+          },
+          {
+            "severity": "low",
+            "issue": "Follow-up years: calculator uses 4.7 years (f_212fc65cab642b confirmed), but f_f069a99aae1e11 shows median_followup None for ACCORD lipid trial specifically. The 4.7 years may be for overall ACCORD. Should confirm lipid-trial-specific follow-up.",
+            "target_agent": "case_builder",
+            "request": "Verify lipid-trial-specific median follow-up from ACCORD lipid trial publications or registry. Use 4.7 years if confirmed for lipid arm, otherwise note discrepancy."
+          },
+          {
+            "severity": "low",
+            "issue": "Dose discrepancy: calculator inputs don't explicitly state the outcome trial dose (160 mg/day per f_0e10b34b431436, 54 mg/day for renal impairment per f_65079f1036803a). The FIELD LDL-C change uses 200 mg/day. Dose mapping should be documented.",
+            "target_agent": "case_builder",
+            "request": "Add dose_used_in_outcome_trial: 160 mg/day (160 mg/day standard, 54 mg/day renal impairment) to calculator inputs or case metadata for traceability."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator inputs for both LDL-C and triglyceride changes are null with no verified placebo-adjusted biomarker change at the ACCORD lipid trial dose (160 mg/day) in the target population (T2D on statin). The only ACCORD-related biomarker fact (f_c087cfd76a1e09) is a phase 2 sub-study reporting 28% change for an unspecified 'other' biomarker (verified as FGF21 increase), not placebo-adjusted, dose not stated. The FIELD study LDL-C change (f_88fcabb26e49b5, 0% at 200 mg/day monotherapy) is verified but at wrong dose/population. Per protocol, the outcome trial's own measured biomarker change should be used in autopsy mode, but it is absent from verified facts.",
+            "target_agent": "case_builder",
+            "request": "Search for ACCORD lipid trial (NCT00000620) lipid parameter changes: LDL-C, triglycerides, HDL-C changes at median follow-up (4.7 years) in the fenofibrate 160 mg/day + simvastatin arm vs simvastatin alone. Also search for placebo-adjusted phase 2 fenofibrate 160 mg/day triglyceride change in statin-treated T2D patients."
+          },
+          {
+            "severity": "high",
+            "issue": "Two contradictory dose facts for ACCORD lipid trial: f_0e10b34b431436 states 160 mg/day; f_65079f1036803a states 54 mg/day. Both cite pmid:17599426. 160 mg/day is the standard fenofibrate dose; 54 mg/day may refer to fenofibric acid (choline salt) equivalent. This must be resolved as dose affects biomarker change expectations.",
+            "target_agent": "case_builder",
+            "request": "Clarify the fenofibrate dose in ACCORD lipid trial from pmid:17599426 (protocol paper). Determine whether 160 mg/day (fenofibrate) and 54 mg/day (fenofibric acid equivalent) refer to the same arm or different formulations."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypothesis 'execution_or_nonscientific' cites f_88fcabb26e49b5 to support 'FIELD used 200 mg/day', but f_88fcabb26e49b5 is a biomarker_change fact (LDL-C 0% in FIELD) whose metadata includes dose='200 mg/day' — it does not explicitly state the FIELD trial dose. A dedicated dose fact for FIELD should be used or the reference corrected.",
+            "target_agent": "mechanism",
+            "request": "Find a verified fact explicitly stating FIELD study fenofibrate dose (200 mg/day) to replace f_88fcabb26e49b5 in this hypothesis."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypothesis 'insufficient_data' references 'calculator' as a source for missing biomarker inputs. Hypotheses must cite verified facts (f_*) or registry entries, not internal calculator state. The absence of biomarker facts should be noted by citing the lack of relevant f_* entries.",
+            "target_agent": "mechanism",
+            "request": "Replace 'calculator' reference with a statement that no verified facts (f_*) exist for ACCORD lipid trial LDL-C or triglyceride changes at 160 mg/day, and cite the automatic check findings."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator observed_hr and events are null despite trial readout (f_707ab5282f750b). The primary outcome HR and event counts should be populated from the ACCORD lipid trial publication (NEJM 2010) to enable consistency checks (expected_hr vs observed_hr).",
+            "target_agent": "case_builder",
+            "request": "Extract observed hazard ratio (with 95% CI) and event counts for the primary endpoint (combined fatal/nonfatal CVD events) from ACCORD lipid trial primary publication (NEJM 2010, PMID 20228404 or similar)."
+          },
+          {
+            "severity": "low",
+            "issue": "Several hypotheses have 'against' arguments with empty refs arrays (e.g., biomarker_not_causal, off_target_harm, design_or_endpoint, execution_or_nonscientific). While not required, adding supporting facts would strengthen the autopsy.",
+            "target_agent": "mechanism",
+            "request": "Add verified fact references for 'against' arguments where available (e.g., FIELD overall HR for biomarker_not_causal against; FIELD safety for off_target_harm against)."
+          },
+          {
+            "severity": "low",
+            "issue": "The FIELD study LDL-C change (f_88fcabb26e49b5, 0% placebo-adjusted) is a verified, quantified input that could provide context for the calculator's 'no lipid change' basis, but it is not used because it is from a different trial/dose/population. Per protocol, missing phase 3 biomarker data is a caveat (severity medium) — this should be explicitly noted in calculator assumptions/notes.",
+            "target_agent": "mechanism",
+            "request": "Add a calculator assumption/note: 'FIELD study (fenofibrate 200 mg/day monotherapy) showed 0% placebo-adjusted LDL-C change (f_88fcabb26e49b5), but this is not at the ACCORD dose (160 mg/day) or population (statin background). ACCORD lipid trial's own lipid changes are not in verified facts.'"
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_212fc65cab642b",
+          "claim": "c1",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 4.7,
+          "unit": "years",
+          "source_id": "ctgov:NCT00000620@2010-03-14",
+          "status": "confirmed",
+          "found": "4.7 years",
+          "note": "The registry primary outcome timeFrame includes 4.7 years, matching the claim.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Major Cardiovascular Event%' LIMIT 5",
+          "rows": 3
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 1
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PPARA",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.416,
+        "genetic_association_score": 0.0,
+        "evidence_count": 0,
+        "top_evidence": [],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_88fcabb26e49b5",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "200 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17988728",
+        "quote": "the need for such treatment was not affected by plasma lipid concentrations",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_c8322cc16519a8",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 0.34,
+        "unit": "grams/liter",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg/d"
+        },
+        "source_id": "pmid:7635967",
+        "quote": "Administration of fenofibrate (300 mg/d) to 16 patients with coronary artery disease resulted in a marked increase in plasma apo A-II concentrations (0.34 +/- 0.11 to 0.45 +/- 0.17 grams/liter; P < 0.01).",
+        "pub_date": "1995-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/7635967"
+      },
+      {
+        "fact_id": "f_dd296c770b19cd",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 14.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "FIELD",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_27aa32d85d300a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.11,
+        "unit": "grams/liter",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "after fenofibrate administration",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg/d",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:7635967",
+        "quote": "Administration of fenofibrate (300 mg/d) to 16 patients with coronary artery disease resulted in a marked increase in plasma apo A-II concentrations (0.34 +/- 0.11 to 0.45 +/- 0.17 grams/liter; P < 0.01).",
+        "pub_date": "1995-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/7635967"
+      },
+      {
+        "fact_id": "f_57aab671867154",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.4,
+        "unit": "percentage points",
+        "attrs": {
+          "trial": "FIELD",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "5 years",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_c087cfd76a1e09",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 28,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "during fenofibrate treatment",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "ACCORD"
+        },
+        "source_id": "pmid:18680716",
+        "quote": "Hypertriglyceridemic nondiabetic patients had 2-fold elevated FGF21 levels, which were further increased by 28% during fenofibrate treatment.",
+        "pub_date": "2008-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18680716"
+      },
+      {
+        "fact_id": "f_fac050fbabf852",
+        "entity": "target:ppara",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 0,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:PPARA",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000186951"
+      },
+      {
+        "fact_id": "f_084defeb486555",
+        "entity": "trial:nct00000620",
+        "key": "ci_high",
+        "value": 0.84,
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:17988728",
+        "quote": "hazard ratio [HR] 0.69, 95% CI 0.56-0.84; p=0.0002",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_092331213eb6b9",
+        "entity": "trial:nct00000620",
+        "key": "ci_high",
+        "value": 0.99,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "overall"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Fenofibrate reduced total CVD events by 11% (95% CI 0.80–0.99, P = 0.035)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_a1fe8608d85da0",
+        "entity": "trial:nct00000620",
+        "key": "ci_high",
+        "value": 0.91,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "marked dyslipidemia"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "marked dyslipidemia group: 27% risk reduction (adjusted HR 0.73 [95% CI 0.58–0.91], P = 0.005)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_ce08a8f6d384a7",
+        "entity": "trial:nct00000620",
+        "key": "ci_high",
+        "value": 0.99,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_2384c71b6d40ea",
+        "entity": "trial:nct00000620",
+        "key": "ci_low",
+        "value": 0.56,
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:17988728",
+        "quote": "hazard ratio [HR] 0.69, 95% CI 0.56-0.84; p=0.0002",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_372032b81fa5a0",
+        "entity": "trial:nct00000620",
+        "key": "ci_low",
+        "value": 0.58,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "marked dyslipidemia"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "marked dyslipidemia group: 27% risk reduction (adjusted HR 0.73 [95% CI 0.58–0.91], P = 0.005)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_da66cca726ac3f",
+        "entity": "trial:nct00000620",
+        "key": "ci_low",
+        "value": 0.8,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "overall"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Fenofibrate reduced total CVD events by 11% (95% CI 0.80–0.99, P = 0.035)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_fecc70202f2cc7",
+        "entity": "trial:nct00000620",
+        "key": "ci_low",
+        "value": 0.79,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_0e10b34b431436",
+        "entity": "trial:nct00000620",
+        "key": "dose",
+        "value": 160,
+        "unit": "mg/day",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "active fenofibrate 160 mg/day or its bioequivalent",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_65079f1036803a",
+        "entity": "trial:nct00000620",
+        "key": "dose",
+        "value": 54,
+        "unit": "mg/day",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "or 54 mg/day if the estimated glomerular filtration rate ranges from 30 to <50 mL/min per 1.73 m2",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_5ea43de85514c7",
+        "entity": "trial:nct00000620",
+        "key": "events_control",
+        "value": 238,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:17988728",
+        "quote": "164 [3.4%] patients on fenofibrate vs 238 [4.9%] on placebo",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_6bc83a9c4591ac",
+        "entity": "trial:nct00000620",
+        "key": "events_control",
+        "value": 237,
+        "unit": "cardiovascular events",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial",
+          "arm": "standard group"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "There were 208 cardiovascular events in the intensive group and 237 events in the standard group.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_bdae092a17025c",
+        "entity": "trial:nct00000620",
+        "key": "events_control",
+        "value": 4900,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "matching placebo (n=4900)",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_ff6f16dc1fd6cd",
+        "entity": "trial:nct00000620",
+        "key": "events_control",
+        "value": 62,
+        "unit": "strokes",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial",
+          "arm": "standard group"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "The intensive blood pressure group had 36 strokes, compared to 62 strokes in the standard group.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_3f09eea2dae3d5",
+        "entity": "trial:nct00000620",
+        "key": "events_treatment",
+        "value": 36,
+        "unit": "strokes",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial",
+          "arm": "intensive group"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "The intensive blood pressure group had 36 strokes, compared to 62 strokes in the standard group.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_482294b2c19f07",
+        "entity": "trial:nct00000620",
+        "key": "events_treatment",
+        "value": 208,
+        "unit": "cardiovascular events",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial",
+          "arm": "intensive group"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "There were 208 cardiovascular events in the intensive group and 237 events in the standard group.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_6e0f4c44f913e7",
+        "entity": "trial:nct00000620",
+        "key": "events_treatment",
+        "value": 4895,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "micronised fenofibrate 200 mg daily (n=4895)",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_a08be99dfedcea",
+        "entity": "trial:nct00000620",
+        "key": "events_treatment",
+        "value": 164,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:17988728",
+        "quote": "164 [3.4%] patients on fenofibrate vs 238 [4.9%] on placebo",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_155b26a755b64f",
+        "entity": "trial:nct00000620",
+        "key": "hr",
+        "value": 0.89,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_19858a3a86ac48",
+        "entity": "trial:nct00000620",
+        "key": "hr",
+        "value": 0.69,
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:17988728",
+        "quote": "hazard ratio [HR] 0.69, 95% CI 0.56-0.84; p=0.0002",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_53a8c9ffcd9a5b",
+        "entity": "trial:nct00000620",
+        "key": "hr",
+        "value": 0.73,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "marked dyslipidemia"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "marked dyslipidemia group: 27% risk reduction (adjusted HR 0.73 [95% CI 0.58–0.91], P = 0.005)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_a2f2aed24df8a4",
+        "entity": "trial:nct00000620",
+        "key": "hr",
+        "value": 0.89,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "overall"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Fenofibrate reduced total CVD events by 11% (95% CI 0.80–0.99, P = 0.035)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_2348a51af5d32d",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "<6.0%",
+        "unit": "HbA1c",
+        "attrs": {
+          "trial": "ACCORD glycemia trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "targets a glycosylated hemoglobin (HbA1c) level of <6.0%",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_300290d3b5f64b",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": 126,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "quote": "fasting plasma glucose level greater than 126 mg/dl (7.0 mmol/l)",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000620"
+      },
+      {
+        "fact_id": "f_6fd2ffbd8db25f",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "<2.59",
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "ACCORD lipid trial",
+          "biomarker": "LDL-C",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "achieve a goal low-density lipoprotein [LDL] cholesterol level of <2.59 mmol/L [100 mg/dL]",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_79cd2d67b7e180",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "<140",
+        "unit": "mm Hg",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "targets a systolic blood pressure of <140 mm Hg",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_be3e15db088af2",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "<120",
+        "unit": "mm Hg",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "targets a systolic blood pressure of <120 mm Hg",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_e0844228a6962f",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "total-cholesterol concentration of 3.0-6.5 mmol/L and a total-cholesterol/HDL-cholesterol ratio of 4.0 or more or plasma triglyceride of 1.0-5.0 mmol/L",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "with a total-cholesterol concentration of 3.0-6.5 mmol/L and a total-cholesterol/HDL-cholesterol ratio of 4.0 or more or plasma triglyceride of 1.0-5.0 mmol/L",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_ea7101b0dbb145",
+        "entity": "trial:nct00000620",
+        "key": "inclusion_threshold",
+        "value": "7.0%-7.9%",
+        "unit": "HbA1c",
+        "attrs": {
+          "trial": "ACCORD glycemia trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "targets an HbA1c level of 7.0%-7.9%",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_212fc65cab642b",
+        "entity": "trial:nct00000620",
+        "key": "median_followup",
+        "value": 4.7,
+        "unit": "years",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "quote": "First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial. [4.7 years]",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000620"
+      },
+      {
+        "fact_id": "f_2a88863c3ab61c",
+        "entity": "trial:nct00000620",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "Averaged over the 5 years' study duration",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_b8e00bdce309d9",
+        "entity": "trial:nct00000620",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {
+          "trial": "FIELD"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "The cohort of 9,795 subjects followed for an average of 5 years was sufficient to explore whether CVD event rates were increased in subjects with or without various metabolic syndrome features.",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_f069a99aae1e11",
+        "entity": "trial:nct00000620",
+        "key": "median_followup",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "follow-up is scheduled to end in June 2009",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_16d556f7ab81ad",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 5518,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "This is a blinded component in a 5,518-patient subset of the ACCORD cohort.",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_7e9b232c7a9d26",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 9795,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FIELD study"
+        },
+        "source_id": "pmid:17988728",
+        "quote": "The Fenofibrate Intervention and Event Lowering in Diabetes (FIELD) study was a multinational randomised trial of 9795 patients aged 50-75 years with type 2 diabetes mellitus.",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_90e036c8859d24",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 9795,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "We did a multinational, randomised controlled trial with 9795 participants aged 50-75 years",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_bb1ee64c28a320",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 4733,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "The blood pressure trial includes the remaining 4,733 participants",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_c15eb6c319bbaa",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 10251,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "involving 10,251 middle-aged and older participants with type 2 diabetes",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_f4dc4babae4ea8",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 10251,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "quote": "Enrollment: 10251 (ACTUAL)",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000620"
+      },
+      {
+        "fact_id": "f_f583c3d2698361",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 5518,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "The lipid trial includes 5,518 of the participants",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_ff26fc9345067d",
+        "entity": "trial:nct00000620",
+        "key": "n_randomized",
+        "value": 4733,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCORD blood pressure trial"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "Researchers randomly assigned 4,733 participants with elevated blood pressure to a target systolic blood pressure of either less than 120 mmHg (the intensive group) or to less than 140 mmHg (the standard group).",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_02b725b4209b0a",
+        "entity": "trial:nct00000620",
+        "key": "p_value",
+        "value": 0.035,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "overall"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Fenofibrate reduced total CVD events by 11% (95% CI 0.80–0.99, P = 0.035)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_da1efc914af2b3",
+        "entity": "trial:nct00000620",
+        "key": "p_value",
+        "value": 0.052,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "metabolic syndrome"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Among individuals with metabolic syndrome, fenofibrate reduced the 5-year CVD risk from 14.5 to 13.1%, representing a proportional risk reduction of 11% (adjusted HR 0.89 [95% CI 0–21%], P = 0.052; absolute risk reduction 1.4%)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_df2409cee2eec3",
+        "entity": "trial:nct00000620",
+        "key": "p_value",
+        "value": 0.0002,
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:17988728",
+        "quote": "hazard ratio [HR] 0.69, 95% CI 0.56-0.84; p=0.0002",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_fb96a0cafa4f6c",
+        "entity": "trial:nct00000620",
+        "key": "p_value",
+        "value": 0.005,
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD",
+          "placebo_adjusted": true,
+          "subgroup": "marked dyslipidemia"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "marked dyslipidemia group: 27% risk reduction (adjusted HR 0.73 [95% CI 0.58–0.91], P = 0.005)",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_a6998b24a547bf",
+        "entity": "trial:nct00000620",
+        "key": "phase",
+        "value": 3,
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "quote": "Phase: PHASE3",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000620"
+      },
+      {
+        "fact_id": "f_012f033cd7cbae",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "total CVD event rates",
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "Cox proportional models adjusted for age, sex, CVD status, and baseline A1C levels were used to determine the independent contributions of metabolic syndrome features to total CVD event rates and the effects of fenofibrate.",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_06b6dfd3670d01",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "combined risk of fatal or nonfatal cardiovascular disease events",
+        "unit": null,
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "treating multiple blood lipids with combination drug therapy of a fibrate and a statin did not reduce the combined risk of cardiovascular disease events more than treatment with statin alone.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_2b588c05e44862",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "first occurrence of a major CVD event (nonfatal myocardial infarction, nonfatal stroke, or cardiovascular death)",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "The primary outcome measure for all 3 research questions is the first occurrence of a major CVD event, specifically nonfatal myocardial infarction, nonfatal stroke, or cardiovascular death",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_2bce7340b5c04b",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "requirement for first laser treatment for all retinopathy",
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study"
+        },
+        "source_id": "pmid:17988728",
+        "quote": "The requirement for first laser treatment for all retinopathy was significantly lower in the fenofibrate group than in the placebo group",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_3a1360207194c6",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "coronary events (coronary heart disease death or non-fatal myocardial infarction)",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "Our primary outcome was coronary events (coronary heart disease death or non-fatal myocardial infarction)",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_c785b0769e1263",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "quote": "First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial. [4.7 years]",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000620"
+      },
+      {
+        "fact_id": "f_d92c3590908898",
+        "entity": "trial:nct00000620",
+        "key": "primary_endpoint",
+        "value": "cardiovascular events",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "aims to test whether a 3-hydroxy-3-methylglutaryl coenzyme A reductase inhibitor (statin) plus a fibrate is more efficacious in reducing cardiovascular events than a statin plus placebo",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_0c7d27e5802444",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "Metabolic syndrome components identify higher CVD risk in individuals with type 2 diabetes, so the absolute benefits of fenofibrate are likely to be greater when metabolic syndrome features are present. The highest risk and greatest benefits of fenofibrate are seen among those with marked hypertriglyceridemia.",
+        "unit": "",
+        "attrs": {
+          "trial": "FIELD"
+        },
+        "source_id": "pmcid:PMC2646035",
+        "quote": "CONCLUSIONS—Metabolic syndrome components identify higher CVD risk in individuals with type 2 diabetes, so the absolute benefits of fenofibrate are likely to be greater when metabolic syndrome features are present. The highest risk and greatest benefits of fenofibrate are seen among those with marked hypertriglyceridemia.",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/18984774"
+      },
+      {
+        "fact_id": "f_6c133674c2aae7",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "Treatment with fenofibrate in individuals with type 2 diabetes mellitus reduces the need for laser treatment for diabetic retinopathy",
+        "unit": null,
+        "attrs": {
+          "trial": "FIELD study"
+        },
+        "source_id": "pmid:17988728",
+        "quote": "Treatment with fenofibrate in individuals with type 2 diabetes mellitus reduces the need for laser treatment for diabetic retinopathy",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17988728"
+      },
+      {
+        "fact_id": "f_6cd7152af242b3",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "Fenofibrate did not significantly reduce the risk of the primary outcome of coronary events. It did reduce total cardiovascular events, mainly due to fewer non-fatal myocardial infarctions and revascularisations.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:16310551",
+        "quote": "Fenofibrate did not significantly reduce the risk of the primary outcome of coronary events. It did reduce total cardiovascular events, mainly due to fewer non-fatal myocardial infarctions and revascularisations.",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16310551"
+      },
+      {
+        "fact_id": "f_707ab5282f750b",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "treating multiple blood lipids with combination drug therapy of a fibrate and a statin did not reduce the combined risk of cardiovascular disease events more than treatment with statin alone",
+        "unit": null,
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "announcement:accord_lipid",
+        "quote": "treating multiple blood lipids with combination drug therapy of a fibrate and a statin did not reduce the combined risk of cardiovascular disease events more than treatment with statin alone.",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm"
+      },
+      {
+        "fact_id": "f_ba0a2770aaba64",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "Upon the expected completion of participant follow-up in 2009, the ACCORD trial should document for the first time the benefits and risks of intensive glucose control, intensive blood pressure control, and the combination of fibrate and statin drugs in managing blood lipids in high-risk patients with type 2 diabetes.",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD"
+        },
+        "source_id": "pmid:17599422",
+        "quote": "Upon the expected completion of participant follow-up in 2009, the ACCORD trial should document for the first time the benefits and risks of intensive glucose control, intensive blood pressure control, and the combination of fibrate and statin drugs in managing blood lipids in high-risk patients with type 2 diabetes.",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599422"
+      },
+      {
+        "fact_id": "f_bf7994af4602fb",
+        "entity": "trial:nct00000620",
+        "key": "readout_statement",
+        "value": "The current protocol is designed to provide an ethically justifiable test of combined statin plus fibrate treatment consistent with the highest level of safety and lipid treatment standards of care.",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCORD lipid trial"
+        },
+        "source_id": "pmid:17599426",
+        "quote": "The current protocol is designed to provide an ethically justifiable test of combined statin plus fibrate treatment consistent with the highest level of safety and lipid treatment standards of care.",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17599426"
+      },
+      {
+        "fact_id": "f_b1d05201c0aea9",
+        "entity": "trial:nct00000620",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "PPARA",
+          "variant_or_score": "rs4253623",
+          "outcome": "nonfatal myocardial infarction",
+          "direction": "harmful",
+          "effect_on_biomarker": null,
+          "n": 848,
+          "ci_low": 1.08,
+          "ci_high": 1.46
+        },
+        "source_id": "pmid:18549840",
+        "quote": "The minor allele of the PPARA SNP, rs4253623, was associated with a higher risk of MI (odds ratio 1.25, 95% confidence interval 1.08 to 1.46)",
+        "pub_date": "2008-04-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18549840"
+      },
+      {
+        "fact_id": "f_fc2fb020bfc205",
+        "entity": "trial:nct00000620",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "TLR4",
+          "variant_or_score": "rs1927911",
+          "outcome": "nonfatal myocardial infarction",
+          "direction": "protective",
+          "effect_on_biomarker": null,
+          "n": 848,
+          "ci_low": 0.77,
+          "ci_high": 0.99
+        },
+        "source_id": "pmid:18549840",
+        "quote": "whereas the minor allele of the TLR4 SNP, rs1927911, was associated with a lower risk of MI (odds ratio 0.88, 95% confidence interval 0.77 to 0.99)",
+        "pub_date": "2008-04-09",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18549840"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00000620@2010-03-14",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00000620 ACCORD",
+        "url": "https://clinicaltrials.gov/study/NCT00000620",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00000620",
+            "acronym": "ACCORD",
+            "title": "Action to Control Cardiovascular Risk in Diabetes (ACCORD)",
+            "official_title": "Action to Control Cardiovascular Risk in Diabetes (ACCORD)",
+            "sponsor": "National Heart, Lung, and Blood Institute (NHLBI)",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "1999-09",
+            "primary_completion": "2009-06",
+            "first_posted": "1999-10-28",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 10251,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Anti-hyperglycemic Agents",
+                "type": "DRUG",
+                "other_names": [
+                  "glimepiride (Amaryl)",
+                  "metformin (Glucophage)",
+                  "repaglinide (Gluconorm, Prandin)",
+                  "rosiglitazone (Avandia)",
+                  "pioglitazone (Actos)",
+                  "human regular insulin (Novolin ge Toronto)",
+                  "human NPH (Novolin N)",
+                  "human mixed (Novolin 70/30)",
+                  "human isophane (Novolin ge NPH)",
+                  "human 30/70 (Novolin ge 30/70)",
+                  "insulin aspart (NovoRapid, NovoLog)",
+                  "insulin detemir (Levemir)",
+                  "human regular insulin (Novolin R)",
+                  "insulin glargine (Lantus)",
+                  "Acarbose"
+                ]
+              },
+              {
+                "name": "Anti-hypertensive Agents",
+                "type": "DRUG",
+                "other_names": [
+                  "benazepril (Lotensin, Zestril, Altace)",
+                  "chlorthalidone (Thalitone)",
+                  "metoprolol (Toprol XL)",
+                  "diltiazem (Tiazac)",
+                  "plendil (Felodipine)",
+                  "terazosin (Hytrin)",
+                  "candesartan (Atacand)",
+                  "valsartan (Diovan)",
+                  "furosemide",
+                  "reserpine",
+                  "hydralazine",
+                  "carvedilol (Coreg)",
+                  "triamterene / hydrochlorothiazide (Dyazide)",
+                  "metoprolol / hydrochlorothiazide(Lopressor HCT)",
+                  "benazepril / hydrochlorothiazide (Lotensin HCT)",
+                  "lisinopril / hydrochlorothiazide (Zestoretic)",
+                  "candesartan / hydrochlorothiazide (Atacand HCT)",
+                  "valsartan / hydrochlorothiazide (Diovan HCT)",
+                  "amlodipine / benazepril (Lotrel)"
+                ]
+              },
+              {
+                "name": "Blinded fenofibrate or placebo plus simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "fenofibrate (Tricor)"
+                ]
+              }
+            ],
+            "conditions": [
+              "Atherosclerosis",
+              "Cardiovascular Diseases",
+              "Hypercholesterolemia",
+              "Hypertension",
+              "Diabetes Mellitus, Type 2",
+              "Diabetes Mellitus",
+              "Coronary Disease"
+            ],
+            "primary_outcomes": [
+              "First Occurrence of a Major Cardiovascular Event (MCE); Specifically Nonfatal Heart Attack, Nonfatal Stroke, or Cardiovascular Death (Measured Throughout the Study) in the Glycemia Trial. [4.9 years]",
+              "First Occurrence of Major Cardiovascular Event (MCE) in the Blood Pressure Trial. [4.7 years]",
+              "First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial. [4.7 years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 2112
+      },
+      {
+        "source_id": "pmcid:PMC2646035",
+        "type": "journal",
+        "title": "Effects of fenofibrate treatment on cardiovascular disease risk in 9,795 individuals with type 2 diabetes and various components of the metabolic syndrome: the Fenofibrate Intervention and Event Lowering in Diabetes (FIELD) study.",
+        "url": "https://europepmc.org/article/MED/18984774",
+        "pub_date": "2008-11-04",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "18984774",
+          "pmcid": "PMC2646035",
+          "doi": "10.2337/dc08-1543",
+          "journal": "Diabetes care"
+        },
+        "chars": 26826
+      },
+      {
+        "source_id": "pmid:17988728",
+        "type": "journal",
+        "title": "Effect of fenofibrate on the need for laser treatment for diabetic retinopathy (FIELD study): a randomised controlled trial.",
+        "url": "https://europepmc.org/article/MED/17988728",
+        "pub_date": "2007-11-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17988728",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(07)61607-9",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 3081
+      },
+      {
+        "source_id": "pmid:16310551",
+        "type": "journal",
+        "title": "Effects of long-term fenofibrate therapy on cardiovascular events in 9795 people with type 2 diabetes mellitus (the FIELD study): randomised controlled trial.",
+        "url": "https://europepmc.org/article/MED/16310551",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16310551",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(05)67667-2",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 2086
+      },
+      {
+        "source_id": "pmid:15619408",
+        "type": "journal",
+        "title": "Reporting rate of rhabdomyolysis with fenofibrate + statin versus gemfibrozil + any statin.",
+        "url": "https://europepmc.org/article/MED/15619408",
+        "pub_date": "2005-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15619408",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2004.08.076",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1216
+      },
+      {
+        "source_id": "pmid:18199835",
+        "type": "journal",
+        "title": "PPARalpha agonist fenofibrate suppresses tumor growth through direct and indirect angiogenesis inhibition.",
+        "url": "https://europepmc.org/article/MED/18199835",
+        "pub_date": "2008-01-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18199835",
+          "pmcid": "PMC2242705",
+          "doi": "10.1073/pnas.0711281105",
+          "journal": "Proceedings of the National Academy of Sciences of the United States of America"
+        },
+        "chars": 1615
+      },
+      {
+        "source_id": "pmid:17599422",
+        "type": "journal",
+        "title": "Action to Control Cardiovascular Risk in Diabetes (ACCORD) trial: design and methods.",
+        "url": "https://europepmc.org/article/MED/17599422",
+        "pub_date": "2007-04-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17599422",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2007.03.003",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 2732
+      },
+      {
+        "source_id": "pmid:17599426",
+        "type": "journal",
+        "title": "Evolution of the lipid trial protocol of the Action to Control Cardiovascular Risk in Diabetes (ACCORD) trial.",
+        "url": "https://europepmc.org/article/MED/17599426",
+        "pub_date": "2007-04-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17599426",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2007.03.024",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1760
+      },
+      {
+        "source_id": "pmid:7635967",
+        "type": "journal",
+        "title": "Fibrates increase human apolipoprotein A-II expression through activation of the peroxisome proliferator-activated receptor.",
+        "url": "https://europepmc.org/article/MED/7635967",
+        "pub_date": "1995-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "7635967",
+          "pmcid": "PMC185258",
+          "doi": "10.1172/jci118118",
+          "journal": "The Journal of clinical investigation"
+        },
+        "chars": 2424
+      },
+      {
+        "source_id": "pmid:18680716",
+        "type": "journal",
+        "title": "The circulating metabolic regulator FGF21 is induced by prolonged fasting and PPARalpha activation in man.",
+        "url": "https://europepmc.org/article/MED/18680716",
+        "pub_date": "2008-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18680716",
+          "pmcid": null,
+          "doi": "10.1016/j.cmet.2008.06.014",
+          "journal": "Cell metabolism"
+        },
+        "chars": 1143
+      },
+      {
+        "source_id": "pmid:16556735",
+        "type": "journal",
+        "title": "Reciprocal regulation of brain and muscle Arnt-like protein 1 and peroxisome proliferator-activated receptor alpha defines a novel positive feedback loop in the rodent liver circadian clock.",
+        "url": "https://europepmc.org/article/MED/16556735",
+        "pub_date": "2006-03-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16556735",
+          "pmcid": null,
+          "doi": "10.1210/me.2006-0052",
+          "journal": "Molecular endocrinology (Baltimore, Md.)"
+        },
+        "chars": 1327
+      },
+      {
+        "source_id": "pmid:12006394",
+        "type": "journal",
+        "title": "Association between the PPARA L162V polymorphism and plasma lipid levels: the Framingham Offspring Study.",
+        "url": "https://europepmc.org/article/MED/12006394",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12006394",
+          "pmcid": null,
+          "doi": "10.1161/01.atv.0000012302.11991.42",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology",
+          "purpose": "genetics"
+        },
+        "chars": 1485
+      },
+      {
+        "source_id": "pmid:19124612",
+        "type": "journal",
+        "title": "Bezafibrate at clinically relevant doses decreases serum/liver triglycerides via down-regulation of sterol regulatory element-binding protein-1c in mice: a novel peroxisome proliferator-activated receptor alpha-independent mechanism.",
+        "url": "https://europepmc.org/article/MED/19124612",
+        "pub_date": "2009-01-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19124612",
+          "pmcid": "PMC2684924",
+          "doi": "10.1124/mol.108.052928",
+          "journal": "Molecular pharmacology",
+          "purpose": "genetics"
+        },
+        "chars": 2093
+      },
+      {
+        "source_id": "pmid:18549840",
+        "type": "journal",
+        "title": "Cholesterol ester transfer protein, interleukin-8, peroxisome proliferator activator receptor alpha, and Toll-like receptor 4 genetic variations and risk of incident nonfatal myocardial infarction and ischemic stroke.",
+        "url": "https://europepmc.org/article/MED/18549840",
+        "pub_date": "2008-04-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18549840",
+          "pmcid": "PMC2577871",
+          "doi": "10.1016/j.amjcard.2008.02.052",
+          "journal": "The American journal of cardiology",
+          "purpose": "genetics"
+        },
+        "chars": 2164
+      },
+      {
+        "source_id": "announcement:accord_lipid",
+        "type": "press_release",
+        "title": "NIH/NHLBI news release: Landmark ACCORD Trial Finds Intensive Blood Pressure and Combination Lipid Therapies do not Reduce Combined Cardiovascular Events in Adults with Diabetes",
+        "url": "http://www.nih.gov/news/health/mar2010/nhlbi-15.htm",
+        "pub_date": "2010-03-14",
+        "access": "press_release",
+        "meta": {},
+        "chars": 14240
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 20,
+      "facts": 69,
+      "relationships": 13,
+      "events": 167,
+      "audit_entries": 167,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 18360,
+        "output_tokens": 6625,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 8483,
+        "output_tokens": 10911,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2432,
+        "output_tokens": 3825,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 9978,
+        "output_tokens": 6281,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "nvidia"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 10362,
+        "output_tokens": 5527,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6566,
+        "output_tokens": 4759,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

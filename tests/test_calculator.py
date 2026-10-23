@@ -99,6 +99,37 @@ class VerdictTests(unittest.TestCase):
             followup_years=1.5, events=837, observed_hr=1.25, observed_ci=(1.09, 1.44))
         self.assertEqual(evaluate(case).category, "off_target_harm")
 
+    def test_blood_pressure_lowering_alone_counts_as_a_causal_effect(self):
+        # SPRINT-like: no lipid change, systolic BP 13 mmHg lower, 562 events over 3.3 years.
+        case = CaseInput(
+            case_id="sprint_like", mode="autopsy", target_genetics="causal", intended_biomarker="SBP",
+            changes=[], sbp_change_mmhg=-13.1, followup_years=3.26, events=562)
+        result = evaluate(case)
+        self.assertGreater(result.causal_rrr, 0.15)
+        self.assertAlmostEqual(result.causal_rrr, 1 - result.expected_hr, places=3)
+        self.assertNotEqual(result.category, "effect_too_small")
+
+    def test_an_unmeasured_ldl_change_is_unknown_not_zero(self):
+        # TNT-like: LDL-C is the mechanism, but no between-arm value was found in the documents.
+        common = dict(case_id="tnt_like", mode="autopsy", intended_biomarker="LDL-C", followup_years=4.9, events=982)
+        missing = evaluate(CaseInput(target_genetics="causal", changes=[BiomarkerChange("LDL-C")], **common))
+        self.assertEqual((missing.outcome, missing.category), ("not_computable", "insufficient_data"))
+        self.assertIsNone(missing.expected_hr)
+        self.assertEqual(missing.weakest_link, "LDL-C change not measured")
+        # A target that genetics shows is not causal fails whatever the size.
+        non_causal = evaluate(CaseInput(target_genetics="not_causal", changes=[BiomarkerChange("LDL-C")], **common))
+        self.assertEqual((non_causal.outcome, non_causal.category), ("failure", "target_not_causal"))
+
+    def test_blood_pressure_given_as_a_biomarker_row_is_used_once(self):
+        row = BiomarkerChange("SBP", abs_change=-13.1, unit="mmHg")
+        common = dict(case_id="sprint_like", mode="autopsy", target_genetics="causal", intended_biomarker="SBP",
+                      followup_years=3.26, events=562)
+        from_row = evaluate(CaseInput(changes=[row], **common))
+        from_field = evaluate(CaseInput(changes=[], sbp_change_mmhg=-13.1, **common))
+        both = evaluate(CaseInput(changes=[row], sbp_change_mmhg=-13.1, **common))
+        self.assertEqual(from_row.expected_hr, from_field.expected_hr)
+        self.assertEqual(both.expected_hr, from_field.expected_hr)
+
 
 if __name__ == "__main__":
     unittest.main()

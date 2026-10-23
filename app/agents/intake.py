@@ -82,8 +82,15 @@ def _resolve_drug(state: RunState):
         if i.get("type") in ("DRUG", "BIOLOGICAL") and not PLACEBO.search(i.get("name") or ""):
             names.append(i["name"])
             names += i.get("other_names") or []
-    for name in names:
-        clean = re.sub(r"\b(\d+(\.\d+)?\s?(mg|g|mcg))\b.*", "", name, flags=re.I).strip()
+    cleaned = [re.sub(r"\b(\d+(\.\d+)?\s?(mg|g|mcg))\b.*", "", name, flags=re.I).strip() for name in names]
+    # Second pass, only if no name resolves as written: drop trademark signs and split "Brand (generic name)",
+    # e.g. "Epanova® (omega-3 carboxylic acids)" -> "Epanova", "omega-3 carboxylic acids".
+    variants = []
+    for name in cleaned:
+        plain = re.sub(r"[®™©]", "", name).strip()
+        variants += [plain, *[x.strip() for x in re.split(r"[()]", plain) if x.strip()]]
+    variants = [v for v in dict.fromkeys(variants) if v not in cleaned]
+    for clean in cleaned + variants:
         try:
             hit = opentargets.find_drug(clean, tracer=state.tracer)
         except Exception as exc:  # source outage is reported, not fatal

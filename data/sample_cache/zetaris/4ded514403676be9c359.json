@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22819432+OR+PMCID%3APMC5396348&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1612[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5396348' LIMIT 5",
+ "rows": [
+  [
+   " Follow-up will continue in this event-driven trial until approximately 1612 adjudicated primary-efficacy endpoint events have occurred"
+  ]
+ ],
+ "error": null
+}
