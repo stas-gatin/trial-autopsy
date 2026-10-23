@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22819432+OR+PMCID%3APMC5396348&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*13\\\\.6%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22819432' AND r.abstractText LIKE '%13.6%%' LIMIT 5",
+ "rows": [
+  [
+   "0005), respectively, and non-high-density lipoprotein (non-HDL) cholesterol by 13.6% (p <0"
+  ]
+ ],
+ "error": null
+}

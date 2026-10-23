@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A24825642+OR+EXT_ID%3A26920601&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*94[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '24825642' AND r.abstractText LIKE '%94%' LIMIT 5",
+ "rows": [
+  [
+   " For high-intensity statin groups, evolocumab every 2 weeks reduced LDL-C from a baseline mean of 89 to 94 mg/dL to an on-treatment mean of 35 to 38 mg/dL; monthly evolocumab reduced LDL-C from a baseline mean of 89 to 94 mg/dL to an on-treatment mean of 33 to 35 mg/dL"
+  ]
+ ],
+ "error": null
+}

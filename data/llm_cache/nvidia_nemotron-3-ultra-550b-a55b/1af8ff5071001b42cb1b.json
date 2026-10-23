@@ -1,0 +1,15 @@
+{
+  "key": "1af8ff5071001b42cb1b",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T21:12:37+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: IMPROVE-IT NCT00202878 - IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | LDL-C change used by the calculator | biomarker_change = -16.5 percent | {\"biomarker\": \"LDL-C\", \"dose\": \"10 mg ezetimibe added to 80 mg simvastatin\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase2\", \"placebo_adjusted\": false, \"timepoint\": \"end of study\"} | source pmid:18376000 | quote: \"a between-group difference of 16.5%\"\nc2 | LDL-C change used by the calculator | inclusion_threshold = 100 mg/dl | {\"population\": \"participants taking a statin\", \"trial\": \"IMPROVE-IT\"} | source ctgov:NCT00202878@2014-11-17 | quote: \"Participants taking a statin must have an LDL-C of 100 mg/dl or less.\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*16\\\\.5[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18376000' LIMIT 5 | rows: [[\"36 mmol per liter) in the combined-therapy group (a between-group difference of 16.5%, P<0\"]]\nc2 | SQL: SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*100 mg/dl[^.]*)', 1) AS sentence FROM registry LIMIT 5 | rows: [[\" Participants taking a statin must have an LDL-C of 100 mg/dl or less\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"contradicts\", \"found\": \"a between-group difference of 16.5%\", \"note\": \"Row states positive 16.5% difference, claim asserts -16.5% (sign mismatch).\"}, {\"claim\": \"c2\", \"status\": \"confirmed\", \"found\": \"Participants taking a statin must have an LDL-C of 100 mg/dl or less\", \"note\": \"Row matches claim exactly for inclusion threshold.\"}]}",
+  "usage": {
+    "input_tokens": 564,
+    "output_tokens": 1125
+  }
+}

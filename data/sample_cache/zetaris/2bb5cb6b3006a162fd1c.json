@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15842977+OR+EXT_ID%3A19958854+OR+EXT_ID%3A22345126+OR+PMCID%3APMC2821630&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*(?:33\\.4%|33\\.4 percent)[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC2821630' LIMIT 5",
+ "rows": [
+  [
+   " Dalcetrapib increased HDL-C (33.4%, Week 24; 33"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,15 @@
+{
+  "key": "ae94ec88500f43362edd",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T20:26:51+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: IDEAL NCT00159835 - Atorvastatin Versus Simvastatin In The Prevention Of Coronary Heart Disease (CHD) In Patients With Known CHD\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | follow-up | median_followup = 4.9 years | {} | source pmid:15755765 | quote: \"Patients were followed for a median of 4.9 years.\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*4\\\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '15755765' LIMIT 5 | rows: [[\" Patients were followed for a median of 4.9 years\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"Patients were followed for a median of 4.9 years\", \"note\": \"The abstract states median follow-up of 4.9 years, matching the claim.\"}]}",
+  "usage": {
+    "input_tokens": 370,
+    "output_tokens": 187
+  }
+}

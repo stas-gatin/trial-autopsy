@@ -136,3 +136,29 @@ class TimeMachine(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CutoffGuardHoles(unittest.TestCase):
+    """With an evidence cut-off no way round the field list may reach status, results or enrollment."""
+    real = {"registry": "t_reg", "papers": "t_pap"}
+
+    def rejected(self, sql, cutoff=True):
+        from app.agents.verifier import UnsafeSQL, safe_sql
+        with self.assertRaises(UnsafeSQL):
+            safe_sql(sql, self.real, cutoff)
+
+    def test_whole_sections_and_fields_hidden_in_strings(self):
+        self.rejected("SELECT protocolSection.designModule FROM registry")
+        self.rejected("SELECT to_json(protocolSection) FROM registry")
+        self.rejected("SELECT protocolSection['statusModule'] FROM registry")
+        self.rejected("SELECT get_json_object(x, '$.statusModule') FROM registry")
+
+    def test_other_tables_by_comma_or_quoted_name(self):
+        self.rejected("SELECT a FROM registry, session.other_tbl", cutoff=False)
+        self.rejected("SELECT a FROM registry UNION SELECT b FROM `secret`", cutoff=False)
+
+    def test_valid_queries_pass(self):
+        from app.agents.verifier import safe_sql
+        self.assertIn("count(*)", safe_sql("SELECT count(*) FROM papers WHERE pmid = '1'", self.real, True))
+        self.assertIn("EXTRACT(year FROM d)", safe_sql("SELECT EXTRACT(year FROM d) FROM papers", self.real, True))
+        self.assertIn("session.t_reg", safe_sql("SELECT protocolSection.designModule.phases FROM registry", self.real, True))

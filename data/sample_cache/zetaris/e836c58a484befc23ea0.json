@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18376000&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*intima-media thickness[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18376000' LIMIT 5",
+ "rows": [
+  [
+   " Patients underwent B-mode ultrasonography to assess the intima-media thickness of the walls of the carotid and femoral arteries"
+  ]
+ ],
+ "error": null
+}

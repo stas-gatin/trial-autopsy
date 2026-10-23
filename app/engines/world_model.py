@@ -27,8 +27,9 @@ CREATE TABLE IF NOT EXISTS sources (
 CREATE TABLE IF NOT EXISTS entities (
   entity_id TEXT PRIMARY KEY, type TEXT, name TEXT, props TEXT);
 CREATE TABLE IF NOT EXISTS facts (
-  fact_id TEXT PRIMARY KEY, run_id TEXT, case_id TEXT, entity_id TEXT, key TEXT, value TEXT, unit TEXT,
-  attrs TEXT, source_id TEXT, quote TEXT, quote_verified INTEGER, agent TEXT, created_at TEXT);
+  fact_id TEXT, run_id TEXT, case_id TEXT, entity_id TEXT, key TEXT, value TEXT, unit TEXT,
+  attrs TEXT, source_id TEXT, quote TEXT, quote_verified INTEGER, agent TEXT, created_at TEXT,
+  PRIMARY KEY (fact_id, run_id));
 CREATE TABLE IF NOT EXISTS relationships (
   src TEXT, rel TEXT, dst TEXT, run_id TEXT, PRIMARY KEY (src, rel, dst, run_id));
 CREATE INDEX IF NOT EXISTS facts_case ON facts(run_id, case_id);
@@ -44,12 +45,25 @@ def fact_id(case_id: str, entity_id: str, key: str, value, source_id: str, quote
     return "f_" + hashlib.sha256(blob.encode()).hexdigest()[:14]
 
 
+def _migrate_fact_key(db: sqlite3.Connection):
+    """Facts are keyed by (fact_id, run_id): the same fact found by two runs of one case belongs to both. Older
+    databases keyed facts by fact_id alone, so a second run took the row away from the first; rebuild them once."""
+    pk = [r[1] for r in db.execute("PRAGMA table_info(facts)").fetchall() if r[5]]
+    if pk == ["fact_id"]:
+        db.executescript("ALTER TABLE facts RENAME TO facts_v1; DROP INDEX IF EXISTS facts_case;")
+        db.executescript(SCHEMA)
+        db.execute("INSERT OR IGNORE INTO facts SELECT * FROM facts_v1")
+        db.execute("DROP TABLE facts_v1")
+        db.commit()
+
+
 class WorldStoreService:
     def __init__(self, run_id: str, db_name: str = "world.db"):
         WORLD_DB_DIR.mkdir(parents=True, exist_ok=True)
         config.logs_dir().mkdir(parents=True, exist_ok=True)
         self.run_id = run_id
         self.db = sqlite3.connect(WORLD_DB_DIR / db_name, check_same_thread=False, timeout=60)
+        _migrate_fact_key(self.db)
         self.db.executescript(SCHEMA)
         # A run id is a fresh run: drop anything a previous run with the same id left behind.
         self.db.execute("DELETE FROM facts WHERE run_id=?", (run_id,))
@@ -107,7 +121,7 @@ class IngestPipelineService:
         if exists:
             return fid, False
         self.store.execute(
-            "INSERT OR REPLACE INTO facts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT OR IGNORE INTO facts VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (fid, self.store.run_id, case_id, entity_id, key, json.dumps(normalized), unit,
              json.dumps(attrs or {}, default=str), source_id, quote, int(quote_verified), agent, _now()))
         self.store.execute("INSERT OR IGNORE INTO relationships VALUES (?,?,?,?)",

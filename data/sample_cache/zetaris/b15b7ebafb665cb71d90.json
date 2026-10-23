@@ -1,0 +1,14 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10027849+OR+EXT_ID%3A20863951+OR+EXT_ID%3A21602519+OR+EXT_ID%3A21989792&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*10[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21602519' AND r.abstractText LIKE '%10%' LIMIT 5",
+ "rows": [
+  [
+   "21602519",
+   "Varespladib inhibits secretory phospholipase A2 in bronchoalveolar lavage of different types of neonatal lung injury.",
+   "2011-05-20",
+   "04) using 40 µM varespladib; 10 µM was able to lower enzyme activity (P = "
+  ]
+ ],
+ "error": null
+}

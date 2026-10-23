@@ -12,6 +12,7 @@ to a constant in rules.py (which cites data/reference/coefficients.json).
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass, field
 from statistics import NormalDist
 
@@ -20,20 +21,32 @@ from app.core import rules
 _N = NormalDist()
 
 
-def canonical(name: str | None) -> str:
-    """Map free-text biomarker names to the calculator's vocabulary ("sPLA2-IIA mass" -> "sPLA2-IIA")."""
-    n = (name or "").lower()
-    rules_ = [("non-hdl", "non-HDL-C"), ("hdl", "HDL-C"), ("ldl", "LDL-C"), ("apob", "apoB"),
-              ("apolipoprotein b", "apoB"), ("lp(a)", "Lp(a)"), ("lipoprotein(a)", "Lp(a)"),
-              ("lipoprotein (a)", "Lp(a)"), ("lp-pla2", "Lp-PLA2 activity"), ("lppla2", "Lp-PLA2 activity"),
-              ("spla2", "sPLA2-IIA"), ("crp", "hsCRP"), ("c-reactive", "hsCRP"), ("il-6", "IL-6"),
-              ("interleukin-6", "IL-6"), ("il-1", "IL-1beta"), ("hba1c", "HbA1c"), ("glycated", "HbA1c"),
-              ("weight", "body weight"), ("bmi", "body weight"), ("systolic", "SBP"), ("sbp", "SBP"),
-              ("blood pressure", "SBP"), ("triglycer", "triglycerides")]
-    for key, value in rules_:
-        if key in n:
+_CANON = [  # first match wins; whole-word patterns on a lower-cased name with spaces and hyphens collapsed
+    (r"\bnon ?hdl\b", "non-HDL-C"), (r"\bvldl\b", "VLDL-C"), (r"\bldl ?p\b|\bldl\b.*\bparticle", "LDL-P"),
+    (r"\bhdl\b", "HDL-C"), (r"\bldl\b", "LDL-C"), (r"\bapo ?b\b|\bapolipoprotein b\b", "apoB"),
+    (r"\bs ?pla2\b|\bsecretory phospholipase", "sPLA2-IIA"),
+    (r"\blp ?pla2\b|\blppla2\b|\blipoprotein associated phospholipase", "Lp-PLA2 activity"),
+    (r"\blp ?\(a\)|\blipoprotein ?\(a\)|\blpa\b", "Lp(a)"),
+    (r"\b(hs ?)?crp\b|\bc reactive", "hsCRP"), (r"\bil ?6\b|\binterleukin ?6\b", "IL-6"),
+    (r"\bil ?1(?: ?(?:beta|b|\u03b2))?\b|\binterleukin ?1(?: ?(?:beta|\u03b2))?\b", "IL-1beta"),
+    (r"\bhba1c\b|\bglycated\b|\ba1c\b", "HbA1c"), (r"\bweight\b|\bbmi\b", "body weight"),
+    (r"\bdiastolic\b|\bdbp\b", "DBP"), (r"\bsystolic\b|\bsbp\b|\bblood pressure\b", "SBP"),
+    (r"\btriglycer|\btg\b", "triglycerides"),
+]
+
+
+def canonical(name) -> str:
+    """Map free-text biomarker names to the calculator's vocabulary ("sPLA2-IIA mass" -> "sPLA2-IIA",
+    "non HDL cholesterol" -> "non-HDL-C", "Apo B" -> "apoB"). Unknown names come back unchanged."""
+    if isinstance(name, (list, tuple)):
+        name = next((x for x in name if isinstance(x, str)), "")
+    raw = name if isinstance(name, str) else ""
+    n = re.sub(r"[\s_\-]+", " ", raw.lower()).strip()
+    n = re.sub(r"\(\s+", "(", re.sub(r"\s+\)", ")", n))
+    for pattern, value in _CANON:
+        if re.search(pattern, n):
             return value
-    return (name or "").strip()
+    return raw.strip()
 
 
 @dataclass
@@ -118,15 +131,31 @@ def events_needed(expected_hr: float, alpha_two_sided: float = 0.05, target_powe
     return math.ceil(4 * z**2 / math.log(expected_hr) ** 2)
 
 
+def _to_canonical_unit(change: BiomarkerChange, assumptions: list[str]) -> BiomarkerChange:
+    """The calculator works in mmol/L for LDL-C and non-HDL-C and in mg/dL for apoB and Lp(a). A value in another
+    unit is converted here, so a unit slip upstream cannot change the size of the effect by a factor of 39 or 100."""
+    name, unit = canonical(change.biomarker), (change.unit or "").lower().replace(" ", "")
+    factor, new_unit = None, None
+    if name in ("LDL-C", "non-HDL-C") and "mg/dl" in unit:
+        factor, new_unit = 1 / rules.MGDL_PER_MMOL_CHOLESTEROL, "mmol/L"
+    elif name == "apoB" and ("g/l" in unit and "mg/l" not in unit):
+        factor, new_unit = 100.0, "mg/dL"
+    elif name == "Lp(a)" and "nmol" in unit:
+        # Lp(a) canonical unit is mg/dL; there is no fixed conversion (rules.LPA_NMOL_PER_MGDL is an assumption).
+        factor, new_unit = 1 / rules.LPA_NMOL_PER_MGDL, "mg/dL"
+        assumptions.append(f"Lp(a) given in nmol/L, converted at {rules.LPA_NMOL_PER_MGDL} nmol/L per mg/dL")
+    baseline = change.baseline if change.baseline is not None and change.baseline > 0 else None
+    if factor is None:
+        return BiomarkerChange(name, abs_change=change.abs_change, unit=change.unit, pct_change=change.pct_change,
+                               baseline=baseline, method=change.method, source=change.source)
+    return BiomarkerChange(name, unit=new_unit, pct_change=change.pct_change, method=change.method, source=change.source,
+                           abs_change=None if change.abs_change is None else change.abs_change * factor,
+                           baseline=None if baseline is None else baseline * factor)
+
+
 def _absolute(change: BiomarkerChange, assumptions: list[str]) -> float | None:
     """Absolute reduction as a positive number (canonical unit), or None."""
-    if change.biomarker == "Lp(a)" and "nmol" in (change.unit or "").lower():
-        # Lp(a) canonical unit is mg/dL; there is no fixed conversion (rules.LPA_NMOL_PER_MGDL is an assumption).
-        assumptions.append(f"Lp(a) given in nmol/L, converted at {rules.LPA_NMOL_PER_MGDL} nmol/L per mg/dL")
-        change = BiomarkerChange(change.biomarker, unit="mg/dL", pct_change=change.pct_change, method=change.method,
-                                 source=change.source,
-                                 abs_change=None if change.abs_change is None else change.abs_change / rules.LPA_NMOL_PER_MGDL,
-                                 baseline=None if change.baseline is None else change.baseline / rules.LPA_NMOL_PER_MGDL)
+    change = _to_canonical_unit(change, assumptions)
     if change.abs_change is not None:
         return -change.abs_change
     if change.pct_change is None:
@@ -140,22 +169,47 @@ def _absolute(change: BiomarkerChange, assumptions: list[str]) -> float | None:
     return -change.pct_change / 100 * baseline
 
 
-def ldl_equivalent(changes: list[BiomarkerChange], assumptions: list[str]) -> tuple[float | None, str]:
+def _percent(change: BiomarkerChange | None) -> float | None:
+    """Signed percent change, given or derived from the absolute change and the baseline."""
+    if change is None:
+        return None
+    if change.pct_change is not None:
+        return change.pct_change
+    if change.abs_change is not None and change.baseline:
+        return change.abs_change / change.baseline * 100
+    return None
+
+
+def _sources(change: BiomarkerChange) -> set[str]:
+    return {s.strip() for s in (change.source or "").split(",") if s.strip()}
+
+
+def ldl_equivalent(changes: list[BiomarkerChange], assumptions: list[str],
+                   intended: str | None = None) -> tuple[float | None, str]:
     """LDL-equivalent reduction in mmol/L from the most trustworthy lipid measure, plus Lp(a)."""
-    by = {canonical(c.biomarker): c for c in changes}
+    by: dict[str, BiomarkerChange] = {}
+    for c in changes:  # the first row for a biomarker is the analyst's primary one
+        by.setdefault(canonical(c.biomarker), c)
     ldl, nonhdl, apob, lpa = by.get("LDL-C"), by.get("non-HDL-C"), by.get("apoB"), by.get("Lp(a)")
 
+    # LDL-C and apoB disagree (a CETP inhibitor's assay artefact, or opposite directions): trust non-HDL-C/apoB.
     discordant = False
-    same_source = not (ldl and apob and ldl.source and apob.source and ldl.source != apob.source)
-    if ldl and apob and ldl.pct_change and apob.pct_change and same_source:
-        ratio = abs(ldl.pct_change) / abs(apob.pct_change)
-        discordant = ratio > rules.DISCORDANCE_RATIO or ratio < 1 / rules.DISCORDANCE_RATIO
+    pl, pa = _percent(ldl), _percent(apob)
+    same_source = not (ldl and apob and _sources(ldl) and _sources(apob) and not (_sources(ldl) & _sources(apob)))
+    if pl is not None and pa is not None and same_source and abs(pl - pa) >= rules.DISCORDANCE_MIN_POINTS:
+        if (pl < 0) != (pa < 0) or min(abs(pl), abs(pa)) == 0:
+            discordant = True
+        else:
+            ratio = abs(pl) / abs(pa)
+            discordant = ratio > rules.DISCORDANCE_RATIO or ratio < 1 / rules.DISCORDANCE_RATIO
+    # A triglyceride-lowering drug acts on TG-rich particles that LDL-C does not count; non-HDL-C and apoB do.
+    tg_drug = canonical(intended) == "triglycerides"
 
-    candidates = []
-    if discordant:
+    if discordant or tg_drug:
         candidates = [("non-HDL-C", nonhdl, 1.0), ("apoB", apob, 1 / rules.APOB_MGDL_PER_LDL_MMOL)]
     else:
         candidates = [("LDL-C", ldl, 1.0), ("non-HDL-C", nonhdl, 1.0), ("apoB", apob, 1 / rules.APOB_MGDL_PER_LDL_MMOL)]
+    note = " (LDL/apoB discordant)" if discordant else (" (triglyceride-lowering drug)" if tg_drug else "")
 
     lipid, basis = None, "no lipid change"
     for name, change, factor in candidates:
@@ -163,7 +217,7 @@ def ldl_equivalent(changes: list[BiomarkerChange], assumptions: list[str]) -> tu
             continue
         value = _absolute(change, assumptions)
         if value is not None:
-            lipid, basis = value * factor, name + (" (LDL/apoB discordant)" if discordant else "")
+            lipid, basis = value * factor, name + note
             break
 
     total = lipid
@@ -179,9 +233,9 @@ def evaluate(case: CaseInput) -> Result:
     assumptions: list[str] = []
     notes: list[str] = []
 
-    eq, basis = ldl_equivalent(case.changes, assumptions)
+    eq, basis = ldl_equivalent(case.changes, assumptions, case.intended_biomarker)
     years = case.followup_years
-    if years is None:
+    if years is None or years <= 0:
         years = 5.0
         assumptions.append("follow-up unknown, effect shown at 5 years")
     g = time_factor(years)
@@ -202,17 +256,26 @@ def evaluate(case: CaseInput) -> Result:
     # SGLT2 or anti-inflammatory drug would otherwise get a confident false "failure".
     intended = canonical(case.intended_biomarker)
     unquantified_reason = None
-    if case.pathway in rules.UNQUANTIFIED_CAUSAL_PATHWAYS:
+    pathway = canonical(case.pathway) if case.pathway else None
+    if pathway in rules.UNQUANTIFIED_CAUSAL_PATHWAYS or (pathway or "").lower() in rules.UNQUANTIFIED_CAUSAL_PATHWAYS:
         unquantified_reason = f"{case.pathway} pathway"
     elif intended and intended not in rules.QUANTIFIED_BIOMARKERS and intended not in rules.NON_CAUSAL_BIOMARKERS:
         unquantified_reason = f"main mechanism via {intended}"
     # A sized mechanism with no measured value anywhere in the facts is unknown, not zero: sizing it as "no change"
     # would turn missing data into a confident "failure". A target proven non-causal fails whatever the size.
-    not_measured = (unquantified_reason is None and eq is None and not sbp and intended in rules.QUANTIFIED_BIOMARKERS
-                    and case.target_genetics != "not_causal")
+    # The main mechanism must itself be measured: an Lp(a) drug with only a small LDL-C change, or a triglyceride
+    # drug with only LDL-C, is not "sized" by that other number. No intended biomarker named: any sized value counts.
+    def measured(name):
+        if name == "SBP":
+            return sbp is not None
+        row = next((c for c in case.changes if canonical(c.biomarker) == name), None)
+        return row is not None and _absolute(row, []) is not None
+    needs = rules.MEASURED_BY.get(intended or "")
+    not_measured = (unquantified_reason is None and needs is not None and case.target_genetics != "not_causal"
+                    and not any(measured(n) for n in needs))
     if not_measured:
-        basis = f"{intended} change not measured"
-        notes.append(f"no measured change in {intended} or another sized lipid: the effect is unknown, not zero")
+        basis = f"{intended or 'main mechanism'} change not measured"
+        notes.append(f"no measured change in {intended or 'any sized biomarker'}: the effect is unknown, not zero")
     quantifiable = unquantified_reason is None and not not_measured
     lipid_hr = rules.LDL_RR_PER_MMOL_5Y ** (g * (eq or 0.0))
     expected_hr = lipid_hr * bp_factor if quantifiable else None
@@ -252,7 +315,7 @@ def evaluate(case: CaseInput) -> Result:
         outcome=outcome,
         category=category,
         secondary=secondary,
-        weakest_link=f"{intended} change not measured" if not_measured else _weakest_link(case, causal_rrr, pw),
+        weakest_link=basis if not_measured else _weakest_link(case, causal_rrr, pw),
         consistent_with_observed=consistent,
         assumptions=assumptions,
         notes=notes,

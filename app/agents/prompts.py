@@ -133,6 +133,16 @@ Category definitions (pick the primary one by these, not by tone):
   the intended biomarker itself is non-causal.
 - target_not_causal: human genetics does not support the drug's target itself.
 - effect_too_small: the mechanism is causal but the expected benefit was too small for the trial to detect.
+- off_target_harm: the drug did harm through an effect other than its intended mechanism (a rise in blood pressure,
+  a toxicity, a safety signal), which offset or reversed the benefit the mechanism predicts.
+- population: the mechanism is causal and the drug moved the biomarker, but in the trial's patients most events come
+  from processes that mechanism does not act on, so the benefit expected in other patients does not apply to them.
+- design_or_endpoint: the trial's design, not the biology, kept it from showing the effect: an endpoint diluted by
+  events the mechanism cannot prevent, a follow-up too short for the effect to build up, an active or crossing-over
+  comparator, or an endpoint changed during the trial.
+- execution_or_nonscientific: the trial stopped or fell short for reasons outside the science: a sponsor's business
+  decision, poor adherence or recruitment, or a programme dropped before the trial could answer its question.
+- insufficient_data: the available evidence cannot tell the explanations apart, because key numbers are missing.
 
 Rules:
 - Every evidence item cites fact_ids or "calculator". No outside facts, no invented numbers.
@@ -170,6 +180,10 @@ Judge the inputs against what the public evidence can contain. Before an outcome
 its own biomarker effect is not public: the placebo-adjusted phase 2 change at the dose closest to the outcome trial's
 is the accepted input. Missing phase 3 biomarker data is a caveat (severity medium), never a reason to drop a
 quantified, verified input, and never ask for a number to be set to null.
+In mode "autopsy" the trial's topline announcement is part of the evidence on purpose: its result (whether the
+primary endpoint was met, the hazard ratio) may be cited to explain what happened, so never ask to remove it. Only
+evidence published after the cut-off is out of bounds, and the result is never a calculator input other than
+observed_hr and observed_ci.
 
 Return JSON only:
 {"issues": [{"severity": "high|medium|low", "issue": "...", "target_agent": "case_builder|mechanism|investigator",

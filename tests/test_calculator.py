@@ -133,3 +133,71 @@ class VerdictTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GeneralInputRules(unittest.TestCase):
+    """Rules that must hold for any drug: names, units, and missing values."""
+
+    common = dict(case_id="x", mode="autopsy", target_genetics="causal", followup_years=4.0, events=1500)
+
+    def test_biomarker_names_are_matched_as_words(self):
+        from app.core.calculator import canonical
+        self.assertEqual(canonical("non HDL cholesterol"), "non-HDL-C")
+        self.assertEqual(canonical("Apo B"), "apoB")
+        self.assertEqual(canonical("Lp (a)"), "Lp(a)")
+        self.assertEqual(canonical("diastolic blood pressure"), "DBP")
+        self.assertEqual(canonical("VLDL cholesterol"), "VLDL-C")
+        self.assertEqual(canonical("IL-18"), "IL-18")
+        self.assertEqual(canonical("secretory phospholipase A2"), "sPLA2-IIA")
+
+    def test_units_are_converted_whatever_the_name(self):
+        mmol = evaluate(CaseInput(intended_biomarker="LDL-C", changes=[BiomarkerChange("LDL-C", abs_change=-1.0)],
+                                  **self.common))
+        mgdl = evaluate(CaseInput(intended_biomarker="LDL cholesterol",
+                                  changes=[BiomarkerChange("LDL cholesterol", abs_change=-38.67, unit="mg/dL")],
+                                  **self.common))
+        self.assertAlmostEqual(mmol.ldl_equivalent_mmol, mgdl.ldl_equivalent_mmol, places=3)
+        gl = evaluate(CaseInput(intended_biomarker="apoB", changes=[BiomarkerChange("Apo B", abs_change=-0.3, unit="g/L")],
+                                **self.common))
+        self.assertAlmostEqual(gl.ldl_equivalent_mmol, 30 / 29.2, places=2)
+
+    def test_a_triglyceride_drug_is_sized_by_non_hdl_or_apob_never_by_ldl_alone(self):
+        only_ldl = evaluate(CaseInput(intended_biomarker="triglycerides",
+                                      changes=[BiomarkerChange("triglycerides", pct_change=-20),
+                                               BiomarkerChange("LDL-C", pct_change=3, baseline=2.0)], **self.common))
+        self.assertEqual(only_ldl.outcome, "not_computable")
+        with_nonhdl = evaluate(CaseInput(intended_biomarker="triglycerides",
+                                         changes=[BiomarkerChange("LDL-C", pct_change=3, baseline=2.0),
+                                                  BiomarkerChange("non-HDL-C", abs_change=-0.4)], **self.common))
+        self.assertAlmostEqual(with_nonhdl.ldl_equivalent_mmol, 0.4, places=3)
+
+    def test_an_lpa_drug_is_not_sized_by_a_small_ldl_change(self):
+        r = evaluate(CaseInput(intended_biomarker="Lp(a)", changes=[BiomarkerChange("LDL-C", abs_change=-0.05)],
+                               **self.common))
+        self.assertEqual((r.outcome, r.category), ("not_computable", "insufficient_data"))
+
+    def test_no_intended_biomarker_and_no_value_is_not_a_failure(self):
+        r = evaluate(CaseInput(intended_biomarker="", changes=[], **self.common))
+        self.assertEqual(r.outcome, "not_computable")
+
+    def test_zero_follow_up_is_unknown(self):
+        r = evaluate(CaseInput(intended_biomarker="LDL-C", changes=[BiomarkerChange("LDL-C", abs_change=-1.0)],
+                               **{**self.common, "followup_years": 0}))
+        self.assertLess(r.expected_hr, 1.0)
+        self.assertIn("follow-up unknown, effect shown at 5 years", r.assumptions)
+
+    def test_discordance_needs_a_real_gap(self):
+        small = evaluate(CaseInput(intended_biomarker="LDL-C", changes=[BiomarkerChange("LDL-C", pct_change=0, baseline=2.5),
+                                                                        BiomarkerChange("apoB", pct_change=-5)], **self.common))
+        self.assertEqual(small.basis, "LDL-C")
+        opposite = evaluate(CaseInput(intended_biomarker="LDL-C", changes=[BiomarkerChange("LDL-C", pct_change=-20, baseline=2.5),
+                                                                           BiomarkerChange("apoB", pct_change=20, baseline=90),
+                                                                           BiomarkerChange("non-HDL-C", abs_change=0.2)],
+                                      **self.common))
+        self.assertTrue(opposite.basis.startswith("non-HDL-C"))
+
+    def test_the_first_row_for_a_biomarker_is_used(self):
+        r = evaluate(CaseInput(intended_biomarker="LDL-C", changes=[BiomarkerChange("LDL-C", abs_change=-1.0),
+                                                                    BiomarkerChange("LDL cholesterol", abs_change=-0.1)],
+                               **self.common))
+        self.assertAlmostEqual(r.ldl_equivalent_mmol, 1.0)

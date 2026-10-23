@@ -1,0 +1,15 @@
+{
+  "key": "ea204758edbe09c5d417",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-23T17:58:35+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: AURORA NCT00240331 - AURORA: Crestor 10mg Versus Placebo in Subjects With End-stage Renal Disease (ESRD)\nInvestigational drug: rosuvastatin\nDocument: Alternative splicing of 3-hydroxy-3-methylglutaryl coenzyme A reductase is associated with plasma low-density lipoprotein cholesterol response to simvastatin. (journal, published 2008-06-16, source pmid:18559695)\n\n--- DOCUMENT TEXT ---\nAlternative splicing of 3-hydroxy-3-methylglutaryl coenzyme A reductase is associated with plasma low-density lipoprotein cholesterol response to simvastatin.\n\nBackground HMGCR(3-Hydroxy-3-methylglutaryl coenzyme A reductase), the direct target of statin inhibition, undergoes alternative splicing of exon 13, which encodes part of the statin-binding domain of the enzyme. We hypothesized that HMGCR alternative splicing might be related to the interindividual variation in plasma low-density lipoprotein cholesterol response to statin treatment. Methods and results We measured mRNA expression of both the full-length and the alternatively spliced HMGCR transcript lacking exon 13 (HMGCRv_1) in 170 simvastatin-incubated immortalized lymphocyte cell lines derived from participants in the Cholesterol and Pharmacogenetics (CAP) study who were treated with simvastatin 40 mg/d for 6 weeks. Greater upregulation of HMGCRv_1 in vitro was significantly correlated (P Conclusions Variation in the production of an HMGCR isoform with reduced statin sensitivity is a determinant of interindividual differences in low-density lipoprotein cholesterol, apolipoprotein B, and triglyceride response to statin treatment.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 597,
+    "output_tokens": 7
+  }
+}

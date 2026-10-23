@@ -1,0 +1,7 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A10027849+OR+EXT_ID%3A20863951+OR+EXT_ID%3A21602519+OR+EXT_ID%3A21989792&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*100[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '10027849' AND r.abstractText LIKE '%100%' LIMIT 5",
+ "rows": [],
+ "error": null
+}
