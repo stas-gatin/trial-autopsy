@@ -204,7 +204,9 @@ def evaluate(case: CaseInput) -> Result:
     quantifiable = unquantified_reason is None
     lipid_hr = rules.LDL_RR_PER_MMOL_5Y ** (g * (eq or 0.0))
     expected_hr = lipid_hr * bp_factor if quantifiable else None
-    causal_rrr = 1 - lipid_hr if quantifiable else None
+    # The causal effect is everything the sized mechanisms predict: lipids and blood pressure together. A drug or a
+    # strategy that only lowers blood pressure (SPRINT) would otherwise score no effect at all.
+    causal_rrr = 1 - lipid_hr * bp_factor if quantifiable else None
     partial_hr = None
     if not quantifiable:
         notes.append(f"{unquantified_reason} has no validated trial-scale coefficient; effect size not computable")

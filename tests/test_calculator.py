@@ -99,6 +99,16 @@ class VerdictTests(unittest.TestCase):
             followup_years=1.5, events=837, observed_hr=1.25, observed_ci=(1.09, 1.44))
         self.assertEqual(evaluate(case).category, "off_target_harm")
 
+    def test_blood_pressure_lowering_alone_counts_as_a_causal_effect(self):
+        # SPRINT-like: no lipid change, systolic BP 13 mmHg lower, 562 events over 3.3 years.
+        case = CaseInput(
+            case_id="sprint_like", mode="autopsy", target_genetics="causal", intended_biomarker="SBP",
+            changes=[], sbp_change_mmhg=-13.1, followup_years=3.26, events=562)
+        result = evaluate(case)
+        self.assertGreater(result.causal_rrr, 0.15)
+        self.assertAlmostEqual(result.causal_rrr, 1 - result.expected_hr, places=3)
+        self.assertNotEqual(result.category, "effect_too_small")
+
 
 if __name__ == "__main__":
     unittest.main()
