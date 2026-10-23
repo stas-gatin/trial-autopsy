@@ -1,10 +1,12 @@
+<p align="center">
+  <img src="docs/images/art/hero.svg" width="100%" alt="Trial Autopsy: AI agents that explain why a cardiovascular drug trial failed, with a live example: Lp(a)HORIZON, pelacarsen, failed because the effect was too small for the trial">
+</p>
+
 # Trial Autopsy
 
 **AI agents that explain why a cardiovascular drug trial failed, or is likely to fail, and what that means for every other drug on the same target.**
 
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
-
-![Trial Autopsy home page: the question "Why did the trial fail, and who is next?" and a live report card for pelacarsen](docs/images/home_hero.png)
 
 | | |
 |---|---|
@@ -16,6 +18,8 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 > Research tool. Not medical or investment advice.
 
 ---
+
+![The app's home page: the question and a live report card for pelacarsen](docs/images/home_hero.png)
 
 ## The problem in one minute
 
@@ -83,6 +87,10 @@ The report also has a replay of every step the agents took and a PDF export.
 ---
 
 ## How it works
+
+<p align="center">
+  <img src="docs/images/art/pipeline.svg" width="100%" alt="The pipeline: data read through Zetaris, nine steps from intake to reporter, the Verifier's SQL in Zetaris, the critic's loop back, facts in the Meterless World Model and reasoning on NVIDIA Nemotron through Meterless Nightshift">
+</p>
 
 ![System map from the Settings page: data sources and Zetaris on the left, the nine steps in the middle, the Meterless World Model, Meterless Nightshift and NVIDIA Nemotron on the right](docs/images/system_map.png)
 
@@ -205,6 +213,10 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 ---
 
 ## Results
+
+<p align="center">
+  <img src="docs/images/art/results.svg" width="100%" alt="Blind backtest scores and the share of reasoning calls through Meterless Nightshift">
+</p>
 
 The honest test is the **blind backtest**: 14 finished trials replayed with only the documents published before each readout, scored against the explanations experts published later (`data/golden_set/`, never shown to the agents). Results: [`eval/results/backtest_2026-10-23.md`](eval/results/backtest_2026-10-23.md).
 
