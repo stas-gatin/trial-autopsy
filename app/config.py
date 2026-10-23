@@ -35,7 +35,7 @@ class Role:
 # either, recorded answers are replayed.
 ROLE_DEFAULTS = {
     "reasoning": "meterless:meterless/deep",
-    "extraction": "meterless:meterless/fast",
+    "extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",   # reasoning off: Nightshift cannot switch it off
     "critic": "meterless:meterless/fast",
     "reporter": "meterless:meterless/fast",
 }
