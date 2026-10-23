@@ -5,8 +5,12 @@ Rule (fixed, applied identically to every case):
   1. ClinicalTrials.gov record in "design-only" view (status, stop reason, results removed)
   2. Europe PMC documents published BEFORE as_of that mention the drug or its code names
      (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,
-     then most recent; at most 10; open full text when available (rule v2)
+     then most recent; at most 10; open full text when available (rule v2). A paper found only by
+     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word
+     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)
   3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)
+     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may
+     have been printed after the readout (rule v4)
   4. The topline announcement itself (press release on the readout day), fetched from its URL
 Nothing is added by hand. Documents that reveal the outcome cannot exist before as_of,
 except the topline announcement, which is what a real analyst would have on that day.
@@ -30,6 +34,7 @@ from app.agents.intake import PLACEBO  # noqa: E402
 from app.tools import ctgov, europepmc, http, opentargets  # noqa: E402
 
 WAYBACK = "https://web.archive.org/web/{date}/{url}"
+TOPIC = re.compile(case_builder.CARDIO.pattern + r"|hypertens|blood pressure|triglycer|renal|kidney|diabet", re.I)
 
 
 def html_to_text(raw: str) -> str:
@@ -92,13 +97,23 @@ def main():
     name_clause = " OR ".join(f'TITLE:"{n}" OR ABSTRACT:"{n}"' for n in aliases[:6])
     queries = [f"({name_clause})", f"({' OR '.join(tokens[:8])}) AND (PUB_TYPE:\"Clinical Trial, Phase II\" OR "
                                    f"PUB_TYPE:\"Clinical Trial, Phase III\" OR PUB_TYPE:\"Randomized Controlled Trial\")"]
+    def dated_before(r):
+        d = r.get("first_pub_date") or ""
+        return not (d.endswith("-01") and d[:7] == meta["readout_date"][:7])
+
+    acronym = (meta.get("trial_name") or "").split(" (")[0].strip()
     if meta.get("trial_name"):
         queries.append(f'"{meta["trial_name"]}"')
+    acronym_re = re.compile(rf"(?<![A-Za-z0-9]){re.escape(acronym)}(?![A-Za-z0-9])") if acronym else None
     candidates = {}
     for q in queries:
-        for r in europepmc.search(q, as_of=before, page_size=25):
-            if case_builder._mentions(r, aliases + [meta.get("trial_name") or ""]):
+        for r in filter(dated_before, europepmc.search(q, as_of=before, page_size=25)):
+            if case_builder._mentions(r, aliases):
                 candidates.setdefault(r.get("pmid") or r["title"], r)
+            elif acronym_re and case_builder._mentions(r, [meta["trial_name"], acronym]):
+                text = r["title"] + " " + r["abstract"]
+                if acronym_re.search(text) and TOPIC.search(text):
+                    candidates.setdefault(r.get("pmid") or r["title"], r)
     for record in sorted(candidates.values(), key=lambda r: case_builder._rank(r, aliases))[:args.max_docs]:
         text = europepmc.full_text(record["pmcid"]) if record.get("pmcid") and record.get("is_open_access") else None
         save(europepmc.to_document(record, text))
@@ -108,7 +123,7 @@ def main():
     for t in {t["approvedSymbol"]: t for t in targets}.values():
         q = (f'(TITLE:"{t["approvedSymbol"]}" OR ABSTRACT:"{t["approvedSymbol"]}") AND {case_builder.GENETIC_TERMS}')
         records = [r for r in europepmc.search(q, as_of=before, page_size=10)
-                   if t["approvedSymbol"].lower() in (r["title"] + r["abstract"]).lower()][:3]
+                   if dated_before(r) and t["approvedSymbol"].lower() in (r["title"] + r["abstract"]).lower()][:3]
         for r in records:
             doc = europepmc.to_document(r)
             doc.meta["purpose"] = "genetics"
