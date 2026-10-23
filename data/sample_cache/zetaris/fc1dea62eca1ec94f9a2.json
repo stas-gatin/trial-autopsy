@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A14739125+OR+EXT_ID%3A17084249+OR+EXT_ID%3A17084250&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*0\\.1%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '17084249' LIMIT 5",
+ "rows": [
+  [
+   " Low-density lipoprotein cholesterol lowering was less in subjects with higher (>150 mg/dl) versus lower levels of baseline triglycerides; at 60 mg, the change in LDL-C was 0.1% versus -22"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,15 @@
+{
+  "key": "7d3400a9bf4b0e28a59b",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T17:23:44+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. The calculator runs on a few numbers that other\nagents took from papers and the trial registry. You check each one independently against the source of record by\nwriting Lightning SQL (Spark SQL dialect) against the Zetaris tables described below. Code runs your queries.\n\nRules:\n- One read-only SELECT per number. Use only the tables given (`registry`, `papers`), no other tables, no semicolons.\n- For a paper, filter on its pmid (or pmcid) and look for the number in the abstract; return the matching sentence.\n- For a registry fact, select the field that states it (for example enrollmentInfo.count for the number of patients,\n  primaryOutcomes timeFrame for follow-up), so the value can be compared.\n- Keep each query small: select only the columns needed, LIMIT 5.\n\nReturn JSON only:\n{\"checks\": [{\"claim\": \"c1\", \"table\": \"papers|registry\", \"sql\": \"SELECT ...\"}]}",
+  "prompt": "Case: ACCORD NCT00000620 - Action to Control Cardiovascular Risk in Diabetes (ACCORD) (NCT00000620)\n\nTable `registry`: one row, the trial's ClinicalTrials.gov v2 record as nested columns.\nThis analysis has an evidence cut-off: only design-time fields may be read. Results, status and enrollment fields,\nand SELECT *, are rejected.\n  protocolSection.identificationModule.nctId, .acronym, .briefTitle\n  protocolSection.designModule.phases (array)\n  protocolSection.outcomesModule.primaryOutcomes (array of struct measure, description, timeFrame)\n  protocolSection.eligibilityModule.eligibilityCriteria (text)\n  protocolSection.armsInterventionsModule.interventions (array of struct type, name, description)\nArrays: SELECT o.measure, o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o\n\nNumbers to check (claim | used as | key = value unit | attributes | source | quote):\nc1 | follow-up | median_followup = 4.7 years | {\"trial\": \"ACCORD\"} | source ctgov:NCT00000620@2010-03-14 | quote: \"First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial. [4.7 years]\"\n\nWrite one query per claim.",
+  "response": "{\"checks\": [{\"claim\": \"c1\", \"table\": \"registry\", \"sql\": \"SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Major Cardiovascular Event%' LIMIT 5\"}]}",
+  "usage": {
+    "input_tokens": 515,
+    "output_tokens": 57
+  }
+}

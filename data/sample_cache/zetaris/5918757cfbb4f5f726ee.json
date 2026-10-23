@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A36342163&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*260\\.3 nmol per liter[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '36342163' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Results</h4>Among the 281 enrolled patients, the median concentration of lipoprotein(a) at baseline was 260.3 nmol per liter, and the median concentration of low-density lipoprotein cholesterol was 67"
+  ]
+ ],
+ "error": null
+}

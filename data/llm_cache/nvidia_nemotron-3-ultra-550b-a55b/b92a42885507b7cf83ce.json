@@ -1,0 +1,15 @@
+{
+  "key": "b92a42885507b7cf83ce",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T18:09:21+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: AURORA NCT00240331 - AURORA: Crestor 10mg Versus Placebo in Subjects With End-stage Renal Disease (ESRD)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | LDL-C change used by the calculator | biomarker_change = -45.0 % | {\"biomarker\": \"LDL-C\", \"dose\": \"10 mg\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase3\", \"placebo_adjusted\": true, \"timepoint\": \"not stated\", \"trial\": \"NCT00206310\"} | source pmid:17984166 | quote: \"patients in the rosuvastatin group had decreased levels of low-density lipoprotein cholesterol (difference between groups, 45.0%; P\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*45\\\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '17984166' LIMIT 5 | rows: [[\"<h4>Results</h4>As compared with the placebo group, patients in the rosuvastatin group had decreased levels of low-density lipoprotein cholesterol (difference between groups, 45.0%; P<0\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"difference between groups, 45.0%\", \"note\": \"Row shows placebo-adjusted LDL-C difference of 45.0%, matching claim magnitude and direction.\"}]}",
+  "usage": {
+    "input_tokens": 470,
+    "output_tokens": 2550
+  }
+}
