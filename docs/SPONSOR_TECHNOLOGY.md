@@ -1,6 +1,6 @@
 # Sponsor technology in Trial Autopsy
 
-How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. Every claim points to the code and to a way to check it. The numbers come from the 17 recorded analyses in `data/library/` (14 blind backtests and 3 examples, run on 22 and 23 October 2026).
+How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. Every claim points to the code and to a way to check it. The numbers come from the 16 recorded analyses in `data/library/` (14 blind backtests and 2 examples, run live on 22 and 23 October 2026; the third example is the ACCELERATE backtest itself). Their logs are in `logs/`.
 
 | Sponsor | Role in the product | Code |
 |---|---|---|
@@ -37,7 +37,7 @@ SELECT to_json(r) FROM session.ta_<id> LATERAL VIEW explode(resultList.result) A
 
 A contradiction goes to the critic as a serious issue, and the critic can send the work back (up to two rounds). Without Zetaris, the report says its numbers were not independently verified and lowers its confidence one level. Each report's *Numbers used* tab shows the verdict, the sentence found and the SQL for every number.
 
-**Across the 17 analyses** the Verifier checked 85 numbers: 50 confirmed, 31 not found in the abstract or registry, 4 contradictions. Each contradiction reached the critic:
+**Across the 16 analyses** the Verifier checked 77 numbers: 45 confirmed, 28 not found in the abstract or registry, 4 contradictions. Each contradiction reached the critic:
 - **IMPROVE-IT:** the source reported the LDL-C difference with the opposite sign to the input. The critic sent the work back, and the second round's expected hazard ratio, 0.899, matched the answer key's 0.898.
 - **Pelacarsen:** the follow-up of 2.5 years was a *minimum*, not the median. The critic sent the work back, and the second round used 3.25 years.
 - **FOURIER (two):** two baseline LDL-C values were ranges in the source (89–94 and 123–126 mg/dL), not single values.
@@ -58,7 +58,7 @@ A contradiction goes to the critic as a serious issue, and the critic can send t
 
 The provider keys stay in Nightshift. Each response's `model` field names the lane that answered, and the trace records it. Answers are stored under the model that actually answered, so one lane's answer is never replayed as another model's.
 
-**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 16 live runs all 132 of those calls went through Nightshift and none needed the direct fallback. Nightshift answered 131 of them from Nemotron 3 Ultra. A full analysis took a median of 10 minutes (5 to 33). The per-run table is in `docs/evidence/nightshift_runs.md`.
+**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 16 recorded runs all 132 of those calls went through Nightshift and none needed the direct fallback. Nightshift answered 131 of them from Nemotron 3 Ultra. A full analysis took a median of 10 minutes (5 to 33). The per-run table is in `docs/evidence/nightshift_runs.md`.
 
 **What we learned running a pipeline through Nightshift.** Nightshift is built first for chat. A pipeline of strict steps needs a few settings, and we measured each:
 
@@ -86,7 +86,7 @@ The provider keys stay in Nightshift. Each response's `model` field names the la
 
 Facts whose quote failed the word-for-word check are stored too, marked unverified with low confidence, so the record of everything extracted is complete; only verified facts reach the calculator and the report. The engine keeps an event-sourced, audited, idempotent world state in `data/meterless/.world/<run>.json`. `app/engines/world_model.py` implements the same three services the Meterless engine guides describe (WorldStore, IngestPipeline, ContextBuilder), and the analyst, the calculator, the Verifier and the investigator build their context from them.
 
-Across the 17 analyses the engine stored 374 entities, 1,331 facts, 445 links and 3,373 audit entries.
+Across the 16 analyses the engine stored 350 entities, 1,250 facts, 418 links and 3,168 audit entries; each run's audit log is `logs/world-<run_id>.jsonl`.
 
 **How to check it.**
 - `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass (`docs/evidence/meterless_world_model_conformance.txt`).
@@ -134,7 +134,7 @@ The run trace records each such step.
 **How to check it.**
 - Settings page: every AI step shows the NVIDIA logo and its Nemotron route or model.
 - Each report's agent graph and *What this analysis used* panel show the model each step actually used.
-- `eval/results/` holds the scores; `data/library/traces/` holds every recorded run's step log.
+- `eval/results/` holds the scores; `logs/` holds every recorded run's step log, and `scripts/check_replay.py` replays each run offline and checks it reproduces the live result.
 
 ## What is distinctive
 
