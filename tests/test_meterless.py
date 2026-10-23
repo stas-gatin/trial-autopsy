@@ -99,3 +99,11 @@ class JsonRetryTests(unittest.TestCase):
         data, calls = self._run(['{"issues": [1]}'])
         self.assertEqual(data, {"issues": [1]})
         self.assertEqual(calls, ["case:critic:0"])
+
+    def test_extraction_can_opt_out_of_the_retry(self):
+        from unittest import mock
+        from app.llm import generator
+        replies = iter(["Facts ['f_1'] do not", "I can't verify that."])
+        with mock.patch.object(generator, "generate", side_effect=lambda *a, **k: mock.Mock(text=next(replies))):
+            with self.assertRaises(ValueError):
+                generator.generate_json("extraction", "system", "prompt", tag="case:extract:x", retry=False)

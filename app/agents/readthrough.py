@@ -85,7 +85,7 @@ def _assess(state: RunState, program: dict, intended: str) -> dict:
                                                   text=doc.text)
         data, response = generator.generate_json("extraction", prompts.EXTRACTION_SYSTEM, prompt,
                                                  tag=f"{state.case_id}:readthrough:{drug}", agent="ReadThrough",
-                                                 list_key="facts")
+                                                 list_key="facts", retry=False)
         state.record_model("ReadThrough", response)
         facts = [f for f in data.get("facts", []) if (f.get("attrs") or {}).get("biomarker") == intended
                  and verify_quote(doc.text, f.get("quote", ""))]
