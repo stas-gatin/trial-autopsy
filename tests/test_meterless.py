@@ -107,3 +107,26 @@ class JsonRetryTests(unittest.TestCase):
         with mock.patch.object(generator, "generate", side_effect=lambda *a, **k: mock.Mock(text=next(replies))):
             with self.assertRaises(ValueError):
                 generator.generate_json("extraction", "system", "prompt", tag="case:extract:x", retry=False)
+
+
+class FactsBelongToEachRun(unittest.TestCase):
+    def test_two_runs_of_one_case_keep_their_facts(self):
+        import tempfile
+        from unittest import mock
+        from app import config
+        from app.engines import world_model
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(world_model, "WORLD_DB_DIR", __import__("pathlib").Path(tmp)), \
+                mock.patch.object(config, "LOGS", __import__("pathlib").Path(tmp)), \
+                mock.patch.dict("os.environ", {"SOURCE_METERLESS": "false"}):
+            runs = []
+            for rid in ("run-a", "run-b"):
+                store = world_model.WorldStoreService(rid)
+                ingest = world_model.IngestPipelineService(store)
+                from app.tools.documents import Document
+                ingest.upsert_source(Document(source_id="s1", type="journal", title="t", text="q", url="",
+                                              pub_date="2020-01-01", access="abstract_only"))
+                ingest.ingest_fact(case_id="x", entity_id="drug:x", key="k", value=1, source_id="s1", quote="q",
+                                   quote_verified=True, agent="test")
+                runs.append(store)
+            for store in runs:
+                self.assertEqual(len(store.query("SELECT 1 FROM facts WHERE run_id=?", (store.run_id,))), 1)
