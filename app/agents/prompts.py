@@ -133,6 +133,16 @@ Category definitions (pick the primary one by these, not by tone):
   the intended biomarker itself is non-causal.
 - target_not_causal: human genetics does not support the drug's target itself.
 - effect_too_small: the mechanism is causal but the expected benefit was too small for the trial to detect.
+- off_target_harm: the drug did harm through an effect other than its intended mechanism (a rise in blood pressure,
+  a toxicity, a safety signal), which offset or reversed the benefit the mechanism predicts.
+- population: the mechanism is causal and the drug moved the biomarker, but in the trial's patients most events come
+  from processes that mechanism does not act on, so the benefit expected in other patients does not apply to them.
+- design_or_endpoint: the trial's design, not the biology, kept it from showing the effect: an endpoint diluted by
+  events the mechanism cannot prevent, a follow-up too short for the effect to build up, an active or crossing-over
+  comparator, or an endpoint changed during the trial.
+- execution_or_nonscientific: the trial stopped or fell short for reasons outside the science: a sponsor's business
+  decision, poor adherence or recruitment, or a programme dropped before the trial could answer its question.
+- insufficient_data: the available evidence cannot tell the explanations apart, because key numbers are missing.
 
 Rules:
 - Every evidence item cites fact_ids or "calculator". No outside facts, no invented numbers.
