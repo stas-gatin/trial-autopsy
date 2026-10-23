@@ -1,10 +1,10 @@
-"""Copy the HTTP cache entries used by the recorded examples into data/sample_cache/ (committed),
-so SAMPLE_MODE works on a fresh clone without network or keys.
+"""Copy the HTTP cache entries used by the recorded runs into data/sample_cache/ (committed),
+so SAMPLE_MODE works on a fresh clone without network or keys, for the examples and the backtests alike.
 
 The examples are replayed offline (SAMPLE_MODE, with the local HTTP cache): nothing is called live, so no
 recording is overwritten. Run it after the examples were recorded live.
 
-Usage: python scripts/export_sample_cache.py input_examples/*.json
+Usage: python scripts/export_sample_cache.py eval/backtests/*.json input_examples/*.json
 """
 import os
 import pathlib
