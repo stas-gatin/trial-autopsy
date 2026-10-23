@@ -24,7 +24,21 @@ KEY_TERMS = re.compile(
     r"phospholipase|blood pressure|hazard ratio|HR|95% CI|confidence interval|events?|randomi[sz]ed|follow-up|"
     r"power|placebo|primary end ?point|primary outcome|enrolled|median)\b", re.I)
 NUMBER = re.compile(r"\d")
-GENERIC_TOKENS = {"sodium", "calcium", "acid", "hydrochloride", "tablet", "injection", "placebo", "ionis", "free"}
+# Words in drug names that would match unrelated papers: salt and dosage forms. The sponsor's own name (a company
+# prefix in code names such as "IONIS-APO(a)-LRx") is added per trial from the registry.
+GENERIC_TOKENS = {"sodium", "calcium", "potassium", "magnesium", "acid", "hydrochloride", "mesylate", "besylate",
+                  "tablet", "tablets", "capsule", "injection", "solution", "placebo", "free"}
+
+
+def generic_tokens_for(sponsor: str | None, names: list[str]) -> set[str]:
+    """Words to leave out of the loose literature search: salt and dosage forms, the sponsor's name, and a company
+    prefix in a code name ("IONIS-APO(a)-LRx", "AKCEA-APO(a)-L Rx"), which would match every paper of that company."""
+    prefixes = {m.group(1).lower() for n in names for m in [re.match(r"([A-Za-z]{4,})-(?=[^ ]*[\d(])", n or "")] if m}
+    return GENERIC_TOKENS | prefixes | {t.lower() for t in re.split(r"[^A-Za-z0-9]+", sponsor or "") if len(t) >= 4}
+
+
+def generic_tokens(state: RunState, names: list[str]) -> set[str]:
+    return generic_tokens_for(state.trial.get("sponsor"), names)
 
 
 def _skip(state: RunState, source: str, what: str) -> bool:
@@ -90,8 +104,9 @@ def gather_literature(state: RunState, extra_terms: str | None = None) -> list[D
         queries.append(f'"{acronym}"')
     trial_types = ('PUB_TYPE:"Clinical Trial, Phase II" OR PUB_TYPE:"Clinical Trial, Phase III" OR '
                    'PUB_TYPE:"Randomized Controlled Trial"')
+    generic = generic_tokens(state, names)
     tokens = sorted({t for n in names for t in re.split(r"[^A-Za-z0-9]+", n)
-                     if (len(t) >= 5 or any(ch.isdigit() for ch in t)) and t.lower() not in GENERIC_TOKENS})
+                     if (len(t) >= 5 or any(ch.isdigit() for ch in t)) and t.lower() not in generic})
     if tokens:
         # Unquoted tokens catch code names typeset differently, e.g. "AKCEA-APO(a)-L Rx".
         queries.append(f"({' OR '.join(tokens[:8])}) AND ({trial_types})")

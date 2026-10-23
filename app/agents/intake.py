@@ -76,6 +76,11 @@ def _load_live(state: RunState, req: dict):
                                     f"N {state.trial.get('enrollment')} | results posted {state.trial.get('has_results')}")
 
 
+# Synonyms that only name a salt or chemical form ("... free acid", "... sodium") match papers about other products.
+SALT_FORM = re.compile(r"\b(free acid|free base|sodium|calcium|potassium|magnesium|hydrochloride|mesylate|besylate|"
+                       r"hydrate|anhydrous)\b", re.I)
+
+
 def _resolve_drug(state: RunState):
     names = []
     if state.request.get("drug"):
@@ -105,7 +110,7 @@ def _resolve_drug(state: RunState):
                        for m in mechs for t in m.get("targets") or []}
             aliases = sorted({x["label"] for x in (profile.get("synonyms") or []) + (profile.get("tradeNames") or [])
                               if x.get("label") and x["label"].lower() != profile.get("name", "").lower()
-                              and "free acid" not in x["label"].lower()})
+                              and not SALT_FORM.search(x["label"])})
             state.drug = {"name": profile.get("name", hit["name"]).lower(), "chembl_id": hit["id"], "aliases": aliases,
                           "drug_type": profile.get("drugType"),
                           "mechanisms": sorted({m["mechanismOfAction"] for m in mechs}),

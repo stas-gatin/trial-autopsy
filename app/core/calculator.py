@@ -256,7 +256,8 @@ def evaluate(case: CaseInput) -> Result:
     # SGLT2 or anti-inflammatory drug would otherwise get a confident false "failure".
     intended = canonical(case.intended_biomarker)
     unquantified_reason = None
-    if case.pathway in rules.UNQUANTIFIED_CAUSAL_PATHWAYS:
+    pathway = canonical(case.pathway) if case.pathway else None
+    if pathway in rules.UNQUANTIFIED_CAUSAL_PATHWAYS or (pathway or "").lower() in rules.UNQUANTIFIED_CAUSAL_PATHWAYS:
         unquantified_reason = f"{case.pathway} pathway"
     elif intended and intended not in rules.QUANTIFIED_BIOMARKERS and intended not in rules.NON_CAUSAL_BIOMARKERS:
         unquantified_reason = f"main mechanism via {intended}"
