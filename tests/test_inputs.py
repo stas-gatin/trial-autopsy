@@ -1,7 +1,7 @@
 import unittest
 
 from app.agents.analysis import check_inputs, complete_inputs
-from app.agents.case_builder import change_direction
+from app.agents.case_builder import change_direction, sentence_before
 
 
 class DirectionFromQuote(unittest.TestCase):
@@ -15,6 +15,24 @@ class DirectionFromQuote(unittest.TestCase):
         self.assertEqual(change_direction("LDL-C −59% vs placebo", 59), -1)
         self.assertEqual(change_direction("increases (+19% to +24%)", 24), 1)
         self.assertEqual(change_direction("LDL-C was 71 mg/dL", 71), 0)
+
+    def test_direction_from_the_start_of_the_sentence(self):
+        # the quote starts mid-sentence, after the verb that gives the direction
+        doc = ("Results. Evolocumab reduced LDL-C by 66% (95% CI, 58% to 73%) to 75% (biweekly) and by 63% "
+               "(95% CI, 54% to 71%) to 75% (monthly) vs placebo at the mean of weeks 10 and 12. Adverse events were similar.")
+        quote = "and by 63% (95% CI, 54% to 71%) to 75% (monthly) vs placebo"
+        self.assertEqual(change_direction(quote, 63), 0)
+        before = sentence_before(doc, quote)
+        self.assertTrue(before.startswith("evolocumab reduced"))
+        self.assertEqual(change_direction(f"{before} {quote}", 63, window=480), -1)
+        self.assertEqual(sentence_before(doc, "not in the document at all"), "")
+
+    def test_sentence_is_used_only_when_the_quote_says_nothing(self):
+        from app.agents.case_builder import _number_in
+        # a level change written as two levels: the difference is not in the quote, so the sentence is not read
+        self.assertFalse(_number_in("lowered the triglyceride level from 164 mg per deciliter to 122 mg per deciliter", 42))
+        self.assertTrue(_number_in("and by 63% (95% CI, 54% to 71%) vs placebo", 63))
+        self.assertFalse(_number_in("a 138.2 mg/dL level", 38))
 
 
 class CompleteInputs(unittest.TestCase):
