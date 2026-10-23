@@ -79,9 +79,13 @@ class InputCheckTests(unittest.TestCase):
 
 class WorldModelTests(unittest.TestCase):
     def test_ingest_is_idempotent_and_runs_are_isolated(self):
+        from unittest import mock
+
+        from app import config
         from app.engines import world_model as wm
-        with tempfile.TemporaryDirectory() as tmp:
-            wm.WORLD_DB_DIR, wm.LOGS = Path(tmp), Path(tmp)
+        # the store and its audit log go to a temporary folder, never into the repository's data/ or logs/
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(wm, "WORLD_DB_DIR", Path(tmp)), \
+                mock.patch.object(config, "LOGS", Path(tmp)):
             store = wm.WorldStoreService("run-a", db_name="t.db")
             ingest = wm.IngestPipelineService(store)
             doc = Document("pmid:1", "journal", "t", "apoB fell 15%", pub_date="2015-01-01")
