@@ -13,7 +13,8 @@ load_dotenv(ROOT / ".env")
 DATA = ROOT / "data"
 LOGS = ROOT / "logs"
 HTTP_CACHE = DATA / "cache" / "http"
-LLM_CACHE = DATA / "llm_cache"
+# Model recordings. LLM_CACHE_DIR records a fresh set elsewhere (a full rerun that must not reuse old answers).
+LLM_CACHE = pathlib.Path(os.getenv("LLM_CACHE_DIR") or DATA / "llm_cache")
 ARCHIVE = DATA / "archive"
 WORLD_DB_DIR = DATA / "world"
 
