@@ -36,6 +36,29 @@ Trial Autopsy answers in about ten minutes, the way a pathologist works: collect
 
 ---
 
+## When something goes wrong
+
+What the agents do when a step fails, what they do without being asked, and how a person can tell afterwards what happened.
+
+**A failed step says so; it does not guess.**
+- **No number, no forecast.** If a number the calculator needs (an event count, the between-arm LDL-C difference) is not in the documents published before the cut-off, the result is *not computable*. A missing value is never read as zero, and an Lp(a) or triglyceride drug is never sized by some other small change.
+- **Cut model calls are retried and logged.** Nightshift cuts a request whose first token is slow; the app retries, and after two cuts calls NVIDIA directly, and the step log names the provider that answered. A reply cut off mid-thought, with no JSON in it, is repaired by the same model or asked once more.
+- **Failed sources are reported.** If Zetaris is down, the Verifier is marked unavailable and the report lowers its confidence.
+- **Out of scope is refused, with the reason.** A blood-pressure strategy with no molecule, or a trial outside cardiometabolic disease, gets a clear refusal instead of a forced answer.
+
+**Checks nobody asked for.**
+- The **Verifier** re-checks every number the calculator used against the registry and the cited papers with SQL in Zetaris; a contradiction goes to the critic.
+- The **critic** can send the work back. Code then keeps every verified number the critic did not question, so a revision cannot quietly lose evidence.
+- **Code** checks every quote word for word against its document (a fact whose quote is not there is kept as unverified and never reaches the calculator or the report), converts units, and reads the direction of a change from the source's own clause.
+- The **archive builder** leaves out a paper dated only to the readout month, since it may have been printed after the readout.
+
+**Afterwards, everything can be traced.**
+- Every step is in the run's log (`logs/trace-<run>.jsonl`): the agent, the action, a summary of input and output, the model and provider that answered, and whether code or a model did it.
+- Every number links to its verbatim quote and source, and every World Model write is in an audit log (`logs/world-<run>.jsonl`).
+- Every recorded analysis replays offline to the same result (`scripts/check_replay.py`), and CI checks this on every push, so anyone can rerun the whole backtest without keys.
+
+---
+
 ## What you get
 
 ### Four checks, as one causal chain
@@ -210,7 +233,8 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 
 - Every AI step runs on NVIDIA Nemotron: Nemotron 3 Ultra (550B) and Nemotron 3.5 Super (120B). In the final runs Nightshift served the reasoning steps mostly from Ultra; extraction ran on 3.5 Super.
 - The critic has its own instructions and reviews the analyst's work, so the steps check each other; malformed JSON is repaired by the same model; calls are paced under the API's rate limit.
-- Open models matter here: a drug company cannot send unpublished trial data to a closed cloud model. The same agents can run on the company's own hardware, for example an NVIDIA DGX Spark, which Nightshift supports. (I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.)
+- Open models matter here: a drug company cannot send unpublished trial data to a closed cloud model.
+- **On your own NVIDIA hardware.** Every model call goes to an OpenAI-compatible endpoint. Pointing `NVIDIA_BASE_URL` at a local NVIDIA NIM that serves Nemotron, or giving Nightshift a lane on an NVIDIA DGX Spark, moves the whole analysis onto the company's own machine with no code change, and the unpublished data never leaves it. The agents, prompts, checks and recordings stay the same. (I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.)
 
 ---
 
