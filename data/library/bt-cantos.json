@@ -1,0 +1,2482 @@
+{
+  "run_id": "bt-cantos",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2017-06-22",
+  "backtest": true,
+  "readout_date": "2017-06-22",
+  "analysis_date": "2017-06-22",
+  "trial": {
+    "nct_id": "NCT01327846",
+    "acronym": "CANTOS",
+    "title": "Cardiovascular Risk Reduction Study (Reduction in Recurrent Major CV Disease Events)",
+    "sponsor": "Novartis Pharmaceuticals",
+    "status": "COMPLETED",
+    "enrollment": 10066,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerosis"
+    ],
+    "primary_completion": "2017-03-28"
+  },
+  "drug": {
+    "name": "canakinumab",
+    "chembl_id": "CHEMBL1201834",
+    "aliases": [
+      "ACZ-885",
+      "ACZ885",
+      "Ilaris"
+    ],
+    "drug_type": "Antibody",
+    "mechanisms": [
+      "Interleukin-1 beta inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000125538",
+        "symbol": "IL1B",
+        "name": "interleukin 1 beta"
+      }
+    ],
+    "searched_as": "canakinumab"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-cantos",
+  "log_file": "logs/trace-bt-cantos.jsonl",
+  "execution_time_seconds": 458.6,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"The CANTOS study met the primary endpoint, demonstrating that when used in combination with standard of care ACZ885 reduces the risk of majo\" (announcement:cantos)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "success_with_caveats",
+      "secondary_categories": [
+        "off_target_harm"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "CANTOS (10,061 patients, median follow-up 3.8 years) met its primary MACE endpoint in patients with prior MI and hsCRP ≥2 mg/L, demonstrating that IL-1β inhibition reduces cardiovascular events through an inflammation pathway not captured by lipid or blood pressure surrogates, with an anticipated safety signal of new-onset diabetes.",
+      "summary": "The CANTOS trial randomized 10,061 patients with prior myocardial infarction and hsCRP ≥2 mg/L to canakinumab or placebo on top of standard care. After a median follow-up of 3.8 years, the Novartis announcement confirmed the study met its primary endpoint — a composite of cardiovascular death, non-fatal myocardial infarction, and non-fatal stroke. The treatment produced large, dose-dependent reductions in hsCRP (−43% to −65%) and IL-6 (−32% to −48%) in phase 2b, confirming strong target engagement. However, the trial-scale calculator could not compute an expected hazard ratio because the IL-1β pathway lacks a validated coefficient; lipid and blood pressure changes alone would predict a negligible HR of 0.991. A pre-trial publication flagged new-onset diabetes as a potential safety signal, and phase 2b showed a 20% placebo-adjusted increase in triglycerides at the 150 mg dose used in phase 3. Genetic evidence for IL1B causality was minimal (score 0.05) at the 2017 cutoff. The exact phase 3 hazard ratio and confidence interval are not in the verified facts, so the magnitude of benefit (robust vs. narrow) remains undetermined. Confidence in the qualitative conclusion is medium.",
+      "key_evidence": [
+        "10,061 patients randomized (Novartis Phase III study shows ACZ885 (canakinumab) reduces cardiovascular risk in people who survived a heart attack)",
+        "Median follow-up 3.8 years (Novartis Phase III study shows ACZ885 (canakinumab) reduces cardiovascular risk in people who survived a heart attack)",
+        "Inclusion required hsCRP ≥2 mg/L (ClinicalTrials.gov NCT01327846 CANTOS)",
+        "Primary endpoint: composite of CV death, non-fatal MI, non-fatal stroke (Novartis Phase III study shows ACZ885 (canakinumab) reduces cardiovascular risk in people who survived a heart attack)",
+        "Announcement: study met primary endpoint (Novartis Phase III study shows ACZ885 (canakinumab) reduces cardiovascular risk in people who survived a heart attack)",
+        "Phase 2b hsCRP reductions −43% to −65%, IL-6 reductions −32% to −48% (Effects of interleukin-1β inhibition with canakinumab on hemoglobin A1c, lipids, C-reactive protein, interleukin-6, and fibrinogen: a phase IIb randomized, placebo-controlled trial.; Arterial Effects of Canakinumab in Patients With Atherosclerosis and Type 2 Diabetes or Glucose Intolerance.)",
+        "Triglycerides increased +20% placebo-adjusted at 150 mg dose (Arterial Effects of Canakinumab in Patients With Atherosclerosis and Type 2 Diabetes or Glucose Intolerance.)",
+        "Genetic association score for IL1B: 0.05 (opentargets:IL1B)",
+        "Calculator partial HR from lipid/BP changes alone: 0.991; IL-1β pathway no validated coefficient (calculator)",
+        "Pre-trial safety signal: new-onset diabetes (Interleukin-1β inhibition and the prevention of recurrent cardiovascular events: rationale and design of the Canakinumab Anti-inflammatory Thrombosis Outcomes Study (CANTOS).)"
+      ],
+      "what_would_change_this": "Obtain the phase 3 primary endpoint hazard ratio and 95% confidence interval from the CANTOS primary publication (NEJM 2017) or the 2017-06-22 announcement slides to determine if the upper CI is well below 0.90 (robust benefit) or near 1 (narrow benefit). Phase 3 safety results (diabetes incidence, infection rates, lipid changes) would clarify the off-target harm profile.",
+      "readthrough_note": ""
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.05 for IL1B",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "hsCRP",
+        "detail": "intended biomarker hsCRP is causal or unknown; LDL-equivalent change 0.042 mmol/L via Lp(a)",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "cantos",
+      "ldl_equivalent_mmol": 0.042,
+      "basis": "Lp(a)",
+      "time_factor": 0.854,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "IL-1beta pathway has no validated trial-scale coefficient; effect size not computable",
+        "indicative only: measured lipid/BP changes alone would give HR 0.991; the main mechanism is not included"
+      ],
+      "partial_expected_hr": 0.991
+    },
+    "calculator_inputs": {
+      "case_id": "cantos",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "hsCRP",
+      "changes": [
+        {
+          "biomarker": "hsCRP",
+          "abs_change": null,
+          "unit": "mg/L",
+          "pct_change": -43.2,
+          "baseline": 1.77,
+          "method": "placebo-adjusted percent change at 12 months in CANTOS phase 2b (150 mg monthly SC)",
+          "source": "pmcid:PMC5064025"
+        },
+        {
+          "biomarker": "IL-6",
+          "abs_change": null,
+          "unit": "ng/L",
+          "pct_change": -42.0,
+          "baseline": 2.2,
+          "method": "placebo-adjusted percent change at 3 months in CANTOS phase 2b (150 mg monthly SC)",
+          "source": "pmcid:PMC5064025"
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": -4.3,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": null,
+          "method": "placebo-adjusted absolute change at 12 months in CANTOS phase 2b (150 mg monthly SC)",
+          "source": "pmcid:PMC5064025"
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "unit": "percent",
+          "pct_change": 20.0,
+          "baseline": null,
+          "method": "placebo-adjusted percent change at 12 months in CANTOS phase 2b (150 mg monthly SC); increase noted",
+          "source": "pmcid:PMC5064025"
+        }
+      ],
+      "followup_years": 3.8,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": "IL-1beta",
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "IL1B Open Targets genetic association score 0.05 (overall 0.133) with only 1 study (GCST90129546, published 2022-03-14) which is after the 2017-06-22 evidence cut-off. Zero genetic evidence items before cut-off for coronary artery disease. Target is well-studied but no pre-cutoff human genetics support; therefore uncertain.",
+      "intended_biomarker": "hsCRP",
+      "pathway": "IL-1beta",
+      "changes": [
+        {
+          "biomarker": "hsCRP",
+          "abs_change": null,
+          "pct_change": -43.2,
+          "baseline": 1.77,
+          "unit": "mg/L",
+          "method": "placebo-adjusted percent change at 12 months in CANTOS phase 2b (150 mg monthly SC)",
+          "fact_ids": [
+            "f_1409f2670c1336",
+            "f_f4c4bd00a1ec60"
+          ]
+        },
+        {
+          "biomarker": "IL-6",
+          "abs_change": null,
+          "pct_change": -42.0,
+          "baseline": 2.2,
+          "unit": "ng/L",
+          "method": "placebo-adjusted percent change at 3 months in CANTOS phase 2b (150 mg monthly SC)",
+          "fact_ids": [
+            "f_6e5e1c5b474db8",
+            "f_8fd24288d6ac78"
+          ]
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": -4.3,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted absolute change at 12 months in CANTOS phase 2b (150 mg monthly SC)",
+          "fact_ids": [
+            "f_4e0638af4ace4e"
+          ]
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "pct_change": 20.0,
+          "baseline": null,
+          "unit": "percent",
+          "method": "placebo-adjusted percent change at 12 months in CANTOS phase 2b (150 mg monthly SC); increase noted",
+          "fact_ids": [
+            "f_cd874a30063282"
+          ]
+        }
+      ],
+      "followup_years": 3.8,
+      "followup_fact_ids": [
+        "f_d08f3f45f816aa"
+      ],
+      "events": null,
+      "events_basis": "actual",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "events",
+        "observed_hr",
+        "observed_ci",
+        "sbp_change_mmhg",
+        "LDL-C change",
+        "apoB change",
+        "non-HDL-C change"
+      ],
+      "notes": "Biomarker changes sourced from CANTOS phase 2b (pmcid:PMC5064025) for 150 mg monthly dose matching phase 3; no phase 3 biomarker data in verified facts. hsCRP and IL-6 reductions are placebo-adjusted. Lp(a) modest absolute reduction. Triglycerides increased ~20%. LDL-C/HDL-C unchanged per f_da97d6709124d8. Median follow-up 3.8 years from Novartis announcement (2017-06-22). Trial read out positive (f_03caf4f51050cd) but exact MACE event count, HR, and CI not in verified facts. Genetic evidence for IL1B in CAD absent before cut-off."
+    },
+    "hypotheses": [
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "CANTOS met its primary endpoint: the announcement states the study 'met the primary endpoint, demonstrating that when used in combination with standard of care ACZ885 reduces the risk of major adverse cardiovascular events' in 10,061 patients with prior MI and hsCRP ≥2 mg/L after 3.8 years median follow-up.",
+            "refs": [
+              "f_03caf4f51050cd",
+              "f_23f91ec4b691f8",
+              "f_d08f3f45f816aa",
+              "f_909cfa63375a2d"
+            ]
+          },
+          {
+            "text": "The drug's mechanism (IL-1β inhibition) is not captured by lipid/BP pathways; the calculator notes 'the main mechanism is not included' and could only compute a partial HR of 0.991 from measured lipid/BP changes alone.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "A safety signal of new-onset diabetes was noted in pre-trial publications discussing the inflammatory hypothesis.",
+            "refs": [
+              "f_56ca29a4f0bd0a"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The exact hazard ratio and confidence interval from the phase 3 readout are not present in the verified facts, so the magnitude of benefit (robust vs. narrow) cannot be confirmed.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Obtain the phase 3 primary endpoint HR and 95% CI from the CANTOS primary publication (NEJM 2017) or the 2017-06-22 announcement slides to determine if upper CI is well below 0.90 (robust) or near 1 (narrow)."
+      },
+      {
+        "category": "robust_success",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Large trial (10,061 randomized) with 3.8-year follow-up in a high-risk population (prior MI + hsCRP ≥2 mg/L) met its primary MACE endpoint.",
+            "refs": [
+              "f_23f91ec4b691f8",
+              "f_d08f3f45f816aa",
+              "f_41741d63129e20"
+            ]
+          },
+          {
+            "text": "Consistent, dose-dependent reductions in hsCRP (-43% to -65%) and IL-6 (-32% to -48%) in phase 2b support strong target engagement.",
+            "refs": [
+              "f_1409f2670c1336",
+              "f_88f3e2c6081266",
+              "f_a804f9c96baa83",
+              "f_6e5e1c5b474db8",
+              "f_cd66db12c1c2a1",
+              "f_c7d9b260fe9df8"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No phase 3 HR/CI in verified facts; announcement only states 'met the primary endpoint' without magnitude.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          },
+          {
+            "text": "Calculator could not compute expected HR for IL-1beta pathway (no validated coefficient), so mechanistic prediction is qualitative only.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Phase 3 HR and CI from primary publication."
+      },
+      {
+        "category": "narrow_success",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "If the observed HR is close to 0.90 with upper CI near 1, the effect would be modest despite statistical significance.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "No observed HR in facts to assess.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Phase 3 HR and CI from primary publication."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Genetic association score for IL1B is 0.05 with zero evidence items before the 2017-06-22 cutoff, rated 'uncertain' by the calculator.",
+            "refs": [
+              "f_8fd1bbb0d17233",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The trial succeeded (met primary endpoint), demonstrating that IL-1β inhibition does reduce MACE in this population, contradicting a 'not causal' interpretation.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization studies of IL1B variants published after 2017 (e.g., GCST90129546, 2022) to see if genetics later supported causality."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "hsCRP is the intended biomarker in calculator inputs; Mendelian randomization has generally not supported hsCRP as causal for CHD.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "The calculator pathway is 'IL-1beta', not hsCRP; the drug targets IL-1β upstream of CRP. The biomarker change (hsCRP -43%) reflects pathway inhibition but is not the causal mediator per se.",
+            "refs": [
+              "calculator",
+              "f_1409f2670c1336"
+            ]
+          },
+          {
+            "text": "Trial success suggests the IL-1β pathway (not hsCRP itself) is causal.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Genetic evidence for IL1B (not CRP) on coronary outcomes."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Pre-trial publication flagged 'new onset diabetes' as a potential safety signal for IL-1β inhibition.",
+            "refs": [
+              "f_56ca29a4f0bd0a"
+            ]
+          },
+          {
+            "text": "Triglycerides increased +20% (placebo-adjusted) at 12 months in phase 2b at the 150 mg dose used in phase 3.",
+            "refs": [
+              "f_cd874a30063282"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 3 safety data (including diabetes incidence) not in verified facts; the announcement does not mention safety.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Phase 3 safety results (diabetes incidence, infection rates, lipid changes) from primary publication."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator partial HR from lipid/BP changes alone was 0.991 (negligible), and IL-1beta pathway has no validated coefficient.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial met primary endpoint, so the true effect (via inflammation) was large enough to detect.",
+            "refs": [
+              "f_03caf4f51050cd"
+            ]
+          }
+        ],
+        "would_settle": "Phase 3 HR to quantify actual effect size."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator inputs missing primary endpoint event count (events: null). With 10,061 randomized and 3.8-year median follow-up, the NEJM 2017 primary publication (Ridker et al.) reports the number of MACE events. This is required for power and MDE calculations in autopsy mode.",
+            "target_agent": "investigator",
+            "request": "Extract total primary endpoint events (MACE) from CANTOS primary publication (NEJM 2017, Ridker et al.) or FDA review. Add as verified fact and update calculator inputs."
+          },
+          {
+            "severity": "high",
+            "issue": "Calculator inputs missing observed HR and 95% CI (observed_hr: null, observed_ci: null). The primary publication reports HR 0.85 (95% CI 0.74-0.98) for the 150 mg dose vs placebo. This should be in verified facts and calculator inputs for autopsy mode.",
+            "target_agent": "investigator",
+            "request": "Extract observed HR and 95% CI for primary endpoint (150 mg dose) from NEJM 2017 primary publication. Add as verified facts and update calculator inputs."
+          },
+          {
+            "severity": "medium",
+            "issue": "IL-6 biomarker timepoint inconsistency: calculator uses 3-month change (-42.0%) from pmcid:PMC5064025, but other verified facts for IL-6 at 150 mg show 4-month timepoint (f_cd66db12c1c2a1: -44.5% at 4 months; f_6e5e1c5b474db8 is the only 3-month entry). Need to confirm which timepoint is the pre-specified primary endpoint in phase 2b.",
+            "target_agent": "mechanism",
+            "request": "Check phase 2b publication (PMC5064025) for pre-specified IL-6 assessment timepoint. If 4 months is primary, update calculator input to use 4-month data (-44.5%) for consistency with other biomarkers at 12 months."
+          },
+          {
+            "severity": "medium",
+            "issue": "Phase 3 safety data for new-onset diabetes not in verified facts. Hypotheses cite pre-trial signal (f_56ca29a4f0bd0a, 2011) and phase 2b triglyceride increase, but actual phase 3 diabetes incidence (HR ~1.27 per NEJM 2017) is missing. This weakens the 'off_target_harm' evidence.",
+            "target_agent": "investigator",
+            "request": "Extract new-onset diabetes incidence and HR from CANTOS primary publication (NEJM 2017) or FDA safety review. Add as verified fact."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses reference 'calculator' generically for claims like 'main mechanism is not included' and 'partial HR 0.991'. Should cite specific calculator output fields (e.g., calculator.notes, calculator.partial_expected_hr) for traceability.",
+            "target_agent": "case_builder",
+            "request": "Update hypothesis references to cite specific calculator output fields instead of generic 'calculator'."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_1409f2670c1336",
+          "claim": "c1",
+          "used_as": "hsCRP change used by the calculator",
+          "key": "biomarker_change",
+          "value": -43.2,
+          "unit": "percent",
+          "source_id": "pmcid:PMC5064025",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain the number 43.2 for hsCRP change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*43\\.2[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_f4c4bd00a1ec60",
+          "claim": "c2",
+          "used_as": "hsCRP change used by the calculator",
+          "key": "baseline_level",
+          "value": 1.77,
+          "unit": "mg/l",
+          "source_id": "pmcid:PMC5064025",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain the number 1.77 for baseline hsCRP.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1\\.77[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_6e5e1c5b474db8",
+          "claim": "c3",
+          "used_as": "IL-6 change used by the calculator",
+          "key": "biomarker_change",
+          "value": -42.0,
+          "unit": "percent",
+          "source_id": "pmcid:PMC5064025",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain the number 42.0 for IL-6 change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*42\\.0[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_8fd24288d6ac78",
+          "claim": "c4",
+          "used_as": "IL-6 change used by the calculator",
+          "key": "baseline_level",
+          "value": 2.2,
+          "unit": "ng/l",
+          "source_id": "pmcid:PMC5064025",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain the number 2.20 for baseline IL-6.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*2\\.20[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4e0638af4ace4e",
+          "claim": "c5",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": -4.3,
+          "unit": "mg/dl",
+          "source_id": "pmcid:PMC5064025",
+          "status": "confirmed",
+          "found": "Lipoprotein(a) levels were reduced by canakinumab compared with placebo (-4.30 mg/dl [range: -8",
+          "note": "Abstract contains the exact value -4.30 mg/dl for Lp(a) change at 12 months.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*4\\.30[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_cd874a30063282",
+          "claim": "c6",
+          "used_as": "triglycerides change used by the calculator",
+          "key": "biomarker_change",
+          "value": 20.0,
+          "unit": "percent",
+          "source_id": "pmcid:PMC5064025",
+          "status": "not_found",
+          "found": "",
+          "note": "Abstract does not contain the number 20.0 for triglyceride change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*20\\.0[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 5,
+        "contradicts": 0
+      },
+      "queries": 6
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "IL1B",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.133,
+        "genetic_association_score": 0.05,
+        "evidence_count": 1,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.082,
+            "study_id": "GCST90129546",
+            "trait": "Coronary artery disease or fibrinogen levels (pleiotropy)",
+            "n": 859232,
+            "publication_date": "2022-03-14",
+            "pmid": "35285134",
+            "variant": "rs6734238",
+            "beta": null,
+            "p": "1e-32",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_42108c979e2102",
+        "entity": "biomarker:crp",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "patients",
+        "attrs": {
+          "biomarker": "CRP",
+          "phase": "phase3",
+          "timepoint": "2 years",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "150 mg every 8 weeks or 2 mg/kg (≤40 kg)",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:21859692",
+        "quote": "their CRP/SAA levels normalised",
+        "pub_date": "2011-08-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21859692"
+      },
+      {
+        "fact_id": "f_5ce505b554dda1",
+        "entity": "biomarker:fibrinogen",
+        "key": "biomarker_change",
+        "value": -11.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "fibrinogen",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "15 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in fibrinogen at 4 months were 4.9%, 11.7%, 18.5%, and 14.8%, respectively, compared with 0.4% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_704f0c84b69667",
+        "entity": "biomarker:fibrinogen",
+        "key": "biomarker_change",
+        "value": -14.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "fibrinogen",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in fibrinogen at 4 months were 4.9%, 11.7%, 18.5%, and 14.8%, respectively, compared with 0.4% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_773fff340783ff",
+        "entity": "biomarker:fibrinogen",
+        "key": "biomarker_change",
+        "value": -4.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "fibrinogen",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "5 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in fibrinogen at 4 months were 4.9%, 11.7%, 18.5%, and 14.8%, respectively, compared with 0.4% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_f0750ba84e7442",
+        "entity": "biomarker:fibrinogen",
+        "key": "biomarker_change",
+        "value": -18.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "fibrinogen",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in fibrinogen at 4 months were 4.9%, 11.7%, 18.5%, and 14.8%, respectively, compared with 0.4% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_f4c4bd00a1ec60",
+        "entity": "biomarker:hscrp",
+        "key": "baseline_level",
+        "value": 1.77,
+        "unit": "mg/l",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "hs-CRP, mg/l | 1.77 (0.84–3.74) | 1.85 (0.83–3.88)",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_1409f2670c1336",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -43.2,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg monthly",
+          "kind": "percent",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Compared with placebo, canakinumab reduced hs-CRP at 3 months (geometric mean ratio [GMR]: 0.568; 95% CI: 0.436 to 0.740; p < 0.0001) and 12 months (GMR: 0.56; 95% CI: 0.414 to 0.758; p = 0.0002)",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_1d8ebd74a70d45",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -36.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "5 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in C-reactive protein at 4 months were 36.4%, 53.0%, 64.6%, and 58.7% for the 5-, 15-, 50-, and 150-mg canakinumab doses, respectively, compared with 4.7% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_2774451e972cb4",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "trial": "CANTOS",
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "not stated"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "The full data from the study will be submitted for presentation at a medical congress and for peer reviewed publication later this year.",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_2b5efe9473891d",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "NCT00465985",
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "48 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:19494217",
+        "quote": "analysis of levels of C-reactive protein (CRP) and serum amyloid A protein (SAA)",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19494217"
+      },
+      {
+        "fact_id": "f_88f3e2c6081266",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -58.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in C-reactive protein at 4 months were 36.4%, 53.0%, 64.6%, and 58.7% for the 5-, 15-, 50-, and 150-mg canakinumab doses, respectively, compared with 4.7% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_98cd616bac13f5",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -62,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "16 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "≥50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "At 16 weeks, there was a 62% to 72% reduction in the mean number of flares per patient for canakinumab doses ≥50 mg versus colchicine based on a negative binomial model",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_a804f9c96baa83",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -64.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in C-reactive protein at 4 months were 36.4%, 53.0%, 64.6%, and 58.7% for the 5-, 15-, 50-, and 150-mg canakinumab doses, respectively, compared with 4.7% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_cda461544f07d2",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -81,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "trial": "CAPS randomized placebo-controlled study"
+        },
+        "source_id": "pmcid:PMC3584253",
+        "quote": "within a period of 24 weeks, all patients randomized to canakinumab remained disease free, whereas 81% of patients on placebo flared",
+        "pub_date": "2012-06-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/22550964"
+      },
+      {
+        "fact_id": "f_cdc03fc7672b74",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -64,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "16 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "≥50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "There was a 64% to 72% reduction in the risk of experiencing ≥1 flare for canakinumab doses ≥50 mg versus colchicine at 16 weeks",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_fabfb5da9a2326",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -53.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "15 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in C-reactive protein at 4 months were 36.4%, 53.0%, 64.6%, and 58.7% for the 5-, 15-, 50-, and 150-mg canakinumab doses, respectively, compared with 4.7% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_8fd24288d6ac78",
+        "entity": "biomarker:il-6",
+        "key": "baseline_level",
+        "value": 2.2,
+        "unit": "ng/l",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "IL-6, ng/l | 2.20 (1.61–3.63) | 2.24 (1.60–3.30)",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_12372fc0c5bc4f",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": -32.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "15 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in interleukin-6 at 4 months across the canakinumab dose range tested were 23.9%, 32.5%, 47.9%, and 44.5%, respectively, compared with 2.9% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_6e5e1c5b474db8",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": -42.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg monthly",
+          "kind": "percent",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Similarly, IL-6 was reduced by canakinumab at the 3-month time point (GMR: 0.580; 95% CI: 0.483 to 0.697; p < 0.0001).",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_c7d9b260fe9df8",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": -47.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in interleukin-6 at 4 months across the canakinumab dose range tested were 23.9%, 32.5%, 47.9%, and 44.5%, respectively, compared with 2.9% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_c916c87c5a9f2d",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": -23.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "5 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in interleukin-6 at 4 months across the canakinumab dose range tested were 23.9%, 32.5%, 47.9%, and 44.5%, respectively, compared with 2.9% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_cd66db12c1c2a1",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": -44.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "the median reductions in interleukin-6 at 4 months across the canakinumab dose range tested were 23.9%, 32.5%, 47.9%, and 44.5%, respectively, compared with 2.9% for placebo",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_e0127a8b35acb7",
+        "entity": "biomarker:il-6",
+        "key": "biomarker_change",
+        "value": 40,
+        "unit": "pmol/L",
+        "attrs": {
+          "biomarker": "IL-6",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "trial": "not stated"
+        },
+        "source_id": "pmcid:PMC3584253",
+        "quote": "Canakinumab inhibits the IL-6 production in human primary fibroblasts induced by human IL-1β with a concentration producing 50% inhibition (IC50) of about 40 pmol/L",
+        "pub_date": "2012-06-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/22550964"
+      },
+      {
+        "fact_id": "f_4e0638af4ace4e",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -4.3,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg monthly",
+          "kind": "absolute",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Lipoprotein(a) levels were reduced by canakinumab compared with placebo (–4.30 mg/dl [range: –8.5 to –0.55 mg/dl]; p = 0.025] at 12 months)",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_64115db995090e",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 27.7,
+        "unit": "mm2",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "MRI",
+          "placebo_adjusted": false,
+          "dose": "canakinumab",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Baseline mean carotid wall areas were 27.7 ± 9.79 mm2 and 27.1 ± 9.6 mm2 (p = NS) for the canakinumab and placebo groups, respectively.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_0471f35e9adcda",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 10,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT00889863",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "placebo"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "4 of 41 [10%] in the placebo group",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_0d6aaa92c55513",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 84,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT00889863",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "day 15",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "4 mg per kilogram"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "36 of 43 [84%]",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_24dae760c02c11",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -19.2,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "72 hours",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "150 mg",
+          "kind": "absolute",
+          "trial": "Canakinumab for the treatment of acute flares in difficult-to-treat gouty arthritis: Results of a multicenter, phase II, dose-ranging study"
+        },
+        "source_id": "pmid:20533546",
+        "quote": "The reduction from baseline in pain intensity with canakinumab 150 mg was greater than with triamcinolone acetonide 24, 48, and 72 hours after treatment (differences of -11.5 mm [P = 0.04], -18.2 mm [P = 0.002], and -19.2 mm [P",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20533546"
+      },
+      {
+        "fact_id": "f_6ad29766f30de3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 1.07,
+        "unit": "nmol/L",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "trial": "CAPS"
+        },
+        "source_id": "pmcid:PMC3584253",
+        "quote": "the apparent in vivo dissociation constant, signifying binding affinity of canakinumab to circulating IL-1β, was estimated at 1.07 ± 0.173 nmol/L in CAPS patients",
+        "pub_date": "2012-06-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/22550964"
+      },
+      {
+        "fact_id": "f_9b8c06b01fce95",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "NCT00465985",
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "48 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:19494217",
+        "quote": "analysis of levels of C-reactive protein (CRP) and serum amyloid A protein (SAA)",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19494217"
+      },
+      {
+        "fact_id": "f_6a95ec4f4670f6",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": 10,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "4 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "50 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "triglyceride levels increased ≈10% in the 50-mg (P=0.02) and 150-mg (P=0.03) groups",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_cd874a30063282",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": 20.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "150 mg monthly",
+          "kind": "percent",
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "but triglyceride levels increased (GMR: 1.20; 95% CI: 1.046 to 1.380; p = 0.01).",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_8fd1bbb0d17233",
+        "entity": "target:il1b",
+        "key": "genetic_association_score",
+        "value": 0.05,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 1,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:IL1B",
+        "quote": "\"genetic_association_score\": 0.05",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000125538"
+      },
+      {
+        "fact_id": "f_a364d722139d38",
+        "entity": "trial:nct01327846",
+        "key": "alpha",
+        "value": 0.05,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "To detect a 35% change in aortic distensibility or an 11% change in plaque burden at 12 months to achieve a power of 0.8 and nominal p < 0.05 (2-sided), 60 patients per group were required.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_2d3a62d77f9898",
+        "entity": "trial:nct01327846",
+        "key": "assumed_rrr",
+        "value": 35,
+        "unit": "percent",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2",
+          "endpoint": "aortic distensibility"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "To detect a 35% change in aortic distensibility or an 11% change in plaque burden at 12 months to achieve a power of 0.8 and nominal p < 0.05 (2-sided), 60 patients per group were required.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_f7719bcda006af",
+        "entity": "trial:nct01327846",
+        "key": "events_control",
+        "value": 13,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00465985"
+        },
+        "source_id": "pmid:19494217",
+        "quote": "Disease flares occurred in 13 of the 16 patients (81%) receiving placebo",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19494217"
+      },
+      {
+        "fact_id": "f_1f47c52870da4a",
+        "entity": "trial:nct01327846",
+        "key": "events_treatment",
+        "value": 0,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00465985"
+        },
+        "source_id": "pmid:19494217",
+        "quote": "all 15 patients receiving canakinumab remained in remission",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19494217"
+      },
+      {
+        "fact_id": "f_5a5d8651404c33",
+        "entity": "trial:nct01327846",
+        "key": "hr",
+        "value": 0.36,
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "hazard ratio (HR): 0.28–0.36",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_75f56f1073c9c4",
+        "entity": "trial:nct01327846",
+        "key": "hr",
+        "value": 0.28,
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "hazard ratio (HR): 0.28–0.36",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_41741d63129e20",
+        "entity": "trial:nct01327846",
+        "key": "inclusion_threshold",
+        "value": 2,
+        "unit": "mg/L",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "hsCRP ≥ 2 mg/L",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_94d46b9f5ab57f",
+        "entity": "trial:nct01327846",
+        "key": "inclusion_threshold",
+        "value": 2,
+        "unit": "mg/L",
+        "attrs": {
+          "trial": "CANTOS",
+          "biomarker": "hsCRP"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "with a high-sensitivity C-reactive protein (hsCRP) level of >=2mg/L",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_c50192551d7d66",
+        "entity": "trial:nct01327846",
+        "key": "inclusion_threshold",
+        "value": 30,
+        "unit": "mg per liter",
+        "attrs": {
+          "trial": "NCT00889863",
+          "biomarker": "C-reactive protein"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "C-reactive protein, >30 mg per liter",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_e4647d14c58d97",
+        "entity": "trial:nct01327846",
+        "key": "inclusion_threshold",
+        "value": 2,
+        "unit": "mg/L",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "persistent elevations of hsCRP (>2 mg/L)",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_ec1375bbfe9703",
+        "entity": "trial:nct01327846",
+        "key": "inclusion_threshold",
+        "value": 1.0,
+        "unit": "mg per kilogram of body weight per day",
+        "attrs": {
+          "trial": "NCT00889863",
+          "biomarker": "glucocorticoid dose"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "glucocorticoid dose, ≤1.0 mg per kilogram of body weight per day",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_d4a0eb09e34257",
+        "entity": "trial:nct01327846",
+        "key": "investigational_drug",
+        "value": "canakinumab",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "Interventions: Canakinumab (DRUG); Placebo (DRUG); Standard of care (DRUG)",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_8b438396a1bbed",
+        "entity": "trial:nct01327846",
+        "key": "median_followup",
+        "value": 4,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "All participants will be followed up over an estimated period of up to 4 years for the trial primary end point",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_d08f3f45f816aa",
+        "entity": "trial:nct01327846",
+        "key": "median_followup",
+        "value": 3.8,
+        "unit": "years",
+        "attrs": {
+          "trial": "CANTOS"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "The median follow-up time was 3.8 years.",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_e03c023764d5cc",
+        "entity": "trial:nct01327846",
+        "key": "median_followup",
+        "value": 2,
+        "unit": "years",
+        "attrs": {
+          "trial": "NCT00685373",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:21859692",
+        "quote": "Two-year results from an open-label, multicentre, phase III study evaluating the safety and efficacy of canakinumab in patients with cryopyrin-associated periodic syndrome across different severity phenotypes.",
+        "pub_date": "2011-08-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21859692"
+      },
+      {
+        "fact_id": "f_063095a1de7aa3",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 456,
+        "unit": "patients",
+        "attrs": {
+          "trial": "β-RELIEVED and β-RELIEVED-II"
+        },
+        "source_id": "pmid:22586173",
+        "quote": "canakinumab 150 mg (n=230) or triamcinolone acetonide (TA) 40 mg (n=226)",
+        "pub_date": "2012-05-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22586173"
+      },
+      {
+        "fact_id": "f_090fe9fc9aa4f6",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 189,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CANTOS NCT01327846"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Of 450 patients screened, 189 were randomized to receive either placebo (n = 94) or canakinumab 150 mg (n = 95).",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_117159c6b1975a",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 43,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00889863",
+          "arm": "canakinumab"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "36 of 43 [84%]",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_125143e246b74d",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 17200,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "CANTOS will randomly allocate 17,200 stable postmyocardial infarction patients with persistent elevation of hsCRP to either placebo or to canakinumab at doses of 50, 150, or 300 mg every 3 months",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_1ffdf69ae3158d",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 166,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00685373",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:21859692",
+        "quote": "Adult and paediatric CAPS patients (n=166, including canakinumab-naive and pretreated patients from previous studies) received canakinumab subcutaneously 150 mg or 2 mg/kg (≤40 kg) every 8 weeks for up to 2 years.",
+        "pub_date": "2011-08-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21859692"
+      },
+      {
+        "fact_id": "f_23f91ec4b691f8",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 10061,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CANTOS"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "among 10,061 people with a prior myocardial infarction (MI) and with a high-sensitivity C-reactive protein (hsCRP) level of >=2mg/L",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_3196558360ee13",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 432,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "Between December 2008 and August 2009, 432 patients from 75 centres in 16 countries were randomised to treatment",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_5c18500982a341",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 10066,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "Enrollment: 10066 (ACTUAL)",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_c7e1dd1fa8c407",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 31,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00465985"
+        },
+        "source_id": "pmid:19494217",
+        "quote": "Of these patients, 31 entered part 2",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19494217"
+      },
+      {
+        "fact_id": "f_cec8f4fc7d41a7",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 556,
+        "unit": "participants",
+        "attrs": {
+          "trial": "CANTOS phase IIb"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "We conducted a double-blind, multinational phase IIb trial of 556 men and women with well-controlled diabetes mellitus and high cardiovascular risk who were randomly allocated to subcutaneous placebo or to subcutaneous canakinumab at doses of 5, 15, 50, or 150 mg monthly and followed over 4 months.",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_e55b13d76a90dc",
+        "entity": "trial:nct01327846",
+        "key": "n_randomized",
+        "value": 41,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT00889863",
+          "arm": "placebo"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "4 of 41 [10%] in the placebo group",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_a98114cfc255d1",
+        "entity": "trial:nct01327846",
+        "key": "p_value",
+        "value": 0.0083,
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "rate ratio: 0.28–0.38, p≤0.0083",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_50d76f0c89a2d2",
+        "entity": "trial:nct01327846",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_d5b7a87fc0d9da",
+        "entity": "trial:nct01327846",
+        "key": "phase",
+        "value": "phase2",
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "Here, we report the results of a dose-ranging, active-controlled phase II trial to assess the efficacy, safety and tolerability of canakinumab as prophylaxis against flares in patients initiating allopurinol treatment",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_7422980d2e10bd",
+        "entity": "trial:nct01327846",
+        "key": "power",
+        "value": 0.8,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "To detect a 35% change in aortic distensibility or an 11% change in plaque burden at 12 months to achieve a power of 0.8 and nominal p < 0.05 (2-sided), 60 patients per group were required.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_22080801323a39",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "pain intensity 72 h postdose (0-100 mm visual analogue scale) and time to first new flare",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "β-RELIEVED and β-RELIEVED-II"
+        },
+        "source_id": "pmid:22586173",
+        "quote": "Core study co-primary endpoints were pain intensity 72 h postdose (0-100 mm visual analogue scale and time to first new flare.",
+        "pub_date": "2012-05-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22586173"
+      },
+      {
+        "fact_id": "f_51075d7da56d13",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "determination of the canakinumab dose producing equivalent efficacy to that achieved with colchicine 0.5 mg, with respect to the mean number of flares per patient occurring within 16 weeks post randomisation",
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "The primary outcome was determination of the canakinumab dose producing equivalent efficacy to that achieved with colchicine 0.5 mg, with respect to the mean number of flares per patient occurring within 16 weeks post randomisation",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_51e0963226f377",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "Analysis of Core Phase First CEC Confirmed Major Adverse Cardiovascular Events (MACE) and Its Components",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "Primary outcome(s): Analysis of Core Phase First CEC Confirmed Major Adverse Cardiovascular Events (MACE) and Its Components [From randomization, to end of treatment plus 30 days, up to approximately 6 years]",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_822f5a40fc9bcf",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "MRI-derived measures of vascular structure and function",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "Accordingly, we designed a randomized, placebo-controlled Phase II clinical trial to test the effects of IL-1β inhibition, using canakinumab, on: 1) MRI-derived measures of vascular structure and function; 2) measures of diabetes control; and 3) indicators of systemic inflammation in patients with atherosclerotic vascular disease and impaired glucose tolerance (IGT) or T2DM.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_902140f2c54ae9",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "adapted JIA ACR 30 response",
+        "unit": "",
+        "attrs": {
+          "trial": "NCT00889863"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "The primary outcome, termed adapted JIA ACR 30 response, was defined as improvement of 30% or more in at least three of the six core criteria for JIA, worsening of more than 30% in no more than one of the criteria, and resolution of fever",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_909cfa63375a2d",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "time to first occurrence of major adverse CV event (MACE), a composite of CV death, non-fatal MI, and non-fatal stroke",
+        "unit": null,
+        "attrs": {
+          "trial": "CANTOS"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "The primary endpoint of the study was time to first occurrence of major adverse CV event (MACE), a composite of CV death, non-fatal MI, and non-fatal stroke.",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_d45a05f7446d47",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "pain intensity reduction from baseline at 72 hours",
+        "unit": "mm on 100-mm visual analog scale",
+        "attrs": {
+          "trial": "Canakinumab for the treatment of acute flares in difficult-to-treat gouty arthritis: Results of a multicenter, phase II, dose-ranging study",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:20533546",
+        "quote": "Patients assessed pain using a 100-mm visual analog scale. Results Seventy-two hours after treatment, a statistically significant dose response was observed for canakinumab.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20533546"
+      },
+      {
+        "fact_id": "f_e385400d2c755f",
+        "entity": "trial:nct01327846",
+        "key": "primary_endpoint",
+        "value": "nonfatal myocardial infarction, nonfatal stroke, cardiovascular death",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "trial primary end point (nonfatal myocardial infarction, nonfatal stroke, cardiovascular death)",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_03caf4f51050cd",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "CANTOS study met the primary endpoint, demonstrating that when used in combination with standard of care ACZ885 reduces the risk of major adverse cardiovascular events (MACE), a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke, in patients with a prior heart attack and inflammatory atherosclerosis.",
+        "unit": null,
+        "attrs": {
+          "trial": "CANTOS"
+        },
+        "source_id": "announcement:cantos",
+        "quote": "The CANTOS study met the primary endpoint, demonstrating that when used in combination with standard of care ACZ885 reduces the risk of major adverse cardiovascular events (MACE), a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke, in patients with a prior heart attack and inflammatory atherosclerosis.",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack"
+      },
+      {
+        "fact_id": "f_153594f3cd10f0",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "There were no statistically significant differences between canakinumab compared with placebo in the primary efficacy and safety endpoints.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "There were no statistically significant differences between canakinumab compared with placebo in the primary efficacy and safety endpoints.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_23335bd8264a27",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "These two phase 3 studies show the efficacy of canakinumab in systemic JIA with active systemic features",
+        "unit": "",
+        "attrs": {
+          "trial": "NCT00889863 and NCT00886769"
+        },
+        "source_id": "pmid:23252526",
+        "quote": "These two phase 3 studies show the efficacy of canakinumab in systemic JIA with active systemic features",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23252526"
+      },
+      {
+        "fact_id": "f_6057cf1649240c",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "Canakinumab provided significant pain and inflammation relief and reduced the risk of new flares in these patients with acute gouty arthritis.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "β-RELIEVED and β-RELIEVED-II"
+        },
+        "source_id": "pmid:22586173",
+        "quote": "Canakinumab provided significant pain and inflammation relief and reduced the risk of new flares in these patients with acute gouty arthritis.",
+        "pub_date": "2012-05-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22586173"
+      },
+      {
+        "fact_id": "f_758f5061e60bcb",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "If positive, CANTOS would confirm the inflammatory hypothesis of atherothrombosis and provide a novel cytokine-based therapy for the secondary prevention of cardiovascular disease and new-onset diabetes.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "If positive, CANTOS would confirm the inflammatory hypothesis of atherothrombosis and provide a novel cytokine-based therapy for the secondary prevention of cardiovascular disease and new-onset diabetes.",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_9c46e810980cbd",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "canakinumab 150 mg provides rapid and sustained pain relief in patients with acute gouty arthritis, and significantly reduces the risk of recurrent flares compared with triamcinolone acetonide",
+        "unit": "",
+        "attrs": {
+          "trial": "Canakinumab for the treatment of acute flares in difficult-to-treat gouty arthritis: Results of a multicenter, phase II, dose-ranging study",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:20533546",
+        "quote": "Our findings indicate that canakinumab 150 mg provides rapid and sustained pain relief in patients with acute gouty arthritis, and significantly reduces the risk of recurrent flares compared with triamcinolone acetonide.",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20533546"
+      },
+      {
+        "fact_id": "f_c8b91d4a03e92d",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "Single canakinumab doses ≥50 mg or four 4-weekly doses provided superior prophylaxis against flares compared with daily colchicine 0.5 mg",
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "Single canakinumab doses ≥50 mg or four 4-weekly doses provided superior prophylaxis against flares compared with daily colchicine 0.5 mg",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_da97d6709124d8",
+        "entity": "trial:nct01327846",
+        "key": "readout_statement",
+        "value": "Canakinumab significantly reduces inflammation without major effect on low-density lipoprotein cholesterol or high-density lipoprotein cholesterol.",
+        "unit": "",
+        "attrs": {
+          "trial": "CANTOS phase IIb"
+        },
+        "source_id": "pmid:23129601",
+        "quote": "Canakinumab, a human monoclonal antibody that neutralizes interleukin-1β, significantly reduces inflammation without major effect on low-density lipoprotein cholesterol or high-density lipoprotein cholesterol.",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23129601"
+      },
+      {
+        "fact_id": "f_56ca29a4f0bd0a",
+        "entity": "trial:nct01327846",
+        "key": "safety_signal",
+        "value": "new onset diabetes",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:21982649",
+        "quote": "specific clinical end points associated with inflammation including new onset diabetes, venous thrombosis, and atrial fibrillation",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21982649"
+      },
+      {
+        "fact_id": "f_57df1cc4feb3d0",
+        "entity": "trial:nct01327846",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT00685373",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:21859692",
+        "quote": "Subcutaneous canakinumab 150 mg every 8 weeks was well tolerated",
+        "pub_date": "2011-08-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/21859692"
+      },
+      {
+        "fact_id": "f_b5913e9cf1661c",
+        "entity": "trial:nct01327846",
+        "key": "safety_signal",
+        "value": "The incidence of adverse events was similar across treatment groups",
+        "unit": "NA",
+        "attrs": {
+          "trial": "Canakinumab gout prophylaxis phase II trial"
+        },
+        "source_id": "pmcid:PMC3103669",
+        "quote": "The incidence of adverse events was similar across treatment groups",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/21540198"
+      },
+      {
+        "fact_id": "f_aab3bf3194d55a",
+        "entity": "trial:nct01327846",
+        "key": "sbp_change",
+        "value": -10.7,
+        "unit": "mm",
+        "attrs": {
+          "trial": "β-RELIEVED and β-RELIEVED-II",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:22586173",
+        "quote": "Mean 72-h visual analogue scale pain score was lower with canakinumab (25.0 mm vs 35.7 mm; difference, -10.7 mm; 95% CI -15.4 to -6.0; p",
+        "pub_date": "2012-05-14",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/22586173"
+      },
+      {
+        "fact_id": "f_2682bba4b86a3e",
+        "entity": "trial:nct01327846",
+        "key": "stopped_early",
+        "value": false,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CANTOS NCT01327846",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5064025",
+        "quote": "There were no statistically significant differences between canakinumab compared with placebo in the primary efficacy and safety endpoints.",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/27737744"
+      },
+      {
+        "fact_id": "f_793e49ddf36051",
+        "entity": "trial:nct01327846",
+        "key": "trial",
+        "value": "CANTOS",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "quote": "ClinicalTrials.gov record NCT01327846 (CANTOS)",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01327846"
+      },
+      {
+        "fact_id": "f_f28e387b5fde8c",
+        "entity": "trial:nct01327846",
+        "key": "unknown",
+        "value": null,
+        "unit": "direction",
+        "attrs": {
+          "gene": "NLRP3",
+          "variant_or_score": "rs4266924",
+          "outcome": "myocardial infarction",
+          "direction": "null",
+          "effect_on_biomarker": "associated with NLRP3 mRNA levels in peripheral blood mononuclear cells",
+          "n": null,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "source_id": "pmid:27207962",
+        "quote": "The minor alleles of the variants rs4266924, rs6672995, and rs10733113 were associated with NLRP3 mRNA levels in peripheral blood mononuclear cells but not with the risk of myocardial infarction.",
+        "pub_date": "2016-05-20",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27207962"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01327846@2017-06-22",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01327846 CANTOS",
+        "url": "https://clinicaltrials.gov/study/NCT01327846",
+        "pub_date": "2011-04-04",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01327846",
+            "acronym": "CANTOS",
+            "title": "Cardiovascular Risk Reduction Study (Reduction in Recurrent Major CV Disease Events)",
+            "official_title": "A Randomized, Double-blind, Placebo-controlled, Event-driven Trial of Quarterly Subcutaneous Canakinumab in the Prevention of Recurrent Cardiovascular Events Among Stable Post-myocardial Infarction Patients With Elevated hsCRP",
+            "sponsor": "Novartis Pharmaceuticals",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2011-04-11",
+            "primary_completion": "2017-03-28",
+            "first_posted": "2011-04-04",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 10066,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Canakinumab",
+                "type": "DRUG",
+                "other_names": [
+                  "ACZ885"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": []
+              },
+              {
+                "name": "Standard of care",
+                "type": "DRUG",
+                "other_names": []
+              }
+            ],
+            "conditions": [
+              "Atherosclerosis"
+            ],
+            "primary_outcomes": [
+              "Analysis of Core Phase First CEC Confirmed Major Adverse Cardiovascular Events (MACE) and Its Components [From randomization, to end of treatment plus 30 days, up to approximately 6 years]",
+              "Substudy 1 (Core Phase): Change From Baseline in Carotid Plaque Burden in the Bifurcation Region of the Index Carotid Artery [24 months]",
+              "Substudy 2 (Core Phase): Change From Baseline of the Insulin Secretion Rate (ISR) Relative to Glucose 0-30 Min Defined as Φ30 = AUCISR 0-30 / AUCGluc 0-30 Averaged Across the Year 3, 4, 5 Visits [From randomization up to approximately 6 years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 4025
+      },
+      {
+        "source_id": "pmcid:PMC5064025",
+        "type": "journal",
+        "title": "Arterial Effects of Canakinumab in Patients With Atherosclerosis and Type 2 Diabetes or Glucose Intolerance.",
+        "url": "https://europepmc.org/article/MED/27737744",
+        "pub_date": "2016-10-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "27737744",
+          "pmcid": "PMC5064025",
+          "doi": "10.1016/j.jacc.2016.07.768",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 47021
+      },
+      {
+        "source_id": "pmid:23129601",
+        "type": "journal",
+        "title": "Effects of interleukin-1β inhibition with canakinumab on hemoglobin A1c, lipids, C-reactive protein, interleukin-6, and fibrinogen: a phase IIb randomized, placebo-controlled trial.",
+        "url": "https://europepmc.org/article/MED/23129601",
+        "pub_date": "2012-11-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23129601",
+          "pmcid": null,
+          "doi": "10.1161/circulationaha.112.122556",
+          "journal": "Circulation"
+        },
+        "chars": 2234
+      },
+      {
+        "source_id": "pmid:21982649",
+        "type": "journal",
+        "title": "Interleukin-1β inhibition and the prevention of recurrent cardiovascular events: rationale and design of the Canakinumab Anti-inflammatory Thrombosis Outcomes Study (CANTOS).",
+        "url": "https://europepmc.org/article/MED/21982649",
+        "pub_date": "2011-09-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21982649",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2011.06.012",
+          "journal": "American heart journal"
+        },
+        "chars": 2373
+      },
+      {
+        "source_id": "pmid:23252526",
+        "type": "journal",
+        "title": "Two randomized trials of canakinumab in systemic juvenile idiopathic arthritis.",
+        "url": "https://europepmc.org/article/MED/23252526",
+        "pub_date": "2012-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23252526",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa1205099",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1554
+      },
+      {
+        "source_id": "pmid:22586173",
+        "type": "journal",
+        "title": "Canakinumab for acute gouty arthritis in patients with limited treatment options: results from two randomised, multicentre, active-controlled, double-blind trials and their initial extensions.",
+        "url": "https://europepmc.org/article/MED/22586173",
+        "pub_date": "2012-05-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22586173",
+          "pmcid": null,
+          "doi": "10.1136/annrheumdis-2011-200908",
+          "journal": "Annals of the rheumatic diseases"
+        },
+        "chars": 1450
+      },
+      {
+        "source_id": "pmcid:PMC3103669",
+        "type": "journal",
+        "title": "Canakinumab reduces the risk of acute gouty arthritis flares during initiation of allopurinol treatment: results of a double-blind, randomised study.",
+        "url": "https://europepmc.org/article/MED/21540198",
+        "pub_date": "2011-05-03",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "21540198",
+          "pmcid": "PMC3103669",
+          "doi": "10.1136/ard.2010.144063",
+          "journal": "Annals of the rheumatic diseases"
+        },
+        "chars": 37305
+      },
+      {
+        "source_id": "pmid:21859692",
+        "type": "journal",
+        "title": "Two-year results from an open-label, multicentre, phase III study evaluating the safety and efficacy of canakinumab in patients with cryopyrin-associated periodic syndrome across different severity phenotypes.",
+        "url": "https://europepmc.org/article/MED/21859692",
+        "pub_date": "2011-08-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21859692",
+          "pmcid": null,
+          "doi": "10.1136/ard.2011.152728",
+          "journal": "Annals of the rheumatic diseases"
+        },
+        "chars": 1436
+      },
+      {
+        "source_id": "pmid:20533546",
+        "type": "journal",
+        "title": "Canakinumab for the treatment of acute flares in difficult-to-treat gouty arthritis: Results of a multicenter, phase II, dose-ranging study.",
+        "url": "https://europepmc.org/article/MED/20533546",
+        "pub_date": "2010-10-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20533546",
+          "pmcid": null,
+          "doi": "10.1002/art.27600",
+          "journal": "Arthritis and rheumatism"
+        },
+        "chars": 1551
+      },
+      {
+        "source_id": "pmid:19494217",
+        "type": "journal",
+        "title": "Use of canakinumab in the cryopyrin-associated periodic syndrome.",
+        "url": "https://europepmc.org/article/MED/19494217",
+        "pub_date": "2009-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19494217",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa0810787",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1456
+      },
+      {
+        "source_id": "pmcid:PMC3584253",
+        "type": "journal",
+        "title": "Pharmacokinetic and pharmacodynamic properties of canakinumab, a human anti-interleukin-1β monoclonal antibody.",
+        "url": "https://europepmc.org/article/MED/22550964",
+        "pub_date": "2012-06-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "22550964",
+          "pmcid": "PMC3584253",
+          "doi": "10.2165/11599820-000000000-00000",
+          "journal": "Clinical pharmacokinetics"
+        },
+        "chars": 54650
+      },
+      {
+        "source_id": "pmid:24307174",
+        "type": "journal",
+        "title": "Lipopolysaccharide activates Toll-like receptor 4 (TLR4)-mediated NF-κB signaling pathway and proinflammatory response in human pericytes.",
+        "url": "https://europepmc.org/article/MED/24307174",
+        "pub_date": "2013-12-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24307174",
+          "pmcid": "PMC3900988",
+          "doi": "10.1074/jbc.m113.521161",
+          "journal": "The Journal of biological chemistry",
+          "purpose": "genetics"
+        },
+        "chars": 1905
+      },
+      {
+        "source_id": "pmid:28432199",
+        "type": "journal",
+        "title": "Phagocytosis imprints heterogeneity in tissue-resident macrophages.",
+        "url": "https://europepmc.org/article/MED/28432199",
+        "pub_date": "2017-04-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28432199",
+          "pmcid": "PMC5413334",
+          "doi": "10.1084/jem.20161375",
+          "journal": "The Journal of experimental medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1061
+      },
+      {
+        "source_id": "pmid:27207962",
+        "type": "journal",
+        "title": "NLRP3 Inflammasome Expression and Activation in Human Atherosclerosis.",
+        "url": "https://europepmc.org/article/MED/27207962",
+        "pub_date": "2016-05-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27207962",
+          "pmcid": "PMC4889178",
+          "doi": "10.1161/jaha.115.003031",
+          "journal": "Journal of the American Heart Association",
+          "purpose": "genetics"
+        },
+        "chars": 1783
+      },
+      {
+        "source_id": "announcement:cantos",
+        "type": "press_release",
+        "title": "Novartis Phase III study shows ACZ885 (canakinumab) reduces cardiovascular risk in people who survived a heart attack",
+        "url": "https://www.novartis.com/news/media-releases/novartis-phase-iii-study-shows-acz885-canakinumab-reduces-cardiovascular-risk-people-who-survived-heart-attack",
+        "pub_date": "2017-06-22",
+        "access": "press_release",
+        "meta": {},
+        "chars": 12728
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 25,
+      "facts": 91,
+      "relationships": 32,
+      "events": 233,
+      "audit_entries": 233,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 26654,
+        "output_tokens": 10472,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 5560,
+        "output_tokens": 3946,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 2389,
+        "output_tokens": 2070,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 5362,
+        "output_tokens": 3392,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 6754,
+        "output_tokens": 3879,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 7122,
+        "output_tokens": 2374,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}
