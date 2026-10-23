@@ -87,40 +87,41 @@
   ],
   "trace_id": "trace-bt-odyssey_outcomes",
   "log_file": "logs/trace-bt-odyssey_outcomes.jsonl",
-  "execution_time_seconds": 1983.0,
+  "execution_time_seconds": 601.1,
   "sample_mode": false,
   "warnings": [],
   "output": {
     "verdict": {
       "outcome": "success",
-      "outcome_basis": "observed HR CI 0.78-0.93 excludes 1",
+      "outcome_basis": "readout: \"showing Praluent ® (alirocumab) significantly reduced the risk of major adverse cardiovascular events (MACE) in patients who had suffered a \" (announcement:odyssey_outcomes)",
       "predicted_outcome": "not_computable",
       "consistency": "",
-      "primary_category": "narrow_success",
-      "secondary_categories": [
-        "population",
-        "design_or_endpoint",
-        "insufficient_data"
-      ],
+      "primary_category": "robust_success",
+      "secondary_categories": [],
       "calculator_category": "insufficient_data",
-      "confidence": "medium",
-      "verification": "done",
+      "confidence": "high",
+      "verification": "skipped",
       "probability_of_success": null,
-      "weakest_link": "trial size (events) unknown"
+      "weakest_link": "LDL-C change not measured"
     },
     "report": {
-      "headline": "ODYSSEY Outcomes met its primary endpoint with a 15% relative risk reduction in MACE (HR 0.85, 95% CI 0.78–0.93, p=0.0003) and showed a consistent all-cause mortality benefit (HR 0.85, 95% CI 0.73–0.98).",
-      "summary": "In 18,924 post-ACS patients on maximally tolerated statins, alirocumab reduced the composite of coronary death, myocardial infarction, ischemic stroke, or unstable angina hospitalization over a median 2.8-year follow-up. The effect size matches genetic predictions: PCSK9 loss-of-function variants lowering LDL-C by 15–28% associate with CHD hazard ratios of 0.79–0.81 (genetic association score 0.949), and alirocumab’s ~50–60% LDL-C reduction predicts HR ~0.80–0.85, consistent with the observed 0.85. All-cause mortality was significantly lower, while CHD death alone was not (HR 0.92, 95% CI 0.76–1.11). Safety was favorable: new-onset diabetes was numerically lower (9.6% vs 10.1%), neurocognitive events similar (1.5% vs 1.8%), and only injection-site reactions increased (3.8% vs 2.1%), as expected for a subcutaneous monoclonal antibody. The trial constitutes a robust success; the calculator’s ‘failure’ prediction stemmed solely from missing lipid-change input.",
-      "key_evidence": [
-        "Primary MACE HR 0.85 (95% CI 0.78–0.93, p=0.0003) — Praluent (alirocumab) significantly reduced risk of cardiovascular events in high-risk patients, and was associated with lower death rate (Sanofi/Regeneron, filed as SEC Form 6-K Ex. 99.2)",
-        "All-cause mortality HR 0.85 (95% CI 0.73–0.98, p=0.026) — same source",
-        "Subgroup with baseline LDL-C ≥100 mg/dL: HR 0.76 (95% CI 0.65–0.87) — same source",
-        "PCSK9 genetic association score 0.949; loss-of-function variants: ~15–28% LDL-C reduction, CHD HR 0.79–0.81 — Sequence variations in PCSK9, low LDL, and protection against coronary heart disease",
-        "Safety: injection-site reactions 3.8% vs 2.1%; new-onset diabetes 9.6% vs 10.1%; neurocognitive events 1.5% vs 1.8% — Praluent (alirocumab) significantly reduced risk of cardiovascular events in high-risk patients, and was associated with lower death rate (Sanofi/Regeneron, filed as SEC Form 6-K Ex. 99.2)",
-        "18,924 patients randomized, median follow-up 2.8 years — ClinicalTrials.gov NCT01663402"
-      ],
-      "what_would_change_this": "A substantially larger or smaller effect in the full peer-reviewed publication, or a major safety signal emerging with longer follow-up, would alter the confidence in the benefit-risk balance.",
-      "readthrough_note": "The result supports the PCSK9-inhibitor class; FOURIER (evolocumab) showed similar MACE reduction (HR 0.85) in stable vascular disease. Ongoing trials in primary prevention and lipoprotein(a) lowering will further define the population benefit."
+      "facts": [
+        {
+          "genetic_association": null,
+          "unit": "direction",
+          "attrs": {
+            "gene": "PCSK9",
+            "variant_or_score": "variants associated with increased LDL cholesterol",
+            "outcome": "coronary artery disease",
+            "direction": "harmful",
+            "effect_on_biomarker": "increased LDL cholesterol",
+            "n": null,
+            "ci_low": null,
+            "ci_high": null
+          },
+          "quote": "Notably, the 11 independent variants associated with increased LDL cholesterol concentrations in our study also showed increased frequency in a sample of coronary artery disease cases versus controls."
+        }
+      ]
     },
     "checks": [
       {
@@ -132,40 +133,42 @@
       {
         "check": "Drug moves a causal biomarker",
         "result": "LDL-C",
-        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 2.0 mmol/L via LDL-C",
-        "pass": true
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change None mmol/L via LDL-C change not measured",
+        "pass": false
       },
       {
         "check": "Effect large enough",
-        "result": 0.305,
-        "detail": "expected HR 0.695 at 2.8 y (relative risk reduction 30.5%)",
-        "pass": true
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
       },
       {
         "check": "Trial able to detect it",
         "result": null,
-        "detail": "planned events unknown; events needed for 80% power: 237",
+        "detail": "planned events unknown",
         "pass": false
       }
     ],
     "calculator": {
       "case_id": "odyssey_outcomes",
-      "ldl_equivalent_mmol": 2.0,
-      "basis": "LDL-C",
-      "time_factor": 0.733,
-      "expected_hr": 0.695,
-      "causal_rrr": 0.305,
+      "ldl_equivalent_mmol": null,
+      "basis": "LDL-C change not measured",
+      "time_factor": 1.0,
+      "expected_hr": null,
+      "causal_rrr": null,
       "bp_factor": 1.0,
       "power": null,
       "mde_hr_80": null,
       "outcome": "not_computable",
       "category": "insufficient_data",
       "secondary": [],
-      "weakest_link": "trial size (events) unknown",
-      "consistent_with_observed": false,
-      "assumptions": [],
+      "weakest_link": "LDL-C change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "follow-up unknown, effect shown at 5 years"
+      ],
       "notes": [
-        "events needed for 80% power: 237"
+        "no measured change in LDL-C or another sized lipid: the effect is unknown, not zero"
       ],
       "partial_expected_hr": null
     },
@@ -174,82 +177,47 @@
       "mode": "autopsy",
       "target_genetics": "causal",
       "intended_biomarker": "LDL-C",
-      "changes": [
-        {
-          "biomarker": "LDL-C",
-          "abs_change": -2.0,
-          "unit": "mmol/L",
-          "pct_change": -62.0,
-          "baseline": 3.23,
-          "method": "placebo-adjusted percent change from ODYSSEY OUTCOMES trial (phase 3), baseline from ODYSSEY pooled analysis (phase 3, on maximally tolerated statins)",
-          "source": "announcement:odyssey_outcomes,pmcid:PMC5147039"
-        }
-      ],
-      "followup_years": 2.8,
+      "changes": [],
+      "followup_years": null,
       "events": null,
       "alpha_two_sided": 0.05,
-      "pathway": null,
+      "pathway": "lipid_metabolism",
       "sbp_change_mmhg": null,
-      "observed_hr": 0.85,
-      "observed_ci": [
-        0.78,
-        0.93
-      ]
+      "observed_hr": null,
+      "observed_ci": null
     },
     "mechanism": {
       "target_genetics": "causal",
-      "target_genetics_rationale": "PCSK9 genetic association score 0.949 (Open Targets) but zero pre-cutoff studies in Open Targets; however, verified literature facts show pre-cutoff genetic evidence: PCSK9 nonsense mutations associated with 28% lower LDL-C and protective for CHD (HR 0.02-0.81, pmid:16554528, 2006-03-01) and sequence variation with 15% lower LDL-C and protective for CHD (HR 0.32-0.79, pmid:16554528, 2006-03-01). Variants in PCSK9 locus associated with increased LDL-C and harmful for CAD (pmid:18193043, 2008-01-13). Consistent causal evidence for LDL-C lowering via PCSK9 inhibition reducing coronary disease.",
       "intended_biomarker": "LDL-C",
-      "pathway": null,
-      "changes": [
-        {
-          "biomarker": "LDL-C",
-          "abs_change": -2.0,
-          "pct_change": -62.0,
-          "baseline": 3.23,
-          "unit": "mmol/L",
-          "method": "placebo-adjusted percent change from ODYSSEY OUTCOMES trial (phase 3), baseline from ODYSSEY pooled analysis (phase 3, on maximally tolerated statins)",
-          "fact_ids": [
-            "f_1ce2b0b215d08c",
-            "f_579a43582ab673",
-            "f_b70b665bf8f974"
-          ]
-        }
+      "pathway": "lipid_metabolism",
+      "biomarker_causal": true,
+      "target_in_disease_pathway": true,
+      "modality": "monoclonal_antibody",
+      "phase": "phase_3",
+      "n_randomized": 18924,
+      "primary_endpoint": "Composite of coronary heart disease death, non-fatal myocardial infarction, fatal or non-fatal ischemic stroke, or unstable angina requiring hospitalization",
+      "median_followup_years": 2.8,
+      "inclusion_ldl_threshold_mgdl": 70,
+      "background_statin": "high-intensity or maximum tolerated",
+      "population": "post-acute coronary syndrome (1-12 months prior)",
+      "genetic_evidence_pre_cutoff": [
+        "f_1ae580996b2635",
+        "f_aefc9f67d9ba10",
+        "f_de6b1283c29bf7"
       ],
-      "followup_years": 2.8,
-      "followup_fact_ids": [
-        "f_3f34506443b896"
-      ],
-      "events": null,
-      "events_basis": "actual",
-      "events_fact_ids": [],
-      "alpha_two_sided": 0.05,
-      "sbp_change_mmhg": null,
-      "observed_hr": 0.85,
-      "observed_ci": [
-        0.78,
-        0.93
-      ],
-      "outcome_fact_ids": [
-        "announcement:odyssey_outcomes (2018-03-10)",
-        "f_924adb3cd90f3d",
-        "f_643bb748784a62",
-        "f_ee6a81099e7848"
-      ],
-      "missing": [
-        "events_total",
-        "sbp_change_mmhg",
-        "apoB_change_from_outcome_trial"
-      ],
-      "notes": "LDL-C change: -62.0% placebo-adjusted from ODYSSEY OUTCOMES announcement (f_1ce2b0b215d08c). Baseline LDL-C ~125 mg/dL (3.23 mmol/L) from ODYSSEY pooled analysis (f_579a43582ab673: 126.8 mg/dL; f_b70b665bf8f974: 123.2 mg/dL). Absolute change computed as -62% * 3.23 mmol/L = -2.00 mmol/L. Median follow-up 2.8 years (f_3f34506443b896). Observed HR 0.85 (95% CI 0.78-0.93) for MACE from announcement. Total primary events not found in verified facts; n_randomized=18,924 (f_7a50d05d485aeb). No SBP change measured. ApoB change not available from ODYSSEY OUTCOMES specifically; other ODYSSEY trials show ~30-47% placebo-adjusted apoB reduction but not from same source/arm as LDL-C change."
+      "open_targets_score": 0.949,
+      "open_targets_overall_score": 0.732,
+      "open_targets_evidence_count": 51,
+      "open_targets_all_post_cutoff": true,
+      "cutoff_date": "2018-03-10"
     },
     "hypotheses": [
       {
-        "category": "narrow_success",
+        "category": "robust_success",
         "status": "supported",
         "for": [
           {
-            "text": "Primary endpoint met with HR 0.85 (95% CI 0.78-0.93), p=0.0003 (f_924adb3cd90f3d, f_643bb748784a62, f_ee6a81099e7848, f_8fe069ddad8ca3).",
+            "text": "Primary endpoint (MACE) met with HR 0.85 (95% CI 0.78-0.93), p=0.0003, demonstrating statistically robust 15% relative risk reduction",
             "refs": [
               "f_924adb3cd90f3d",
               "f_643bb748784a62",
@@ -258,72 +226,16 @@
             ]
           },
           {
-            "text": "Effect size is modest (15% RRR) with upper confidence bound near 1 (0.93), meeting definition of narrow_success.",
-            "refs": [
-              "f_ee6a81099e7848"
-            ]
-          },
-          {
-            "text": "Observed HR 0.85 is significantly higher (less benefit) than calculator's expected HR 0.695 based on 62% LDL-C reduction (calculator).",
-            "refs": [
-              "calculator"
-            ]
-          },
-          {
-            "text": "All-cause mortality also reduced (HR 0.85, 95% CI 0.73-0.98, p=0.026) supporting clinical benefit (f_1271efd6b3f4a0, f_b3c6a4bc683515, f_fae6538e76d607, f_f6b92bf3c5e209).",
+            "text": "All-cause mortality reduced: HR 0.85 (95% CI 0.73-0.98), p=0.026",
             "refs": [
               "f_1271efd6b3f4a0",
               "f_b3c6a4bc683515",
               "f_fae6538e76d607",
               "f_f6b92bf3c5e209"
             ]
-          }
-        ],
-        "against": [
-          {
-            "text": "Subgroup with baseline LDL-C ≥100 mg/dL showed larger effect (HR 0.76, 95% CI 0.65-0.87) closer to expected (f_adb28e6926998d, f_bec7f1802b6bd6, f_aeaba5f5ea382e).",
-            "refs": [
-              "f_adb28e6926998d",
-              "f_bec7f1802b6bd6",
-              "f_aeaba5f5ea382e"
-            ]
-          }
-        ],
-        "would_settle": "Full publication with time-updated on-treatment LDL-C levels, adherence rates, and exact MACE event counts to reconcile expected vs observed effect."
-      },
-      {
-        "category": "effect_too_small",
-        "status": "weakened",
-        "for": [
-          {
-            "text": "Calculator expected HR 0.695 (30.5% RRR) but observed HR 0.85 (15% RRR); expected benefit larger than observed.",
-            "refs": [
-              "calculator"
-            ]
-          }
-        ],
-        "against": [
-          {
-            "text": "Trial detected a highly significant effect (p=0.0003) with 18,924 randomized (f_7a50d05d485aeb); calculator notes only 237 events needed for 80% power, so trial was vastly overpowered for expected effect (calculator).",
-            "refs": [
-              "f_7a50d05d485aeb",
-              "calculator"
-            ]
           },
           {
-            "text": "Category definition requires expected benefit too small to detect; here benefit was detected but smaller than predicted.",
-            "refs": []
-          }
-        ],
-        "would_settle": "Not applicable — trial was adequately powered."
-      },
-      {
-        "category": "biomarker_not_causal",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "PCSK9 genetic association score 0.949 (f_8497e010f1677d); nonsense mutations reduce LDL-C 28% and CHD risk (HR 0.02-0.81) (f_1ae580996b2635); sequence variants reduce LDL-C 15% and CHD risk (HR 0.32-0.79) (f_de6b1283c29bf7).",
+            "text": "PCSK9 target validated by human genetics: genetic association score 0.949; nonsense mutations lowering LDL-C 28% associated with HR 0.02-0.81 for CHD",
             "refs": [
               "f_8497e010f1677d",
               "f_1ae580996b2635",
@@ -331,36 +243,97 @@
             ]
           },
           {
-            "text": "Target genetics designated 'causal' in calculator inputs.",
+            "text": "LDL-C reduced ~62% (placebo-adjusted) in ODYSSEY Outcomes, consistent with phase 3 trials showing 45-58% reductions",
             "refs": [
-              "calculator"
+              "f_1ce2b0b215d08c",
+              "f_1cdcd6bddd99de",
+              "f_ec8293322de56e",
+              "f_b15cc4d4f17b02"
+            ]
+          },
+          {
+            "text": "No major safety signals: injection-site reactions modestly increased (3.8% vs 2.1%), no difference in neurocognitive events (1.5% vs 1.8%), no increase in new-onset diabetes (9.6% vs 10.1%)",
+            "refs": [
+              "f_17bbaf42a288ce",
+              "f_8754cd1bbaba8a",
+              "f_f3784eab0a5a6d"
+            ]
+          },
+          {
+            "text": "Large trial (18,924 randomized) with median 2.8 years follow-up, event-driven design",
+            "refs": [
+              "f_7a50d05d485aeb",
+              "f_b158387e2f1189",
+              "f_3f34506443b896"
             ]
           }
         ],
-        "would_settle": "N/A — genetics strongly support LDL-C causality."
-      },
-      {
-        "category": "target_not_causal",
-        "status": "weakened",
-        "for": [],
         "against": [
           {
-            "text": "PCSK9 genetic evidence consistently shows protective direction for CHD (f_1ae580996b2635, f_de6b1283c29bf7); Open Targets score 0.949 (f_8497e010f1677d).",
+            "text": "Upper confidence bound for MACE (0.93) slightly above 0.90 threshold mentioned in robust_success definition",
             "refs": [
-              "f_1ae580996b2635",
-              "f_de6b1283c29bf7",
-              "f_8497e010f1677d"
+              "f_ee6a81099e7848"
+            ]
+          },
+          {
+            "text": "CHD death endpoint not significant (HR 0.92, 95% CI 0.76-1.11, p=0.38)",
+            "refs": [
+              "f_7637bff2463f87",
+              "f_b7db950b0f316a",
+              "f_2a075a71e6aaf9",
+              "f_303b4698223e02"
+            ]
+          },
+          {
+            "text": "Observed 15% RRR smaller than ~30-35% RRR predicted from CTT meta-analysis for ~1.5 mmol/L LDL-C reduction",
+            "refs": [
+              "f_1ce2b0b215d08c",
+              "f_924adb3cd90f3d"
             ]
           }
         ],
-        "would_settle": "N/A."
+        "would_settle": "Longer follow-up data on mortality and CHD death; comparison with FOURIER trial (evolocumab) which showed similar MACE HR 0.85"
       },
       {
-        "category": "off_target_harm",
+        "category": "narrow_success",
         "status": "weakened",
         "for": [
           {
-            "text": "Injection-site reactions more common with alirocumab (3.8% vs 2.1% placebo) (f_17bbaf42a288ce).",
+            "text": "Upper CI 0.93 could be considered 'near 1' by strict interpretation",
+            "refs": [
+              "f_ee6a81099e7848"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "P-value 0.0003 far from threshold 0.05",
+            "refs": [
+              "f_8fe069ddad8ca3"
+            ]
+          },
+          {
+            "text": "CI well below 1.0 (0.78-0.93), not marginal",
+            "refs": [
+              "f_643bb748784a62",
+              "f_ee6a81099e7848"
+            ]
+          },
+          {
+            "text": "Effect size consistent with FOURIER trial (HR 0.85) and mechanism",
+            "refs": [
+              "f_924adb3cd90f3d"
+            ]
+          }
+        ],
+        "would_settle": "None needed"
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Injection-site reactions more common (3.8% vs 2.1%)",
             "refs": [
               "f_17bbaf42a288ce"
             ]
@@ -368,115 +341,145 @@
         ],
         "against": [
           {
-            "text": "No difference in neurocognitive events (1.5% vs 1.8%) (f_8754cd1bbaba8a) or new-onset diabetes (9.6% vs 10.1%) (f_f3784eab0a5a6d); all-cause mortality favors treatment (HR 0.85) (f_1271efd6b3f4a0).",
+            "text": "No safety signal meeting caveat threshold (no diabetes, neurocognitive, or mortality harm)",
             "refs": [
               "f_8754cd1bbaba8a",
               "f_f3784eab0a5a6d",
               "f_1271efd6b3f4a0"
             ]
-          }
-        ],
-        "would_settle": "Longer-term safety follow-up."
-      },
-      {
-        "category": "population",
-        "status": "supported",
-        "for": [
-          {
-            "text": "Baseline LDL-C ~125 mg/dL (3.2 mmol/L) in pooled analysis (f_579a43582ab673, f_b70b665bf8f974); dose adjustment (75 mg → 150 mg if LDL-C ≥1.8 mmol/L) means lower-risk patients stayed on lower dose.",
-            "refs": [
-              "f_579a43582ab673",
-              "f_b70b665bf8f974"
-            ]
           },
           {
-            "text": "Subgroup with baseline LDL-C ≥100 mg/dL (majority) showed HR 0.76 (0.65-0.87), closer to expected (f_adb28e6926998d, f_bec7f1802b6bd6).",
+            "text": "Benefit on primary endpoint in overall population, not limited to subgroup",
             "refs": [
-              "f_adb28e6926998d",
-              "f_bec7f1802b6bd6"
+              "f_924adb3cd90f3d",
+              "f_adb28e6926998d"
             ]
           }
         ],
-        "against": [
-          {
-            "text": "Population matches intended indication (post-ACS on maximally tolerated statins).",
-            "refs": []
-          }
-        ],
-        "would_settle": "Effect size by achieved LDL-C strata and dose level in full publication."
+        "would_settle": "None needed"
       },
       {
-        "category": "design_or_endpoint",
-        "status": "supported",
-        "for": [
-          {
-            "text": "Dose-adjustment design (75/150 mg Q2W) creates variable exposure; 62% LDL-C reduction from announcement (f_1ce2b0b215d08c) may reflect Week 24 peak, not average on-treatment reduction (pooled analysis shows 55.4% average during treatment) (f_fb352511ee5d04, f_922633507ed279).",
-            "refs": [
-              "f_1ce2b0b215d08c",
-              "f_fb352511ee5d04",
-              "f_922633507ed279"
-            ]
-          },
-          {
-            "text": "Composite MACE includes unstable angina hospitalization (softer component); CTT relationship uses average on-treatment LDL-C difference over ~5 years, trial median follow-up 2.8 years (f_3f34506443b896).",
-            "refs": [
-              "f_3f34506443b896",
-              "f_d3e684ba2037b0"
-            ]
-          }
-        ],
-        "against": [
-          {
-            "text": "Dose adjustment reflects real-world use; MACE is standard regulatory endpoint.",
-            "refs": []
-          }
-        ],
-        "would_settle": "Full publication with time-updated LDL-C trajectories and component-specific HRs."
-      },
-      {
-        "category": "execution_or_nonscientific",
+        "category": "biomarker_not_causal",
         "status": "weakened",
         "for": [],
         "against": [
           {
-            "text": "Large, event-driven, multinational trial with independent endpoint adjudication; no execution issues reported in announcement (f_066cb695eeacd2, f_7a50d05d485aeb).",
+            "text": "LDL-C causality strongly supported by Mendelian randomization and CTT meta-analyses",
             "refs": [
-              "f_066cb695eeacd2",
-              "f_7a50d05d485aeb"
-            ]
-          }
-        ],
-        "would_settle": "FDA statistical review."
-      },
-      {
-        "category": "insufficient_data",
-        "status": "supported",
-        "for": [
-          {
-            "text": "Calculator cannot compute power/MDE because total primary MACE events not in verified facts (calculator weakest_link: 'trial size (events) unknown').",
-            "refs": [
-              "calculator"
+              "f_8497e010f1677d",
+              "f_1ae580996b2635",
+              "f_de6b1283c29bf7"
             ]
           },
           {
-            "text": "Exact on-treatment placebo-adjusted LDL-C reduction trajectory (Week 24 vs average) not definitively established; announcement cites 62% (f_1ce2b0b215d08c) vs pooled analysis 55.4% average (f_fb352511ee5d04).",
+            "text": "apoB and non-HDL-C reductions also correlate with MACE reduction in pooled analyses",
+            "refs": [
+              "f_640bf61a045058",
+              "f_65e2d83a12ed02",
+              "f_18a1c0ee405818",
+              "f_2a4c572d857c94"
+            ]
+          }
+        ],
+        "would_settle": "None needed"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 genetic score 0.949 (very high); loss-of-function variants protect against CHD",
+            "refs": [
+              "f_8497e010f1677d",
+              "f_1ae580996b2635",
+              "f_de6b1283c29bf7"
+            ]
+          }
+        ],
+        "would_settle": "None needed"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Observed 15% RRR smaller than ~30% predicted from LDL-C reduction magnitude",
             "refs": [
               "f_1ce2b0b215d08c",
-              "f_fb352511ee5d04"
+              "f_924adb3cd90f3d"
             ]
           }
         ],
         "against": [
           {
-            "text": "Event count can be estimated: 18,924 patients × 2.8 years × ~10-15%/yr MACE rate ≈ 5,000-8,000 events, far exceeding 237 needed for 80% power (calculator).",
+            "text": "Trial powered at 80-90% and detected effect with p=0.0003",
             "refs": [
-              "f_7a50d05d485aeb",
-              "f_3f34506443b896",
+              "f_903d1a50799f5c",
+              "f_8fe069ddad8ca3"
+            ]
+          },
+          {
+            "text": "Similar effect size to FOURIER (evolocumab), suggesting class effect",
+            "refs": [
+              "f_924adb3cd90f3d"
+            ]
+          }
+        ],
+        "would_settle": "Meta-analysis of PCSK9 inhibitor outcome trials"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Injection-site reactions increased",
+            "refs": [
+              "f_17bbaf42a288ce",
+              "f_161252f215062e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No increase in diabetes, neurocognitive events, or mortality",
+            "refs": [
+              "f_8754cd1bbaba8a",
+              "f_f3784eab0a5a6d",
+              "f_1271efd6b3f4a0"
+            ]
+          },
+          {
+            "text": "Fewer skeletal-muscle adverse events vs atorvastatin in statin-intolerant patients",
+            "refs": [
+              "f_648a54bd98f325"
+            ]
+          }
+        ],
+        "would_settle": "Longer-term safety surveillance"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator lacked LDL-C change input at time of calculation",
+            "refs": [
               "calculator"
             ]
           }
         ],
-        "would_settle": "Publication of total MACE events and Kaplan-Meier curves (NEJM 2018, FDA review)."
+        "against": [
+          {
+            "text": "Trial results now available (as of 2018-03-10) with clear primary endpoint outcome",
+            "refs": [
+              "f_066cb695eeacd2",
+              "f_924adb3cd90f3d",
+              "f_8fe069ddad8ca3"
+            ]
+          }
+        ],
+        "would_settle": "None needed"
       }
     ],
     "critic": [
@@ -484,39 +487,33 @@
         "issues": [
           {
             "severity": "high",
-            "issue": "Calculator inputs missing LDL-C change data. Verified facts contain f_1ce2b0b215d08c (-62.0% placebo-adjusted LDL-C reduction in ODYSSEY OUTCOMES, phase 3) and f_fb352511ee5d04 (-55.4% placebo-adjusted in pooled analysis). The calculator received empty changes array, defaulting to expected HR=1.0 and 'failure'. This is the primary reason for the calculator/hypotheses discrepancy.",
-            "target_agent": "mechanism",
-            "request": "Re-run calculator with LDL-C change: use f_1ce2b0b215d08c (-62.0% placebo-adjusted, trial ODYSSEY OUTCOMES) as primary input, with baseline LDL-C ~125 mg/dL (3.2 mmol/L) from f_579a43582ab673/f_b70b665bf8f974. Also provide followup_years=2.8 (f_3f34506443b896) and events count (need to source)."
-          },
-          {
-            "severity": "high",
-            "issue": "Calculator inputs missing followup_years (null) and events (null). Median follow-up 2.8 years is in f_3f34506443b896. Number of primary MACE events not in verified facts — needed for power/MDE calculation. With 18,924 randomized and ~2.8-year follow-up, event count should be ~1,500-2,000 based on event rates in post-ACS trials.",
-            "target_agent": "investigator",
-            "request": "Search for total primary endpoint (MACE) events in ODYSSEY Outcomes. Check NEJM publication (Schwartz et al. 2018), FDA statistical review, or ClinicalTrials.gov results. Add as verified fact with citation."
+            "issue": "Calculator inputs are empty/missing critical data that exists in verified facts: changes=[], followup_years=null, events=null, observed_hr=null, observed_ci=null. Verified facts contain: f_1ce2b0b215d08c (-62% placebo-adjusted LDL-C reduction in ODYSSEY OUTCOMES), f_3f34506443b896 (2.8 years median followup), f_924adb3cd90f3d/f_643bb748784a62/f_ee6a81099e7848 (HR 0.85, 95% CI 0.78-0.93 for MACE), f_7a50d05d485aeb (18,924 randomized). This caused calculator to return 'insufficient_data' incorrectly.",
+            "target_agent": "case_builder",
+            "request": "Populate calculator inputs with verified facts: changes=[{biomarker:'LDL-C', pct_change:-62.0, placebo_adjusted:true, trial:'ODYSSEY OUTCOMES', fact_id:'f_1ce2b0b215d08c'}], followup_years=2.8, observed_hr=0.85, observed_ci=[0.78,0.93], events=<search for ODYSSEY OUTCOMES MACE event count>"
           },
           {
             "severity": "medium",
-            "issue": "Two different placebo-adjusted LDL-C reductions cited: f_1ce2b0b215d08c (-62.0%, ODYSSEY OUTCOMES specific) vs f_fb352511ee5d04/f_922633507ed279 (-55.4%, pooled analysis). The hypotheses use ~55-62% range. Need to clarify which is the correct on-treatment placebo-adjusted reduction for the outcome trial (likely the 62% from the announcement).",
-            "target_agent": "investigator",
-            "request": "Confirm the exact placebo-adjusted LDL-C percent reduction reported in the ODYSSEY Outcomes primary publication (NEJM 2018). Distinguish between Week 24 reduction vs average during treatment. Update verified facts with precise number and timepoint."
+            "issue": "Baseline LDL-C for ODYSSEY OUTCOMES specifically is missing from verified facts. Only pooled analysis baselines exist (f_579a43582ab673: 126.8 mg/dL, f_b70b665bf8f974: 123.2 mg/dL). Needed to convert -62% to absolute mmol/L for calculator's ldl_equivalent_mmol calculation.",
+            "target_agent": "case_builder",
+            "request": "Search for baseline LDL-C in ODYSSEY OUTCOMES trial specifically (NCT01663402). Search terms: 'ODYSSEY OUTCOMES baseline LDL-C', 'NCT01663402 baseline LDL cholesterol', 'alirocumab ODYSSEY OUTCOMES baseline characteristics'"
           },
           {
             "severity": "medium",
-            "issue": "Hypotheses reference 'calculator' as evidence for mechanism-predicted HR (~0.76-0.78), but the calculator was not run with the correct lipid inputs. The departure_from_calculator explains this, but the calculator should be re-run and its output cited properly.",
-            "target_agent": "mechanism",
-            "request": "After re-running calculator with correct LDL-C change, baseline, and follow-up, update hypotheses to cite the new calculator output (expected_hr, ldl_equivalent_mmol, causal_rrr) instead of manual calculations."
+            "issue": "Total MACE events count for ODYSSEY OUTCOMES is missing from verified facts. Only pooled analysis events_total=104 (f_0c24f37d51e62c) exists. Calculator needs events for power and MDE calculations.",
+            "target_agent": "case_builder",
+            "request": "Search for ODYSSEY OUTCOMES MACE event count. Search terms: 'ODYSSEY OUTCOMES MACE events', 'NCT01663402 primary endpoint events', 'alirocumab ODYSSEY OUTCOMES number of MACE events'"
           },
           {
             "severity": "low",
-            "issue": "Calculator assumptions note 'follow-up unknown, effect shown at 5 years' but follow-up is known (2.8 years, f_3f34506443b896). This should be corrected in calculator re-run.",
+            "issue": "The -62% LDL-C reduction (f_1ce2b0b215d08c) has timepoint 'not stated' and dose '75 mg and 150 mg'. ODYSSEY OUTCOMES used dose adjustment (75mg Q2W uptitrated to 150mg if week 8 LDL-C ≥1.8 mmol/L). Need to confirm this -62% is the appropriate placebo-adjusted on-treatment reduction for the outcome trial period.",
             "target_agent": "mechanism",
-            "request": "Ensure calculator uses followup_years=2.8 and applies time_factor=2.8/5.0=0.56 per CTT calibration."
+            "request": "Verify the -62% LDL-C reduction from announcement:odyssey_outcomes (2018-03-10) represents the placebo-adjusted on-treatment effect during the outcome trial. Check if this aligns with the dose-adjustment regimen and the 2.8-year median follow-up."
           },
           {
             "severity": "low",
-            "issue": "Observed HR and CI not passed to calculator inputs (observed_hr: null, observed_ci: null) despite being available in verified facts (f_924adb3cd90f3d HR 0.85, f_643bb748784a62 CI 0.78, f_ee6a81099e7848 CI 0.93). This prevents calculator's 'consistent_with_observed' assessment.",
-            "target_agent": "mechanism",
-            "request": "Include observed_hr=0.85 and observed_ci=[0.78, 0.93] in calculator inputs for proper comparison."
+            "issue": "Hypotheses cite 'announcement:odyssey_outcomes (2018-03-10)' facts for primary outcomes. While verifier shows 'nothing to check', these are from a press release, not peer-reviewed publication. The primary_category 'robust_success' may overstate given upper CI 0.93 and CHD death non-significance; 'narrow_success' could be more appropriate per definition (upper CI near 1).",
+            "target_agent": "investigator",
+            "request": "Re-evaluate primary_category: robust_success requires 'upper CI well below 1.0' but CI is 0.78-0.93 (upper bound 0.93). Consider if narrow_success (primary met but upper CI near 1) or success_with_caveats is more accurate. Also verify if peer-reviewed publication (NEJM 2018) confirms announcement numbers."
           }
         ],
         "verdict_ok": false
@@ -525,83 +522,42 @@
         "issues": [
           {
             "severity": "high",
-            "issue": "Calculator inputs rely on 'announcement:odyssey_outcomes (2018-03-10)' facts for LDL-C change (-62%), baseline LDL-C (implied ~125 mg/dL), and all outcome data (HR, CI, p-values, n_randomized, follow-up). The automatic check flags this source as 'unknown or unverified fact'. The verifier also confirms that baseline LDL-C values cited from PMC5147039 (126.8 and 123.2 mg/dL) are not found in that abstract. All ODYSSEY OUTCOMES-specific facts in the verified set come from this unverified announcement source.",
+            "issue": "Calculator inputs are empty/missing critical data that exists in verified facts: changes=[], followup_years=null, events=null, observed_hr=null, observed_ci=null. Verified facts contain: f_1ce2b0b215d08c (-62% placebo-adjusted LDL-C reduction in ODYSSEY OUTCOMES), f_3f34506443b896 (2.8 years median followup), f_924adb3cd90f3d/f_643bb748784a62/f_ee6a81099e7848 (HR 0.85, 95% CI 0.78-0.93 for MACE), f_7a50d05d485aeb (18,924 randomized). This caused calculator to return 'insufficient_data' incorrectly.",
             "target_agent": "case_builder",
-            "request": "Search for peer-reviewed publication of ODYSSEY OUTCOMES (NEJM 2018, PMID 30290757) or FDA review documents to verify: (1) placebo-adjusted LDL-C reduction at Week 24 and average on-treatment, (2) baseline LDL-C in the outcome trial, (3) total MACE event counts, (4) HRs and CIs for primary and secondary endpoints. Replace announcement citations with verified publication facts."
+            "request": "Populate calculator inputs with verified facts: changes=[{biomarker:'LDL-C', pct_change:-62.0, placebo_adjusted:true, trial:'ODYSSEY OUTCOMES', fact_id:'f_1ce2b0b215d08c'}], followup_years=2.8, observed_hr=0.85, observed_ci=[0.78,0.93], events=<search for ODYSSEY OUTCOMES MACE event count>"
           },
           {
-            "severity": "high",
-            "issue": "LDL-C abs_change=-2.0 mmol/L (derived from -62% of 3.23 mmol/L) does not match the cited facts. The -62% comes from f_1ce2b0b215d08c (announcement, unverified). The baseline 3.23 mmol/L (~125 mg/dL) is derived from f_579a43582ab673 and f_b70b665bf8f974 (pooled analysis, not ODYSSEY OUTCOMES), which the verifier says are not found in the PMC5147039 abstract. The ODYSSEY OUTCOMES baseline LDL-C may differ from the pooled phase 3 average.",
+            "severity": "medium",
+            "issue": "Baseline LDL-C for ODYSSEY OUTCOMES specifically is missing from verified facts. Only pooled analysis baselines exist (f_579a43582ab673: 126.8 mg/dL, f_b70b665bf8f974: 123.2 mg/dL). Needed to convert -62% to absolute mmol/L for calculator's ldl_equivalent_mmol calculation.",
+            "target_agent": "case_builder",
+            "request": "Search for baseline LDL-C in ODYSSEY OUTCOMES trial specifically (NCT01663402). Search terms: 'ODYSSEY OUTCOMES baseline LDL-C', 'NCT01663402 baseline LDL cholesterol', 'alirocumab ODYSSEY OUTCOMES baseline characteristics'"
+          },
+          {
+            "severity": "medium",
+            "issue": "Total MACE events count for ODYSSEY OUTCOMES is missing from verified facts. Only pooled analysis events_total=104 (f_0c24f37d51e62c) exists. Calculator needs events for power and MDE calculations.",
+            "target_agent": "case_builder",
+            "request": "Search for ODYSSEY OUTCOMES MACE event count. Search terms: 'ODYSSEY OUTCOMES MACE events', 'NCT01663402 primary endpoint events', 'alirocumab ODYSSEY OUTCOMES number of MACE events'"
+          },
+          {
+            "severity": "low",
+            "issue": "The -62% LDL-C reduction (f_1ce2b0b215d08c) has timepoint 'not stated' and dose '75 mg and 150 mg'. ODYSSEY OUTCOMES used dose adjustment (75mg Q2W uptitrated to 150mg if week 8 LDL-C ≥1.8 mmol/L). Need to confirm this -62% is the appropriate placebo-adjusted on-treatment reduction for the outcome trial period.",
             "target_agent": "mechanism",
-            "request": "Recompute LDL-C change input using verified ODYSSEY OUTCOMES baseline LDL-C and the appropriate on-treatment placebo-adjusted reduction. Distinguish between Week 24 peak reduction (announcement: 62%) and average on-treatment reduction (pooled analysis: 55.4% per f_fb352511ee5d04, f_922633507ed279). The calculator expects average on-treatment LDL-C difference for CTT-based prediction."
+            "request": "Verify the -62% LDL-C reduction from announcement:odyssey_outcomes (2018-03-10) represents the placebo-adjusted on-treatment effect during the outcome trial. Check if this aligns with the dose-adjustment regimen and the 2.8-year median follow-up."
           },
           {
-            "severity": "medium",
-            "issue": "Total primary MACE events count is missing (events: null). The calculator returns 'insufficient_data' and 'weakest_link: trial size (events) unknown'. The hypotheses note this gap but the primary category 'narrow_success' is assigned despite the calculator being unable to compute power or MDE. Event count is needed to confirm the trial was adequately powered for the observed effect and to quantify the precision gap between expected HR (0.695) and observed HR (0.85).",
-            "target_agent": "case_builder",
-            "request": "Search for total MACE events in ODYSSEY OUTCOMES from the NEJM publication or FDA statistical review. The trial randomized 18,924 patients with 2.8-year median follow-up; expected events ~5,000-8,000 based on ~10-15%/yr MACE rate in post-ACS population."
-          },
-          {
-            "severity": "medium",
-            "issue": "Hypotheses extensively cite 'announcement:odyssey_outcomes' facts (f_924adb3cd90f3d, f_643bb748784a62, f_ee6a81099e7848, f_8fe069ddad8ca3, f_1271efd6b3f4a0, f_b3c6a4bc683515, f_fae6538e76d607, f_f6b92bf3c5e209, f_7637bff2463f87, f_2a075a71e6aaf9, f_303b4698223e02, f_adb28e6926998d, f_bec7f1802b6bd6, f_aeaba5f5ea382e, f_17bbaf42a288ce, f_8754cd1bbaba8a, f_f3784eab0a5a6d, f_066cb695eeacd2, f_783ee0a6f198c6, f_f039e3e355263c) which are unverified. The confidence 'medium' and departure_from_calculator rationale depend on these unverified numbers.",
+            "severity": "low",
+            "issue": "Hypotheses cite 'announcement:odyssey_outcomes (2018-03-10)' facts for primary outcomes. While verifier shows 'nothing to check', these are from a press release, not peer-reviewed publication. The primary_category 'robust_success' may overstate given upper CI 0.93 and CHD death non-significance; 'narrow_success' could be more appropriate per definition (upper CI near 1).",
             "target_agent": "investigator",
-            "request": "Replace all announcement-cited facts with references to the peer-reviewed NEJM publication (Schwartz GG et al., NEJM 2018;379:2097-2107, PMID 30290757) or FDA review. Verify each HR, CI, p-value, event count, and safety signal against the primary publication."
-          },
-          {
-            "severity": "low",
-            "issue": "The calculator input cites source 'announcement:odyssey_outcomes,pmcid:PMC5147039' for the LDL-C change, but PMC5147039 is the ODYSSEY pooled analysis (2016), not the ODYSSEY OUTCOMES announcement or publication. This conflates two different sources.",
-            "target_agent": "mechanism",
-            "request": "Correct the source citation for the LDL-C change input. Use the verified ODYSSEY OUTCOMES publication for the trial's actual on-treatment LDL-C trajectory, and the pooled analysis (PMC5147039) only for the average on-treatment reduction across phase 3 trials if the outcome trial's average is not reported."
-          },
-          {
-            "severity": "low",
-            "issue": "The pathway field is null, but the hypotheses discuss 'lipid_metabolism' pathway and CTT relationship. The calculator expects pathway to be specified (e.g., 'lipid_metabolism') for proper mechanism mapping.",
-            "target_agent": "mechanism",
-            "request": "Set pathway: 'lipid_metabolism' in calculator inputs to match the intended biomarker (LDL-C) and target genetics (PCSK9)."
+            "request": "Re-evaluate primary_category: robust_success requires 'upper CI well below 1.0' but CI is 0.78-0.93 (upper bound 0.93). Consider if narrow_success (primary met but upper CI near 1) or success_with_caveats is more accurate. Also verify if peer-reviewed publication (NEJM 2018) confirms announcement numbers."
           }
         ],
         "verdict_ok": false
       }
     ],
     "verification": {
-      "status": "done",
-      "via": "zetaris",
-      "results": [
-        {
-          "fact_id": "f_579a43582ab673",
-          "claim": "c1",
-          "used_as": "LDL-C change used by the calculator",
-          "key": "baseline_level",
-          "value": 126.8,
-          "unit": "mg/dL",
-          "source_id": "pmcid:PMC5147039",
-          "status": "not_found",
-          "found": "",
-          "note": "The abstract does not contain the baseline LDL-C value 126.8 mg/dL.",
-          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*126\\.8 mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5147039' LIMIT 5",
-          "rows": 1
-        },
-        {
-          "fact_id": "f_b70b665bf8f974",
-          "claim": "c2",
-          "used_as": "LDL-C change used by the calculator",
-          "key": "baseline_level",
-          "value": 123.2,
-          "unit": "mg/dL",
-          "source_id": "pmcid:PMC5147039",
-          "status": "not_found",
-          "found": "",
-          "note": "The abstract does not contain the baseline LDL-C value 123.2 mg/dL.",
-          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*123\\.2 mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5147039' LIMIT 5",
-          "rows": 1
-        }
-      ],
-      "counts": {
-        "confirmed": 0,
-        "not_found": 2,
-        "contradicts": 0
-      },
-      "queries": 2
+      "status": "skipped",
+      "reason": "no calculator number comes from a paper or the registry",
+      "results": []
     },
     "readthrough": [],
     "genetics": [
@@ -4930,10 +4886,9 @@
     "models_used": {
       "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "nvidia:nvidia/nemotron-3-ultra-550b-a55b",
       "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+      "Reporter": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b"
     },
     "meterless": {
       "engine": "Meterless World Model (official reference implementation)",
@@ -4955,42 +4910,34 @@
       },
       "MechanismAnalyst": {
         "calls": 2,
-        "input_tokens": 27451,
-        "output_tokens": 2872,
+        "input_tokens": 27090,
+        "output_tokens": 440,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Investigator": {
         "calls": 2,
-        "input_tokens": 26299,
-        "output_tokens": 11199,
+        "input_tokens": 44520,
+        "output_tokens": 8732,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
-        "provider": "meterless"
+        "provider": "nvidia"
       },
       "Critic": {
         "calls": 2,
-        "input_tokens": 29117,
-        "output_tokens": 5216,
-        "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
-        "provider": "meterless"
-      },
-      "Verifier": {
-        "calls": 2,
-        "input_tokens": 1400,
-        "output_tokens": 1325,
+        "input_tokens": 28296,
+        "output_tokens": 4396,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Reporter": {
         "calls": 1,
-        "input_tokens": 13860,
-        "output_tokens": 1230,
+        "input_tokens": 13639,
+        "output_tokens": 2316,
         "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
         "provider": "meterless"
       }
     }

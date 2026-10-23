@@ -1,0 +1,15 @@
+{
+  "key": "3d6ab8d525aca6b0722f",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T09:01:41+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: ACCORD NCT00000620 - Action to Control Cardiovascular Risk in Diabetes (ACCORD)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | follow-up | median_followup = 4.7 years | {\"trial\": \"ACCORD\"} | source ctgov:NCT00000620@2010-03-14 | quote: \"First Occurrence of Major Cardiovascular Event (MCE) in the Lipid Trial. [4.7 years]\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Major Cardiovascular Event%' LIMIT 5 | rows: [[\"4.9 years\"], [\"4.7 years\"], [\"4.7 years\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"4.7 years\", \"note\": \"The registry primary outcome timeFrame includes 4.7 years, matching the claim.\"}]}",
+  "usage": {
+    "input_tokens": 373,
+    "output_tokens": 395
+  }
+}

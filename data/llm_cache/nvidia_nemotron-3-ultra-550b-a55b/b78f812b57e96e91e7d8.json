@@ -1,0 +1,15 @@
+{
+  "key": "b78f812b57e96e91e7d8",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T12:15:08+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: TNT NCT00327691 - A Study to Determine the Degree of Additional Reduction in CV Risk in Lowering LDL Below Minimum Target Levels\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | follow-up | median_followup = 3.9 years | {} | source pmid:15325833 | quote: \"Median duration of follow-up was 3.9 years (IQR 3.0-4.7).\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*3\\\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '15325833' LIMIT 5 | rows: [[\" Median duration of follow-up was 3.9 years (IQR 3\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"Median duration of follow-up was 3.9 years (IQR 3\", \"note\": \"The abstract states median duration of follow-up was 3.9 years, matching the claim.\"}]}",
+  "usage": {
+    "input_tokens": 373,
+    "output_tokens": 189
+  }
+}

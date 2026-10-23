@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A15755765+OR+EXT_ID%3A16034009&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*226[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '16034009' LIMIT 5",
+ "rows": [
+  [
+   " During a median follow-up period of four years, 469 patients (37 percent) reached the primary end point, of whom 226 were assigned to atorvastatin and 243 to placebo (relative risk, 0"
+  ]
+ ],
+ "error": null
+}

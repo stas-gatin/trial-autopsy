@@ -1,0 +1,12 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18068514+OR+EXT_ID%3A25743173+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, regexp_extract(r.abstractText, '([^.]*0\\.6[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18068514' AND r.abstractText LIKE '%0.6%' LIMIT 5",
+ "rows": [
+  [
+   "18068514",
+   "gov, number NCT00565292 and NCT00565006"
+  ]
+ ],
+ "error": null
+}

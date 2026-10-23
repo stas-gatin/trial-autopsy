@@ -1,0 +1,15 @@
+{
+  "key": "8a98e5eaec34e95fdc40",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-23T11:31:34+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: SHARP NCT00125593 - Study of Heart and Renal Protection\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | number of primary events | n_randomized = 9438 patients | {\"trial\": \"SHARP\"} | source ctgov:NCT00125593@2010-11-20 | quote: \"Enrollment: 9438 (ACTUAL)\"\nc2 | follow-up | median_followup = 4.9 years | {\"trial\": \"SHARP\"} | source ctgov:NCT00125593@2010-11-20 | quote: \"[Median follow-up 4.9 years]\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '(9438)', 1) AS enrollment_number FROM registry WHERE protocolSection.eligibilityModule.eligibilityCriteria LIKE '%9438%' LIMIT 5 | rows: []\nc2 | SQL: SELECT regexp_extract(o.timeFrame, '(4\\.9 years?)', 1) AS followup FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%4.9 year%' LIMIT 5 | rows: [[\"4.9 years\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"not_found\", \"found\": \"\", \"note\": \"The registry eligibility criteria do not contain the enrollment number 9438.\"}, {\"claim\": \"c2\", \"status\": \"confirmed\", \"found\": \"4.9 years\", \"note\": \"The registry primary outcome timeFrame includes 4.9 years, matching the claim.\"}]}",
+  "usage": {
+    "input_tokens": 450,
+    "output_tokens": 646
+  }
+}
