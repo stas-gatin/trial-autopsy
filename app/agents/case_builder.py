@@ -179,7 +179,10 @@ def is_design_paper(record: dict, acronym: str) -> bool:
     if not short or not DESIGN_TITLE.search(record.get("title") or ""):
         return False
     text = (record.get("title") or "") + " " + (record.get("abstract") or "")
-    return bool(re.search(rf"(?<![A-Za-z0-9]){re.escape(short)}(?![A-Za-z0-9])", text))
+    # A one-word acronym must be in capitals (IDEAL, SPRINT are also words); a compound one may be in any case
+    # ("ODYSSEY Outcomes", "HPS2-THRIVE").
+    flags = re.I if re.search(r"[\s\-\d]", short) else 0
+    return bool(re.search(rf"(?<![A-Za-z0-9]){re.escape(short)}(?![A-Za-z0-9])", text, flags))
 
 
 def _alnum(text: str) -> str:

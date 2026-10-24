@@ -16,6 +16,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import time
 from urllib.parse import urlencode
 
 from app import config
@@ -62,6 +63,23 @@ def claims(state: RunState) -> list[dict]:
         if len(out) == MAX_CLAIMS:
             break
     return out
+
+
+BIOC = "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pubmed.cgi/BioC_json"
+
+
+def pubmed_papers_url(state: RunState, items: list[dict]) -> str | None:
+    """The cited papers' PubMed abstracts as BioC JSON, when Europe PMC cannot be read: one URL for all PMIDs (a PMC
+    source is looked up through its document's PMID)."""
+    pmids = set()
+    meta = {d.source_id: d.meta or {} for d in state.docs}
+    for c in items:
+        kind, _, ident = c["source_id"].partition(":")
+        if kind == "pmid":
+            pmids.add(ident)
+        elif kind == "pmcid" and meta.get(c["source_id"], {}).get("pmid"):
+            pmids.add(str(meta[c["source_id"]]["pmid"]))
+    return f"{BIOC}/{','.join(sorted(pmids))}/unicode" if pmids else None
 
 
 def tables(state: RunState, items: list[dict]) -> dict[str, str]:
@@ -195,7 +213,13 @@ def run_query(sql: str, urls: dict[str, str], session: _Session | None, cutoff: 
     try:
         real = {a: session.table(a) for a in urls if re.search(rf"\b{a}\b", sql)}
         statement = safe_sql(sql, real, cutoff)
-        rows = zetaris.sql(statement, limit=MAX_ROWS)
+        try:
+            rows = zetaris.sql(statement, limit=MAX_ROWS)
+        except zetaris.ZetarisError as exc:
+            if "429" not in str(exc):
+                raise
+            time.sleep(6)   # the source behind the table asked us to slow down (PubMed): one pause, one retry
+            rows = zetaris.sql(statement, limit=MAX_ROWS)
         record = {"alias": alias, "source": urls[alias], "sql": sql, "rows": rows[:MAX_ROWS], "error": None}
     except zetaris.ZetarisError as exc:
         record = {"alias": alias, "source": urls[alias], "sql": sql, "rows": [], "error": str(exc)[:300]}
@@ -227,13 +251,41 @@ def run(state: RunState):
         return
     session = _Session(urls) if live else None
     try:
+        lost, lost_reason = [], ""
         if live:
-            try:
-                for alias in urls:
+            failed = {}
+            for alias in list(urls):
+                try:
                     session.table(alias)
-            except zetaris.ZetarisError as exc:
-                _unavailable(state, items, f"Zetaris unreachable: {exc}"[:200])
+                except zetaris.ZetarisError as exc:
+                    fallback = pubmed_papers_url(state, items) if alias == "papers" else None
+                    if fallback:
+                        try:
+                            urls[alias] = session.urls[alias] = fallback
+                            session.table(alias)
+                            state.tracer.log("Verifier", "source_fallback", input_summary="papers",
+                                             output_summary=f"Europe PMC table could not be read ({str(exc)[:120]}); "
+                                                            f"PubMed abstracts (BioC) used instead",
+                                             status="warning", via="zetaris", source="PubMed")
+                            continue
+                        except zetaris.ZetarisError as exc2:
+                            exc = exc2
+                    failed[alias] = str(exc)
+            if len(failed) == len(urls):
+                _unavailable(state, items, f"Zetaris unreachable: {next(iter(failed.values()))}"[:200])
                 return
+            if failed:
+                # One source is down (e.g. Europe PMC): check what the other tables can show, and say which numbers
+                # were not checked, instead of giving up on all of them.
+                lost = [c for c in items if _table_of(c) in failed]
+                items = [c for c in items if c not in lost]
+                urls = {a: u for a, u in urls.items() if a not in failed}
+                lost_reason = "; ".join(f"{a} table could not be read: {e}" for a, e in failed.items())[:300]
+                state.tracer.log("Verifier", "source_unavailable", output_summary=f"{lost_reason}; {len(lost)} numbers "
+                                 f"from it are not checked", status="warning", via="zetaris", target_agent="Critic")
+                if not items:
+                    _unavailable(state, lost, lost_reason)
+                    return
         state.tracer.log("Verifier", "register_tables",
                          output_summary="; ".join(f"{a} = Zetaris REST session table over {u.split('?')[0]}"
                                                   for a, u in urls.items()),
@@ -266,6 +318,16 @@ def run(state: RunState):
         if session:
             session.close()
     _judge(state, items, checks, results)
+    if lost:
+        state.verification["results"] += [
+            {"fact_id": c["fact_id"], "claim": c["claim"], "used_as": c["used_as"], "key": c["key"], "value": c["value"],
+             "unit": c["unit"], "source_id": c["source_id"], "status": "not_checked", "note": lost_reason} for c in lost]
+        state.verification["partial"] = lost_reason
+
+
+def _table_of(claim: dict) -> str:
+    """The Zetaris table a claim is checked in: the registry record or the papers."""
+    return "registry" if claim["source_id"].startswith("ctgov:") else "papers"
 
 
 def _schema(urls: dict, cutoff: bool = False) -> str:
@@ -273,7 +335,7 @@ def _schema(urls: dict, cutoff: bool = False) -> str:
     if "registry" in urls:
         parts.append(prompts.VERIFIER_REGISTRY_SCHEMA_CUTOFF if cutoff else prompts.VERIFIER_REGISTRY_SCHEMA)
     if "papers" in urls:
-        parts.append(prompts.VERIFIER_PAPERS_SCHEMA)
+        parts.append(prompts.VERIFIER_PAPERS_SCHEMA_PUBMED if BIOC in urls["papers"] else prompts.VERIFIER_PAPERS_SCHEMA)
     return "\n\n".join(parts)
 
 
@@ -355,8 +417,13 @@ def summary(state: RunState) -> str:
     v = state.verification or {}
     if v.get("status") == "unavailable":
         return f"- not run: {v.get('reason')}. The numbers were not independently verified."
+    if v.get("partial"):
+        missing = sum(1 for r in v.get("results") or [] if r.get("status") == "not_checked")
+        prefix = f"- {missing} numbers not checked ({v['partial']}).\n"
+    else:
+        prefix = ""
     if v.get("status") != "done":
         return "- nothing to check"
-    return "\n".join(f"- {r['fact_id']} ({r['used_as']}, {r['value']} {r['unit']}): {r['status']}"
+    return prefix + "\n".join(f"- {r['fact_id']} ({r['used_as']}, {r['value']} {r['unit']}): {r['status']}"
                      + (f"; found: {r['found']}" if r.get("found") else "") + (f"; {r['note']}" if r.get("note") else "")
                      for r in v["results"])

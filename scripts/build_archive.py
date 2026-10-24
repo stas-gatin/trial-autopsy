@@ -3,7 +3,8 @@
 Rule (fixed, applied identically to every case):
   as_of = the case's readout_date (the day of the first public topline announcement)
   1. ClinicalTrials.gov record in "design-only" view (status, stop reason, results removed)
-  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names
+  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its
+     code names
      (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,
      then most recent; at most 10; open full text when available (rule v2). A paper found only by
      the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word

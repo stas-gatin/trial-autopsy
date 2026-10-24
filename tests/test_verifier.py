@@ -119,6 +119,54 @@ class Contradiction(unittest.TestCase):
 
 
 
+class OneSourceDown(unittest.TestCase):
+    def test_the_registry_is_still_checked_when_the_papers_table_fails(self):
+        st = _state()
+        st.as_of = None
+        st.docs = []
+
+        def table(url):
+            if "europepmc" in url or "BioC" in url:
+                raise verifier.zetaris.ZetarisError("HTTP 503")
+            return "t_registry"
+        verdicts = {"results": [{"claim": "c2", "status": "confirmed", "found": "993"}]}
+        with mock.patch.object(verifier.zetaris, "enabled", return_value=True), \
+                mock.patch.object(verifier.zetaris, "_session_table", side_effect=table), \
+                mock.patch.object(verifier.zetaris, "_drop"), \
+                mock.patch.object(verifier, "_write_queries", return_value=[{"claim": "c2", "sql": "SELECT a FROM registry"}]), \
+                mock.patch.object(verifier, "run_query", return_value={"sql": "SELECT a FROM registry", "rows": [["993"]], "error": None}), \
+                mock.patch.object(verifier.generator, "generate_json", return_value=(verdicts, _resp())):
+            verifier.run(st)
+        by_fact = {r["fact_id"]: r["status"] for r in st.verification["results"]}
+        self.assertEqual(by_fact, {"f2": "confirmed", "f1": "not_checked"})
+        self.assertIn("not checked", verifier.summary(st))
+
+
+class EuropePmcDown(unittest.TestCase):
+    def test_pubmed_abstracts_are_used_for_the_papers(self):
+        st = _state()
+        st.as_of = None
+        st.docs = []
+        made = []
+
+        def table(url):
+            if "europepmc" in url:
+                raise verifier.zetaris.ZetarisError("Europe PMC HTTP 503")
+            made.append(url)
+            return "t"
+        verdicts = {"results": [{"claim": "c1", "status": "confirmed", "found": "-73.7%"},
+                                {"claim": "c2", "status": "confirmed", "found": "993"}]}
+        with mock.patch.object(verifier.zetaris, "enabled", return_value=True), \
+                mock.patch.object(verifier.zetaris, "_session_table", side_effect=table), \
+                mock.patch.object(verifier.zetaris, "_drop"), \
+                mock.patch.object(verifier, "_write_queries", return_value=[]), \
+                mock.patch.object(verifier.generator, "generate_json", return_value=(verdicts, _resp())):
+            verifier.run(st)
+        self.assertTrue(any("BioC_json/36529659" in u for u in made))
+        self.assertIn("PubMed", verifier._schema({"papers": made[-1]}))
+        self.assertFalse(any(r["status"] == "not_checked" for r in st.verification["results"]))
+
+
 class TimeMachine(unittest.TestCase):
     def test_cutoff_rejects_fields_known_only_after_the_readout(self):
         for sql in ("SELECT resultsSection FROM registry",

@@ -130,3 +130,25 @@ class FactsBelongToEachRun(unittest.TestCase):
                 runs.append(store)
             for store in runs:
                 self.assertEqual(len(store.query("SELECT 1 FROM facts WHERE run_id=?", (store.run_id,))), 1)
+
+
+class PubMedFallback(unittest.TestCase):
+    def test_query_syntax_and_dates_are_translated(self):
+        from app.tools import pubmed
+        self.assertEqual(pubmed.to_pubmed_query('"X-1" AND (TITLE:design OR TITLE:"baseline characteristics") AND PUB_TYPE:"Randomized Controlled Trial"'),
+                         '"X-1" AND (design[ti] OR "baseline characteristics"[ti]) AND "Randomized Controlled Trial"[pt]')
+        self.assertEqual(pubmed.to_pubmed_query("EXT_ID:123 OR PMCID:PMC9"), "123[pmid] OR PMC9[pmc]")
+        self.assertEqual([pubmed._date(x) for x in ("2016 Apr 2", "2016 Apr", "2016")], ["2016-04-02", "2016-04-01", "2016-01-01"])
+
+    def test_an_outage_switches_to_pubmed_and_a_404_does_not(self):
+        from unittest import mock
+        from app.tools import europepmc, http
+        europepmc._OUTAGE["until"] = 0
+        with mock.patch.object(europepmc, "_search", side_effect=http.SourceError("Europe PMC failed after retries: Europe PMC HTTP 503")), \
+                mock.patch("app.tools.pubmed.search", return_value=[{"pmid": "1"}]) as pm:
+            self.assertEqual(europepmc.search("x"), [{"pmid": "1"}])
+            pm.assert_called_once()
+        europepmc._OUTAGE["until"] = 0
+        with mock.patch.object(europepmc, "_search", side_effect=http.SourceError("Europe PMC HTTP 404: no such page")):
+            with self.assertRaises(http.SourceError):
+                europepmc.search("x")

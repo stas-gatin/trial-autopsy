@@ -272,6 +272,13 @@ VERIFIER_PAPERS_SCHEMA = """Table `papers`: the cited papers' Europe PMC records
 Search the abstract for a number with LIKE (r.abstractText LIKE '%73.7%') and return the sentence around it with
 regexp_extract(r.abstractText, '([^.]*73\\\\.7[^.]*)', 1). Abstracts only: a number from the full text may not be there."""
 
+VERIFIER_PAPERS_SCHEMA_PUBMED = """Table `papers`: the cited papers' PubMed records in BioC form (Europe PMC is unavailable), two
+arrays to explode: documents, then each document's passages (title and abstract).
+  SELECT d.id AS pmid, p.infons.type AS part, p.text
+  FROM papers LATERAL VIEW explode(documents) AS d LATERAL VIEW explode(d.passages) AS p WHERE d.id = '<pmid>'
+Search the abstract for a number with LIKE (p.text LIKE '%73.7%') and return the sentence around it with
+regexp_extract(p.text, '([^.]*73\\\\.7[^.]*)', 1). Abstracts only: a number from the full text may not be there."""
+
 VERIFIER_QUERY_SYSTEM = """You are the Verifier in a trial-autopsy system. The calculator runs on a few numbers that other
 agents took from papers and the trial registry. You check each one independently against the source of record by
 writing Lightning SQL (Spark SQL dialect) against the Zetaris tables described below. Code runs your queries.
