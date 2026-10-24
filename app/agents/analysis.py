@@ -532,8 +532,11 @@ READOUT_RULES = [
                               rf"\b(did|do|does) not (\w+ ){{0,2}}(reduce|lower|decrease) (\w+ ){{0,6}}{_EVENTS}|"
                               rf"{_STOP} (the |its |a |all )?([\w()\-\"'\u201c\u201d]+ ){{0,6}}{_TRIAL}|"
                               rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
-    ("success", 3, re.compile(rf"significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}", re.I)),
-    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)", re.I)),
+    ("success", 3, re.compile(rf"(?<![\w-])significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}",
+                              re.I)),
+    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)|"
+                              r"\b(non-?|in)significant (\w+ ){0,2}(reduction|difference|benefit|decrease)|"
+                              r"too small to (show|detect|demonstrate)", re.I)),
 ]
 
 

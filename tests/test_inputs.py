@@ -281,3 +281,11 @@ class DesignPaper(unittest.TestCase):
         self.assertFalse(is_design_paper(results, "IMPROVE-IT"))
         self.assertTrue(is_design_paper({"title": "JUPITER: baseline characteristics", "abstract": ""},
                                         "JUPITER (Justification for the Use of Statins in Prevention)"))
+
+
+class NonSignificant(unittest.TestCase):
+    def test_a_non_significant_reduction_is_not_a_success(self):
+        from app.agents.analysis import classify_readout
+        self.assertEqual(classify_readout("produced only a small, non-significant reduction in CHD events")[0], "failure")
+        self.assertEqual(classify_readout("the difference was too small to show a difference in death rates")[0], "failure")
+        self.assertEqual(classify_readout("Significantly Reduced Major Vascular Events")[0], "success")
