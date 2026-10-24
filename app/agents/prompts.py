@@ -82,10 +82,9 @@ Decide:
    its entry threshold (e.g. "Lp(a) >= 70 mg/dL") as a lower bound, and cite that fact too.
    Lipid-lowering effects carry over between populations as PERCENT changes, not absolute ones (a statin or PCSK9
    inhibitor lowers LDL-C by about the same percent whatever the starting level). When the change comes from a
-   different trial than the outcome trial and the outcome trial's own MEASURED mean or median baseline is stated (in
-   its design or baseline paper, or its announcement), give pct_change with that baseline and leave abs_change null.
-   An entry threshold is not a baseline for LDL-C, non-HDL-C or apoB (patients start well above it): when only a
-   threshold is stated, give pct_change with baseline null, and code applies a typical treated baseline and says so.
+   different trial than the outcome trial and the outcome trial's own baseline is stated (measured, or its entry
+   threshold as a lower bound), give pct_change with that baseline and leave abs_change null; give the other
+   trial's absolute change only when no baseline of the outcome trial is stated.
 5. followup_years (median follow-up; when only a minimum follow-up and a planned total duration are stated, as in
    event-driven trials, use the midpoint of the two and say so; leave it null only when no fact states any
    duration, follow-up or treatment period for the outcome trial), events (actual total primary events if the trial
