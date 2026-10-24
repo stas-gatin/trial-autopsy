@@ -7,7 +7,7 @@
   "as_of": "2018-09-24",
   "readout_date": "2018-09-24",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01492361@2018-09-24",
@@ -41,6 +41,9 @@
               "type": "DRUG",
               "other_names": [
                 "VASCEPA® (icosapent ethyl)"
+              ],
+              "arms": [
+                "AMR101"
               ]
             },
             {
@@ -48,12 +51,29 @@
               "type": "DRUG",
               "other_names": [
                 "matching placebo"
+              ],
+              "arms": [
+                "Placebo"
               ]
             },
             {
               "name": "Statin therapy",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "AMR101",
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "AMR101",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -236,7 +256,7 @@
       "pub_date": "2018-09-24",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2018-09-25)"
     }
   ]
 }

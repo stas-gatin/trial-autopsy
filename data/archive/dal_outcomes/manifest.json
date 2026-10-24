@@ -7,7 +7,7 @@
   "as_of": "2012-05-07",
   "readout_date": "2012-05-07",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day, or the same release filed with the SEC that\n     day): the Wayback Machine capture nearest that day (same page), else the live page if it was not redirected\n     to another page; sentences naming a year more than one year after the readout are left out (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT00658515@2012-05-07",
@@ -39,17 +39,37 @@
             {
               "name": "Dalcetrapib (RO4607381)",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Dalcetrapib (RO4607381)"
+              ]
             },
             {
               "name": "Evidence-based medical care for Acute Coronary Syndrome",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Dalcetrapib (RO4607381)",
+                "Placebo"
+              ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Dalcetrapib (RO4607381)",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -64,11 +84,27 @@
       "note": "design-only registry view"
     },
     {
+      "source_id": "pmid:22456295",
+      "file": "docs/pmid_22456295.txt",
+      "type": "journal",
+      "title": "No clinically relevant drug-drug interactions when dalcetrapib is co-administered with a monophasic oral contraceptive (Microgynon® 30)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22456295/",
+      "pub_date": "2012-04-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "22456295",
+        "pmcid": null,
+        "doi": "10.5414/cp201647",
+        "journal": "International journal of clinical pharmacology and therapeutics"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:22345126",
       "file": "docs/pmid_22345126.txt",
       "type": "journal",
-      "title": "Vascular effects and safety of dalcetrapib in patients with or at risk of coronary heart disease: the dal-VESSEL randomized clinical trial.",
-      "url": "https://europepmc.org/article/MED/22345126",
+      "title": "Vascular effects and safety of dalcetrapib in patients with or at risk of coronary heart disease: the dal-VESSEL randomized clinical trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22345126/",
       "pub_date": "2012-02-16",
       "access": "abstract_only",
       "meta": {
@@ -83,8 +119,8 @@
       "source_id": "pmid:22424025",
       "file": "docs/pmid_22424025.txt",
       "type": "journal",
-      "title": "Effect of dalcetrapib plus pravastatin on lipoprotein metabolism and high-density lipoprotein composition and function in dyslipidemic patients: results of a phase IIb dose-ranging study.",
-      "url": "https://europepmc.org/article/MED/22424025",
+      "title": "Effect of dalcetrapib plus pravastatin on lipoprotein metabolism and high-density lipoprotein composition and function in dyslipidemic patients: results of a phase IIb dose-ranging study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22424025/",
       "pub_date": "2012-03-01",
       "access": "abstract_only",
       "meta": {
@@ -96,29 +132,13 @@
       "note": ""
     },
     {
-      "source_id": "pmid:21908036",
-      "file": "docs/pmid_21908036.txt",
+      "source_id": "pmcid:PMC4047820",
+      "file": "docs/pmcid_PMC4047820.txt",
       "type": "journal",
-      "title": "Safety and efficacy of dalcetrapib on atherosclerotic disease using novel non-invasive multimodality imaging (dal-PLAQUE): a randomised clinical trial.",
-      "url": "https://europepmc.org/article/MED/21908036",
-      "pub_date": "2011-09-09",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "21908036",
-        "pmcid": "PMC4151875",
-        "doi": "10.1016/s0140-6736(11)61383-4",
-        "journal": "Lancet (London, England)"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:21835280",
-      "file": "docs/pmid_21835280.txt",
-      "type": "journal",
-      "title": "Rationale and design of dal-PLAQUE: a study assessing efficacy and safety of dalcetrapib on progression or regression of atherosclerosis using magnetic resonance imaging and 18F-fluorodeoxyglucose positron emission tomography/computed tomography.",
-      "url": "https://europepmc.org/article/MED/21835280",
+      "title": "Rationale and design of dal-PLAQUE: a study assessing efficacy and safety of dalcetrapib on progression or regression of atherosclerosis using magnetic resonance imaging and 18F-fluorodeoxyglucose positron emission tomography/computed tomography",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21835280/",
       "pub_date": "2011-08-01",
-      "access": "abstract_only",
+      "access": "open_full_text",
       "meta": {
         "pmid": "21835280",
         "pmcid": "PMC4047820",
@@ -128,11 +148,59 @@
       "note": ""
     },
     {
+      "source_id": "pmid:21982411",
+      "file": "docs/pmid_21982411.txt",
+      "type": "journal",
+      "title": "Effect of dalcetrapib, a CETP modulator, on non-cholesterol sterol markers of cholesterol homeostasis in healthy subjects",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21982411/",
+      "pub_date": "2011-09-16",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21982411",
+        "pmcid": null,
+        "doi": "10.1016/j.atherosclerosis.2011.09.017",
+        "journal": "Atherosclerosis"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC4151875",
+      "file": "docs/pmcid_PMC4151875.txt",
+      "type": "journal",
+      "title": "Safety and efficacy of dalcetrapib on atherosclerotic disease using novel non-invasive multimodality imaging (dal-PLAQUE): a randomised clinical trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21908036/",
+      "pub_date": "2011-09-09",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "21908036",
+        "pmcid": "PMC4151875",
+        "doi": "10.1016/S0140-6736(11)61383-4",
+        "journal": "Lancet (London, England)"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:21366361",
+      "file": "docs/pmid_21366361.txt",
+      "type": "journal",
+      "title": "Safety, tolerability and pharmacokinetics of dalcetrapib following single and multiple ascending doses in healthy subjects: a randomized, double-blind, placebo-controlled, phase I study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21366361/",
+      "pub_date": "2011-01-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21366361",
+        "pmcid": null,
+        "doi": "10.1007/BF03256931",
+        "journal": "Clinical drug investigation"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmcid:PMC2821630",
       "file": "docs/pmcid_PMC2821630.txt",
       "type": "journal",
-      "title": "Safety and tolerability of dalcetrapib (RO4607381/JTT-705): results from a 48-week trial.",
-      "url": "https://europepmc.org/article/MED/20097702",
+      "title": "Safety and tolerability of dalcetrapib (RO4607381/JTT-705): results from a 48-week trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20097702/",
       "pub_date": "2010-01-22",
       "access": "open_full_text",
       "meta": {
@@ -144,11 +212,27 @@
       "note": ""
     },
     {
+      "source_id": "pmid:20489031",
+      "file": "docs/pmid_20489031.txt",
+      "type": "journal",
+      "title": "Coadministration of dalcetrapib with pravastatin, rosuvastatin, or simvastatin: no clinically relevant drug-drug interactions",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20489031/",
+      "pub_date": "2010-05-20",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20489031",
+        "pmcid": null,
+        "doi": "10.1177/0091270009358709",
+        "journal": "Journal of clinical pharmacology"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:21175438",
       "file": "docs/pmid_21175438.txt",
       "type": "journal",
-      "title": "Lack of clinically relevant drug-drug interactions when dalcetrapib is co-administered with ezetimibe.",
-      "url": "https://europepmc.org/article/MED/21175438",
+      "title": "Lack of clinically relevant drug-drug interactions when dalcetrapib is co-administered with ezetimibe",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21175438/",
       "pub_date": "2010-12-01",
       "access": "abstract_only",
       "meta": {
@@ -163,113 +247,66 @@
       "source_id": "pmid:19958854",
       "file": "docs/pmid_19958854.txt",
       "type": "journal",
-      "title": "Rationale and design of the dal-OUTCOMES trial: efficacy and safety of dalcetrapib in patients with recent acute coronary syndrome.",
-      "url": "https://europepmc.org/article/MED/19958854",
+      "title": "Rationale and design of the dal-OUTCOMES trial: efficacy and safety of dalcetrapib in patients with recent acute coronary syndrome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19958854/",
       "pub_date": "2009-12-01",
       "access": "abstract_only",
       "meta": {
         "pmid": "19958854",
         "pmcid": null,
         "doi": "10.1016/j.ahj.2009.09.017",
-        "journal": "American heart journal"
+        "journal": "American heart journal",
+        "purpose": "design"
       },
-      "note": ""
+      "note": "design or baseline paper of the outcome trial"
     },
     {
-      "source_id": "pmid:15842977",
-      "file": "docs/pmid_15842977.txt",
+      "source_id": "pmid:40339105",
+      "file": "docs/pmid_40339105.txt",
       "type": "journal",
-      "title": "Effectiveness of inhibition of cholesteryl ester transfer protein by JTT-705 in combination with pravastatin in type II dyslipidemia.",
-      "url": "https://europepmc.org/article/MED/15842977",
-      "pub_date": "2005-05-01",
+      "title": "CETP-Related Hyperalphalipoproteinemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40339105/",
+      "pub_date": "1993-01-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "15842977",
+        "pmid": "40339105",
         "pmcid": null,
-        "doi": "10.1016/j.amjcard.2004.12.064",
-        "journal": "The American journal of cardiology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:11994249",
-      "file": "docs/pmid_11994249.txt",
-      "type": "journal",
-      "title": "Efficacy and safety of a novel cholesteryl ester transfer protein inhibitor, JTT-705, in humans: a randomized phase II dose-response study.",
-      "url": "https://europepmc.org/article/MED/11994249",
-      "pub_date": "2002-05-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "11994249",
-        "pmcid": null,
-        "doi": "10.1161/01.cir.0000015857.31889.7b",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:19576325",
-      "file": "docs/pmid_19576325.txt",
-      "type": "journal",
-      "title": "Safety and tolerability of dalcetrapib.",
-      "url": "https://europepmc.org/article/MED/19576325",
-      "pub_date": "2009-07-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19576325",
-        "pmcid": null,
-        "doi": "10.1016/j.amjcard.2009.02.061",
-        "journal": "The American journal of cardiology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:18193043",
-      "file": "docs/pmid_18193043.txt",
-      "type": "journal",
-      "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
-      "url": "https://europepmc.org/article/MED/18193043",
-      "pub_date": "2008-01-13",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "18193043",
-        "pmcid": "PMC5206900",
-        "doi": "10.1038/ng.76",
-        "journal": "Nature genetics",
+        "doi": null,
+        "journal": "",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:12034052",
-      "file": "docs/pmid_12034052.txt",
+      "source_id": "pmid:20512706",
+      "file": "docs/pmid_20512706.txt",
       "type": "journal",
-      "title": "Thyroid disease and lipids.",
-      "url": "https://europepmc.org/article/MED/12034052",
-      "pub_date": "2002-04-01",
+      "title": "CETP, the human genome and cardiovascular outcomes",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20512706/",
+      "pub_date": "2010-05-29",
       "access": "abstract_only",
       "meta": {
-        "pmid": "12034052",
+        "pmid": "20512706",
         "pmcid": null,
-        "doi": "10.1089/10507250252949405",
-        "journal": "Thyroid : official journal of the American Thyroid Association",
+        "doi": "10.4414/smw.2010.12994",
+        "journal": "Swiss medical weekly",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:14559957",
-      "file": "docs/pmid_14559957.txt",
+      "source_id": "pmid:17169247",
+      "file": "docs/pmid_17169247.txt",
       "type": "journal",
-      "title": "Unique lipoprotein phenotype and genotype associated with exceptional longevity.",
-      "url": "https://europepmc.org/article/MED/14559957",
-      "pub_date": "2003-10-01",
+      "title": "Will torcetrapib be the next big thing in coronary heart disease risk reduction?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17169247/",
+      "pub_date": "2007-01-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "14559957",
+        "pmid": "17169247",
         "pmcid": null,
-        "doi": "10.1001/jama.290.15.2030",
-        "journal": "JAMA",
+        "doi": "10.1007/BF02693940",
+        "journal": "Current atherosclerosis reports",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -283,7 +320,7 @@
       "pub_date": "2012-05-07",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2019-12-07)"
     }
   ]
 }

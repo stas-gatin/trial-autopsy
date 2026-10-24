@@ -7,7 +7,7 @@
   "as_of": "2022-12-07",
   "readout_date": "2022-12-07",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT02993406@2022-12-07",
@@ -41,6 +41,9 @@
               "type": "DRUG",
               "other_names": [
                 "ETC-1002"
+              ],
+              "arms": [
+                "Bempedoic Acid 180 mg"
               ]
             },
             {
@@ -48,7 +51,20 @@
               "type": "DRUG",
               "other_names": [
                 "placebo comparator"
+              ],
+              "arms": [
+                "Placebo Comparator"
               ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Bempedoic Acid 180 mg",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo Comparator",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -64,212 +80,246 @@
       "note": "design-only registry view"
     },
     {
+      "source_id": "pmid:33966815",
+      "file": "docs/pmid_33966815.txt",
+      "type": "journal",
+      "title": "Clinical development of bempedoic acid: phase 2 and phase 3 clinical trials",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33966815/",
+      "pub_date": "2021-05-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33966815",
+        "pmcid": null,
+        "doi": "10.1016/j.arteri.2021.02.005",
+        "journal": "Clinica e investigacion en arteriosclerosis : publicacion oficial de la Sociedad Espanola de Arteriosclerosis"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33795585",
+      "file": "docs/pmid_33795585.txt",
+      "type": "journal",
+      "title": "Letter in reply to 'Updated clinical evidence and place in therapy of bempedoic acid for hypercholesterolemia: ANMCO position paper'",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33795585/",
+      "pub_date": "2021-05-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33795585",
+        "pmcid": null,
+        "doi": "10.2459/JCM.0000000000001164",
+        "journal": "Journal of cardiovascular medicine (Hagerstown, Md.)"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33399349",
+      "file": "docs/pmid_33399349.txt",
+      "type": "journal",
+      "title": "Letter to the Editor: 'Updated clinical evidence and place in therapy of bempedoic acid (BA) for hypercholesterolemia: aNMCO position paper'",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33399349/",
+      "pub_date": "2021-05-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33399349",
+        "pmcid": null,
+        "doi": "10.2459/JCM.0000000000001150",
+        "journal": "Journal of cardiovascular medicine (Hagerstown, Md.)"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33966814",
+      "file": "docs/pmid_33966814.txt",
+      "type": "journal",
+      "title": "Bempedoic acid. Mechanism of action and pharmacokinetic and pharmacodynamic properties",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33966814/",
+      "pub_date": "2021-05-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33966814",
+        "pmcid": null,
+        "doi": "10.1016/j.arteri.2021.02.012",
+        "journal": "Clinica e investigacion en arteriosclerosis : publicacion oficial de la Sociedad Espanola de Arteriosclerosis"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:32786202",
+      "file": "docs/pmid_32786202.txt",
+      "type": "journal",
+      "title": "Bempedoic Acid to Lower LDL Cholesterol - Safety and Efficacy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32786202/",
+      "pub_date": "2020-08-13",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "32786202",
+        "pmcid": null,
+        "doi": "10.1056/NEJMc1908495",
+        "journal": "The New England journal of medicine"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:32786203",
+      "file": "docs/pmid_32786203.txt",
+      "type": "journal",
+      "title": "Bempedoic Acid to Lower LDL Cholesterol - Safety and Efficacy. Reply",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32786203/",
+      "pub_date": "2020-08-13",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "32786203",
+        "pmcid": null,
+        "doi": "10.1056/NEJMc1908495",
+        "journal": "The New England journal of medicine"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33611517",
+      "file": "docs/pmid_33611517.txt",
+      "type": "journal",
+      "title": "Bempedoic acid: Everything with a place and purpose",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33611517/",
+      "pub_date": "2021-07-23",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33611517",
+        "pmcid": null,
+        "doi": "10.1177/2047487320929779",
+        "journal": "European journal of preventive cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC8883220",
+      "file": "docs/pmcid_PMC8883220.txt",
+      "type": "journal",
+      "title": "Clinical efficacy and safety outcomes of bempedoic acid for LDL-C lowering therapy in patients at high cardiovascular risk: a systematic review and meta-analysis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35210334/",
+      "pub_date": "2022-02-24",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "35210334",
+        "pmcid": "PMC8883220",
+        "doi": "10.1136/bmjopen-2021-048893",
+        "journal": "BMJ open"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33719370",
+      "file": "docs/pmid_33719370.txt",
+      "type": "journal",
+      "title": "Bempedoic Acid (Nexletol) for the Treatment of Hyperlipidemia and Familial Hypercholesterolemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33719370/",
+      "pub_date": "2021-03-15",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33719370",
+        "pmcid": null,
+        "doi": null,
+        "journal": "American family physician"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:33502687",
+      "file": "docs/pmid_33502687.txt",
+      "type": "journal",
+      "title": "Bempedoic Acid in the Treatment of Patients with Dyslipidemias and Statin Intolerance",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33502687/",
+      "pub_date": "2021-01-27",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "33502687",
+        "pmcid": null,
+        "doi": "10.1007/s10557-020-07139-x",
+        "journal": "Cardiovascular drugs and therapy"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:29371842",
+      "file": "docs/pmid_29371842.txt",
+      "type": "journal",
+      "title": "Using Action-Mapping to Design a Non-Majors Neuroeconomics Course to Teach First-Year Collegiate Skills",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29371842/",
+      "pub_date": "2017-01-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "29371842",
+        "pmcid": "PMC5777838",
+        "doi": null,
+        "journal": "Journal of undergraduate neuroscience education : JUNE : a publication of FUN, Faculty for Undergraduate Neuroscience",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
       "source_id": "pmid:33470195",
       "file": "docs/pmid_33470195.txt",
       "type": "journal",
-      "title": "Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance.",
-      "url": "https://europepmc.org/article/MED/33470195",
+      "title": "Rationale and design of the CLEAR-outcomes trial: Evaluating the effect of bempedoic acid on cardiovascular events in patients with statin intolerance",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33470195/",
       "pub_date": "2020-10-24",
       "access": "abstract_only",
       "meta": {
         "pmid": "33470195",
         "pmcid": null,
         "doi": "10.1016/j.ahj.2020.10.060",
-        "journal": "American heart journal"
+        "journal": "American heart journal",
+        "purpose": "design"
       },
-      "note": ""
+      "note": "design or baseline paper of the outcome trial"
     },
     {
-      "source_id": "pmid:30865796",
-      "file": "docs/pmid_30865796.txt",
+      "source_id": "pmid:35675800",
+      "file": "docs/pmid_35675800.txt",
       "type": "journal",
-      "title": "Safety and Efficacy of Bempedoic Acid to Reduce LDL Cholesterol.",
-      "url": "https://europepmc.org/article/MED/30865796",
-      "pub_date": "2019-03-01",
+      "title": "Inhibition of ATP-citrate lyase improves NASH, liver fibrosis, and dyslipidemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35675800/",
+      "pub_date": "2022-06-07",
       "access": "abstract_only",
       "meta": {
-        "pmid": "30865796",
+        "pmid": "35675800",
         "pmcid": null,
-        "doi": "10.1056/nejmoa1803917",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:31714986",
-      "file": "docs/pmid_31714986.txt",
-      "type": "journal",
-      "title": "Effect of Bempedoic Acid vs Placebo Added to Maximally Tolerated Statins on Low-Density Lipoprotein Cholesterol in Patients at High Risk for Cardiovascular Disease: The CLEAR Wisdom Randomized Clinical Trial.",
-      "url": "https://europepmc.org/article/MED/31714986",
-      "pub_date": "2019-11-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "31714986",
-        "pmcid": "PMC6865290",
-        "doi": "10.1001/jama.2019.16585",
-        "journal": "JAMA"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC6509724",
-      "file": "docs/pmcid_PMC6509724.txt",
-      "type": "journal",
-      "title": "Efficacy and Safety of Bempedoic Acid in Patients With Hypercholesterolemia and Statin Intolerance.",
-      "url": "https://europepmc.org/article/MED/30922146",
-      "pub_date": "2019-04-01",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "30922146",
-        "pmcid": "PMC6509724",
-        "doi": "10.1161/jaha.118.011662",
-        "journal": "Journal of the American Heart Association"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC7153222",
-      "file": "docs/pmcid_PMC7153222.txt",
-      "type": "journal",
-      "title": "Bempedoic acid plus ezetimibe fixed-dose combination in patients with hypercholesterolemia and high CVD risk treated with maximally tolerated statin therapy.",
-      "url": "https://europepmc.org/article/MED/31357887",
-      "pub_date": "2019-07-29",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "31357887",
-        "pmcid": "PMC7153222",
-        "doi": "10.1177/2047487319864671",
-        "journal": "European journal of preventive cardiology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:29910030",
-      "file": "docs/pmid_29910030.txt",
-      "type": "journal",
-      "title": "Efficacy and safety of bempedoic acid added to ezetimibe in statin-intolerant patients with hypercholesterolemia: A randomized, placebo-controlled study.",
-      "url": "https://europepmc.org/article/MED/29910030",
-      "pub_date": "2018-06-12",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "29910030",
-        "pmcid": null,
-        "doi": "10.1016/j.atherosclerosis.2018.06.002",
-        "journal": "Atherosclerosis"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:27206943",
-      "file": "docs/pmid_27206943.txt",
-      "type": "journal",
-      "title": "Treatment with ETC-1002 alone and in combination with ezetimibe lowers LDL cholesterol in hypercholesterolemic patients with or without statin intolerance.",
-      "url": "https://europepmc.org/article/MED/27206943",
-      "pub_date": "2016-01-06",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "27206943",
-        "pmcid": null,
-        "doi": "10.1016/j.jacl.2015.12.025",
-        "journal": "Journal of clinical lipidology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:27138185",
-      "file": "docs/pmid_27138185.txt",
-      "type": "journal",
-      "title": "Effect of ETC-1002 on Serum Low-Density Lipoprotein Cholesterol in Hypercholesterolemic Patients Receiving Statin Therapy.",
-      "url": "https://europepmc.org/article/MED/27138185",
-      "pub_date": "2016-04-06",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "27138185",
-        "pmcid": null,
-        "doi": "10.1016/j.amjcard.2016.03.043",
-        "journal": "The American journal of cardiology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:26073387",
-      "file": "docs/pmid_26073387.txt",
-      "type": "journal",
-      "title": "Use of ETC-1002 to treat hypercholesterolemia in patients with statin intolerance.",
-      "url": "https://europepmc.org/article/MED/26073387",
-      "pub_date": "2015-03-19",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "26073387",
-        "pmcid": null,
-        "doi": "10.1016/j.jacl.2015.03.003",
-        "journal": "Journal of clinical lipidology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:24385236",
-      "file": "docs/pmid_24385236.txt",
-      "type": "journal",
-      "title": "Efficacy and safety of ETC-1002, a novel investigational low-density lipoprotein-cholesterol-lowering therapy for the treatment of patients with hypercholesterolemia and type 2 diabetes mellitus.",
-      "url": "https://europepmc.org/article/MED/24385236",
-      "pub_date": "2014-01-02",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "24385236",
-        "pmcid": null,
-        "doi": "10.1161/atvbaha.113.302677",
-        "journal": "Arteriosclerosis, thrombosis, and vascular biology"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:35031766",
-      "file": "docs/pmid_35031766.txt",
-      "type": "journal",
-      "title": "Lipogenesis inhibitors: therapeutic opportunities and challenges.",
-      "url": "https://europepmc.org/article/MED/35031766",
-      "pub_date": "2022-01-14",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "35031766",
-        "pmcid": "PMC8758994",
-        "doi": "10.1038/s41573-021-00367-2",
-        "journal": "Nature reviews. Drug discovery",
+        "doi": "10.1016/j.cmet.2022.05.004",
+        "journal": "Cell metabolism",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:30865797",
-      "file": "docs/pmid_30865797.txt",
+      "source_id": "pmid:32786204",
+      "file": "docs/pmid_32786204.txt",
       "type": "journal",
-      "title": "Mendelian Randomization Study of &lt;i&gt;ACLY&lt;/i&gt; and Cardiovascular Disease.",
-      "url": "https://europepmc.org/article/MED/30865797",
-      "pub_date": "2019-03-01",
+      "title": "Mendelian Randomization Study of ACLY and Cardiovascular Disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32786204/",
+      "pub_date": "2020-08-13",
       "access": "abstract_only",
       "meta": {
-        "pmid": "30865797",
-        "pmcid": "PMC7612927",
-        "doi": "10.1056/nejmoa1806747",
+        "pmid": "32786204",
+        "pmcid": null,
+        "doi": "10.1056/NEJMc1908496",
         "journal": "The New England journal of medicine",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:34044180",
-      "file": "docs/pmid_34044180.txt",
+      "source_id": "pmid:32786206",
+      "file": "docs/pmid_32786206.txt",
       "type": "journal",
-      "title": "Insulin action, type 2 diabetes, and branched-chain amino acids: A two-way street.",
-      "url": "https://europepmc.org/article/MED/34044180",
-      "pub_date": "2021-05-24",
+      "title": "Mendelian Randomization Study of ACLY and Cardiovascular Disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32786206/",
+      "pub_date": "2020-08-13",
       "access": "abstract_only",
       "meta": {
-        "pmid": "34044180",
-        "pmcid": "PMC8513145",
-        "doi": "10.1016/j.molmet.2021.101261",
-        "journal": "Molecular metabolism",
+        "pmid": "32786206",
+        "pmcid": null,
+        "doi": "10.1056/NEJMc1908496",
+        "journal": "The New England journal of medicine",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -283,7 +333,7 @@
       "pub_date": "2022-12-07",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2022-12-07)"
     }
   ]
 }

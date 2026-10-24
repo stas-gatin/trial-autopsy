@@ -7,7 +7,7 @@
   "as_of": "2015-10-12",
   "readout_date": "2015-10-12",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day, or the same release filed with the SEC that\n     day): the Wayback Machine capture nearest that day (same page), else the live page if it was not redirected\n     to another page; sentences naming a year more than one year after the readout are left out (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01687998@2015-10-12",
@@ -41,12 +41,28 @@
               "type": "DRUG",
               "other_names": [
                 "LY2484595"
+              ],
+              "arms": [
+                "Evacetrapib"
               ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Evacetrapib",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -64,8 +80,8 @@
       "source_id": "pmid:26678626",
       "file": "docs/pmid_26678626.txt",
       "type": "journal",
-      "title": "Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial.",
-      "url": "https://europepmc.org/article/MED/26678626",
+      "title": "Assessment of the clinical effects of cholesteryl ester transfer protein inhibition with evacetrapib in patients at high-risk for vascular outcomes: Rationale and design of the ACCELERATE trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26678626/",
       "pub_date": "2015-09-16",
       "access": "abstract_only",
       "meta": {
@@ -77,27 +93,11 @@
       "note": ""
     },
     {
-      "source_id": "pmcid:PMC4284021",
-      "file": "docs/pmcid_PMC4284021.txt",
-      "type": "journal",
-      "title": "Effects of the cholesteryl ester transfer protein inhibitor evacetrapib on lipoproteins, apolipoproteins and 24-h ambulatory blood pressure in healthy adults.",
-      "url": "https://europepmc.org/article/MED/24961753",
-      "pub_date": "2014-06-24",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "24961753",
-        "pmcid": "PMC4284021",
-        "doi": "10.1111/jphp.12287",
-        "journal": "The Journal of pharmacy and pharmacology"
-      },
-      "note": ""
-    },
-    {
       "source_id": "pmid:24786356",
       "file": "docs/pmid_24786356.txt",
       "type": "journal",
-      "title": "Efficacy, safety, tolerability, and pharmacokinetic profile of evacetrapib administered as monotherapy or in combination with atorvastatin in Japanese patients with dyslipidemia.",
-      "url": "https://europepmc.org/article/MED/24786356",
+      "title": "Efficacy, safety, tolerability, and pharmacokinetic profile of evacetrapib administered as monotherapy or in combination with atorvastatin in Japanese patients with dyslipidemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24786356/",
       "pub_date": "2014-04-02",
       "access": "abstract_only",
       "meta": {
@@ -109,11 +109,27 @@
       "note": ""
     },
     {
+      "source_id": "pmcid:PMC4284021",
+      "file": "docs/pmcid_PMC4284021.txt",
+      "type": "journal",
+      "title": "Effects of the cholesteryl ester transfer protein inhibitor evacetrapib on lipoproteins, apolipoproteins and 24-h ambulatory blood pressure in healthy adults",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24961753/",
+      "pub_date": "2014-06-24",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "24961753",
+        "pmcid": "PMC4284021",
+        "doi": "10.1111/jphp.12287",
+        "journal": "The Journal of pharmacy and pharmacology"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:24271137",
       "file": "docs/pmid_24271137.txt",
       "type": "journal",
-      "title": "Evacetrapib at a supratherapeutic steady state concentration does not prolong QT in a thorough QT/QTc study in healthy participants.",
-      "url": "https://europepmc.org/article/MED/24271137",
+      "title": "Evacetrapib at a supratherapeutic steady state concentration does not prolong QT in a thorough QT/QTc study in healthy participants",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24271137/",
       "pub_date": "2013-11-22",
       "access": "abstract_only",
       "meta": {
@@ -128,9 +144,9 @@
       "source_id": "pmid:22089718",
       "file": "docs/pmid_22089718.txt",
       "type": "journal",
-      "title": "Effects of the CETP inhibitor evacetrapib administered as monotherapy or in combination with statins on HDL and LDL cholesterol: a randomized controlled trial.",
-      "url": "https://europepmc.org/article/MED/22089718",
-      "pub_date": "2011-11-01",
+      "title": "Effects of the CETP inhibitor evacetrapib administered as monotherapy or in combination with statins on HDL and LDL cholesterol: a randomized controlled trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22089718/",
+      "pub_date": "2011-11-16",
       "access": "abstract_only",
       "meta": {
         "pmid": "22089718",
@@ -144,8 +160,8 @@
       "source_id": "pmcid:PMC4536537",
       "file": "docs/pmcid_PMC4536537.txt",
       "type": "journal",
-      "title": "A Multidose Study to Examine the Effect of Food on Evacetrapib Exposure at Steady State.",
-      "url": "https://europepmc.org/article/MED/25736283",
+      "title": "A Multidose Study to Examine the Effect of Food on Evacetrapib Exposure at Steady State",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25736283/",
       "pub_date": "2015-03-03",
       "access": "open_full_text",
       "meta": {
@@ -157,27 +173,11 @@
       "note": ""
     },
     {
-      "source_id": "pmid:25651523",
-      "file": "docs/pmid_25651523.txt",
-      "type": "journal",
-      "title": "Assessment of the persistence of anacetrapib and evacetrapib concentrations using two pharmacokinetic modeling approaches.",
-      "url": "https://europepmc.org/article/MED/25651523",
-      "pub_date": "2015-02-20",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "25651523",
-        "pmcid": null,
-        "doi": "10.1002/jcph.472",
-        "journal": "Journal of clinical pharmacology"
-      },
-      "note": ""
-    },
-    {
       "source_id": "pmcid:PMC3910017",
       "file": "docs/pmcid_PMC3910017.txt",
       "type": "journal",
-      "title": "The pharmacokinetics and pharmacokinetic/pharmacodynamic relationships of evacetrapib administered as monotherapy or in combination with statins.",
-      "url": "https://europepmc.org/article/MED/24452615",
+      "title": "The pharmacokinetics and pharmacokinetic/pharmacodynamic relationships of evacetrapib administered as monotherapy or in combination with statins",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24452615/",
       "pub_date": "2014-01-22",
       "access": "open_full_text",
       "meta": {
@@ -189,84 +189,100 @@
       "note": ""
     },
     {
+      "source_id": "pmid:22754969",
+      "file": "docs/pmid_22754969.txt",
+      "type": "journal",
+      "title": "Atherosclerosis. Effects of evacetrapib administered as monotherapy or in combination with statins",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22754969/",
+      "pub_date": "2012-01-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "22754969",
+        "pmcid": null,
+        "doi": "10.3909/ricm0645",
+        "journal": "Reviews in cardiovascular medicine"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:21957197",
       "file": "docs/pmid_21957197.txt",
       "type": "journal",
-      "title": "Evacetrapib is a novel, potent, and selective inhibitor of cholesteryl ester transfer protein that elevates HDL cholesterol without inducing aldosterone or increasing blood pressure.",
-      "url": "https://europepmc.org/article/MED/21957197",
+      "title": "Evacetrapib is a novel, potent, and selective inhibitor of cholesteryl ester transfer protein that elevates HDL cholesterol without inducing aldosterone or increasing blood pressure",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21957197/",
       "pub_date": "2011-09-25",
       "access": "abstract_only",
       "meta": {
         "pmid": "21957197",
         "pmcid": "PMC3220285",
-        "doi": "10.1194/jlr.m018069",
+        "doi": "10.1194/jlr.M018069",
         "journal": "Journal of lipid research"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:23736814",
-      "file": "docs/pmid_23736814.txt",
+      "source_id": "pmid:22362199",
+      "file": "docs/pmid_22362199.txt",
       "type": "journal",
-      "title": "Recent clinical trials evaluating benefit of drug therapy for modification of HDL cholesterol.",
-      "url": "https://europepmc.org/article/MED/23736814",
-      "pub_date": "2013-07-01",
+      "title": "Evacetrapib",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22362199/",
+      "pub_date": "2012-06-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "23736814",
+        "pmid": "22362199",
         "pmcid": null,
-        "doi": "10.1097/hco.0b013e328362059d",
-        "journal": "Current opinion in cardiology"
+        "doi": "10.1007/s11886-012-0252-3",
+        "journal": "Current cardiology reports"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:18193043",
-      "file": "docs/pmid_18193043.txt",
+      "source_id": "pmid:24829485",
+      "file": "docs/pmid_24829485.txt",
       "type": "journal",
-      "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
-      "url": "https://europepmc.org/article/MED/18193043",
-      "pub_date": "2008-01-13",
+      "title": "Mediterranean diet and cardiovascular health: Teachings of the PREDIMED study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24829485/",
+      "pub_date": "2014-05-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18193043",
-        "pmcid": "PMC5206900",
-        "doi": "10.1038/ng.76",
-        "journal": "Nature genetics",
+        "pmid": "24829485",
+        "pmcid": "PMC4013190",
+        "doi": "10.3945/an.113.005389",
+        "journal": "Advances in nutrition (Bethesda, Md.)",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:12034052",
-      "file": "docs/pmid_12034052.txt",
+      "source_id": "pmid:40339105",
+      "file": "docs/pmid_40339105.txt",
       "type": "journal",
-      "title": "Thyroid disease and lipids.",
-      "url": "https://europepmc.org/article/MED/12034052",
-      "pub_date": "2002-04-01",
+      "title": "CETP-Related Hyperalphalipoproteinemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40339105/",
+      "pub_date": "1993-01-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "12034052",
+        "pmid": "40339105",
         "pmcid": null,
-        "doi": "10.1089/10507250252949405",
-        "journal": "Thyroid : official journal of the American Thyroid Association",
+        "doi": null,
+        "journal": "",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:25898129",
-      "file": "docs/pmid_25898129.txt",
+      "source_id": "pmid:20512706",
+      "file": "docs/pmid_20512706.txt",
       "type": "journal",
-      "title": "A multivariate genome-wide association analysis of 10 LDL subfractions, and their response to statin treatment, in 1868 Caucasians.",
-      "url": "https://europepmc.org/article/MED/25898129",
-      "pub_date": "2015-04-21",
+      "title": "CETP, the human genome and cardiovascular outcomes",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20512706/",
+      "pub_date": "2010-05-29",
       "access": "abstract_only",
       "meta": {
-        "pmid": "25898129",
-        "pmcid": "PMC4405269",
-        "doi": "10.1371/journal.pone.0120758",
-        "journal": "PloS one",
+        "pmid": "20512706",
+        "pmcid": null,
+        "doi": "10.4414/smw.2010.12994",
+        "journal": "Swiss medical weekly",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -280,7 +296,7 @@
       "pub_date": "2015-10-12",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2019-05-18)"
     }
   ]
 }

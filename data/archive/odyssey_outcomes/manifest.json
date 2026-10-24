@@ -7,7 +7,7 @@
   "as_of": "2018-03-10",
   "readout_date": "2018-03-10",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day, or the same release filed with the SEC that\n     day): the Wayback Machine capture nearest that day (same page), else the live page if it was not redirected\n     to another page; sentences naming a year more than one year after the readout are left out (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01663402@2018-03-10",
@@ -43,17 +43,37 @@
                 "SAR236553",
                 "REGN727",
                 "Praluent®"
+              ],
+              "arms": [
+                "Alirocumab 75 mg Q2W/Up to 150 mg Q2W"
               ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
             },
             {
               "name": "LMT",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Alirocumab 75 mg Q2W/Up to 150 mg Q2W",
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
+            },
+            {
+              "label": "Alirocumab 75 mg Q2W/Up to 150 mg Q2W",
+              "type": "EXPERIMENTAL"
             }
           ],
           "conditions": [
@@ -68,18 +88,34 @@
       "note": "design-only registry view"
     },
     {
-      "source_id": "pmcid:PMC5698740",
-      "file": "docs/pmcid_PMC5698740.txt",
+      "source_id": "pmid:28750828",
+      "file": "docs/pmid_28750828.txt",
       "type": "journal",
-      "title": "Efficacy and safety of alirocumab in insulin-treated individuals with type 1 or type 2 diabetes and high cardiovascular risk: The ODYSSEY DM-INSULIN randomized trial.",
-      "url": "https://europepmc.org/article/MED/28905478",
-      "pub_date": "2017-10-10",
+      "title": "Efficacy and Safety of Alirocumab Versus Ezetimibe Over 2 Years (from ODYSSEY COMBO II)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28750828/",
+      "pub_date": "2017-06-28",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "28750828",
+        "pmcid": null,
+        "doi": "10.1016/j.amjcard.2017.06.023",
+        "journal": "The American journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC5400401",
+      "file": "docs/pmcid_PMC5400401.txt",
+      "type": "journal",
+      "title": "Effect of alirocumab dose increase on LDL lowering and lipid goal attainment in patients with dyslipidemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27740972/",
+      "pub_date": "2017-05-01",
       "access": "open_full_text",
       "meta": {
-        "pmid": "28905478",
-        "pmcid": "PMC5698740",
-        "doi": "10.1111/dom.13114",
-        "journal": "Diabetes, obesity & metabolism"
+        "pmid": "27740972",
+        "pmcid": "PMC5400401",
+        "doi": "10.1097/MCA.0000000000000438",
+        "journal": "Coronary artery disease"
       },
       "note": ""
     },
@@ -87,8 +123,8 @@
       "source_id": "pmcid:PMC5485164",
       "file": "docs/pmcid_PMC5485164.txt",
       "type": "journal",
-      "title": "Lipid-lowering efficacy and safety of alirocumab in patients with or without diabetes: A sub-analysis of ODYSSEY COMBO II.",
-      "url": "https://europepmc.org/article/MED/28206704",
+      "title": "Lipid-lowering efficacy and safety of alirocumab in patients with or without diabetes: A sub-analysis of ODYSSEY COMBO II",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28206704/",
       "pub_date": "2017-04-18",
       "access": "open_full_text",
       "meta": {
@@ -100,180 +136,181 @@
       "note": ""
     },
     {
-      "source_id": "pmcid:PMC5262523",
-      "file": "docs/pmcid_PMC5262523.txt",
+      "source_id": "pmid:28347654",
+      "file": "docs/pmid_28347654.txt",
       "type": "journal",
-      "title": "Effects of PCSK9 Inhibition With Alirocumab on Lipoprotein Metabolism in Healthy Humans.",
-      "url": "https://europepmc.org/article/MED/27986651",
-      "pub_date": "2016-12-16",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "27986651",
-        "pmcid": "PMC5262523",
-        "doi": "10.1161/circulationaha.116.025253",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC5055560",
-      "file": "docs/pmcid_PMC5055560.txt",
-      "type": "journal",
-      "title": "Efficacy and Safety of Alirocumab in Patients with Heterozygous Familial Hypercholesterolemia and LDL-C of 160 mg/dl or Higher.",
-      "url": "https://europepmc.org/article/MED/27618825",
-      "pub_date": "2016-10-01",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "27618825",
-        "pmcid": "PMC5055560",
-        "doi": "10.1007/s10557-016-6685-y",
-        "journal": "Cardiovascular drugs and therapy"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC5081037",
-      "file": "docs/pmcid_PMC5081037.txt",
-      "type": "journal",
-      "title": "No effect of PCSK9 inhibitor alirocumab on the incidence of diabetes in a pooled analysis from 10 ODYSSEY Phase 3 studies.",
-      "url": "https://europepmc.org/article/MED/27460890",
-      "pub_date": "2016-07-26",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "27460890",
-        "pmcid": "PMC5081037",
-        "doi": "10.1093/eurheartj/ehw292",
-        "journal": "European heart journal"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC5147039",
-      "file": "docs/pmcid_PMC5147039.txt",
-      "type": "journal",
-      "title": "Reductions in Atherogenic Lipids and Major Cardiovascular Events: A Pooled Analysis of 10 ODYSSEY Trials Comparing Alirocumab With Control.",
-      "url": "https://europepmc.org/article/MED/27777279",
-      "pub_date": "2016-10-24",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "27777279",
-        "pmcid": "PMC5147039",
-        "doi": "10.1161/circulationaha.116.024604",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:25773378",
-      "file": "docs/pmid_25773378.txt",
-      "type": "journal",
-      "title": "Efficacy and safety of alirocumab in reducing lipids and cardiovascular events.",
-      "url": "https://europepmc.org/article/MED/25773378",
-      "pub_date": "2015-03-15",
+      "title": "Efficacy and safety of alirocumab in insulin-treated patients with type 1 or type 2 diabetes and high cardiovascular risk: Rationale and design of the ODYSSEY DM-INSULIN trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28347654/",
+      "pub_date": "2017-03-24",
       "access": "abstract_only",
       "meta": {
-        "pmid": "25773378",
+        "pmid": "28347654",
         "pmcid": null,
-        "doi": "10.1056/nejmoa1501031",
-        "journal": "The New England journal of medicine"
+        "doi": "10.1016/j.diabet.2017.01.004",
+        "journal": "Diabetes & metabolism"
       },
       "note": ""
     },
     {
-      "source_id": "pmcid:PMC4644253",
-      "file": "docs/pmcid_PMC4644253.txt",
+      "source_id": "pmcid:PMC5698740",
+      "file": "docs/pmcid_PMC5698740.txt",
       "type": "journal",
-      "title": "ODYSSEY FH I and FH II: 78 week results with alirocumab treatment in 735 patients with heterozygous familial hypercholesterolaemia.",
-      "url": "https://europepmc.org/article/MED/26330422",
-      "pub_date": "2015-09-01",
+      "title": "Efficacy and safety of alirocumab in insulin-treated individuals with type 1 or type 2 diabetes and high cardiovascular risk: The ODYSSEY DM-INSULIN randomized trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28905478/",
+      "pub_date": "2017-10-10",
       "access": "open_full_text",
       "meta": {
-        "pmid": "26330422",
-        "pmcid": "PMC4644253",
-        "doi": "10.1093/eurheartj/ehv370",
-        "journal": "European heart journal"
+        "pmid": "28905478",
+        "pmcid": "PMC5698740",
+        "doi": "10.1111/dom.13114",
+        "journal": "Diabetes, obesity & metabolism"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:26687696",
-      "file": "docs/pmid_26687696.txt",
+      "source_id": "pmcid:PMC5474052",
+      "file": "docs/pmcid_PMC5474052.txt",
       "type": "journal",
-      "title": "Efficacy and safety of alirocumab vs ezetimibe in statin-intolerant patients, with a statin rechallenge arm: The ODYSSEY ALTERNATIVE randomized trial.",
-      "url": "https://europepmc.org/article/MED/26687696",
-      "pub_date": "2015-08-29",
+      "title": "Efficacy and safety of alirocumab in patients with hypercholesterolemia not adequately controlled with non-statin lipid-lowering therapy or the lowest strength of statin: ODYSSEY NIPPON study design and rationale",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28623954/",
+      "pub_date": "2017-06-17",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "28623954",
+        "pmcid": "PMC5474052",
+        "doi": "10.1186/s12944-017-0513-7",
+        "journal": "Lipids in health and disease"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27389448",
+      "file": "docs/pmid_27389448.txt",
+      "type": "journal",
+      "title": "PCSK9 inhibitors may improve cardiovascular outcomes-Can we afford them?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/",
+      "pub_date": "2016-06-23",
       "access": "abstract_only",
       "meta": {
-        "pmid": "26687696",
+        "pmid": "27389448",
         "pmcid": null,
-        "doi": "10.1016/j.jacl.2015.08.006",
-        "journal": "Journal of clinical lipidology"
+        "doi": "10.1016/j.ijcard.2016.06.126",
+        "journal": "International journal of cardiology"
       },
       "note": ""
     },
     {
-      "source_id": "pmcid:PMC4430683",
-      "file": "docs/pmcid_PMC4430683.txt",
+      "source_id": "pmid:27886619",
+      "file": "docs/pmid_27886619.txt",
       "type": "journal",
-      "title": "Efficacy and safety of alirocumab in high cardiovascular risk patients with inadequately controlled hypercholesterolaemia on maximally tolerated doses of statins: the ODYSSEY COMBO II randomized controlled trial.",
-      "url": "https://europepmc.org/article/MED/25687353",
-      "pub_date": "2015-02-16",
-      "access": "open_full_text",
+      "title": "Open-label therapy with alirocumab in patients with heterozygous familial hypercholesterolemia: Results from three years of treatment",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27886619/",
+      "pub_date": "2016-11-09",
+      "access": "abstract_only",
       "meta": {
-        "pmid": "25687353",
-        "pmcid": "PMC4430683",
-        "doi": "10.1093/eurheartj/ehv028",
-        "journal": "European heart journal"
+        "pmid": "27886619",
+        "pmcid": null,
+        "doi": "10.1016/j.ijcard.2016.11.046",
+        "journal": "International journal of cardiology"
       },
       "note": ""
+    },
+    {
+      "source_id": "pmid:27793396",
+      "file": "docs/pmid_27793396.txt",
+      "type": "journal",
+      "title": "Effect of Alirocumab on Lipoprotein(a) Over ≥1.5 Years (from the Phase 3 ODYSSEY Program)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27793396/",
+      "pub_date": "2016-09-29",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27793396",
+        "pmcid": null,
+        "doi": "10.1016/j.amjcard.2016.09.010",
+        "journal": "The American journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27639753",
+      "file": "docs/pmid_27639753.txt",
+      "type": "journal",
+      "title": "A phase III randomized trial evaluating alirocumab 300 mg every 4 weeks as monotherapy or add-on to statin: ODYSSEY CHOICE I",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27639753/",
+      "pub_date": "2016-08-31",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27639753",
+        "pmcid": null,
+        "doi": "10.1016/j.atherosclerosis.2016.08.043",
+        "journal": "Atherosclerosis"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:25440796",
+      "file": "docs/pmid_25440796.txt",
+      "type": "journal",
+      "title": "Effect of alirocumab, a monoclonal antibody to PCSK9, on long-term cardiovascular outcomes following acute coronary syndromes: rationale and design of the ODYSSEY outcomes trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25440796/",
+      "pub_date": "2014-08-07",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "25440796",
+        "pmcid": null,
+        "doi": "10.1016/j.ahj.2014.07.028",
+        "journal": "American heart journal",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
+      "source_id": "pmid:15893177",
+      "file": "docs/pmid_15893177.txt",
+      "type": "journal",
+      "title": "What promise does PCSK9 hold?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15893177/",
+      "pub_date": "2005-05-17",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "15893177",
+        "pmcid": null,
+        "doi": "10.1016/j.jacc.2005.02.056",
+        "journal": "Journal of the American College of Cardiology",
+        "purpose": "genetics"
+      },
+      "note": "genetic association paper on the target"
+    },
+    {
+      "source_id": "pmid:28329241",
+      "file": "docs/pmid_28329241.txt",
+      "type": "journal",
+      "title": "Lipoprotein(a): the revenant",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28329241/",
+      "pub_date": "2017-05-21",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "28329241",
+        "pmcid": null,
+        "doi": "10.1093/eurheartj/ehx033",
+        "journal": "European heart journal",
+        "purpose": "genetics"
+      },
+      "note": "genetic association paper on the target"
     },
     {
       "source_id": "pmid:16554528",
       "file": "docs/pmid_16554528.txt",
       "type": "journal",
-      "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease.",
-      "url": "https://europepmc.org/article/MED/16554528",
-      "pub_date": "2006-03-01",
+      "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16554528/",
+      "pub_date": "2006-03-23",
       "access": "abstract_only",
       "meta": {
         "pmid": "16554528",
         "pmcid": null,
-        "doi": "10.1056/nejmoa054013",
+        "doi": "10.1056/NEJMoa054013",
         "journal": "The New England journal of medicine",
-        "purpose": "genetics"
-      },
-      "note": "genetic association paper on the target"
-    },
-    {
-      "source_id": "pmid:25830891",
-      "file": "docs/pmid_25830891.txt",
-      "type": "journal",
-      "title": "In vivo genome editing using Staphylococcus aureus Cas9.",
-      "url": "https://europepmc.org/article/MED/25830891",
-      "pub_date": "2015-04-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "25830891",
-        "pmcid": "PMC4393360",
-        "doi": "10.1038/nature14299",
-        "journal": "Nature",
-        "purpose": "genetics"
-      },
-      "note": "genetic association paper on the target"
-    },
-    {
-      "source_id": "pmid:18193043",
-      "file": "docs/pmid_18193043.txt",
-      "type": "journal",
-      "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
-      "url": "https://europepmc.org/article/MED/18193043",
-      "pub_date": "2008-01-13",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "18193043",
-        "pmcid": "PMC5206900",
-        "doi": "10.1038/ng.76",
-        "journal": "Nature genetics",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -287,7 +324,7 @@
       "pub_date": "2018-03-10",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }
