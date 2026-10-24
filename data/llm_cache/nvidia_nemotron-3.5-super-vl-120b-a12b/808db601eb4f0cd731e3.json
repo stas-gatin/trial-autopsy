@@ -1,0 +1,15 @@
+{
+  "key": "808db601eb4f0cd731e3",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T14:58:09+00:00",
+  "system": "You extract quantitative facts about one clinical trial programme from one document.\n\nRules:\n- Extract only facts stated in THIS document. Never use outside knowledge.\n- Every fact needs \"quote\": an exact, verbatim span copied from the document (8-300 characters) that contains the number. Quotes are machine-checked; paraphrases are discarded.\n- Placebo-adjusted values are preferred. If a value is within-arm (not placebo-adjusted), set attrs.placebo_adjusted=false.\n- Units: keep the unit the document uses; put it in \"unit\".\n- Other trials of the same investigational drug (phase 2, dose-finding, other populations, combination arms) belong\n  to the programme: extract their facts too, and put the trial's name in attrs.trial when the document gives it.\n- Return {\"facts\": []} only if the document reports no results for the investigational drug.\n\nAllowed keys:\n  n_randomized, median_followup, primary_endpoint, inclusion_threshold, planned_events, assumed_rrr, power,\n  alpha, stopped_early, events_treatment, events_control, events_total, hr, ci_low, ci_high, p_value,\n  biomarker_change, baseline_level, sbp_change, safety_signal, readout_statement\n\nFor biomarker_change and baseline_level, attrs must include: biomarker (one of LDL-C, non-HDL-C, apoB, HDL-C,\nLp(a), triglycerides, hsCRP, IL-6, Lp-PLA2 activity, sPLA2-IIA, SBP, other), phase (phase2 or phase3),\ntimepoint, method (assay or \"not stated\"), placebo_adjusted (true/false), dose (if stated).\nFor biomarker_change give \"value\" as the change (negative = reduction) and state in attrs.kind whether it is\n\"percent\" or \"absolute\".\n\nReturn JSON only:\n{\"facts\": [{\"key\": \"...\", \"value\": <number or string>, \"unit\": \"...\", \"attrs\": {...}, \"quote\": \"...\"}]}",
+  "prompt": "Trial: GISSI-HF NCT00336336 - GISSI-HF- Effects of n-3 PUFA and Rosuvastatin on Mortality-Morbidity of Patients With Symptomatic CHF\nInvestigational drug: rosuvastatin\nDocument: Controlled Rosuvastatin Multinational Trial In Heart Failure (the positive negative trial) (journal, published 2008-04-09, source pmid:18549865)\n\n--- DOCUMENT TEXT ---\nControlled Rosuvastatin Multinational Trial In Heart Failure (the positive negative trial)\n\n\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 587,
+    "output_tokens": 7
+  }
+}

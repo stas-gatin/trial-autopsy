@@ -1,0 +1,15 @@
+{
+  "key": "9429034dd32da4c6717e",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T16:51:38+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: IMPROVE-IT NCT00202878 - IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)\nInvestigational drug: ezetimibe\nDocument: Niemann-Pick C1 Like 1 (NPC1L1) an intestinal sterol transporter (journal, published 2009-01-19, source pmid:19272334)\n\n--- DOCUMENT TEXT ---\nNiemann-Pick C1 Like 1 (NPC1L1) an intestinal sterol transporter\n\nNiemann-Pick C1 Like 1 (NPC1L1) has been identified and characterized as an essential protein in the intestinal cholesterol absorption process. NPC1L1 localizes to the brush border membrane of absorptive enterocytes in the small intestine. Intestinal expression of NPC1L1 is down regulated by diets containing high levels of cholesterol. While otherwise phenotypically normal, Npc1l1 null mice exhibit a significant reduction in the intestinal uptake and absorption of cholesterol and phytosterols. Characterization of the NPC1L1 pathway revealed that cholesterol absorption inhibitor ezetimibe specifically binds to an extracellular loop of NPC1L1 and inhibits its sterol transport function. Npc1l1 null mice are resistant to diet-induced hypercholesterolemia, and when crossed with apo E null mice, are completely resistant to the development of atherosclerosis. Intestinal gene expression studies in Npc1l1 null mice indicated that no exogenous cholesterol was entering enterocytes lacking NPC1L1, which resulted in an upregulation of intestinal and hepatic LDL receptor and cholesterol biosynthetic gene expression. Polymorphisms in the human NPC1L1 gene have been found to influence cholesterol absorption and plasma low density lipoprotein levels. Therefore, NPC1L1 is a critical intestinal sterol uptake transporter which influences whole body cholesterol homeostasis.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 649,
+    "output_tokens": 7
+  }
+}

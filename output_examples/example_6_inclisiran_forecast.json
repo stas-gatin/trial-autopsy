@@ -1,0 +1,2164 @@
+{
+  "run_id": "example-inclisiran",
+  "status": "success",
+  "mode": "forecast",
+  "as_of": null,
+  "backtest": false,
+  "readout_date": null,
+  "analysis_date": "2026-10-25",
+  "trial": {
+    "nct_id": "NCT05030428",
+    "acronym": "VICTORION-2P",
+    "title": "Study of Inclisiran to Prevent Cardiovascular (CV) Events in Participants With Established Cardiovascular Disease",
+    "sponsor": "Novartis Pharmaceuticals",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 17004,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerotic Cardiovascular Disease"
+    ],
+    "primary_completion": "2027-05-10"
+  },
+  "drug": {
+    "name": "inclisiran sodium",
+    "chembl_id": "CHEMBL5095052",
+    "aliases": [
+      "Leqvio",
+      "inclisiran",
+      "kjx839"
+    ],
+    "drug_type": "Oligonucleotide",
+    "mechanisms": [
+      "PCSK9 mRNA rnai inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000169174",
+        "symbol": "PCSK9",
+        "name": "proprotein convertase subtilisin/kexin type 9"
+      }
+    ],
+    "searched_as": "Inclisiran sodium"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-example-inclisiran",
+  "log_file": "logs/trace-example-inclisiran.jsonl",
+  "execution_time_seconds": 478.7,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "not_computable",
+      "outcome_basis": "calculator forecast",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "robust_success",
+      "secondary_categories": [
+        "narrow_success",
+        "success_with_caveats"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "trial size (events) unknown"
+    },
+    "report": {
+      "headline": "VICTORION-2P (17,004 patients) is forecast as robust success for inclisiran based on strong PCSK9 genetics, consistent ~40-65% LDL-C lowering, and prior PCSK9 inhibitor class success, though follow-up duration and event count remain unknown.",
+      "summary": "The VICTORION-2P trial has randomized 17,004 participants with established cardiovascular disease (LDL-C ≥70 mg/dL) to inclisiran versus placebo with a 3P-MACE primary endpoint. The calculator cannot compute power or minimum detectable effect because follow-up duration and event count are unknown (757 events needed for 80% power). However, mechanistic evidence strongly supports success: PCSK9 has an OpenTargets genetic association score of 0.949 with coronary artery disorder; inclisiran achieves consistent 40-65% placebo-adjusted LDL-C lowering across ORION-11 (time-averaged -41%, Day 510 -43.7%), ORION-15 (-56.6% to -65.3%), and ORION-3 (4-year averaged -44.2%); prior PCSK9 monoclonal antibodies (evolocumab FOURIER, alirocumab ODYSSEY) demonstrated ~15% RRR (HR ~0.85) in similar secondary prevention populations. The calculator predicts an expected HR of 0.816 (18.4% RRR) based on an LDL-C equivalent of 0.82 mmol/L. Safety is favorable with mainly mild injection-site reactions and no major signals in >12,000 patient-years (ORION-8). Confidence is high but the forecast is conditional on adequate follow-up (≥3-4 years) for event accrual.",
+      "key_evidence": [
+        "17,004 participants randomized — ClinicalTrials.gov NCT05030428 VICTORION-2P",
+        "Primary endpoint: Time to First Occurrence of 3P-MACE — ClinicalTrials.gov NCT05030428 VICTORION-2P",
+        "PCSK9 genetic association score 0.949 with coronary artery disorder — opentargets:PCSK9",
+        "Inclisiran LDL-C lowering: ORION-11 time-averaged -41%, Day 510 -43.7% — Effect of inclisiran on lipids in primary prevention: the ORION-11 trial",
+        "Inclisiran LDL-C lowering: ORION-15 -56.6% to -65.3% — Efficacy, Safety, and Pharmacokinetics of Inclisiran in Japanese Patients: Results from ORION-15",
+        "Inclisiran LDL-C lowering: ORION-3 4-year averaged -44.2% — Long-term efficacy and safety of inclisiran in patients with high cardiovascular risk and elevated LDL cholesterol (ORION-3): results from the 4-year open-label extension of the ORION-1 trial",
+        "Calculator expected HR 0.816 (18.4% RRR) based on LDL equivalent 0.82 mmol/L — calculator output",
+        "757 events needed for 80% power — calculator output",
+        "ORION-8 long-term safety: >12,000 patient-years, favorable profile — Inclisiran administration potently and durably lowers LDL-C over an extended-term follow-up: the ORION-8 trial",
+        "Prior PCSK9 mAbs (FOURIER, ODYSSEY) showed ~15% RRR (HR ~0.85) in secondary prevention — hypotheses"
+      ],
+      "what_would_change_this": "If follow-up is shorter than ~3-4 years or event accrual is substantially lower than expected, the confidence interval may approach 1.0; the lower baseline LDL-C threshold (70 mg/dL = 1.81 mmol/L vs ORION-11's 3.6 mmol/L) may reduce absolute LDL-C change and shift expected HR toward 0.85-0.88.",
+      "readthrough_note": "VICTORION-2P is the first cardiovascular outcomes trial for inclisiran; success would extend the PCSK9 inhibitor class evidence to siRNA therapy. The parallel VICTORION-1P trial in primary prevention and ORION-4 (NCT03705234) provide additional readouts for the same mechanism."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.949 for PCSK9",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.82 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.184,
+        "detail": "expected HR 0.816 at 5 y (relative risk reduction 18.4%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 757",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "victorion-2p",
+      "ldl_equivalent_mmol": 0.82,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 0.816,
+      "causal_rrr": 0.184,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "trial size (events) unknown",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "follow-up unknown, effect shown at 5 years"
+      ],
+      "notes": [
+        "events needed for 80% power: 757"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "victorion-2p",
+      "mode": "forecast",
+      "target_genetics": "causal",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -41.0,
+          "baseline": 2.0,
+          "method": "placebo-adjusted time-averaged Day 90-540 from ORION-11 phase 3 trial; baseline assumed as typical on-statin LDL-C in established CVD (VICTORION-2P entry threshold 70 mg/dL = 1.81 mmol/L as lower bound)",
+          "source": "ctgov:NCT05030428,pmcid:PMC9769955"
+        }
+      ],
+      "followup_years": null,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "PCSK9 genetic association score 0.949 with coronary artery disorder (Open Targets), 51 genetic evidence items. Multiple studies published before cut-off (GCST010867, GCST90132314, GCST90449059, FINNGEN_R12_I9_CORATHER, GCST010479) show protective effect for CHD. Score well above 0.5 threshold for causal.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -41.0,
+          "baseline": 2.0,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted time-averaged Day 90-540 from ORION-11 phase 3 trial; baseline assumed as typical on-statin LDL-C in established CVD (VICTORION-2P entry threshold 70 mg/dL = 1.81 mmol/L as lower bound)",
+          "fact_ids": [
+            "f_cd93d94e099db8",
+            "f_96c42e5398a2e5"
+          ]
+        }
+      ],
+      "followup_years": null,
+      "followup_fact_ids": [],
+      "events": null,
+      "events_basis": "planned",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "followup_years",
+        "events",
+        "planned_events",
+        "VICTORION-2P_baseline_LDL-C"
+      ],
+      "notes": "LDL-C change from ORION-11 (primary prevention, baseline 3.6 mmol/L) time-averaged Day 90-540: -41.0% placebo-adjusted (f_cd93d94e099db8), absolute -1.3 mmol/L (f_514d5ccb1b5409). VICTORION-2P enrolls established CVD on statins with entry threshold LDL-C >=70 mg/dL (1.81 mmol/L). Assumed baseline 2.0 mmol/L reflects typical on-statin LDL-C in this population. Sensitivity: if true baseline = 1.81 mmol/L (threshold), absolute reduction = 0.74 mmol/L -> expected HR ~0.837. apoB change from ORION-5 (homozygous FH, n=56) excluded per critic feedback as mismatched population. Trial is event-driven; median follow-up and planned event count not stated in available facts."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "PCSK9 target has strong genetic validation: OpenTargets association score 0.949 with coronary artery disorder, 51 evidence items; loss-of-function variants show protective effect for CHD (HR 0.32-0.79 per 15-28% LDL-C reduction).",
+            "refs": [
+              "f_26852c5141bbbd",
+              "f_26374424fe103c",
+              "f_4f689531f77157"
+            ]
+          },
+          {
+            "text": "Inclisiran achieves consistent ~40-65% placebo-adjusted LDL-C lowering across Phase 2/3 trials (ORION-11 time-averaged -41%, Day 510 -43.7%; ORION-15 -56.6% to -65.3%; ORION-3 4-yr averaged -44.2%).",
+            "refs": [
+              "f_cd93d94e099db8",
+              "f_112d16613e8d68",
+              "f_5189973ff441cb",
+              "f_1f2b272d845daf",
+              "f_b76058cfcb33c8",
+              "f_072acd76720243"
+            ]
+          },
+          {
+            "text": "Prior PCSK9 monoclonal antibodies (evolocumab FOURIER, alirocumab ODYSSEY) demonstrated ~15% RRR (HR ~0.85) in secondary prevention with similar magnitude of LDL-C lowering.",
+            "refs": []
+          },
+          {
+            "text": "Large sample size (17,004 randomized) provides ample power if event accrual follows typical secondary prevention rates; calculator estimates 757 events needed for 80% power.",
+            "refs": [
+              "f_e1f8c4b4b95309",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Trial not stopped early; long-term extension data (ORION-8, >12,000 patient-years) show sustained LDL-C lowering and favorable safety.",
+            "refs": [
+              "f_6c044fb27b1640",
+              "f_1db893b77ae8bf",
+              "f_64bb34dd0fd06e"
+            ]
+          },
+          {
+            "text": "Safety profile favorable: mainly mild injection-site reactions (ORION-11), similar to placebo in ORION-15, no major signals in ORION-8.",
+            "refs": [
+              "f_047cc3b77f2e60",
+              "f_3c3acfd46c1cb7",
+              "f_64bb34dd0fd06e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Follow-up duration unknown; if shorter than ~3-4 years, treatment effect may not fully accrue (CTT shows benefit increases with time).",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Baseline LDL-C in VICTORION-2P (entry threshold 70 mg/dL = 1.81 mmol/L) lower than ORION-11 (3.6 mmol/L); absolute LDL-C reduction smaller, expected HR closer to 0.85-0.88.",
+            "refs": [
+              "f_96c42e5398a2e5",
+              "f_9c41a06902df0c",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Percent LDL-C lowering in statin-treated secondary prevention not directly verified in available facts (ORION-10 data not in evidence set).",
+            "refs": [
+              "critic"
+            ]
+          }
+        ],
+        "would_settle": "Trial results with observed HR, follow-up duration, and event count."
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If follow-up is shorter or event rate lower than expected, confidence interval may approach 1.0.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Absolute LDL-C reduction smaller in lower-baseline population → expected HR ~0.85-0.88 rather than 0.82.",
+            "refs": [
+              "f_96c42e5398a2e5",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetics and prior PCSK9 inhibitor trials support ~15-20% RRR in secondary prevention; 17,004 patients should provide precision.",
+            "refs": [
+              "f_26852c5141bbbd",
+              "f_26374424fe103c",
+              "f_4f689531f77157"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and confidence interval at readout."
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "ORION-3 reported 14% and 1% safety signals (nature unspecified, likely injection-site).",
+            "refs": [
+              "f_29ad490dda5f8a",
+              "f_c0764da5ff1cde",
+              "f_6a77f76c42d6d6",
+              "f_ec1f80546eec7b"
+            ]
+          },
+          {
+            "text": "Generalizability to statin-intolerant or higher LDL-C subgroups may be limited.",
+            "refs": [
+              "f_96c42e5398a2e5"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No major safety signal in Phase 3 trials (ORION-11, ORION-15, ORION-8).",
+            "refs": [
+              "f_047cc3b77f2e60",
+              "f_3c3acfd46c1cb7",
+              "f_64bb34dd0fd06e"
+            ]
+          },
+          {
+            "text": "Mechanism is well-understood LDL-C lowering; benefit expected to be explained by LDL-C reduction.",
+            "refs": [
+              "f_26852c5141bbbd"
+            ]
+          }
+        ],
+        "would_settle": "Detailed safety report at trial readout."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If follow-up <2 years or event rate very low, 757 events may not accrue.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "17,004 patients in secondary prevention typically yield >1000 MACE events over 3-4 years.",
+            "refs": [
+              "f_e1f8c4b4b95309"
+            ]
+          },
+          {
+            "text": "Calculator notes 757 events needed for 80% power — achievable with planned follow-up.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Actual event count and follow-up at readout."
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Residual risk in statin-treated patients includes inflammation, thrombosis, etc.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "FOURIER and ODYSSEY showed clear benefit in similar statin-treated secondary prevention populations.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Subgroup analyses by baseline LDL-C, statin intensity."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "3P-MACE includes CV death, MI, stroke — all LDL-C sensitive.",
+            "refs": [
+              "f_f877d28ec9b4f2"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Standard endpoint, no active comparator or crossover mentioned; adequate follow-up planned (assumed 5 years per calculator).",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Trial protocol details on follow-up and endpoint adjudication."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Injection-site reactions common but mild.",
+            "refs": [
+              "f_047cc3b77f2e60"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No signal of BP increase, diabetes, neurocognitive harm in ORION trials.",
+            "refs": [
+              "f_047cc3b77f2e60",
+              "f_3c3acfd46c1cb7",
+              "f_64bb34dd0fd06e"
+            ]
+          },
+          {
+            "text": "ORION-8 long-term safety favorable (>12,000 patient-years).",
+            "refs": [
+              "f_1db893b77ae8bf",
+              "f_64bb34dd0fd06e"
+            ]
+          }
+        ],
+        "would_settle": "Comprehensive safety data at readout."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial not stopped early; large enrollment (17,004) achieved.",
+            "refs": [
+              "f_6c044fb27b1640",
+              "f_e1f8c4b4b95309"
+            ]
+          }
+        ],
+        "would_settle": "Trial completion status."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 genetics strongly support causality: association score 0.949, 51 evidence items, multiple protective loss-of-function variants for CHD.",
+            "refs": [
+              "f_26852c5141bbbd",
+              "f_26374424fe103c",
+              "f_4f689531f77157"
+            ]
+          }
+        ],
+        "would_settle": "N/A — genetics already robust."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is established causal biomarker for ASCVD; CTT meta-analyses confirm log-linear relationship.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "N/A — biomarker causality established."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator cannot compute power or MDE without follow-up years and event count.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Forecast mode asks for prediction; mechanistic evidence (genetics, biomarker, class precedent, trial size) strongly supports success prediction.",
+            "refs": [
+              "f_26852c5141bbbd",
+              "f_cd93d94e099db8",
+              "f_e1f8c4b4b95309"
+            ]
+          }
+        ],
+        "would_settle": "Trial readout with observed HR, events, follow-up."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "apoB change input (-4.3% from ORION-5) is from a homozygous FH population (n=56) and is not relevant to VICTORION-2P (established CVD, n=17,004). The intended_biomarker is LDL-C, so apoB change should not be included as a calculator input for this forecast.",
+            "target_agent": "mechanism",
+            "request": "Remove apoB change from calculator inputs; it adds noise and reflects a mismatched population. Keep only LDL-C change from ORION-11."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator assumes LDL-C baseline of 2.0 mmol/L (assumptions: 'LDL-C: no baseline given, assumed 2.0'), but the input method states 'baseline is VICTORION-2P entry threshold (70 mg/dL = 1.81 mmol/L) as lower bound'. The actual baseline in this statin-treated secondary prevention population is likely 1.8-2.6 mmol/L. The assumption should be explicit and justified.",
+            "target_agent": "mechanism",
+            "request": "Document the rationale for 2.0 mmol/L baseline assumption (e.g., typical on-statin LDL-C in established CVD) and note sensitivity: if true baseline is 1.81 mmol/L (threshold), absolute reduction = 0.74 mmol/L -> expected HR ~0.837."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C percent change (-41.0%) comes from ORION-11 (primary prevention, baseline LDL-C 3.6 mmol/L) applied to a secondary prevention population with lower baseline. While percent lowering may be similar, this population difference should be noted as a caveat.",
+            "target_agent": "investigator",
+            "request": "Search for any inclisiran LDL-C lowering data in secondary prevention or mixed populations (e.g., ORION-10, ORION-8 extension) to confirm percent reduction is consistent."
+          },
+          {
+            "severity": "low",
+            "issue": "Verifier reports 'not_found' for apoB change fact f_dcf2a823725db2 (abstract snippet lacks the number). This is expected since the verifier only checks abstracts; the full paper (PMC10815002) may contain it. However, given the population mismatch, this input should be removed regardless.",
+            "target_agent": "case_builder",
+            "request": "No action needed on verification; the high-severity issue above supersedes this."
+          }
+        ],
+        "verdict_ok": true
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator input assumes baseline LDL-C of 2.0 mmol/L for VICTORION-2P, but the only verified baseline is the entry threshold of 70 mg/dL (1.81 mmol/L). The actual on-statin baseline in this secondary prevention population is unknown and could be 1.8-2.6 mmol/L. This assumption drives the ldl_equivalent_mmol (0.82) and expected HR (0.816). Sensitivity to baseline should be documented or a range provided.",
+            "target_agent": "mechanism",
+            "request": "Provide sensitivity analysis for expected HR across plausible baseline LDL-C values (1.8-2.6 mmol/L) using the -41% placebo-adjusted reduction from ORION-11."
+          },
+          {
+            "severity": "medium",
+            "issue": "The hypothesis for 'robust_success' cites prior PCSK9 mAb trials (FOURIER, ODYSSEY) showing ~15% RRR but provides no references (refs: []). These are key class-precedent evidence and should be supported by verified facts or marked as external knowledge.",
+            "target_agent": "case_builder",
+            "request": "Search for verified facts on FOURIER (evolocumab) and ODYSSEY OUTCOMES (alirocumab) hazard ratios and LDL-C lowering in secondary prevention."
+          },
+          {
+            "severity": "low",
+            "issue": "ORION-3 safety signals cited as '14% and 1%' (f_29ad490dda5f8a, f_c0764da5ff1cde, f_6a77f76c42d6d6, f_ec1f80546eec7b) but the nature of these signals is unspecified in the verified facts. The hypothesis speculates 'likely injection-site' without evidence.",
+            "target_agent": "case_builder",
+            "request": "Search for ORION-3 safety details specifying what the 14% and 1% refer to (injection-site reactions, serious AEs, discontinuations, etc.)."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator input uses ORION-11 (primary prevention) LDL-C lowering of -41.0% time-averaged. ORION-10 (secondary prevention, statin-treated) is the more directly relevant biomarker trial but its data is not in the verified fact set. The hypothesis acknowledges this gap but the calculator input does not reflect this limitation.",
+            "target_agent": "mechanism",
+            "request": "Note in calculator assumptions that percent lowering is from primary prevention (ORION-11); secondary prevention data (ORION-10) not in evidence set. If ORION-10 data becomes available, update input."
+          },
+          {
+            "severity": "low",
+            "issue": "Follow-up duration for VICTORION-2P is unknown (calculator input followup_years: null). The calculator assumption 'follow-up unknown, effect shown at 5 years' references CTT but VICTORION-2P planned follow-up is not in verified facts. This affects power and expected HR (time_factor).",
+            "target_agent": "case_builder",
+            "request": "Search CT.gov (NCT05030428) or protocol publications for planned follow-up duration in VICTORION-2P."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_cd93d94e099db8",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -41.0,
+          "unit": "%",
+          "source_id": "pmcid:PMC9769955",
+          "status": "confirmed",
+          "found": "6] with a corresponding time-adjusted change of -41.0% (95% CI: -47",
+          "note": "The abstract contains the exact time-adjusted LDL-C change of -41.0%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*41\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC9769955' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_96c42e5398a2e5",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 70,
+          "unit": "mg/dL",
+          "source_id": "ctgov:NCT05030428",
+          "status": "confirmed",
+          "found": "Fasting LDL-C ≥ 70 mg/dL at randomization visit",
+          "note": "The eligibility criteria includes the LDL-C threshold of 70 mg/dL.",
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*70 mg/dL[^.]*)', 1) AS sentence FROM registry LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PCSK9",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.732,
+        "genetic_association_score": 0.949,
+        "evidence_count": 51,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.971,
+            "study_id": "GCST010867",
+            "trait": "Coronary artery disease",
+            "n": 168228,
+            "publication_date": "2020-10-05",
+            "pmid": "33020668",
+            "variant": "rs151193009",
+            "beta": -0.447667,
+            "p": "1e-14",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.965,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs472495",
+            "beta": 0.006884953522584949,
+            "p": "3.7131738662719727e-13",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.951,
+            "study_id": "GCST90449059",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 185000,
+            "publication_date": "2024-11-13",
+            "pmid": "39537608",
+            "variant": "rs11206510",
+            "beta": -0.0255560596854,
+            "p": "2.8949999809265137e-9",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.948,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.193186932710206,
+            "p": "9.26200008392334e-31",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs11206510",
+            "beta": -0.06765864847381481,
+            "p": "1e-8",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs11591147",
+            "beta": -0.010701321233358261,
+            "p": "1.431955337524414e-12",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs11591147",
+            "beta": -0.012468438835740718,
+            "p": "1.3121823072433472e-14",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.203581973859205,
+            "p": "5.118000030517578e-26",
+            "published_before_cutoff": true
+          }
+        ],
+        "evidence_before_cutoff": 8
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_dcf2a823725db2",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -4.3,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "apoB",
+          "timepoint": "day 150",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "300 mg inclisiran sodium"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage changes from baseline to day 150 for apoB (−4.3%; P=0.68)",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_2af679574ba73a",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 294.0,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "LDL-C",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg inclisiran sodium",
+          "arm": "inclisiran"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The mean baseline LDL-C levels were 294.0 mg/dL and 356.7 mg/dL in the inclisiran and placebo groups, respectively.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_7140de1f7ce863",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 356.7,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "LDL-C",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "arm": "placebo"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The mean baseline LDL-C levels were 294.0 mg/dL and 356.7 mg/dL in the inclisiran and placebo groups, respectively.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_9c41a06902df0c",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 3.6,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "ORION-11",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "The mean baseline (SD) LDL-C was 3.6 (1.5) mmol/L.",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_a081a98b7116f4",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 114.0,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "ORION-15",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "Overall, 312 patients (mean age, 63.6 years; male, 74.4%; baseline LDL-C, 114.0 mg/dL) were randomized.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_072acd76720243",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -44.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "4-year averaged",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "300 mg twice-yearly"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "The 4-year averaged mean reduction of LDL-C cholesterol was 44·2% (95% CI: 47·1-41·4)",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_112d16613e8d68",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -43.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-11",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "Day 510",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "At Day 510, the placebo-corrected LDL-C change with inclisiran was −43.7% [95% confidence interval (CI): −52.8 to −34.6]",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_1f2b272d845daf",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -65.3,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-15",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 180",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "300 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The primary endpoints of the placebo-adjusted percentage change in LDL-C from baseline to Day 180 were −56.6% (95% CI: −64.2%, −49.0%; p＜0.0001), −60.9% (95% CI: −67.6%, −54.3%; p＜0.0001), and −65.3% (95% CI: −72.0%, −58.6%; p＜0.0001) for inclisiran sodium 100, 200, and 300 mg, respectively",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_514d5ccb1b5409",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -1.3,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "ORION-11",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "Day 90 to Day 540",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "with a respective time-adjusted change of −1.3 mmol/L (95% CI: −1.6 to −1.1).",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_5189973ff441cb",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -56.6,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-15",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 180",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The primary endpoints of the placebo-adjusted percentage change in LDL-C from baseline to Day 180 were −56.6% (95% CI: −64.2%, −49.0%; p＜0.0001), −60.9% (95% CI: −67.6%, −54.3%; p＜0.0001), and −65.3% (95% CI: −72.0%, −58.6%; p＜0.0001) for inclisiran sodium 100, 200, and 300 mg, respectively",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_5f06ede7e42716",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -47.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 210",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "300 mg twice-yearly"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "In the inclisiran-only arm, LDL cholesterol was reduced by 47·5% (95% CI 50·7-44·3) at day 210",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_69fbfe0b3f5b62",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 26.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "LDL-C",
+          "timepoint": "day 150",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "300 mg inclisiran sodium",
+          "subgroup": "homozygous LDLR"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "but LDL-C level increased in the homozygous LDLR group (+26.6%; n=19;",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_72a08cdc61cc38",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -58.3,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "day 90",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "then the decreases of PCSK9 and LDL-C were generally maintained up to 56.4% and 49.6% of 100 mg, 74.9% and 58.3% of 300 mg, respectively, at day 90.",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_8bc61066c09c43",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "extended-term follow-up until Day 990",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "twice yearly (after initial and 3-month doses)",
+          "kind": "percent"
+        },
+        "source_id": "pmid:38753448",
+        "quote": "inclisiran demonstrated consistent and effective LDL-C lowering",
+        "pub_date": "2024-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38753448"
+      },
+      {
+        "fact_id": "f_9b46f842e1b2a2",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -49.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "day 90",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "then the decreases of PCSK9 and LDL-C were generally maintained up to 56.4% and 49.6% of 100 mg, 74.9% and 58.3% of 300 mg, respectively, at day 90.",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_a38900da6fcab8",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -1.5,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "ORION-11",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "Day 510",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "The placebo-corrected absolute change in LDL-C at Day 510 with inclisiran was −1.5 mmol/L (95% CI: −1.8 to −1.2)",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_b76058cfcb33c8",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -60.9,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-15",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Day 180",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "200 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The primary endpoints of the placebo-adjusted percentage change in LDL-C from baseline to Day 180 were −56.6% (95% CI: −64.2%, −49.0%; p＜0.0001), −60.9% (95% CI: −67.6%, −54.3%; p＜0.0001), and −65.3% (95% CI: −72.0%, −58.6%; p＜0.0001) for inclisiran sodium 100, 200, and 300 mg, respectively",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_cd93d94e099db8",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -41.0,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-11",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "Day 90 to Day 540",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "with a corresponding time-adjusted change of −41.0% (95% CI: −47.8 to −34.2)",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_e20734a259466e",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -2.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "non-HDL-C",
+          "timepoint": "day 150",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "300 mg inclisiran sodium"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage changes from baseline to day 150 for apoB (−4.3%; P=0.68), non–HDL-C (−2.1%;",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_0b9c45d81f65c3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -77.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "up to day 1440",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "300 mg twice-yearly"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "with reductions in PCSK9 ranging from 62·2% to 77·8%",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_4a0cbfaadb2610",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -79.2,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-15",
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Day 180",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The greatest reductions (LDL-C, 65.3%; PCSK9, 79.2%) were with inclisiran sodium 300 mg.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_564e6f2002811e",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -62.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "up to day 1440",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "300 mg twice-yearly"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "with reductions in PCSK9 ranging from 62·2% to 77·8%",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_202920bb6c9a01",
+        "entity": "biomarker:pcsk9",
+        "key": "biomarker_change",
+        "value": -56.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2",
+          "biomarker": "PCSK9",
+          "timepoint": "day 90",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "then the decreases of PCSK9 and LDL-C were generally maintained up to 56.4% and 49.6% of 100 mg, 74.9% and 58.3% of 300 mg, respectively, at day 90.",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_4ccc9c0567988d",
+        "entity": "biomarker:pcsk9",
+        "key": "biomarker_change",
+        "value": -74.9,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2",
+          "biomarker": "PCSK9",
+          "timepoint": "day 90",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "300 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "then the decreases of PCSK9 and LDL-C were generally maintained up to 56.4% and 49.6% of 100 mg, 74.9% and 58.3% of 300 mg, respectively, at day 90.",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_ce9ac93b944ba5",
+        "entity": "biomarker:pcsk9",
+        "key": "biomarker_change",
+        "value": -60.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "biomarker": "PCSK9",
+          "timepoint": "day 150",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "300 mg inclisiran sodium"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage change in PCSK9 levels from baseline to day 150 was −60.6% with inclisiran treatment (P<0.0001)",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_26852c5141bbbd",
+        "entity": "target:pcsk9",
+        "key": "genetic_association_score",
+        "value": 0.949,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 51,
+          "evidence_before_cutoff": 8
+        },
+        "source_id": "opentargets:PCSK9",
+        "quote": "\"genetic_association_score\": 0.949",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000169174"
+      },
+      {
+        "fact_id": "f_f09f39da6f4cb5",
+        "entity": "trial:nct05030428",
+        "key": "alpha",
+        "value": 0.025,
+        "unit": "one-sided",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "It was calculated that a sample size of at least 45 patients (randomized 2:1 to inclisiran:placebo), with at least 30 patients in the inclisiran arm, would provide >80% power to detect a 20% reduction (assuming an SD of 20% in each arm) in placebo-corrected LDL-C levels from baseline to day 150 in the inclisiran group compared with the placebo group at a 1-sided significance level of 0.025 based on a 2-sample t test.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_5bc8e6a2d61cca",
+        "entity": "trial:nct05030428",
+        "key": "assumed_rrr",
+        "value": 20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "It was calculated that a sample size of at least 45 patients (randomized 2:1 to inclisiran:placebo), with at least 30 patients in the inclisiran arm, would provide >80% power to detect a 20% reduction (assuming an SD of 20% in each arm) in placebo-corrected LDL-C levels from baseline to day 150 in the inclisiran group compared with the placebo group at a 1-sided significance level of 0.025 based on a 2-sample t test.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_fcb95fb13fe0b1",
+        "entity": "trial:nct05030428",
+        "key": "ci_high",
+        "value": 25.83,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "placebo_adjusted": true,
+          "endpoint": "LDL-C percentage change from baseline to day 150"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage change in LDL-C level from baseline to day 150 was −1.68% (95% CI, −29.19% to 25.83%; P=0.90), and the difference was not statistically significant between the inclisiran and placebo groups.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_a45bd91ee8e604",
+        "entity": "trial:nct05030428",
+        "key": "ci_low",
+        "value": -29.19,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "placebo_adjusted": true,
+          "endpoint": "LDL-C percentage change from baseline to day 150"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage change in LDL-C level from baseline to day 150 was −1.68% (95% CI, −29.19% to 25.83%; P=0.90), and the difference was not statistically significant between the inclisiran and placebo groups.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_d08d9ae7ab4575",
+        "entity": "trial:nct05030428",
+        "key": "hr",
+        "value": -1.68,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "placebo_adjusted": true,
+          "endpoint": "LDL-C percentage change from baseline to day 150"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage change in LDL-C level from baseline to day 150 was −1.68% (95% CI, −29.19% to 25.83%; P=0.90), and the difference was not statistically significant between the inclisiran and placebo groups.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_8b60a8d7d1caa7",
+        "entity": "trial:nct05030428",
+        "key": "inclusion_threshold",
+        "value": 2.6,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "ORION-11",
+          "population": "primary prevention"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "The eligibility criteria stipulated that primary prevention patients had LDL-C levels ≥2.6 mmol/L (≥100 mg/dL)",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_96c42e5398a2e5",
+        "entity": "trial:nct05030428",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Fasting LDL-C ≥ 70 mg/dL at randomization visit",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_9ad7ea1209a001",
+        "entity": "trial:nct05030428",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "Forty Chinese patients with hypercholesterolemia (LDL-C ≥100 mg/dL) who were on maximally tolerated statin were randomized to receive a single dose of either inclisiran sodium 100 or 300mg s.c. injection (each for 15 patients) or placebo (10 patients).",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_a70579af4fa5ec",
+        "entity": "trial:nct05030428",
+        "key": "inclusion_threshold",
+        "value": 130,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "Patients were eligible for inclusion if they had a fasting LDL-C level ≥130 mg/dL (≥3.4 mmol/L) despite receiving a maximally tolerated dose of statin therapy with or without ezetimibe.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_045f81416c2e6e",
+        "entity": "trial:nct05030428",
+        "key": "n_randomized",
+        "value": 56,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "Overall, 56 patients were enrolled, of whom 37 were randomized to the inclisiran group and 19 to the placebo group.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_0dfc8ad4a5da8f",
+        "entity": "trial:nct05030428",
+        "key": "n_randomized",
+        "value": 312,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ORION-15"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "Overall, 312 patients (mean age, 63.6 years; male, 74.4%; baseline LDL-C, 114.0 mg/dL) were randomized.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_cf271d19312ba8",
+        "entity": "trial:nct05030428",
+        "key": "n_randomized",
+        "value": 40,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "Forty Chinese patients with hypercholesterolemia (LDL-C ≥100 mg/dL) who were on maximally tolerated statin were randomized to receive a single dose of either inclisiran sodium 100 or 300mg s.c. injection (each for 15 patients) or placebo (10 patients).",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_e1f8c4b4b95309",
+        "entity": "trial:nct05030428",
+        "key": "n_randomized",
+        "value": 17004,
+        "unit": "participants",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Enrollment: 17004 (ACTUAL)",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_ffd69a82b88472",
+        "entity": "trial:nct05030428",
+        "key": "n_randomized",
+        "value": 203,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ORION-11",
+          "population": "primary prevention"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "Of those randomized, 203 (12.6%) were categorized as primary prevention patients, with 98 assigned to inclisiran and 105 to placebo.",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_44dcc53fd38a60",
+        "entity": "trial:nct05030428",
+        "key": "p_value",
+        "value": 0.9,
+        "unit": null,
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3",
+          "placebo_adjusted": true,
+          "endpoint": "LDL-C percentage change from baseline to day 150"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "The placebo-corrected percentage change in LDL-C level from baseline to day 150 was −1.68% (95% CI, −29.19% to 25.83%; P=0.90), and the difference was not statistically significant between the inclisiran and placebo groups.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_ff89cae0466586",
+        "entity": "trial:nct05030428",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_56748bff86a6d8",
+        "entity": "trial:nct05030428",
+        "key": "power",
+        "value": 80,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "It was calculated that a sample size of at least 45 patients (randomized 2:1 to inclisiran:placebo), with at least 30 patients in the inclisiran arm, would provide >80% power to detect a 20% reduction (assuming an SD of 20% in each arm) in placebo-corrected LDL-C levels from baseline to day 150 in the inclisiran group compared with the placebo group at a 1-sided significance level of 0.025 based on a 2-sample t test.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_77948d8c9ba75b",
+        "entity": "trial:nct05030428",
+        "key": "primary_endpoint",
+        "value": "percentage change in LDL-C from baseline to Day 510 and time-adjusted percentage change in LDL-C from baseline after Day 90 and up to Day 540",
+        "unit": "category",
+        "attrs": {
+          "trial": "ORION-11"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "The pre-specified co-primary endpoints were the percentage change in LDL-C from baseline to Day 510 and the time-adjusted percentage change in LDL-C from baseline after Day 90 and up to Day 540.",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_ac2da9288ea098",
+        "entity": "trial:nct05030428",
+        "key": "primary_endpoint",
+        "value": "percentage change from baseline to Day 180",
+        "unit": "LDL-C",
+        "attrs": {
+          "trial": "ORION-15"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The primary endpoint was the percentage change from baseline to Day 180 to demonstrate the superiority of inclisiran vs. placebo.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_f877d28ec9b4f2",
+        "entity": "trial:nct05030428",
+        "key": "primary_endpoint",
+        "value": "Time to First Occurrence of 3P-MACE (3-Point Major Adverse Cardiovascular Events)",
+        "unit": "",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Primary outcome(s): Time to First Occurrence of 3P-MACE (3-Point Major Adverse Cardiovascular Events) [From randomization to total follow-up time (up to 72 months)]",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_1db893b77ae8bf",
+        "entity": "trial:nct05030428",
+        "key": "readout_statement",
+        "value": "In the largest and longest follow-up to date with >12 000 patient-years exposure, inclisiran demonstrated consistent and effective LDL-C lowering with a favourable long-term safety and tolerability profile.",
+        "unit": "",
+        "attrs": {
+          "trial": "ORION-8",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:38753448",
+        "quote": "In the largest and longest follow-up to date with >12 000 patient-years exposure, inclisiran demonstrated consistent and effective LDL-C lowering with a favourable long-term safety and tolerability profile.",
+        "pub_date": "2024-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38753448"
+      },
+      {
+        "fact_id": "f_42942f88e6d8aa",
+        "entity": "trial:nct05030428",
+        "key": "readout_statement",
+        "value": "Study CKJX839B12302 is a pivotal Phase III trial to evaluate the benefits of inclisiran on major adverse cardiovascular (MACE) events in participants with established cardiovascular disease (CVD).",
+        "unit": "",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Brief summary: Study CKJX839B12302 is a pivotal Phase III trial to evaluate the benefits of inclisiran on major adverse cardiovascular (MACE) events in participants with established cardiovascular disease (CVD).",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_67cef8a925fd8c",
+        "entity": "trial:nct05030428",
+        "key": "readout_statement",
+        "value": "Twice-yearly inclisiran provided sustained reductions in LDL cholesterol and PCSK9 concentrations and was well tolerated over 4 years in the extension study.",
+        "unit": "",
+        "attrs": {
+          "trial": "ORION-3"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "Twice-yearly inclisiran provided sustained reductions in LDL cholesterol and PCSK9 concentrations and was well tolerated over 4 years in the extension study.",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_76fc318035c065",
+        "entity": "trial:nct05030428",
+        "key": "readout_statement",
+        "value": "Inclisiran treatment did not reduce LDL-C levels in patients with homozygous familial hypercholesterolemia despite substantial lowering of PCSK9 levels.",
+        "unit": null,
+        "attrs": {
+          "trial": "ORION-5",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC10815002",
+        "quote": "CONCLUSIONS: Inclisiran treatment did not reduce LDL-C levels in patients with homozygous familial hypercholesterolemia despite substantial lowering of PCSK9 levels.",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/37850379"
+      },
+      {
+        "fact_id": "f_e130e1c68cfa7e",
+        "entity": "trial:nct05030428",
+        "key": "readout_statement",
+        "value": "Inclisiran sodium 100, 200, and 300 mg demonstrated clinically meaningful and statistically significant LDL-C and PCSK9 reductions at Day 180, which were consistent over 12 months. Inclisiran was effective and well tolerated in Japanese patients with hypercholesterolemia, including HeFH.",
+        "unit": "none",
+        "attrs": {
+          "trial": "ORION-15"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "Conclusion: Inclisiran sodium 100, 200, and 300 mg demonstrated clinically meaningful and statistically significant LDL-C and PCSK9 reductions at Day 180, which were consistent over 12 months. Inclisiran was effective and well tolerated in Japanese patients with hypercholesterolemia, including HeFH.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_047cc3b77f2e60",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": "mainly mild, treatment-emergent adverse events at the injection site",
+        "unit": "category",
+        "attrs": {
+          "trial": "ORION-11"
+        },
+        "source_id": "pmcid:PMC9769955",
+        "quote": "and was well-tolerated except for mainly mild, treatment-emergent adverse events at the injection site.",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/36331315"
+      },
+      {
+        "fact_id": "f_29ad490dda5f8a",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": 14,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-3"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "and 12 (14%) of 87 patients in the switching arm",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_3c3acfd46c1cb7",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": "similar to placebo",
+        "unit": "incidence of adverse events",
+        "attrs": {
+          "trial": "ORION-15"
+        },
+        "source_id": "pmcid:PMC11150722",
+        "quote": "The incidence of adverse events with inclisiran was similar to that with placebo.",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38220186"
+      },
+      {
+        "fact_id": "f_64bb34dd0fd06e",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "ORION-8",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:38753448",
+        "quote": "favourable long-term safety and tolerability profile",
+        "pub_date": "2024-10-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38753448"
+      },
+      {
+        "fact_id": "f_6a77f76c42d6d6",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": 1,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-3"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "and 1% (one of 87) in the switching arm",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_b102c8bac837cf",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "count",
+        "attrs": {
+          "trial": "NCT04774003",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:37164838",
+        "quote": "There were no serious adverse events being reported.",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37164838"
+      },
+      {
+        "fact_id": "f_c0764da5ff1cde",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": 14,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-3"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "Adverse events at the injection site were reported in 39 (14%) of 284 patients in the inclisiran-only arm",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_ec1f80546eec7b",
+        "entity": "trial:nct05030428",
+        "key": "safety_signal",
+        "value": 1,
+        "unit": "%",
+        "attrs": {
+          "trial": "ORION-3"
+        },
+        "source_id": "pmid:36620965",
+        "quote": "The incidence of treatment-emergent serious adverse events possibly related to the study drug was 1% (three of 284) in the inclisiran-only arm",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36620965"
+      },
+      {
+        "fact_id": "f_6c044fb27b1640",
+        "entity": "trial:nct05030428",
+        "key": "stopped_early",
+        "value": false,
+        "unit": "",
+        "attrs": {
+          "trial": "VICTORION-2P"
+        },
+        "source_id": "ctgov:NCT05030428",
+        "quote": "Overall status: ACTIVE_NOT_RECRUITING",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05030428"
+      },
+      {
+        "fact_id": "f_26374424fe103c",
+        "entity": "trial:nct05030428",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "sequence variation in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "15 percent reduction in LDL cholesterol",
+          "n": 9524,
+          "ci_low": 0.32,
+          "ci_high": 0.79
+        },
+        "source_id": "pmid:16554528",
+        "quote": "a sequence variation in PCSK9 that was associated with a 15 percent reduction in LDL cholesterol and a 47 percent reduction in the risk of CHD (hazard ratio, 0.50; 95 percent confidence interval, 0.32 to 0.79; P=0.003)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      },
+      {
+        "fact_id": "f_4f689531f77157",
+        "entity": "trial:nct05030428",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "nonsense mutations in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "28 percent reduction in mean LDL cholesterol",
+          "n": 3363,
+          "ci_low": 0.02,
+          "ci_high": 0.81
+        },
+        "source_id": "pmid:16554528",
+        "quote": "these mutations were associated with a 28 percent reduction in mean LDL cholesterol and an 88 percent reduction in the risk of CHD (P=0.008 for the reduction; hazard ratio, 0.11; 95 percent confidence interval, 0.02 to 0.81; P=0.03)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT05030428",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT05030428 VICTORION-2P",
+        "url": "https://clinicaltrials.gov/study/NCT05030428",
+        "pub_date": "2021-09-01",
+        "access": "registry",
+        "meta": {
+          "design_only_view": false,
+          "summary": {
+            "nct_id": "NCT05030428",
+            "acronym": "VICTORION-2P",
+            "title": "Study of Inclisiran to Prevent Cardiovascular (CV) Events in Participants With Established Cardiovascular Disease",
+            "official_title": "A Randomized, Double-blind, Placebo-controlled, Multicenter Trial, Assessing the Impact of Inclisiran on Major Adverse Cardiovascular Events in Participants With Established Cardiovascular Disease (VICTORION-2 PREVENT)",
+            "sponsor": "Novartis Pharmaceuticals",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2021-11-23",
+            "primary_completion": "2027-05-10",
+            "first_posted": "2021-09-01",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 17004,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Inclisiran sodium 300 mg",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Inclisiran sodium"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Inclisiran sodium",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Atherosclerotic Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Time to First Occurrence of 3P-MACE (3-Point Major Adverse Cardiovascular Events) [From randomization to total follow-up time (up to 72 months)]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 3046
+      },
+      {
+        "source_id": "pmid:38753448",
+        "type": "journal",
+        "title": "Inclisiran administration potently and durably lowers LDL-C over an extended-term follow-up: the ORION-8 trial.",
+        "url": "https://europepmc.org/article/MED/38753448",
+        "pub_date": "2024-10-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "38753448",
+          "pmcid": "PMC11481169",
+          "doi": "10.1093/cvr/cvae109",
+          "journal": "Cardiovascular research"
+        },
+        "chars": 1138
+      },
+      {
+        "source_id": "pmcid:PMC11150722",
+        "type": "journal",
+        "title": "Efficacy, Safety, and Pharmacokinetics of Inclisiran in Japanese Patients: Results from ORION-15.",
+        "url": "https://europepmc.org/article/MED/38220186",
+        "pub_date": "2024-01-14",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "38220186",
+          "pmcid": "PMC11150722",
+          "doi": "10.5551/jat.64454",
+          "journal": "Journal of atherosclerosis and thrombosis"
+        },
+        "chars": 87030
+      },
+      {
+        "source_id": "pmid:36620965",
+        "type": "journal",
+        "title": "Long-term efficacy and safety of inclisiran in patients with high cardiovascular risk and elevated LDL cholesterol (ORION-3): results from the 4-year open-label extension of the ORION-1 trial.",
+        "url": "https://europepmc.org/article/MED/36620965",
+        "pub_date": "2023-01-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "36620965",
+          "pmcid": null,
+          "doi": "10.1016/s2213-8587(22)00353-9",
+          "journal": "The lancet. Diabetes & endocrinology"
+        },
+        "chars": 3132
+      },
+      {
+        "source_id": "pmcid:PMC10815002",
+        "type": "journal",
+        "title": "Efficacy, Safety, and Tolerability of Inclisiran in Patients With Homozygous Familial Hypercholesterolemia: Results From the ORION-5 Randomized Clinical Trial.",
+        "url": "https://europepmc.org/article/MED/37850379",
+        "pub_date": "2023-10-18",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "37850379",
+          "pmcid": "PMC10815002",
+          "doi": "10.1161/circulationaha.122.063460",
+          "journal": "Circulation"
+        },
+        "chars": 34855
+      },
+      {
+        "source_id": "pmid:37164838",
+        "type": "journal",
+        "title": "The clinical effects of inclisiran, a first-in-class LDL-C lowering siRNA therapy, on the LDL-C levels in Chinese patients with hypercholesterolemia.",
+        "url": "https://europepmc.org/article/MED/37164838",
+        "pub_date": "2023-04-29",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "37164838",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2023.04.010",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1886
+      },
+      {
+        "source_id": "pmcid:PMC9769955",
+        "type": "journal",
+        "title": "Effect of inclisiran on lipids in primary prevention: the ORION-11 trial.",
+        "url": "https://europepmc.org/article/MED/36331315",
+        "pub_date": "2022-12-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "36331315",
+          "pmcid": "PMC9769955",
+          "doi": "10.1093/eurheartj/ehac615",
+          "journal": "European heart journal"
+        },
+        "chars": 49418
+      },
+      {
+        "source_id": "pmid:16554528",
+        "type": "journal",
+        "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease.",
+        "url": "https://europepmc.org/article/MED/16554528",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16554528",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa054013",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1719
+      },
+      {
+        "source_id": "pmid:25830891",
+        "type": "journal",
+        "title": "In vivo genome editing using Staphylococcus aureus Cas9.",
+        "url": "https://europepmc.org/article/MED/25830891",
+        "pub_date": "2015-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25830891",
+          "pmcid": "PMC4393360",
+          "doi": "10.1038/nature14299",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1088
+      },
+      {
+        "source_id": "pmid:37794186",
+        "type": "journal",
+        "title": "Plasma proteomic associations with genetics and health in the UK Biobank.",
+        "url": "https://europepmc.org/article/MED/37794186",
+        "pub_date": "2023-10-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "37794186",
+          "pmcid": "PMC10567551",
+          "doi": "10.1038/s41586-023-06592-6",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1881
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": null,
+    "usage": {
+      "Extraction": {
+        "calls": 10,
+        "input_tokens": 19413,
+        "output_tokens": 8129,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 9861,
+        "output_tokens": 6486,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2816,
+        "output_tokens": 2344,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 9202,
+        "output_tokens": 8690,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 12118,
+        "output_tokens": 4340,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 5873,
+        "output_tokens": 1582,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

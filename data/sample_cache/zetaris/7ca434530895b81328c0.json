@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40337982+OR+EXT_ID%3A40347969+OR+PMCID%3APMC11456355+OR+PMCID%3APMC12811769&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*98[^.]*mg[^.]*deciliter[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40337982' AND r.abstractText LIKE '%98%mg%deciliter%' LIMIT 5",
+ "rows": [
+  [
+   " The mean age of the patients was 65 years, 34% were women, and the mean baseline LDL cholesterol level was 98 mg per deciliter"
+  ]
+ ],
+ "error": null
+}

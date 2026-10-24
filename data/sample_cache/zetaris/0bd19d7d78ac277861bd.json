@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19166443+OR+PMCID%3APMC3120223&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*20\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%20.0%%' LIMIT 5",
+ "rows": [
+  [
+   "4%), high-density lipoprotein cholesterol (HDL-C; 20.0%), LDL-C:HDL-C (-31"
+  ]
+ ],
+ "error": null
+}

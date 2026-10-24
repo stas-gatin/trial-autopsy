@@ -1,0 +1,1555 @@
+{
+  "run_id": "bt-allhat_llt",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2002-12-17",
+  "backtest": true,
+  "readout_date": "2002-12-17",
+  "analysis_date": "2002-12-17",
+  "trial": {
+    "nct_id": "NCT00000542",
+    "acronym": "ALLHAT-LLT",
+    "title": "Antihypertensive and Lipid-Lowering Treatment to Prevent Heart Attack Trial (ALLHAT)",
+    "sponsor": "National Heart, Lung, and Blood Institute (NHLBI)",
+    "status": "COMPLETED",
+    "enrollment": null,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Diseases",
+      "Coronary Disease",
+      "Diabetes Mellitus",
+      "Heart Diseases",
+      "Hypercholesterolemia",
+      "Hypertension",
+      "Myocardial Infarction",
+      "Myocardial Ischemia",
+      "Heart Failure"
+    ],
+    "primary_completion": "2002-03"
+  },
+  "drug": {
+    "name": "pravastatin",
+    "chembl_id": "CHEMBL1144",
+    "aliases": [
+      "C10AA03",
+      "Pravastatina",
+      "Pravastatine",
+      "Pravator",
+      "atorvastatin",
+      "fluvastatin",
+      "rosuvastatin",
+      "simvastatin"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "HMG-CoA reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000113161",
+        "symbol": "HMGCR",
+        "name": "3-hydroxy-3-methylglutaryl-CoA reductase"
+      }
+    ],
+    "searched_as": "pravastatin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-allhat_llt",
+  "log_file": "logs/trace-bt-allhat_llt.jsonl",
+  "execution_time_seconds": 131.9,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"overall mortality There were no significant differences between the pravastatin and usual care groups in overall mortality or in mortality f\" (announcement:allhat_llt)",
+      "predicted_outcome": "failure",
+      "consistency": "consistent with the calculator (probability of success 13%)",
+      "primary_category": "effect_too_small",
+      "secondary_categories": [
+        "design_or_endpoint"
+      ],
+      "calculator_category": "effect_too_small",
+      "confidence": "high",
+      "verification": "skipped",
+      "probability_of_success": 0.129,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "ALLHAT-LLT failed to demonstrate a mortality benefit with pravastatin because the placebo-adjusted LDL-C reduction of only 9.6% yielded insufficient power (12.9%) for the overall mortality endpoint.",
+      "summary": "The trial randomized 10,355 hypertensive patients to pravastatin or usual care with a primary endpoint of overall mortality. The placebo-adjusted LDL-C reduction was only -9.6% at 4 years (pravastatin -17.2% vs usual care -7.6%), far smaller than typical statin trials. This translated to an expected hazard ratio of 0.955 (4.5% relative risk reduction) but the trial had only 12.9% power to detect this effect given 1,272 deaths over 4.8 years of follow-up; the minimum detectable HR for 80% power was 0.855. The trial's own readout stated the cholesterol difference was too small to show a mortality difference. The calculator predicted failure with 13% success probability, consistent with the observed result.",
+      "key_evidence": [
+        "Placebo-adjusted LDL-C reduction: -9.6% (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Usual care arm LDL-C reduction: -7.6% (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Pravastatin within-arm LDL-C reduction: -17.2% (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Expected HR 0.955 (4.5% RRR), power 12.9%, minimum detectable HR for 80% power 0.855 (source: calculator)",
+        "Total deaths: 1,272 (631 treatment, 641 control) (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Median follow-up: 4.8 years (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Participants randomized: 10,355 (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Primary endpoint: overall mortality (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "Readout: 'The difference in cholesterol levels between the groups was too small to show a difference in death rates' (source: NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results))",
+        "LIPID trial (secondary prevention) HR for CHD death: 0.76 with pravastatin 40 mg (source: [Clinical study of the month. The LIPID study: \"long-term intervention with pravastatin in ischaemic disease\"])",
+        "HMGCR genetic association score: 0.695 but all supporting studies published after 2002-12-17 (source: opentargets:HMGCR)"
+      ],
+      "what_would_change_this": "A larger LDL-C difference (e.g., 25-35% placebo-adjusted reduction typical of statin trials) or a CHD-specific endpoint in a higher-risk population would have provided adequate power; the usual care comparator allowing crossover (evidenced by -7.6% LDL-C reduction in control) fundamentally limited the achievable treatment difference.",
+      "readthrough_note": "The LIPID trial in secondary prevention demonstrated clear benefit with pravastatin 40 mg (HR 0.76 for CHD death), confirming HMGCR target causality in an appropriate population; subsequent genetic evidence (post-2002) further supports target validity."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.695 for HMGCR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.192 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.045,
+        "detail": "expected HR 0.955 at 4.8 y (relative risk reduction 4.5%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.129,
+        "detail": "power 13% with 1272 events; smallest detectable HR 0.855",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "allhat_llt",
+      "ldl_equivalent_mmol": 0.192,
+      "basis": "LDL-C",
+      "time_factor": 0.976,
+      "expected_hr": 0.955,
+      "causal_rrr": 0.045,
+      "bp_factor": 1.0,
+      "power": 0.129,
+      "mde_hr_80": 0.855,
+      "outcome": "failure",
+      "category": "effect_too_small",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0"
+      ],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "allhat_llt",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "percent",
+          "pct_change": -9.6,
+          "baseline": null,
+          "method": "placebo-adjusted percent change from outcome trial (ALLHAT-LLT) at 4 years (f_eb1482aeb6c0d4); baseline LDL-C for ALLHAT-LLT not reported in verified facts",
+          "source": "announcement:allhat_llt"
+        }
+      ],
+      "followup_years": 4.8,
+      "events": 1272,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 for coronary artery disorder (f_d68bda2f76e65b), but evidence_before_cutoff = 0 (all 4 Open Targets studies published 2016-2023, after 2002-12-17 cutoff). No genetic evidence available at trial design time; per rule of thumb, uncertain.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -9.6,
+          "baseline": null,
+          "unit": "percent",
+          "method": "placebo-adjusted percent change from outcome trial (ALLHAT-LLT) at 4 years (f_eb1482aeb6c0d4); baseline LDL-C for ALLHAT-LLT not reported in verified facts",
+          "fact_ids": [
+            "f_eb1482aeb6c0d4"
+          ]
+        }
+      ],
+      "followup_years": 4.8,
+      "followup_fact_ids": [
+        "f_87a43062f82800"
+      ],
+      "events": 1272,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_2fe9a341289d81",
+        "f_2675fe0dd39c1b"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_2df8e04af1a5b8",
+        "f_87a43062f82800",
+        "f_2fe9a341289d81",
+        "f_2675fe0dd39c1b"
+      ],
+      "missing": [
+        "baseline_LDL_C_ALLHAT_LLT",
+        "observed_hr_ALLHAT_LLT",
+        "observed_ci_ALLHAT_LLT",
+        "sbp_change_mmhg"
+      ],
+      "notes": "Primary endpoint overall mortality (f_2df8e04af1a5b8). Placebo-adjusted LDL-C reduction -9.6% at 4 years from outcome trial itself (f_eb1482aeb6c0d4). Baseline LDL-C for ALLHAT-LLT not in verified facts (ctgov inclusion threshold shows 'None None' f_0b7cfefd8a9b87). Total deaths 1272 (641 control + 631 treatment). No HR or CI reported for ALLHAT-LLT in verified facts (readout states 'non-significant decrease' f_c747808e10b8a8). SBP change not measured/reported. LIPID trial data (HR 0.76, baseline LDL-C 135 mg/dl) not used as different trial."
+    },
+    "hypotheses": [
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator shows only 12.9% power to detect the expected 4.5% RRR (HR 0.955) given 1272 events and 4.8-year follow-up; minimum detectable HR for 80% power was 0.855, far below observed ~0.98",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Placebo-adjusted LDL-C reduction was only -9.6% at 4 years (pravastatin -17.2% vs usual care -7.6%), much smaller than typical statin trials (25-35%)",
+            "refs": [
+              "f_eb1482aeb6c0d4",
+              "f_a925d4c9fe7781",
+              "f_c9e4cada15549f"
+            ]
+          },
+          {
+            "text": "Readout statement explicitly: 'The difference in cholesterol levels between the groups was too small to show a difference in death rates'",
+            "refs": [
+              "f_c747808e10b8a8"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Already settled by calculator power calculation and trial readout"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Usual care comparator allowed crossover/statin use, evidenced by -7.6% LDL-C reduction in control arm, diluting the treatment difference to only 9.6%",
+            "refs": [
+              "f_c9e4cada15549f",
+              "f_eb1482aeb6c0d4"
+            ]
+          },
+          {
+            "text": "Primary endpoint was overall mortality rather than CHD-specific events, requiring larger effect size; LIPID trial (secondary prevention, CHD death endpoint) showed HR 0.76 with pravastatin 40mg",
+            "refs": [
+              "f_2df8e04af1a5b8",
+              "f_49ef2592629160",
+              "f_d4888ac97ff401"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator already uses placebo-adjusted LDL-C difference (9.6%), accounting for crossover",
+            "refs": [
+              "calculator",
+              "f_eb1482aeb6c0d4"
+            ]
+          }
+        ],
+        "would_settle": "Data on statin crossover rates in usual care arm"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "HMGCR genetic association score 0.695 but evidence_before_cutoff = 0 (all 4 supporting studies published after 2002-12-17)",
+            "refs": [
+              "f_d68bda2f76e65b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "LIPID trial (pravastatin 40mg, secondary prevention) demonstrated clear benefit HR 0.76 for CHD death, confirming target causality in appropriate population",
+            "refs": [
+              "f_49ef2592629160"
+            ]
+          },
+          {
+            "text": "Failure attributed to small LDL-C difference, not target validity",
+            "refs": [
+              "f_c747808e10b8a8"
+            ]
+          }
+        ],
+        "would_settle": "Post-2002 genetic evidence (now abundant) confirms HMGCR causality"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is established causal for CVD; drug moved LDL-C in expected direction (just insufficient magnitude)",
+            "refs": [
+              "f_eb1482aeb6c0d4"
+            ]
+          }
+        ],
+        "would_settle": "N/A"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary prevention in hypertensive patients with moderately elevated cholesterol vs LIPID's secondary prevention; lower event rate (~2.5%/year mortality)",
+            "refs": [
+              "f_875509e6243155",
+              "f_2fe9a341289d81",
+              "f_2675fe0dd39c1b",
+              "f_87a43062f82800"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Readout attributes failure to small cholesterol difference, not population mismatch",
+            "refs": [
+              "f_c747808e10b8a8"
+            ]
+          },
+          {
+            "text": "Mechanism (LDL-C lowering) should operate regardless of prevention setting",
+            "refs": [
+              "f_eb1482aeb6c0d4"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analysis by baseline risk"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No safety signals reported for ALLHAT-LLT in verified facts",
+            "refs": [
+              "f_c747808e10b8a8"
+            ]
+          },
+          {
+            "text": "Pravastatin generally well-tolerated",
+            "refs": [
+              "f_08c9c3dc494054",
+              "f_a64c6c8f7e7b46"
+            ]
+          }
+        ],
+        "would_settle": "Comprehensive safety data review"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Large trial (10,355 randomized) completed with 4.8-year median follow-up as planned",
+            "refs": [
+              "f_875509e6243155",
+              "f_87a43062f82800"
+            ]
+          }
+        ],
+        "would_settle": "N/A"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Baseline LDL-C not reported for ALLHAT-LLT in verified facts; calculator assumed 2.0 mmol/L",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Key numbers available: events (1272), placebo-adjusted % change (9.6%), follow-up (4.8 years)",
+            "refs": [
+              "f_2fe9a341289d81",
+              "f_2675fe0dd39c1b",
+              "f_eb1482aeb6c0d4",
+              "f_87a43062f82800"
+            ]
+          },
+          {
+            "text": "Calculator produced definitive 'effect_too_small' result with reasonable assumption",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Baseline LDL-C from trial publication"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator inputs missing observed_hr and observed_ci despite available event counts (631 vs 641 deaths). Observed HR ≈ 0.984 can be calculated and should be included for completeness and to enable consistency check.",
+            "target_agent": "mechanism",
+            "request": "Add observed_hr: 0.984 (or 631/641) and observed_ci if available from trial publication to calculator inputs."
+          },
+          {
+            "severity": "medium",
+            "issue": "Baseline LDL-C assumption of 2.0 mmol/L (77 mg/dL) may be too low for ALLHAT-LLT population (primary prevention, hypertensive patients with moderately elevated cholesterol). LIPID baseline was 135 mg/dL (3.5 mmol/L); SHIPS baseline 280 mg/dL. The absolute LDL-C change (0.192 mmol/L) and expected_hr (0.955) depend on this assumption.",
+            "target_agent": "mechanism",
+            "request": "Search for ALLHAT-LLT baseline LDL-C in trial publication (JAMA 2002;288:2998) or CT.gov records to replace assumed value with verified fact."
+          },
+          {
+            "severity": "low",
+            "issue": "Pravastatin dose in ALLHAT-LLT not specified in verified facts. Hypothesis 'design_or_endpoint' references 'pravastatin 40mg' by comparison to LIPID, but dose for ALLHAT-LLT is unconfirmed in provided facts.",
+            "target_agent": "case_builder",
+            "request": "Search for pravastatin dose in ALLHAT-LLT (CT.gov NCT00000542, JAMA 2002 publication) to confirm dose used."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'design_or_endpoint' cites f_2df8e04af1a5b8, f_49ef2592629160, f_d4888ac97ff401 for LIPID HR 0.76 and endpoint difference. f_49ef2592629160 is the HR fact; f_d4888ac97ff401 is LIPID primary endpoint; f_2df8e04af1a5b8 is ALLHAT-LLT primary endpoint. Citations are correct but could be more explicitly linked in text.",
+            "target_agent": "investigator",
+            "request": "No action needed; citations are accurate. Minor clarification in hypothesis text could explicitly map each ref."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "skipped",
+      "reason": "no calculator number comes from a paper or the registry",
+      "results": []
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "HMGCR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.722,
+        "genetic_association_score": 0.695,
+        "evidence_count": 4,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.816,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs7703051",
+            "beta": null,
+            "p": "9e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.791,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12916",
+            "beta": 0.02883433,
+            "p": "6.954999923706055e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.787,
+            "study_id": "GCST90428732",
+            "trait": "Gall stone disease or coronary artery disease",
+            "n": 1716127,
+            "publication_date": "2023-09-13",
+            "pmid": "37705021",
+            "variant": "rs12916",
+            "beta": null,
+            "p": "8e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.676,
+            "study_id": "GCST90451698",
+            "trait": "Type 2 diabetes mellitus or coronary artery disease (pleiotropy)",
+            "n": 2063820,
+            "publication_date": "2023-12-08",
+            "pmid": "38062574",
+            "variant": "rs10474433",
+            "beta": null,
+            "p": "5e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_860fd52ce5842d",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 280,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg twice daily",
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "patients with total cholesterol less than 280 mg/dl",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_a8c11d31fe8979",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 135,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "LIPID",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg/day"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "LDL cholesterol was < 135 mg/dl",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_37a31986c32cb0",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -19.6,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "at least 10 days prior to elective PTCA",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg twice daily",
+          "kind": "percent",
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "Total cholesterol decreased by 19.6% in the pravastatin group (p < 0.001)",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_a925d4c9fe7781",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -17.2,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ALLHAT-LLT",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "4 years",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "pravastatin",
+          "kind": "percent"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "Total cholesterol dropped by 17.2 percent in the pravastatin group and 7.6 percent in the usual care group�a modest 9.6 percent difference.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_c9e4cada15549f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -7.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ALLHAT-LLT",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "4 years",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "usual care",
+          "kind": "percent"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "Total cholesterol dropped by 17.2 percent in the pravastatin group and 7.6 percent in the usual care group�a modest 9.6 percent difference.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_eb1482aeb6c0d4",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -9.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ALLHAT-LLT",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "4 years",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "pravastatin vs usual care",
+          "kind": "percent"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "Total cholesterol dropped by 17.2 percent in the pravastatin group and 7.6 percent in the usual care group�a modest 9.6 percent difference.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_fa274258aafd23",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg/day",
+          "kind": "not stated"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "LDL cholesterol was < 135 mg/dl",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_d5979eda6ab72c",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 1.97,
+        "unit": "CSI units",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg twice per day"
+        },
+        "source_id": "pmid:11317474",
+        "quote": "Both groups were comparable in CSI (mean +/- SD) at baseline (1.78 +/- 0.2 placebo vs. 1.97 +/- 0.4 verum)",
+        "pub_date": "2001-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11317474/"
+      },
+      {
+        "fact_id": "f_22cc2da30fa6ce",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.52,
+        "unit": "CSI units",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg twice per day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:11317474",
+        "quote": "CSI significantly decreased in the verum group to 1.45 +/- 0.4 (P = 0.003)",
+        "pub_date": "2001-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11317474/"
+      },
+      {
+        "fact_id": "f_13d12f55a855ac",
+        "entity": "biomarker:total cholesterol",
+        "key": "baseline_level",
+        "value": 213,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "LIPID",
+          "biomarker": "total cholesterol",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg/day"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "total cholesterol was < 213 mg/dl",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_d68bda2f76e65b",
+        "entity": "target:hmgcr",
+        "key": "genetic_association_score",
+        "value": 0.695,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 4,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:HMGCR",
+        "quote": "\"genetic_association_score\": 0.695",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161"
+      },
+      {
+        "fact_id": "f_26ab29bcd3a816",
+        "entity": "trial:nct00000542",
+        "key": "events_control",
+        "value": 231,
+        "unit": "strokes",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 380 coronary heart disease events and 209 strokes in the pravastatin group, compared with 421 heart disease events and 231 strokes in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_2fe9a341289d81",
+        "entity": "trial:nct00000542",
+        "key": "events_control",
+        "value": 641,
+        "unit": "deaths",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 631 deaths in the pravastatin group and 641 in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_f20ecafa8958b4",
+        "entity": "trial:nct00000542",
+        "key": "events_control",
+        "value": 421,
+        "unit": "heart disease events",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 380 coronary heart disease events and 209 strokes in the pravastatin group, compared with 421 heart disease events and 231 strokes in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_2675fe0dd39c1b",
+        "entity": "trial:nct00000542",
+        "key": "events_treatment",
+        "value": 631,
+        "unit": "deaths",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 631 deaths in the pravastatin group and 641 in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_c45a13bccf7cdc",
+        "entity": "trial:nct00000542",
+        "key": "events_treatment",
+        "value": 380,
+        "unit": "coronary heart disease events",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 380 coronary heart disease events and 209 strokes in the pravastatin group, compared with 421 heart disease events and 231 strokes in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_f20f6213a23354",
+        "entity": "trial:nct00000542",
+        "key": "events_treatment",
+        "value": 209,
+        "unit": "strokes",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were 380 coronary heart disease events and 209 strokes in the pravastatin group, compared with 421 heart disease events and 231 strokes in the usual care group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_49ef2592629160",
+        "entity": "trial:nct00000542",
+        "key": "hr",
+        "value": 0.76,
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:10081301",
+        "quote": "lower death rate from coronary heart disease (24%)",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_0b7cfefd8a9b87",
+        "entity": "trial:nct00000542",
+        "key": "inclusion_threshold",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "ctgov:NCT00000542@2002-12-17",
+        "quote": "Men and women hypertensive patients, ages 55 and above. A total of 36 percent were diabetics.",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000542"
+      },
+      {
+        "fact_id": "f_6b099b0942631b",
+        "entity": "trial:nct00000542",
+        "key": "inclusion_threshold",
+        "value": 271,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "LIPID",
+          "biomarker": "total cholesterol",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "total cholesterol levels of 155 to 271 mg/dl",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_e5c5c90e3b86da",
+        "entity": "trial:nct00000542",
+        "key": "inclusion_threshold",
+        "value": 155,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "LIPID",
+          "biomarker": "total cholesterol",
+          "phase": "phase3"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "total cholesterol levels of 155 to 271 mg/dl",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_36c3deb86d4d4e",
+        "entity": "trial:nct00000542",
+        "key": "median_followup",
+        "value": 6.1,
+        "unit": "years",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "After a mean follow-up of 6.1 years",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_87a43062f82800",
+        "entity": "trial:nct00000542",
+        "key": "median_followup",
+        "value": 4.8,
+        "unit": "years",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "They were followed for an average of 4.8 years.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_199f1f27e5d454",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "ctgov:NCT00000542@2002-12-17",
+        "quote": "Enrollment: None (None)",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000542"
+      },
+      {
+        "fact_id": "f_3536cd852c73bb",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": 22,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Effect of pravastatin on erythrocyte rheological and biochemical properties in poorly controlled Type 2 diabetic patients"
+        },
+        "source_id": "pmid:10342343",
+        "quote": "In 22 of the diabetic patients who showed an impairment in erythrocyte deformability (filtration index >10.5 on the Hanss' haemorheometer), a double-blind randomized trial compared the effect of the inhibitor of HMG CoA reductase pravastatin 20 mg per day for 4 months vs. placebo on the erythrocyte parameters.",
+        "pub_date": "1999-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10342343/"
+      },
+      {
+        "fact_id": "f_5276fd0c437391",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": 207,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "Of 207 patients randomly assigned to study groups",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_875509e6243155",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": 10355,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "ALLHAT's cholesterol study, the first one done exclusively in patients with high blood pressure, involved 10,355 of the hypertension trial's participants.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_a4b7ddd576db94",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": 21,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "fluvastatin biliary lipids study"
+        },
+        "source_id": "pmid:11317474",
+        "quote": "investigated the effect of a high-dose application of fluvastatin on biliary lipid composition in 21 subjects",
+        "pub_date": "2001-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11317474/"
+      },
+      {
+        "fact_id": "f_b0f0dd41d61e41",
+        "entity": "trial:nct00000542",
+        "key": "n_randomized",
+        "value": 9014,
+        "unit": "patients",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "performed in 9014 patients with coronary heart disease",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_789e1e2feaaf05",
+        "entity": "trial:nct00000542",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "significantly (p < 0.001)",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_8060de08cb41b2",
+        "entity": "trial:nct00000542",
+        "key": "phase",
+        "value": "phase3",
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "ctgov:NCT00000542@2002-12-17",
+        "quote": "Phase: PHASE3",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000542"
+      },
+      {
+        "fact_id": "f_14ffb825073136",
+        "entity": "trial:nct00000542",
+        "key": "primary_endpoint",
+        "value": "frequency of restenosis defined as a more than 50% loss of the initial gain in diameter stenosis at the PTCA site at 3 months during follow-up by automated quantitative coronary arteriography",
+        "unit": "",
+        "attrs": {
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "The end-point was a between-group comparison of the frequency of restenosis defined as a more than 50% loss of the initial gain in diameter stenosis at the PTCA site at 3 months during follow-up by automated quantitative coronary arteriography.",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_2df8e04af1a5b8",
+        "entity": "trial:nct00000542",
+        "key": "primary_endpoint",
+        "value": "overall mortality",
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "There were no significant differences between the pravastatin and usual care groups in overall mortality or in mortality from any single cause.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_54ea8458e01234",
+        "entity": "trial:nct00000542",
+        "key": "primary_endpoint",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "ctgov:NCT00000542@2002-12-17",
+        "quote": "to determine, in a subset of this population, if lowering serum cholesterol with a HMG CoA reductase inhibitor in older adults reduces all-cause mortality compared to a control group receiving usual care",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00000542"
+      },
+      {
+        "fact_id": "f_d4888ac97ff401",
+        "entity": "trial:nct00000542",
+        "key": "primary_endpoint",
+        "value": "death rate from coronary heart disease",
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "patients receiving pravastatin (40 mg/day) had significantly (p < 0.001) lower death rate from coronary heart disease (24%)",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_3326ea63f3d1ca",
+        "entity": "trial:nct00000542",
+        "key": "readout_statement",
+        "value": "Pravastatin thus reduces restenosis after PTCA of high grade lesions.",
+        "unit": "",
+        "attrs": {
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "Pravastatin thus reduces restenosis after PTCA of high grade lesions.",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_c747808e10b8a8",
+        "entity": "trial:nct00000542",
+        "key": "readout_statement",
+        "value": "The difference in cholesterol levels between the groups was too small to show a difference in death rates and produced only a small, non-significant decrease in the rates of heart attacks and strokes in the statin group.",
+        "unit": null,
+        "attrs": {
+          "trial": "ALLHAT-LLT"
+        },
+        "source_id": "announcement:allhat_llt",
+        "quote": "The difference in cholesterol levels between the groups was too small to show a difference in death rates and produced only a small, non-significant decrease in the rates of heart attacks and strokes in the statin group.",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm"
+      },
+      {
+        "fact_id": "f_d587b4388431c8",
+        "entity": "trial:nct00000542",
+        "key": "readout_statement",
+        "value": "Erythrocyte deformability may be improved by lowering plasma cholesterol with a statin.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Effect of pravastatin on erythrocyte rheological and biochemical properties in poorly controlled Type 2 diabetic patients"
+        },
+        "source_id": "pmid:10342343",
+        "quote": "Erythrocyte deformability may be improved by lowering plasma cholesterol with a statin.",
+        "pub_date": "1999-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10342343/"
+      },
+      {
+        "fact_id": "f_ec90ac8fa288c0",
+        "entity": "trial:nct00000542",
+        "key": "readout_statement",
+        "value": "In secondary prevention, the favourable effect of the statin on the coronary heart disease outcomes is observed even in case of initial cholesterol levels yet considered as \"normal\".",
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "Thus, in secondary prevention, the favourable effect of the statin on the coronary heart disease outcomes is observed even in case of initial cholesterol levels yet considered as \"normal\".",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_08c9c3dc494054",
+        "entity": "trial:nct00000542",
+        "key": "safety_signal",
+        "value": "not reported",
+        "unit": "",
+        "attrs": {
+          "trial": "SHIPS"
+        },
+        "source_id": "pmid:8924063",
+        "quote": "Pravastatin thus reduces restenosis after PTCA of high grade lesions.",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/"
+      },
+      {
+        "fact_id": "f_a64c6c8f7e7b46",
+        "entity": "trial:nct00000542",
+        "key": "safety_signal",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "LIPID"
+        },
+        "source_id": "pmid:10081301",
+        "quote": "lower death rate from coronary heart disease (24%), lower overall mortality (22%) and lower incidence of all cardiovascular outcomes (20 to 29% depending on the event)",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/"
+      },
+      {
+        "fact_id": "f_fb5e14aa68f111",
+        "entity": "trial:nct00000542",
+        "key": "safety_signal",
+        "value": "fibrinogen decreased significantly",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Effect of pravastatin on erythrocyte rheological and biochemical properties in poorly controlled Type 2 diabetic patients"
+        },
+        "source_id": "pmid:10342343",
+        "quote": "In the pravastatin-treated group (11 patients), fibrinogen decreased significantly, FI reached a normal value (<10) in six patients.",
+        "pub_date": "1999-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10342343/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00000542@2002-12-17",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00000542",
+        "url": "https://clinicaltrials.gov/study/NCT00000542",
+        "pub_date": "1999-10-28",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00000542",
+            "acronym": null,
+            "title": "Antihypertensive and Lipid-Lowering Treatment to Prevent Heart Attack Trial (ALLHAT)",
+            "official_title": null,
+            "sponsor": "National Heart, Lung, and Blood Institute (NHLBI)",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "1993-08",
+            "primary_completion": "2002-03",
+            "first_posted": "1999-10-28",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": null,
+            "enrollment_type": null,
+            "interventions": [
+              {
+                "name": "Inhibitors, ACE",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "amlodipine",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "lisinopril",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "doxazosin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "chlorthalidone",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "pravastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "diet, fat-restricted",
+                "type": "BEHAVIORAL",
+                "other_names": [],
+                "arms": []
+              }
+            ],
+            "arm_groups": [],
+            "conditions": [
+              "Cardiovascular Diseases",
+              "Coronary Disease",
+              "Diabetes Mellitus",
+              "Heart Diseases",
+              "Hypercholesterolemia",
+              "Hypertension",
+              "Myocardial Infarction",
+              "Myocardial Ischemia",
+              "Heart Failure"
+            ],
+            "primary_outcomes": [],
+            "has_results": false
+          }
+        },
+        "chars": 1268
+      },
+      {
+        "source_id": "pmid:12106851",
+        "type": "journal",
+        "title": "Effect of pravastatin on apolipoproteins B and C-III in very-low-density lipoproteins and low-density lipoproteins",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12106851/",
+        "pub_date": "2002-07-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12106851",
+          "pmcid": null,
+          "doi": "10.1016/s0002-9149(02)02444-x",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 116
+      },
+      {
+        "source_id": "pmid:11317474",
+        "type": "journal",
+        "title": "Effects of fluvastatin on biliary lipids in subjects with an elevated cholesterol saturation index",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11317474/",
+        "pub_date": "2001-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11317474",
+          "pmcid": null,
+          "doi": "10.1007/s002280000254",
+          "journal": "European journal of clinical pharmacology"
+        },
+        "chars": 1756
+      },
+      {
+        "source_id": "pmid:10801253",
+        "type": "journal",
+        "title": "Effect of fluvastatin on proteinuria in patients with immunoglobulin A nephropathy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10801253/",
+        "pub_date": "2000-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "10801253",
+          "pmcid": null,
+          "doi": "10.1067/mcp.2000.105330",
+          "journal": "Clinical pharmacology and therapeutics"
+        },
+        "chars": 1293
+      },
+      {
+        "source_id": "pmid:10653925",
+        "type": "journal",
+        "title": "Medical therapy versus revascularization: the atorvastatin versus revascularization treatment AVERT trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10653925/",
+        "pub_date": "2000-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "10653925",
+          "pmcid": null,
+          "doi": null,
+          "journal": "The Canadian journal of cardiology"
+        },
+        "chars": 1182
+      },
+      {
+        "source_id": "pmid:10342343",
+        "type": "journal",
+        "title": "Effect of pravastatin on erythrocyte rheological and biochemical properties in poorly controlled Type 2 diabetic patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10342343/",
+        "pub_date": "1999-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "10342343",
+          "pmcid": null,
+          "doi": "10.1046/j.1464-5491.1999.00083.x",
+          "journal": "Diabetic medicine : a journal of the British Diabetic Association"
+        },
+        "chars": 2080
+      },
+      {
+        "source_id": "pmid:10081301",
+        "type": "journal",
+        "title": "[Clinical study of the month. The LIPID study: \"long-term intervention with pravastatin in ischaemic disease\"]",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10081301/",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "10081301",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Revue medicale de Liege"
+        },
+        "chars": 1022
+      },
+      {
+        "source_id": "pmid:9723390",
+        "type": "journal",
+        "title": "Treatment of hypercholesterolemia with fluvastatin in kidney transplant patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9723390/",
+        "pub_date": "1998-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "9723390",
+          "pmcid": null,
+          "doi": "10.1016/s0041-1345(98)00538-7",
+          "journal": "Transplantation proceedings"
+        },
+        "chars": 82
+      },
+      {
+        "source_id": "pmid:9121394",
+        "type": "journal",
+        "title": "Atorvastatin--a new lipid-lowering drug",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9121394/",
+        "pub_date": "1997-03-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "9121394",
+          "pmcid": null,
+          "doi": null,
+          "journal": "The Medical letter on drugs and therapeutics"
+        },
+        "chars": 41
+      },
+      {
+        "source_id": "pmid:9164896",
+        "type": "journal",
+        "title": "Efficacy of atorvastatin in primary hypercholesterolemia. Japan Cholesterol Lowering Atorvastatin Study (J-CLAS) Group",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9164896/",
+        "pub_date": "1997-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "9164896",
+          "pmcid": null,
+          "doi": null,
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 406
+      },
+      {
+        "source_id": "pmid:8924063",
+        "type": "journal",
+        "title": "Pravastatin reduces restenosis after coronary angioplasty of high grade stenotic lesions: results of SHIPS (SHIga Pravastatin Study)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8924063/",
+        "pub_date": "1996-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "8924063",
+          "pmcid": null,
+          "doi": "10.1007/BF00051114",
+          "journal": "Cardiovascular drugs and therapy"
+        },
+        "chars": 1681
+      },
+      {
+        "source_id": "announcement:allhat_llt",
+        "type": "press_release",
+        "title": "NHLBI Study Finds Traditional Diuretics Better Than Newer Medicines for Treating Hypertension (NIH News Release, includes ALLHAT cholesterol-lowering trial results)",
+        "url": "http://www.nhlbi.nih.gov/new/press/02-12-17.htm",
+        "pub_date": "2002-12-17",
+        "access": "press_release",
+        "meta": {},
+        "chars": 13152
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": null,
+    "usage": {
+      "Extraction": {
+        "calls": 12,
+        "input_tokens": 11944,
+        "output_tokens": 3821,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 3389,
+        "output_tokens": 1890,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 3147,
+        "output_tokens": 2335,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 3682,
+        "output_tokens": 2022,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4171,
+        "output_tokens": 3962,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

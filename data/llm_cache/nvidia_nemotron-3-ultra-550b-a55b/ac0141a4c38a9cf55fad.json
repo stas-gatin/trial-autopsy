@@ -1,0 +1,15 @@
+{
+  "key": "ac0141a4c38a9cf55fad",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T16:56:48+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: IMPROVE-IT NCT00202878 - IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | number of primary events | planned_events = 5250 patients | {} | source pmid:19061694 | quote: \"Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point.\"\nc2 | follow-up | median_followup = 2.5 years | {} | source pmid:19061694 | quote: \"Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point.\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*5,?250[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19061694' LIMIT 5 | rows: [[\"5 years and until at least 5,250 patients experience a primary end point\"]]\nc2 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*2[.]5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19061694' LIMIT 5 | rows: [[\" Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"5 years and until at least 5,250 patients experience a primary end point\", \"note\": \"The abstract states the trial will continue until at least 5,250 patients experience a primary endpoint, matching the planned number of primary events.\"}, {\"claim\": \"c2\", \"status\": \"not_found\", \"found\": \"Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point\", \"note\": \"The abstract specifies a minimum follow-up of 2.5 years, not a median follow-up.\"}]}",
+  "usage": {
+    "input_tokens": 534,
+    "output_tokens": 816
+  }
+}

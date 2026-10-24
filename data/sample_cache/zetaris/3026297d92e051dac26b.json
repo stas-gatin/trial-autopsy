@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A27793396+OR+PMCID%3APMC5485164+OR+PMCID%3APMC5698740&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*27%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '27793396' LIMIT 5",
+ "rows": [
+  [
+   " At week 24, reductions from baseline were 23% to 27% with alirocumab 75/150-mg Q2W and 29% with alirocumab 150-mg Q2W (all comparisons p <0"
+  ]
+ ],
+ "error": null
+}

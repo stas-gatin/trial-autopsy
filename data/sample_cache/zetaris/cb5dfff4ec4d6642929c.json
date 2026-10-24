@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26481083&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*5\\\\.8[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26481083' LIMIT 5",
+ "rows": [
+  [
+   "5 mg/d or placebo (2 × 2 factorial design) and will be followed for a mean of 5.8 years"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,15 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25743173+OR+EXT_ID%3A28478132+OR+EXT_ID%3A28624096+OR+PMCID%3APMC5419667&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*28\\.7[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28478132' AND r.abstractText LIKE '%28.7%' LIMIT 5",
+ "rows": [
+  [
+   "28478132",
+   null,
+   "Lipid-modifying efficacy and tolerability of anacetrapib added to ongoing statin therapy in Japanese patients with dyslipidemia.",
+   "2017-03-10",
+   "1%), ApoB (28.7%), and Lp(a) (48"
+  ]
+ ],
+ "error": null
+}

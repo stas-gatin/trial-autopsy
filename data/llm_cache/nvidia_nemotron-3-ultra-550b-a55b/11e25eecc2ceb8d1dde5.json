@@ -1,0 +1,15 @@
+{
+  "key": "11e25eecc2ceb8d1dde5",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T13:39:03+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: CANTOS NCT01327846 - Cardiovascular Risk Reduction Study (Reduction in Recurrent Major CV Disease Events)\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | hsCRP change used by the calculator | biomarker_change = -44.0 percent | {\"biomarker\": \"hsCRP\", \"dose\": \"150 mg monthly\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase2\", \"placebo_adjusted\": true, \"timepoint\": \"12 months\"} | source pmcid:PMC5064025 | quote: \"and 12 months (GMR: 0.56; 95% CI: 0.414 to 0.758; p = 0.0002)\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*0\\\\.56[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5 | rows: [[\" High-sensitivity C-reactive protein was significantly reduced by canakinumab compared with placebo at 3 months (geometric mean ratio [GMR]: 0.568; 95% confidence interval [CI]: 0\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"not_found\", \"found\": \"High-sensitivity C-reactive protein was significantly reduced by canakinumab compared with placebo at 3 months (geometric mean ratio [GMR]: 0.568; 95% confidence interval [CI]: 0\", \"note\": \"The abstract snippet only reports 3-month hsCRP GMR (0.568), not the 12-month GMR of 0.56 corresponding to -44% change.\"}]}",
+  "usage": {
+    "input_tokens": 450,
+    "output_tokens": 430
+  }
+}

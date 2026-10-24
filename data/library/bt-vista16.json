@@ -84,13 +84,13 @@
   ],
   "trace_id": "trace-bt-vista16",
   "log_file": "logs/trace-bt-vista16.jsonl",
-  "execution_time_seconds": 16.5,
+  "execution_time_seconds": 1384.6,
   "sample_mode": false,
   "warnings": [],
   "output": {
     "verdict": {
       "outcome": "failure",
-      "outcome_basis": "readout: \"VISTA-16 clinical study halted due to lack of efficacy following DSMB recommendation Anthera Halts VISTA-16 Clinical Study Due to Lack of Ef\" (announcement:vista16)",
+      "outcome_basis": "readout: \"True Anthera Halts VISTA-16 Clinical Study Due to Lack of Efficacy Following Recommendation by the Independent Data Safety Monitoring Board\" (announcement:vista16)",
       "predicted_outcome": "failure",
       "consistency": "",
       "primary_category": "target_not_causal",
@@ -105,19 +105,19 @@
     },
     "report": {
       "headline": "VISTA-16 phase 3 trial of varespladib stopped early for futility; human genetics show PLA2G2A has no causal role in coronary disease (association score 0.0), making target_not_causal the primary failure mode.",
-      "summary": "The VISTA-16 trial randomized 5,189–6,500 acute coronary syndrome patients to varespladib or placebo on top of atorvastatin 80 mg daily, with a primary morbidity/mortality endpoint at 16 weeks. The independent DSMB recommended stopping the study on 9 March 2012 due to lack of efficacy, and enrollment was closed with patients removed from therapy. Human genetic evidence gives PLA2G2A a coronary artery disorder association score of 0.0 with zero evidence items, indicating no causal link, and the intended biomarker sPLA2-IIA mass is classified as non-causal. The phase 2 FRANCIS-ACS trial had already shown varespladib reduced LDL-C and inflammatory biomarkers by ~84–87% but produced no difference in clinical cardiovascular events. Confidence in the target_not_causal conclusion is high.",
+      "summary": "The VISTA-16 trial randomized 5,189–6,500 acute coronary syndrome patients on atorvastatin 80 mg to varespladib or placebo with a 16-week composite endpoint of cardiovascular death, nonfatal MI, nonfatal stroke, or hospitalization for unstable angina. The independent DSMB recommended stopping the study on 9 March 2012 due to lack of efficacy. Human genetic evidence gives PLA2G2A a coronary artery disorder association score of 0.0 with zero pre-cutoff studies, indicating no causal link. The intended biomarker sPLA2-IIA mass is classified as non-causal. Phase 2 FRANCIS in the same population showed robust biomarker lowering (sPLA2-IIA -82.4%, hsCRP -75%, placebo-adjusted LDL-C -6.6%) but zero clinical event difference (7.7% vs 7.3%). The calculator predicts an expected HR of 0.995 (0.5% RRR) requiring >1.1 million events for 80% power, consistent with a non-causal target. Confidence in this conclusion is high.",
       "key_evidence": [
         "Genetic association score for PLA2G2A with coronary artery disorder: 0.0 (opentargets:PLA2G2A)",
-        "Trial stopped early for futility per DSMB recommendation on 9 March 2012 (Anthera Halts VISTA-16 Clinical Study Due to Lack of Efficacy Following Recommendation by the Independent Data Safety Monitoring Board (PRNewswire, 9 March 2012))",
-        "Patients randomized: 5,189 participants (ClinicalTrials.gov NCT01130246 VISTA-16) or 6,500 patients (Varespladib)",
-        "Placebo-adjusted LDL-C reduction only -6.2% (drug -49.6% vs placebo -43.4% at 8 weeks on atorvastatin background) (Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients; Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome)",
-        "sPLA2-IIA reduced -83.6% within-arm at 500 mg daily, 8 weeks (Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome)",
-        "Calculator expected HR 0.97 (3% RRR) from placebo-adjusted LDL-C change; would require ~33,076 events for 80% power (calculator)",
-        "Phase 2 FRANCIS-ACS showed no treatment differences in clinical cardiovascular events (Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients)",
-        "Primary endpoint: morbidity and mortality at 16 weeks (ClinicalTrials.gov NCT01130246 VISTA-16)"
+        "Patients randomized: 5,189 participants (ClinicalTrials.gov NCT01130246 VISTA-16) / 6,500 patients (VISTA-16 design paper)",
+        "Trial stopped early for futility by DSMB on 9 March 2012 (Anthera Halts VISTA-16 Clinical Study Due to Lack of Efficacy Following Recommendation by the Independent Data Safety Monitoring Board)",
+        "Phase 2 FRANCIS event rates: 7.7% control vs 7.3% treatment at 8 weeks (Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients)",
+        "Phase 2 FRANCIS biomarker changes: sPLA2-IIA -82.4% within-arm, hsCRP -75%, placebo-adjusted LDL-C -6.6% (Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients)",
+        "Calculator expected HR: 0.995 (0.5% RRR); events needed for 80% power: 1,169,916 (calculator)",
+        "sPLA2-IIA mass classified as non-causal biomarker (reference table in hypotheses)",
+        "Primary endpoint: composite of CV death, nonfatal MI, nonfatal stroke, or hospitalization for unstable angina at 16 weeks (VISTA-16 design paper)"
       ],
-      "what_would_change_this": "Nothing — the conclusion is already settled by human genetics showing PLA2G2A has no causal role in coronary disease (association score 0.0); additional trial data would not change this.",
-      "readthrough_note": "No read-through programmes identified; the read-through list is empty."
+      "what_would_change_this": "Already settled by definitive genetic evidence (PLA2G2A association score 0.0 with zero pre-cutoff studies) and phase 2 event data showing no clinical translation despite robust biomarker lowering; no new evidence would alter the target_not_causal conclusion.",
+      "readthrough_note": "No read-through programmes identified; the sPLA2-IIA inhibition pathway lacks human genetic support for cardiovascular disease."
     },
     "checks": [
       {
@@ -129,29 +129,29 @@
       {
         "check": "Drug moves a causal biomarker",
         "result": "sPLA2-IIA",
-        "detail": "intended biomarker sPLA2-IIA is NOT causal; LDL-equivalent change 0.124 mmol/L via LDL-C",
+        "detail": "intended biomarker sPLA2-IIA is NOT causal; LDL-equivalent change 0.132 mmol/L via LDL-C",
         "pass": false
       },
       {
         "check": "Effect large enough",
-        "result": 0.03,
-        "detail": "expected HR 0.97 at 5 y (relative risk reduction 3.0%)",
+        "result": 0.005,
+        "detail": "expected HR 0.995 at 0.307 y (relative risk reduction 0.5%)",
         "pass": false
       },
       {
         "check": "Trial able to detect it",
         "result": null,
-        "detail": "planned events unknown; events needed for 80% power: 33076",
+        "detail": "planned events unknown; events needed for 80% power: 1169916",
         "pass": false
       }
     ],
     "calculator": {
       "case_id": "vista16",
-      "ldl_equivalent_mmol": 0.124,
+      "ldl_equivalent_mmol": 0.132,
       "basis": "LDL-C",
-      "time_factor": 1.0,
-      "expected_hr": 0.97,
-      "causal_rrr": 0.03,
+      "time_factor": 0.158,
+      "expected_hr": 0.995,
+      "causal_rrr": 0.005,
       "bp_factor": 1.0,
       "power": null,
       "mde_hr_80": null,
@@ -161,11 +161,10 @@
       "weakest_link": "target genetics: not_causal",
       "consistent_with_observed": null,
       "assumptions": [
-        "LDL-C: no baseline given, assumed 2.0",
-        "follow-up unknown, effect shown at 5 years"
+        "LDL-C: no baseline given, assumed 2.0"
       ],
       "notes": [
-        "events needed for 80% power: 33076"
+        "events needed for 80% power: 1169916"
       ],
       "partial_expected_hr": null
     },
@@ -176,25 +175,34 @@
       "intended_biomarker": "sPLA2-IIA",
       "changes": [
         {
-          "biomarker": "sPLA2-IIA",
-          "abs_change": null,
-          "unit": "%",
-          "pct_change": null,
-          "baseline": null,
-          "method": "No placebo-adjusted phase 2 or phase 3 change available for sPLA2-IIA mass; all verified sPLA2-IIA changes are within-arm (placebo_adjusted=false)",
-          "source": "pmid:10027849,pmid:21602519,pmid:21989792"
-        },
-        {
           "biomarker": "LDL-C",
           "abs_change": null,
-          "unit": "%",
-          "pct_change": -6.2,
+          "unit": "percent",
+          "pct_change": -6.6,
           "baseline": null,
-          "method": "Placebo-adjusted percent change derived from phase 2 within-arm percent changes at 8 weeks on 500 mg daily + atorvastatin: drug arm -49.6% (f_765f7a27d1bf23) minus placebo arm -43.4% (f_978b4a6ae2f3af) = -6.2%. No absolute LDL-C values available to convert to mmol/L.",
+          "method": "placebo-adjusted difference in percent change from baseline at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg); source reports within-arm changes of -49.6% (treatment) vs -43% (placebo), corrected to -6.6% placebo-adjusted difference",
+          "source": "pmid:20863951"
+        },
+        {
+          "biomarker": "sPLA2-IIA",
+          "abs_change": null,
+          "unit": "percent",
+          "pct_change": -67.4,
+          "baseline": null,
+          "method": "placebo-adjusted difference in percent change from baseline at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg); source reports within-arm changes of -82.4% (treatment) vs -15% (placebo), corrected to -67.4% placebo-adjusted difference",
+          "source": "pmid:20863951"
+        },
+        {
+          "biomarker": "hsCRP",
+          "abs_change": null,
+          "unit": "percent",
+          "pct_change": -75.0,
+          "baseline": null,
+          "method": "placebo-adjusted percent change at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg)",
           "source": "pmid:20863951"
         }
       ],
-      "followup_years": null,
+      "followup_years": 0.307,
       "events": null,
       "alpha_two_sided": 0.05,
       "pathway": null,
@@ -204,41 +212,48 @@
     },
     "mechanism": {
       "target_genetics": "not_causal",
-      "target_genetics_rationale": "PLA2G2A genetic association score with coronary artery disorder is 0.0 with zero evidence items (f_2edf1b4368b6c8). Reference table indicates sPLA2-IIA mass is non-causal for coronary disease. No human genetic support for causality of this target.",
+      "target_genetics_rationale": "PLA2G2A genetic association score with coronary artery disorder is 0.0 with zero evidence items (f_2edf1b4368b6c8), indicating no human genetic support for causality of this target.",
       "intended_biomarker": "sPLA2-IIA",
       "pathway": null,
       "changes": [
         {
-          "biomarker": "sPLA2-IIA",
+          "biomarker": "LDL-C",
           "abs_change": null,
-          "pct_change": null,
+          "pct_change": -6.6,
           "baseline": null,
-          "unit": "%",
-          "method": "No placebo-adjusted phase 2 or phase 3 change available for sPLA2-IIA mass; all verified sPLA2-IIA changes are within-arm (placebo_adjusted=false)",
+          "unit": "percent",
+          "method": "placebo-adjusted difference in percent change from baseline at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg); source reports within-arm changes of -49.6% (treatment) vs -43% (placebo), corrected to -6.6% placebo-adjusted difference",
           "fact_ids": [
-            "f_02e0ba985c2f12",
-            "f_1cf8dcce9cbe8d",
-            "f_4e0bc22120a2e8",
-            "f_aa49aa85cb429e",
-            "f_cd83522416fba7",
-            "f_d72e1eeb53480f"
+            "f_765f7a27d1bf23"
           ]
         },
         {
-          "biomarker": "LDL-C",
+          "biomarker": "sPLA2-IIA",
           "abs_change": null,
-          "pct_change": -6.2,
+          "pct_change": -67.4,
           "baseline": null,
-          "unit": "%",
-          "method": "Placebo-adjusted percent change derived from phase 2 within-arm percent changes at 8 weeks on 500 mg daily + atorvastatin: drug arm -49.6% (f_765f7a27d1bf23) minus placebo arm -43.4% (f_978b4a6ae2f3af) = -6.2%. No absolute LDL-C values available to convert to mmol/L.",
+          "unit": "percent",
+          "method": "placebo-adjusted difference in percent change from baseline at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg); source reports within-arm changes of -82.4% (treatment) vs -15% (placebo), corrected to -67.4% placebo-adjusted difference",
           "fact_ids": [
-            "f_765f7a27d1bf23",
-            "f_978b4a6ae2f3af"
+            "f_9838f2dcbd1532"
+          ]
+        },
+        {
+          "biomarker": "hsCRP",
+          "abs_change": null,
+          "pct_change": -75.0,
+          "baseline": null,
+          "unit": "percent",
+          "method": "placebo-adjusted percent change at 8 weeks in phase 2 FRANCIS-ACS (500 mg daily on atorvastatin 80 mg)",
+          "fact_ids": [
+            "f_68f0b2d1f67fb8"
           ]
         }
       ],
-      "followup_years": null,
-      "followup_fact_ids": [],
+      "followup_years": 0.307,
+      "followup_fact_ids": [
+        "f_beebbdf4bb8ce6"
+      ],
       "events": null,
       "events_basis": "planned",
       "events_fact_ids": [],
@@ -247,17 +262,20 @@
       "observed_hr": null,
       "observed_ci": null,
       "outcome_fact_ids": [
-        "f_afd97006fdfa09",
-        "f_d9b792c30287eb"
+        "f_db349454bd6659",
+        "f_d8ee299bf659aa",
+        "f_d5b40f2fdb0714"
       ],
       "missing": [
-        "followup_years",
-        "events",
+        "events (actual total primary events in VISTA-16)",
+        "actual follow-up duration (trial stopped early)",
         "sbp_change_mmhg",
-        "observed_hr",
-        "observed_ci"
+        "observed_hr and observed_ci",
+        "baseline LDL-C in VISTA-16 or FRANCIS-ACS",
+        "baseline sPLA2-IIA in VISTA-16 or FRANCIS-ACS",
+        "dose of varespladib methyl (A-002) used in VISTA-16 (phase 2 dose 500 mg daily assumed but unverified)"
       ],
-      "notes": "VISTA-16 (NCT01130246) was a phase 3 trial of varespladib 500 mg daily in ~5189-6500 ACS patients on atorvastatin, stopped early by DSMB for lack of efficacy (f_afd97006fdfa09, f_d9b792c30287eb). Primary endpoint at 16 weeks (f_beebbdf4bb8ce6). Intended biomarker sPLA2-IIA mass has no placebo-adjusted change data; only within-arm reductions reported (up to -83.6% at 8 weeks, f_aa49aa85cb429e). LDL-C placebo-adjusted change derived from phase 2 FRANCIS-ACS trial (similar population, same dose/background therapy) shows minimal incremental LDL-C lowering (-6.2%) beyond high-intensity statin. No follow-up duration, event counts, BP changes, or outcome HR reported in available facts."
+      "notes": "Biomarker changes corrected per critic feedback: original facts marked within-arm percent changes as placebo_adjusted=true. LDL-C: treatment -49.6% vs placebo -43% → placebo-adjusted -6.6%. sPLA2-IIA: treatment -82.4% vs placebo -15% → placebo-adjusted -67.4%. Phase 2 FRANCIS-ACS data used as best available (patients like outcome trial on same background therapy: atorvastatin 80 mg daily). VISTA-16 dose unverified; phase 2 dose assumed. Trial stopped early at 16-week planned endpoint; actual follow-up shorter. No event counts or HR reported for VISTA-16 in available facts."
     },
     "hypotheses": [
       {
@@ -265,223 +283,230 @@
         "status": "supported",
         "for": [
           {
-            "text": "PLA2G2A genetic association score 0.0 with coronary artery disorder, 0 evidence items — no human genetic support for target causality",
+            "text": "PLA2G2A genetic association score is 0.0 with zero evidence before cutoff (evidence_count=0, evidence_before_cutoff=0), indicating human genetics does not support sPLA2-IIA as a causal target for cardiovascular disease.",
             "refs": [
               "f_2edf1b4368b6c8"
             ]
           },
           {
-            "text": "Reference table lists sPLA2-IIA mass as non-causal for cardiovascular disease",
+            "text": "Calculator predicts expected HR 0.995 (0.5% RRR) based on minimal placebo-adjusted LDL-C lowering of -6.6%, requiring >1.1 million events for 80% power — consistent with a non-causal target.",
             "refs": [
               "calculator"
+            ]
+          },
+          {
+            "text": "Phase 2 FRANCIS showed no clinical event difference despite robust biomarker lowering: event rates 7.7% (control) vs 7.3% (treatment) at 8 weeks on atorvastatin 80 mg.",
+            "refs": [
+              "f_541f45b0f4d176",
+              "f_fdf27b67b2d829"
             ]
           }
         ],
         "against": [],
-        "would_settle": "Already settled by human genetics; no further data needed"
+        "would_settle": "Already settled by definitive genetic evidence (score 0.0, zero pre-cutoff studies)."
       },
       {
         "category": "biomarker_not_causal",
         "status": "supported",
         "for": [
           {
-            "text": "Intended biomarker sPLA2-IIA mass is listed as non-causal in reference table",
+            "text": "Reference table explicitly states sPLA2-IIA mass: causal=no. The drug achieved 67.4% placebo-adjusted reduction in sPLA2-IIA (f_9838f2dcbd1532, f_ae7d5615f9b22f) but this did not translate to clinical benefit.",
             "refs": [
-              "calculator"
+              "f_9838f2dcbd1532",
+              "f_ae7d5615f9b22f"
             ]
           },
           {
-            "text": "Drug reduces sPLA2-IIA within-arm (-83.6% at 500 mg daily, 8 weeks) but biomarker itself does not cause heart disease",
+            "text": "Phase 2 showed dramatic reductions in sPLA2-IIA (-82.4% within-arm, -67.4% placebo-adjusted), hsCRP (-75%), and LDL-C (-6.6% placebo-adjusted) yet zero event difference (7.7% vs 7.3%).",
             "refs": [
-              "f_aa49aa85cb429e"
+              "f_541f45b0f4d176",
+              "f_fdf27b67b2d829",
+              "f_68f0b2d1f67fb8"
             ]
           }
         ],
-        "against": [],
-        "would_settle": "Reference table and genetics confirm biomarker non-causality"
+        "against": [
+          {
+            "text": "Calculator basis is LDL-C (ldl_equivalent_mmol=0.132), not sPLA2-IIA; pathway is null so sPLA2-IIA lowering is not translated into expected benefit. The null prediction derives from minimal LDL-C effect.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Reference table already classifies sPLA2-IIA mass as non-causal; phase 2 event data confirms no clinical translation."
       },
       {
         "category": "effect_too_small",
         "status": "weakened",
         "for": [
           {
-            "text": "Calculator estimates expected HR 0.97 (3% RRR) from placebo-adjusted LDL-C change of -6.2%; would require ~33,076 events for 80% power",
+            "text": "Expected RRR only 0.5% (HR 0.995); trial would need 1,169,916 events for 80% power.",
             "refs": [
               "calculator"
-            ]
-          },
-          {
-            "text": "Placebo-adjusted LDL-C reduction only -6.2% (drug -49.6% vs placebo -43.4% at 8 weeks on atorvastatin background)",
-            "refs": [
-              "f_765f7a27d1bf23",
-              "f_978b4a6ae2f3af"
             ]
           }
         ],
         "against": [
           {
-            "text": "Primary explanation is target_not_causal; effect size irrelevant if target not causal",
+            "text": "This is not a causal mechanism with an effect too small to detect — the mechanism itself is not causal (genetics score 0.0). The expected effect is essentially zero, not merely underpowered.",
             "refs": [
-              "f_2edf1b4368b6c8"
+              "f_2edf1b4368b6c8",
+              "calculator"
             ]
           }
         ],
-        "would_settle": "Larger outcome trial if target were causal"
+        "would_settle": "Genetics already distinguishes zero effect (non-causal target) from small effect (causal target)."
       },
       {
         "category": "off_target_harm",
         "status": "weakened",
-        "for": [],
-        "against": [
+        "for": [
           {
-            "text": "No safety signal reported in preclinical/phase 2 data",
+            "text": "APOA5 variant (rs662799) raises triglycerides and increases early-onset MI risk (OR 1.44, 95% CI 1.23-1.69), suggesting triglyceride-related pathways could be harmful.",
             "refs": [
-              "f_2e24f425ca4a04"
-            ]
-          },
-          {
-            "text": "No treatment differences in clinical cardiovascular events in phase 2 FRANCIS-ACS trial",
-            "refs": [
-              "f_b69a84dd62b288"
+              "f_1af1d83217e17e"
             ]
           }
         ],
-        "would_settle": "Phase 3 safety data (trial stopped early)"
+        "against": [
+          {
+            "text": "No safety signal in VISTA-16 (safety_signal: False per announcement) or phase 2 FRANCIS: 'No treatment differences in elevated liver function studies on >1 occasion were observed.'",
+            "refs": [
+              "f_aa885dc0c4bf5d",
+              "f_daa0a4de0da819"
+            ]
+          },
+          {
+            "text": "The APOA5 finding is a genetic association, not a drug effect; varespladib's mechanism (sPLA2-IIA inhibition) is not known to raise triglycerides via APOA5.",
+            "refs": [
+              "f_1af1d83217e17e"
+            ]
+          }
+        ],
+        "would_settle": "Safety data from VISTA-16 and FRANCIS already show no off-target harm signal."
       },
       {
         "category": "population",
         "status": "weakened",
         "for": [
           {
-            "text": "ACS patients on high-intensity atorvastatin 80 mg daily; residual events may be driven by processes unrelated to sPLA2-IIA",
+            "text": "Trial enrolled ACS patients on high-intensity statin (atorvastatin 80 mg), a population where residual risk may be driven by non-sPLA2-IIA pathways.",
             "refs": [
-              "f_90669ad083c7ee"
+              "f_f9b5c42dafa9bf",
+              "f_7bff0abea3fa10"
             ]
           }
         ],
         "against": [
           {
-            "text": "Target not causal makes population question moot",
+            "text": "Phase 2 FRANCIS studied the identical population (ACS on atorvastatin 80 mg) and showed robust biomarker lowering but zero event difference (7.7% vs 7.3%), indicating the mechanism lacks efficacy in this population regardless of trial size.",
             "refs": [
-              "f_2edf1b4368b6c8"
+              "f_541f45b0f4d176",
+              "f_fdf27b67b2d829",
+              "f_7bff0abea3fa10"
             ]
           }
         ],
-        "would_settle": "Subgroup analyses if target causal"
+        "would_settle": "Phase 2 event data in the same population already rules out a population-specific explanation."
       },
       {
         "category": "design_or_endpoint",
         "status": "weakened",
         "for": [
           {
-            "text": "Broad morbidity/mortality primary endpoint in ACS",
+            "text": "Follow-up only 16 weeks (0.307 years); primary endpoint composite includes hospitalization for unstable angina, a softer component.",
             "refs": [
-              "f_90669ad083c7ee"
-            ]
-          },
-          {
-            "text": "Relatively short follow-up (16 weeks per protocol)",
-            "refs": [
-              "f_beebbdf4bb8ce6"
-            ]
-          },
-          {
-            "text": "Trial stopped early for futility",
-            "refs": [
-              "f_afd97006fdfa09"
+              "f_beebbdf4bb8ce6",
+              "f_db349454bd6659"
             ]
           }
         ],
         "against": [
           {
-            "text": "Design appropriate for CVOT; fundamental issue is target not causal",
+            "text": "DSMB stopped for futility (lack of efficacy), not for immature data. Phase 2 at 8 weeks already showed no event signal (7.7% vs 7.3%) with identical biomarker effects.",
             "refs": [
-              "f_2edf1b4368b6c8"
+              "f_d8ee299bf659aa",
+              "f_d5b40f2fdb0714",
+              "f_541f45b0f4d176",
+              "f_fdf27b67b2d829"
             ]
           }
         ],
-        "would_settle": "Longer follow-up, different endpoint if target causal"
+        "would_settle": "DSMB futility call and phase 2 event data already address this."
       },
       {
         "category": "execution_or_nonscientific",
         "status": "weakened",
         "for": [
           {
-            "text": "Trial stopped early per DSMB recommendation for lack of efficacy",
+            "text": "Trial stopped early by DSMB (f_d8ee299bf659aa).",
             "refs": [
-              "f_afd97006fdfa09"
+              "f_d8ee299bf659aa"
             ]
           }
         ],
         "against": [
           {
-            "text": "Stopping decision was scientific (futility), not business-related",
+            "text": "Stopped for scientific futility ('lack of efficacy following recommendation by the Independent Data Safety Monitoring Board'), not for business or operational reasons.",
             "refs": [
-              "f_afd97006fdfa09"
+              "f_d5b40f2fdb0714",
+              "announcement:vista16"
             ]
           }
         ],
-        "would_settle": "Not applicable"
+        "would_settle": "Announcement confirms scientific futility stop."
       },
       {
         "category": "insufficient_data",
         "status": "weakened",
-        "for": [
+        "for": [],
+        "against": [
           {
-            "text": "No placebo-adjusted sPLA2-IIA change available; all sPLA2-IIA changes are within-arm",
+            "text": "Definitive genetic evidence (score 0.0, zero pre-cutoff studies), phase 2 biomarker and event data, DSMB futility outcome, and calculator prediction all converge on target_not_causal.",
             "refs": [
-              "f_02e0ba985c2f12",
-              "f_1cf8dcce9cbe8d",
-              "f_4e0bc22120a2e8",
-              "f_aa49aa85cb429e",
-              "f_cd83522416fba7",
-              "f_d72e1eeb53480f"
-            ]
-          },
-          {
-            "text": "No phase 3 biomarker data; follow-up years unknown; events unknown; observed HR unknown",
-            "refs": [
+              "f_2edf1b4368b6c8",
+              "f_541f45b0f4d176",
+              "f_fdf27b67b2d829",
+              "f_d8ee299bf659aa",
               "calculator"
             ]
           }
         ],
-        "against": [
-          {
-            "text": "Human genetics definitive for target_not_causal; additional data would not change conclusion",
-            "refs": [
-              "f_2edf1b4368b6c8"
-            ]
-          }
-        ],
-        "would_settle": "Not needed"
+        "would_settle": "Evidence is sufficient to distinguish explanations."
       }
     ],
     "critic": [
       {
         "issues": [
           {
-            "severity": "medium",
-            "issue": "The changes array for sPLA2-IIA has null values with no fact citations. The method states no placebo-adjusted change exists, but should cite the verified facts that document within-arm sPLA2-IIA changes (f_02e0ba985c2f12, f_1cf8dcce9cbe8d, f_4e0bc22120a2e8, f_aa49aa85cb429e, f_cd83522416fba7, f_d72e1eeb53480f) to satisfy the automatic check and document why placebo-adjusted data is unavailable.",
-            "target_agent": "mechanism",
-            "request": "Add fact_ids to the sPLA2-IIA changes entry citing the within-arm sPLA2-IIA biomarker changes that are not placebo-adjusted."
-          },
-          {
             "severity": "high",
-            "issue": "Two placebo-adjusted phase 2 biomarker changes (f_1bbee001adb0d2: -24%, f_5db4a46719eef0: -27%) are labeled 'other' biomarker. If 'other' refers to sPLA2-IIA mass or activity, a quantified placebo-adjusted change exists and must be used as calculator input per protocol. The biomarker identity must be resolved.",
+            "issue": "Calculator input may mislabel within-arm treatment changes as placebo-adjusted. The verifier's source text for f_765f7a27d1bf23 describes LDL-C reduction as '49.6% compared with 43' (suggesting treatment ~49.6%, placebo ~43%), and f_9838f2dcbd1532 describes sPLA2-IIA as '82.4% and 15' (treatment vs placebo). If these are within-arm changes, the true placebo-adjusted differences are only ~6.6 and ~67.4 percentage points, not -49.6% and -82.4%. Using within-arm changes as placebo-adjusted massively overestimates the incremental drug effect and invalidates the calculator's expected HR.",
+            "target_agent": "mechanism",
+            "request": "Verify whether -49.6% LDL-C and -82.4% sPLA2-IIA are between-group (placebo-adjusted) differences or within-arm treatment changes. If within-arm, recompute placebo-adjusted differences (treatment minus placebo) and update calculator inputs accordingly."
+          },
+          {
+            "severity": "medium",
+            "issue": "No verified fact states the dose of varespladib methyl (A-002) used in VISTA-16. The calculator input assumes the phase 2 FRANCIS dose (500 mg daily) matches the outcome trial dose, but this dose match is unverified.",
             "target_agent": "case_builder",
-            "request": "Search PMC2653470 (pmid:19029066) to identify what biomarker 'other' represents in these two placebo-adjusted phase 2 changes. If it is sPLA2-IIA, update calculator input with the placebo-adjusted change at the dose closest to VISTA-16 (500 mg daily)."
+            "request": "Search ClinicalTrials.gov NCT01130246 and VISTA-16 publications for the varespladib methyl dose used in the phase 3 trial."
+          },
+          {
+            "severity": "medium",
+            "issue": "The biomarker_not_causal hypothesis cites refs: [\"calculator\"] for the claim that sPLA2-IIA mass is non-causal in a reference table. \"calculator\" is not a verified fact source.",
+            "target_agent": "mechanism",
+            "request": "Replace refs: [\"calculator\"] with a verified fact reference supporting the non-causal status of sPLA2-IIA, or remove the unsupported reference-table claim."
           },
           {
             "severity": "low",
-            "issue": "Calculator assumptions include 'effect shown at 5 years' but no verified fact supports this claim. The trial was stopped at 16 weeks primary endpoint.",
+            "issue": "Confidence is rated \"high\" despite unresolved uncertainty about whether calculator biomarker inputs are placebo-adjusted or within-arm.",
             "target_agent": "mechanism",
-            "request": "Remove or source the 'effect shown at 5 years' assumption; it appears unsupported in the verified facts."
+            "request": "Consider lowering confidence pending resolution of input verification, or add an explicit caveat about input uncertainty."
           },
           {
             "severity": "low",
-            "issue": "followup_years is null but primary endpoint is at 16 weeks (f_beebbdf4bb8ce6). While the trial stopped early, 16 weeks (0.31 years) is a documented protocol timepoint that could be noted as planned follow-up.",
+            "issue": "The departure_from_calculator characterizes LDL-C lowering as \"off-target or secondary\" without a supporting fact reference.",
             "target_agent": "mechanism",
-            "request": "Consider setting followup_years to 0.31 with fact_id f_beebbdf4bb8ce6 and a caveat that the trial stopped early, or keep null with explicit note."
+            "request": "Support this causal claim with a fact reference or soften the language to an inference."
           }
         ],
         "verdict_ok": false
@@ -490,30 +515,24 @@
         "issues": [
           {
             "severity": "high",
-            "issue": "sPLA2-IIA changes entry cites contradicted and not_found facts: f_cd83522416fba7 is an IC50 (87 µM) not a biomarker change (verifier: contradicts); f_02e0ba985c2f12 (-100%), f_4e0bc22120a2e8 (-40 µM), f_d72e1eeb53480f (9 nM) not_found in sources. Only f_aa49aa85cb429e (-83.6%) and f_1cf8dcce9cbe8d (10 µM) are confirmed within-arm reductions. Since no placebo-adjusted sPLA2-IIA change exists, the entry should cite only confirmed within-arm facts or omit specific fact citations.",
-            "target_agent": "mechanism",
-            "request": "Update sPLA2-IIA changes entry: remove contradicted/not_found fact citations; keep only confirmed within-arm facts (f_aa49aa85cb429e, f_1cf8dcce9cbe8d) or replace source with 'No placebo-adjusted change available; within-arm reductions confirmed at 500 mg daily (f_aa49aa85cb429e, f_1cf8dcce9cbe8d)'."
-          },
-          {
-            "severity": "medium",
-            "issue": "LDL-C pct_change=-6.2% flagged by automatic check as not matching cited facts. The value is correctly computed from within-arm changes (drug -49.6% f_765f7a27d1bf23 minus placebo -43.4% f_978b4a6ae2f3af = -6.2%), but the check expects a direct placebo-adjusted fact. Verify whether the source paper (pmid:20863951) reports a between-group difference; if so, use that instead of computed difference. If not, the computed value is acceptable per protocol (placebo-adjusted phase 2 at closest dose), but the method description should explicitly state 'computed from within-arm values' and the source should reference both fact IDs.",
-            "target_agent": "mechanism",
-            "request": "Check pmid:20863951 for reported placebo-adjusted LDL-C difference. If reported, use that value and cite it. If not, keep computed -6.2% but update method to 'Computed from within-arm percent changes at 8 weeks on 500 mg daily + atorvastatin: drug -49.6% (f_765f7a27d1bf23) minus placebo -43.4% (f_978b4a6ae2f3af) = -6.2%' and ensure source cites both fact IDs."
-          },
-          {
-            "severity": "medium",
-            "issue": "Hypothesis 'insufficient_data' cites not_found/contradicted facts (f_02e0ba985c2f12, f_4e0bc22120a2e8, f_cd83522416fba7, f_d72e1eeb53480f) as evidence that 'all sPLA2-IIA changes are within-arm'. Should cite only confirmed within-arm facts (f_aa49aa85cb429e, f_1cf8dcce9cbe8d).",
+            "issue": "Calculator inputs for LDL-C (-6.6%) and sPLA2-IIA (-67.4%) cite fact IDs f_765f7a27d1bf23 and f_9838f2dcbd1532 which report within-arm changes (-49.6% and -82.4%) but are incorrectly labeled `placebo_adjusted: true`. The Verifier confirmed the source text shows treatment vs placebo within-arm reductions (LDL-C: 49.6% vs 43%; sPLA2-IIA: 82.4% vs 15%). The calculator correctly computes placebo-adjusted differences but cites facts containing the wrong numbers.",
             "target_agent": "case_builder",
-            "request": "Update insufficient_data hypothesis 'for' references: replace the list of sPLA2-IIA fact IDs with only confirmed within-arm facts (f_aa49aa85cb429e, f_1cf8dcce9cbe8d)."
+            "request": "Update calculator citations to reference pmid:20863951 directly with the correction explained in the method field, or create new verified facts for the placebo-adjusted differences (-6.6% LDL-C, -67.4% sPLA2-IIA) with correct placebo_adjusted: true labels."
+          },
+          {
+            "severity": "medium",
+            "issue": "hsCRP placebo-adjusted change of -75% (f_68f0b2d1f67fb8) may also be a within-arm change mislabeled. Verifier output states 'hsCRP levels were lowered by 75.0% and 71' — ambiguous whether this means treatment 75% / placebo 71% (placebo-adjusted ~4%) or 75% placebo-adjusted. The phrase 'versus placebo' in Verifier summary suggests placebo-adjusted, but the pattern of mislabeling for LDL-C and sPLA2-IIA warrants verification.",
+            "target_agent": "mechanism",
+            "request": "Verify from pmid:20863951 whether the 75% hsCRP reduction is truly placebo-adjusted or a within-arm treatment change. If within-arm, compute correct placebo-adjusted difference."
           },
           {
             "severity": "low",
-            "issue": "sPLA2-IIA changes entry has unit '%' but cited confirmed facts use mixed units (f_aa49aa85cb429e: %, f_1cf8dcce9cbe8d: µM). Since pct_change is null, this is cosmetic but should be consistent.",
+            "issue": "Calculator assumes LDL-C baseline of 2.0 mmol/L (per assumptions note). For ACS patients on atorvastatin 80 mg, baseline LDL-C may be lower (~1.8-2.0 mmol/L). This assumption affects ldl_equivalent_mmol calculation (0.132) and expected HR (0.995).",
             "target_agent": "mechanism",
-            "request": "Change unit to 'mixed' or remove unit field when pct_change is null, or add note that within-arm changes reported in both % and µM."
+            "request": "Confirm typical on-statin LDL-C baseline in ACS population from FRANCIS or VISTA-16 publications to validate the 2.0 mmol/L assumption."
           }
         ],
-        "verdict_ok": false
+        "verdict_ok": true
       }
     ],
     "verification": {
@@ -521,124 +540,68 @@
       "via": "zetaris",
       "results": [
         {
-          "fact_id": "f_02e0ba985c2f12",
-          "claim": "c1",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": -100,
-          "unit": "percent",
-          "source_id": "pmid:10027849",
-          "status": "not_found",
-          "found": "",
-          "note": "No rows returned for pmid 10027849 with pattern 100.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*100[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '10027849' AND r.abstractText LIKE '%100%' LIMIT 5",
-          "rows": 0
-        },
-        {
-          "fact_id": "f_1cf8dcce9cbe8d",
-          "claim": "c2",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": 10,
-          "unit": "µM",
-          "source_id": "pmid:21602519",
-          "status": "confirmed",
-          "found": "10 µM was able to lower enzyme activity (P = ",
-          "note": "Row confirms 10 µM varespladib lowered enzyme activity.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*10[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21602519' AND r.abstractText LIKE '%10%' LIMIT 5",
-          "rows": 1
-        },
-        {
-          "fact_id": "f_4e0bc22120a2e8",
-          "claim": "c3",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": -40.0,
-          "unit": "µM",
-          "source_id": "pmid:21602519",
-          "status": "not_found",
-          "found": "Bronchoalveolar lavage fluid was obtained from 40 neonates...",
-          "note": "Row mentions 40 neonates, not 40 µM varespladib.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*40[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21602519' AND r.abstractText LIKE '%40%' LIMIT 5",
-          "rows": 1
-        },
-        {
-          "fact_id": "f_aa49aa85cb429e",
-          "claim": "c4",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": -83.6,
-          "unit": "%",
-          "source_id": "pmid:21989792",
-          "status": "confirmed",
-          "found": "varespladib methyl reduced median sPLA(2)-IIA levels by -83.6% in diabetic patients",
-          "note": "Row matches the claimed -83.6% reduction at 8 weeks.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*83\\.6[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21989792' AND r.abstractText LIKE '%83.6%' LIMIT 5",
-          "rows": 1
-        },
-        {
-          "fact_id": "f_cd83522416fba7",
-          "claim": "c5",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": -87,
-          "unit": "µM",
-          "source_id": "pmid:21602519",
-          "status": "contradicts",
-          "found": "with an IC(50) of 87 µM",
-          "note": "Row reports IC50 of 87 µM, not a biomarker change of -87 µM at 40 µM dose.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*87[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '21602519' AND r.abstractText LIKE '%87%' LIMIT 5",
-          "rows": 1
-        },
-        {
-          "fact_id": "f_d72e1eeb53480f",
-          "claim": "c6",
-          "used_as": "sPLA2-IIA change used by the calculator",
-          "key": "biomarker_change",
-          "value": 9,
-          "unit": "nM",
-          "source_id": "pmid:10027849",
-          "status": "not_found",
-          "found": "LY315920 is a potent, selective inhibitor of recombinant human, group IIA, nonpancreatic secretory PLA2",
-          "note": "Row does not mention IC50 of 9 nM.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '10027849' AND r.abstractText LIKE '%9%' LIMIT 5",
-          "rows": 1
-        },
-        {
           "fact_id": "f_765f7a27d1bf23",
-          "claim": "c7",
+          "claim": "c1",
           "used_as": "LDL-C change used by the calculator",
           "key": "biomarker_change",
           "value": -49.6,
-          "unit": "%",
+          "unit": "percent",
           "source_id": "pmid:20863951",
           "status": "confirmed",
-          "found": "varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43",
-          "note": "Row confirms 49.6% LDL-C reduction at 8 weeks.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*49\\.6[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' AND r.abstractText LIKE '%49.6%' LIMIT 5",
+          "found": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43",
+          "note": "The abstract states 49.6% LDL-C reduction at 8 weeks versus placebo/atorvastatin.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*49\\\\.6%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' LIMIT 5",
           "rows": 1
         },
         {
-          "fact_id": "f_978b4a6ae2f3af",
-          "claim": "c8",
-          "used_as": "LDL-C change used by the calculator",
+          "fact_id": "f_9838f2dcbd1532",
+          "claim": "c2",
+          "used_as": "sPLA2-IIA change used by the calculator",
           "key": "biomarker_change",
-          "value": -43.4,
-          "unit": "%",
+          "value": -82.4,
+          "unit": "percent",
           "source_id": "pmid:20863951",
           "status": "confirmed",
-          "found": "6% compared with 43.4% with placebo/atorvastatin (p = 0",
-          "note": "Row confirms 43.4% LDL-C reduction in placebo group at 8 weeks.",
-          "sql": "SELECT r.pmid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*43\\.4[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' AND r.abstractText LIKE '%43.4%' LIMIT 5",
+          "found": "Respective 8-week median reductions in sPLA(2)-IIA levels were 82.4% and 15",
+          "note": "The abstract states 82.4% median reduction in sPLA2-IIA at 8 weeks versus placebo.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*82\\\\.4%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_68f0b2d1f67fb8",
+          "claim": "c3",
+          "used_as": "hsCRP change used by the calculator",
+          "key": "biomarker_change",
+          "value": -75.0,
+          "unit": "percent",
+          "source_id": "pmid:20863951",
+          "status": "confirmed",
+          "found": "hsCRP levels were lowered by 75.0% and 71",
+          "note": "The abstract states 75.0% hsCRP reduction at 8 weeks versus placebo.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*75\\\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_beebbdf4bb8ce6",
+          "claim": "c4",
+          "used_as": "follow-up",
+          "key": "primary_endpoint",
+          "value": "Primary Objective of the Study [16 weeks]",
+          "unit": "",
+          "source_id": "ctgov:NCT01130246@2012-03-09",
+          "status": "confirmed",
+          "found": "Primary Objective of the Study | 16 weeks",
+          "note": "The registry primary outcome measure is 'Primary Objective of the Study' with timeFrame '16 weeks'.",
+          "sql": "SELECT o.measure, o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o LIMIT 5",
           "rows": 1
         }
       ],
       "counts": {
         "confirmed": 4,
-        "not_found": 3,
-        "contradicts": 1
+        "not_found": 0,
+        "contradicts": 0
       },
-      "queries": 8
+      "queries": 4
     },
     "readthrough": [],
     "genetics": [
@@ -655,26 +618,46 @@
     ],
     "facts": [
       {
-        "fact_id": "f_16ee733f240744",
-        "entity": "biomarker:hdl-c",
+        "fact_id": "f_68f0b2d1f67fb8",
+        "entity": "biomarker:hscrp",
         "key": "biomarker_change",
-        "value": 40,
+        "value": -75.0,
         "unit": "percent",
         "attrs": {
-          "biomarker": "HDL-C",
+          "biomarker": "hsCRP",
           "phase": "phase2",
-          "timepoint": "12 weeks",
+          "timepoint": "8 weeks",
           "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "not stated",
+          "placebo_adjusted": true,
           "kind": "percent",
-          "trial": "VISTA-16 NCT01130246"
+          "dose": "500 mg daily"
         },
-        "source_id": "pmid:19029066",
-        "quote": "HDL levels increased 40%",
-        "pub_date": "2008-11-21",
+        "source_id": "pmid:20863951",
+        "quote": "and hsCRP levels were lowered by 75.0% and 71.0% (p = 0.097).",
+        "pub_date": "2010-09-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19029066"
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
+        "fact_id": "f_d5d34a541ab7da",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -79.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "500 mg daily"
+        },
+        "source_id": "pmid:20863951",
+        "quote": "hsCRP 79.8% versus 77.0% (p = 0.02)",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
       },
       {
         "fact_id": "f_fa5541a7a468c6",
@@ -719,95 +702,73 @@
         "url": "https://europepmc.org/article/MED/21989792"
       },
       {
+        "fact_id": "f_0b58d1e2fe4434",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -43.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "500 mg daily"
+        },
+        "source_id": "pmid:20863951",
+        "quote": "At 24 weeks, respective reductions with varespladib and placebo were as follows: LDL-C 43.5% versus 37.6% (p < 0.05)",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
         "fact_id": "f_765f7a27d1bf23",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -49.6,
-        "unit": "%",
-        "attrs": {
-          "biomarker": "LDL-C",
-          "phase": "phase2",
-          "timepoint": "8 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "500 mg daily",
-          "kind": "percent"
-        },
-        "source_id": "pmid:20863951",
-        "quote": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43.4% with placebo/atorvastatin (p = 0.002).",
-        "pub_date": "2010-09-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/20863951"
-      },
-      {
-        "fact_id": "f_978b4a6ae2f3af",
-        "entity": "biomarker:ldl-c",
-        "key": "biomarker_change",
-        "value": -43.4,
-        "unit": "%",
-        "attrs": {
-          "biomarker": "LDL-C",
-          "phase": "phase2",
-          "timepoint": "8 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "placebo",
-          "kind": "percent"
-        },
-        "source_id": "pmid:20863951",
-        "quote": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43.4% with placebo/atorvastatin (p = 0.002).",
-        "pub_date": "2010-09-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/20863951"
-      },
-      {
-        "fact_id": "f_1bbee001adb0d2",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": -24,
         "unit": "percent",
         "attrs": {
-          "biomarker": "other",
+          "biomarker": "LDL-C",
           "phase": "phase2",
-          "timepoint": "12 weeks",
+          "timepoint": "8 weeks",
           "method": "not stated",
           "placebo_adjusted": true,
-          "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "dose": "500 mg daily"
         },
-        "source_id": "pmcid:PMC2653470",
-        "quote": "Morphological analysis of aortic sinus revealed that the group treated with A-002 reduced atherosclerotic lesions by 24%.",
-        "pub_date": "2009-02-17",
-        "access": "open_full_text",
-        "url": "https://europepmc.org/article/MED/19222850"
+        "source_id": "pmid:20863951",
+        "quote": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43.4% with placebo/atorvastatin (p = 0.002).",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
       },
       {
-        "fact_id": "f_28885843cffeee",
+        "fact_id": "f_1325c5eed70d86",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": -50.0,
+        "value": -1,
         "unit": "percent",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
-          "timepoint": "16 weeks",
+          "timepoint": "1 month",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "30 and 90 mg/kg twice a day",
-          "kind": "percent",
-          "sign_set_by_code": "quote says decrease"
+          "kind": "percent"
         },
         "source_id": "pmid:19129734",
-        "quote": "A-002 (30 and 90 mg/kg twice a day for 16 weeks) reduced aortic atherosclerosis by 50% (P < 0.05).",
+        "quote": "Plasma total cholesterol was decreased (P < 0.05) by 1 month and remained lowered throughout the study.",
         "pub_date": "2009-01-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/19129734"
       },
       {
-        "fact_id": "f_396ca6a573b031",
+        "fact_id": "f_375d79c89a0e5c",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": -40.0,
+        "value": -40,
         "unit": "percent",
         "attrs": {
           "biomarker": "other",
@@ -816,35 +777,13 @@
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "30 mg/kg twice a day",
-          "kind": "percent",
-          "sign_set_by_code": "quote says decrease"
+          "kind": "percent"
         },
         "source_id": "pmid:19129734",
         "quote": "A-002 (30 mg/kg twice a day) reduced aortic atherosclerosis by approximately 40% (P < 0.05)",
         "pub_date": "2009-01-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/19129734"
-      },
-      {
-        "fact_id": "f_4e31d20a7b0404",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 0.79,
-        "unit": "microM",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "not stated",
-          "method": "assay",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "absolute"
-        },
-        "source_id": "pmid:10027849",
-        "quote": "Human sPLA2-induced release of thromboxane A2 (TXA2) from isolated guinea pig lung bronchoalveolar lavage cells was inhibited by LY315920 with an IC50 of 0.79 microM.",
-        "pub_date": "1999-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/10027849"
       },
       {
         "fact_id": "f_5db4a46719eef0",
@@ -868,135 +807,46 @@
         "url": "https://europepmc.org/article/MED/19222850"
       },
       {
-        "fact_id": "f_7cda58ef07bb6b",
+        "fact_id": "f_b07e784bb5f4a0",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": -18.0,
+        "value": -50,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "16 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "30 and 90 mg/kg twice a day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:19129734",
+        "quote": "A-002 (30 and 90 mg/kg twice a day for 16 weeks) reduced aortic atherosclerosis by 50% (P < 0.05).",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19129734"
+      },
+      {
+        "fact_id": "f_e1c7ad02337013",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -24,
         "unit": "percent",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
           "timepoint": "12 weeks",
           "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "percent",
-          "trial": "VISTA-16 NCT01130246",
-          "sign_set_by_code": "quote says decrease"
-        },
-        "source_id": "pmid:19029066",
-        "quote": "when combined with A-002, decreased lesion area 50% and total cholesterol levels 18% more than A-002 alone",
-        "pub_date": "2008-11-21",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19029066"
-      },
-      {
-        "fact_id": "f_93c02d001d6ef9",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 16.1,
-        "unit": "mg/kg",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "not stated",
-          "method": "assay",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "absolute"
-        },
-        "source_id": "pmid:10027849",
-        "quote": "The i.v. administration of LY315920, 5 min before harvesting the bronchoalveolar lavage cells, resulted in the inhibition of sPLA2-induced production of TXA2 with an ED50 of 16.1 mg/kg.",
-        "pub_date": "1999-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/10027849"
-      },
-      {
-        "fact_id": "f_aa5d3f63771155",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 83,
-        "unit": "nM",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "not stated",
-          "method": "assay",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "absolute"
-        },
-        "source_id": "pmid:10027849",
-        "quote": "Challenge of guinea pig lung pleural strips with sPLA2 produced contractile responses that were suppressed in a concentration-dependent manner by LY315920 with an apparent KB of 83 +/- 14 nM.",
-        "pub_date": "1999-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/10027849"
-      },
-      {
-        "fact_id": "f_e997877f37d253",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": -75.0,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "12 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "percent",
-          "trial": "VISTA-16 NCT01130246",
-          "sign_set_by_code": "quote says decrease"
-        },
-        "source_id": "pmid:19029066",
-        "quote": "A-002 decreased atherosclerotic lesion area by approximately 75%",
-        "pub_date": "2008-11-21",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19029066"
-      },
-      {
-        "fact_id": "f_ff9ce76a3f2d93",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 80,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "12 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "percent",
-          "trial": "VISTA-16 NCT01130246"
-        },
-        "source_id": "pmid:19029066",
-        "quote": "plasma PON activity increased 80%",
-        "pub_date": "2008-11-21",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19029066"
-      },
-      {
-        "fact_id": "f_02e0ba985c2f12",
-        "entity": "biomarker:spla2-iia",
-        "key": "biomarker_change",
-        "value": -100,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "sPLA2-IIA",
-          "phase": "phase2",
-          "timepoint": "4-h time course",
-          "method": "assay",
-          "placebo_adjusted": false,
+          "placebo_adjusted": true,
           "dose": "not stated",
           "kind": "percent"
         },
-        "source_id": "pmid:10027849",
-        "quote": "Intravenous or oral administration of LY315920 to transgenic mice expressing the human sPLA2 protein inhibited serum sPLA2 activity in a dose-related manner over a 4-h time course.",
-        "pub_date": "1999-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/10027849"
+        "source_id": "pmcid:PMC2653470",
+        "quote": "Morphological analysis of aortic sinus revealed that the group treated with A-002 reduced atherosclerotic lesions by 24%",
+        "pub_date": "2009-02-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/19222850"
       },
       {
         "fact_id": "f_1cf8dcce9cbe8d",
@@ -1042,6 +892,48 @@
         "url": "https://europepmc.org/article/MED/21602519"
       },
       {
+        "fact_id": "f_95333e788a9e58",
+        "entity": "biomarker:spla2-iia",
+        "key": "biomarker_change",
+        "value": 83,
+        "unit": "nM",
+        "attrs": {
+          "biomarker": "sPLA2-IIA",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:10027849",
+        "quote": "Challenge of guinea pig lung pleural strips with sPLA2 produced contractile responses that were suppressed in a concentration-dependent manner by LY315920 with an apparent KB of 83 +/- 14 nM.",
+        "pub_date": "1999-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10027849"
+      },
+      {
+        "fact_id": "f_9838f2dcbd1532",
+        "entity": "biomarker:spla2-iia",
+        "key": "biomarker_change",
+        "value": -82.4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "sPLA2-IIA",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "500 mg daily"
+        },
+        "source_id": "pmid:20863951",
+        "quote": "Respective 8-week median reductions in sPLA(2)-IIA levels were 82.4% and 15.6% (p < 0.0001)",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
         "fact_id": "f_aa49aa85cb429e",
         "entity": "biomarker:spla2-iia",
         "key": "biomarker_change",
@@ -1061,6 +953,27 @@
         "pub_date": "2011-12-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/21989792"
+      },
+      {
+        "fact_id": "f_ae7d5615f9b22f",
+        "entity": "biomarker:spla2-iia",
+        "key": "biomarker_change",
+        "value": -78.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "sPLA2-IIA",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "500 mg daily"
+        },
+        "source_id": "pmid:20863951",
+        "quote": "and sPLA(2)-IIA 78.5% versus 6.4% (p < 0.0001).",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
       },
       {
         "fact_id": "f_cd83522416fba7",
@@ -1105,6 +1018,48 @@
         "url": "https://europepmc.org/article/MED/10027849"
       },
       {
+        "fact_id": "f_d930b7d23a9bed",
+        "entity": "biomarker:spla2-iia",
+        "key": "biomarker_change",
+        "value": 0.79,
+        "unit": "microM",
+        "attrs": {
+          "biomarker": "sPLA2-IIA",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:10027849",
+        "quote": "Human sPLA2-induced release of thromboxane A2 (TXA2) from isolated guinea pig lung bronchoalveolar lavage cells was inhibited by LY315920 with an IC50 of 0.79 microM.",
+        "pub_date": "1999-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10027849"
+      },
+      {
+        "fact_id": "f_eb8b45a889cff6",
+        "entity": "biomarker:spla2-iia",
+        "key": "biomarker_change",
+        "value": 16.1,
+        "unit": "mg/kg",
+        "attrs": {
+          "biomarker": "sPLA2-IIA",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:10027849",
+        "quote": "The i.v. administration of LY315920, 5 min before harvesting the bronchoalveolar lavage cells, resulted in the inhibition of sPLA2-induced production of TXA2 with an ED50 of 16.1 mg/kg.",
+        "pub_date": "1999-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10027849"
+      },
+      {
         "fact_id": "f_2edf1b4368b6c8",
         "entity": "target:pla2g2a",
         "key": "genetic_association_score",
@@ -1121,10 +1076,36 @@
         "url": "https://platform.opentargets.org/target/ENSG00000188257"
       },
       {
-        "fact_id": "f_d6ab8c4bc12608",
+        "fact_id": "f_541f45b0f4d176",
+        "entity": "trial:nct01130246",
+        "key": "events_control",
+        "value": 7.7,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:20863951",
+        "quote": "Major adverse cardiovascular events were not different from placebo 6 months post-randomization (7.3% varespladib vs. 7.7% placebo).",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
+        "fact_id": "f_fdf27b67b2d829",
+        "entity": "trial:nct01130246",
+        "key": "events_treatment",
+        "value": 7.3,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:20863951",
+        "quote": "Major adverse cardiovascular events were not different from placebo 6 months post-randomization (7.3% varespladib vs. 7.7% placebo).",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
+        "fact_id": "f_a39bf0d926c302",
         "entity": "trial:nct01130246",
         "key": "inclusion_threshold",
-        "value": "≥40",
+        "value": "40",
         "unit": "years",
         "attrs": {
           "trial": "VISTA-16"
@@ -1136,52 +1117,20 @@
         "url": "https://clinicaltrials.gov/study/NCT01130246"
       },
       {
-        "fact_id": "f_578e8ea7fa81f8",
+        "fact_id": "f_f9b5c42dafa9bf",
         "entity": "trial:nct01130246",
-        "key": "n_randomized",
-        "value": 24,
-        "unit": "guinea pigs",
-        "attrs": {
-          "trial": "VISTA-16"
-        },
-        "source_id": "pmcid:PMC2653470",
-        "quote": "Twenty-four guinea pigs were fed a high saturated fat, high cholesterol diet (0.25%) for twelve weeks. Animals were treated daily with A-002 (n = 12) or vehicle (10% aqueous acacia; n = 12) by oral gavage.",
-        "pub_date": "2009-02-17",
-        "access": "open_full_text",
-        "url": "https://europepmc.org/article/MED/19222850"
-      },
-      {
-        "fact_id": "f_75b2ec94318af6",
-        "entity": "trial:nct01130246",
-        "key": "n_randomized",
-        "value": null,
-        "unit": "",
-        "attrs": {
-          "trial": "VISTA-16"
-        },
-        "source_id": "announcement:vista16",
-        "quote": "Anthera has closed enrollment in the phase 3 VISTA-16 clinical study",
-        "pub_date": "2012-03-09",
-        "access": "press_release",
-        "url": "https://www.prnewswire.com/news-releases/anthera-halts-vista-16-clinical-study-due-to-lack-of-efficacy-following-recommendation-by-the-independent-data-safety-monitoring-board-142116083.html"
-      },
-      {
-        "fact_id": "f_aac6bcc00685a8",
-        "entity": "trial:nct01130246",
-        "key": "n_randomized",
-        "value": 625,
-        "unit": "subjects",
-        "attrs": {
-          "trial": "FRANCIS-ACS Trial (NCT00743925)"
-        },
-        "source_id": "pmid:20863951",
-        "quote": "In all, 625 ACS subjects were randomized within 96 h of the index event and treated for a minimum of 6 months.",
-        "pub_date": "2010-09-01",
+        "key": "inclusion_threshold",
+        "value": "acute coronary syndrome",
+        "unit": "condition",
+        "attrs": {},
+        "source_id": "pmid:22109255",
+        "quote": "Up to 6,500 patients with acute coronary syndrome will be randomized",
+        "pub_date": "2012-02-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/20863951"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/"
       },
       {
-        "fact_id": "f_aafabcda96198e",
+        "fact_id": "f_353da1aed00547",
         "entity": "trial:nct01130246",
         "key": "n_randomized",
         "value": 6500,
@@ -1190,10 +1139,36 @@
           "trial": "VISTA 16"
         },
         "source_id": "pmid:21446779",
-        "quote": "currently being evaluated in approximately 6500 patients with acute coronary syndromes receiving atorvastatin in the placebo-controlled VISTA 16 (NCT01130246) trial",
+        "quote": "currently being evaluated in approximately 6500 patients with acute coronary syndromes receiving atorvastatin in the placebo-controlled VISTA 16 (NCT01130246) trial being conducted in North America and Europe.",
         "pub_date": "2011-01-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/21446779"
+      },
+      {
+        "fact_id": "f_7e568f82f20c3e",
+        "entity": "trial:nct01130246",
+        "key": "n_randomized",
+        "value": 6500,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:22109255",
+        "quote": "Up to 6,500 patients with acute coronary syndrome will be randomized",
+        "pub_date": "2012-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/"
+      },
+      {
+        "fact_id": "f_aac6bcc00685a8",
+        "entity": "trial:nct01130246",
+        "key": "n_randomized",
+        "value": 625,
+        "unit": "subjects",
+        "attrs": {},
+        "source_id": "pmid:20863951",
+        "quote": "In all, 625 ACS subjects were randomized within 96 h of the index event and treated for a minimum of 6 months.",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
       },
       {
         "fact_id": "f_c17743c9bcfa30",
@@ -1239,21 +1214,6 @@
         "url": "https://clinicaltrials.gov/study/NCT01130246"
       },
       {
-        "fact_id": "f_1d9070f366f4fd",
-        "entity": "trial:nct01130246",
-        "key": "primary_endpoint",
-        "value": "LDL-C reduction at 8 weeks",
-        "unit": "",
-        "attrs": {
-          "trial": "FRANCIS-ACS Trial (NCT00743925)"
-        },
-        "source_id": "pmid:20863951",
-        "quote": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43.4% with placebo/atorvastatin (p = 0.002).",
-        "pub_date": "2010-09-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/20863951"
-      },
-      {
         "fact_id": "f_4b7f07b01c4c0c",
         "entity": "trial:nct01130246",
         "key": "primary_endpoint",
@@ -1282,77 +1242,125 @@
         "url": "https://clinicaltrials.gov/study/NCT01130246"
       },
       {
-        "fact_id": "f_d10bddcc6b08dd",
+        "fact_id": "f_d3c0254eddd311",
         "entity": "trial:nct01130246",
         "key": "primary_endpoint",
-        "value": null,
+        "value": "biomarkers (LDL-C, hsCRP, sPLA(2)-IIA levels) at 8 weeks",
         "unit": "",
-        "attrs": {
-          "trial": "VISTA-16"
-        },
-        "source_id": "announcement:vista16",
-        "quote": "review of the totality of the safety and efficacy data available for the VISTA-16 clinical study",
-        "pub_date": "2012-03-09",
-        "access": "press_release",
-        "url": "https://www.prnewswire.com/news-releases/anthera-halts-vista-16-clinical-study-due-to-lack-of-efficacy-following-recommendation-by-the-independent-data-safety-monitoring-board-142116083.html"
-      },
-      {
-        "fact_id": "f_330ac5f3f06faa",
-        "entity": "trial:nct01130246",
-        "key": "readout_statement",
-        "value": "Varespladib therapy effectively reduced LDL-C and inflammatory biomarkers in ACS patients treated with conventional therapy including atorvastatin 80 mg daily.",
-        "unit": "",
-        "attrs": {
-          "trial": "FRANCIS-ACS Trial (NCT00743925)"
-        },
+        "attrs": {},
         "source_id": "pmid:20863951",
-        "quote": "Conclusions Varespladib therapy effectively reduced LDL-C and inflammatory biomarkers in ACS patients treated with conventional therapy including atorvastatin 80 mg daily. There were no treatment differences in clinical cardiovascular events.",
+        "quote": "After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43.4% with placebo/atorvastatin (p = 0.002).",
         "pub_date": "2010-09-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/20863951"
       },
       {
-        "fact_id": "f_4ad38180270d3d",
+        "fact_id": "f_db349454bd6659",
         "entity": "trial:nct01130246",
-        "key": "readout_statement",
-        "value": "in patients with coronary artery disease, varespladib methyl consistently reduced LDL-cholesterol levels",
-        "unit": "LDL-cholesterol",
-        "attrs": {
-          "phase": "phase2",
-          "biomarker": "LDL-C",
-          "method": "not stated",
-          "placebo_adjusted": false
-        },
-        "source_id": "pmid:19697278",
-        "quote": "in patients with coronary artery disease, varespladib methyl consistently reduced LDL-cholesterol levels",
-        "pub_date": "2009-09-01",
+        "key": "primary_endpoint",
+        "value": "cardiovascular death, nonfatal myocardial infarction, nonfatal stroke or hospitalization for unstable angina with objective evidence of myocardial ischemia",
+        "unit": "composite endpoint",
+        "attrs": {},
+        "source_id": "pmid:22109255",
+        "quote": "The primary efficacy parameter is the combination of cardiovascular death, nonfatal myocardial infarction, nonfatal stroke or hospitalization for unstable angina with objective evidence of myocardial ischemia",
+        "pub_date": "2012-02-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19697278"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/"
       },
       {
-        "fact_id": "f_90669ad083c7ee",
+        "fact_id": "f_00dc85dfd0e4d4",
         "entity": "trial:nct01130246",
         "key": "readout_statement",
-        "value": "The objective of this study is to evaluate the safety and efficacy of short-term A-002 treatment on morbidity and mortality when added to atorvastatin and standard of care in subjects with an acute coronary syndrome (ACS).",
+        "value": "The VISTA-16 study will determine whether varespladib methyl has a beneficial impact on cardiovascular events in patients with an acute coronary syndrome",
+        "unit": "not stated",
+        "attrs": {},
+        "source_id": "pmid:22109255",
+        "quote": "The VISTA-16 study will determine whether varespladib methyl has a beneficial impact on cardiovascular events in patients with an acute coronary syndrome",
+        "pub_date": "2012-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/"
+      },
+      {
+        "fact_id": "f_4b9117c8623bc8",
+        "entity": "trial:nct01130246",
+        "key": "readout_statement",
+        "value": "Varespladib therapy effectively reduced LDL-C and inflammatory biomarkers in ACS patients treated with conventional therapy including atorvastatin 80 mg daily. There were no treatment differences in clinical cardiovascular events.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:20863951",
+        "quote": "CONCLUSIONS: Varespladib therapy effectively reduced LDL-C and inflammatory biomarkers in ACS patients treated with conventional therapy including atorvastatin 80 mg daily. There were no treatment differences in clinical cardiovascular events.",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20863951"
+      },
+      {
+        "fact_id": "f_7bff0abea3fa10",
+        "entity": "trial:nct01130246",
+        "key": "readout_statement",
+        "value": "Varespladib methyl significantly reduced low-density lipoprotein cholesterol and inflammatory biomarkers in ACS subjects treated with standard-of-care and atorvastatin 80 mg daily.",
+        "unit": "",
+        "attrs": {
+          "trial": "FRANCIS",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21174506",
+        "quote": "Varespladib methyl significantly reduced low-density lipoprotein cholesterol and inflammatory biomarkers in ACS subjects treated with standard-of-care and atorvastatin 80 mg daily.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21174506/"
+      },
+      {
+        "fact_id": "f_d5b40f2fdb0714",
+        "entity": "trial:nct01130246",
+        "key": "readout_statement",
+        "value": "The DSMB's recommendation was based on a review of the totality of the safety and efficacy data available for the VISTA-16 clinical study.",
         "unit": "",
         "attrs": {
           "trial": "VISTA-16"
         },
-        "source_id": "ctgov:NCT01130246@2012-03-09",
-        "quote": "Brief summary: The objective of this study is to evaluate the safety and efficacy of short-term A-002 treatment on morbidity and mortality when added to atorvastatin and standard of care in subjects with an acute coronary syndrome (ACS).",
-        "pub_date": "2010-05-25",
-        "access": "registry",
-        "url": "https://clinicaltrials.gov/study/NCT01130246"
+        "source_id": "announcement:vista16",
+        "quote": "The DSMB's recommendation was based on a review of the totality of the safety and efficacy data available for the VISTA-16 clinical study.",
+        "pub_date": "2012-03-09",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/anthera-halts-vista-16-clinical-study-due-to-lack-of-efficacy-following-recommendation-by-the-independent-data-safety-monitoring-board-142116083.html"
       },
       {
-        "fact_id": "f_d9b792c30287eb",
+        "fact_id": "f_f19ae0bd2c70a7",
         "entity": "trial:nct01130246",
         "key": "readout_statement",
-        "value": "VISTA-16 clinical study halted due to lack of efficacy following DSMB recommendation",
+        "value": "There was a nonsignificant reduction in major adverse cardiovascular events at study completion; however, positive trends remained for unstable angina and myocardial infarction.",
         "unit": "",
         "attrs": {
-          "trial": "VISTA-16",
-          "drug": "varespladib"
+          "trial": "FRANCIS",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:21174506",
+        "quote": "There was a nonsignificant reduction in major adverse cardiovascular events at study completion; however, positive trends remained for unstable angina and myocardial infarction.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21174506/"
+      },
+      {
+        "fact_id": "f_2b311a2b3135ef",
+        "entity": "trial:nct01130246",
+        "key": "safety_signal",
+        "value": "safety and tolerability will also be evaluated",
+        "unit": "not stated",
+        "attrs": {},
+        "source_id": "pmid:22109255",
+        "quote": "Effects of varespladib methyl on lipid and inflammatory markers, in addition to safety and tolerability, will also be evaluated",
+        "pub_date": "2012-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/"
+      },
+      {
+        "fact_id": "f_aa885dc0c4bf5d",
+        "entity": "trial:nct01130246",
+        "key": "safety_signal",
+        "value": false,
+        "unit": "",
+        "attrs": {
+          "trial": "VISTA-16"
         },
         "source_id": "announcement:vista16",
         "quote": "Anthera Halts VISTA-16 Clinical Study Due to Lack of Efficacy Following Recommendation by the Independent Data Safety Monitoring Board",
@@ -1361,48 +1369,54 @@
         "url": "https://www.prnewswire.com/news-releases/anthera-halts-vista-16-clinical-study-due-to-lack-of-efficacy-following-recommendation-by-the-independent-data-safety-monitoring-board-142116083.html"
       },
       {
-        "fact_id": "f_2e24f425ca4a04",
+        "fact_id": "f_daa0a4de0da819",
         "entity": "trial:nct01130246",
         "key": "safety_signal",
-        "value": "not stated",
-        "unit": "not stated",
-        "attrs": {},
-        "source_id": "pmid:19129734",
-        "quote": "Thus, A-002 was effective at significantly decreasing total cholesterol, atherogenesis, and aneurysm formation in these 2 ApoE mouse models.",
-        "pub_date": "2009-01-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/19129734"
-      },
-      {
-        "fact_id": "f_b69a84dd62b288",
-        "entity": "trial:nct01130246",
-        "key": "safety_signal",
-        "value": "No treatment differences in clinical cardiovascular events; no mention of safety signal",
+        "value": "No treatment differences in elevated liver function studies on >1 occasion were observed.",
         "unit": "",
-        "attrs": {
-          "trial": "FRANCIS-ACS Trial (NCT00743925)"
-        },
+        "attrs": {},
         "source_id": "pmid:20863951",
-        "quote": "There were no treatment differences in clinical cardiovascular events.",
+        "quote": "No treatment differences in elevated liver function studies on >1 occasion were observed.",
         "pub_date": "2010-09-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/20863951"
       },
       {
-        "fact_id": "f_afd97006fdfa09",
+        "fact_id": "f_d8ee299bf659aa",
         "entity": "trial:nct01130246",
         "key": "stopped_early",
         "value": true,
         "unit": "",
         "attrs": {
-          "trial": "VISTA-16",
-          "reason": "lack of efficacy"
+          "trial": "VISTA-16"
         },
         "source_id": "announcement:vista16",
-        "quote": "the VISTA-16 Data Safety Monitoring Board (DSMB) has recommended stopping the VISTA-16 clinical study due to a lack efficacy that could not be reasonably overcome in the remainder of the trial",
+        "quote": "Anthera Halts VISTA-16 Clinical Study Due to Lack of Efficacy Following Recommendation by the Independent Data Safety Monitoring Board",
         "pub_date": "2012-03-09",
         "access": "press_release",
         "url": "https://www.prnewswire.com/news-releases/anthera-halts-vista-16-clinical-study-due-to-lack-of-efficacy-following-recommendation-by-the-independent-data-safety-monitoring-board-142116083.html"
+      },
+      {
+        "fact_id": "f_1af1d83217e17e",
+        "entity": "trial:nct01130246",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "APOA5",
+          "variant_or_score": "APOA5-1131T>C (rs662799)",
+          "outcome": "early-onset acute myocardial infarction",
+          "direction": "harmful",
+          "effect_on_biomarker": "raised plasma triglyceride levels",
+          "n": 1864,
+          "ci_low": 1.23,
+          "ci_high": 1.69
+        },
+        "source_id": "pmid:21130994",
+        "quote": "with a per C allele odds ratio of 1.44 (95% CI 1.23-1.69)",
+        "pub_date": "2010-11-16",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21130994/"
       }
     ],
     "sources": [
@@ -1435,12 +1449,28 @@
               {
                 "name": "A-002, varespladib methyl",
                 "type": "DRUG",
-                "other_names": []
+                "other_names": [],
+                "arms": [
+                  "A-002 500 mg"
+                ]
               },
               {
                 "name": "Placebo",
                 "type": "DRUG",
-                "other_names": []
+                "other_names": [],
+                "arms": [
+                  "Matched Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "A-002 500 mg",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Matched Placebo",
+                "type": "PLACEBO_COMPARATOR"
               }
             ],
             "conditions": [
@@ -1457,8 +1487,8 @@
       {
         "source_id": "pmid:21989792",
         "type": "journal",
-        "title": "Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome.",
-        "url": "https://europepmc.org/article/MED/21989792",
+        "title": "Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21989792/",
         "pub_date": "2011-12-01",
         "access": "abstract_only",
         "meta": {
@@ -1467,14 +1497,29 @@
           "doi": "10.1007/s10557-011-6344-2",
           "journal": "Cardiovascular drugs and therapy"
         },
-        "chars": 1544
+        "chars": 1547
+      },
+      {
+        "source_id": "pmid:21174506",
+        "type": "journal",
+        "title": "After FRANCIS: next steps in the clinical evaluation of varespladib methyl",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21174506/",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21174506",
+          "pmcid": null,
+          "doi": "10.2217/fca.10.118",
+          "journal": "Future cardiology"
+        },
+        "chars": 1262
       },
       {
         "source_id": "pmid:20863951",
         "type": "journal",
-        "title": "Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients.",
-        "url": "https://europepmc.org/article/MED/20863951",
-        "pub_date": "2010-09-01",
+        "title": "Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20863951/",
+        "pub_date": "2010-09-28",
         "access": "abstract_only",
         "meta": {
           "pmid": "20863951",
@@ -1482,28 +1527,43 @@
           "doi": "10.1016/j.jacc.2010.06.015",
           "journal": "Journal of the American College of Cardiology"
         },
-        "chars": 2088
+        "chars": 2565
+      },
+      {
+        "source_id": "pmid:21112895",
+        "type": "journal",
+        "title": "Varespladib: targeting the inflammatory face of atherosclerosis",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21112895/",
+        "pub_date": "2010-11-25",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21112895",
+          "pmcid": null,
+          "doi": "10.1093/eurheartj/ehq385",
+          "journal": "European heart journal"
+        },
+        "chars": 65
       },
       {
         "source_id": "pmid:19129734",
         "type": "journal",
-        "title": "Varespladib (A-002), a secretory phospholipase A2 inhibitor, reduces atherosclerosis and aneurysm formation in ApoE-/- mice.",
-        "url": "https://europepmc.org/article/MED/19129734",
+        "title": "Varespladib (A-002), a secretory phospholipase A2 inhibitor, reduces atherosclerosis and aneurysm formation in ApoE-/- mice",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19129734/",
         "pub_date": "2009-01-01",
         "access": "abstract_only",
         "meta": {
           "pmid": "19129734",
           "pmcid": null,
-          "doi": "10.1097/fjc.0b013e318195bfbc",
+          "doi": "10.1097/FJC.0b013e318195bfbc",
           "journal": "Journal of cardiovascular pharmacology"
         },
-        "chars": 1435
+        "chars": 1434
       },
       {
         "source_id": "pmcid:PMC2653470",
         "type": "journal",
-        "title": "A-002 (Varespladib), a phospholipase A2 inhibitor, reduces atherosclerosis in guinea pigs.",
-        "url": "https://europepmc.org/article/MED/19222850",
+        "title": "A-002 (Varespladib), a phospholipase A2 inhibitor, reduces atherosclerosis in guinea pigs",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19222850/",
         "pub_date": "2009-02-17",
         "access": "open_full_text",
         "meta": {
@@ -1515,40 +1575,10 @@
         "chars": 30070
       },
       {
-        "source_id": "pmid:19697278",
-        "type": "journal",
-        "title": "Varespladib methyl, an oral phospholipase A2 inhibitor for the potential treatment of coronary artery disease.",
-        "url": "https://europepmc.org/article/MED/19697278",
-        "pub_date": "2009-09-01",
-        "access": "abstract_only",
-        "meta": {
-          "pmid": "19697278",
-          "pmcid": null,
-          "doi": null,
-          "journal": "IDrugs : the investigational drugs journal"
-        },
-        "chars": 1617
-      },
-      {
-        "source_id": "pmid:19029066",
-        "type": "journal",
-        "title": "The synergistic inhibition of atherogenesis in apoE-/- mice between pravastatin and the sPLA2 inhibitor varespladib (A-002).",
-        "url": "https://europepmc.org/article/MED/19029066",
-        "pub_date": "2008-11-21",
-        "access": "abstract_only",
-        "meta": {
-          "pmid": "19029066",
-          "pmcid": "PMC2656655",
-          "doi": "10.1194/jlr.m800361-jlr200",
-          "journal": "Journal of lipid research"
-        },
-        "chars": 1585
-      },
-      {
         "source_id": "pmid:21602519",
         "type": "journal",
-        "title": "Varespladib inhibits secretory phospholipase A2 in bronchoalveolar lavage of different types of neonatal lung injury.",
-        "url": "https://europepmc.org/article/MED/21602519",
+        "title": "Varespladib inhibits secretory phospholipase A2 in bronchoalveolar lavage of different types of neonatal lung injury",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21602519/",
         "pub_date": "2011-05-20",
         "access": "abstract_only",
         "meta": {
@@ -1557,28 +1587,28 @@
           "doi": "10.1177/0091270011405498",
           "journal": "Journal of clinical pharmacology"
         },
-        "chars": 1541
+        "chars": 1540
       },
       {
         "source_id": "pmid:10027849",
         "type": "journal",
-        "title": "Pharmacology of LY315920/S-5920, [[3-(aminooxoacetyl)-2-ethyl-1- (phenylmethyl)-1H-indol-4-yl]oxy] acetate, a potent and selective secretory phospholipase A2 inhibitor: A new class of anti-inflammatory drugs, SPI.",
-        "url": "https://europepmc.org/article/MED/10027849",
+        "title": "Pharmacology of LY315920/S-5920, [[3-(aminooxoacetyl)-2-ethyl-1- (phenylmethyl)-1H-indol-4-yl]oxy] acetate, a potent and selective secretory phospholipase A2 inhibitor: A new class of anti-inflammatory drugs, SPI",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10027849/",
         "pub_date": "1999-03-01",
         "access": "abstract_only",
         "meta": {
           "pmid": "10027849",
           "pmcid": null,
-          "doi": "10.1016/s0022-3565(24)38064-4",
+          "doi": null,
           "journal": "The Journal of pharmacology and experimental therapeutics"
         },
-        "chars": 1990
+        "chars": 1989
       },
       {
         "source_id": "pmid:21446779",
         "type": "journal",
-        "title": "Varespladib.",
-        "url": "https://europepmc.org/article/MED/21446779",
+        "title": "Varespladib",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21446779/",
         "pub_date": "2011-01-01",
         "access": "abstract_only",
         "meta": {
@@ -1587,13 +1617,13 @@
           "doi": "10.2165/11533650-000000000-00000",
           "journal": "American journal of cardiovascular drugs : drugs, devices, and other interventions"
         },
-        "chars": 646
+        "chars": 645
       },
       {
         "source_id": "pmid:20809869",
         "type": "journal",
-        "title": "Varespladib methyl in cardiovascular disease.",
-        "url": "https://europepmc.org/article/MED/20809869",
+        "title": "Varespladib methyl in cardiovascular disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20809869/",
         "pub_date": "2010-10-01",
         "access": "abstract_only",
         "meta": {
@@ -1602,55 +1632,71 @@
           "doi": "10.1517/13543784.2010.517193",
           "journal": "Expert opinion on investigational drugs"
         },
-        "chars": 1480
+        "chars": 1483
       },
       {
-        "source_id": "pmid:18801741",
+        "source_id": "pmid:22109255",
         "type": "journal",
-        "title": "Analyses of group III secreted phospholipase A2 transgenic mice reveal potential participation of this enzyme in plasma lipoprotein modification, macrophage foam cell formation, and atherosclerosis.",
-        "url": "https://europepmc.org/article/MED/18801741",
-        "pub_date": "2008-09-18",
+        "title": "Inhibition of secretory phospholipase A(2) in patients with acute coronary syndromes: rationale and design of the vascular inflammation suppression to treat acute coronary syndrome for 16 weeks (VISTA-16) trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/",
+        "pub_date": "2012-02-01",
         "access": "abstract_only",
         "meta": {
-          "pmid": "18801741",
-          "pmcid": "PMC2662271",
-          "doi": "10.1074/jbc.m804628200",
-          "journal": "The Journal of biological chemistry",
-          "purpose": "genetics"
+          "pmid": "22109255",
+          "pmcid": null,
+          "doi": "10.1007/s10557-011-6358-9",
+          "journal": "Cardiovascular drugs and therapy",
+          "purpose": "design"
         },
-        "chars": 1814
+        "chars": 1733
       },
       {
-        "source_id": "pmid:18992148",
+        "source_id": "pmid:16368710",
         "type": "journal",
-        "title": "Low-penetrance alleles predisposing to sporadic colorectal cancers: a French case-controlled genetic association study.",
-        "url": "https://europepmc.org/article/MED/18992148",
-        "pub_date": "2008-11-07",
+        "title": "Tagging-SNP haplotype analysis of the secretory PLA2IIa gene PLA2G2A shows strong association with serum levels of sPLA2IIa: results from the UDACS study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16368710/",
+        "pub_date": "2005-12-20",
         "access": "abstract_only",
         "meta": {
-          "pmid": "18992148",
-          "pmcid": "PMC2585099",
-          "doi": "10.1186/1471-2407-8-326",
-          "journal": "BMC cancer",
+          "pmid": "16368710",
+          "pmcid": null,
+          "doi": "10.1093/hmg/ddi453",
+          "journal": "Human molecular genetics",
           "purpose": "genetics"
         },
-        "chars": 2083
+        "chars": 1802
       },
       {
-        "source_id": "pmid:20463618",
+        "source_id": "pmid:22879865",
         "type": "journal",
-        "title": "Role of polymorphic variants as genetic modulators of infection in neonatal sepsis.",
-        "url": "https://europepmc.org/article/MED/20463618",
-        "pub_date": "2010-10-01",
+        "title": "Functional analysis of two PLA2G2A variants associated with secretory phospholipase A2-IIA levels",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22879865/",
+        "pub_date": "2012-01-01",
         "access": "abstract_only",
         "meta": {
-          "pmid": "20463618",
-          "pmcid": "PMC2940937",
-          "doi": "10.1203/pdr.0b013e3181e6a068",
-          "journal": "Pediatric research",
+          "pmid": "22879865",
+          "pmcid": "PMC3412631",
+          "doi": "10.1371/journal.pone.0041139",
+          "journal": "PloS one",
           "purpose": "genetics"
         },
-        "chars": 1286
+        "chars": 1810
+      },
+      {
+        "source_id": "pmid:21130994",
+        "type": "journal",
+        "title": "Strong association of the APOA5-1131T>C gene variant and early-onset acute myocardial infarction",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21130994/",
+        "pub_date": "2010-11-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21130994",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2010.11.011",
+          "journal": "Atherosclerosis",
+          "purpose": "genetics"
+        },
+        "chars": 1877
       },
       {
         "source_id": "announcement:vista16",
@@ -1666,65 +1712,57 @@
     "models_used": {
       "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
     },
-    "meterless": {
-      "engine": "Meterless World Model (official reference implementation)",
-      "entities": 24,
-      "facts": 44,
-      "relationships": 21,
-      "events": 125,
-      "audit_entries": 125,
-      "state_shape_keys": 6
-    },
+    "meterless": null,
     "usage": {
       "Extraction": {
         "calls": 15,
-        "input_tokens": 16675,
-        "output_tokens": 4806,
+        "input_tokens": 16877,
+        "output_tokens": 4662,
         "estimated": false,
         "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
         "provider": "nvidia"
       },
       "MechanismAnalyst": {
         "calls": 2,
-        "input_tokens": 6942,
-        "output_tokens": 6758,
+        "input_tokens": 7678,
+        "output_tokens": 7427,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 3279,
+        "output_tokens": 14322,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Investigator": {
         "calls": 2,
-        "input_tokens": 6697,
-        "output_tokens": 4949,
+        "input_tokens": 7399,
+        "output_tokens": 6587,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Critic": {
         "calls": 2,
-        "input_tokens": 8211,
-        "output_tokens": 7670,
+        "input_tokens": 9651,
+        "output_tokens": 3844,
         "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
-        "provider": "meterless"
-      },
-      "Verifier": {
-        "calls": 3,
-        "input_tokens": 5843,
-        "output_tokens": 4289,
-        "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
         "provider": "meterless"
       },
       "Reporter": {
         "calls": 1,
-        "input_tokens": 4088,
-        "output_tokens": 1584,
+        "input_tokens": 4989,
+        "output_tokens": 1050,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"

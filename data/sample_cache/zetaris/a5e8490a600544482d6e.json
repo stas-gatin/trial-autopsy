@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19166443+OR+PMCID%3APMC3120223&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*25\\.8%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%25.8%%' LIMIT 5",
+ "rows": [
+  [
+   "8%), triglycerides (TG; -25.8%), apolipoprotein (Apo) B (-18"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20863951&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*49\\\\.6%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' AND r.abstractText LIKE '%49.6%' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Results</h4>After 8 weeks (primary efficacy end point), varespladib/atorvastatin reduced mean LDL-C levels from baseline by 49.6% compared with 43"
+  ]
+ ],
+ "error": null
+}

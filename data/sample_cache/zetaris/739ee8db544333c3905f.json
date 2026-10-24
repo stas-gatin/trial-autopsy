@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12686036&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*154[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12686036' LIMIT 5",
+ "rows": [
+  [
+   " By that time, 100 primary events had occurred in the atorvastatin group compared with 154 events in the placebo group (hazard ratio 0"
+  ]
+ ],
+ "error": null
+}

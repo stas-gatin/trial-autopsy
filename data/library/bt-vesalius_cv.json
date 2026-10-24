@@ -1,0 +1,3575 @@
+{
+  "run_id": "bt-vesalius_cv",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2025-10-02",
+  "backtest": true,
+  "readout_date": "2025-10-02",
+  "analysis_date": "2025-10-02",
+  "trial": {
+    "nct_id": "NCT03872401",
+    "acronym": "VESALIUS-CV",
+    "title": "Effect of Evolocumab in Patients at High Cardiovascular Risk Without Prior Myocardial Infarction or Stroke",
+    "sponsor": "Amgen",
+    "status": "COMPLETED",
+    "enrollment": 12301,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Coronary Heart Disease (CHD)"
+    ],
+    "primary_completion": "2025-07-25"
+  },
+  "drug": {
+    "name": "evolocumab",
+    "chembl_id": "CHEMBL2364655",
+    "aliases": [
+      "AMG-145",
+      "Repatha",
+      "Repatha sureclick",
+      "amg 145",
+      "pcsk9i"
+    ],
+    "drug_type": "Antibody",
+    "mechanisms": [
+      "Subtilisin/kexin type 9 inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000169174",
+        "symbol": "PCSK9",
+        "name": "proprotein convertase subtilisin/kexin type 9"
+      }
+    ],
+    "searched_as": "evolocumab"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-vesalius_cv",
+  "log_file": "logs/trace-bt-vesalius_cv.jsonl",
+  "execution_time_seconds": 550.2,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"2, 2025 /PRNewswire/ -- Amgen (NASDAQ:AMGN) today announced the Phase 3 VESALIUS-CV clinical trial met its dual primary endpoints demonstrat\" (announcement:vesalius_cv)",
+      "predicted_outcome": "success",
+      "consistency": "consistent with the calculator (probability of success 96%)",
+      "primary_category": "robust_success",
+      "secondary_categories": [],
+      "calculator_category": "robust_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.965,
+      "weakest_link": "power 97%"
+    },
+    "report": {
+      "headline": "VESALIUS-CV met its dual primary endpoints in ~12,300 high-risk primary prevention patients with 4.5-year follow-up, confirming the calculator's robust_success prediction (96.5% power, expected HR 0.76), though the actual hazard ratio and confidence interval remain unpublished.",
+      "summary": "The VESALIUS-CV trial randomized 12,301 participants without prior MI or stroke but with elevated lipids (LDL-C ≥90 mg/dL, non-HDL-C ≥120 mg/dL, or apoB ≥80 mg/dL on statin) to evolocumab versus placebo and followed them for a median of 4.5 years. The trial met both dual primary endpoints — composites of CHD death/MI/ischemic stroke and that plus ischemia-driven revascularization — per the October 2025 announcement. The calculator predicted robust success (expected HR 0.759, 24% RRR) based on FOURIER's -59% LDL-C reduction applied to the VESALIUS-CV entry threshold, the longer 4.5-year follow-up (time factor 0.939), and 751 planned events yielding 96.5% power. No new safety signals were reported. The main limitation is that the actual HR, 95% CI, and achieved LDL-C reduction in VESALIUS-CV have not yet been published; only the top-line positive result is available.",
+      "key_evidence": [
+        "12,301 participants randomized, 4.5-year median follow-up, 751 planned events — ClinicalTrials.gov NCT03872401 VESALIUS-CV; Rationale and design of the effect of evolocumab in patients at high cardiovascular risk without prior myocardial infarction or stroke (VESALIUS-CV) trial.; Landmark Phase 3 Trial (VESALIUS-CV) Meets Primary Endpoints in a Cardiovascular Primary Prevention Study of 12,000 Patients",
+        "Dual primary endpoints met: CHD death/MI/ischemic stroke and CHD death/MI/ischemic stroke/ischemia-driven revascularization — Landmark Phase 3 Trial (VESALIUS-CV) Meets Primary Endpoints in a Cardiovascular Primary Prevention Study of 12,000 Patients",
+        "Calculator predicted HR 0.759 (24% RRR) with 96.5% power, MDE HR 0.815 — calculator output",
+        "PCSK9 genetic association score 0.949 with 51 evidence items — opentargets:PCSK9",
+        "FOURIER (secondary prevention) showed HR 0.85 (95% CI 0.79-0.92) with -59% LDL-C reduction — Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease; Low-Density Lipoprotein Cholesterol Lowering With Evolocumab and Outcomes in Patients With Peripheral Artery Disease: Insights From the FOURIER Trial",
+        "No new safety signals observed in VESALIUS-CV; long-term FOURIER extension showed adverse event rates not exceeding placebo — Landmark Phase 3 Trial (VESALIUS-CV) Meets Primary Endpoints in a Cardiovascular Primary Prevention Study of 12,000 Patients; Long-Term Evolocumab in Patients With Established Atherosclerotic Cardiovascular Disease",
+        "VESALIUS-CV specific placebo-adjusted LDL-C reduction not reported; calculator used FOURIER's -59% as proxy — Landmark Phase 3 Trial (VESALIUS-CV) Meets Primary Endpoints in a Cardiovascular Primary Prevention Study of 12,000 Patients"
+      ],
+      "what_would_change_this": "Publication of the actual hazard ratio, 95% confidence interval, p-value, and achieved LDL-C reduction in VESALIUS-CV would confirm the magnitude of benefit and allow direct comparison with the calculator's prediction.",
+      "readthrough_note": "The result supports the PCSK9 inhibitor class effect in primary prevention; inclisiran's VICTORION-2P trial (NCT05030428) in secondary prevention and other PCSK9 programmes should show consistent benefit proportional to LDL-C lowering achieved."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.949 for PCSK9",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 1.18 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.241,
+        "detail": "expected HR 0.759 at 4.5 y (relative risk reduction 24.1%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.965,
+        "detail": "power 96% with 751 events; smallest detectable HR 0.815",
+        "pass": true
+      }
+    ],
+    "calculator": {
+      "case_id": "vesalius_cv",
+      "ldl_equivalent_mmol": 1.18,
+      "basis": "LDL-C",
+      "time_factor": 0.939,
+      "expected_hr": 0.759,
+      "causal_rrr": 0.241,
+      "bp_factor": 1.0,
+      "power": 0.965,
+      "mde_hr_80": 0.815,
+      "outcome": "success",
+      "category": "robust_success",
+      "secondary": [],
+      "weakest_link": "power 97%",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0"
+      ],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "vesalius_cv",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -59.0,
+          "baseline": null,
+          "method": "placebo-adjusted percent change from FOURIER phase 3 (48 weeks) applied to VESALIUS-CV LDL-C entry threshold baseline; VESALIUS-CV specific change fact reports None",
+          "source": "ctgov:NCT03872401@2025-10-02,pmid:28304224"
+        }
+      ],
+      "followup_years": 4.5,
+      "events": 751,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "PCSK9 genetic association score 0.949 (f_147eddff9b78ae) with 51 evidence items, 6 published before the 2025-10-02 cut-off. Multiple coronary artery disease GWAS studies before cut-off (GCST010867, GCST90132314, GCST90449059, GCST010479) support a causal link between PCSK9 and coronary disease (score >= 0.5 with coronary-disease studies).",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -59,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted percent change from FOURIER phase 3 (48 weeks) applied to VESALIUS-CV LDL-C entry threshold baseline; VESALIUS-CV specific change fact reports None",
+          "fact_ids": [
+            "f_7e7081f85eb4ca",
+            "f_d1025d13961f00"
+          ]
+        }
+      ],
+      "followup_years": 4.5,
+      "followup_fact_ids": [
+        "f_a0ddb22d9f70ae",
+        "f_50eb2bfffe279b"
+      ],
+      "events": 751,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_7f3c172a93510a"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_7cb94c378cb8b2",
+        "f_fc87aff7463579",
+        "f_18fbcfdb3f44a4"
+      ],
+      "missing": [
+        "VESALIUS-CV specific placebo-adjusted LDL-C change (f_1b048350e9742f reports None)",
+        "actual primary event count for VESALIUS-CV",
+        "observed HR and CI for VESALIUS-CV primary endpoint"
+      ],
+      "notes": "VESALIUS-CV (NCT03872401) is a phase 3 primary prevention trial of evolocumab added to statin therapy in patients without prior MI or stroke. The trial's own biomarker change fact (f_1b048350e9742f) reports no value, so the FOURIER phase 3 placebo-adjusted LDL-C percent change (-59% at 48 weeks, f_7e7081f85eb4ca) is used as the best available proxy. Percent changes carry over between populations; baseline is the VESALIUS-CV LDL-C entry threshold of 90 mg/dL (≈2.33 mmol/L, f_d1025d13961f00) treated as a lower bound. Median follow-up 4.5 years (f_a0ddb22d9f70ae). Planned primary events 751 (f_7f3c172a93510a); no actual event count or observed HR available in the evidence store."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator predicted robust_success with expected HR 0.759 (24% RRR), power 96.5%, MDE HR 0.815 based on -59% LDL-C reduction from FOURIER applied to VESALIUS-CV entry threshold (LDL-C ≥90 mg/dL), 4.5-year follow-up, and 751 planned events.",
+            "refs": [
+              "calculator",
+              "f_7e7081f85eb4ca",
+              "f_d1025d13961f00",
+              "f_a0ddb22d9f70ae",
+              "f_7f3c172a93510a"
+            ]
+          },
+          {
+            "text": "PCSK9 target genetics strongly causal for coronary disease (genetic association score 0.949, 51 evidence items, 6 published before cut-off).",
+            "refs": [
+              "f_147eddff9b78ae"
+            ]
+          },
+          {
+            "text": "LDL-C biomarker is causal for cardiovascular disease; FOURIER (secondary prevention) demonstrated HR 0.85 (95% CI 0.79-0.92) for primary endpoint with similar LDL-C reduction (-59% at 48 weeks).",
+            "refs": [
+              "f_7e7081f85eb4ca",
+              "f_d4325326d13d4f",
+              "f_4ea83819a8a179"
+            ]
+          },
+          {
+            "text": "Trial met its dual primary endpoints per announcement: \"Repatha added to statins or other LDL-C lowering treatments significantly reduces cardiovascular events compared with standard therapy alone as primary prevention.\"",
+            "refs": [
+              "f_ee57041e663cfe",
+              "f_fc87aff7463579"
+            ]
+          },
+          {
+            "text": "No new safety signals observed; safety profile consistent with FOURIER and long-term extension.",
+            "refs": [
+              "f_33f4e888ed0e7b",
+              "f_08916d37c2c4b9",
+              "f_2f4f951ef30c38"
+            ]
+          },
+          {
+            "text": "Adequate sample size (~12,300 randomized) and longer follow-up (4.5 years vs FOURIER's 2.2 years) providing more events and time for benefit to accrue.",
+            "refs": [
+              "f_9865e57f83a762",
+              "f_a0ddb22d9f70ae",
+              "f_55cf67ecbf492c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Actual observed HR and CI for VESALIUS-CV primary endpoint not yet published; announcement confirms statistical significance but not magnitude.",
+            "refs": [
+              "f_1b048350e9742f",
+              "f_7cb94c378cb8b2",
+              "f_fc87aff7463579"
+            ]
+          },
+          {
+            "text": "VESALIUS-CV specific placebo-adjusted LDL-C change not reported (fact reports None); calculator used FOURIER's -59% as proxy.",
+            "refs": [
+              "f_1b048350e9742f"
+            ]
+          },
+          {
+            "text": "Primary prevention population may have different event pathophysiology than FOURIER's secondary prevention, though entry criteria required high risk (LDL-C ≥90 mg/dL or non-HDL-C ≥120 mg/dL or apoB ≥80 mg/dL on statin).",
+            "refs": [
+              "f_732d69f9183734",
+              "f_d1025d13961f00",
+              "f_6024b9c32784d9",
+              "f_451abf2f19d831"
+            ]
+          }
+        ],
+        "would_settle": "Publication of VESALIUS-CV primary results with observed HR, 95% CI, and actual LDL-C reduction in the trial population."
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If actual HR is closer to 0.85-0.90 (like FOURIER) rather than predicted 0.76, the upper confidence bound might approach 0.95, making it a narrower success.",
+            "refs": [
+              "f_d4325326d13d4f",
+              "f_4ea83819a8a179"
+            ]
+          },
+          {
+            "text": "Primary prevention patients may derive less absolute benefit despite similar relative risk reduction.",
+            "refs": [
+              "f_732d69f9183734"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator's expected HR 0.759 is substantially lower than FOURIER's 0.85, reflecting longer follow-up (4.5 vs 2.2 years) and time-factor adjustment (0.939).",
+            "refs": [
+              "calculator",
+              "f_a0ddb22d9f70ae",
+              "f_55cf67ecbf492c"
+            ]
+          },
+          {
+            "text": "High power (96.5%) and MDE HR 0.815 suggest trial was well-sized to detect a robust effect.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Announcement describes \"significantly reduces cardiovascular events\" without qualification, suggesting clear benefit.",
+            "refs": [
+              "f_ee57041e663cfe"
+            ]
+          }
+        ],
+        "would_settle": "Actual HR and CI from primary publication."
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Dual primary endpoints (CHD death/MI/ischemic stroke; and adding ischemia-driven revascularization) could dilute effect if revascularization driven by non-atherosclerotic factors.",
+            "refs": [
+              "f_18fbcfdb3f44a4",
+              "f_7cb94c378cb8b2",
+              "f_fc87aff7463579"
+            ]
+          },
+          {
+            "text": "Population limited to high-risk primary prevention without prior MI/stroke; generalizability to lower-risk primary prevention unknown.",
+            "refs": [
+              "f_732d69f9183734",
+              "f_d1025d13961f00"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No safety signals reported (\"No new safety signals were observed\").",
+            "refs": [
+              "f_33f4e888ed0e7b"
+            ]
+          },
+          {
+            "text": "Both dual primary endpoints met, suggesting consistent benefit across endpoint definitions.",
+            "refs": [
+              "f_ee57041e663cfe",
+              "f_fc87aff7463579"
+            ]
+          },
+          {
+            "text": "FOURIER showed consistent benefit across subgroups including diabetes status and PAD.",
+            "refs": [
+              "f_302e10ce4ec1fd",
+              "f_de7e257142e960",
+              "f_94c8f555ac4b5c",
+              "f_fbcede1cbccd8c"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses from primary publication to assess consistency across risk strata."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If actual LDL-C reduction in VESALIUS-CV was less than FOURIER's -59% (e.g., due to different background therapy or adherence), expected benefit would be smaller.",
+            "refs": [
+              "f_1b048350e9742f",
+              "f_7e7081f85eb4ca"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator predicts large effect (HR 0.759) with high power; trial met endpoint, so effect was not too small to detect.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "PCSK9 inhibitors consistently achieve ~50-60% LDL-C reduction across trials.",
+            "refs": [
+              "f_7e7081f85eb4ca",
+              "f_0b2b80b2c1d384",
+              "f_551256cc00aa27"
+            ]
+          }
+        ],
+        "would_settle": "Actual achieved LDL-C reduction in VESALIUS-CV."
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary prevention population may have more non-atherosclerotic events (e.g., heart failure, arrhythmia) that LDL-C lowering does not prevent, diluting relative risk reduction.",
+            "refs": [
+              "f_732d69f9183734"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Entry criteria required high lipid levels despite statin therapy (LDL-C ≥90, non-HDL-C ≥120, or apoB ≥80 mg/dL), enriching for atherosclerotic risk.",
+            "refs": [
+              "f_732d69f9183734",
+              "f_d1025d13961f00",
+              "f_6024b9c32784d9",
+              "f_451abf2f19d831"
+            ]
+          },
+          {
+            "text": "FOURIER subgroup analyses showed consistent benefit regardless of baseline risk factors.",
+            "refs": [
+              "f_302e10ce4ec1fd",
+              "f_de7e257142e960",
+              "f_94c8f555ac4b5c"
+            ]
+          }
+        ],
+        "would_settle": "Event adjudication data showing proportion of atherosclerotic vs non-atherosclerotic events in VESALIUS-CV."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Dual primary endpoints require both to be met; if one was marginal, could indicate endpoint sensitivity issues.",
+            "refs": [
+              "f_18fbcfdb3f44a4",
+              "f_fc87aff7463579"
+            ]
+          },
+          {
+            "text": "Composite includes ischemia-driven revascularization, which can be influenced by physician discretion.",
+            "refs": [
+              "f_18fbcfdb3f44a4",
+              "f_fc87aff7463579"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Both dual primary endpoints met per announcement.",
+            "refs": [
+              "f_ee57041e663cfe"
+            ]
+          },
+          {
+            "text": "Follow-up (4.5 years) substantially longer than FOURIER (2.2 years), allowing full expression of LDL-C lowering benefit.",
+            "refs": [
+              "f_a0ddb22d9f70ae",
+              "f_55cf67ecbf492c"
+            ]
+          },
+          {
+            "text": "No active comparator or crossover design issues; placebo-controlled on background statin.",
+            "refs": [
+              "f_732d69f9183734"
+            ]
+          }
+        ],
+        "would_settle": "Primary publication with endpoint-specific HRs."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "FOURIER showed neutral effect on new-onset diabetes (HR 1.05 without diabetes, 1.00 with prediabetes).",
+            "refs": [
+              "f_b9368a20e8f50c",
+              "f_a041469ca3f320",
+              "f_145d9252c84cb1",
+              "f_c252391f67292d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No new safety signals in VESALIUS-CV; long-term FOURIER extension showed adverse event rates not exceeding placebo.",
+            "refs": [
+              "f_33f4e888ed0e7b",
+              "f_08916d37c2c4b9",
+              "f_2f4f951ef30c38"
+            ]
+          },
+          {
+            "text": "EBBINGHAUS cognitive substudy showed no difference.",
+            "refs": [
+              "f_bee17e6070ccdf"
+            ]
+          },
+          {
+            "text": "No blood pressure increase or other off-target harm reported for evolocumab.",
+            "refs": [
+              "f_b1d4f0b6d788b0"
+            ]
+          }
+        ],
+        "would_settle": "Full safety dataset from VESALIUS-CV publication."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 genetic association score 0.949 with 51 evidence items; multiple CAD GWAS support causal link.",
+            "refs": [
+              "f_147eddff9b78ae"
+            ]
+          },
+          {
+            "text": "Mendelian randomization studies show PCSK9 loss-of-function variants protect against CHD (HR 0.79-0.81 per 15-28% LDL-C reduction).",
+            "refs": [
+              "f_3685591272fd74",
+              "f_fcb9ba6ac0746d"
+            ]
+          }
+        ],
+        "would_settle": "N/A - genetics strongly support causality."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is established causal biomarker for atherosclerotic cardiovascular disease.",
+            "refs": [
+              "f_147eddff9b78ae",
+              "f_3685591272fd74",
+              "f_fcb9ba6ac0746d"
+            ]
+          },
+          {
+            "text": "FOURIER demonstrated LDL-C reduction translates to clinical benefit.",
+            "refs": [
+              "f_7e7081f85eb4ca",
+              "f_d4325326d13d4f"
+            ]
+          }
+        ],
+        "would_settle": "N/A - LDL-C causality well-established."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed as planned with ~12,300 randomized and 4.5-year median follow-up.",
+            "refs": [
+              "f_9865e57f83a762",
+              "f_a0ddb22d9f70ae",
+              "f_c0a92017bb1f75"
+            ]
+          },
+          {
+            "text": "Planned events (751) accrued; no early stopping for futility or business reasons reported.",
+            "refs": [
+              "f_7f3c172a93510a",
+              "f_ee57041e663cfe"
+            ]
+          }
+        ],
+        "would_settle": "N/A - execution appears successful."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Actual HR, CI, p-value, and achieved LDL-C reduction for VESALIUS-CV not yet published; only top-line announcement available.",
+            "refs": [
+              "f_1b048350e9742f",
+              "f_7cb94c378cb8b2",
+              "f_fc87aff7463579",
+              "f_ee57041e663cfe"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Announcement confirms dual primary endpoints met with statistical significance.",
+            "refs": [
+              "f_ee57041e663cfe"
+            ]
+          },
+          {
+            "text": "Calculator prediction based on robust genetic and trial evidence (FOURIER) is consistent with success.",
+            "refs": [
+              "calculator",
+              "f_147eddff9b78ae",
+              "f_7e7081f85eb4ca"
+            ]
+          },
+          {
+            "text": "No safety concerns raised.",
+            "refs": [
+              "f_33f4e888ed0e7b"
+            ]
+          }
+        ],
+        "would_settle": "Full primary manuscript publication."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "The biomarker change input (-59% LDL-C) is taken from FOURIER (secondary prevention) rather than VESALIUS-CV itself. VESALIUS-CV specific placebo-adjusted LDL-C reduction is not reported (fact f_1b048350e9742f). While using the phase 3 proxy is the accepted method, the primary prevention population, background therapy, and adherence may differ, making the true LDL-C reduction uncertain. This proxy should be explicitly flagged as a caveat in the calculator assumptions.",
+            "target_agent": "mechanism",
+            "request": "Document the proxy assumption and consider sensitivity analysis using a range of plausible LDL-C reductions (e.g., -50% to -60%) to assess robustness of expected HR."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator assumes a baseline LDL-C of 2.0 mmol/L (≈77 mg/dL) for VESALIUS-CV, but the inclusion threshold is LDL-C ≥90 mg/dL (fact f_d1025d13961f00) and the actual baseline is likely higher (≈100-120 mg/dL). A higher baseline would increase the absolute LDL-C reduction (mmol/L) for the same percent change, leading to a larger ldl_equivalent_mmol and a lower expected HR (more benefit). This assumption may slightly underestimate the predicted benefit.",
+            "target_agent": "mechanism",
+            "request": "Verify the baseline LDL-C assumption; if possible, use the reported mean baseline from VESALIUS-CV (when published) or a more representative value from similar primary prevention populations."
+          },
+          {
+            "severity": "medium",
+            "issue": "The time_factor of 0.939 for 4.5-year follow-up (vs. FOURIER's 2.2 years) assumes a log-linear relationship between LDL-C reduction and hazard ratio over time, derived from CTT meta-analyses of statins. This extrapolation to PCSK9 inhibitors in primary prevention is unvalidated and may overestimate the additional benefit from longer exposure. The expected HR of 0.759 is substantially lower than FOURIER's observed 0.85, largely due to this time_factor.",
+            "target_agent": "mechanism",
+            "request": "Clarify the source and validation of the time_factor for PCSK9 inhibitors; consider presenting a range of expected HRs with and without time_factor adjustment."
+          },
+          {
+            "severity": "medium",
+            "issue": "The primary category 'robust_success' is assigned with high confidence, but the actual hazard ratio and confidence interval for VESALIUS-CV are not yet published. The announcement only confirms statistical significance of dual primary endpoints, not the magnitude. If the true HR is closer to FOURIER's 0.85, the upper confidence bound could approach 0.95, which would constitute a 'narrow_success' rather than 'robust_success'. Confidence should be tempered until the primary publication.",
+            "target_agent": "investigator",
+            "request": "Downgrade confidence to 'moderate' or add a caveat that the category assignment is provisional pending full results; explicitly state that 'robust_success' relies on the calculator's predicted HR (0.759) rather than observed data."
+          },
+          {
+            "severity": "low",
+            "issue": "The dual primary endpoints include ischemia-driven revascularization, which is subject to physician discretion and may introduce noise. The announcement states both endpoints were met, but the individual hazard ratios are unknown. If the revascularization component drove the significance, the clinical relevance could be questioned.",
+            "target_agent": "investigator",
+            "request": "Await primary publication to examine endpoint-specific HRs and assess consistency; note this as a caveat in the final report."
+          },
+          {
+            "severity": "medium",
+            "issue": "The calculator's power calculation (96.5%) uses 751 events for a single endpoint at alpha=0.05 two-sided. However, the trial has dual primary endpoints (co-primary). If the statistical analysis plan required both to be significant without alpha adjustment (intersection-union test), the power for each endpoint individually is as calculated, but the overall power to reject both is lower. If alpha was split, power for each would be lower. The calculator does not account for multiplicity.",
+            "target_agent": "mechanism",
+            "request": "Check the statistical analysis plan for VESALIUS-CV to determine if alpha was split or if an intersection-union test was used; adjust power calculation accordingly."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_7e7081f85eb4ca",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -59,
+          "unit": "percent",
+          "source_id": "pmid:28304224",
+          "status": "confirmed",
+          "found": "At 48 weeks, the least-squares mean percentage reduction in LDL cholesterol levels with evolocumab, as compared with placebo, was 59%",
+          "note": "The abstract states a 59% reduction in LDL-C at 48 weeks, matching the claim.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*59%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28304224' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d1025d13961f00",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 90,
+          "unit": "mg/dL",
+          "source_id": "ctgov:NCT03872401@2025-10-02",
+          "status": "confirmed",
+          "found": "Low-density lipoprotein cholesterol (LDL-C) ≥ 90 mg/dL (≥ 2",
+          "note": "The registry eligibility criteria specify LDL-C ≥ 90 mg/dL.",
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*90 mg/dL[^.]*)', 1) AS sentence FROM registry LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_7f3c172a93510a",
+          "claim": "c3",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 751,
+          "unit": "patients",
+          "source_id": "pmid:38160917",
+          "status": "confirmed",
+          "found": "The trial is planned to continue until at least 751 patients experience an adjudicated triple endpoint",
+          "note": "The abstract states the trial planned to continue until at least 751 patients experience the triple endpoint.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*751[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '38160917' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_50eb2bfffe279b",
+          "claim": "c4",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 4.5,
+          "unit": "years",
+          "source_id": "pmid:38160917",
+          "status": "confirmed",
+          "found": "the median follow-up is ≥4.5 years",
+          "note": "The abstract states median follow-up is ≥4.5 years.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*4\\.5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '38160917' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 4,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 4
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PCSK9",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.732,
+        "genetic_association_score": 0.949,
+        "evidence_count": 51,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.971,
+            "study_id": "GCST010867",
+            "trait": "Coronary artery disease",
+            "n": 168228,
+            "publication_date": "2020-10-05",
+            "pmid": "33020668",
+            "variant": "rs151193009",
+            "beta": -0.447667,
+            "p": "1e-14",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.965,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs472495",
+            "beta": 0.006884953522584949,
+            "p": "3.7131738662719727e-13",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.951,
+            "study_id": "GCST90449059",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 185000,
+            "publication_date": "2024-11-13",
+            "pmid": "39537608",
+            "variant": "rs11206510",
+            "beta": -0.0255560596854,
+            "p": "2.8949999809265137e-9",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.948,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.193186932710206,
+            "p": "9.26200008392334e-31",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs11206510",
+            "beta": -0.06765864847381481,
+            "p": "1e-8",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs11591147",
+            "beta": -0.010701321233358261,
+            "p": "1.431955337524414e-12",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs11591147",
+            "beta": -0.012468438835740718,
+            "p": "1.3121823072433472e-14",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.203581973859205,
+            "p": "5.118000030517578e-26",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 6
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_1fb123ea703cb0",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 141.3,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "Among treated patients (age 60.5 ± 9.6 years; 28.6% women; low-density lipoprotein cholesterol [LDL-C], 141.3 ± 33.1 mg/dL)",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_61b553aedf191e",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 92,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:28304224",
+        "quote": "from a median baseline value of 92 mg per deciliter (2.4 mmol per liter)",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_e1ec198dc2e55b",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 92.5,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "mean LDL-C level, 92.5 mg/dL [SD, 27.2])",
+        "pub_date": "2016-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27846344"
+      },
+      {
+        "fact_id": "f_0b2b80b2c1d384",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -59.1,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "52 weeks",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "dose": "420 mg monthly",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "The evolocumab group achieved lower LDL-C levels (28.1 vs 87.2 mg/dL; P",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_1b048350e9742f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "VESALIUS-CV",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "Repatha is known as a highly effective LDL-C lowering treatment",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_4c5b19d4d63318",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -1.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "population": "patients without PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Because of their higher risk, patients with PAD had larger absolute risk reductions for the primary end point (3.5% with PAD, 1.6% without PAD)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_551256cc00aa27",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -56.5,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 78",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "dose": "420 mg monthly",
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "Compared with placebo, the evolocumab group achieved lower mean, time-weighted LDL-C levels (93.0 vs 36.6 mg/dL; difference, -56.5 mg/dL [95% CI, -59.7 to -53.4]; P",
+        "pub_date": "2016-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27846344"
+      },
+      {
+        "fact_id": "f_7e7081f85eb4ca",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -59,
+        "unit": "percent",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "48 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:28304224",
+        "quote": "At 48 weeks, the least-squares mean percentage reduction in LDL cholesterol levels with evolocumab, as compared with placebo, was 59%",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_aa9e78f2564ea1",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -3.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "population": "patients with PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and the key secondary end point (3.5% with PAD, 1.4% without PAD).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_b34bf7c9a69350",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "mmol/L",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "2669 (10%) of 25 982 patients achieved LDL-cholesterol concentrations of less than 0·5 mmol/L",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_ce200778ea82a2",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -3.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "population": "patients with PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Because of their higher risk, patients with PAD had larger absolute risk reductions for the primary end point (3.5% with PAD, 1.6% without PAD)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_f263a3f382c4a9",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -1.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "population": "patients without PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and the key secondary end point (3.5% with PAD, 1.4% without PAD).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_39811b613eb69d",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 37,
+        "unit": "nmol/L",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "The median (interquartile range) baseline Lp(a) concentration was 37 (13-165) nmol/L.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_54e1568e2b2af1",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -26.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "48 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "At 48 weeks, evolocumab significantly reduced Lp(a) by a median (interquartile range) of 26.9% (6.2%-46.7%).",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_3ecfcf56dd2415",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 5.2,
+        "unit": "msec",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "evolocumab"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "psychomotor speed (change in raw score, 5.2 msec and 0.9 msec, respectively)",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_45b7afb6b911ec",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.52,
+        "unit": "raw score change",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "evolocumab"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "working memory (change in raw score, -0.52 in the evolocumab group and -0.93 in the placebo group)",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_47100bcffcd17a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -3.17,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "52 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "dose": "420 mg monthly",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "and macrophage index (-3.17 vs -1.45 mm; P = 0.04) throughout the arterial segment.",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_4d22389ba31d5a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.93,
+        "unit": "raw score change",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "placebo"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "working memory (change in raw score, -0.52 in the evolocumab group and -0.93 in the placebo group)",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_61ee2c5131114d",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.45,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "52 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "dose": "placebo",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "and macrophage index (-3.17 vs -1.45 mm; P = 0.04) throughout the arterial segment.",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_64933b5ba1fdc3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.53,
+        "unit": "raw score change",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "evolocumab"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "episodic memory (change in raw score, -1.53 and -1.53, respectively)",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_a89ddeacef1c2a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -2.29,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "52 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "420 mg monthly",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "Greater regression of percent atheroma volume was observed with evolocumab compared with placebo (-2.29% ± 0.47% vs -0.61% ± 0.46%; P = 0.009).",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_d105f4c8374bc4",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.9,
+        "unit": "msec",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "placebo"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "psychomotor speed (change in raw score, 5.2 msec and 0.9 msec, respectively)",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_f2efab81c8dcfc",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.61,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "52 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "placebo",
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "Greater regression of percent atheroma volume was observed with evolocumab compared with placebo (-2.29% ± 0.47% vs -0.61% ± 0.46%; P = 0.009).",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_fdd24d7bfce502",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.21,
+        "unit": "raw score change",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "over time",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "arm": "evolocumab"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "the mean (±SD) change from baseline over time in the raw score for the spatial working memory strategy index of executive function (primary end point) was -0.21±2.62 in the evolocumab group",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_147eddff9b78ae",
+        "entity": "target:pcsk9",
+        "key": "genetic_association_score",
+        "value": 0.949,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 51,
+          "evidence_before_cutoff": 6
+        },
+        "source_id": "opentargets:PCSK9",
+        "quote": "\"genetic_association_score\": 0.949",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000169174"
+      },
+      {
+        "fact_id": "f_145d9252c84cb1",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 1.17,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "Evolocumab did not increase the risk of new-onset diabetes in patients without diabetes at baseline (HR 1·05, 0·94-1·17)",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_302e10ce4ec1fd",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.93,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and without PAD (HR 0.86; 95% CI, 0.80-0.93; P =0.0003; P interaction =0.40).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_3c299eb33b15cf",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 1.08,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "evolocumab vs placebo in patients ≤median baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "by 7% (hazard ratio, 0.93; 95% CI, 0.80-1.08; P interaction=0.07) in those ≤median.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_5a60ac0d8c724e",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 1.48,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "highest quartile vs quartile 1 baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "adjusted hazard ratio quartile 4: quartile 1, 1.22; 95% CI, 1.01-1.48",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_6ed3c78a266465",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.88,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "all patients",
+          "endpoint": "major adverse limb events"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab reduced the risk of major adverse limb events in all patients (HR, 0.58; 95% CI, 0.38-0.88; P =0.0093)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_7db9d387b7f4ba",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.89,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·78 (0·69-0·89; p=0·0002) for those without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_94c8f555ac4b5c",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.93,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the primary composite endpoint, the hazard ratios (HRs) were 0·83 (95% CI 0·75-0·93; p=0·0008) for patients with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_c94410781fe0ba",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.91,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "For the key secondary end point, the HRs were 0.73 (0.59-0.91; P =0.0040) for those with PAD",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_cfff6f8db3b7f0",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.99,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "and a 23% lower risk of cardiovascular death (hazard ratio, 0.77 [95% CI, 0.60-0.99]; P =0.04).",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_d9ed5222df046a",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.9,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and 0.81 (0.73-0.90; P P interaction =0.41).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_de7e257142e960",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.94,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab significantly reduced the primary end point consistently in patients with PAD (hazard ratio [HR] 0.79; 95% confidence interval [CI], 0.66-0.94; P =0.0098)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_eab57325da1eac",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.93,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death, myocardial infarction, or stroke"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "a 20% lower risk of cardiovascular death, myocardial infarction, or stroke (hazard ratio, 0.80 [95% CI, 0.68-0.93]; P =0.003)",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_eaf1c73055ca38",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.93,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the key secondary endpoint, the HRs were 0·82 (0·72-0·93; p=0·0021) for those with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_f785cfcf6d6b0b",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 1.13,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with prediabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "including in those with prediabetes (HR 1·00, 0·89-1·13).",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_fbcede1cbccd8c",
+        "entity": "trial:nct03872401",
+        "key": "ci_high",
+        "value": 0.96,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·87 (0·79-0·96; p=0·0052) for patients without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_0a9935329f6423",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.72,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the key secondary endpoint, the HRs were 0·82 (0·72-0·93; p=0·0021) for those with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_1b0bfcac775794",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.94,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "Evolocumab did not increase the risk of new-onset diabetes in patients without diabetes at baseline (HR 1·05, 0·94-1·17)",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_276a82dfe8163f",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.79,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·87 (0·79-0·96; p=0·0052) for patients without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_2916aea31833d7",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.68,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death, myocardial infarction, or stroke"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "a 20% lower risk of cardiovascular death, myocardial infarction, or stroke (hazard ratio, 0.80 [95% CI, 0.68-0.93]; P =0.003)",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_3bbbfee0596803",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.66,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab significantly reduced the primary end point consistently in patients with PAD (hazard ratio [HR] 0.79; 95% confidence interval [CI], 0.66-0.94; P =0.0098)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_49bb5750178356",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 1.01,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "highest quartile vs quartile 1 baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "adjusted hazard ratio quartile 4: quartile 1, 1.22; 95% CI, 1.01-1.48",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_4ea83819a8a179",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.8,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and without PAD (HR 0.86; 95% CI, 0.80-0.93; P =0.0003; P interaction =0.40).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_4ec6f9fd674461",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.75,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the primary composite endpoint, the hazard ratios (HRs) were 0·83 (95% CI 0·75-0·93; p=0·0008) for patients with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_5846cda76f6a2f",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.69,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·78 (0·69-0·89; p=0·0002) for those without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_b286c9a4afc8e2",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.59,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "For the key secondary end point, the HRs were 0.73 (0.59-0.91; P =0.0040) for those with PAD",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_c252391f67292d",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.89,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with prediabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "including in those with prediabetes (HR 1·00, 0·89-1·13).",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_ca1b73c67e4b07",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.73,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and 0.81 (0.73-0.90; P P interaction =0.41).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_e73208348eec59",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.8,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "evolocumab vs placebo in patients ≤median baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "by 7% (hazard ratio, 0.93; 95% CI, 0.80-1.08; P interaction=0.07) in those ≤median.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_e791ef771adbeb",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.38,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "all patients",
+          "endpoint": "major adverse limb events"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab reduced the risk of major adverse limb events in all patients (HR, 0.58; 95% CI, 0.38-0.88; P =0.0093)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_ebf3917f0d9068",
+        "entity": "trial:nct03872401",
+        "key": "ci_low",
+        "value": 0.6,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "and a 23% lower risk of cardiovascular death (hazard ratio, 0.77 [95% CI, 0.60-0.99]; P =0.04).",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_607d6fe4a0a143",
+        "entity": "trial:nct03872401",
+        "key": "events_total",
+        "value": 25982,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "From the remaining 25 982 patients (94% of those randomly assigned) 13 013 were assigned evolocumab and 12 969 were assigned placebo.",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_0b921668b904ea",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.79,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab significantly reduced the primary end point consistently in patients with PAD (hazard ratio [HR] 0.79; 95% confidence interval [CI], 0.66-0.94; P =0.0098)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_2f7d90ebb40e0a",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.58,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "all patients",
+          "endpoint": "major adverse limb events"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab reduced the risk of major adverse limb events in all patients (HR, 0.58; 95% CI, 0.38-0.88; P =0.0093)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_46780e5f8d7b33",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.8,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death, myocardial infarction, or stroke"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "a 20% lower risk of cardiovascular death, myocardial infarction, or stroke (hazard ratio, 0.80 [95% CI, 0.68-0.93]; P =0.003)",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_54255ad21e24cd",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.83,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the primary composite endpoint, the hazard ratios (HRs) were 0·83 (95% CI 0·75-0·93; p=0·0008) for patients with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_76616f6e4318c3",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.93,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "evolocumab vs placebo in patients ≤median baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "by 7% (hazard ratio, 0.93; 95% CI, 0.80-1.08; P interaction=0.07) in those ≤median.",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_79fd3fd3647a0b",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.87,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·87 (0·79-0·96; p=0·0052) for patients without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_7d014a9859d14a",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.82,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the key secondary endpoint, the HRs were 0·82 (0·72-0·93; p=0·0021) for those with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_95f15912265ce0",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.77,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "and a 23% lower risk of cardiovascular death (hazard ratio, 0.77 [95% CI, 0.60-0.99]; P =0.04).",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_a041469ca3f320",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 1.0,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with prediabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "including in those with prediabetes (HR 1·00, 0·89-1·13).",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_b525a18ced41ff",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.73,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "For the key secondary end point, the HRs were 0.73 (0.59-0.91; P =0.0040) for those with PAD",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_b9368a20e8f50c",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 1.05,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes at baseline",
+          "endpoint": "risk of new-onset diabetes",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "Evolocumab did not increase the risk of new-onset diabetes in patients without diabetes at baseline (HR 1·05, 0·94-1·17)",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_cb32f75c27736c",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.78,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·78 (0·69-0·89; p=0·0002) for those without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_cc3191b58d3aee",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.81,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and 0.81 (0.73-0.90; P P interaction =0.41).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_ce9359d4e37a99",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 1.22,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "coronary heart disease death, myocardial infarction, or urgent revascularization",
+          "comparison": "highest quartile vs quartile 1 baseline Lp(a)"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "adjusted hazard ratio quartile 4: quartile 1, 1.22; 95% CI, 1.01-1.48",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_d4325326d13d4f",
+        "entity": "trial:nct03872401",
+        "key": "hr",
+        "value": 0.86,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and without PAD (HR 0.86; 95% CI, 0.80-0.93; P =0.0003; P interaction =0.40).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_2903fd8cbcfca7",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28304224",
+        "quote": "LDL cholesterol levels of 70 mg per deciliter (1.8 mmol per liter) or higher",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_336dea846b3da6",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 90,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "an LDL-C ≥ 90 mg/dL, or non-high-density lipoprotein cholesterol (non-HDL-C) ≥ 120 mg/dL, or apolipoprotein B ≥ 80 mg/dL",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_451abf2f19d831",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 80,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "VESALIUS-CV",
+          "biomarker": "apoB"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "apolipoprotein B ≥ 80 mg/dL (≥ 1.56 µmol/L)",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_5347e5fa9677c1",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "The parent FOURIER trial randomized 27 564 patients with atherosclerotic cardiovascular disease and LDL-C ≥70 mg/dL on statin to evolocumab versus placebo.",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_6024b9c32784d9",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 120,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "VESALIUS-CV",
+          "biomarker": "non-HDL-C"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "non high-density lipoprotein cholesterol (non-HDL)-C ≥ 120 mg/dL (≥ 3.1 mmol/L)",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_732d69f9183734",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": "LDL-C ≥ 90 mg/dL, or non-HDL-C ≥ 120 mg/dL, or apolipoprotein B ≥ 80 mg/dL",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "an LDL-C ≥ 90 mg/dL, or non-high-density lipoprotein cholesterol (non-HDL-C) ≥ 120 mg/dL, or apolipoprotein B ≥ 80 mg/dL",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_866d57d82b1de6",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 20,
+        "unit": "percent of standard deviation",
+        "attrs": {
+          "trial": "EBBINGHAUS"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "the noninferiority margin was set at 20% of the standard deviation of the score in the placebo group",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_d1025d13961f00",
+        "entity": "trial:nct03872401",
+        "key": "inclusion_threshold",
+        "value": 90,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "VESALIUS-CV",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "Low-density lipoprotein cholesterol (LDL-C) ≥ 90 mg/dL (≥ 2.3 mmol/L)",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_50eb2bfffe279b",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 4.5,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "and the median follow-up is ≥4.5 years",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_55cf67ecbf492c",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 2.2,
+        "unit": "years",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28927706",
+        "quote": "FOURIER was a randomised trial of evolocumab (140 mg every 2 weeks or 420 mg once per month) versus placebo in 27 564 patients with atherosclerotic disease who were on statin therapy, followed up for a median of 2·2 years.",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_702eeeb3d9963e",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 2.2,
+        "unit": "years",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "FOURIER was a randomized trial of evolocumab versus placebo in 27 564 patients with atherosclerotic disease on statin therapy followed for a median of 2.2 years.",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_a0ddb22d9f70ae",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 4.5,
+        "unit": "years",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "were followed for a median of approximately 4.5 years",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_ac85eff677ebf6",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 2.2,
+        "unit": "years",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "over a median of 2·2 years of follow-up.",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_ad4a2dd16f5b95",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 2.2,
+        "unit": "years",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "median follow-up, 2.2 years",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_b126908f7f2084",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 5.0,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "Median follow-up in FOURIER-OLE was 5.0 years; maximum exposure to evolocumab in parent plus FOURIER-OLE was 8.4 years.",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_bf1b1503505cc6",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 2.2,
+        "unit": "years",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28304224",
+        "quote": "The median duration of follow-up was 2.2 years.",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_c0a92017bb1f75",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 55.2,
+        "unit": "months",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "median (min, max) time on trial was 55.2 (0.0, 72.7) months",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_d9d0ddb5bfc4e7",
+        "entity": "trial:nct03872401",
+        "key": "median_followup",
+        "value": 19,
+        "unit": "months",
+        "attrs": {
+          "trial": "EBBINGHAUS"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "A total of 1204 patients were followed for a median of 19 months",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_22d70155a3a5b8",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28304224",
+        "quote": "We conducted a randomized, double-blind, placebo-controlled trial involving 27,564 patients with atherosclerotic cardiovascular disease",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_24266229edcf66",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "FOURIER was a randomized trial of evolocumab versus placebo in 27 564 patients with atherosclerotic disease on statin therapy followed for a median of 2.2 years.",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_43fb7b558cddd3",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28927706",
+        "quote": "FOURIER was a randomised trial of evolocumab (140 mg every 2 weeks or 420 mg once per month) versus placebo in 27 564 patients with atherosclerotic disease who were on statin therapy, followed up for a median of 2·2 years.",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_79481da2ae2ce7",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 12301,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "The study population consists of 12,301 patients with atherosclerosis or high-risk diabetes mellitus without a prior MI or stroke",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_8f227eb83c5a83",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "The parent FOURIER trial randomized 27 564 patients with atherosclerotic cardiovascular disease and LDL-C ≥70 mg/dL on statin to evolocumab versus placebo.",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_94095d62c995f9",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 25096,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "Lp(a) was measured in 25 096 patients in the FOURIER trial",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_9865e57f83a762",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 12301,
+        "unit": "participants",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "Enrollment: 12301 (ACTUAL)",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_a0417c46539890",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "Between Feb 8, 2013, and June 5, 2015, 27 564 patients were randomly assigned a treatment in the FOURIER study.",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_bb064d43fee084",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 968,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "enrolling 968 patients presenting for coronary angiography",
+        "pub_date": "2016-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27846344"
+      },
+      {
+        "fact_id": "f_bd9c4d6e368ac5",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 12000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "VESALIUS-CV enrolled more than 12,000 patients",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_e24e05a954a19b",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 161,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "Patients with a non-ST-segment elevation myocardial infarction were treated with monthly evolocumab 420 mg (n = 80) or placebo (n = 81) for 52 weeks.",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_f290170bfbd473",
+        "entity": "trial:nct03872401",
+        "key": "n_randomized",
+        "value": 1204,
+        "unit": "patients",
+        "attrs": {
+          "trial": "EBBINGHAUS"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "A total of 1204 patients were followed for a median of 19 months",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_275a54c6a588d3",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0093,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "all patients",
+          "endpoint": "major adverse limb events"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab reduced the risk of major adverse limb events in all patients (HR, 0.58; 95% CI, 0.38-0.88; P =0.0093)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_37ad264803dd1c",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0002,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·78 (0·69-0·89; p=0·0002) for those without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_406743c2ead71f",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.85,
+        "unit": null,
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "comparison": "superiority"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "P<0.001 for noninferiority; P=0.85 for superiority",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_6e040d1af92b78",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.004,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "key secondary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "For the key secondary end point, the HRs were 0.73 (0.59-0.91; P =0.0040) for those with PAD",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_81cdc9c9678abd",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0098,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients with PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Evolocumab significantly reduced the primary end point consistently in patients with PAD (hazard ratio [HR] 0.79; 95% confidence interval [CI], 0.66-0.94; P =0.0098)",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_81df2c5ba03f39",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0008,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the primary composite endpoint, the hazard ratios (HRs) were 0·83 (95% CI 0·75-0·93; p=0·0008) for patients with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_8c0f4a281c5be9",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0052,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients without diabetes",
+          "endpoint": "primary composite endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "and 0·87 (0·79-0·96; p=0·0052) for patients without diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_91e8a9f375b18f",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.003,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death, myocardial infarction, or stroke"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "a 20% lower risk of cardiovascular death, myocardial infarction, or stroke (hazard ratio, 0.80 [95% CI, 0.68-0.93]; P =0.003)",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_b264bfcb9b612b",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.07,
+        "unit": null,
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "interaction test for evolocumab benefit by baseline Lp(a) median"
+        },
+        "source_id": "pmid:30586750",
+        "quote": "P interaction=0.07",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30586750"
+      },
+      {
+        "fact_id": "f_c6831cd72917c2",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0021,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "subgroup": "patients with diabetes",
+          "endpoint": "key secondary endpoint",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:28927706",
+        "quote": "For the key secondary endpoint, the HRs were 0·82 (0·72-0·93; p=0·0021) for those with diabetes",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_d28b43b42317df",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.04,
+        "unit": "",
+        "attrs": {
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:36031810",
+        "quote": "and a 23% lower risk of cardiovascular death (hazard ratio, 0.77 [95% CI, 0.60-0.99]; P =0.04).",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_e56367fb8281f1",
+        "entity": "trial:nct03872401",
+        "key": "p_value",
+        "value": 0.0003,
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER",
+          "population": "patients without PAD",
+          "endpoint": "primary end point"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "and without PAD (HR 0.86; 95% CI, 0.80-0.93; P =0.0003; P interaction =0.40).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_7f3c172a93510a",
+        "entity": "trial:nct03872401",
+        "key": "planned_events",
+        "value": 751,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "The trial is planned to continue until at least 751 patients experience an adjudicated triple endpoint",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_d364b76a1530ce",
+        "entity": "trial:nct03872401",
+        "key": "planned_events",
+        "value": 1254,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "at least 1254 experience an adjudicated quadruple endpoint",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_18fbcfdb3f44a4",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "CHD death, MI, or ischemic stroke; and CHD death, MI, ischemic stroke, or ischemia-driven arterial revascularization",
+        "unit": "composite endpoints",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "The primary efficacy objective is to assess whether evolocumab reduces the risk of the dual primary composite endpoints of coronary heart disease (CHD) death, myocardial infarction (MI), or ischemic stroke (triple primary endpoint) and of CHD death, MI, ischemic stroke, or ischemia-driven arterial revascularization (quadruple primary endpoint).",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_1923f33ac4432a",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "cardiovascular events",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "The PCSK9 (proprotein convertase subtilisin/kexin type 9) inhibitor evolocumab reduced low-density lipoprotein cholesterol and cardiovascular events in the FOURIER trial (Further Cardiovascular Outcomes Research With PCSK9 Inhibition in Subjects With Elevated Risk).",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_198d1479aff1bc",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, myocardial infarction, stroke, hospital admission for unstable angina, or coronary revascularisation",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28927706",
+        "quote": "The primary endpoint was a composite of cardiovascular death, myocardial infarction, stroke, hospital admission for unstable angina, or coronary revascularisation.",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_56712b190afc63",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization",
+        "unit": "NA",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28304224",
+        "quote": "The primary efficacy end point was the composite of cardiovascular death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization.",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28304224"
+      },
+      {
+        "fact_id": "f_60891654e03e70",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, myocardial infarction, stroke, coronary revascularisation, or unstable angina",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "primary endpoint was the composite of cardiovascular death, myocardial infarction, stroke, coronary revascularisation, or unstable angina",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_7cb94c378cb8b2",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "Number of Participants Who Experienced Coronary Heart Disease (CHD) Death, Myocardial Infarction (MI), or Ischemic Stroke, Whichever Occurred First",
+        "unit": "count",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "quote": "Primary outcome(s): Number of Participants Who Experienced Coronary Heart Disease (CHD) Death, Myocardial Infarction (MI), or Ischemic Stroke, Whichever Occurred First",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03872401"
+      },
+      {
+        "fact_id": "f_8cceeae2732818",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "spatial working memory strategy index of executive function",
+        "unit": "score",
+        "attrs": {
+          "trial": "EBBINGHAUS"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "The primary end point was the score on the spatial working memory strategy index of executive function",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_8f49664cdd4fac",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "nominal change in percent atheroma volume (PAV) from baseline to week 78",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "The primary efficacy measure was the nominal change in percent atheroma volume (PAV) from baseline to week 78, measured by serial intravascular ultrasonography (IVUS) imaging.",
+        "pub_date": "2016-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/27846344"
+      },
+      {
+        "fact_id": "f_96fc8e21edca23",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "incidence of adverse events",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "The primary end point was the incidence of adverse events.",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_e3ff7d811b3644",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "change in the minimum fibrous cap thickness and maximum lipid arc throughout the imaged arterial segment",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Imaging of Coronary Plaques in Participants Treated With Evolocumab; NCT03570697"
+        },
+        "source_id": "pmid:35431172",
+        "quote": "The primary analysis determined the change in the minimum fibrous cap thickness and maximum lipid arc throughout the imaged arterial segment.",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35431172"
+      },
+      {
+        "fact_id": "f_fc87aff7463579",
+        "entity": "trial:nct03872401",
+        "key": "primary_endpoint",
+        "value": "time to first occurrence of a composite of coronary heart disease (CHD) death, heart attack or ischemic stroke as well as time to first occurrence of a composite of CHD death, heart attack, ischemic stroke or any ischemia-driven arterial revascularization",
+        "unit": "",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "The VESALIUS-CV primary endpoints were time to first occurrence of a composite of coronary heart disease (CHD) death, heart attack or ischemic stroke as well as time to first occurrence of a composite of CHD death, heart attack, ischemic stroke or any ischemia-driven arterial revascularization",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_287d1601c27e02",
+        "entity": "trial:nct03872401",
+        "key": "readout_statement",
+        "value": "Patients with PAD are at high risk of cardiovascular events, and PCSK9 inhibition with evolocumab significantly reduced that risk with large absolute risk reductions. Moreover, lowering of low-density lipoprotein cholesterol with evolocumab reduced the risk of major adverse limb events.",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:29133605",
+        "quote": "Patients with PAD are at high risk of cardiovascular events, and PCSK9 inhibition with evolocumab significantly reduced that risk with large absolute risk reductions. Moreover, lowering of low-density lipoprotein cholesterol with evolocumab reduced the risk of major adverse limb events.",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29133605"
+      },
+      {
+        "fact_id": "f_8153849be9c3fd",
+        "entity": "trial:nct03872401",
+        "key": "readout_statement",
+        "value": "PCSK9 inhibition with evolocumab significantly reduced cardiovascular risk in patients with and without diabetes. Evolocumab did not increase the risk of new-onset diabetes, nor did it worsen glycaemia.",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28927706",
+        "quote": "PCSK9 inhibition with evolocumab significantly reduced cardiovascular risk in patients with and without diabetes. Evolocumab did not increase the risk of new-onset diabetes, nor did it worsen glycaemia.",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_b5c9914198c235",
+        "entity": "trial:nct03872401",
+        "key": "readout_statement",
+        "value": "Long-term LDL-C lowering with evolocumab was associated with persistently low rates of adverse events for >8 years that did not exceed those observed in the original placebo arm during the parent study and led to further reductions in cardiovascular events compared with delayed treatment initiation.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "Long-term LDL-C lowering with evolocumab was associated with persistently low rates of adverse events for >8 years that did not exceed those observed in the original placebo arm during the parent study and led to further reductions in cardiovascular events compared with delayed treatment initiation.",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_bee17e6070ccdf",
+        "entity": "trial:nct03872401",
+        "key": "readout_statement",
+        "value": "no significant between-group difference in cognitive function was observed over a median of 19 months",
+        "unit": null,
+        "attrs": {
+          "trial": "EBBINGHAUS"
+        },
+        "source_id": "pmid:28813214",
+        "quote": "no significant between-group difference in cognitive function was observed over a median of 19 months",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28813214"
+      },
+      {
+        "fact_id": "f_ee57041e663cfe",
+        "entity": "trial:nct03872401",
+        "key": "readout_statement",
+        "value": "Repatha added to statins or other LDL-C lowering treatments significantly reduces cardiovascular events compared with standard therapy alone as primary prevention",
+        "unit": "",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "VESALIUS-CV now establishes that Repatha, added to statins or other LDL-C lowering treatments, significantly reduces cardiovascular events compared with standard therapy alone as primary prevention",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_08916d37c2c4b9",
+        "entity": "trial:nct03872401",
+        "key": "safety_signal",
+        "value": "no offsetting safety concerns",
+        "unit": "none",
+        "attrs": {},
+        "source_id": "pmid:38160917",
+        "quote": "with no offsetting safety concerns",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38160917"
+      },
+      {
+        "fact_id": "f_2f4f951ef30c38",
+        "entity": "trial:nct03872401",
+        "key": "safety_signal",
+        "value": "adverse event rates did not exceed those observed in the original placebo arm during the parent study",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:36031810",
+        "quote": "Long-term LDL-C lowering with evolocumab was associated with persistently low rates of adverse events for >8 years that did not exceed those observed in the original placebo arm during the parent study",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36031810"
+      },
+      {
+        "fact_id": "f_33f4e888ed0e7b",
+        "entity": "trial:nct03872401",
+        "key": "safety_signal",
+        "value": "No new safety signals were observed",
+        "unit": "",
+        "attrs": {
+          "trial": "VESALIUS-CV"
+        },
+        "source_id": "announcement:vesalius_cv",
+        "quote": "No new safety signals were observed",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients"
+      },
+      {
+        "fact_id": "f_4b824883f6c92c",
+        "entity": "trial:nct03872401",
+        "key": "safety_signal",
+        "value": "Evolocumab did not increase the risk of new-onset diabetes, nor did it worsen glycaemia.",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28927706",
+        "quote": "Evolocumab did not increase the risk of new-onset diabetes, nor did it worsen glycaemia.",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28927706"
+      },
+      {
+        "fact_id": "f_b1d4f0b6d788b0",
+        "entity": "trial:nct03872401",
+        "key": "safety_signal",
+        "value": "no significant association was observed between achieved LDL cholesterol and safety outcomes",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:28859947",
+        "quote": "Conversely, no significant association was observed between achieved LDL cholesterol and safety outcomes, either for all serious adverse events or any of the other nine prespecified safety events.",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/28859947"
+      },
+      {
+        "fact_id": "f_3685591272fd74",
+        "entity": "trial:nct03872401",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "nonsense mutations",
+          "outcome": "CHD (myocardial infarction, fatal CHD, or coronary revascularization)",
+          "direction": "protective",
+          "effect_on_biomarker": "28 percent reduction in mean LDL cholesterol",
+          "n": 3363,
+          "ci_low": 0.02,
+          "ci_high": 0.81
+        },
+        "source_id": "pmid:16554528",
+        "quote": "these mutations were associated with a 28 percent reduction in mean LDL cholesterol and an 88 percent reduction in the risk of CHD (P=0.008 for the reduction; hazard ratio, 0.11; 95 percent confidence interval, 0.02 to 0.81; P=0.03)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      },
+      {
+        "fact_id": "f_fcb9ba6ac0746d",
+        "entity": "trial:nct03872401",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "sequence variation",
+          "outcome": "CHD (myocardial infarction, fatal CHD, or coronary revascularization)",
+          "direction": "protective",
+          "effect_on_biomarker": "15 percent reduction in LDL cholesterol",
+          "n": 9524,
+          "ci_low": 0.32,
+          "ci_high": 0.79
+        },
+        "source_id": "pmid:16554528",
+        "quote": "a sequence variation in PCSK9 that was associated with a 15 percent reduction in LDL cholesterol and a 47 percent reduction in the risk of CHD (hazard ratio, 0.50; 95 percent confidence interval, 0.32 to 0.79; P=0.003)",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16554528"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT03872401@2025-10-02",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT03872401 VESALIUS-CV",
+        "url": "https://clinicaltrials.gov/study/NCT03872401",
+        "pub_date": "2019-03-13",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT03872401",
+            "acronym": "VESALIUS-CV",
+            "title": "Effect of Evolocumab in Patients at High Cardiovascular Risk Without Prior Myocardial Infarction or Stroke",
+            "official_title": "A Double-blind, Randomized, Placebo-controlled, Multicenter Study to Evaluate the Impact of Evolocumab on Major Cardiovascular Events in Patients at High Cardiovascular Risk Without Prior Myocardial Infarction or Stroke",
+            "sponsor": "Amgen",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2019-06-11",
+            "primary_completion": "2025-07-25",
+            "first_posted": "2019-03-13",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 12301,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Evolocumab",
+                "type": "DRUG",
+                "other_names": [
+                  "AMG 145",
+                  "Repatha"
+                ],
+                "arms": [
+                  "Evolocumab 140 mg Q2W"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "Evolocumab 140 mg Q2W",
+                "type": "EXPERIMENTAL"
+              }
+            ],
+            "conditions": [
+              "Coronary Heart Disease (CHD)"
+            ],
+            "primary_outcomes": [
+              "Number of Participants Who Experienced Coronary Heart Disease (CHD) Death, Myocardial Infarction (MI), or Ischemic Stroke, Whichever Occurred First [From enrollment to last confirmed survival status date; median (min, max) time on trial was 55.2 (0.0, 72.7) months]",
+              "Number of Participants Who Experienced CHD Death, MI, Ischemic Stroke, or Any Ischemia-driven Arterial Revascularization, Whichever Occurred First [From enrollment to last confirmed survival status date; median (min, max) time on trial was 55.2 (0.0, 72.7) months]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 5860
+      },
+      {
+        "source_id": "pmid:38160917",
+        "type": "journal",
+        "title": "Rationale and design of the effect of evolocumab in patients at high cardiovascular risk without prior myocardial infarction or stroke (VESALIUS-CV) trial.",
+        "url": "https://europepmc.org/article/MED/38160917",
+        "pub_date": "2023-12-29",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "38160917",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2023.12.004",
+          "journal": "American heart journal"
+        },
+        "chars": 2242
+      },
+      {
+        "source_id": "pmid:35431172",
+        "type": "journal",
+        "title": "Effect of Evolocumab on Coronary Plaque Phenotype and Burden in Statin-Treated Patients Following Myocardial Infarction.",
+        "url": "https://europepmc.org/article/MED/35431172",
+        "pub_date": "2022-03-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35431172",
+          "pmcid": null,
+          "doi": "10.1016/j.jcmg.2022.03.002",
+          "journal": "JACC. Cardiovascular imaging"
+        },
+        "chars": 2080
+      },
+      {
+        "source_id": "pmid:36031810",
+        "type": "journal",
+        "title": "Long-Term Evolocumab in Patients With Established Atherosclerotic Cardiovascular Disease.",
+        "url": "https://europepmc.org/article/MED/36031810",
+        "pub_date": "2022-08-29",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "36031810",
+          "pmcid": null,
+          "doi": "10.1161/circulationaha.122.061620",
+          "journal": "Circulation"
+        },
+        "chars": 2033
+      },
+      {
+        "source_id": "pmid:30586750",
+        "type": "journal",
+        "title": "Lipoprotein(a), PCSK9 Inhibition, and Cardiovascular Risk.",
+        "url": "https://europepmc.org/article/MED/30586750",
+        "pub_date": "2019-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "30586750",
+          "pmcid": null,
+          "doi": "10.1161/circulationaha.118.037184",
+          "journal": "Circulation"
+        },
+        "chars": 2311
+      },
+      {
+        "source_id": "pmid:28304224",
+        "type": "journal",
+        "title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease.",
+        "url": "https://europepmc.org/article/MED/28304224",
+        "pub_date": "2017-03-17",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28304224",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa1615664",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1785
+      },
+      {
+        "source_id": "pmid:29133605",
+        "type": "journal",
+        "title": "Low-Density Lipoprotein Cholesterol Lowering With Evolocumab and Outcomes in Patients With Peripheral Artery Disease: Insights From the FOURIER Trial (Further Cardiovascular Outcomes Research With PCSK9 Inhibition in Subjects With Elevated Risk).",
+        "url": "https://europepmc.org/article/MED/29133605",
+        "pub_date": "2017-11-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "29133605",
+          "pmcid": null,
+          "doi": "10.1161/circulationaha.117.032235",
+          "journal": "Circulation"
+        },
+        "chars": 2443
+      },
+      {
+        "source_id": "pmid:28859947",
+        "type": "journal",
+        "title": "Clinical efficacy and safety of achieving very low LDL-cholesterol concentrations with the PCSK9 inhibitor evolocumab: a prespecified secondary analysis of the FOURIER trial.",
+        "url": "https://europepmc.org/article/MED/28859947",
+        "pub_date": "2017-08-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28859947",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(17)32290-0",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 3194
+      },
+      {
+        "source_id": "pmid:28927706",
+        "type": "journal",
+        "title": "Cardiovascular safety and efficacy of the PCSK9 inhibitor evolocumab in patients with and without diabetes and the effect of evolocumab on glycaemia and risk of new-onset diabetes: a prespecified analysis of the FOURIER randomised controlled trial.",
+        "url": "https://europepmc.org/article/MED/28927706",
+        "pub_date": "2017-09-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28927706",
+          "pmcid": null,
+          "doi": "10.1016/s2213-8587(17)30313-3",
+          "journal": "The lancet. Diabetes & endocrinology"
+        },
+        "chars": 3802
+      },
+      {
+        "source_id": "pmid:28813214",
+        "type": "journal",
+        "title": "Cognitive Function in a Randomized Trial of Evolocumab.",
+        "url": "https://europepmc.org/article/MED/28813214",
+        "pub_date": "2017-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28813214",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa1701131",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2655
+      },
+      {
+        "source_id": "pmid:27846344",
+        "type": "journal",
+        "title": "Effect of Evolocumab on Progression of Coronary Disease in Statin-Treated Patients: The GLAGOV Randomized Clinical Trial.",
+        "url": "https://europepmc.org/article/MED/27846344",
+        "pub_date": "2016-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27846344",
+          "pmcid": null,
+          "doi": "10.1001/jama.2016.16951",
+          "journal": "JAMA"
+        },
+        "chars": 2341
+      },
+      {
+        "source_id": "pmcid:PMC12315028",
+        "type": "journal",
+        "title": "Characterisation of a clinical trial-like population of high cardiovascular risk patients prior to myocardial infarction or stroke in the real world: design and protocol for a multidatabase retrospective cohort study.",
+        "url": "https://europepmc.org/article/MED/40738626",
+        "pub_date": "2025-07-30",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "40738626",
+          "pmcid": "PMC12315028",
+          "doi": "10.1136/bmjopen-2024-092702",
+          "journal": "BMJ open",
+          "purpose": "design"
+        },
+        "chars": 38075
+      },
+      {
+        "source_id": "pmid:16554528",
+        "type": "journal",
+        "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease.",
+        "url": "https://europepmc.org/article/MED/16554528",
+        "pub_date": "2006-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16554528",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa054013",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1719
+      },
+      {
+        "source_id": "pmid:25830891",
+        "type": "journal",
+        "title": "In vivo genome editing using Staphylococcus aureus Cas9.",
+        "url": "https://europepmc.org/article/MED/25830891",
+        "pub_date": "2015-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25830891",
+          "pmcid": "PMC4393360",
+          "doi": "10.1038/nature14299",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1088
+      },
+      {
+        "source_id": "pmid:37794186",
+        "type": "journal",
+        "title": "Plasma proteomic associations with genetics and health in the UK Biobank.",
+        "url": "https://europepmc.org/article/MED/37794186",
+        "pub_date": "2023-10-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "37794186",
+          "pmcid": "PMC10567551",
+          "doi": "10.1038/s41586-023-06592-6",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1881
+      },
+      {
+        "source_id": "announcement:vesalius_cv",
+        "type": "press_release",
+        "title": "Landmark Phase 3 Trial (VESALIUS-CV) Meets Primary Endpoints in a Cardiovascular Primary Prevention Study of 12,000 Patients",
+        "url": "https://www.amgen.com/newsroom/press-releases/2025/10/landmark-phase-3-trial-vesaliuscv-meets-primary-endpoints-in-a-cardiovascular-primary-prevention-study-of-12000-patients",
+        "pub_date": "2025-10-02",
+        "access": "press_release",
+        "meta": {},
+        "chars": 20000
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": null,
+    "usage": {
+      "Extraction": {
+        "calls": 16,
+        "input_tokens": 21172,
+        "output_tokens": 15484,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 8022,
+        "output_tokens": 508,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1710,
+        "output_tokens": 3740,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 7754,
+        "output_tokens": 3675,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 9920,
+        "output_tokens": 4664,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 11350,
+        "output_tokens": 1707,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

@@ -106,7 +106,7 @@
   ],
   "trace_id": "trace-bt-sharp",
   "log_file": "logs/trace-bt-sharp.jsonl",
-  "execution_time_seconds": 21.1,
+  "execution_time_seconds": 738.6,
   "sample_mode": false,
   "warnings": [],
   "output": {
@@ -114,31 +114,32 @@
       "outcome": "success",
       "outcome_basis": "readout: \"VYTORIN (ezetimibe/simvastatin) Significantly Reduced Major Vascular Events in Patients With Chronic Kidney Disease in a New 9,000-Patient I\" (announcement:sharp)",
       "predicted_outcome": "success",
-      "consistency": "consistent with the calculator (probability of success 98%)",
-      "primary_category": "robust_success",
+      "consistency": "consistent with the calculator (probability of success 83%)",
+      "primary_category": "narrow_success",
       "secondary_categories": [],
-      "calculator_category": "robust_success",
-      "confidence": "high",
+      "calculator_category": "narrow_success",
+      "confidence": "medium",
       "verification": "done",
-      "probability_of_success": 0.981,
+      "probability_of_success": 0.829,
       "weakest_link": "target genetics: uncertain"
     },
     "report": {
-      "headline": "SHARP (NCT00125593) demonstrated a robust success: simvastatin 20 mg plus ezetimibe 10 mg daily reduced major vascular events by 16.1% (HR 0.839, p=0.001) in 9,438 CKD patients over 4.9 years, matching the effect predicted from LDL-C lowering.",
-      "summary": "The trial randomized 9,438 patients with chronic kidney disease to simvastatin 20 mg plus ezetimibe 10 mg versus placebo. Over a median 4.9-year follow-up, the combination lowered LDL-C by 30% (–32 mg/dL) and reduced the composite of non-fatal myocardial infarction, cardiac death, stroke, or revascularization from 17.9% to 15.2% (HR 0.839, p=0.001). The observed hazard ratio closely matches the mechanism-predicted HR of 0.816 derived from the 0.83 mmol/L LDL-C reduction using the Cholesterol Treatment Trialists' meta-regression. The trial had 98% power to detect this effect (MDE HR 0.868 at 80% power). No safety signal emerged: cancer incidence was 9.4% vs 9.5% (p=0.89) and cancer mortality 3.2% vs 2.8% (p=0.20). The only caveat at the 2010-11-20 cutoff was the absence of pre-cutoff HMGCR genetic evidence (genetic association score 0.695 but all studies post-2010), which has since been resolved by later Mendelian randomization studies. Overall, the evidence supports a robust success with high confidence (probability 0.98).",
+      "headline": "SHARP (NCT00125593) achieved a narrow success: simvastatin 20 mg plus ezetimibe 10 mg daily reduced major vascular events by 16.1% (HR 0.839, p=0.001) in 9,438 CKD patients over 4.9 years, though the observed benefit was slightly smaller than the mechanism predicted from the verified LDL-C reduction.",
+      "summary": "The SHARP trial randomized 9,438 patients with chronic kidney disease to simvastatin 20 mg plus ezetimibe 10 mg daily versus placebo. Over a median 4.9-year follow-up, the treatment group experienced a 30% placebo-adjusted LDL-C reduction (–32 mg/dL) and a 16.1% relative reduction in the composite of non-fatal MI, cardiac death, stroke, or revascularization (15.2% vs 17.9% event rates, HR 0.839, p=0.001). The trial had 83% power to detect this effect (MDE HR 0.868). The observed HR of 0.839 is slightly worse than the mechanism-predicted HR of ~0.816 when using the verified baseline LDL-C of 108 mg/dL (2.79 mmol/L) from the trial announcement, which yields an absolute LDL-C reduction of ~0.84 mmol/L. No safety signal was reported in SHARP (safety_signal = 0). The primary caveat at the 2010-11-20 cutoff was the absence of pre-cutoff human genetic evidence linking HMGCR to coronary disease (genetic association score 0.695 but evidence_before_cutoff = 0), which has since been resolved by later Mendelian randomization studies. Overall, the evidence supports a narrow success with medium confidence (probability 0.83).",
       "key_evidence": [
         "9,438 patients randomized (ClinicalTrials.gov NCT00125593 SHARP)",
-        "Primary endpoint: first major vascular events — non-fatal heart attacks or cardiac death, stroke, or any revascularization procedure (VYTORIN announcement)",
-        "Event rates: 17.9% placebo vs 15.2% treatment (VYTORIN announcement)",
+        "Primary endpoint: first major vascular events (non-fatal heart attacks or cardiac death, stroke or any revascularization procedure) (VYTORIN announcement)",
+        "17.9% event rate in placebo vs 15.2% in treatment (VYTORIN announcement)",
         "Hazard ratio 0.839, p=0.001 (VYTORIN announcement)",
         "30% placebo-adjusted LDL-C reduction (–32 mg/dL) at 2.5 years (VYTORIN announcement)",
+        "Baseline LDL-C 108 mg/dL (VYTORIN announcement)",
         "Median follow-up 4.9 years (ClinicalTrials.gov NCT00125593 SHARP)",
-        "Cancer incidence 9.4% vs 9.5% (p=0.89); cancer mortality 3.2% vs 2.8% (p=0.20) (VYTORIN announcement)",
-        "Genetic association score for HMGCR 0.695 but all evidence post-2010 cutoff (opentargets:HMGCR)",
-        "Trial completed as planned, not stopped early (Early intensive vs a delayed conservative simvastatin strategy in patients with acute coronary syndromes: phase Z of the A to Z trial)"
+        "No safety signal reported (safety_signal = 0) (VYTORIN announcement)",
+        "HMGCR genetic association score 0.695 but zero pre-2010 evidence (opentargets:HMGCR)",
+        "Trial power 83%, minimum detectable effect HR 0.868 (calculator)"
       ],
-      "what_would_change_this": "Pre-2010 HMGCR Mendelian randomization evidence would remove the target-genetics caveat; otherwise the result is definitive and no further data would alter the robust success conclusion.",
-      "readthrough_note": ""
+      "what_would_change_this": "Publication of the 95% confidence interval for the primary endpoint HR would confirm precision; pre-2010 Mendelian randomization evidence for HMGCR variants and coronary outcomes would resolve the target genetics uncertainty that is the weakest link.",
+      "readthrough_note": "No read-through programmes were provided for this case."
     },
     "checks": [
       {
@@ -150,38 +151,40 @@
       {
         "check": "Drug moves a causal biomarker",
         "result": "LDL-C",
-        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.83 mmol/L via LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.6 mmol/L via LDL-C",
         "pass": true
       },
       {
         "check": "Effect large enough",
-        "result": 0.184,
-        "detail": "expected HR 0.816 at 4.9 y (relative risk reduction 18.4%)",
-        "pass": true
+        "result": 0.137,
+        "detail": "expected HR 0.863 at 4.9 y (relative risk reduction 13.7%)",
+        "pass": false
       },
       {
         "check": "Trial able to detect it",
-        "result": 0.981,
-        "detail": "power 98% with 1562 events; smallest detectable HR 0.868",
+        "result": 0.829,
+        "detail": "power 83% with 1562 events; smallest detectable HR 0.868",
         "pass": true
       }
     ],
     "calculator": {
       "case_id": "sharp",
-      "ldl_equivalent_mmol": 0.83,
+      "ldl_equivalent_mmol": 0.6,
       "basis": "LDL-C",
       "time_factor": 0.988,
-      "expected_hr": 0.816,
-      "causal_rrr": 0.184,
+      "expected_hr": 0.863,
+      "causal_rrr": 0.137,
       "bp_factor": 1.0,
-      "power": 0.981,
+      "power": 0.829,
       "mde_hr_80": 0.868,
       "outcome": "success",
-      "category": "robust_success",
+      "category": "narrow_success",
       "secondary": [],
       "weakest_link": "target genetics: uncertain",
       "consistent_with_observed": null,
-      "assumptions": [],
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0"
+      ],
       "notes": [],
       "partial_expected_hr": null
     },
@@ -193,10 +196,10 @@
       "changes": [
         {
           "biomarker": "LDL-C",
-          "abs_change": -0.83,
+          "abs_change": null,
           "unit": "mmol/L",
           "pct_change": -30.0,
-          "baseline": 2.79,
+          "baseline": null,
           "method": "placebo-adjusted, phase 3, outcome trial (SHARP), 2.5-year timepoint",
           "source": "announcement:sharp"
         }
@@ -211,15 +214,15 @@
     },
     "mechanism": {
       "target_genetics": "uncertain",
-      "target_genetics_rationale": "HMGCR genetic association score is 0.695 (f_53f9433e84f158) but evidence_before_cutoff=0; all four Open Targets studies (GCST004045, GCST90132315, GCST90428732, GCST90451698) published after 2010-11-20 cut-off, so no qualifying genetic evidence before cut-off.",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 (overall 0.722) with 4 evidence items, but evidence_before_cutoff is 0 — all 4 studies (GCST004045, GCST90132315, GCST90428732, GCST90451698) were published after the 2010-11-20 cut-off. No pre-cutoff coronary-disease genetic studies are available to confirm a causal role, so target genetics remains uncertain despite the high score.",
       "intended_biomarker": "LDL-C",
       "pathway": null,
       "changes": [
         {
           "biomarker": "LDL-C",
-          "abs_change": -0.83,
+          "abs_change": null,
           "pct_change": -30.0,
-          "baseline": 2.79,
+          "baseline": null,
           "unit": "mmol/L",
           "method": "placebo-adjusted, phase 3, outcome trial (SHARP), 2.5-year timepoint",
           "fact_ids": [
@@ -237,123 +240,109 @@
       "events": 1562,
       "events_basis": "actual",
       "events_fact_ids": [
-        "f_334b6a830c3302",
-        "f_7158a7b5677540",
-        "f_b2b2f16890fcc6"
+        "f_b2b2f16890fcc6",
+        "f_b7eed96d5823b2",
+        "f_99813a85eb6948"
       ],
       "alpha_two_sided": 0.05,
       "sbp_change_mmhg": null,
       "observed_hr": 0.839,
       "observed_ci": null,
       "outcome_fact_ids": [
-        "f_ca302c91af3673",
-        "f_0c602e8810ee83",
-        "f_6dcb721908b6db"
+        "f_b0c11f8a21e91d",
+        "f_8b98bf69b1b815",
+        "f_f4cf6e3e76307c"
       ],
       "missing": [
-        "sbp_change_mmhg",
-        "observed_ci",
-        "apoB_change"
+        "observed_ci"
       ],
-      "notes": "SHARP tested simvastatin 20mg + ezetimibe 10mg (VYTORIN) vs placebo in 9438 CKD patients. LDL-C reduction from outcome trial itself at 2.5 years: -30% / -32 mg/dL (placebo-adjusted). Baseline LDL-C 108 mg/dL (2.79 mmol/L). Median follow-up 4.9 years. Primary endpoint: first major vascular events. Observed HR 0.839 (p=0.001). Total events calculated from arm percentages (15.2% vs 17.9%) and n=9438 ≈ 1562. HMGCR genetics uncertain due to zero pre-cutoff evidence."
+      "notes": "LDL-C absolute change: -32 mg/dL (f_87b72a90517edc) = -0.83 mmol/L; percent change: -30% (f_1e0081604972e1); baseline/inclusion threshold: 108 mg/dL (f_cc4e234cb7ca67) = 2.79 mmol/L. Both biomarker changes are placebo-adjusted, from the SHARP outcome trial itself at the 2.5-year timepoint. Events computed from n_randomized=9438 (f_b2b2f16890fcc6) with control event rate 17.9% (f_b7eed96d5823b2) and treatment event rate 15.2% (f_99813a85eb6948): 9438 × (0.179 + 0.152) / 2 ≈ 1562 total primary events. Follow-up 4.9 years (f_4120933dee2d16, f_b2bfcbc177c65f). Observed HR 0.839 (f_b0c11f8a21e91d), p=0.001 (f_8b98bf69b1b815). No confidence interval for the SHARP primary endpoint HR is present in the verified facts."
     },
     "hypotheses": [
       {
-        "category": "robust_success",
+        "category": "narrow_success",
         "status": "supported",
         "for": [
           {
-            "text": "Primary endpoint met with high significance (p=0.001) and HR 0.839, well below 1",
+            "text": "Primary endpoint met with statistical significance: HR 0.839 (16.1% RRR), p=0.001 for first major vascular events in 9,438 CKD patients over 4.9 years median follow-up.",
             "refs": [
-              "f_0c602e8810ee83",
-              "f_6dcb721908b6db"
+              "f_b0c11f8a21e91d",
+              "f_8b98bf69b1b815",
+              "f_f4cf6e3e76307c",
+              "f_b2b2f16890fcc6",
+              "f_b2bfcbc177c65f"
             ]
           },
           {
-            "text": "Observed HR (0.839) closely matches mechanism-predicted HR (0.816) from 0.83 mmol/L LDL-C reduction",
+            "text": "LDL-C reduced by 30% (placebo-adjusted) at 2.5 years, consistent with intended biomarker effect.",
             "refs": [
-              "calculator",
               "f_1e0081604972e1",
               "f_87b72a90517edc"
             ]
           },
           {
-            "text": "Trial was highly powered (98%) with 1562 events over 4.9 years median follow-up",
+            "text": "Observed benefit (HR 0.839) is slightly smaller than mechanism-predicted HR (~0.816) when using the correct baseline LDL-C of 108 mg/dL (2.79 mmol/L) from the trial announcement, giving an absolute reduction of ~0.84 mmol/L.",
             "refs": [
-              "calculator",
-              "f_4120933dee2d16",
-              "f_334b6a830c3302",
-              "f_7158a7b5677540"
-            ]
-          },
-          {
-            "text": "No safety signal offsetting benefit: cancer incidence and mortality balanced vs placebo",
-            "refs": [
-              "f_2ef9d02553c764"
-            ]
-          },
-          {
-            "text": "Placebo-controlled design with adequate follow-up for atherosclerotic events in CKD population",
-            "refs": [
-              "f_ca302c91af3673",
-              "f_b2b2f16890fcc6",
-              "f_b5e73de7723e05"
+              "f_cc4e234cb7ca67",
+              "f_1e0081604972e1",
+              "calculator"
             ]
           }
         ],
         "against": [
           {
-            "text": "Target genetics rated 'uncertain' because all HMGCR genetic evidence published after 2010-11-20 cutoff",
+            "text": "Upper confidence bound for the primary endpoint HR is not available in verified facts, so cannot confirm it is well below 1.0.",
+            "refs": []
+          },
+          {
+            "text": "Target genetics uncertain: HMGCR genetic association score 0.695 but zero pre-cutoff evidence (all 4 studies post-2010-11-20).",
             "refs": [
-              "f_53f9433e84f158",
-              "calculator"
+              "f_53f9433e84f158"
             ]
           }
         ],
-        "would_settle": "Pre-cutoff HMGCR genetic evidence (now available) confirms target causality; this is a data-availability artifact, not a biological weakness"
+        "would_settle": "Published 95% CI for the primary endpoint HR; pre-2010 human genetic evidence for HMGCR variants and coronary disease."
       },
       {
         "category": "success_with_caveats",
         "status": "weakened",
         "for": [
           {
-            "text": "Target genetics formally 'uncertain' per calculator cutoff rule",
+            "text": "Target genetics uncertain (evidence_before_cutoff=0) is a caveat for causal inference.",
             "refs": [
-              "f_53f9433e84f158",
-              "calculator"
+              "f_53f9433e84f158"
             ]
           },
           {
-            "text": "Drug is fixed-dose combination (simvastatin + ezetimibe); calculator attributes entire effect to LDL-C lowering via HMGCR",
+            "text": "SEAS trial (aortic stenosis) showed a cancer safety signal with simvastatin-ezetimibe, though SHARP itself reported no safety signal.",
             "refs": [
-              "f_1e0081604972e1",
-              "f_87b72a90517edc"
+              "f_91642bfbd3d950",
+              "f_e2a2995385925e"
             ]
           }
         ],
         "against": [
           {
-            "text": "Observed effect matches LDL-C-mediated prediction almost exactly; no unexplained benefit requiring caveat",
+            "text": "SHARP's own safety signal fact states '0' (no signal) in the announcement.",
             "refs": [
-              "calculator"
+              "f_e2a2995385925e"
             ]
           },
           {
-            "text": "No safety signal, subgroup limitation, or endpoint issue identified",
+            "text": "The primary endpoint was met clearly (p=0.001), not marginally; the caveat of uncertain target genetics is already captured as the weakest link in narrow_success.",
             "refs": [
-              "f_2ef9d02553c764",
-              "f_cd845ef4a2e41a"
+              "f_8b98bf69b1b815"
             ]
           }
         ],
-        "would_settle": "N/A - caveats are minor and do not change the robust success conclusion"
+        "would_settle": "Long-term cancer incidence follow-up from SHARP; Mendelian randomization studies for HMGCR published before 2010."
       },
       {
         "category": "target_not_causal",
         "status": "weakened",
         "for": [
           {
-            "text": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (all 4 studies post-2010)",
+            "text": "No pre-2010 genetic evidence linking HMGCR to coronary disease (evidence_before_cutoff=0).",
             "refs": [
               "f_53f9433e84f158"
             ]
@@ -361,209 +350,143 @@
         ],
         "against": [
           {
-            "text": "Genetic score 0.695 exceeds 0.5 threshold for causal; post-cutoff evidence confirms causality",
+            "text": "HMGCR genetic association score is 0.695 (moderate) based on 4 studies, and LDL-C is well-established as causal for ASCVD via other genetic instruments (e.g., PCSK9, NPC1L1).",
             "refs": [
               "f_53f9433e84f158"
             ]
           },
           {
-            "text": "LDL-C lowering mechanism validated by multiple prior statin trials (HPS, 4S, etc.)",
+            "text": "The trial demonstrated a clear clinical benefit consistent with LDL-C lowering.",
             "refs": [
-              "f_574bdd5f3caf62",
-              "f_8e7443c070ee7c",
-              "f_fd660180465880"
+              "f_b0c11f8a21e91d",
+              "f_1e0081604972e1"
             ]
           }
         ],
-        "would_settle": "Pre-2010 HMGCR Mendelian randomization studies (now published) would resolve the cutoff artifact"
+        "would_settle": "Pre-2010 Mendelian randomization studies for HMGCR and coronary outcomes."
       },
       {
         "category": "population",
         "status": "weakened",
         "for": [
           {
-            "text": "CKD population has high competing non-vascular mortality; could dilute atherosclerotic benefit",
+            "text": "CKD patients have high competing non-atherosclerotic cardiovascular risk (e.g., heart failure, arrhythmia) which LDL-lowering may not prevent, potentially diluting the observable benefit.",
             "refs": [
-              "f_e54b38e67e2b2f",
-              "f_ca302c91af3673"
+              "f_e54b38e67e2b2f"
             ]
           }
         ],
         "against": [
           {
-            "text": "Primary endpoint was major vascular events (atherosclerotic), not all-cause mortality; benefit clearly demonstrated",
+            "text": "The primary endpoint (first major vascular events) is dominated by atherosclerotic events (MI, stroke, revascularization) that LDL-lowering does prevent.",
             "refs": [
-              "f_ca302c91af3673",
-              "f_0c602e8810ee83"
+              "f_f4cf6e3e76307c",
+              "f_a1e540c1b713cf"
             ]
           },
           {
-            "text": "Event rates (15.2% vs 17.9%) and HR consistent with LDL-C effect size in this population",
+            "text": "A clear 16.1% RRR was observed, indicating the mechanism operates in this population.",
             "refs": [
-              "f_334b6a830c3302",
-              "f_7158a7b5677540",
-              "calculator"
+              "f_a1e540c1b713cf"
             ]
           }
         ],
-        "would_settle": "Subgroup analysis by CKD stage would clarify if benefit varies with renal function"
-      },
-      {
-        "category": "effect_too_small",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "Expected RRR 18.4% (HR 0.816); observed RRR 16.1% (HR 0.839); trial powered at 98% to detect this",
-            "refs": [
-              "calculator"
-            ]
-          },
-          {
-            "text": "MDE HR at 80% power is 0.868; observed HR 0.839 well below this threshold",
-            "refs": [
-              "calculator"
-            ]
-          }
-        ],
-        "would_settle": "N/A - effect size was large and clearly detected"
-      },
-      {
-        "category": "off_target_harm",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "Cancer incidence 9.4% vs 9.5% (p=0.89); cancer mortality 3.2% vs 2.8% (p=0.20) - no signal",
-            "refs": [
-              "f_2ef9d02553c764"
-            ]
-          },
-          {
-            "text": "No excess myopathy reported in SHARP (unlike SEARCH 80mg simvastatin)",
-            "refs": [
-              "f_8fcefd72f19cdc"
-            ]
-          }
-        ],
-        "would_settle": "N/A - no off-target harm detected"
+        "would_settle": "Subgroup analysis of event types in SHARP (atherosclerotic vs. non-atherosclerotic)."
       },
       {
         "category": "design_or_endpoint",
         "status": "weakened",
-        "for": [],
+        "for": [
+          {
+            "text": "Composite endpoint includes revascularization, which can be driven by non-atherosclerotic factors in CKD.",
+            "refs": [
+              "f_f4cf6e3e76307c"
+            ]
+          }
+        ],
         "against": [
           {
-            "text": "Placebo-controlled, hard vascular endpoint, 4.9-year follow-up appropriate for LDL-C lowering",
+            "text": "Endpoint matches the mechanism (LDL-C lowering prevents atherosclerotic events); the trial was powered for and achieved this endpoint.",
             "refs": [
-              "f_ca302c91af3673",
-              "f_4120933dee2d16"
+              "f_a1e540c1b713cf",
+              "calculator"
             ]
           },
           {
-            "text": "No active comparator, crossover, or endpoint change during trial",
+            "text": "Follow-up of 4.9 years is adequate for LDL-C lowering benefit to accrue (time_factor 0.988).",
             "refs": [
-              "f_cd845ef4a2e41a",
-              "f_f964c90d4f6474"
-            ]
-          }
-        ],
-        "would_settle": "N/A - design was appropriate and executed as planned"
-      },
-      {
-        "category": "execution_or_nonscientific",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "Trial completed as planned (not stopped early), 9438 randomized, high event yield",
-            "refs": [
-              "f_cd845ef4a2e41a",
-              "f_b2b2f16890fcc6",
-              "f_b5e73de7723e05"
-            ]
-          }
-        ],
-        "would_settle": "N/A - no execution issues"
-      },
-      {
-        "category": "biomarker_not_causal",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "LDL-C is established causal biomarker for ASCVD; genetics and trial evidence consistent",
-            "refs": [
-              "f_574bdd5f3caf62",
-              "f_8e7443c070ee7c",
+              "f_4120933dee2d16",
               "calculator"
             ]
           }
         ],
-        "would_settle": "N/A - LDL-C causality not in question"
-      },
-      {
-        "category": "insufficient_data",
-        "status": "weakened",
-        "for": [],
-        "against": [
-          {
-            "text": "Key numbers all available: n=9438, events=1562, follow-up=4.9y, HR=0.839, p=0.001, LDL-C change=-30%",
-            "refs": [
-              "f_b2b2f16890fcc6",
-              "f_334b6a830c3302",
-              "f_7158a7b5677540",
-              "f_4120933dee2d16",
-              "f_0c602e8810ee83",
-              "f_6dcb721908b6db",
-              "f_1e0081604972e1"
-            ]
-          }
-        ],
-        "would_settle": "N/A - data sufficient for definitive conclusion"
+        "would_settle": "Component-specific HRs for MI, stroke, and revascularization separately."
       }
     ],
     "critic": [
       {
         "issues": [
           {
-            "severity": "medium",
-            "issue": "Baseline LDL-C value (108 mg/dL / 2.79 mmol/L) sourced from fact labeled 'inclusion_threshold' (f_cc4e234cb7ca67), not 'baseline_level'. While internally consistent with the -30%/-32 mg/dL placebo-adjusted change, the fact label suggests this may be the entry criterion rather than the observed mean baseline. The SHARP publication (Lancet 2011) confirms mean baseline LDL-C ~2.79 mmol/L, but this fact is not in the verified set.",
-            "target_agent": "case_builder",
-            "request": "Search for a 'baseline_level' fact for LDL-C in SHARP from the announcement or publication (e.g., 'SHARP baseline LDL-C 2.79 mmol/L' or 'SHARP mean LDL-C at randomization') to replace or supplement f_cc4e234cb7ca67."
-          },
-          {
-            "severity": "medium",
-            "issue": "Total events (1562) is not directly cited in any verified fact; it is derived from n_randomized (9438) × event rates (17.9% control, 15.2% treatment). Automatic check flags 'events=1562 does not match cited facts'. The verifier did not confirm n_randomized from registry (not_found in eligibility criteria), though announcement confirms 9438.",
-            "target_agent": "case_builder",
-            "request": "Search for a fact with 'events_total' for SHARP (e.g., 'SHARP total primary events 1562' or 'SHARP major vascular events count') from the announcement or publication. If unavailable, add a derived-fact note explaining the calculation."
-          },
-          {
-            "severity": "low",
-            "issue": "Calculator input 'observed_ci' is null. The announcement (2010-11-20) may not have reported a confidence interval for HR 0.839. The full Lancet 2011 publication reports 95% CI 0.74–0.95. Missing CI prevents the calculator from assessing 'consistent_with_observed'.",
-            "target_agent": "case_builder",
-            "request": "Search for the 95% CI for the primary endpoint HR in the SHARP announcement or early publication (e.g., 'SHARP HR 0.839 95% CI' or 'SHARP major vascular events confidence interval'). If only in post-cutoff publication, note as limitation."
-          },
-          {
-            "severity": "low",
-            "issue": "Hypothesis 'robust_success' would_settle claims 'Pre-cutoff HMGCR genetic evidence (now available) confirms target causality' — but the cutoff is fixed at 2010-11-20 and f_53f9433e84f158 shows evidence_before_cutoff=0. This overstates what pre-cutoff evidence exists; it is a data-availability artifact, not a confirmed pre-cutoff finding.",
-            "target_agent": "investigator",
-            "request": "Revise would_settle to: 'The target_genetics=uncertain rating reflects the 2010-11-20 cutoff; post-cutoff Mendelian randomization studies confirm HMGCR causality, so this is a data-availability artifact, not a biological weakness.'"
-          },
-          {
-            "severity": "low",
-            "issue": "The calculator attributes the entire LDL-C effect to HMGCR (simvastatin) via pathway=null, but the drug is a fixed-dose combination of simvastatin (HMGCR inhibitor) + ezetimibe (NPC1L1 inhibitor). The LDL-C lowering (-30%) is the combined effect. The hypotheses note this as a caveat but weaken it because observed effect matches LDL-C prediction. This is acceptable but should be explicit in calculator assumptions.",
+            "severity": "high",
+            "issue": "Calculator input missing baseline LDL-C, causing incorrect ldl_equivalent_mmol (0.6 vs actual ~0.83 mmol/L) and expected_hr (0.863 vs ~0.816). The changes object has pct_change=-30% but abs_change=null and baseline=null. Verified facts f_1e0081604972e1 (-30%) and f_87b72a90517edc (-32 mg/dL = -0.83 mmol/L) at 2.5 years, both placebo-adjusted, plus f_cc4e234cb7ca67 (108 mg/dL = 2.79 mmol/L baseline LDL-C from announcement). Mechanism analyst should have supplied abs_change=-0.83 mmol/L (or baseline=2.79 with pct_change=-30%).",
             "target_agent": "mechanism",
-            "request": "Add a calculator assumption note: 'Drug is simvastatin+ezetimibe combination; LDL-C reduction reflects dual mechanism (HMGCR + NPC1L1 inhibition). Calculator models total LDL-C effect as if via single pathway.'"
+            "request": "Re-run calculator with abs_change=-0.83, unit=mmol/L, baseline=2.79 (or abs_change=-0.83 alone) using the 2.5-year placebo-adjusted SHARP announcement values."
+          },
+          {
+            "severity": "medium",
+            "issue": "Events=1562 in calculator input is derived (9438 * (0.179+0.152)/2) but not directly cited in any verified fact. Automatic check flags 'events=1562 does not match cited facts'. No f_events_total fact exists for SHARP.",
+            "target_agent": "case_builder",
+            "request": "Add a derived fact for total events (1562) with refs to f_b2b2f16890fcc6 (n_randomized), f_b7eed96d5823b2 (events_control 17.9%), f_99813a85eb6948 (events_treatment 15.2%), or search for published total event count in SHARP primary paper."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypotheses claim 'Observed HR (0.839) is better than mechanism-predicted HR (0.863)' but this comparison uses the calculator's incorrect expected_hr (based on assumed 2.0 mmol/L baseline). With correct baseline (2.79 mmol/L), mechanism predicts HR ~0.816, making observed HR 0.839 slightly worse than predicted. The 'for' argument for narrow_success is therefore based on a flawed premise.",
+            "target_agent": "investigator",
+            "request": "Re-evaluate the 'observed vs predicted' comparison after mechanism analyst corrects the calculator input. Update hypotheses accordingly."
           },
           {
             "severity": "low",
-            "issue": "Verifier 'not_found' for f_b2b2f16890fcc6 (n_randomized 9438 from ctgov) because registry eligibility criteria section doesn't contain enrollment number. The enrollment number is typically in a different registry field. The announcement fact f_b5e73de7723e05 confirms 9438.",
+            "issue": "Hypotheses speculate on upper CI bound ('likely ~0.93', 'expected near 0.93') but observed_ci is null in calculator input and no verified fact provides the 95% CI. The 'would_settle' items correctly note this gap.",
             "target_agent": "case_builder",
-            "request": "Verify n_randomized from the registry 'Enrollment' field (not eligibility criteria) or rely on announcement fact f_b5e73de7723e05 which is confirmed. No change needed if announcement is accepted as source."
+            "request": "Search for published 95% CI for SHARP primary endpoint HR (e.g., Lancet 2011 paper) and add as f_ci_high/f_ci_low facts."
           }
         ],
-        "verdict_ok": true
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator inputs for LDL-C baseline and absolute change contradict verified announcement facts. The calculator assumes baseline 2.0 mmol/L (assumption noted) and derives abs_change ~0.6 mmol/L from -30% pct_change. Verified fact f_cc4e234cb7ca67 gives baseline LDL-C 108 mg/dL = 2.79 mmol/L. Verified fact f_87b72a90517edc gives placebo-adjusted absolute change -32 mg/dL = -0.83 mmol/L at 2.5 years. These should replace the assumed values and change the expected_hr from 0.863 to ~0.816.",
+            "target_agent": "mechanism",
+            "request": "Update calculator inputs: set baseline to 2.79 mmol/L (108 mg/dL) and abs_change to -0.83 mmol/L (or -32 mg/dL) for LDL-C change at 2.5 years, placebo-adjusted, from announcement:sharp. Recalculate expected_hr and ldl_equivalent_mmol."
+          },
+          {
+            "severity": "high",
+            "issue": "Calculator input changes[0].abs_change is null despite a verified absolute change being available in the announcement (-32 mg/dL, placebo-adjusted, 2.5 years). The calculator should use the direct absolute measurement rather than deriving from percent change and assumed baseline.",
+            "target_agent": "mechanism",
+            "request": "Set changes[0].abs_change = -0.83 (unit mmol/L) and changes[0].baseline = 2.79 (unit mmol/L) using f_87b72a90517edc and f_cc4e234cb7ca67. Keep pct_change = -30.0 as cross-check."
+          },
+          {
+            "severity": "medium",
+            "issue": "Total primary events (1562) is not directly verified by any cited fact; the automatic check flags a mismatch. The number is derivable from announcement percentages (17.9% control, 15.2% treatment, n=9438 1:1) but no fact explicitly states the total event count. The primary publication should be searched for the exact total events.",
+            "target_agent": "case_builder",
+            "request": "Search for SHARP trial primary publication (Lancet 2011 or similar) to verify total number of first major vascular events across both arms. Search terms: 'SHARP trial first major vascular events total events 1562' or 'SHARP NCT00125593 primary endpoint events'."
+          },
+          {
+            "severity": "medium",
+            "issue": "Observed 95% CI for the primary endpoint HR (0.839) is missing (observed_ci: null). The hypothesis notes this gap. The CI is needed to assess precision and whether the upper bound is well below 1.0.",
+            "target_agent": "case_builder",
+            "request": "Search for the 95% confidence interval of the primary endpoint HR 0.839 in SHARP. Search terms: 'SHARP trial HR 0.839 95% CI' or 'SHARP NCT00125593 confidence interval first major vascular events'."
+          },
+          {
+            "severity": "low",
+            "issue": "The narrow_success hypothesis states a mechanism-predicted HR of ~0.816 using the correct baseline, referencing 'calculator' but the calculator actually produced 0.863 with the wrong baseline. This appears to be a separate manual calculation not shown in the calculator output. Should be clarified or sourced.",
+            "target_agent": "investigator",
+            "request": "Clarify the source of the mechanism-predicted HR ~0.816. Is this from a CTT meta-analysis slope applied to 0.83 mmol/L reduction? If so, cite the CTT slope used. Ensure the hypothesis does not present an unverified calculation as if from the calculator."
+          }
+        ],
+        "verdict_ok": false
       }
     ],
     "verification": {
@@ -581,8 +504,8 @@
           "status": "not_found",
           "found": "",
           "note": "The registry eligibility criteria do not contain the enrollment number 9438.",
-          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*9438[^.]*)', 1) AS sentence FROM registry LIMIT 5",
-          "rows": 1
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '(?s)([^.]*?\\\\b9438\\\\b[^.]*\\\\.)', 1) AS sentence FROM registry WHERE protocolSection.eligibilityModule.eligibilityCriteria LIKE '%9438%' LIMIT 5",
+          "rows": 0
         },
         {
           "fact_id": "f_4120933dee2d16",
@@ -595,7 +518,7 @@
           "status": "confirmed",
           "found": "Median follow-up 4.9 years",
           "note": "The registry primary outcome timeFrame includes 'Median follow-up 4.9 years', matching the claim.",
-          "sql": "SELECT regexp_extract(o.timeFrame, '([^.]*4\\.9 years?[^.]*)', 1) AS sentence FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o LIMIT 5",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%4.9 years%' LIMIT 5",
           "rows": 1
         }
       ],
@@ -674,72 +597,6 @@
     ],
     "facts": [
       {
-        "fact_id": "f_21ebe790ee6961",
-        "entity": "biomarker:hdl-c",
-        "key": "biomarker_change",
-        "value": 6.8,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "HDL-C",
-          "phase": "phase2",
-          "timepoint": "6 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "10 to 80 mg",
-          "kind": "percent",
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "compared with +2.1% to +6.8% in all other groups",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
-      },
-      {
-        "fact_id": "f_41fd30d29452b1",
-        "entity": "biomarker:hdl-c",
-        "key": "biomarker_change",
-        "value": 2.1,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "HDL-C",
-          "phase": "phase2",
-          "timepoint": "6 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "10 to 80 mg",
-          "kind": "percent",
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "compared with +2.1% to +6.8% in all other groups",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
-      },
-      {
-        "fact_id": "f_4f1e81d1bd5a90",
-        "entity": "biomarker:hdl-c",
-        "key": "biomarker_change",
-        "value": 9.6,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "HDL-C",
-          "phase": "phase2",
-          "timepoint": "6 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "80 mg",
-          "kind": "percent",
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6%",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
-      },
-      {
         "fact_id": "f_84cc2f575f2019",
         "entity": "biomarker:hdl-c",
         "key": "biomarker_change",
@@ -748,39 +605,18 @@
         "attrs": {
           "biomarker": "HDL-C",
           "phase": "phase2",
-          "timepoint": "three-year",
+          "timepoint": "3 years",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
         },
         "source_id": "pmid:11757504",
         "quote": "these levels changed substantially (by -42 percent and +26 percent, respectively) in the simvastatin-niacin group",
         "pub_date": "2001-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/11757504"
-      },
-      {
-        "fact_id": "f_e0423a45b03515",
-        "entity": "biomarker:hdl-c",
-        "key": "biomarker_change",
-        "value": 7.7,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "HDL-C",
-          "phase": "phase2",
-          "timepoint": "6 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "10 mg",
-          "kind": "percent",
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6%",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
       },
       {
         "fact_id": "f_1ccb4370cac2e9",
@@ -794,8 +630,7 @@
           "timepoint": "end of study",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "80 mg simvastatin",
-          "trial": "NCT00552097"
+          "dose": "80 mg simvastatin"
         },
         "source_id": "pmid:18376000",
         "quote": "the mean (+/-SD) LDL cholesterol level was 192.7+/-60.3 mg per deciliter",
@@ -815,8 +650,7 @@
           "timepoint": "end of study",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "80 mg simvastatin plus 10 mg ezetimibe",
-          "trial": "NCT00552097"
+          "dose": "80 mg simvastatin plus 10 mg ezetimibe"
         },
         "source_id": "pmid:18376000",
         "quote": "141.3+/-52.6 mg per deciliter",
@@ -825,21 +659,21 @@
         "url": "https://europepmc.org/article/MED/18376000"
       },
       {
-        "fact_id": "f_394f16bf3f945f",
+        "fact_id": "f_5e2e239167289e",
         "entity": "biomarker:ldl-c",
         "key": "baseline_level",
-        "value": 77,
+        "value": 68,
         "unit": "mg/dL",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase3",
-          "timepoint": "8 months",
+          "timepoint": "1 month",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "20 mg/d simvastatin"
+          "dose": "40 mg/d simvastatin"
         },
         "source_id": "pmid:15337732",
-        "quote": "was 77 mg/dL (1.99 mmol/L) at 8 months while taking 20 mg/d of simvastatin",
+        "quote": "the median LDL cholesterol level achieved at 1 month while taking 40 mg/d of simvastatin was 68 mg/dL (1.76 mmol/L)",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
@@ -885,27 +719,7 @@
         "url": "https://europepmc.org/article/MED/17671394"
       },
       {
-        "fact_id": "f_790dfbda309ead",
-        "entity": "biomarker:ldl-c",
-        "key": "baseline_level",
-        "value": 104,
-        "unit": "mg/dL",
-        "attrs": {
-          "biomarker": "LDL-C",
-          "phase": "phase3",
-          "timepoint": "during treatment",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "20 mg/d"
-        },
-        "source_id": "pmid:16287954",
-        "quote": "mean LDL-C levels were 104 (SE, 0.3) mg/dL in the simvastatin group",
-        "pub_date": "2005-11-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/16287954"
-      },
-      {
-        "fact_id": "f_a01c60e560338c",
+        "fact_id": "f_786a7220eef712",
         "entity": "biomarker:ldl-c",
         "key": "baseline_level",
         "value": 122,
@@ -919,30 +733,31 @@
           "dose": "placebo"
         },
         "source_id": "pmid:15337732",
-        "quote": "median low-density lipoprotein (LDL) cholesterol level achieved while taking placebo was 122 mg/dL (3.16 mmol/L) at 1 month",
+        "quote": "the median low-density lipoprotein (LDL) cholesterol level achieved while taking placebo was 122 mg/dL (3.16 mmol/L) at 1 month",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
       },
       {
-        "fact_id": "f_a2357a6514db65",
+        "fact_id": "f_790dfbda309ead",
         "entity": "biomarker:ldl-c",
         "key": "baseline_level",
-        "value": 68,
+        "value": 104,
         "unit": "mg/dL",
         "attrs": {
+          "trial": "IDEAL",
           "biomarker": "LDL-C",
           "phase": "phase3",
-          "timepoint": "1 month",
+          "timepoint": "during treatment",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "40 mg/d simvastatin"
+          "dose": "simvastatin 20 mg/d"
         },
-        "source_id": "pmid:15337732",
-        "quote": "median LDL cholesterol level achieved at 1 month while taking 40 mg/d of simvastatin was 68 mg/dL (1.76 mmol/L)",
-        "pub_date": "2004-08-30",
+        "source_id": "pmid:16287954",
+        "quote": "mean LDL-C levels were 104 (SE, 0.3) mg/dL in the simvastatin group",
+        "pub_date": "2005-11-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
+        "url": "https://europepmc.org/article/MED/16287954"
       },
       {
         "fact_id": "f_bb85d13d30fcd0",
@@ -965,24 +780,46 @@
         "url": "https://europepmc.org/article/MED/15337732"
       },
       {
-        "fact_id": "f_c791b31afbc218",
+        "fact_id": "f_bcfc17bb8a9435",
         "entity": "biomarker:ldl-c",
         "key": "baseline_level",
-        "value": 81,
+        "value": 77,
         "unit": "mg/dL",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase3",
-          "timepoint": "during treatment",
+          "timepoint": "8 months",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "80 mg/d"
+          "dose": "20 mg/d simvastatin"
         },
-        "source_id": "pmid:16287954",
-        "quote": "and 81 (SE, 0.3) mg/dL in the atorvastatin group",
-        "pub_date": "2005-11-01",
+        "source_id": "pmid:15337732",
+        "quote": "and was 77 mg/dL (1.99 mmol/L) at 8 months while taking 20 mg/d of simvastatin",
+        "pub_date": "2004-08-30",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/16287954"
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_19702b2c888c8c",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -18,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 to 80 mg",
+          "kind": "percent",
+          "trial": "STELLAR Trial"
+        },
+        "source_id": "pmid:12860216",
+        "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
+        "pub_date": "2003-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12860216"
       },
       {
         "fact_id": "f_1e0081604972e1",
@@ -1015,11 +852,12 @@
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
-          "timepoint": "three-year",
+          "timepoint": "3 years",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
         },
         "source_id": "pmid:11757504",
         "quote": "these levels changed substantially (by -42 percent and +26 percent, respectively) in the simvastatin-niacin group",
@@ -1028,25 +866,26 @@
         "url": "https://europepmc.org/article/MED/11757504"
       },
       {
-        "fact_id": "f_548648e5935e31",
+        "fact_id": "f_248d5779d0ed58",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
-        "value": -1.0,
-        "unit": "mmol/L",
+        "value": -23,
+        "unit": "mg/dL",
         "attrs": {
+          "trial": "IDEAL",
           "biomarker": "LDL-C",
           "phase": "phase3",
-          "timepoint": "5-year treatment period",
+          "timepoint": "during treatment",
           "method": "not stated",
-          "placebo_adjusted": true,
-          "kind": "absolute",
-          "dose": "40 mg simvastatin daily"
+          "placebo_adjusted": false,
+          "dose": "atorvastatin 80 mg/d vs simvastatin 20 mg/d",
+          "kind": "absolute"
         },
-        "source_id": "pmid:15016485",
-        "quote": "yielded an average difference in LDL cholesterol of 1.0 mmol/L (39 mg/dL) during the 5-year treatment period.",
-        "pub_date": "2004-03-01",
+        "source_id": "pmid:16287954",
+        "quote": "mean LDL-C levels were 104 (SE, 0.3) mg/dL in the simvastatin group and 81 (SE, 0.3) mg/dL in the atorvastatin group",
+        "pub_date": "2005-11-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15016485"
+        "url": "https://europepmc.org/article/MED/16287954"
       },
       {
         "fact_id": "f_607f243e50be51",
@@ -1070,29 +909,7 @@
         "url": "https://europepmc.org/article/MED/12114036"
       },
       {
-        "fact_id": "f_6c21e827c168ec",
-        "entity": "biomarker:ldl-c",
-        "key": "biomarker_change",
-        "value": -16.5,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "LDL-C",
-          "phase": "phase2",
-          "timepoint": "24 months",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "80 mg simvastatin ± 10 mg ezetimibe",
-          "kind": "percent",
-          "trial": "NCT00552097"
-        },
-        "source_id": "pmid:18376000",
-        "quote": "a between-group difference of 16.5%",
-        "pub_date": "2008-03-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/18376000"
-      },
-      {
-        "fact_id": "f_705068281bbd8e",
+        "fact_id": "f_67b7c9d05f24db",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -12,
@@ -1108,10 +925,31 @@
           "trial": "STELLAR Trial"
         },
         "source_id": "pmid:12860216",
-        "quote": "12% to 18% more than simvastatin 10 to 80 mg",
+        "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
         "pub_date": "2003-07-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12860216"
+      },
+      {
+        "fact_id": "f_6c21e827c168ec",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -16.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "end of study",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "80 mg simvastatin ± 10 mg ezetimibe"
+        },
+        "source_id": "pmid:18376000",
+        "quote": "a between-group difference of 16.5%",
+        "pub_date": "2008-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18376000"
       },
       {
         "fact_id": "f_87b72a90517edc",
@@ -1148,6 +986,7 @@
           "timepoint": "5-year treatment period",
           "method": "not stated",
           "placebo_adjusted": true,
+          "dose": "40 mg simvastatin daily",
           "kind": "absolute"
         },
         "source_id": "pmid:12814710",
@@ -1179,6 +1018,48 @@
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
+        "fact_id": "f_b1d79c2445f073",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -39,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "5-year treatment period",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "dose": "40 mg simvastatin daily"
+        },
+        "source_id": "pmid:15016485",
+        "quote": "an average difference in LDL cholesterol of 1.0 mmol/L (39 mg/dL) during the 5-year treatment period",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
+      },
+      {
+        "fact_id": "f_dbae8402b9f6a5",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -1.0,
+        "unit": "mmol/L",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "5-year treatment period",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute",
+          "dose": "40 mg simvastatin daily"
+        },
+        "source_id": "pmid:15016485",
+        "quote": "an average difference in LDL cholesterol of 1.0 mmol/L (39 mg/dL) during the 5-year treatment period",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
+      },
+      {
         "fact_id": "f_fd660180465880",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
@@ -1191,6 +1072,7 @@
           "timepoint": "5-year treatment period",
           "method": "not stated",
           "placebo_adjusted": true,
+          "dose": "40 mg simvastatin daily",
           "kind": "absolute"
         },
         "source_id": "pmid:12814710",
@@ -1240,28 +1122,7 @@
         "url": "https://europepmc.org/article/MED/17671394"
       },
       {
-        "fact_id": "f_5374a1cc9bf196",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 0.7,
-        "unit": "percent",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "three-year",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "not stated",
-          "kind": "percent"
-        },
-        "source_id": "pmid:11757504",
-        "quote": "0.7 percent with simvastatin-niacin plus antioxidants",
-        "pub_date": "2001-11-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/11757504"
-      },
-      {
-        "fact_id": "f_6da67edd6ae1ef",
+        "fact_id": "f_19d4dd20926c77",
         "entity": "biomarker:other",
         "key": "biomarker_change",
         "value": 1.8,
@@ -1269,14 +1130,15 @@
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
-          "timepoint": "three-year",
+          "timepoint": "3 years",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
         },
         "source_id": "pmid:11757504",
-        "quote": "1.8 percent with antioxidants",
+        "quote": "1.8 percent with antioxidants (P=0.16 for the comparison with the placebo group)",
         "pub_date": "2001-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/11757504"
@@ -1290,11 +1152,12 @@
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
-          "timepoint": "three-year",
+          "timepoint": "3 years",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
         },
         "source_id": "pmid:11757504",
         "quote": "The average stenosis progressed by 3.9 percent with placebos",
@@ -1303,7 +1166,29 @@
         "url": "https://europepmc.org/article/MED/11757504"
       },
       {
-        "fact_id": "f_fffa104de5d12e",
+        "fact_id": "f_d492a4def8cfff",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 years",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
+        },
+        "source_id": "pmid:11757504",
+        "quote": "and 0.7 percent with simvastatin-niacin plus antioxidants (P=0.004)",
+        "pub_date": "2001-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11757504"
+      },
+      {
+        "fact_id": "f_db0d00ed8aa109",
         "entity": "biomarker:other",
         "key": "biomarker_change",
         "value": -0.4,
@@ -1311,14 +1196,15 @@
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
-          "timepoint": "three-year",
+          "timepoint": "3 years",
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "not stated",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "SHARP NCT00125593"
         },
         "source_id": "pmid:11757504",
-        "quote": "regressed by 0.4 percent with simvastatin-niacin alone",
+        "quote": "and regressed by 0.4 percent with simvastatin-niacin alone",
         "pub_date": "2001-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/11757504"
@@ -1346,7 +1232,6 @@
         "value": 0.97,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -1356,26 +1241,12 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_22c14465681b53",
-        "entity": "trial:nct00125593",
-        "key": "ci_high",
-        "value": 0.85,
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15016485",
-        "quote": "Overall, there was a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
-        "pub_date": "2004-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15016485"
-      },
-      {
         "fact_id": "f_3149ad48793411",
         "entity": "trial:nct00125593",
         "key": "ci_high",
         "value": 1.18,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -1390,14 +1261,40 @@
         "key": "ci_high",
         "value": 1.12,
         "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "(hazard ratio in the simvastatin-ezetimibe group, 0.96; 95% confidence interval [CI], 0.83 to 1.12; P=0.59)",
         "pub_date": "2008-09-02",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_5285b0897ee637",
+        "entity": "trial:nct00125593",
+        "key": "ci_high",
+        "value": 1.04,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_6f57aa8de7f556",
+        "entity": "trial:nct00125593",
+        "key": "ci_high",
+        "value": 0.85,
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:15016485",
+        "quote": "a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
       },
       {
         "fact_id": "f_9b09ca7b1767e4",
@@ -1416,12 +1313,31 @@
         "url": "https://europepmc.org/article/MED/12814710"
       },
       {
+        "fact_id": "f_9c6fdfe5f51c0b",
+        "entity": "trial:nct00125593",
+        "key": "ci_high",
+        "value": 1.0,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(HR, 0.75; 95% CI, 0.57-1.00; P =.05)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
         "fact_id": "f_a2a228aaeba9ca",
         "entity": "trial:nct00125593",
         "key": "ci_high",
         "value": 1.01,
         "unit": "",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "endpoint": "major coronary event"
+        },
         "source_id": "pmid:16287954",
         "quote": "(hazard ratio [HR], 0.89; 95% CI, 0.78-1.01; P = .07)",
         "pub_date": "2005-11-01",
@@ -1429,32 +1345,33 @@
         "url": "https://europepmc.org/article/MED/16287954"
       },
       {
-        "fact_id": "f_f4a1d747e88a93",
-        "entity": "trial:nct00125593",
-        "key": "ci_high",
-        "value": 1.04,
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14",
-        "pub_date": "2004-08-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
-      },
-      {
         "fact_id": "f_029f56348a275c",
         "entity": "trial:nct00125593",
         "key": "ci_low",
         "value": 0.83,
         "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "(hazard ratio in the simvastatin-ezetimibe group, 0.96; 95% confidence interval [CI], 0.83 to 1.12; P=0.59)",
         "pub_date": "2008-09-02",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_332ff2849cce44",
+        "entity": "trial:nct00125593",
+        "key": "ci_low",
+        "value": 0.57,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(HR, 0.75; 95% CI, 0.57-1.00; P =.05)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
       },
       {
         "fact_id": "f_48a89fde6be8c1",
@@ -1463,7 +1380,6 @@
         "value": 0.84,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -1489,13 +1405,40 @@
         "url": "https://europepmc.org/article/MED/12814710"
       },
       {
+        "fact_id": "f_88f871bef1acc8",
+        "entity": "trial:nct00125593",
+        "key": "ci_low",
+        "value": 0.76,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_9f4161aac59d2c",
+        "entity": "trial:nct00125593",
+        "key": "ci_low",
+        "value": 0.66,
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:15016485",
+        "quote": "a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
+      },
+      {
         "fact_id": "f_e1d2ae626d0960",
         "entity": "trial:nct00125593",
         "key": "ci_low",
         "value": 0.63,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -1505,56 +1448,20 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_eda6edb2f0e76e",
-        "entity": "trial:nct00125593",
-        "key": "ci_low",
-        "value": 0.76,
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14",
-        "pub_date": "2004-08-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
-      },
-      {
         "fact_id": "f_fda2b57b3b3bc9",
         "entity": "trial:nct00125593",
         "key": "ci_low",
         "value": 0.78,
         "unit": "",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "endpoint": "major coronary event"
+        },
         "source_id": "pmid:16287954",
         "quote": "(hazard ratio [HR], 0.89; 95% CI, 0.78-1.01; P = .07)",
         "pub_date": "2005-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/16287954"
-      },
-      {
-        "fact_id": "f_ff6bbc90b5c1e7",
-        "entity": "trial:nct00125593",
-        "key": "ci_low",
-        "value": 0.66,
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15016485",
-        "quote": "Overall, there was a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
-        "pub_date": "2004-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15016485"
-      },
-      {
-        "fact_id": "f_08a612439209ce",
-        "entity": "trial:nct00125593",
-        "key": "events_control",
-        "value": 343,
-        "unit": "patients",
-        "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "343 patients (16.7%) in the placebo plus simvastatin group experienced the primary end point",
-        "pub_date": "2004-08-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
       },
       {
         "fact_id": "f_2d1d5652c9e347",
@@ -1563,7 +1470,8 @@
         "value": 748,
         "unit": "participants",
         "attrs": {
-          "trial": "MRC/BHF Heart Protection Study"
+          "trial": "MRC/BHF Heart Protection Study",
+          "placebo_adjusted": false
         },
         "source_id": "pmid:12814710",
         "quote": "601 [20.2%] simvastatin-allocated vs 748 [25.1%] placebo-allocated",
@@ -1572,20 +1480,19 @@
         "url": "https://europepmc.org/article/MED/12814710"
       },
       {
-        "fact_id": "f_334b6a830c3302",
+        "fact_id": "f_2de37036eb3874",
         "entity": "trial:nct00125593",
         "key": "events_control",
-        "value": 17.9,
-        "unit": "percent",
+        "value": 343,
+        "unit": "patients",
         "attrs": {
-          "trial": "SHARP",
-          "placebo_adjusted": false
+          "trial": "A to Z trial phase Z"
         },
-        "source_id": "announcement:sharp",
-        "quote": "In the intention-to-treat analysis, VYTORIN reduced first major vascular events by 16.1 percent compared to placebo (p=0.0010). In the group that received VYTORIN (n=4,193) 15.2 percent of patients had a major vascular event, compared to 17.9 percent of patients taking placebo (n=4,191).",
-        "pub_date": "2010-11-20",
-        "access": "press_release",
-        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
+        "source_id": "pmid:15337732",
+        "quote": "A total of 343 patients (16.7%) in the placebo plus simvastatin group experienced the primary end point",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
       },
       {
         "fact_id": "f_73965af9c0d03c",
@@ -1593,7 +1500,10 @@
         "key": "events_control",
         "value": 463,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "arm": "simvastatin 20 mg/d"
+        },
         "source_id": "pmid:16287954",
         "quote": "A major coronary event occurred in 463 simvastatin patients (10.4%)",
         "pub_date": "2005-11-01",
@@ -1620,7 +1530,6 @@
         "value": 187,
         "unit": "patients",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -1636,7 +1545,6 @@
         "value": 278,
         "unit": "patients",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -1644,6 +1552,38 @@
         "pub_date": "2008-09-02",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_b421d58ff275e4",
+        "entity": "trial:nct00125593",
+        "key": "events_control",
+        "value": 109,
+        "unit": "patients",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "Cardiovascular death occurred in 109 (5.4%) and 83 (4.1%) patients in the 2 groups",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_b7eed96d5823b2",
+        "entity": "trial:nct00125593",
+        "key": "events_control",
+        "value": 17.9,
+        "unit": "percent",
+        "attrs": {
+          "trial": "SHARP",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:sharp",
+        "quote": "In the group that received VYTORIN (n=4,193) 15.2 percent of patients had a major vascular event, compared to 17.9 percent of patients taking placebo (n=4,191).",
+        "pub_date": "2010-11-20",
+        "access": "press_release",
+        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
         "fact_id": "f_d237a976d789e9",
@@ -1664,9 +1604,7 @@
         "key": "events_control",
         "value": 355,
         "unit": "patients",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "and in 355 patients (38.2%) in the placebo group",
         "pub_date": "2008-09-02",
@@ -1674,14 +1612,32 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_2450954bfa8143",
+        "fact_id": "f_5b981623c03ea6",
         "entity": "trial:nct00125593",
         "key": "events_total",
-        "value": 652,
+        "value": 874,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL"
+        },
+        "source_id": "pmid:16287954",
+        "quote": "A major coronary event occurred in 463 simvastatin patients (10.4%) and in 411 atorvastatin patients (9.3%)",
+        "pub_date": "2005-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16287954"
+      },
+      {
+        "fact_id": "f_0a3b00e3508c26",
+        "entity": "trial:nct00125593",
+        "key": "events_treatment",
+        "value": 83,
+        "unit": "patients",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
         "source_id": "pmid:15337732",
-        "quote": "343 patients (16.7%) in the placebo plus simvastatin group experienced the primary end point compared with 309 (14.4%) in the simvastatin only group",
+        "quote": "Cardiovascular death occurred in 109 (5.4%) and 83 (4.1%) patients in the 2 groups",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
@@ -1692,7 +1648,10 @@
         "key": "events_treatment",
         "value": 411,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "arm": "atorvastatin 80 mg/d"
+        },
         "source_id": "pmid:16287954",
         "quote": "in 411 atorvastatin patients (9.3%)",
         "pub_date": "2005-11-01",
@@ -1726,7 +1685,20 @@
         "url": "https://europepmc.org/article/MED/15016485"
       },
       {
-        "fact_id": "f_7158a7b5677540",
+        "fact_id": "f_7ff304d8cb5ef2",
+        "entity": "trial:nct00125593",
+        "key": "events_treatment",
+        "value": 333,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:18765433",
+        "quote": "the primary outcome occurred in 333 patients (35.3%) in the simvastatin-ezetimibe group",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_99813a85eb6948",
         "entity": "trial:nct00125593",
         "key": "events_treatment",
         "value": 15.2,
@@ -1736,25 +1708,10 @@
           "placebo_adjusted": false
         },
         "source_id": "announcement:sharp",
-        "quote": "In the intention-to-treat analysis, VYTORIN reduced first major vascular events by 16.1 percent compared to placebo (p=0.0010). In the group that received VYTORIN (n=4,193) 15.2 percent of patients had a major vascular event, compared to 17.9 percent of patients taking placebo (n=4,191).",
+        "quote": "In the group that received VYTORIN (n=4,193) 15.2 percent of patients had a major vascular event, compared to 17.9 percent of patients taking placebo (n=4,191).",
         "pub_date": "2010-11-20",
         "access": "press_release",
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
-      },
-      {
-        "fact_id": "f_7ff304d8cb5ef2",
-        "entity": "trial:nct00125593",
-        "key": "events_treatment",
-        "value": 333,
-        "unit": "patients",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
-        "source_id": "pmid:18765433",
-        "quote": "the primary outcome occurred in 333 patients (35.3%) in the simvastatin-ezetimibe group",
-        "pub_date": "2008-09-02",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/18765433"
       },
       {
         "fact_id": "f_a901bc550d0c70",
@@ -1763,7 +1720,6 @@
         "value": 267,
         "unit": "patients",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -1773,13 +1729,27 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
+        "fact_id": "f_c87ada61e59d4f",
+        "entity": "trial:nct00125593",
+        "key": "events_treatment",
+        "value": 309,
+        "unit": "patients",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "compared with 309 (14.4%) in the simvastatin only group",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
         "fact_id": "f_c9ce646332fc2a",
         "entity": "trial:nct00125593",
         "key": "events_treatment",
         "value": 148,
         "unit": "patients",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -1789,26 +1759,14 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_d4b408a2ef9779",
-        "entity": "trial:nct00125593",
-        "key": "events_treatment",
-        "value": 309,
-        "unit": "patients",
-        "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "309 (14.4%) in the simvastatin only group",
-        "pub_date": "2004-08-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
-      },
-      {
         "fact_id": "f_f8531853be783e",
         "entity": "trial:nct00125593",
         "key": "events_treatment",
         "value": 601,
         "unit": "participants",
         "attrs": {
-          "trial": "MRC/BHF Heart Protection Study"
+          "trial": "MRC/BHF Heart Protection Study",
+          "placebo_adjusted": false
         },
         "source_id": "pmid:12814710",
         "quote": "601 [20.2%] simvastatin-allocated vs 748 [25.1%] placebo-allocated",
@@ -1822,27 +1780,15 @@
         "key": "hr",
         "value": 0.89,
         "unit": "",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "endpoint": "major coronary event"
+        },
         "source_id": "pmid:16287954",
         "quote": "(hazard ratio [HR], 0.89; 95% CI, 0.78-1.01; P = .07)",
         "pub_date": "2005-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/16287954"
-      },
-      {
-        "fact_id": "f_0c602e8810ee83",
-        "entity": "trial:nct00125593",
-        "key": "hr",
-        "value": 0.839,
-        "unit": "",
-        "attrs": {
-          "trial": "SHARP"
-        },
-        "source_id": "announcement:sharp",
-        "quote": "VYTORIN 10/20 mg reduced the incidence of first major vascular events -- defined as non-fatal heart attacks or cardiac death, stroke or any revascularization procedure -- by a highly statistically significant 16.1 percent compared to placebo (p=0.0010).",
-        "pub_date": "2010-11-20",
-        "access": "press_release",
-        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
         "fact_id": "f_574bdd5f3caf62",
@@ -1867,7 +1813,6 @@
         "value": 1.0,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -1883,7 +1828,6 @@
         "value": 0.78,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -1893,14 +1837,17 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_8a9246b2e09a3f",
+        "fact_id": "f_8e3d63044f9659",
         "entity": "trial:nct00125593",
         "key": "hr",
-        "value": 0.89,
-        "unit": "",
-        "attrs": {},
+        "value": 0.75,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
         "source_id": "pmid:15337732",
-        "quote": "hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14",
+        "quote": "(HR, 0.75; 95% CI, 0.57-1.00; P =.05)",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
@@ -1911,9 +1858,7 @@
         "key": "hr",
         "value": 0.96,
         "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "(hazard ratio in the simvastatin-ezetimibe group, 0.96; 95% confidence interval [CI], 0.83 to 1.12; P=0.59)",
         "pub_date": "2008-09-02",
@@ -1921,32 +1866,60 @@
         "url": "https://europepmc.org/article/MED/18765433"
       },
       {
-        "fact_id": "f_b1f71405e89c1e",
+        "fact_id": "f_a8b3ec1aee4e4f",
+        "entity": "trial:nct00125593",
+        "key": "hr",
+        "value": 0.89,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_b0c11f8a21e91d",
+        "entity": "trial:nct00125593",
+        "key": "hr",
+        "value": 0.839,
+        "unit": "",
+        "attrs": {
+          "trial": "SHARP"
+        },
+        "source_id": "announcement:sharp",
+        "quote": "VYTORIN reduced first major vascular events by 16.1 percent compared to placebo (p=0.0010).",
+        "pub_date": "2010-11-20",
+        "access": "press_release",
+        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
+      },
+      {
+        "fact_id": "f_b75c86196f258c",
         "entity": "trial:nct00125593",
         "key": "hr",
         "value": 0.75,
         "unit": "",
         "attrs": {},
         "source_id": "pmid:15016485",
-        "quote": "Overall, there was a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
+        "quote": "a highly significant 25% (95% CI 15-34) proportional reduction in the first event rate for stroke",
         "pub_date": "2004-03-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15016485"
       },
       {
-        "fact_id": "f_17dbab294962ce",
+        "fact_id": "f_20b908c12c4707",
         "entity": "trial:nct00125593",
         "key": "inclusion_threshold",
-        "value": 160,
+        "value": 1.5,
         "unit": "mg/dl",
-        "attrs": {
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "LDL cholesterol > or =160 and <250 mg/dl",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "attrs": {},
+        "source_id": "ctgov:NCT00125593@2010-11-20",
+        "quote": "greater than or equal to 1.5 mg/dl",
+        "pub_date": "2005-08-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00125593"
       },
       {
         "fact_id": "f_2abe40d2687280",
@@ -1962,11 +1935,11 @@
         "url": "https://clinicaltrials.gov/study/NCT00125593"
       },
       {
-        "fact_id": "f_337bfb251de002",
+        "fact_id": "f_a7c851fab53555",
         "entity": "trial:nct00125593",
         "key": "inclusion_threshold",
-        "value": 80,
-        "unit": "years",
+        "value": 3,
+        "unit": "months",
         "attrs": {
           "trial": "AURORA"
         },
@@ -1975,49 +1948,6 @@
         "pub_date": "2007-07-11",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/17671394"
-      },
-      {
-        "fact_id": "f_572176906ea1ed",
-        "entity": "trial:nct00125593",
-        "key": "inclusion_threshold",
-        "value": 50,
-        "unit": "years",
-        "attrs": {
-          "trial": "AURORA"
-        },
-        "source_id": "pmid:17671394",
-        "quote": "Patients aged 50-80 years on regular chronic haemodialysis for at least 3 months before screening were eligible for inclusion.",
-        "pub_date": "2007-07-11",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/17671394"
-      },
-      {
-        "fact_id": "f_6cb1db9967bec8",
-        "entity": "trial:nct00125593",
-        "key": "inclusion_threshold",
-        "value": 250,
-        "unit": "mg/dl",
-        "attrs": {
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "LDL cholesterol > or =160 and <250 mg/dl",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
-      },
-      {
-        "fact_id": "f_96b374b90a4fa0",
-        "entity": "trial:nct00125593",
-        "key": "inclusion_threshold",
-        "value": 40,
-        "unit": "years",
-        "attrs": {},
-        "source_id": "ctgov:NCT00125593@2010-11-20",
-        "quote": "Men or women aged greater than or equal to 40 years",
-        "pub_date": "2005-08-01",
-        "access": "registry",
-        "url": "https://clinicaltrials.gov/study/NCT00125593"
       },
       {
         "fact_id": "f_b6727b049bbfb8",
@@ -2028,6 +1958,19 @@
         "attrs": {},
         "source_id": "ctgov:NCT00125593@2010-11-20",
         "quote": "plasma or serum creatinine greater than or equal to 150 micromol/l",
+        "pub_date": "2005-08-01",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00125593"
+      },
+      {
+        "fact_id": "f_c1150cffdf2676",
+        "entity": "trial:nct00125593",
+        "key": "inclusion_threshold",
+        "value": 1.7,
+        "unit": "mg/dl",
+        "attrs": {},
+        "source_id": "ctgov:NCT00125593@2010-11-20",
+        "quote": "greater than or equal to 1.7 mg/dl",
         "pub_date": "2005-08-01",
         "access": "registry",
         "url": "https://clinicaltrials.gov/study/NCT00125593"
@@ -2049,19 +1992,32 @@
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
-        "fact_id": "f_ea177493c3d335",
+        "fact_id": "f_0e980edd273acc",
         "entity": "trial:nct00125593",
-        "key": "inclusion_threshold",
-        "value": 400,
-        "unit": "mg/dl",
-        "attrs": {
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "triglycerides <400 mg/dl",
-        "pub_date": "2003-07-01",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:12114036",
+        "quote": "during the scheduled 5-year treatment period",
+        "pub_date": "2002-07-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://europepmc.org/article/MED/12114036"
+      },
+      {
+        "fact_id": "f_3908cf027febee",
+        "entity": "trial:nct00125593",
+        "key": "median_followup",
+        "value": 3,
+        "unit": "years",
+        "attrs": {
+          "trial": "SHARP NCT00125593"
+        },
+        "source_id": "pmid:11757504",
+        "quote": "In a three-year, double-blind trial",
+        "pub_date": "2001-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11757504"
       },
       {
         "fact_id": "f_4120933dee2d16",
@@ -2082,9 +2038,7 @@
         "key": "median_followup",
         "value": 52.2,
         "unit": "months",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "During a median follow-up of 52.2 months",
         "pub_date": "2008-09-02",
@@ -2125,25 +2079,14 @@
         "key": "n_randomized",
         "value": 4497,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
         "source_id": "pmid:15337732",
         "quote": "receiving 40 mg/d of simvastatin for 1 month followed by 80 mg/d thereafter (n = 2265) compared with ACS patients receiving placebo for 4 months followed by 20 mg/d of simvastatin (n = 2232)",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
-      },
-      {
-        "fact_id": "f_264ffb4d5f5da0",
-        "entity": "trial:nct00125593",
-        "key": "n_randomized",
-        "value": 20536,
-        "unit": "participants",
-        "attrs": {},
-        "source_id": "pmid:15016485",
-        "quote": "3280 adults with cerebrovascular disease, and an additional 17256 with other occlusive arterial disease or diabetes, were randomly allocated 40 mg simvastatin daily or matching placebo.",
-        "pub_date": "2004-03-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15016485"
       },
       {
         "fact_id": "f_377a74837e457e",
@@ -2157,21 +2100,6 @@
         "pub_date": "2005-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/16287954"
-      },
-      {
-        "fact_id": "f_5f7a08a7e46586",
-        "entity": "trial:nct00125593",
-        "key": "n_randomized",
-        "value": 160,
-        "unit": "patients",
-        "attrs": {
-          "trial": "SHARP NCT00125593"
-        },
-        "source_id": "pmid:11757504",
-        "quote": "160 patients with coronary disease, low HDL cholesterol levels and normal LDL cholesterol levels were randomly assigned to receive one of four regimens",
-        "pub_date": "2001-11-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/11757504"
       },
       {
         "fact_id": "f_6bc76a5c9970c4",
@@ -2194,9 +2122,7 @@
         "key": "n_randomized",
         "value": 1873,
         "unit": "patients",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "We conducted a randomized, double-blind trial involving 1873 patients with mild-to-moderate, asymptomatic aortic stenosis.",
         "pub_date": "2008-09-02",
@@ -2208,7 +2134,7 @@
         "entity": "trial:nct00125593",
         "key": "n_randomized",
         "value": 5963,
-        "unit": "people",
+        "unit": "participants",
         "attrs": {
           "trial": "MRC/BHF Heart Protection Study"
         },
@@ -2247,6 +2173,37 @@
         "url": "https://europepmc.org/article/MED/12860216"
       },
       {
+        "fact_id": "f_a00a75224d8045",
+        "entity": "trial:nct00125593",
+        "key": "n_randomized",
+        "value": 720,
+        "unit": "patients",
+        "attrs": {
+          "phase": "phase2",
+          "trial": "NCT00552097"
+        },
+        "source_id": "pmid:18376000",
+        "quote": "in 720 patients with familial hypercholesterolemia",
+        "pub_date": "2008-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18376000"
+      },
+      {
+        "fact_id": "f_ac00edb681029a",
+        "entity": "trial:nct00125593",
+        "key": "n_randomized",
+        "value": 160,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SHARP NCT00125593"
+        },
+        "source_id": "pmid:11757504",
+        "quote": "160 patients with coronary disease, low HDL cholesterol levels and normal LDL cholesterol levels were randomly assigned",
+        "pub_date": "2001-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11757504"
+      },
+      {
         "fact_id": "f_b2b2f16890fcc6",
         "entity": "trial:nct00125593",
         "key": "n_randomized",
@@ -2275,14 +2232,45 @@
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
-        "fact_id": "f_4c1916c3391bbf",
+        "fact_id": "f_ba213ff4599603",
+        "entity": "trial:nct00125593",
+        "key": "n_randomized",
+        "value": 20536,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "pmid:15016485",
+        "quote": "Effects of cholesterol-lowering with simvastatin on stroke and other major vascular events in 20536 people with cerebrovascular disease or other high-risk conditions.",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
+      },
+      {
+        "fact_id": "f_2c8b308cb079f5",
+        "entity": "trial:nct00125593",
+        "key": "p_value",
+        "value": 0.29,
+        "unit": null,
+        "attrs": {
+          "phase": "phase2",
+          "trial": "NCT00552097"
+        },
+        "source_id": "pmid:18376000",
+        "quote": "(P=0.29)",
+        "pub_date": "2008-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18376000"
+      },
+      {
+        "fact_id": "f_3908e8acc3309d",
         "entity": "trial:nct00125593",
         "key": "p_value",
         "value": 0.14,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
         "source_id": "pmid:15337732",
-        "quote": "hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14",
+        "quote": "(hazard ratio [HR], 0.89; 95% confidence interval [CI] 0.76-1.04; P =.14)",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
@@ -2293,27 +2281,15 @@
         "key": "p_value",
         "value": 0.07,
         "unit": "",
-        "attrs": {},
+        "attrs": {
+          "trial": "IDEAL",
+          "endpoint": "major coronary event"
+        },
         "source_id": "pmid:16287954",
         "quote": "(hazard ratio [HR], 0.89; 95% CI, 0.78-1.01; P = .07)",
         "pub_date": "2005-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/16287954"
-      },
-      {
-        "fact_id": "f_6dcb721908b6db",
-        "entity": "trial:nct00125593",
-        "key": "p_value",
-        "value": 0.001,
-        "unit": "",
-        "attrs": {
-          "trial": "SHARP"
-        },
-        "source_id": "announcement:sharp",
-        "quote": "VYTORIN 10/20 mg reduced the incidence of first major vascular events -- defined as non-fatal heart attacks or cardiac death, stroke or any revascularization procedure -- by a highly statistically significant 16.1 percent compared to placebo (p=0.0010).",
-        "pub_date": "2010-11-20",
-        "access": "press_release",
-        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
         "fact_id": "f_6f86199a727fbd",
@@ -2322,7 +2298,6 @@
         "value": 0.02,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "ischemic cardiovascular events"
         },
         "source_id": "pmid:18765433",
@@ -2337,9 +2312,7 @@
         "key": "p_value",
         "value": 0.59,
         "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "(hazard ratio in the simvastatin-ezetimibe group, 0.96; 95% confidence interval [CI], 0.83 to 1.12; P=0.59)",
         "pub_date": "2008-09-02",
@@ -2360,13 +2333,27 @@
         "url": "https://europepmc.org/article/MED/12114036"
       },
       {
+        "fact_id": "f_8b98bf69b1b815",
+        "entity": "trial:nct00125593",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "",
+        "attrs": {
+          "trial": "SHARP"
+        },
+        "source_id": "announcement:sharp",
+        "quote": "VYTORIN reduced first major vascular events by 16.1 percent compared to placebo (p=0.0010).",
+        "pub_date": "2010-11-20",
+        "access": "press_release",
+        "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
+      },
+      {
         "fact_id": "f_b64ba5909717a6",
         "entity": "trial:nct00125593",
         "key": "p_value",
         "value": 0.97,
         "unit": "",
         "attrs": {
-          "trial": "NCT00092677",
           "endpoint": "aortic-valve replacement"
         },
         "source_id": "pmid:18765433",
@@ -2374,6 +2361,22 @@
         "pub_date": "2008-09-02",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_db00021c618148",
+        "entity": "trial:nct00125593",
+        "key": "p_value",
+        "value": 0.05,
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z",
+          "endpoint": "cardiovascular death"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "(HR, 0.75; 95% CI, 0.57-1.00; P =.05)",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
       },
       {
         "fact_id": "f_009bb32e676ee9",
@@ -2387,6 +2390,22 @@
         "pub_date": "2005-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/16287954"
+      },
+      {
+        "fact_id": "f_023ded259eba0f",
+        "entity": "trial:nct00125593",
+        "key": "primary_endpoint",
+        "value": "change in the mean carotid-artery intima-media thickness",
+        "unit": "mm",
+        "attrs": {
+          "phase": "phase2",
+          "trial": "NCT00552097"
+        },
+        "source_id": "pmid:18376000",
+        "quote": "The primary outcome measure was the change in the mean carotid-artery intima-media thickness",
+        "pub_date": "2008-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18376000"
       },
       {
         "fact_id": "f_25ba00f8ffa7eb",
@@ -2409,9 +2428,7 @@
         "key": "primary_endpoint",
         "value": "composite of major cardiovascular events, including death from cardiovascular causes, aortic-valve replacement, nonfatal myocardial infarction, hospitalization for unstable angina pectoris, heart failure, coronary-artery bypass grafting, percutaneous coronary intervention, and nonhemorrhagic stroke",
         "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
+        "attrs": {},
         "source_id": "pmid:18765433",
         "quote": "The primary outcome was a composite of major cardiovascular events, including death from cardiovascular causes, aortic-valve replacement, nonfatal myocardial infarction, hospitalization for unstable angina pectoris, heart failure, coronary-artery bypass grafting, percutaneous coronary intervention, and nonhemorrhagic stroke.",
         "pub_date": "2008-09-02",
@@ -2449,8 +2466,10 @@
         "entity": "trial:nct00125593",
         "key": "primary_endpoint",
         "value": "composite of cardiovascular death, nonfatal myocardial infarction, readmission for ACS, and stroke",
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
         "source_id": "pmid:15337732",
         "quote": "The primary end point was a composite of cardiovascular death, nonfatal myocardial infarction, readmission for ACS, and stroke.",
         "pub_date": "2004-08-30",
@@ -2458,10 +2477,25 @@
         "url": "https://europepmc.org/article/MED/15337732"
       },
       {
-        "fact_id": "f_ca302c91af3673",
+        "fact_id": "f_bfa9f2528ee431",
         "entity": "trial:nct00125593",
         "key": "primary_endpoint",
-        "value": "first major vascular events -- defined as non-fatal heart attacks or cardiac death, stroke or any revascularization procedure",
+        "value": "arteriographic evidence of a change in coronary stenosis and the occurrence of a first cardiovascular event (death, myocardial infarction, stroke, or revascularization)",
+        "unit": "",
+        "attrs": {
+          "trial": "SHARP NCT00125593"
+        },
+        "source_id": "pmid:11757504",
+        "quote": "The end points were arteriographic evidence of a change in coronary stenosis and the occurrence of a first cardiovascular event (death, myocardial infarction, stroke, or revascularization)",
+        "pub_date": "2001-11-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11757504"
+      },
+      {
+        "fact_id": "f_f4cf6e3e76307c",
+        "entity": "trial:nct00125593",
+        "key": "primary_endpoint",
+        "value": "first major vascular events",
         "unit": "",
         "attrs": {
           "trial": "SHARP"
@@ -2486,30 +2520,32 @@
         "url": "https://clinicaltrials.gov/study/NCT00125593"
       },
       {
-        "fact_id": "f_107cae874dd0e2",
+        "fact_id": "f_1782e9ace34d08",
         "entity": "trial:nct00125593",
         "key": "readout_statement",
-        "value": "intensive lowering of LDL-C did not result in a significant reduction in the primary outcome of major coronary events, but did reduce the risk of other composite secondary end points and nonfatal acute MI",
+        "value": "Simvastatin plus niacin provides marked clinical and angiographically measurable benefits in patients with coronary disease and low HDL levels. The use of antioxidant vitamins in this setting must be questioned.",
         "unit": "",
-        "attrs": {},
-        "source_id": "pmid:16287954",
-        "quote": "intensive lowering of LDL-C did not result in a significant reduction in the primary outcome of major coronary events, but did reduce the risk of other composite secondary end points and nonfatal acute MI",
-        "pub_date": "2005-11-01",
+        "attrs": {
+          "trial": "SHARP NCT00125593"
+        },
+        "source_id": "pmid:11757504",
+        "quote": "Simvastatin plus niacin provides marked clinical and angiographically measurable benefits in patients with coronary disease and low HDL levels. The use of antioxidant vitamins in this setting must be questioned.",
+        "pub_date": "2001-11-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/16287954"
+        "url": "https://europepmc.org/article/MED/11757504"
       },
       {
-        "fact_id": "f_5f8e94e15819ee",
+        "fact_id": "f_448a25578cd6a2",
         "entity": "trial:nct00125593",
         "key": "readout_statement",
-        "value": "Adding simvastatin to existing treatments safely produces substantial additional benefits for a wide range of high-risk patients, irrespective of their initial cholesterol concentrations.",
+        "value": "Simvastatin and ezetimibe did not reduce the composite outcome of combined aortic-valve events and ischemic events in patients with aortic stenosis.",
         "unit": "",
         "attrs": {},
-        "source_id": "pmid:12114036",
-        "quote": "Adding simvastatin to existing treatments safely produces substantial additional benefits for a wide range of high-risk patients, irrespective of their initial cholesterol concentrations.",
-        "pub_date": "2002-07-01",
+        "source_id": "pmid:18765433",
+        "quote": "Simvastatin and ezetimibe did not reduce the composite outcome of combined aortic-valve events and ischemic events in patients with aortic stenosis.",
+        "pub_date": "2008-09-02",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12114036"
+        "url": "https://europepmc.org/article/MED/18765433"
       },
       {
         "fact_id": "f_631f44260cb9e7",
@@ -2527,77 +2563,60 @@
         "url": "https://europepmc.org/article/MED/12814710"
       },
       {
-        "fact_id": "f_69ec33b924bad5",
+        "fact_id": "f_a1e540c1b713cf",
         "entity": "trial:nct00125593",
         "key": "readout_statement",
-        "value": "combined therapy with ezetimibe and simvastatin did not result in a significant difference in changes in intima-media thickness, as compared with simvastatin alone, despite decreases in levels of LDL cholesterol and C-reactive protein",
-        "unit": "",
-        "attrs": {
-          "trial": "NCT00552097"
-        },
-        "source_id": "pmid:18376000",
-        "quote": "combined therapy with ezetimibe and simvastatin did not result in a significant difference in changes in intima-media thickness, as compared with simvastatin alone, despite decreases in levels of LDL cholesterol and C-reactive protein",
-        "pub_date": "2008-03-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/18376000"
-      },
-      {
-        "fact_id": "f_868c20d0520eb2",
-        "entity": "trial:nct00125593",
-        "key": "readout_statement",
-        "value": "SHARP is the First and Only Prospective Clinical Study in Patients With Chronic Kidney Disease to Show That an LDL Cholesterol-Lowering Medicine Reduced Major Vascular and Atherosclerotic Events",
+        "value": "VYTORIN 10/20 mg reduced the incidence of first major vascular events -- defined as non-fatal heart attacks or cardiac death, stroke or any revascularization procedure -- by a highly statistically significant 16.1 percent compared to placebo (p=0.0010).",
         "unit": "",
         "attrs": {
           "trial": "SHARP"
         },
         "source_id": "announcement:sharp",
-        "quote": "SHARP is the First and Only Prospective Clinical Study in Patients With Chronic Kidney Disease to Show That an LDL Cholesterol-Lowering Medicine Reduced Major Vascular and Atherosclerotic Events",
+        "quote": "VYTORIN 10/20 mg reduced the incidence of first major vascular events -- defined as non-fatal heart attacks or cardiac death, stroke or any revascularization procedure -- by a highly statistically significant 16.1 percent compared to placebo (p=0.0010).",
         "pub_date": "2010-11-20",
         "access": "press_release",
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
-      },
-      {
-        "fact_id": "f_a9a051df4e7762",
-        "entity": "trial:nct00125593",
-        "key": "readout_statement",
-        "value": "Simvastatin plus niacin provides marked clinical and angiographically measurable benefits in patients with coronary disease and low HDL levels.",
-        "unit": "",
-        "attrs": {
-          "trial": "SHARP NCT00125593"
-        },
-        "source_id": "pmid:11757504",
-        "quote": "Simvastatin plus niacin provides marked clinical and angiographically measurable benefits in patients with coronary disease and low HDL levels.",
-        "pub_date": "2001-11-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/11757504"
-      },
-      {
-        "fact_id": "f_bdd06cd3c242f5",
-        "entity": "trial:nct00125593",
-        "key": "readout_statement",
-        "value": "Simvastatin and ezetimibe did not reduce the composite outcome of combined aortic-valve events and ischemic events in patients with aortic stenosis.",
-        "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
-        "source_id": "pmid:18765433",
-        "quote": "Conclusions Simvastatin and ezetimibe did not reduce the composite outcome of combined aortic-valve events and ischemic events in patients with aortic stenosis.",
-        "pub_date": "2008-09-02",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/18765433"
       },
       {
         "fact_id": "f_c3bf83a233fded",
         "entity": "trial:nct00125593",
         "key": "readout_statement",
         "value": "The trial did not achieve the prespecified end point. However, among patients with ACS, the early initiation of an aggressive simvastatin regimen resulted in a favorable trend toward reduction of major cardiovascular events.",
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
         "source_id": "pmid:15337732",
         "quote": "The trial did not achieve the prespecified end point. However, among patients with ACS, the early initiation of an aggressive simvastatin regimen resulted in a favorable trend toward reduction of major cardiovascular events.",
         "pub_date": "2004-08-30",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_dc36fc95c38494",
+        "entity": "trial:nct00125593",
+        "key": "readout_statement",
+        "value": "Allocation to 40 mg simvastatin daily reduced the rate of ischaemic strokes by about one-quarter",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:15016485",
+        "quote": "Allocation to 40 mg simvastatin daily reduced the rate of ischaemic strokes by about one-quarter",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15016485"
+      },
+      {
+        "fact_id": "f_e1f8e7779733a1",
+        "entity": "trial:nct00125593",
+        "key": "readout_statement",
+        "value": "Allocation to 40 mg simvastatin daily reduced the rates of myocardial infarction, of stroke, and of revascularisation by about one-quarter",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:12114036",
+        "quote": "Allocation to 40 mg simvastatin daily reduced the rates of myocardial infarction, of stroke, and of revascularisation by about one-quarter",
+        "pub_date": "2002-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12114036"
       },
       {
         "fact_id": "f_e54b38e67e2b2f",
@@ -2613,10 +2632,38 @@
         "url": "https://clinicaltrials.gov/study/NCT00125593"
       },
       {
-        "fact_id": "f_2ef9d02553c764",
+        "fact_id": "f_0595008b39699a",
         "entity": "trial:nct00125593",
         "key": "safety_signal",
-        "value": "VYTORIN was comparable to placebo in the incidence of cancer and cancer-related deaths: cancer was reported in 9.4 percent of patients taking VYTORIN versus 9.5 percent of patients taking placebo (p=0.89); mortality due to cancer was reported in 3.2 percent of patients taking VYTORIN versus 2.8 percent of patients taking placebo (p=0.20).",
+        "value": "Myopathy (creatine kinase >10 times the upper limit of normal associated with muscle symptoms) occurred in 9 patients (0.4%) receiving simvastatin 80 mg/d",
+        "unit": "NA",
+        "attrs": {
+          "trial": "A to Z trial phase Z"
+        },
+        "source_id": "pmid:15337732",
+        "quote": "Myopathy (creatine kinase >10 times the upper limit of normal associated with muscle symptoms) occurred in 9 patients (0.4%) receiving simvastatin 80 mg/d",
+        "pub_date": "2004-08-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15337732"
+      },
+      {
+        "fact_id": "f_91642bfbd3d950",
+        "entity": "trial:nct00125593",
+        "key": "safety_signal",
+        "value": "Cancer occurred more frequently in the simvastatin-ezetimibe group",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:18765433",
+        "quote": "Cancer occurred more frequently in the simvastatin-ezetimibe group (105 vs. 70, P=0.01).",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/18765433"
+      },
+      {
+        "fact_id": "f_e2a2995385925e",
+        "entity": "trial:nct00125593",
+        "key": "safety_signal",
+        "value": 0,
         "unit": "",
         "attrs": {
           "trial": "SHARP"
@@ -2628,45 +2675,17 @@
         "url": "https://www.businesswire.com/news/home/20101120005013/en/VYTORIN%C2%AE-ezetimibesimvastatin-Significantly-Reduced-Major-Vascular-Events"
       },
       {
-        "fact_id": "f_8fcefd72f19cdc",
+        "fact_id": "f_febdc2a792b245",
         "entity": "trial:nct00125593",
         "key": "safety_signal",
-        "value": "Myopathy (creatine kinase >10 times the upper limit of normal associated with muscle symptoms) occurred in 9 patients (0.4%) receiving simvastatin 80 mg/d, in no patients receiving lower doses of simvastatin, and in 1 patient receiving placebo (P =.02)",
+        "value": "Adding simvastatin to existing treatments safely produces substantial additional benefits",
         "unit": "",
         "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "Myopathy (creatine kinase >10 times the upper limit of normal associated with muscle symptoms) occurred in 9 patients (0.4%) receiving simvastatin 80 mg/d, in no patients receiving lower doses of simvastatin, and in 1 patient receiving placebo (P =.02)",
-        "pub_date": "2004-08-30",
+        "source_id": "pmid:12114036",
+        "quote": "Adding simvastatin to existing treatments safely produces substantial additional benefits for a wide range of high-risk patients",
+        "pub_date": "2002-07-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
-      },
-      {
-        "fact_id": "f_91642bfbd3d950",
-        "entity": "trial:nct00125593",
-        "key": "safety_signal",
-        "value": "Cancer occurred more frequently in the simvastatin-ezetimibe group",
-        "unit": "",
-        "attrs": {
-          "trial": "NCT00092677"
-        },
-        "source_id": "pmid:18765433",
-        "quote": "Cancer occurred more frequently in the simvastatin-ezetimibe group (105 vs. 70, P=0.01).",
-        "pub_date": "2008-09-02",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/18765433"
-      },
-      {
-        "fact_id": "f_cd845ef4a2e41a",
-        "entity": "trial:nct00125593",
-        "key": "stopped_early",
-        "value": false,
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15337732",
-        "quote": "The trial did not achieve the prespecified end point.",
-        "pub_date": "2004-08-30",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15337732"
+        "url": "https://europepmc.org/article/MED/12114036"
       }
     ],
     "sources": [
@@ -2701,6 +2720,10 @@
                 "type": "DRUG",
                 "other_names": [
                   "Zocor"
+                ],
+                "arms": [
+                  "Simvastatin 20mg",
+                  "Simvastatin 20mg plus Ezetimibe 10mg"
                 ]
               },
               {
@@ -2710,12 +2733,32 @@
                   "Ezetrol",
                   "Zetia",
                   "Vytorin (simvastatin plus ezetimibe)"
+                ],
+                "arms": [
+                  "Simvastatin 20mg plus Ezetimibe 10mg"
                 ]
               },
               {
                 "name": "Placebo",
                 "type": "DRUG",
-                "other_names": []
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "Simvastatin 20mg plus Ezetimibe 10mg",
+                "type": "ACTIVE_COMPARATOR"
+              },
+              {
+                "label": "Simvastatin 20mg",
+                "type": "OTHER"
               }
             ],
             "conditions": [
@@ -2880,52 +2923,52 @@
         "chars": 1728
       },
       {
-        "source_id": "pmid:20696928",
+        "source_id": "pmid:20587337",
         "type": "journal",
-        "title": "Dysregulation of the mevalonate pathway promotes transformation.",
-        "url": "https://europepmc.org/article/MED/20696928",
-        "pub_date": "2010-08-09",
+        "title": "The relationship between HMGCR genetic variation, alternative splicing, and statin efficacy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20587337/",
+        "pub_date": "2010-06-01",
         "access": "abstract_only",
         "meta": {
-          "pmid": "20696928",
-          "pmcid": "PMC2930553",
-          "doi": "10.1073/pnas.0910258107",
-          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
-          "purpose": "genetics"
-        },
-        "chars": 1757
-      },
-      {
-        "source_id": "pmid:20031582",
-        "type": "journal",
-        "title": "Comprehensive whole-genome and candidate gene analysis for response to statin therapy in the Treating to New Targets (TNT) cohort.",
-        "url": "https://europepmc.org/article/MED/20031582",
-        "pub_date": "2009-02-12",
-        "access": "abstract_only",
-        "meta": {
-          "pmid": "20031582",
+          "pmid": "20587337",
           "pmcid": null,
-          "doi": "10.1161/circgenetics.108.818062",
-          "journal": "Circulation. Cardiovascular genetics",
+          "doi": null,
+          "journal": "Discovery medicine",
           "purpose": "genetics"
         },
-        "chars": 1961
+        "chars": 893
       },
       {
-        "source_id": "pmid:18559695",
+        "source_id": "pmid:19913121",
         "type": "journal",
-        "title": "Alternative splicing of 3-hydroxy-3-methylglutaryl coenzyme A reductase is associated with plasma low-density lipoprotein cholesterol response to simvastatin.",
-        "url": "https://europepmc.org/article/MED/18559695",
-        "pub_date": "2008-06-16",
+        "title": "Gene-centric association signals for lipids and apolipoproteins identified via the HumanCVD BeadChip",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19913121/",
+        "pub_date": "2009-11-01",
         "access": "abstract_only",
         "meta": {
-          "pmid": "18559695",
-          "pmcid": "PMC2720070",
-          "doi": "10.1161/circulationaha.108.773267",
-          "journal": "Circulation",
+          "pmid": "19913121",
+          "pmcid": "PMC2775832",
+          "doi": "10.1016/j.ajhg.2009.10.014",
+          "journal": "American journal of human genetics",
           "purpose": "genetics"
         },
-        "chars": 1208
+        "chars": 1941
+      },
+      {
+        "source_id": "pmid:18056971",
+        "type": "journal",
+        "title": "Acute myocardial infarction and proinflammatory gene variants",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18056971/",
+        "pub_date": "2007-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18056971",
+          "pmcid": null,
+          "doi": "10.1196/annals.1404.004",
+          "journal": "Annals of the New York Academy of Sciences",
+          "purpose": "genetics"
+        },
+        "chars": 1425
       },
       {
         "source_id": "announcement:sharp",
@@ -2940,66 +2983,58 @@
     ],
     "models_used": {
       "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
-      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "nvidia:nvidia/nemotron-3-ultra-550b-a55b",
       "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
     },
-    "meterless": {
-      "engine": "Meterless World Model (official reference implementation)",
-      "entities": 21,
-      "facts": 125,
-      "relationships": 27,
-      "events": 293,
-      "audit_entries": 293,
-      "state_shape_keys": 6
-    },
+    "meterless": null,
     "usage": {
       "Extraction": {
         "calls": 15,
-        "input_tokens": 17076,
-        "output_tokens": 11912,
+        "input_tokens": 17105,
+        "output_tokens": 12196,
         "estimated": false,
         "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
         "provider": "nvidia"
       },
       "MechanismAnalyst": {
-        "calls": 1,
-        "input_tokens": 6445,
-        "output_tokens": 2123,
+        "calls": 2,
+        "input_tokens": 13647,
+        "output_tokens": 2389,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Verifier": {
-        "calls": 3,
-        "input_tokens": 1508,
-        "output_tokens": 11012,
+        "calls": 5,
+        "input_tokens": 2417,
+        "output_tokens": 17010,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Investigator": {
-        "calls": 1,
-        "input_tokens": 6159,
-        "output_tokens": 3354,
+        "calls": 2,
+        "input_tokens": 13064,
+        "output_tokens": 6750,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Critic": {
-        "calls": 1,
-        "input_tokens": 7218,
-        "output_tokens": 3247,
+        "calls": 2,
+        "input_tokens": 19440,
+        "output_tokens": 9081,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Reporter": {
         "calls": 1,
-        "input_tokens": 8618,
-        "output_tokens": 1558,
+        "input_tokens": 8514,
+        "output_tokens": 1769,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"

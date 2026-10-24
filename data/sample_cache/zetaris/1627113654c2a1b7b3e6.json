@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25440796+OR+EXT_ID%3A27793396+OR+PMCID%3APMC5485164+OR+PMCID%3APMC5698740&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*70 mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25440796' LIMIT 5",
+ "rows": [
+  [
+   " Qualifying patients are treated with atorvastatin 40 or 80 mg daily, rosuvastatin 20 or 40 mg daily, or the maximum tolerated and approved dose of one of these agents and fulfill one of the following criteria: LDL-C ≥ 70 mg/dL, non-high-density lipoprotein cholesterol ≥ 100 mg/dL, or apolipoprotein B ≥ 80 mg/dL"
+  ]
+ ],
+ "error": null
+}

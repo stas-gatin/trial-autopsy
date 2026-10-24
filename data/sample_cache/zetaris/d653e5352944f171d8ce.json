@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A11971941&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*23%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '11971941' LIMIT 5",
+ "rows": [
+  [
+   " ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0"
+  ]
+ ],
+ "error": null
+}

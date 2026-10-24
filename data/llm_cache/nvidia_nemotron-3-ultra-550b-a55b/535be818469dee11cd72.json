@@ -1,0 +1,15 @@
+{
+  "key": "535be818469dee11cd72",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T23:16:12+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: OMEMI NCT01841944 - Omega-3 Fatty Acids in Elderly Patients With Acute Myocardial Infarction\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | follow-up | median_followup = 24 months | {\"trial\": \"OMEMI\"} | source ctgov:NCT01841944@2020-11-15 | quote: \"[24months]\"\nc2 | follow-up | median_followup = 2 years | {} | source pmcid:PMC4074832 | quote: \"evaluate the effect of 2 years supplementation with capsules of very-long chain marine n-3 PUFA on top of standard therapy\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%24%' LIMIT 5 | rows: [[\"24months\"]]\nc2 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*2 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC4074832' LIMIT 5 | rows: [[\"Therefore, the aims of the present study are to evaluate the effect of 2 years supplementation with capsules of very-long chain marine n-3 PUFA on top of standard therapy in elderly patients after acute myocardial infarction (AMI)\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"24months\", \"note\": \"Registry primary outcome timeFrame shows 24months, matching claim.\"}, {\"claim\": \"c2\", \"status\": \"not_found\", \"found\": \"2 years supplementation\", \"note\": \"The paper mentions 2 years supplementation duration, not median follow-up.\"}]}",
+  "usage": {
+    "input_tokens": 502,
+    "output_tokens": 1142
+  }
+}

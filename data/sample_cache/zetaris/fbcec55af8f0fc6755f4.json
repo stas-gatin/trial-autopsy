@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A22089718+OR+EXT_ID%3A24786356+OR+EXT_ID%3A26678626&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1\\.5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26678626' LIMIT 5",
+ "rows": [
+  [
+   " Treatment will continue until 1,670 patients reached the primary end point; at least 700 patients reach the key secondary efficacy end point of CV death, myocardial infarction, and stroke, and the last patient randomized has been followed up for at least 1.5 years"
+  ]
+ ],
+ "error": null
+}

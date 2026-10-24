@@ -1,0 +1,7 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40337982+OR+EXT_ID%3A40347969+OR+PMCID%3APMC11456355+OR+PMCID%3APMC12811769&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*30\\.3%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC11456355' AND r.abstractText LIKE '%30.3%%' LIMIT 5",
+ "rows": [],
+ "error": null
+}

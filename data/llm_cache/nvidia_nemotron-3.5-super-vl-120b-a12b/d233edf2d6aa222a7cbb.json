@@ -1,0 +1,15 @@
+{
+  "key": "d233edf2d6aa222a7cbb",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T16:14:20+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: ILLUMINATE NCT00134264 - A Study Examining Torcetrapib/Atorvastatin And Atorvastatin Effects On Clinical CV Events In Patients With Heart Disease\nInvestigational drug: torcetrapib\nDocument: Sorting out the complexities of reverse cholesterol transport: CETP polymorphisms, HDL, and coronary disease (journal, published 2006-09-01, source pmid:16960121)\n\n--- DOCUMENT TEXT ---\nSorting out the complexities of reverse cholesterol transport: CETP polymorphisms, HDL, and coronary disease\n\n\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 364,
+    "output_tokens": 7
+  }
+}
