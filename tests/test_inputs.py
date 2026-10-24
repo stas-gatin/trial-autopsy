@@ -289,3 +289,16 @@ class NonSignificant(unittest.TestCase):
         self.assertEqual(classify_readout("produced only a small, non-significant reduction in CHD events")[0], "failure")
         self.assertEqual(classify_readout("the difference was too small to show a difference in death rates")[0], "failure")
         self.assertEqual(classify_readout("Significantly Reduced Major Vascular Events")[0], "success")
+
+
+class PrimaryResultWordings(unittest.TestCase):
+    def test_significance_and_p_values_stated_with_the_primary_endpoint(self):
+        from app.agents.analysis import classify_readout
+        self.assertEqual(classify_readout("an 8 percent reduction (p=0.12) in the combined primary endpoint, which was "
+                                          "not statistically significant")[0], "failure")
+        self.assertEqual(classify_readout("There was a statistically significant difference (p=0.005) in event rates")[0],
+                         "success")
+        self.assertEqual(classify_readout("adjusted HR 1·00, p=0·943 for the primary end-point")[0], "failure")
+        self.assertEqual(classify_readout("rosuvastatin did not affect clinical outcomes in heart failure")[0], "failure")
+        self.assertEqual(classify_readout("no benefit in those with lower blood pressure and even a tendency to harm")[0],
+                         "failure")   # 'tendency' does not contain the stop word 'end'

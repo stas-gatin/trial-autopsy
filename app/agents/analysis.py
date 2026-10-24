@@ -513,7 +513,7 @@ def report(state: RunState):
 # "discontinued" alone is not a failure ("stopped early for efficacy", "discontinuation rates were similar"), and a
 # biomarker that fell significantly is not a result.
 _TRIAL = r"(?:trial|study|program|programme|development|outcomes? study)"
-_STOP = r"(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
+_STOP = r"\b(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
 _EVENTS = r"(?:events?|risk|mortality|deaths?|heart attacks?|strokes?|mace|endpoint|morbidity)"
 _PATIENTS_REACHED = re.compile(r"\b(patients|participants|subjects)\b[^.]{0,80}\b(met|achieved|reached)\b", re.I)
 _NEGATED = re.compile(r"\b(no|not|without|lack of|failed to)\b[^.]{0,40}\b(benefit|reduc\w*|decreas\w*|lower\w*|efficacy)", re.I)
@@ -521,6 +521,8 @@ READOUT_RULES = [
     ("failure", 0, re.compile(r"\b(did not|does not|didn't|failed to|fails? to) (meet|achieve|reach) (its|the|their) (\w+ ){0,2}primary|"
                               r"primary (\w+ ){0,3}(was |were )?not (met|achieved|reached)|missed (its|the) (\w+ ){0,2}primary|"
                               r"no (statistically )?significant (difference|reduction|benefit) in (the )?(\w+ ){0,2}primary", re.I)),
+    ("failure", 0, re.compile(r"primary (composite |combined )?end[- ]?point(?:[^.]|\.\d){0,160}\b(was |were |is )?not (statistically )?significant|"
+                              r"\bnot statistically significant[^.]{0,60}\bprimary", re.I)),
     ("success", 0, re.compile(r"\b(met|meets|achieved|achieves) (its|the|their|both) (\w+ ){0,2}primary|"
                               r"primary (\w+ ){0,3}(was|were) (met|achieved)", re.I)),
     ("stopped_harm", 1, re.compile(rf"{_STOP}[^.]{{0,120}}\b(imbalance|excess|increase\w*|higher)\b[^.]{{0,40}}\b(mortality|deaths?|"
@@ -529,9 +531,15 @@ READOUT_RULES = [
                               rf"overwhelming)", re.I)),
     ("failure", 2, re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate|meet|achieve|be met|be achieved)|"
                               rf"did not (benefit|show a (significant )?benefit)|\bno (significant )?(clinical )?benefit|"
+                              rf"\bdid not (affect|improve|change) (\w+ ){{0,2}}(clinical )?outcomes|"
+                              rf"\bno differences? (\w+ ){{0,4}}(with respect to|in|on) (the )?(\w+ ){{0,2}}primary|"
                               rf"\b(did|do|does) not (\w+ ){{0,2}}(reduce|lower|decrease) (\w+ ){{0,6}}{_EVENTS}|"
                               rf"{_STOP} (the |its |a |all )?([\w()\-\"'\u201c\u201d]+ ){{0,6}}{_TRIAL}|"
                               rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
+    ("primary_p", 1, re.compile(r"primary (composite |combined )?end[- ]?point(?:[^.]|\.\d){0,160}\bp ?(=|<|<=|≤) ?0?\.\d+|"
+                                r"\bp ?(=|<|<=|≤) ?0?\.\d+(?:[^.]|\.\d){0,80}\bprimary (composite |combined )?end[- ]?point", re.I)),
+    ("success", 3, re.compile(rf"(?<!no )(?<!not )(?<!non-)\bstatistically significant (\w+ ){{0,2}}(difference|reduction)(?:[^.]|\.\d){{0,40}}"
+                              rf"\b(event rates?|{_EVENTS})", re.I)),
     ("success", 3, re.compile(rf"(?<![\w-])significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}",
                               re.I)),
     ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)|"
@@ -540,9 +548,23 @@ READOUT_RULES = [
 ]
 
 
+def _primary_p(text: str) -> str | None:
+    """A p-value stated with the primary endpoint: below 0.05 the endpoint was met, else not."""
+    m = re.search(r"\bp ?(=|<|<=|≤) ?(0?\.\d+)", text, re.I)
+    if not m:
+        return None
+    value = float(m.group(2))
+    return "success" if value < 0.05 or (m.group(1) in ("<", "<=", "≤") and value <= 0.05) else "failure"
+
+
 def classify_readout(text: str):
     """(outcome, rank) for the strongest statement in one sentence or title, or None."""
+    text = text.replace("\u00b7", ".")   # 'p=0\u00b7943': the Lancet's raised decimal point
     for outcome, rank, rule in READOUT_RULES:
+        if outcome == "primary_p":
+            if rule.search(text) and _primary_p(text):
+                return _primary_p(text), rank
+            continue
         if rank == 0 and outcome == "success" and _PATIENTS_REACHED.search(text):
             continue
         if rule.search(text) and not (rank in (1, 3) and outcome == "success" and _NEGATED.search(text)):
