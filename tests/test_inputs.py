@@ -302,3 +302,24 @@ class PrimaryResultWordings(unittest.TestCase):
         self.assertEqual(classify_readout("rosuvastatin did not affect clinical outcomes in heart failure")[0], "failure")
         self.assertEqual(classify_readout("no benefit in those with lower blood pressure and even a tendency to harm")[0],
                          "failure")   # 'tendency' does not contain the stop word 'end'
+
+
+class ThresholdIsNotABaseline(unittest.TestCase):
+    def test_an_entry_threshold_cited_as_the_ldl_baseline_is_left_out(self):
+        from app.agents.analysis import complete_inputs
+        facts = {"t": {"fact_id": "t", "key": "inclusion_threshold", "value": 70, "unit": "mg/dL"},
+                 "p": {"fact_id": "p", "key": "biomarker_change", "value": -61, "unit": "%"}}
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -61, "baseline": 1.81, "unit": "mmol/L",
+                          "fact_ids": ["p", "t"]}]}
+        filled = complete_inputs(m, facts)
+        self.assertIsNone(m["changes"][0]["baseline"])
+        self.assertTrue(any("entry threshold" in x for x in filled))
+
+    def test_a_measured_baseline_and_an_lpa_threshold_are_kept(self):
+        from app.agents.analysis import complete_inputs
+        facts = {"t": {"fact_id": "t", "key": "inclusion_threshold", "value": 70, "unit": "mg/dL"}}
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -61, "baseline": 2.4, "unit": "mmol/L", "fact_ids": ["t"]},
+                         {"biomarker": "Lp(a)", "pct_change": -80, "baseline": 70, "unit": "mg/dL", "fact_ids": ["t"]}]}
+        complete_inputs(m, facts)
+        self.assertEqual(m["changes"][0]["baseline"], 2.4)
+        self.assertEqual(m["changes"][1]["baseline"], 70)

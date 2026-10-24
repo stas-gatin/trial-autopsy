@@ -322,6 +322,26 @@ def complete_inputs(m: dict, facts: dict) -> list[str]:
                 if v and (v < 0) != (sign < 0):
                     c[k] = -v
                     filled.append(f"{bm} {k} sign set to match cited facts {c.get('fact_ids')}")
+    # An entry threshold ("LDL-C >= 70 mg/dL") is not the patients' starting level, which is well above it: a lipid
+    # baseline that is just a cited threshold is left out, and the calculator applies its stated default instead.
+    for c in m.get("changes") or []:
+        bm, base = c.get("biomarker"), _num(c.get("baseline"))
+        if bm not in ("LDL-C", "non-HDL-C", "apoB") or base is None:
+            continue
+        for i in c.get("fact_ids") or []:
+            f = facts.get(i)
+            v = _num(f["value"]) if f and f.get("key") == "inclusion_threshold" else None
+            if v is None:
+                continue
+            levels = [v] if bm == "apoB" else [v, v / MGDL_PER_MMOL]
+            if any(abs(base - x) <= 0.03 * abs(x) for x in levels if x):
+                pct, absolute = _num(c.get("pct_change")), _num(c.get("abs_change"))
+                c["baseline"] = None
+                if pct is not None and absolute is not None and abs(absolute - pct / 100 * base) <= 0.03 * abs(absolute):
+                    c["abs_change"] = None   # it was only the percent applied to the threshold
+                filled.append(f"{bm} baseline {base} is the outcome trial's entry threshold ({i}), not the patients' "
+                              f"starting level: left out, the calculator applies its stated default baseline")
+                break
     if _num(m.get("events")) is None:
         cited = [facts[i] for i in m.get("events_fact_ids") or [] if i in facts and _num(facts[i]["value"]) is not None]
         if len(cited) == 1:
