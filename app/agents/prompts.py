@@ -146,6 +146,9 @@ Category definitions (pick the primary one by these, not by tone):
 
 Rules:
 - Every evidence item cites fact_ids or "calculator". No outside facts, no invented numbers.
+- In mode "autopsy" the actual outcome, as read by code from the announcement, is given below. The primary category
+  must agree with it: one of the success categories if the trial met its primary endpoint, one of the failure or risk
+  categories if it did not. Use insufficient_data only when no explanation can be supported at all.
 - If the calculator abstained (pathway not quantifiable), judge qualitatively and say so.
 - Keep the calculator's verdict unless verified facts contradict it; if you depart from it, explain why.
 
@@ -158,6 +161,7 @@ Return JSON only:
 
 INVESTIGATOR_PROMPT = """Case: {trial_label} | mode: {mode} | as_of: {as_of}
 Drug: {drug} ({mechanism})
+Actual outcome: {outcome}
 
 Calculator inputs:
 {case_input}

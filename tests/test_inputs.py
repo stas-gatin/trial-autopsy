@@ -253,3 +253,18 @@ class NegatedReductions(unittest.TestCase):
         hit = classify_readout("adding niacin to statin therapy did not significantly further reduce the risk of "
                                "the combination of coronary deaths")
         self.assertEqual(hit[0], "failure")
+
+
+class OutcomeAndCategoryAgree(unittest.TestCase):
+    def test_a_success_is_not_explained_by_a_failure_cause(self):
+        from types import SimpleNamespace
+        from unittest import mock
+        from app.agents import analysis
+        state = SimpleNamespace(calc=SimpleNamespace(power=0.48, outcome="failure", category="effect_too_small",
+                                                     secondary=[], weakest_link="", expected_hr=0.89),
+                                investigation={"primary_category": "effect_too_small",
+                                               "secondary_categories": ["narrow_success"], "confidence": "high"},
+                                verification={"status": "ok"})
+        with mock.patch.object(analysis, "actual_outcome", return_value=("success", "readout")):
+            v = analysis.verdict_block(state)
+        self.assertEqual(v["primary_category"], "narrow_success")

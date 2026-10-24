@@ -436,9 +436,18 @@ def calculate(state: RunState):
 
 # --- Investigator -------------------------------------------------------------
 
+def _outcome_line(state: RunState) -> str:
+    if state.mode != "autopsy":
+        return "not known yet (forecast)"
+    actual, basis = actual_outcome(state)
+    if not actual:
+        return "not stated in the evidence"
+    return f"{'met its primary endpoint' if actual == 'success' else 'did not meet its primary endpoint'} ({basis})"
+
+
 def investigate(state: RunState):
     facts_text, _ = facts_block(state)
-    prompt = prompts.INVESTIGATOR_PROMPT.format(
+    prompt = prompts.INVESTIGATOR_PROMPT.format(outcome=_outcome_line(state),
         trial_label=state.trial_label, mode=state.mode, as_of=state.as_of or "today", drug=state.drug.get("name"),
         mechanism="; ".join(state.drug.get("mechanisms", [])),
         case_input=json.dumps(asdict(state.case_input), default=str),
@@ -589,6 +598,10 @@ def verdict_block(state: RunState) -> dict:
     primary = inv.get("primary_category") or c.category
     if actual in ("failure", "stopped_harm") and primary in SUCCESS_CODES:
         primary = "effect_too_small" if (c.power or 0) < 0.9 else "insufficient_data"
+    elif actual == "success" and primary not in SUCCESS_CODES:
+        # A trial that met its endpoint is not explained by a failure cause: take the investigator's own success
+        # category if it named one, else "with caveats" (the benefit is real but the system could not explain it).
+        primary = next((x for x in inv.get("secondary_categories") or [] if x in SUCCESS_CODES), "success_with_caveats")
     consistency = ""
     if actual and c.power is not None:
         expected_success = c.outcome in ("success", "likely_success")
