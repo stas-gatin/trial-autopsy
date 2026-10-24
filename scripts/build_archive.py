@@ -13,7 +13,8 @@ Rule (fixed, applied identically to every case):
      spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)
      In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may
      have been printed after the readout (rule v4)
-  4. The topline announcement itself (press release on the readout day), fetched from its URL
+  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day
+     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)
 Nothing is added by hand. Documents that reveal the outcome cannot exist before as_of,
 except the topline announcement, which is what a real analyst would have on that day.
 
@@ -44,15 +45,56 @@ def html_to_text(raw: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw))).strip()
 
 
-def fetch_announcement(url: str, on: str) -> str | None:
-    for candidate in (url, WAYBACK.format(date=on.replace("-", ""), url=url)):
-        try:
-            text = html_to_text(http.get_text(candidate, source="announcement"))
-        except http.SourceError:
-            continue
-        if len(text) > 400:
-            return text[:20000]
-    return None
+def _get(url: str):
+    """(text, final URL) of a page, or (None, None). Redirects are followed so that they can be checked."""
+    import httpx
+    try:
+        with httpx.Client(timeout=60, headers=http._headers(), follow_redirects=True) as client:
+            r = client.get(url)
+    except httpx.HTTPError:
+        return None, None
+    return (r.text, str(r.url)) if r.status_code == 200 else (None, None)
+
+
+def _page(url: str) -> str:
+    """Host and path, without scheme, 'www.' or a trailing slash, to tell a moved page from the page asked for."""
+    from urllib.parse import urlparse
+    u = urlparse(url)
+    return (u.netloc.lower().removeprefix("www.") + u.path.rstrip("/")).lower() + ("?" + u.query if u.query else "")
+
+
+def _drop_later_text(text: str, on: str) -> str:
+    """Leave out every sentence that names a year more than one year after the readout: it belongs to the site the
+    page is shown on today (a news sidebar, a copyright line), not to the announcement."""
+    limit = int(on[:4]) + 1
+    parts = re.split(r"(?<=[.!?])\s+|\s+\u00b7\s+", text)
+    keep = [x for x in parts if not any(int(y) > limit for y in re.findall(r"\b(19[5-9]\d|20\d\d)\b", x))]
+    return " ".join(keep)
+
+
+def fetch_announcement(url: str, on: str) -> tuple[str | None, str]:
+    """The announcement as it was published (rule v5). First the Wayback Machine capture nearest the readout day, raw
+    (no Wayback toolbar), if it was taken within a year of it and is still the same page; only then the live page,
+    and only if it was not redirected elsewhere: a live page carries today's sidebars and footers, and an old address
+    may now redirect to unrelated news. Returns (text, provenance)."""
+    from datetime import date as _date
+    day = on.replace("-", "")
+    text, final = _get(f"https://web.archive.org/web/{day}id_/{url}")
+    if text and final:
+        m = re.search(r"/web/(\d{8})\d*(?:id_)?/(.+)$", final)
+        if m:
+            taken = _date(int(m.group(1)[:4]), int(m.group(1)[4:6]), int(m.group(1)[6:8]))
+            gap = (taken - _date.fromisoformat(on)).days
+            if -30 <= gap <= 365 and _page(m.group(2)) == _page(url):
+                body = _drop_later_text(html_to_text(text), on)
+                if len(body) > 400:
+                    return body[:20000], f"Wayback Machine capture of {taken.isoformat()}"
+    text, final = _get(url)
+    if text and final and _page(final) == _page(url):
+        body = _drop_later_text(html_to_text(text), on)
+        if len(body) > 400:
+            return body[:20000], "live page (no usable Wayback capture), sentences naming later years left out"
+    return None, "not readable"
 
 
 def main():
@@ -147,12 +189,13 @@ def main():
 
     announcements = [s for s in gold["sources"] if s["type"] == "press_release" and s.get("pub_date") == meta["readout_date"]]
     for s in announcements:
-        text = fetch_announcement(s["url"], meta["readout_date"])
+        text, provenance = fetch_announcement(s["url"], meta["readout_date"])
+        print(f"announcement {s['url']}: {provenance}")
         if text:
             from app.tools.documents import Document
             save(Document(source_id=f"announcement:{args.case_id}", type="press_release", title=s["title"], text=text,
                           url=s["url"], pub_date=meta["readout_date"], access="press_release"),
-                 "topline announcement on the readout day")
+                 f"topline announcement on the readout day ({provenance})")
             break
 
     manifest = {"case_id": args.case_id, "nct_id": meta["nct_id"], "acronym": meta.get("trial_name"),
