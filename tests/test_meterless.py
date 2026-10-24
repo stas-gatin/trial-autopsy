@@ -131,6 +131,25 @@ class FactsBelongToEachRun(unittest.TestCase):
             for store in runs:
                 self.assertEqual(len(store.query("SELECT 1 FROM facts WHERE run_id=?", (store.run_id,))), 1)
 
+    def test_a_run_does_not_see_source_metadata_from_an_earlier_run(self):
+        import tempfile
+        from unittest import mock
+        from app import config
+        from app.engines import world_model
+        from app.tools.documents import Document
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(world_model, "WORLD_DB_DIR", __import__("pathlib").Path(tmp)), \
+                mock.patch.object(config, "LOGS", __import__("pathlib").Path(tmp)), \
+                mock.patch.dict("os.environ", {"SOURCE_METERLESS": "false"}):
+            for rid, date in (("run-a", "2016-12-01"), ("run-b", "2016-12-13")):
+                store = world_model.WorldStoreService(rid)
+                ingest = world_model.IngestPipelineService(store)
+                for d in (date, "1999-01-01"):     # a second write in the same run does not change the first
+                    ingest.upsert_source(Document(source_id="s1", type="journal", title="t", text="q", url="",
+                                                  pub_date=d, access="abstract_only"))
+                ingest.ingest_fact(case_id="x", entity_id="drug:x", key="k", value=1, source_id="s1", quote="q",
+                                   quote_verified=True, agent="test")
+                self.assertEqual(world_model.ContextBuilderService(store).facts("x")[0]["pub_date"], date)
+
 
 class PubMedFallback(unittest.TestCase):
     def test_query_syntax_and_dates_are_translated(self):
