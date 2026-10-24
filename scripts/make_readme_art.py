@@ -53,12 +53,15 @@ def run_numbers(runs: list[dict]) -> dict:
     ns = direct = checked = 0
     for run in runs:
         out = run.get("output") or {}
-        for step, u in (out.get("usage") or {}).items():
-            if step in reasoning:
-                if u.get("provider") == "meterless":
-                    ns += u.get("calls", 0)
+        # Each model call is one step in the run's trace, which names the provider that answered it.
+        trace = ROOT / "data" / "library" / "traces" / f"trace-{run.get('run_id')}.jsonl"
+        for line in (trace.read_text().splitlines() if trace.exists() else []):
+            step = json.loads(line)
+            if step.get("agent_name") in reasoning and step.get("model"):
+                if step["model"].startswith("meterless:"):
+                    ns += 1
                 else:
-                    direct += u.get("calls", 0)
+                    direct += 1
         checked += len((out.get("verification") or {}).get("results") or [])
     return {"runs": len(runs), "nightshift": ns, "reasoning": ns + direct, "checked": checked}
 

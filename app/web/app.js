@@ -370,8 +370,8 @@ async function renderCompare(h) {
 const KNOWN_TRIAL_NAME = (res) => (analysesCache.find((x) => x.run_id === res.run_id) || {}).trial || (res.trial || {}).acronym || (res.trial || {}).nct_id;
 
 const FEATURED = [
-  { run: "example-pelacarsen", tag: "Live autopsy · 2026", look: "The Verifier found the follow-up was a minimum, the critic sent the work back (HR 0.899 → 0.887), the pre-registered prediction, and who is next on the same target." },
-  { run: "bt-improve_it", tag: "The Verifier catches a number", look: "Zetaris found the LDL-C difference written the other way round; the critic sent the work back, and the expected HR moved from 0.81 to 0.899, against 0.898 in the answer key." },
+  { run: "example-pelacarsen", tag: "Live autopsy · 2026", look: "The Verifier found in Zetaris that the 2.5-year follow-up is a minimum, not the median; the pre-registered prediction, and who is next on the same target." },
+  { run: "bt-reduce_it", tag: "The critic changes the answer", look: "The critic objected to an assumed baseline; with the trial's own, the expected HR moved from 0.917 to 0.903, against 0.904 in the answer key, and the forecast from failure to success." },
   { run: "bt-cantos", tag: "Honest abstention", look: "Inflammation has no validated formula, so the calculator refuses to invent a number; the agents judge the evidence." },
   { run: "bt-fourier", tag: "Every link holds", look: "A causal target, a large LDL drop and a big trial: >99% chance. Colour PCSK9 by its domains in 3D." },
 ];

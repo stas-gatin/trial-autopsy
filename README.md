@@ -29,10 +29,33 @@ Roughly half of phase 3 cardiovascular outcome trials miss their primary endpoin
 
 That explanation usually takes years. After the CETP inhibitors failed in 2012, the genetic explanation was published in 2017.
 
-Trial Autopsy answers in about ten minutes, the way a pathologist works: collect the evidence, run fixed tests, weigh a differential diagnosis, and write a report in which every number links to a verbatim quote from its source.
+Trial Autopsy answers in about a quarter of an hour (median 14 minutes in the recorded runs), the way a pathologist works: collect the evidence, run fixed tests, weigh a differential diagnosis, and write a report in which every number links to a verbatim quote from its source.
 
 - **Autopsy** (after the result): why did it fail or succeed?
 - **Forecast** (before the result): what is the risk, and where is the weakest link?
+
+---
+
+## When something goes wrong
+
+What the agents do when a step fails, what they do without being asked, and how a person can tell afterwards what happened.
+
+**A failed step says so; it does not guess.**
+- **No number, no forecast.** If a number the calculator needs (an event count, the between-arm LDL-C difference) is not in the documents published before the cut-off, the result is *not computable*. A missing value is never read as zero, and an Lp(a) or triglyceride drug is never sized by some other small change.
+- **Cut model calls are retried and logged.** Nightshift cuts a request whose first token is slow; the app retries, and after two cuts calls NVIDIA directly, and the step log names the provider that answered. A reply cut off mid-thought, with no JSON in it, is repaired by the same model or asked once more.
+- **Failed sources are reported.** If Zetaris is down, the Verifier is marked unavailable and the report lowers its confidence.
+- **Out of scope is refused, with the reason.** A blood-pressure strategy with no molecule, or a trial outside cardiometabolic disease, gets a clear refusal instead of a forced answer.
+
+**Checks nobody asked for.**
+- The **Verifier** re-checks every number the calculator used against the registry and the cited papers with SQL in Zetaris; a contradiction goes to the critic.
+- The **critic** can send the work back. Code then keeps every verified number the critic did not question, so a revision cannot quietly lose evidence.
+- **Code** checks every quote word for word against its document (a fact whose quote is not there is kept as unverified and never reaches the calculator or the report), converts units, and reads the direction of a change from the source's own clause.
+- The **archive builder** leaves out a paper dated only to the readout month, since it may have been printed after the readout.
+
+**Afterwards, everything can be traced.**
+- Every step is in the run's log (`logs/trace-<run>.jsonl`): the agent, the action, a summary of input and output, the model and provider that answered, and whether code or a model did it.
+- Every number links to its verbatim quote and source, and every World Model write is in an audit log (`logs/world-<run>.jsonl`).
+- Every recorded analysis replays offline to the same result (`scripts/check_replay.py`), and CI checks this on every push, so anyone can rerun the whole backtest without keys.
 
 ---
 
@@ -59,9 +82,9 @@ After the calculator runs, the **Verifier** has Nemotron write one Lightning SQL
 
 ### A critic that can send the work back
 
-The critic reviews the inputs and claims. A serious issue sends the analysis back for a targeted search and a second round, and the report shows what changed. In IMPROVE-IT the Verifier found that the source reported the LDL-C difference differently from the input; the critic sent the work back, and the second round's expected hazard ratio, 0.899, matched the answer key's 0.898.
+The critic reviews the inputs and claims. A serious issue sends the analysis back for a targeted search and a second round, and the report shows what changed. In REDUCE-IT, the calculator first used a typical non-HDL-C baseline because the documents gave none, and expected a hazard ratio of 0.917 with a 41% chance of success. The critic flagged the assumption and asked for the trial's own baseline (LDL-C plus triglycerides/5); the second round expected 0.903, against 0.904 in the answer key, and the forecast turned from failure to success, which is what happened.
 
-![The critic changed the answer: round 1 expected HR 0.81, the critic's serious issue, round 2 expected HR 0.899](docs/images/critic_improve_it.png)
+![The critic changed the answer: round 1 expected HR 0.917 with a 41% chance to pass, the critic's serious issues, round 2 expected HR 0.903 with 53%](docs/images/critic_reduce_it.png)
 
 ### Evidence you can follow end to end
 
@@ -174,20 +197,20 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 
 - ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through Zetaris: each request becomes a REST session table read back with Lightning SQL (`app/tools/zetaris.py`).
 - The blind-test cut-off runs in that SQL, so a paper from after the cut-off never reaches an agent.
-- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 16 recorded analyses it checked 77 numbers: 45 confirmed, 28 not found in the abstract or registry, 4 contradictions, each of which reached the critic.
+- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 26 recorded analyses it checked 116 numbers: 69 confirmed, 43 not found in the abstract or registry, 4 contradictions, each of which reached the critic.
 - If Zetaris is down, reads fall back to the source directly, the Verifier cannot run, and the report says its numbers were not independently verified.
 
 ### Meterless World Model: the evidence store (Build)
 
 - The official Meterless World Model reference engine, unchanged (Apache-2.0), runs as a local service in `services/meterless/`; `run.py` starts it.
-- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 16 analyses: 350 entities, 1,250 facts, 418 links, 3,168 audit entries, with each run's audit log in `logs/world-<run_id>.jsonl`.
+- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 26 analyses: 562 entities, 2,097 facts, 627 links, 5,230 audit entries, with each run's audit log in `logs/world-<run_id>.jsonl`.
 - The app's own store (`app/engines/world_model.py`) implements the same three services, WorldStore, IngestPipeline and ContextBuilder, and the analyst, calculator, Verifier and investigator build their context from it.
 - `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass ([evidence](docs/evidence/meterless_world_model_conformance.txt)).
 
 ### Meterless Nightshift: the model runtime (Power)
 
 - Nightshift is the primary model provider (`app/llm/meterless_runtime.py`, Meterless Runtime provider contract): the app calls its OpenAI-compatible endpoint with the runtime token, the `meterless-app` and `meterless-scope` headers and a routing mode chosen per step on the Settings page. The NVIDIA key stays in Nightshift.
-- In the 16 recorded runs, all 132 reasoning calls went through Nightshift, with no direct fallback, and every answer came from NVIDIA Nemotron ([evidence](docs/evidence/nightshift_runs.md)). Each step's trace records the model that answered.
+- In the 26 recorded runs, all 235 reasoning calls went through Nightshift, with no direct fallback, and every answer came from NVIDIA Nemotron (228 from Nemotron 3 Ultra, 7 from Nemotron 3.5 Super) ([evidence](docs/evidence/nightshift_runs.md)). Each step's trace records the model that answered.
 - Settings has Auto Detect, connect-link paste and a connection test that names the Nemotron lane that answered.
 
 | | |
@@ -195,22 +218,23 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 | ![Nightshift lanes on its NVIDIA provider: Nemotron 3 Ultra and Nemotron 3.5 Super, both ready](docs/images/nightshift_lanes_nvidia.png) | ![The Meterless card on the Settings page after a connection test: Nightshift online, the routing modes it serves and the Nemotron lane that answered](docs/images/nightshift_settings.png) |
 | In Nightshift: two NVIDIA Nemotron lanes | In the app: Nightshift online, and the lane that answered |
 
-**What we learned running a full pipeline through Nightshift.** Nightshift is built first for chat, and a pipeline of strict steps needs a few settings. We measured each one and handled it:
+**What I learned running a full pipeline through Nightshift.** Nightshift is built first for chat, and a pipeline of strict steps needs a few settings. I measured each one and handled it:
 
-| What we found | What it did to the pipeline | How we handle it |
+| What I found | What it did to the pipeline | How the app handles it |
 |---|---|---|
-| Nightshift hid NVIDIA's models in its lane picker (build 0.92.0) | Nemotron could not be added to a lane | We traced the cause and reported it with the fix ([Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4)); Meterless shipped 0.92.1 the same night |
+| Nightshift hid NVIDIA's models in its lane picker (build 0.92.0) | Nemotron could not be added to a lane | I traced the cause and reported it with the fix ([Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4)); Meterless shipped 0.92.1 the same night |
 | *Tier-split* (on by default) adds a "planner" step before the request | Strict extraction prompts lost their rules: the same document gave 9 facts directly and 0 through Nightshift | Tier-split off in Nightshift's Preferences |
 | The reasoning switch (`chat_template_kwargs`) is not passed to the model | Copying numbers exactly works far better with reasoning off | Extraction and read-through call NVIDIA's API directly with reasoning off; every reasoning step goes through Nightshift |
 | For an identified app, the mode bound in Nightshift's Apps panel decides the routing | One routing mode for the whole app | The app is bound to `fast`; Nightshift picks the Nemotron lane |
-| A cloud request with no first token after 45 s is cut | Long reasoning prompts on a busy Nemotron 3 Ultra were cut | Streaming, retries, and a direct NVIDIA call after two cuts, recorded in the trace (needed 0 times in the final runs) |
+| A cloud request with no first token after 45 s is cut | Long reasoning prompts on a busy Nemotron 3 Ultra were cut | Streaming, retries, and a direct NVIDIA call after two cuts, recorded in the trace (needed 0 times in the final runs, 5 times in earlier ones). I reported it, and Meterless is making the limit configurable |
 | An answer cache keyed on the last 4,000 characters of the prompt | A near-identical prompt got a previous run's answer back, and a repeated connection test was answered from the cache | Every request, and the connection test, carries a unique reference so the cache cannot replay a stale answer |
 
 ### NVIDIA Nemotron: the models
 
 - Every AI step runs on NVIDIA Nemotron: Nemotron 3 Ultra (550B) and Nemotron 3.5 Super (120B). In the final runs Nightshift served the reasoning steps mostly from Ultra; extraction ran on 3.5 Super.
 - The critic has its own instructions and reviews the analyst's work, so the steps check each other; malformed JSON is repaired by the same model; calls are paced under the API's rate limit.
-- Open models matter here: a drug company cannot send unpublished trial data to a closed cloud model. The same agents can run on the company's own hardware, for example an NVIDIA DGX Spark, which Nightshift supports. (We ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.)
+- Open models matter here: a drug company cannot send unpublished trial data to a closed cloud model.
+- **On your own NVIDIA hardware.** Every model call goes to an OpenAI-compatible endpoint. Pointing `NVIDIA_BASE_URL` at a local NVIDIA NIM that serves Nemotron, or giving Nightshift a lane on an NVIDIA DGX Spark, moves the whole analysis onto the company's own machine with no code change, and the unpublished data never leaves it. The agents, prompts, checks and recordings stay the same. (I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.)
 
 ---
 
@@ -220,28 +244,39 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
   <img src="docs/images/art/results.svg" width="100%" alt="Blind backtest scores and the share of reasoning calls through Meterless Nightshift">
 </p>
 
-The honest test is the **blind backtest**: 14 finished trials replayed with only the documents published before each readout, scored against the explanations experts published later (`data/golden_set/`, never shown to the agents). Results: [`eval/results/backtest_2026-10-23.md`](eval/results/backtest_2026-10-23.md).
+The honest test is the **blind backtest**: 24 finished trials replayed with only the documents published before each readout, scored against the explanations experts published later (`data/golden_set/`, never shown to the agents). Results: [`eval/results/backtest_2026-10-24.md`](eval/results/backtest_2026-10-24.md).
 
 | What is scored | NVIDIA Nemotron through Meterless Nightshift |
 |---|---|
-| Success or failure called right, where the trial could be sized | **9 / 9** |
-| Experts' cause named as the main cause | **10 / 14** |
-| Experts' cause among the causes named | **11 / 14** |
-| Expected hazard ratio within 0.03 of the answer key | **10 / 13** |
+| Success or failure called right, where the trial could be sized | **11 / 15** |
+| Experts' cause named as the main cause | **15 / 24** |
+| Experts' cause among the causes named | **21 / 24** |
+| Expected hazard ratio within 0.03 of the answer key | **15 / 20** |
 | Every number used carries a verbatim quote that passed the code check | 100% |
 
 What the misses teach:
-- **Formulas cannot see harm.** In ILLUMINATE, torcetrapib raised blood pressure; no cholesterol formula sees that. The agents named a non-causal biomarker instead of off-target harm.
-- **Some trials cannot be sized blind.** In five of the 14 (CANTOS, HPS2-THRIVE, ILLUMINATE, IMPROVE-IT, ODYSSEY OUTCOMES) a number the calculator needs, such as the event count, was not public before the readout, so it says *not computable* instead of guessing. The agents still weigh the evidence: in CANTOS and HPS2-THRIVE they named the experts' main cause without a number to size it.
-- **Success has shades.** ODYSSEY OUTCOMES and IMPROVE-IT were called narrow successes or successes with caveats where the experts' labels differ by one step.
-- **One bug found by the backtests.** In the first pass, a quote that began mid-sentence ("and by 63% ... vs placebo") carried no direction word, so FOURIER's LDL-C reduction became +63% and the calculator expected harm. Code now reads the start of the sentence in that case (with tests), and FOURIER was rerun: expected HR 0.751 against 0.789 in the answer key.
+- **The four wrong forecasts each have a reason worth knowing.**
+  - In AURORA, rosuvastatin cut LDL-C by 41% in patients on dialysis, so the calculator expected a benefit; the trial failed because these patients' heart deaths are mostly not driven by cholesterol, and the agents named exactly that cause, *population*, as the experts did.
+  - PROMINENT's earlier trials showed a modest drop in non-HDL-C; in the outcome trial LDL-C and apoB rose instead, which the documents before the readout could not show.
+  - REVEAL's chance of success was 48%: a coin flip called "failure" by the 50% rule.
+  - SPIRE-2's LDL-C effect was taken from a phase 2 trial with a lower baseline, so the trial looked underpowered (43%) and still succeeded.
+- **Some trials cannot be sized blind.** In nine of the 24 (CANTOS, HPS2-THRIVE, IDEAL, ILLUMINATE, IMPROVE-IT, JUPITER, ODYSSEY OUTCOMES, STRENGTH, TNT) a number the calculator needs, such as the event count or the between-arm LDL-C difference, was not in the documents before the readout, so it says *not computable* instead of guessing. The agents still weigh the evidence: in CANTOS, HPS2-THRIVE, IDEAL, ODYSSEY OUTCOMES and TNT they named the experts' main cause without a number to size it.
+- **Formulas cannot see harm.** ILLUMINATE's archive holds no announcement and no number for torcetrapib's blood-pressure rise, so the agents could not name off-target harm.
+- **Success has shades.** In JUPITER, SHARP and SPIRE-2 the agents called a robust success where the experts saw caveats or a narrow win.
+- **Bugs the backtests found, each fixed with a test and every analysis then rerun:**
+  - a missing number was sized as "no change", so TNT was forecast to fail; missing now means unknown;
+  - the direction of a change was taken from a neighbouring clause, and a quote that began mid-sentence turned FOURIER's LDL-C reduction into +63%;
+  - the outcome of an autopsy was not always read from the announcement, so AURORA was shown as a success;
+  - a critic round could drop verified inputs (REVEAL), and five of the eleven diagnosis categories had no definition;
+  - the Verifier's evidence cut-off could be bypassed by selecting a whole section of the registry record;
+  - an ACCORD news item dated only to the readout month reported the results; the archive builder now leaves such papers out.
 
-**A prediction you can check.** Lp(a)HORIZON missed its primary endpoint, but its full results are only due at the AHA Scientific Sessions on 7 November 2026. Before that, we committed the prediction that follows from the diagnosis "effect too small": the overall hazard ratio should land between 0.89 and 1.02, most likely 0.90 to 0.95; a point estimate above 1.02 would prove the diagnosis wrong ([`eval/predictions/2026-10-23_preregistered.md`](eval/predictions/2026-10-23_preregistered.md)). The pelacarsen report shows it with its commit.
+**A prediction you can check.** Lp(a)HORIZON missed its primary endpoint, but its full results are only due at the AHA Scientific Sessions on 7 November 2026. Before that, I committed the prediction that follows from the diagnosis "effect too small": the overall hazard ratio should land between 0.89 and 1.02, most likely 0.90 to 0.95; a point estimate above 1.02 would prove the diagnosis wrong ([`eval/predictions/2026-10-23_preregistered.md`](eval/predictions/2026-10-23_preregistered.md)). The pelacarsen report shows it with its commit.
 
 Other checks:
 - **Calculator on the answer key** (development set): `python -m eval.run_calculator`.
 - **Counterfactual tests** (`tests/test_calculator.py`): change the biomarker effect and the verdict must flip, so conclusions follow the data, not the drug's name.
-- **Reproducible offline:** `python scripts/check_replay.py` replays all 16 recorded analyses offline; each gives the same outcome, expected HR, power and fact count as its live run.
+- **Reproducible offline:** `python scripts/check_replay.py` replays all 26 recorded analyses offline; each gives the same outcome, expected HR, power and fact count as its live run.
 
 ---
 
@@ -289,7 +324,7 @@ docker run --rm --network none -e SAMPLE_MODE=true trial-autopsy python scripts/
 ### Tests
 
 ```bash
-.venv/bin/python -m unittest discover tests      # 58 unit and offline end-to-end tests
+.venv/bin/python -m unittest discover tests      # 95 unit and offline end-to-end tests
 npm --prefix services/meterless run conformance  # the official Meterless World Model suite, 8 of 8
 ```
 
@@ -316,7 +351,7 @@ The response holds the verdict, the report, the four checks, the calculator inpu
 
 Every step, handoff, query and send-back is a line in `logs/trace-<run_id>.jsonl`, in the hackathon's log format (timestamp, run_id, agent_name, action, input_summary, output_summary, target_agent, confidence, retry_count, status), mirrored to stdout as `[INFO] run_id=…`. The library keeps each recorded run's trace in `data/library/traces/`.
 
-The logs of the 16 recorded runs are committed in `logs/` (`trace-<run_id>.jsonl` for the steps, `world-<run_id>.jsonl` for the World Model audit). An offline replay writes its result and logs to `data/runs/replay/` and `logs/replay/`, so it never overwrites a live run.
+The logs of the 26 recorded runs are committed in `logs/` (`trace-<run_id>.jsonl` for the steps, `world-<run_id>.jsonl` for the World Model audit). An offline replay writes its result and logs to `data/runs/replay/` and `logs/replay/`, so it never overwrites a live run.
 
 Examples: `input_examples/` (three requests) and `output_examples/` (their responses, each with its `log_file`). Example 3 is the ACCELERATE blind backtest itself, the same run as `bt-accelerate`.
 
