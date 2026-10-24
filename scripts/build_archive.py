@@ -8,7 +8,9 @@ Rule (fixed, applied identically to every case):
      then most recent; at most 10; open full text when available (rule v2). A paper found only by
      the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word
      acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)
-  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)
+  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline
+     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and
+     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)
      In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may
      have been printed after the readout (rule v4)
   4. The topline announcement itself (press release on the readout day), fetched from its URL
@@ -115,9 +117,22 @@ def main():
                 text = r["title"] + " " + r["abstract"]
                 if acronym_re.search(text) and TOPIC.search(text):
                     candidates.setdefault(r.get("pmid") or r["title"], r)
-    for record in sorted(candidates.values(), key=lambda r: case_builder._rank(r, aliases))[:args.max_docs]:
+    chosen = sorted(candidates.values(), key=lambda r: case_builder._rank(r, aliases))[:args.max_docs]
+    for record in chosen:
         text = europepmc.full_text(record["pmcid"]) if record.get("pmcid") and record.get("is_open_access") else None
         save(europepmc.to_document(record, text))
+
+    # The outcome trial's own design or baseline paper, published before as_of (rule v5).
+    if acronym:
+        have = {r.get("pmid") or r["title"] for r in chosen}
+        design = [r for r in filter(dated_before, europepmc.search(case_builder.design_query(acronym), as_of=before,
+                                                                    page_size=10))
+                  if case_builder.is_design_paper(r, acronym) and (r.get("pmid") or r["title"]) not in have][:2]
+        for record in design:
+            text = europepmc.full_text(record["pmcid"]) if record.get("pmcid") and record.get("is_open_access") else None
+            doc = europepmc.to_document(record, text)
+            doc.meta["purpose"] = "design"
+            save(doc, "design or baseline paper of the outcome trial")
 
     # Genetic-association papers on the target(s), published before as_of (rule v3).
     targets = [t for m in ((drug or {}).get("mechanismsOfAction") or {}).get("rows", []) for t in m.get("targets") or []]

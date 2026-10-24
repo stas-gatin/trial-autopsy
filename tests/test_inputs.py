@@ -268,3 +268,16 @@ class OutcomeAndCategoryAgree(unittest.TestCase):
         with mock.patch.object(analysis, "actual_outcome", return_value=("success", "readout")):
             v = analysis.verdict_block(state)
         self.assertEqual(v["primary_category"], "narrow_success")
+
+
+class DesignPaper(unittest.TestCase):
+    def test_only_this_trials_design_paper_counts(self):
+        from app.agents.case_builder import is_design_paper
+        own = {"title": "Rationale and design of IMPROVE-IT", "abstract": "The trial will continue until 5250 events."}
+        other = {"title": "Rationale and design of the SEARCH trial", "abstract": "Unlike IMPROVE-ITS ..."}
+        results = {"title": "IMPROVE-IT results", "abstract": "IMPROVE-IT met its primary endpoint"}
+        self.assertTrue(is_design_paper(own, "IMPROVE-IT"))
+        self.assertFalse(is_design_paper(other, "IMPROVE-IT"))
+        self.assertFalse(is_design_paper(results, "IMPROVE-IT"))
+        self.assertTrue(is_design_paper({"title": "JUPITER: baseline characteristics", "abstract": ""},
+                                        "JUPITER (Justification for the Use of Statins in Prevention)"))

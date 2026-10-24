@@ -141,10 +141,45 @@ def gather_literature(state: RunState, extra_terms: str | None = None) -> list[D
             continue
         seen.add(doc.source_id)
         added.append(doc)
+    if acronym and not extra_terms:
+        try:
+            records = europepmc.search(design_query(acronym), as_of=state.as_of, page_size=10, tracer=state.tracer)
+        except Exception as exc:
+            records = []
+            state.warnings.append(f"Europe PMC design-paper search failed: {exc}")
+        for record in [r for r in records if is_design_paper(r, acronym)][:2]:
+            text = europepmc.full_text(record["pmcid"], tracer=state.tracer) \
+                if record.get("pmcid") and record.get("is_open_access") else None
+            doc = europepmc.to_document(record, text)
+            if doc.source_id not in seen:
+                seen.add(doc.source_id)
+                added.append(doc)
+        state.tracer.log(AGENT, "search_design_paper", input_summary=acronym,
+                         output_summary=f"{sum(1 for r in records if is_design_paper(r, acronym))} design or baseline "
+                                        f"papers of this trial", source="Europe PMC")
     state.tracer.log(AGENT, "select_documents", output_summary="; ".join(
         f"{d.pub_date} {d.title[:60]} [{d.access}]" for d in added)[:700], target_agent="CaseBuilder")
     state.docs.extend(added)
     return added
+
+
+# The outcome trial's own design paper ("rationale and design", "baseline characteristics") is published before the
+# readout and states what a forecast needs: the planned number of events, the follow-up, the population's baseline.
+DESIGN_TITLE = re.compile(r"\b(design|rationale|baseline characteristics|protocol|methodology)\b", re.I)
+
+
+def design_query(acronym: str) -> str:
+    return (f'"{acronym}" AND (TITLE:design OR TITLE:rationale OR TITLE:"baseline characteristics" OR '
+            f'TITLE:protocol OR TITLE:methodology)')
+
+
+def is_design_paper(record: dict, acronym: str) -> bool:
+    """A design or baseline paper of THIS trial: the title says so and spells the acronym as written."""
+    short = (acronym or "").split(" (")[0].strip()
+    if not short or not DESIGN_TITLE.search(record.get("title") or ""):
+        return False
+    text = (record.get("title") or "") + " " + (record.get("abstract") or "")
+    return bool(re.search(rf"(?<![A-Za-z0-9]){re.escape(short)}(?![A-Za-z0-9])", text))
 
 
 def _alnum(text: str) -> str:
