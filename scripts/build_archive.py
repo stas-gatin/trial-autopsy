@@ -14,8 +14,9 @@ Rule (fixed, applied identically to every case):
      spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)
      In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may
      have been printed after the readout (rule v4)
-  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day
-     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)
+  4. The topline announcement itself (press release on the readout day, or the same release filed with the SEC that
+     day): the Wayback Machine capture nearest that day (same page), else the live page if it was not redirected
+     to another page; sentences naming a year more than one year after the readout are left out (rule v5)
 Nothing is added by hand. Documents that reveal the outcome cannot exist before as_of,
 except the topline announcement, which is what a real analyst would have on that day.
 
@@ -73,11 +74,23 @@ def _drop_later_text(text: str, on: str) -> str:
     return " ".join(keep)
 
 
+def _same_document(got: str, asked: str) -> bool:
+    """The page asked for, or a redirect on the same site to a document with the same file name (sec.gov drops the
+    leading zeros of the company number); not a redirect to another page, such as a site's news index."""
+    from urllib.parse import urlparse
+    if _page(got) == _page(asked):
+        return True
+    g, a = urlparse(got), urlparse(asked)
+    same_site = g.netloc.lower().removeprefix("www.") == a.netloc.lower().removeprefix("www.")
+    name = a.path.rstrip("/").rsplit("/", 1)[-1]
+    return same_site and bool(name) and g.path.rstrip("/").rsplit("/", 1)[-1] == name and g.query == a.query
+
+
 def fetch_announcement(url: str, on: str) -> tuple[str | None, str]:
     """The announcement as it was published (rule v5). First the Wayback Machine capture nearest the readout day, raw
-    (no Wayback toolbar), if it was taken within a year of it and is still the same page; only then the live page,
-    and only if it was not redirected elsewhere: a live page carries today's sidebars and footers, and an old address
-    may now redirect to unrelated news. Returns (text, provenance)."""
+    (no Wayback toolbar), if it is still the same document; only then the live page, and only if it was not redirected
+    to another page: an old address may now redirect to unrelated news. Sentences naming a year more than one year
+    after the readout (a later sidebar or footer) are left out either way. Returns (text, provenance)."""
     from datetime import date as _date
     day = on.replace("-", "")
     text, final = _get(f"https://web.archive.org/web/{day}id_/{url}")
@@ -86,12 +99,14 @@ def fetch_announcement(url: str, on: str) -> tuple[str | None, str]:
         if m:
             taken = _date(int(m.group(1)[:4]), int(m.group(1)[4:6]), int(m.group(1)[6:8]))
             gap = (taken - _date.fromisoformat(on)).days
-            if -30 <= gap <= 365 and _page(m.group(2)) == _page(url):
+            # any later capture of the same page: a release's text does not change, and the site's later sidebars
+            # and footers are removed below; a capture from before the readout cannot be the announcement
+            if gap >= -30 and _same_document(m.group(2), url):
                 body = _drop_later_text(html_to_text(text), on)
                 if len(body) > 400:
                     return body[:20000], f"Wayback Machine capture of {taken.isoformat()}"
     text, final = _get(url)
-    if text and final and _page(final) == _page(url):
+    if text and final and _same_document(final, url):
         body = _drop_later_text(html_to_text(text), on)
         if len(body) > 400:
             return body[:20000], "live page (no usable Wayback capture), sentences naming later years left out"
@@ -188,7 +203,9 @@ def main():
             doc.meta["purpose"] = "genetics"
             save(doc, "genetic association paper on the target")
 
-    announcements = [s for s in gold["sources"] if s["type"] == "press_release" and s.get("pub_date") == meta["readout_date"]]
+    # the press release itself, or the same release filed with the SEC that day (an 8-K exhibit)
+    announcements = [s for s in gold["sources"] if s["type"] in ("press_release", "sec_filing")
+                     and s.get("pub_date") == meta["readout_date"]]
     for s in announcements:
         text, provenance = fetch_announcement(s["url"], meta["readout_date"])
         print(f"announcement {s['url']}: {provenance}")
