@@ -1123,9 +1123,10 @@ function renderPoweredBy(o, events) {
   const parts = [];
   if (events.some((e) => e.via === "zetaris")) parts.push(`<span class="pb-item">${logoImg("zetaris", 16)}<b>Zetaris</b> data layer</span>`);
   if (events.some((e) => e.action === "world_model_sync")) parts.push(`<span class="pb-item">${logoImg("meterless", 16)}<b>Meterless</b> World Model</span>`);
-  for (const p of ["nvidia", "anthropic"]) {
+  for (const p of ["meterless", "nvidia", "anthropic"]) {
     const g = byProvider[p];
-    if (g) parts.push(`<span class="pb-item" title="${esc(g.agents.join(", "))}">${logoImg(p, 16)}<b>${esc([...g.models].join(", "))}</b> ${g.agents.length} agent${g.agents.length === 1 ? "" : "s"}</span>`);
+    const via = p === "meterless" ? " via Nightshift" : "";
+    if (g) parts.push(`<span class="pb-item" title="${esc(g.agents.join(", "))}">${logoImg(p === "meterless" ? "nvidia" : p, 16)}<b>${esc([...g.models].join(", "))}</b>${via} · ${g.agents.length} agent${g.agents.length === 1 ? "" : "s"}</span>`);
   }
   $("poweredBy").innerHTML = parts.length ? `<span class="pb-label">Powered by</span>${parts.join("")}` : "";
 }
