@@ -1,7 +1,0 @@
-{
- "alias": "papers",
- "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A31714986+OR+PMCID%3APMC6509724&format=json&resultType=core&pageSize=25",
- "sql": "SELECT regexp_extract(r.abstractText, '([^.]*141\\.3[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC6509724' AND r.abstractText LIKE '%141.3%' LIMIT 5",
- "rows": [],
- "error": null
-}

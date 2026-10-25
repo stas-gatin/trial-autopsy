@@ -253,3 +253,73 @@ class NegatedReductions(unittest.TestCase):
         hit = classify_readout("adding niacin to statin therapy did not significantly further reduce the risk of "
                                "the combination of coronary deaths")
         self.assertEqual(hit[0], "failure")
+
+
+class OutcomeAndCategoryAgree(unittest.TestCase):
+    def test_a_success_is_not_explained_by_a_failure_cause(self):
+        from types import SimpleNamespace
+        from unittest import mock
+        from app.agents import analysis
+        state = SimpleNamespace(calc=SimpleNamespace(power=0.48, outcome="failure", category="effect_too_small",
+                                                     secondary=[], weakest_link="", expected_hr=0.89),
+                                investigation={"primary_category": "effect_too_small",
+                                               "secondary_categories": ["narrow_success"], "confidence": "high"},
+                                verification={"status": "ok"})
+        with mock.patch.object(analysis, "actual_outcome", return_value=("success", "readout")):
+            v = analysis.verdict_block(state)
+        self.assertEqual(v["primary_category"], "narrow_success")
+
+
+class DesignPaper(unittest.TestCase):
+    def test_only_this_trials_design_paper_counts(self):
+        from app.agents.case_builder import is_design_paper
+        own = {"title": "Rationale and design of IMPROVE-IT", "abstract": "The trial will continue until 5250 events."}
+        other = {"title": "Rationale and design of the SEARCH trial", "abstract": "Unlike IMPROVE-ITS ..."}
+        results = {"title": "IMPROVE-IT results", "abstract": "IMPROVE-IT met its primary endpoint"}
+        self.assertTrue(is_design_paper(own, "IMPROVE-IT"))
+        self.assertFalse(is_design_paper(other, "IMPROVE-IT"))
+        self.assertFalse(is_design_paper(results, "IMPROVE-IT"))
+        self.assertTrue(is_design_paper({"title": "JUPITER: baseline characteristics", "abstract": ""},
+                                        "JUPITER (Justification for the Use of Statins in Prevention)"))
+
+
+class NonSignificant(unittest.TestCase):
+    def test_a_non_significant_reduction_is_not_a_success(self):
+        from app.agents.analysis import classify_readout
+        self.assertEqual(classify_readout("produced only a small, non-significant reduction in CHD events")[0], "failure")
+        self.assertEqual(classify_readout("the difference was too small to show a difference in death rates")[0], "failure")
+        self.assertEqual(classify_readout("Significantly Reduced Major Vascular Events")[0], "success")
+
+
+class PrimaryResultWordings(unittest.TestCase):
+    def test_significance_and_p_values_stated_with_the_primary_endpoint(self):
+        from app.agents.analysis import classify_readout
+        self.assertEqual(classify_readout("an 8 percent reduction (p=0.12) in the combined primary endpoint, which was "
+                                          "not statistically significant")[0], "failure")
+        self.assertEqual(classify_readout("There was a statistically significant difference (p=0.005) in event rates")[0],
+                         "success")
+        self.assertEqual(classify_readout("adjusted HR 1·00, p=0·943 for the primary end-point")[0], "failure")
+        self.assertEqual(classify_readout("rosuvastatin did not affect clinical outcomes in heart failure")[0], "failure")
+        self.assertEqual(classify_readout("no benefit in those with lower blood pressure and even a tendency to harm")[0],
+                         "failure")   # 'tendency' does not contain the stop word 'end'
+
+
+class ThresholdIsNotABaseline(unittest.TestCase):
+    def test_an_entry_threshold_cited_as_the_ldl_baseline_is_left_out(self):
+        from app.agents.analysis import complete_inputs
+        facts = {"t": {"fact_id": "t", "key": "inclusion_threshold", "value": 70, "unit": "mg/dL"},
+                 "p": {"fact_id": "p", "key": "biomarker_change", "value": -61, "unit": "%"}}
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -61, "baseline": 1.81, "unit": "mmol/L",
+                          "fact_ids": ["p", "t"]}]}
+        filled = complete_inputs(m, facts)
+        self.assertIsNone(m["changes"][0]["baseline"])
+        self.assertTrue(any("entry threshold" in x for x in filled))
+
+    def test_a_measured_baseline_and_an_lpa_threshold_are_kept(self):
+        from app.agents.analysis import complete_inputs
+        facts = {"t": {"fact_id": "t", "key": "inclusion_threshold", "value": 70, "unit": "mg/dL"}}
+        m = {"changes": [{"biomarker": "LDL-C", "pct_change": -61, "baseline": 2.4, "unit": "mmol/L", "fact_ids": ["t"]},
+                         {"biomarker": "Lp(a)", "pct_change": -80, "baseline": 70, "unit": "mg/dL", "fact_ids": ["t"]}]}
+        complete_inputs(m, facts)
+        self.assertEqual(m["changes"][0]["baseline"], 2.4)
+        self.assertEqual(m["changes"][1]["baseline"], 70)

@@ -7,7 +7,7 @@
   "as_of": "2012-03-09",
   "readout_date": "2012-03-09",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01130246@2012-03-09",
@@ -39,12 +39,28 @@
             {
               "name": "A-002, varespladib methyl",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "A-002 500 mg"
+              ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Matched Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "A-002 500 mg",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Matched Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -62,8 +78,8 @@
       "source_id": "pmid:21989792",
       "file": "docs/pmid_21989792.txt",
       "type": "journal",
-      "title": "Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome.",
-      "url": "https://europepmc.org/article/MED/21989792",
+      "title": "Anti-inflammatory effects of varespladib methyl in diabetic patients with acute coronary syndrome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21989792/",
       "pub_date": "2011-12-01",
       "access": "abstract_only",
       "meta": {
@@ -75,12 +91,28 @@
       "note": ""
     },
     {
+      "source_id": "pmid:21174506",
+      "file": "docs/pmid_21174506.txt",
+      "type": "journal",
+      "title": "After FRANCIS: next steps in the clinical evaluation of varespladib methyl",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21174506/",
+      "pub_date": "2011-01-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21174506",
+        "pmcid": null,
+        "doi": "10.2217/fca.10.118",
+        "journal": "Future cardiology"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:20863951",
       "file": "docs/pmid_20863951.txt",
       "type": "journal",
-      "title": "Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients.",
-      "url": "https://europepmc.org/article/MED/20863951",
-      "pub_date": "2010-09-01",
+      "title": "Effects of varespladib methyl on biomarkers and major cardiovascular events in acute coronary syndrome patients",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20863951/",
+      "pub_date": "2010-09-28",
       "access": "abstract_only",
       "meta": {
         "pmid": "20863951",
@@ -91,17 +123,33 @@
       "note": ""
     },
     {
+      "source_id": "pmid:21112895",
+      "file": "docs/pmid_21112895.txt",
+      "type": "journal",
+      "title": "Varespladib: targeting the inflammatory face of atherosclerosis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21112895/",
+      "pub_date": "2010-11-25",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21112895",
+        "pmcid": null,
+        "doi": "10.1093/eurheartj/ehq385",
+        "journal": "European heart journal"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:19129734",
       "file": "docs/pmid_19129734.txt",
       "type": "journal",
-      "title": "Varespladib (A-002), a secretory phospholipase A2 inhibitor, reduces atherosclerosis and aneurysm formation in ApoE-/- mice.",
-      "url": "https://europepmc.org/article/MED/19129734",
+      "title": "Varespladib (A-002), a secretory phospholipase A2 inhibitor, reduces atherosclerosis and aneurysm formation in ApoE-/- mice",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19129734/",
       "pub_date": "2009-01-01",
       "access": "abstract_only",
       "meta": {
         "pmid": "19129734",
         "pmcid": null,
-        "doi": "10.1097/fjc.0b013e318195bfbc",
+        "doi": "10.1097/FJC.0b013e318195bfbc",
         "journal": "Journal of cardiovascular pharmacology"
       },
       "note": ""
@@ -110,8 +158,8 @@
       "source_id": "pmcid:PMC2653470",
       "file": "docs/pmcid_PMC2653470.txt",
       "type": "journal",
-      "title": "A-002 (Varespladib), a phospholipase A2 inhibitor, reduces atherosclerosis in guinea pigs.",
-      "url": "https://europepmc.org/article/MED/19222850",
+      "title": "A-002 (Varespladib), a phospholipase A2 inhibitor, reduces atherosclerosis in guinea pigs",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19222850/",
       "pub_date": "2009-02-17",
       "access": "open_full_text",
       "meta": {
@@ -123,43 +171,11 @@
       "note": ""
     },
     {
-      "source_id": "pmid:19697278",
-      "file": "docs/pmid_19697278.txt",
-      "type": "journal",
-      "title": "Varespladib methyl, an oral phospholipase A2 inhibitor for the potential treatment of coronary artery disease.",
-      "url": "https://europepmc.org/article/MED/19697278",
-      "pub_date": "2009-09-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19697278",
-        "pmcid": null,
-        "doi": null,
-        "journal": "IDrugs : the investigational drugs journal"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:19029066",
-      "file": "docs/pmid_19029066.txt",
-      "type": "journal",
-      "title": "The synergistic inhibition of atherogenesis in apoE-/- mice between pravastatin and the sPLA2 inhibitor varespladib (A-002).",
-      "url": "https://europepmc.org/article/MED/19029066",
-      "pub_date": "2008-11-21",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19029066",
-        "pmcid": "PMC2656655",
-        "doi": "10.1194/jlr.m800361-jlr200",
-        "journal": "Journal of lipid research"
-      },
-      "note": ""
-    },
-    {
       "source_id": "pmid:21602519",
       "file": "docs/pmid_21602519.txt",
       "type": "journal",
-      "title": "Varespladib inhibits secretory phospholipase A2 in bronchoalveolar lavage of different types of neonatal lung injury.",
-      "url": "https://europepmc.org/article/MED/21602519",
+      "title": "Varespladib inhibits secretory phospholipase A2 in bronchoalveolar lavage of different types of neonatal lung injury",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21602519/",
       "pub_date": "2011-05-20",
       "access": "abstract_only",
       "meta": {
@@ -174,14 +190,14 @@
       "source_id": "pmid:10027849",
       "file": "docs/pmid_10027849.txt",
       "type": "journal",
-      "title": "Pharmacology of LY315920/S-5920, [[3-(aminooxoacetyl)-2-ethyl-1- (phenylmethyl)-1H-indol-4-yl]oxy] acetate, a potent and selective secretory phospholipase A2 inhibitor: A new class of anti-inflammatory drugs, SPI.",
-      "url": "https://europepmc.org/article/MED/10027849",
+      "title": "Pharmacology of LY315920/S-5920, [[3-(aminooxoacetyl)-2-ethyl-1- (phenylmethyl)-1H-indol-4-yl]oxy] acetate, a potent and selective secretory phospholipase A2 inhibitor: A new class of anti-inflammatory drugs, SPI",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10027849/",
       "pub_date": "1999-03-01",
       "access": "abstract_only",
       "meta": {
         "pmid": "10027849",
         "pmcid": null,
-        "doi": "10.1016/s0022-3565(24)38064-4",
+        "doi": null,
         "journal": "The Journal of pharmacology and experimental therapeutics"
       },
       "note": ""
@@ -190,8 +206,8 @@
       "source_id": "pmid:21446779",
       "file": "docs/pmid_21446779.txt",
       "type": "journal",
-      "title": "Varespladib.",
-      "url": "https://europepmc.org/article/MED/21446779",
+      "title": "Varespladib",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21446779/",
       "pub_date": "2011-01-01",
       "access": "abstract_only",
       "meta": {
@@ -206,8 +222,8 @@
       "source_id": "pmid:20809869",
       "file": "docs/pmid_20809869.txt",
       "type": "journal",
-      "title": "Varespladib methyl in cardiovascular disease.",
-      "url": "https://europepmc.org/article/MED/20809869",
+      "title": "Varespladib methyl in cardiovascular disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20809869/",
       "pub_date": "2010-10-01",
       "access": "abstract_only",
       "meta": {
@@ -219,52 +235,69 @@
       "note": ""
     },
     {
-      "source_id": "pmid:18801741",
-      "file": "docs/pmid_18801741.txt",
+      "source_id": "pmid:22109255",
+      "file": "docs/pmid_22109255.txt",
       "type": "journal",
-      "title": "Analyses of group III secreted phospholipase A2 transgenic mice reveal potential participation of this enzyme in plasma lipoprotein modification, macrophage foam cell formation, and atherosclerosis.",
-      "url": "https://europepmc.org/article/MED/18801741",
-      "pub_date": "2008-09-18",
+      "title": "Inhibition of secretory phospholipase A(2) in patients with acute coronary syndromes: rationale and design of the vascular inflammation suppression to treat acute coronary syndrome for 16 weeks (VISTA-16) trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22109255/",
+      "pub_date": "2012-02-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18801741",
-        "pmcid": "PMC2662271",
-        "doi": "10.1074/jbc.m804628200",
-        "journal": "The Journal of biological chemistry",
+        "pmid": "22109255",
+        "pmcid": null,
+        "doi": "10.1007/s10557-011-6358-9",
+        "journal": "Cardiovascular drugs and therapy",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
+      "source_id": "pmid:16368710",
+      "file": "docs/pmid_16368710.txt",
+      "type": "journal",
+      "title": "Tagging-SNP haplotype analysis of the secretory PLA2IIa gene PLA2G2A shows strong association with serum levels of sPLA2IIa: results from the UDACS study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16368710/",
+      "pub_date": "2005-12-20",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "16368710",
+        "pmcid": null,
+        "doi": "10.1093/hmg/ddi453",
+        "journal": "Human molecular genetics",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:18992148",
-      "file": "docs/pmid_18992148.txt",
+      "source_id": "pmid:22879865",
+      "file": "docs/pmid_22879865.txt",
       "type": "journal",
-      "title": "Low-penetrance alleles predisposing to sporadic colorectal cancers: a French case-controlled genetic association study.",
-      "url": "https://europepmc.org/article/MED/18992148",
-      "pub_date": "2008-11-07",
+      "title": "Functional analysis of two PLA2G2A variants associated with secretory phospholipase A2-IIA levels",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22879865/",
+      "pub_date": "2012-01-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18992148",
-        "pmcid": "PMC2585099",
-        "doi": "10.1186/1471-2407-8-326",
-        "journal": "BMC cancer",
+        "pmid": "22879865",
+        "pmcid": "PMC3412631",
+        "doi": "10.1371/journal.pone.0041139",
+        "journal": "PloS one",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:20463618",
-      "file": "docs/pmid_20463618.txt",
+      "source_id": "pmid:21130994",
+      "file": "docs/pmid_21130994.txt",
       "type": "journal",
-      "title": "Role of polymorphic variants as genetic modulators of infection in neonatal sepsis.",
-      "url": "https://europepmc.org/article/MED/20463618",
-      "pub_date": "2010-10-01",
+      "title": "Strong association of the APOA5-1131T>C gene variant and early-onset acute myocardial infarction",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21130994/",
+      "pub_date": "2010-11-16",
       "access": "abstract_only",
       "meta": {
-        "pmid": "20463618",
-        "pmcid": "PMC2940937",
-        "doi": "10.1203/pdr.0b013e3181e6a068",
-        "journal": "Pediatric research",
+        "pmid": "21130994",
+        "pmcid": null,
+        "doi": "10.1016/j.atherosclerosis.2010.11.011",
+        "journal": "Atherosclerosis",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -278,7 +311,7 @@
       "pub_date": "2012-03-09",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }

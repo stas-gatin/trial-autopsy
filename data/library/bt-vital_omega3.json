@@ -1,0 +1,1640 @@
+{
+  "run_id": "bt-vital_omega3",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2018-11-10",
+  "backtest": true,
+  "readout_date": "2018-11-10",
+  "analysis_date": "2018-11-10",
+  "trial": {
+    "nct_id": "NCT01169259",
+    "acronym": "VITAL",
+    "title": "Vitamin D and Omega-3 Trial (VITAL)",
+    "sponsor": "Brigham and Women's Hospital",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 25871,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cancer",
+      "Cardiovascular Disease"
+    ],
+    "primary_completion": "2018-11-10"
+  },
+  "drug": {
+    "name": "omega-3 fatty acids",
+    "chembl_id": "CHEMBL4298065",
+    "aliases": [
+      "NDI 441",
+      "Omega 3 fatty acids",
+      "Omega-3",
+      "Omega-3 acid",
+      "Omega-3 acid triglycerides",
+      "Omega-3 acids",
+      "Omega-3 phospholipids",
+      "Omega-3 polyunsaturates",
+      "Omega-3 triglycerides",
+      "Omega-3-acid triglycerides",
+      "Phospholipids",
+      "dha",
+      "docosahexaenoic acid",
+      "eicosapentaenoic acid",
+      "epa",
+      "fish oil",
+      "fish oil concentrate",
+      "lovaza",
+      "marine n-3 polyunsaturated fatty acids",
+      "marine ω-3 fatty acids",
+      "n-3 fish oil",
+      "n-3 polyunsaturated fatty acids",
+      "n-3 pufa",
+      "n-3 pufas",
+      "o3fa",
+      "omacor",
+      "omacor fish oil",
+      "omarco",
+      "omega 3",
+      "omega-3 acid ethyl esters",
+      "omega-3 fa",
+      "omega-3 polyunsaturated fatty acids",
+      "omega-3 supplementation",
+      "omega-3-acid ethyl esters",
+      "omega-3fa",
+      "omegaven",
+      "polyunsaturated fatty acids",
+      "prescription omega-3 fatty acids",
+      "ω-3 fatty acids",
+      "ω3"
+    ],
+    "drug_type": "Unknown",
+    "mechanisms": [],
+    "targets": [],
+    "searched_as": "omega-3 fatty acids"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-vital_omega3",
+  "log_file": "logs/trace-bt-vital_omega3.jsonl",
+  "execution_time_seconds": 0.4,
+  "sample_mode": false,
+  "warnings": [
+    "no molecular target in Open Targets: the genetics check is skipped and reported as unknown"
+  ],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"A total of 1,617 participants were diagnosed with cancer by the end of the study; 793 had been taking vitamin D and 824 had been taking the \" (announcement:vital_omega3)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "design_or_endpoint",
+      "secondary_categories": [
+        "population"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "triglycerides change not measured"
+    },
+    "report": {
+      "headline": "VITAL's omega-3 arm failed its primary composite MACE endpoint (HR ~0.92) despite reducing heart attacks (HR ~0.72), because the neutral stroke component diluted the composite above the trial's minimum detectable effect.",
+      "summary": "VITAL randomized 25,871 participants aged 50 and older and followed them for a median of 5.3 years, accruing 805 major adverse cardiovascular events. The primary composite of heart attack or stroke was neutral: 386 events on omega-3 versus 419 on control (HR ~0.92). However, heart attacks were reduced (145 versus 200; HR ~0.72) while stroke was unaffected, so the composite endpoint diluted the benefit and stayed above the trial's MDE HR of 0.821 at 80% power. Confidence is high: the trial was large, well conducted, and reported no serious side effects.",
+      "key_evidence": [
+        "25,871 participants randomized; median follow-up 5.3 years — VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer; ClinicalTrials.gov NCT01169259 VITAL",
+        "805 total major adverse cardiovascular events — VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer",
+        "Primary composite MACE: 386 treatment vs 419 control events (HR ~0.92) — VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer",
+        "Heart attacks: 145 treatment vs 200 control (HR ~0.72) — VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer",
+        "Readout: omega-3 fish oil reduced heart attack rates but did not affect risk of stroke or cancer — VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer",
+        "Minimum detectable effect HR 0.821 at 80% power; composite HR ~0.92 exceeds this — calculator"
+      ],
+      "what_would_change_this": "Component-specific HRs and confidence intervals for myocardial infarction, stroke, and cardiovascular death from the primary publication would confirm whether the heart-attack benefit is real and whether the composite null was purely endpoint dilution. On-treatment triglyceride and apoB changes would clarify the biomarker pathway.",
+      "readthrough_note": "Secondary-prevention omega-3 programmes such as GISSI-P and JELIS showed larger composite benefits, suggesting VITAL's null composite may reflect its lower-risk primary-prevention population rather than absence of biological activity."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "no genetics found",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "triglycerides",
+        "detail": "intended biomarker triglycerides is causal or unknown; LDL-equivalent change None mmol/L via triglycerides change not measured",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "vital_omega3",
+      "ldl_equivalent_mmol": null,
+      "basis": "triglycerides change not measured",
+      "time_factor": 1.0,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": 0.821,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "triglycerides change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "no measured change in triglycerides: the effect is unknown, not zero"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "vital_omega3",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "triglycerides",
+      "changes": [
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "No placebo-adjusted on-treatment triglyceride change from VITAL or similar population available in verified facts",
+          "source": ""
+        }
+      ],
+      "followup_years": 5.3,
+      "events": 805,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.72,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "No genetic evidence found for omega-3 fatty acid targets on coronary artery disorder in Open Targets; omega-3 acts via multiple pathways (triglyceride lowering, anti-inflammatory, membrane effects) rather than a single molecular target",
+      "intended_biomarker": "triglycerides",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "No placebo-adjusted on-treatment triglyceride change from VITAL or similar population available in verified facts",
+          "fact_ids": []
+        }
+      ],
+      "followup_years": 5.3,
+      "followup_fact_ids": [
+        "f_1bc90d2278fe91",
+        "f_a01a7f3db2f2b4"
+      ],
+      "events": 805,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_e86c988bd18828"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.72,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_fdcf156c06d8c9",
+        "f_e86c988bd18828",
+        "f_0c375ad1e96692",
+        "f_a69c1125c7928c",
+        "f_ebecb5ff5c1a38",
+        "f_4f58107821651d"
+      ],
+      "missing": [
+        "placebo-adjusted triglyceride change in VITAL or similar population",
+        "observed HR confidence interval for primary MACE endpoint",
+        "systolic blood pressure change"
+      ],
+      "notes": "Observed HR 0.72 from announcement:vital_omega3 appears to be for heart attack component (145 vs 200 events) rather than primary MACE endpoint (386 vs 419 events, HR ~0.92). Primary MACE HR not provided in verified facts. No biomarker changes (triglycerides, LDL-C, etc.) available for VITAL population in verified facts."
+    },
+    "hypotheses": [
+      {
+        "category": "design_or_endpoint",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Primary endpoint is composite MACE (heart attack, stroke, etc.). Readout states 'omega-3 fish oil reduced heart attack rates but did not affect risk of stroke' (f_29ceec807e9773). Heart attack events: 145 vs 200 (HR ~0.725, f_ebecb5ff5c1a38, f_4f58107821651d). Total MACE events: 386 vs 419 (HR ~0.92, f_0c375ad1e96692, f_a69c1125c7928c). The neutral stroke component dilutes the composite, pushing HR from ~0.72 to ~0.92, above the trial's MDE HR of 0.821 at 80% power (calculator).",
+            "refs": [
+              "f_29ceec807e9773",
+              "f_ebecb5ff5c1a38",
+              "f_4f58107821651d",
+              "f_0c375ad1e96692",
+              "f_a69c1125c7928c",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Composite endpoints are standard in CVOTs; the trial was designed to detect a broad cardiovascular benefit.",
+            "refs": [
+              "f_73c247f2636a41",
+              "f_953274be216910"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific HRs and CIs for MI, stroke, and CV death from the primary publication."
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Primary prevention population (age ≥50, generally healthy, f_eff2147f4c4bca). Low event rate (805 MACE in 25,871 over 5.3 years, f_e86c988bd18828, f_4654581125e7cc). Omega-3's putative mechanisms (anti-arrhythmic, plaque stabilization, triglyceride lowering) may preferentially reduce sudden death/MI but not stroke or other MACE components in this lower-risk group. In secondary prevention trials (e.g., GISSI-P, JELIS), omega-3 showed larger composite benefits.",
+            "refs": [
+              "f_eff2147f4c4bca",
+              "f_e86c988bd18828",
+              "f_4654581125e7cc",
+              "f_29ceec807e9773"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary prevention is the intended use case for a supplement; the trial population matches the target population.",
+            "refs": [
+              "f_73c247f2636a41"
+            ]
+          }
+        ],
+        "would_settle": "Meta-analysis of omega-3 trials stratified by primary vs secondary prevention and by endpoint components."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Intended biomarker is triglycerides. Reference table lists triglycerides causal=uncertain (but triglycerides via apoB causal=yes). Omega-3 lowers triglycerides but may not lower apoB proportionally. No on-treatment triglyceride change measured in VITAL (calculator weakest_link).",
+            "refs": [
+              "calculator",
+              "f_fdcf156c06d8c9"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Omega-3 has multiple mechanisms beyond triglycerides (anti-inflammatory, membrane stabilization, anti-arrhythmic). The heart attack reduction suggests some causal pathway is engaged. Triglyceride causality is uncertain, not definitively non-causal.",
+            "refs": [
+              "f_29ceec807e9773"
+            ]
+          }
+        ],
+        "would_settle": "On-treatment triglyceride and apoB changes in VITAL or a similar primary prevention population."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "For the composite MACE endpoint, observed HR ~0.92 exceeds the MDE HR of 0.821 (calculator), so the effect on the chosen endpoint was too small to detect with 805 events.",
+            "refs": [
+              "calculator",
+              "f_0c375ad1e96692",
+              "f_a69c1125c7928c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The biological effect on heart attacks (HR ~0.72) is large and clinically meaningful. The 'effect too small' applies to the diluted composite endpoint, not the underlying mechanism.",
+            "refs": [
+              "f_29ceec807e9773",
+              "f_ebecb5ff5c1a38",
+              "f_4f58107821651d"
+            ]
+          }
+        ],
+        "would_settle": "Larger trial or meta-analysis focused on MI as primary endpoint."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Omega-3 fatty acids act through multiple pathways; no single molecular target. Genetics evidence for coronary artery disorder is absent (target_genetics: uncertain).",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Lack of a single target does not imply non-causality; the observed MI reduction suggests biological activity.",
+            "refs": [
+              "f_29ceec807e9773"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization studies of lifelong omega-3 exposure or triglyceride-lowering variants on MI vs stroke."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No serious side effects reported: 'No serious side effects, such as bleeding, high blood calcium levels, or gastrointestinal symptoms were found with either supplement' (f_f748786928e43a).",
+            "refs": [
+              "f_f748786928e43a"
+            ]
+          }
+        ],
+        "would_settle": "Detailed safety data from primary publication."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Large, well-conducted trial: 25,871 randomized, 5.3-year median follow-up, low dropout implied by event counts. No adherence or recruitment issues reported.",
+            "refs": [
+              "f_4654581125e7cc",
+              "f_1bc90d2278fe91",
+              "f_a01a7f3db2f2b4"
+            ]
+          }
+        ],
+        "would_settle": "Adherence data from primary publication."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator could not compute expected HR because no placebo-adjusted triglyceride change from VITAL was available (calculator weakest_link: 'triglycerides change not measured').",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Verified facts provide clear outcome data (component-specific event counts, readout statement) enabling a mechanistic diagnosis (endpoint dilution) without biomarker change data.",
+            "refs": [
+              "f_29ceec807e9773",
+              "f_ebecb5ff5c1a38",
+              "f_4f58107821651d",
+              "f_0c375ad1e96692",
+              "f_a69c1125c7928c"
+            ]
+          }
+        ],
+        "would_settle": "Publication of on-treatment lipid biomarkers from VITAL."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "The 'biomarker_not_causal' hypothesis claims 'Reference table lists triglycerides causal=uncertain (but triglycerides via apoB causal=yes)' but no such reference table exists in the verified facts. This is an unsupported claim that overstates the evidence.",
+            "target_agent": "case_builder",
+            "request": "Remove or correct the reference to a non-existent 'reference table' in the biomarker_not_causal hypothesis. Cite only verified facts or acknowledge this as external knowledge."
+          },
+          {
+            "severity": "medium",
+            "issue": "The 'population' hypothesis references GISSI-P and JELIS trials as evidence for larger composite benefits in secondary prevention, but these trials are not in the verified facts. This introduces external knowledge not vetted by the verifier.",
+            "target_agent": "case_builder",
+            "request": "Either remove the specific trial references (GISSI-P, JELIS) from the population hypothesis or add them as verified facts with proper citations before including them."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator input for triglycerides change has no fact citation (automatic check flagged this). While this correctly reflects missing data, the input method field contains a narrative explanation rather than a structured 'not available' flag.",
+            "target_agent": "mechanism",
+            "request": "Consider standardizing missing biomarker inputs with a clear 'data_not_available' flag instead of free-text method descriptions, to distinguish missing data from uncited data."
+          },
+          {
+            "severity": "low",
+            "issue": "The observed_hr (0.72) in calculator inputs appears to be the hazard ratio for myocardial infarction (145 vs 200 events), not the primary composite MACE endpoint (386 vs 419 events, HR ~0.92). The calculator uses events=805 (total MACE) but observed_hr=0.72 (MI). This mismatch is not problematic for the current 'insufficient_data' output but could mislead if biomarker data were added later.",
+            "target_agent": "mechanism",
+            "request": "Clarify in calculator inputs which endpoint the observed_hr corresponds to, or add separate observed_hr fields for component endpoints when the announcement reports them."
+          },
+          {
+            "severity": "low",
+            "issue": "Verifier check on f_a01a7f3db2f2b4 (ctgov median_followup 5.3 years) returned 'not_found' in registry primary outcomes timeFrame. The 5.3-year median follow-up comes from the announcement (f_1bc90d2278fe91), which is valid evidence in autopsy mode, but the ctgov record may not encode median follow-up in the primary outcomes timeFrame field.",
+            "target_agent": "investigator",
+            "request": "Confirm that the 5.3-year median follow-up from the announcement (f_1bc90d2278fe91) is the correct value to use, and note that ctgov primary outcomes timeFrame may not capture median follow-up."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_a01a7f3db2f2b4",
+          "claim": "c1",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 5.3,
+          "unit": "years",
+          "source_id": "ctgov:NCT01169259@2018-11-10",
+          "status": "not_found",
+          "found": "No rows returned",
+          "note": "The registry primary outcomes timeFrame does not contain '5.3 years'.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%5.3 years%' LIMIT 5",
+          "rows": 0
+        }
+      ],
+      "counts": {
+        "confirmed": 0,
+        "not_found": 1,
+        "contradicts": 0
+      },
+      "queries": 1
+    },
+    "readthrough": [],
+    "genetics": [],
+    "facts": [
+      {
+        "fact_id": "f_9d4adbc2348a8f",
+        "entity": "trial:nct01169259",
+        "key": "ci_high",
+        "value": 2.03,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "For UC, there was no difference in the relapse rate between the n-3 and control groups (RR 1.02; 95% CI: 0.51-2.03).",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_cd2b3f90dd852f",
+        "entity": "trial:nct01169259",
+        "key": "ci_high",
+        "value": 0.98,
+        "unit": "RR",
+        "attrs": {
+          "placebo_adjusted": true,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "RR 0.77, 95% CI 0.61 to 0.98",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_d203a333cb769c",
+        "entity": "trial:nct01169259",
+        "key": "ci_high",
+        "value": 2.03,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_f195b3f6d62cbb",
+        "entity": "trial:nct01169259",
+        "key": "ci_high",
+        "value": 0.98,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in Crohn's disease"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "There was a statistically significant benefit for n-3 in CD (relative risk [RR] 0.77; 95% confidence interval [CI] 0.61-0.98)",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_faf7ef75b47e8b",
+        "entity": "trial:nct01169259",
+        "key": "ci_high",
+        "value": 1.03,
+        "unit": null,
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "There was a non statistically significant benefit of n-3 therapy for maintaining remission (RR 0.64; 95%CI 0.4 to 1.03; P = 0.07).",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_8250d9a96760ec",
+        "entity": "trial:nct01169259",
+        "key": "ci_low",
+        "value": 0.61,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in Crohn's disease"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "There was a statistically significant benefit for n-3 in CD (relative risk [RR] 0.77; 95% confidence interval [CI] 0.61-0.98)",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_8a87b6241c3c6e",
+        "entity": "trial:nct01169259",
+        "key": "ci_low",
+        "value": 0.51,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_b3d7e8a97f01af",
+        "entity": "trial:nct01169259",
+        "key": "ci_low",
+        "value": 0.61,
+        "unit": "RR",
+        "attrs": {
+          "placebo_adjusted": true,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "RR 0.77, 95% CI 0.61 to 0.98",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_dccf25a0e6e1aa",
+        "entity": "trial:nct01169259",
+        "key": "ci_low",
+        "value": 0.51,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "For UC, there was no difference in the relapse rate between the n-3 and control groups (RR 1.02; 95% CI: 0.51-2.03).",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_f2f857d41e977b",
+        "entity": "trial:nct01169259",
+        "key": "ci_low",
+        "value": 0.4,
+        "unit": null,
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "There was a non statistically significant benefit of n-3 therapy for maintaining remission (RR 0.64; 95%CI 0.4 to 1.03; P = 0.07).",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_2e87a01879c1fd",
+        "entity": "trial:nct01169259",
+        "key": "events_control",
+        "value": 47,
+        "unit": "%",
+        "attrs": {
+          "placebo_adjusted": false,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "Thirty-nine per cent of patients in the n-3 group relapsed at 12 months compared to 47% of placebo patients",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_3fef61661917b9",
+        "entity": "trial:nct01169259",
+        "key": "events_control",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_4f58107821651d",
+        "entity": "trial:nct01169259",
+        "key": "events_control",
+        "value": 200,
+        "unit": "heart attacks",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "VITAL found a significant 28 percent reduction in risk of heart attack among participants taking the omega-3 fatty acid supplements (145 cases in the omega-3 group and 200 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_a69c1125c7928c",
+        "entity": "trial:nct01169259",
+        "key": "events_control",
+        "value": 419,
+        "unit": "events",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "After a median of five years of treatment, 805 participants had suffered a major adverse cardiovascular event, such as a heart attack or stroke (386 in the omega-3 group and 419 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_0a888a99a951b7",
+        "entity": "trial:nct01169259",
+        "key": "events_total",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_e86c988bd18828",
+        "entity": "trial:nct01169259",
+        "key": "events_total",
+        "value": 805,
+        "unit": "events",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "After a median of five years of treatment, 805 participants had suffered a major adverse cardiovascular event, such as a heart attack or stroke (386 in the omega-3 group and 419 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_0c375ad1e96692",
+        "entity": "trial:nct01169259",
+        "key": "events_treatment",
+        "value": 386,
+        "unit": "events",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "After a median of five years of treatment, 805 participants had suffered a major adverse cardiovascular event, such as a heart attack or stroke (386 in the omega-3 group and 419 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_9397d0816d6566",
+        "entity": "trial:nct01169259",
+        "key": "events_treatment",
+        "value": 39,
+        "unit": "%",
+        "attrs": {
+          "placebo_adjusted": false,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "Thirty-nine per cent of patients in the n-3 group relapsed at 12 months compared to 47% of placebo patients",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_9a9d89c09f9bb1",
+        "entity": "trial:nct01169259",
+        "key": "events_treatment",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_ebecb5ff5c1a38",
+        "entity": "trial:nct01169259",
+        "key": "events_treatment",
+        "value": 145,
+        "unit": "heart attacks",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "VITAL found a significant 28 percent reduction in risk of heart attack among participants taking the omega-3 fatty acid supplements (145 cases in the omega-3 group and 200 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_1de54c6a76bbac",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 1.02,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "For UC, there was no difference in the relapse rate between the n-3 and control groups (RR 1.02; 95% CI: 0.51-2.03).",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_51df645e6ff0c7",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 0.77,
+        "unit": "RR",
+        "attrs": {
+          "placebo_adjusted": true,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "RR 0.77, 95% CI 0.61 to 0.98",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_7464f3366ac0c0",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 0.64,
+        "unit": null,
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "There was a non statistically significant benefit of n-3 therapy for maintaining remission (RR 0.64; 95%CI 0.4 to 1.03; P = 0.07).",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_aa1156fe60b254",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 1.02,
+        "unit": "RR",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_aacb7b3e0c5fda",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 0.77,
+        "unit": "relative risk",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in Crohn's disease"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "There was a statistically significant benefit for n-3 in CD (relative risk [RR] 0.77; 95% confidence interval [CI] 0.61-0.98)",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_fdcf156c06d8c9",
+        "entity": "trial:nct01169259",
+        "key": "hr",
+        "value": 0.72,
+        "unit": "",
+        "attrs": {
+          "trial": "VITAL",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "VITAL found a significant 28 percent reduction in risk of heart attack among participants taking the omega-3 fatty acid supplements (145 cases in the omega-3 group and 200 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_eff2147f4c4bca",
+        "entity": "trial:nct01169259",
+        "key": "inclusion_threshold",
+        "value": 50,
+        "unit": "years",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "quote": "be men aged 50 or older or women aged 55 or older",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01169259"
+      },
+      {
+        "fact_id": "f_1bc90d2278fe91",
+        "entity": "trial:nct01169259",
+        "key": "median_followup",
+        "value": 5.3,
+        "unit": "years",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "Brigham and Women’s Hospital investigators leading the VITamin D and OmegA-3 TriaL (VITAL) conducted a rigorous placebo-controlled trial over the course of 5.3 years",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_a01a7f3db2f2b4",
+        "entity": "trial:nct01169259",
+        "key": "median_followup",
+        "value": 5.3,
+        "unit": "years",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "quote": "median 5.3 years",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01169259"
+      },
+      {
+        "fact_id": "f_4654581125e7cc",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 25871,
+        "unit": "participants",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "VITAL, a randomized, double-blind, placebo-controlled trial, enrolled 25,871 men and women age 50 and older from across the U.S., including 5,106 African Americans.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_7298a893debdb9",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 1039,
+        "unit": "patients",
+        "attrs": {
+          "placebo_adjusted": false,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "Six studies with a total of 1039 patients were eligible for inclusion",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_96aa21bba7d4d0",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 166,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "However, the total number of patients enrolled in these studies was small (n = 166).",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_bcd6714cd3c11f",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 138,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "the total number of patients enrolled in these studies was small (n = 138)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_dad6b441576fe2",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 8,
+        "unit": "patients",
+        "attrs": {
+          "trial": "open-label pilot study"
+        },
+        "source_id": "pmcid:PMC4777038",
+        "quote": "Of the 8 patients, 1 met the diagnostic criteria for PTSD.",
+        "pub_date": "2011-12-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/22980098"
+      },
+      {
+        "fact_id": "f_f3a6f967e6e25a",
+        "entity": "trial:nct01169259",
+        "key": "n_randomized",
+        "value": 25871,
+        "unit": "participants",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "quote": "Enrollment: 25871 (ACTUAL)",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01169259"
+      },
+      {
+        "fact_id": "f_7330d40c9255fc",
+        "entity": "trial:nct01169259",
+        "key": "p_value",
+        "value": 0.96,
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The pooled analysis showed a similar relapse rate in the n-3 treated patients and controls (RR 1.02; 95% CI 0.51 to 2.03; P = 0.96)",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_a49bdc1002337d",
+        "entity": "trial:nct01169259",
+        "key": "p_value",
+        "value": 0.07,
+        "unit": null,
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "There was a non statistically significant benefit of n-3 therapy for maintaining remission (RR 0.64; 95%CI 0.4 to 1.03; P = 0.07).",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_73c247f2636a41",
+        "entity": "trial:nct01169259",
+        "key": "primary_endpoint",
+        "value": "major adverse cardiovascular event, such as a heart attack or stroke",
+        "unit": "",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "After a median of five years of treatment, 805 participants had suffered a major adverse cardiovascular event, such as a heart attack or stroke (386 in the omega-3 group and 419 in the placebo group).",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_78ddb0cae5e706",
+        "entity": "trial:nct01169259",
+        "key": "primary_endpoint",
+        "value": "relapse rate",
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "The primary outcome was relapse rate",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_953274be216910",
+        "entity": "trial:nct01169259",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With Invasive Cancer of Any Type [5 years] | Number of Participants With a Major Cardiovascular Event [5 years]",
+        "unit": "NA",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "quote": "Primary outcome(s): Number of Participants With Invasive Cancer of Any Type [5 years] | Number of Participants With a Major Cardiovascular Event [5 years]",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01169259"
+      },
+      {
+        "fact_id": "f_146ccafbe14e84",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "Omega 3 fatty acids are safe but probably ineffective for maintenance of remission in CD.",
+        "unit": "none",
+        "attrs": {
+          "trial": "n-3 for maintenance of remission in Crohn's disease"
+        },
+        "source_id": "pmid:19160277",
+        "quote": "Omega 3 fatty acids are safe but probably ineffective for maintenance of remission in CD.",
+        "pub_date": "2009-01-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19160277"
+      },
+      {
+        "fact_id": "f_29ceec807e9773",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "omega-3 fish oil reduced heart attack rates but did not affect risk of stroke or cancer",
+        "unit": "",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "The team found that omega-3 fish oil reduced heart attack rates but did not affect risk of stroke or cancer.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_75204f7f6f5f0f",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "The 5-year intervention phase (study pill-taking, median 5.3 years) has ended; post-intervention observational follow-up of study participants is ongoing.",
+        "unit": "NA",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "quote": "The 5-year intervention phase (study pill-taking, median 5.3 years) has ended; post-intervention observational follow-up of study participants is ongoing.",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01169259"
+      },
+      {
+        "fact_id": "f_8573b4ec0b8caa",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "Compared to the seven patients without PTSD, one patient with PTSD showed relatively large reactivity to the startle tones.",
+        "unit": "",
+        "attrs": {
+          "trial": "open-label pilot study"
+        },
+        "source_id": "pmcid:PMC4777038",
+        "quote": "Compared to the seven patients without PTSD, one patient with PTSD showed relatively large reactivity to the startle tones.",
+        "pub_date": "2011-12-29",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/22980098"
+      },
+      {
+        "fact_id": "f_c7270b265c0cac",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "omega 3 fatty acids are probably ineffective for maintenance of remission in CD",
+        "unit": "text",
+        "attrs": {
+          "placebo_adjusted": false,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "Evidence from two large high quality studies suggests that omega 3 fatty acids are probably ineffective for maintenance of remission in CD",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_cf34be18eec3de",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "No evidence was found that supports the use of omega 3 fatty acids for maintenance of remission in UC.",
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "No evidence was found that supports the use of omega 3 fatty acids for maintenance of remission in UC.",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_e87f5be07fe60f",
+        "entity": "trial:nct01169259",
+        "key": "readout_statement",
+        "value": "insufficient data to recommend the use of omega 3 fatty acids for maintenance of remission in CD and UC",
+        "unit": "none",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in IBD"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "There are insufficient data to recommend the use of omega 3 fatty acids for maintenance of remission in CD and UC.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      },
+      {
+        "fact_id": "f_6f9ffc688ad519",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "higher rate of diarrhea and upper gastrointestinal symptoms",
+        "unit": "RR",
+        "attrs": {
+          "trial": "n-3 for maintenance of remission in Crohn's disease",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:19160277",
+        "quote": "significantly higher rate of diarrhea (RR 1.36 95% CI 1.01 to 1.84) and symptoms of the upper gastrointestinal tract (RR 1.98 95% CI 1.38 to 2.85) in the n-3 treatment group.",
+        "pub_date": "2009-01-21",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19160277"
+      },
+      {
+        "fact_id": "f_729b0e3be89912",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "higher rate of diarrhea and upper gastrointestinal tract symptoms",
+        "unit": "RR",
+        "attrs": {
+          "placebo_adjusted": true,
+          "trial": "not stated"
+        },
+        "source_id": "pmid:24585498",
+        "quote": "significantly higher rate of diarrhea (4 studies, 862 patients; RR 1.36 95% CI 1.01 to 1.84) and upper gastrointestinal tract symptoms (5 studies, 999 patients; RR 1.65, 95% CI 1.25 to 2.18) in the n-3 treatment group",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/24585498"
+      },
+      {
+        "fact_id": "f_7eb8f2b87aa6b1",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "No significant adverse events were recorded in any of the studies",
+        "unit": null,
+        "attrs": {
+          "trial": "Omega 3 fatty acids for maintenance of remission in Crohn's disease systematic review"
+        },
+        "source_id": "pmid:17443620",
+        "quote": "No significant adverse events were recorded in any of the studies and not enough data were available to analyze the other secondary outcomes.",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17443620"
+      },
+      {
+        "fact_id": "f_7eff4accb499a7",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "No significant adverse events were recorded in any of the studies",
+        "unit": "",
+        "attrs": {
+          "trial": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis"
+        },
+        "source_id": "pmid:17636844",
+        "quote": "No significant adverse events were recorded in any of the studies",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/17636844"
+      },
+      {
+        "fact_id": "f_f748786928e43a",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "No serious side effects, such as bleeding, high blood calcium levels, or gastrointestinal symptoms were found with either supplement.",
+        "unit": "",
+        "attrs": {
+          "trial": "VITAL"
+        },
+        "source_id": "announcement:vital_omega3",
+        "quote": "No serious side effects, such as bleeding, high blood calcium levels, or gastrointestinal symptoms were found with either supplement.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189"
+      },
+      {
+        "fact_id": "f_f90cbd741672c2",
+        "entity": "trial:nct01169259",
+        "key": "safety_signal",
+        "value": "higher rate of diarrhea and upper gastrointestinal symptoms in n-3 treatment group",
+        "unit": "RR",
+        "attrs": {
+          "trial": "systematic review and meta-analysis of omega-3 fatty acids for maintenance of remission in IBD"
+        },
+        "source_id": "pmid:20564531",
+        "quote": "The pooled analysis showed a higher rate of diarrhea (RR 1.36; 95% CI: 1.01-1.84) and symptoms of the upper gastrointestinal tract (RR 1.96; 95% CI: 1.37-2.80) in the n-3 treatment group.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20564531"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01169259@2018-11-10",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01169259 VITAL",
+        "url": "https://clinicaltrials.gov/study/NCT01169259",
+        "pub_date": "2010-07-26",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01169259",
+            "acronym": "VITAL",
+            "title": "Vitamin D and Omega-3 Trial (VITAL)",
+            "official_title": "Vitamin D and Omega-3 Trial (VITAL)",
+            "sponsor": "Brigham and Women's Hospital",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2010-07",
+            "primary_completion": "2018-11-10",
+            "first_posted": "2010-07-26",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 25871,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "vitamin D3",
+                "type": "DIETARY_SUPPLEMENT",
+                "other_names": [
+                  "cholecalciferol"
+                ],
+                "arms": [
+                  "Vitamin D + fish oil",
+                  "Vitamin D + fish oil placebo"
+                ]
+              },
+              {
+                "name": "omega-3 fatty acids (fish oil)",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Vitamin D + fish oil",
+                  "Vitamin D placebo + fish oil"
+                ]
+              },
+              {
+                "name": "Vitamin D3 placebo",
+                "type": "DIETARY_SUPPLEMENT",
+                "other_names": [],
+                "arms": [
+                  "Vitamin D placebo + fish oil",
+                  "Vitamin D placebo + fish oil placebo"
+                ]
+              },
+              {
+                "name": "Fish oil placebo",
+                "type": "DIETARY_SUPPLEMENT",
+                "other_names": [],
+                "arms": [
+                  "Vitamin D + fish oil placebo",
+                  "Vitamin D placebo + fish oil placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Vitamin D + fish oil",
+                "type": "ACTIVE_COMPARATOR"
+              },
+              {
+                "label": "Vitamin D + fish oil placebo",
+                "type": "ACTIVE_COMPARATOR"
+              },
+              {
+                "label": "Vitamin D placebo + fish oil",
+                "type": "ACTIVE_COMPARATOR"
+              },
+              {
+                "label": "Vitamin D placebo + fish oil placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cancer",
+              "Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With Invasive Cancer of Any Type [5 years]",
+              "Number of Participants With a Major Cardiovascular Event [5 years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 2436
+      },
+      {
+        "source_id": "pmid:16531187",
+        "type": "journal",
+        "title": "Omega-3 fatty acids (fish oil) as an anti-inflammatory: an alternative to nonsteroidal anti-inflammatory drugs for discogenic pain.",
+        "url": "https://europepmc.org/article/MED/16531187",
+        "pub_date": "2006-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16531187",
+          "pmcid": null,
+          "doi": "10.1016/j.surneu.2005.10.023",
+          "journal": "Surgical neurology"
+        },
+        "chars": 1872
+      },
+      {
+        "source_id": "pmid:18583436",
+        "type": "journal",
+        "title": "Omega-3 fatty acids (fish-oil) and depression-related cognition in healthy volunteers.",
+        "url": "https://europepmc.org/article/MED/18583436",
+        "pub_date": "2008-06-26",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18583436",
+          "pmcid": null,
+          "doi": "10.1177/0269881108092120",
+          "journal": "Journal of psychopharmacology (Oxford, England)"
+        },
+        "chars": 1445
+      },
+      {
+        "source_id": "pmid:1912396",
+        "type": "journal",
+        "title": "Chronic effects of omega-3 fatty acids (fish oil) in a rat 5/6 renal ablation model.",
+        "url": "https://europepmc.org/article/MED/1912396",
+        "pub_date": "1991-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "1912396",
+          "pmcid": null,
+          "doi": "10.1681/asn.v1121343",
+          "journal": "Journal of the American Society of Nephrology : JASN"
+        },
+        "chars": 1934
+      },
+      {
+        "source_id": "pmid:2245391",
+        "type": "journal",
+        "title": "The effect of dietary omega-3 fatty acids (fish oil) on azoxymethanol-induced focal areas of dysplasia and colon tumor incidence.",
+        "url": "https://europepmc.org/article/MED/2245391",
+        "pub_date": "1990-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "2245391",
+          "pmcid": null,
+          "doi": "10.1002/1097-0142(19901201)66:11<2350::aid-cncr2820661117>3.0.co;2-6",
+          "journal": "Cancer"
+        },
+        "chars": 2154
+      },
+      {
+        "source_id": "pmid:24585498",
+        "type": "journal",
+        "title": "Omega 3 fatty acids (fish oil) for maintenance of remission in Crohn's disease.",
+        "url": "https://europepmc.org/article/MED/24585498",
+        "pub_date": "2014-02-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24585498",
+          "pmcid": "PMC8988157",
+          "doi": "10.1002/14651858.cd006320.pub4",
+          "journal": "The Cochrane database of systematic reviews"
+        },
+        "chars": 3882
+      },
+      {
+        "source_id": "pmid:20564531",
+        "type": "journal",
+        "title": "Maintenance of remission in inflammatory bowel disease using omega-3 fatty acids (fish oil): a systematic review and meta-analyses.",
+        "url": "https://europepmc.org/article/MED/20564531",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20564531",
+          "pmcid": null,
+          "doi": "10.1002/ibd.21374",
+          "journal": "Inflammatory bowel diseases"
+        },
+        "chars": 1790
+      },
+      {
+        "source_id": "pmid:19160277",
+        "type": "journal",
+        "title": "Omega 3 fatty acids (fish oil) for maintenance of remission in Crohn's disease.",
+        "url": "https://europepmc.org/article/MED/19160277",
+        "pub_date": "2009-01-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19160277",
+          "pmcid": null,
+          "doi": "10.1002/14651858.cd006320.pub3",
+          "journal": "The Cochrane database of systematic reviews"
+        },
+        "chars": 2699
+      },
+      {
+        "source_id": "pmid:17443620",
+        "type": "journal",
+        "title": "Omega 3 fatty acids (fish oil) for maintenance of remission in Crohn's disease.",
+        "url": "https://europepmc.org/article/MED/17443620",
+        "pub_date": "2007-04-18",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17443620",
+          "pmcid": null,
+          "doi": "10.1002/14651858.cd006320.pub2",
+          "journal": "The Cochrane database of systematic reviews"
+        },
+        "chars": 2856
+      },
+      {
+        "source_id": "pmid:17636844",
+        "type": "journal",
+        "title": "Omega 3 fatty acids (fish oil) for maintenance of remission in ulcerative colitis.",
+        "url": "https://europepmc.org/article/MED/17636844",
+        "pub_date": "2007-07-18",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17636844",
+          "pmcid": "PMC13606324",
+          "doi": "10.1002/14651858.cd006443.pub2",
+          "journal": "The Cochrane database of systematic reviews"
+        },
+        "chars": 2602
+      },
+      {
+        "source_id": "pmcid:PMC4777038",
+        "type": "journal",
+        "title": "The effect of omega-3 fatty acids on psychophysiological assessment for the secondary prevention of posttraumatic stress disorder: an open-label pilot study.",
+        "url": "https://europepmc.org/article/MED/22980098",
+        "pub_date": "2011-12-29",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "22980098",
+          "pmcid": "PMC4777038",
+          "doi": "10.5539/gjhs.v4n1p3",
+          "journal": "Global journal of health science"
+        },
+        "chars": 16181
+      },
+      {
+        "source_id": "announcement:vital_omega3",
+        "type": "press_release",
+        "title": "VITAL Study Reveals How Vitamin D and Fish Oil Supplements Affect Risk of Heart Attack, Stroke and Cancer",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3189",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "meta": {},
+        "chars": 7249
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 13,
+      "facts": 53,
+      "relationships": 8,
+      "events": 126,
+      "audit_entries": 126,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 12,
+        "input_tokens": 14442,
+        "output_tokens": 4737,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 3640,
+        "output_tokens": 2834,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 827,
+        "output_tokens": 787,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 3577,
+        "output_tokens": 4535,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 4562,
+        "output_tokens": 4050,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4733,
+        "output_tokens": 626,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

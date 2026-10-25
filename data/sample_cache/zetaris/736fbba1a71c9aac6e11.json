@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID%3APMC4074832&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*2 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC4074832' LIMIT 5",
+ "rows": [
+  [
+   "Therefore, the aims of the present study are to evaluate the effect of 2 years supplementation with capsules of very-long chain marine n-3 PUFA on top of standard therapy in elderly patients after acute myocardial infarction (AMI)"
+  ]
+ ],
+ "error": null
+}

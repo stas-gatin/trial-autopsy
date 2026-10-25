@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25784512&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*72\\\\.2[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25784512' LIMIT 5",
+ "rows": [
+  [
+   " Pharmacokinetic/pharmacodynamic model-based simulation assuming no dose reductions predicted that bococizumab would lower LDL-C levels by 72.2 and 55"
+  ]
+ ],
+ "error": null
+}

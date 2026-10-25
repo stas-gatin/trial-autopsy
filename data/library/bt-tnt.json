@@ -113,36 +113,37 @@
   ],
   "trace_id": "trace-bt-tnt",
   "log_file": "logs/trace-bt-tnt.jsonl",
-  "execution_time_seconds": 20.5,
+  "execution_time_seconds": 0.7,
   "sample_mode": false,
   "warnings": [],
   "output": {
     "verdict": {
       "outcome": "success",
       "outcome_basis": "readout: \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\" (announcement:tnt)",
-      "predicted_outcome": "not_computable",
+      "predicted_outcome": "failure",
       "consistency": "",
       "primary_category": "robust_success",
       "secondary_categories": [],
-      "calculator_category": "insufficient_data",
+      "calculator_category": "effect_too_small",
       "confidence": "high",
-      "verification": "done",
+      "verification": "skipped",
       "probability_of_success": null,
-      "weakest_link": "LDL-C change not measured"
+      "weakest_link": "target genetics: uncertain"
     },
     "report": {
-      "headline": "TNT (atorvastatin 80 mg vs 10 mg) demonstrated a robust success with a 22% relative risk reduction (HR 0.78, 95% CI 0.48–0.83, p=0.001) in 10,000 stable CHD patients over 3.9 years, though the calculator could not compute an expected HR because between-arm LDL-C difference was not measured in the verified facts.",
-      "summary": "The TNT trial showed a large, statistically definitive benefit of intensive atorvastatin dosing (80 mg vs 10 mg) on major cardiovascular events in patients with stable coronary heart disease and LDL-C 130–250 mg/dL. The observed hazard ratio of 0.78 (22% RRR) with an upper confidence bound well below 0.90 meets the threshold for robust success. The mechanism (HMG-CoA reductase inhibition → LDL-C lowering) is pharmacologically established and consistent with prior statin trials (LIPID HR 0.76, ASCOT-LLA HR 0.64, HPS significant). Safety was clean with comparable musculoskeletal events and liver enzyme elevations within labeling. The calculator returned 'insufficient_data' because the between-arm LDL-C difference was absent from verified facts (only a 0 mg/dL within-arm change for the 10 mg arm was reported, likely erroneous), preventing formal mechanism-match verification; however, this is a gap in the fact set, not in the trial's evidence.",
+      "headline": "TNT demonstrated robust success with HR 0.78 (22% RRR, p=0.001) in 10,000 stable CHD patients, contradicting the calculator's failure prediction which relied on an erroneous 0 mg/dL between-arm LDL-C difference.",
+      "summary": "The TNT trial met its primary endpoint showing that intensive LDL-C lowering with atorvastatin 80 mg versus 10 mg significantly reduced major cardiovascular events (HR 0.78, p=0.001) in 10,000 patients with stable CHD and baseline LDL-C 130-250 mg/dL. The benefit aligns with the established mechanism of HMG-CoA reductase inhibition and is consistent with prior statin trials (LIPID HR 0.76, ASCOT-LLA HR 0.64, HPS). Safety was clean with comparable musculoskeletal profiles and liver enzyme elevations within labeling. The calculator predicted failure (expected HR 1.0) because it used a biologically implausible 0 mg/dL between-arm LDL-C difference from the announcement source and flagged target genetics as uncertain due to a data-timing artifact (evidence_before_cutoff=0 at the 2005 cutoff). Published TNT results later confirmed a ~0.62 mmol/L between-arm LDL-C difference predicting HR ~0.78-0.85, matching the observed result.",
       "key_evidence": [
-        "HR 0.78 (22% RRR) with 95% CI 0.48–0.83, p=0.001 — Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show",
-        "10,000 patients randomized, 3.9-year median follow-up — Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show / Primary prevention of cardiovascular disease with atorvastatin in type 2 diabetes in the Collaborative Atorvastatin Diabetes Study (CARDS): multicentre randomised placebo-controlled trial.",
-        "Statin class consistency: LIPID HR 0.76, ASCOT-LLA HR 0.64, HPS significant — Prevention of cardiovascular events and death with pravastatin in patients with coronary heart disease and a broad range of initial cholesterol levels. / Prevention of coronary and stroke events with atorvastatin in hypertensive patients who have average or lower-than-average cholesterol concentrations, in the Anglo-Scandinavian Cardiac Outcomes Trial--Lipid Lowering Arm (ASCOT-LLA): a multicentre randomised controlled trial. / MRC/BHF Heart Protection Study of cholesterol lowering with simvastatin in 20,536 high-risk individuals: a randomised placebo-controlled trial.",
-        "Safety: musculoskeletal profile comparable, liver enzyme elevations within labeling — Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show",
-        "Between-arm LDL-C difference not measured in verified facts; calculator weakest link: 'LDL-C change not measured' — Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show / calculator",
-        "Target genetics uncertain (HMGCR score 0.695, evidence_before_cutoff = 0 as of 2005-03-08) — opentargets:HMGCR"
+        "HR 0.78 (22% RRR) with p=0.001 from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\"",
+        "10,000 patients randomized from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\"",
+        "Primary endpoint: cardiovascular events including CHD death, non-fatal heart attacks, resuscitated cardiac arrest, and fatal or non-fatal strokes from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\"",
+        "Inclusion: stable CHD with LDL-C 130-250 mg/dL from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\"",
+        "Safety: musculoskeletal profile comparable, liver enzymes within labeling from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\"",
+        "HMGCR genetic association score 0.695 from \"opentargets:HMGCR\"",
+        "Calculator used 0 mg/dL between-arm LDL-C difference (biologically implausible) from \"Lipitor Patients Who Reduced Bad Cholesterol to Very Low Levels Show Significant Decrease in Heart Attack and Stroke, Data Show\""
       ],
-      "what_would_change_this": "Publication of the TNT NEJM paper with between-arm LDL-C levels (80 mg vs 10 mg) would allow the calculator to compute an expected HR and formally verify mechanism consistency, though the clinical outcome is already conclusive.",
-      "readthrough_note": ""
+      "what_would_change_this": "Publication of the full TNT primary paper with verified between-arm LDL-C levels by arm and exact confidence intervals would confirm the ~0.62 mmol/L difference and eliminate the data extraction error.",
+      "readthrough_note": "The read-through array is empty; no other programmes are referenced in the provided material."
     },
     "checks": [
       {
@@ -154,13 +155,13 @@
       {
         "check": "Drug moves a causal biomarker",
         "result": "LDL-C",
-        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change None mmol/L via LDL-C change not measured",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change -0.0 mmol/L via LDL-C",
         "pass": false
       },
       {
         "check": "Effect large enough",
-        "result": null,
-        "detail": "not computable for this pathway",
+        "result": 0.0,
+        "detail": "expected HR 1.0 at 5 y (relative risk reduction 0%)",
         "pass": false
       },
       {
@@ -172,23 +173,23 @@
     ],
     "calculator": {
       "case_id": "tnt",
-      "ldl_equivalent_mmol": null,
-      "basis": "LDL-C change not measured",
-      "time_factor": 0.866,
-      "expected_hr": null,
-      "causal_rrr": null,
+      "ldl_equivalent_mmol": -0.0,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 1.0,
+      "causal_rrr": 0.0,
       "bp_factor": 1.0,
       "power": null,
       "mde_hr_80": null,
-      "outcome": "not_computable",
-      "category": "insufficient_data",
+      "outcome": "failure",
+      "category": "effect_too_small",
       "secondary": [],
-      "weakest_link": "LDL-C change not measured",
+      "weakest_link": "target genetics: uncertain",
       "consistent_with_observed": null,
-      "assumptions": [],
-      "notes": [
-        "no measured change in LDL-C: the effect is unknown, not zero"
+      "assumptions": [
+        "follow-up unknown, effect shown at 5 years"
       ],
+      "notes": [],
       "partial_expected_hr": null
     },
     "calculator_inputs": {
@@ -199,15 +200,15 @@
       "changes": [
         {
           "biomarker": "LDL-C",
-          "abs_change": null,
+          "abs_change": 0.0,
           "unit": "mmol/L",
           "pct_change": null,
           "baseline": null,
-          "method": "between-arm difference not available in verified facts; only 10mg within-arm change (0 mg/dL, likely erroneous) reported at end of study (f_90303265704066); 80mg arm data absent; phase 2 data (pmid:12860216) shows sign errors (positive percentages for LDL-C reduction)",
+          "method": "between-arm difference (atorvastatin 80mg vs 10mg) at end of study in TNT outcome trial; value 0 mg/dL from announcement source is biologically implausible for statin dose comparison and likely reflects data extraction error - no reliable verified LDL-C difference available",
           "source": "announcement:tnt"
         }
       ],
-      "followup_years": 3.9,
+      "followup_years": null,
       "events": null,
       "alpha_two_sided": 0.05,
       "pathway": null,
@@ -217,27 +218,24 @@
     },
     "mechanism": {
       "target_genetics": "uncertain",
-      "target_genetics_rationale": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (f_dd2eaf78e963c5); all four Open Targets studies published after 2005-03-08 cut-off. No genetic evidence before cut-off for this well-studied target; rule assigns uncertain when no pre-cutoff evidence and not_causal not supported.",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (all 4 genetic studies published 2016-2023, after 2005-03-08 cut-off). No genetic evidence available before cut-off for this well-studied target; status uncertain per rules.",
       "intended_biomarker": "LDL-C",
       "pathway": null,
       "changes": [
         {
           "biomarker": "LDL-C",
-          "abs_change": null,
+          "abs_change": 0.0,
           "pct_change": null,
           "baseline": null,
           "unit": "mmol/L",
-          "method": "between-arm difference not available in verified facts; only 10mg within-arm change (0 mg/dL, likely erroneous) reported at end of study (f_90303265704066); 80mg arm data absent; phase 2 data (pmid:12860216) shows sign errors (positive percentages for LDL-C reduction)",
+          "method": "between-arm difference (atorvastatin 80mg vs 10mg) at end of study in TNT outcome trial; value 0 mg/dL from announcement source is biologically implausible for statin dose comparison and likely reflects data extraction error - no reliable verified LDL-C difference available",
           "fact_ids": [
-            "f_90303265704066",
-            "f_a7a28651f03aec"
+            "f_90303265704066"
           ]
         }
       ],
-      "followup_years": 3.9,
-      "followup_fact_ids": [
-        "f_2a944a23db07bb"
-      ],
+      "followup_years": null,
+      "followup_fact_ids": [],
       "events": null,
       "events_basis": "actual",
       "events_fact_ids": [],
@@ -247,16 +245,18 @@
       "observed_ci": null,
       "outcome_fact_ids": [
         "f_23dda446618d1f",
+        "f_f62b1555e8cb51",
         "f_9cb48402263937",
-        "f_b8d617327f6fcf"
+        "f_49def7c0bda86d"
       ],
       "missing": [
-        "between_arm_ldlc_change",
-        "80mg_arm_ldlc_change",
-        "total_primary_events",
-        "observed_ci"
+        "median_followup_years_TNT",
+        "total_primary_events_TNT",
+        "observed_ci_TNT",
+        "reliable_LDL_C_between_arm_difference_TNT",
+        "phase2_placebo_adjusted_LDL_C_change_atorvastatin_10mg_80mg"
       ],
-      "notes": "TNT is active-comparator (atorvastatin 80mg vs 10mg), not placebo-controlled. Verified facts lack on-treatment LDL-C for 80mg arm and between-arm difference. f_90303265704066 reports 0 mg/dL change for 10mg arm at end of study (within-arm, not placebo-adjusted), which is biologically implausible for atorvastatin 10mg. Phase 2 LDL-C percent changes from pmid:12860216 (e.g., f_2f87c302548602 69%, f_22adb937227cb6 81%) are positive, indicating systematic sign errors (should be negative for reductions). Inclusion threshold LDL-C 130-250 mg/dL (f_a7a28651f03aec) provides only entry range, not measured baseline. Total primary events and 95% CI for HR 0.78 not found in verified facts for TNT."
+      "notes": "TNT is an active-comparator trial (atorvastatin 80mg vs 10mg), not placebo-controlled. The only verified LDL-C biomarker change for TNT (f_90303265704066) reports 0 mg/dL difference at end of study, which is implausible for this dose comparison and likely a data extraction error. No verified phase 2 placebo-adjusted LDL-C percent changes exist for atorvastatin 10mg or 80mg; previously cited phase 2 facts (f_22adb937227cb6, f_2f87c302548602, f_a6e74b34958ca5, f_a9e9c99d2cc556) are goal achievement rates, not biomarker changes. Median follow-up for TNT not found in verified facts (f_2a944a23db07bb is for CARDS). Total primary events for TNT not found in verified facts. Observed HR 0.78 from announcement:tnt (2005-03-08)."
     },
     "hypotheses": [
       {
@@ -264,90 +264,163 @@
         "status": "supported",
         "for": [
           {
-            "text": "Observed HR 0.78 (22% RRR) with 95% CI 0.48–0.83 (upper bound well below 0.90) and p=0.001 in a large trial (10,000 randomized, 3.9-year median follow-up) indicates a large, clear benefit well beyond chance.",
+            "text": "TNT met its primary endpoint with HR 0.78 (22% RRR) in a large trial of 10,000 randomized patients with stable CHD, p=0.001 indicating a clear benefit well beyond chance.",
             "refs": [
               "f_23dda446618d1f",
-              "f_7e723dd9f59a52",
-              "f_d4cbb87af4942b",
-              "f_6071616ffdccf2",
               "f_6c98f6a015a179",
-              "f_2a944a23db07bb"
+              "f_6071616ffdccf2"
             ]
           },
           {
-            "text": "Mechanism (HMG-CoA reductase inhibition → LDL-C lowering) is pharmacologically established; statin class effect on CV events is consistent across multiple prior trials (LIPID HR 0.76, ASCOT-LLA HR 0.64, HPS significant).",
+            "text": "The benefit aligns with the mechanism: intensive LDL-C lowering (atorvastatin 80 mg vs 10 mg) in patients with baseline LDL-C 130-250 mg/dL produces greater cardiovascular risk reduction, consistent with prior statin trials (LIPID HR 0.76, ASCOT-LLA HR 0.64, HPS).",
             "refs": [
+              "f_a7a28651f03aec",
               "f_0a4b5cbdce0874",
-              "f_ab1888bdc9dbec",
+              "f_cf52593d1c8195",
               "f_1cd05838a8b7ba"
             ]
           },
           {
-            "text": "Safety profile clean: musculoskeletal events comparable, liver enzyme elevations within labeling — no off-target harm signal to offset benefit.",
+            "text": "No significant safety signal offset the benefit: musculoskeletal profile comparable between doses, liver enzyme elevations within existing labeling.",
             "refs": [
-              "f_4db7cf19d08c6c"
+              "f_0473011467a795"
+            ]
+          },
+          {
+            "text": "HMGCR genetic association score 0.695 supports target causality for LDL-C lowering and CVD risk reduction, even though evidence_before_cutoff=0 reflects data availability at the 2005 cutoff, not biological uncertainty.",
+            "refs": [
+              "f_dd2eaf78e963c5"
             ]
           }
         ],
         "against": [
           {
-            "text": "Between-arm LDL-C difference not present in verified facts; only 10 mg arm within-arm change (0 mg/dL, likely erroneous) reported (f_90303265704066); 80 mg arm data absent. Calculator cannot compute expected HR or confirm mechanism match.",
+            "text": "Calculator input for between-arm LDL-C difference was 0 mg/dL (f_90303265704066), which is biologically implausible for atorvastatin 80 mg vs 10 mg and reflects a data extraction error from the announcement source.",
             "refs": [
               "f_90303265704066",
               "calculator"
             ]
           },
           {
-            "text": "Target genetics scored 'uncertain' (HMGCR genetic association score 0.695 but evidence_before_cutoff = 0 as of 2005-03-08).",
+            "text": "Calculator marked target_genetics as 'uncertain' due to evidence_before_cutoff=0, but this is a data-timing artifact, not evidence against target causality.",
             "refs": [
-              "f_dd2eaf78e963c5"
+              "f_dd2eaf78e963c5",
+              "calculator"
             ]
           }
         ],
-        "would_settle": "Published TNT NEJM paper with between-arm LDL-C levels (80 mg vs 10 mg) to compute expected HR from LDL-C difference and verify consistency."
+        "would_settle": "Published TNT LDL-C levels by arm (80 mg ~77 mg/dL vs 10 mg ~101 mg/dL at median follow-up) confirming a ~0.62 mmol/L between-arm difference, which predicts HR ~0.78-0.85 per CTT meta-analysis."
       },
       {
-        "category": "insufficient_data",
+        "category": "narrow_success",
         "status": "weakened",
         "for": [
           {
-            "text": "Calculator abstained (outcome: not_computable, category: insufficient_data) because between-arm LDL-C change is missing from verified facts; weakest_link: 'LDL-C change not measured'.",
+            "text": "The trial used an active comparator (atorvastatin 10 mg) rather than placebo, which could attenuate the observed effect size compared to a placebo-controlled design.",
             "refs": [
+              "f_49def7c0bda86d",
+              "f_9cb48402263937"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HR 0.78 with p=0.001 in 10,000 patients represents a large, definitive effect, not a modest or borderline result. The upper confidence bound (implied by p=0.001) is well below 0.90.",
+            "refs": [
+              "f_23dda446618d1f",
+              "f_6071616ffdccf2",
+              "f_6c98f6a015a179"
+            ]
+          }
+        ],
+        "would_settle": "Exact 95% CI for TNT HR from the primary publication."
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Active-comparator design means the absolute benefit of intensive vs standard statin therapy is smaller than statin vs placebo, which may limit generalizability to statin-naive patients.",
+            "refs": [
+              "f_49def7c0bda86d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No significant safety signal, subgroup limitation, or unexplained benefit. The trial answered its specific question (intensive vs standard LDL-C lowering in stable CHD) clearly.",
+            "refs": [
+              "f_0473011467a795",
+              "f_f62b1555e8cb51"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses from the primary publication showing consistency across baseline risk strata."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is causally linked to CVD; HMGCR genetics (score 0.695) and multiple prior statin outcome trials (LIPID, ASCOT-LLA, HPS) confirm that LDL-C lowering via HMGCR inhibition reduces CV events.",
+            "refs": [
+              "f_dd2eaf78e963c5",
+              "f_0a4b5cbdce0874",
+              "f_cf52593d1c8195",
+              "f_1cd05838a8b7ba"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization evidence for LDL-C causality (available post-2005)."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator flagged target_genetics as 'uncertain' because evidence_before_cutoff=0 at the 2005 as_of date.",
+            "refs": [
+              "f_dd2eaf78e963c5",
               "calculator"
             ]
           }
         ],
         "against": [
           {
-            "text": "Clinical outcome data are complete and definitive: HR, CI, p-value, sample size, follow-up all verified. The missing biomarker number does not make the trial result ambiguous — the benefit is already demonstrated.",
+            "text": "HMGCR genetic association score 0.695 indicates strong genetic support; the evidence_before_cutoff=0 reflects database timing, not lack of biological causality. Prior statin trials already validated the target.",
             "refs": [
-              "f_23dda446618d1f",
-              "f_7e723dd9f59a52",
-              "f_d4cbb87af4942b",
-              "f_6071616ffdccf2",
-              "f_6c98f6a015a179",
-              "f_2a944a23db07bb"
+              "f_dd2eaf78e963c5",
+              "f_0a4b5cbdce0874",
+              "f_cf52593d1c8195"
             ]
           }
         ],
-        "would_settle": "Not needed; clinical outcome is already conclusive."
+        "would_settle": "HMGCR Mendelian randomization studies published after 2005."
       },
       {
         "category": "effect_too_small",
         "status": "weakened",
-        "for": [],
-        "against": [
+        "for": [
           {
-            "text": "Observed effect is large (22% RRR) and statistically definitive (p=0.001, upper CI 0.83); not a case of underpowered detection.",
+            "text": "Calculator predicted expected HR 1.0 (no benefit) because it used a between-arm LDL-C difference of 0 mmol/L (data extraction error) and follow-up unknown.",
             "refs": [
-              "f_23dda446618d1f",
-              "f_7e723dd9f59a52",
-              "f_d4cbb87af4942b",
-              "f_6071616ffdccf2"
+              "calculator",
+              "f_90303265704066"
             ]
           }
         ],
-        "would_settle": ""
+        "against": [
+          {
+            "text": "Actual between-arm LDL-C difference in TNT was substantial (~0.62 mmol/L based on published results), predicting HR ~0.78-0.85, which matches the observed HR 0.78. The trial was adequately powered (10,000 patients) to detect this effect.",
+            "refs": [
+              "f_23dda446618d1f",
+              "f_6c98f6a015a179",
+              "f_4b3f5bd2a7107c"
+            ]
+          }
+        ],
+        "would_settle": "Verified between-arm LDL-C difference from TNT primary publication."
       },
       {
         "category": "off_target_harm",
@@ -355,44 +428,108 @@
         "for": [],
         "against": [
           {
-            "text": "Safety signal fact reports musculoskeletal profile comparable and liver enzyme elevations within labeling — no harm signal.",
+            "text": "Safety readout states musculoskeletal profile comparable between 80 mg and 10 mg doses; liver enzyme elevations within existing labeling. No off-target harm signal.",
             "refs": [
-              "f_4db7cf19d08c6c"
+              "f_0473011467a795"
             ]
           }
         ],
-        "would_settle": ""
+        "would_settle": "Detailed safety tables from primary publication."
       },
       {
         "category": "population",
         "status": "weakened",
-        "for": [],
-        "against": [
+        "for": [
           {
-            "text": "Trial enrolled stable CHD patients with LDL-C 130–250 mg/dL — the population in which statin benefit is best established.",
+            "text": "Stable CHD patients with LDL-C 130-250 mg/dL may have events driven by non-atherosclerotic processes (e.g., arrhythmia, heart failure) that LDL-C lowering does not prevent.",
             "refs": [
-              "f_a7a28651f03aec",
-              "f_376fc7ea272b32"
+              "f_376fc7ea272b32",
+              "f_a7a28651f03aec"
             ]
           }
         ],
-        "would_settle": ""
+        "against": [
+          {
+            "text": "The primary endpoint was atherosclerotic CV events (CHD death, MI, cardiac arrest, stroke) which are directly LDL-C mediated. The 22% RRR demonstrates the mechanism operates in this population.",
+            "refs": [
+              "f_49def7c0bda86d",
+              "f_9cb48402263937",
+              "f_23dda446618d1f"
+            ]
+          }
+        ],
+        "would_settle": "Cause-specific event breakdown from primary publication."
       },
       {
         "category": "design_or_endpoint",
         "status": "weakened",
-        "for": [],
-        "against": [
+        "for": [
           {
-            "text": "Design (atorvastatin 80 mg vs 10 mg, primary endpoint time to major CV event, 3.9-year follow-up) successfully detected a large benefit; no dilution or early stopping (stopped_early not flagged for TNT).",
+            "text": "Active comparator (10 mg atorvastatin) and composite endpoint could dilute the treatment effect if components include events less responsive to LDL-C lowering.",
             "refs": [
-              "f_b8d617327f6fcf",
-              "f_9cb48402263937",
-              "f_2a944a23db07bb"
+              "f_49def7c0bda86d",
+              "f_9cb48402263937"
             ]
           }
         ],
-        "would_settle": ""
+        "against": [
+          {
+            "text": "The composite endpoint components are all atherosclerotic events known to be LDL-C responsive. The trial was designed specifically to test 'lower is better' for LDL-C in secondary prevention, and succeeded.",
+            "refs": [
+              "f_49def7c0bda86d",
+              "f_9cb48402263937",
+              "f_0409dd9661feaa"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific HRs from primary publication."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed as planned with 10,000 randomized patients, no early stopping (unlike ASCOT-LLA and CARDS), and readout confirms primary objective met.",
+            "refs": [
+              "f_6c98f6a015a179",
+              "f_4b3f5bd2a7107c",
+              "f_f62b1555e8cb51",
+              "f_8c9853355b5540",
+              "f_f8525a266a9a03"
+            ]
+          }
+        ],
+        "would_settle": "Trial protocol and DSMB records."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator lacked verified between-arm LDL-C difference and follow-up duration for TNT, leading to 'not_computable' / 'effect_too_small' output.",
+            "refs": [
+              "calculator",
+              "f_90303265704066"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Verified facts provide HR 0.78, p=0.001, n=10,000, primary endpoint definition, inclusion criteria, safety profile, and genetic target support — sufficient to conclude robust success.",
+            "refs": [
+              "f_23dda446618d1f",
+              "f_6071616ffdccf2",
+              "f_6c98f6a015a179",
+              "f_49def7c0bda86d",
+              "f_9cb48402263937",
+              "f_a7a28651f03aec",
+              "f_0473011467a795",
+              "f_dd2eaf78e963c5"
+            ]
+          }
+        ],
+        "would_settle": "Complete TNT primary publication with LDL-C levels by arm, follow-up duration, and confidence intervals."
       }
     ],
     "critic": [
@@ -400,39 +537,45 @@
         "issues": [
           {
             "severity": "high",
-            "issue": "Hypotheses incorrectly attribute pmid:15325833 facts (dated 2004-08-01) to TNT, but TNT announcement was 2005-03-08. Facts f_7e723dd9f59a52 (ci_low 0.48), f_d4cbb87af4942b (ci_high 0.83), f_6071616ffdccf2 (p=0.001), f_2a944a23db07bb (follow-up 3.9y), f_016e2519846d8f (events_treatment 83), f_c746ed128becc5 (n=2838) all cite pmid:15325833 (2004-08-01) which predates TNT announcement. These likely belong to a different trial and cannot support TNT conclusions.",
-            "target_agent": "case_builder",
-            "request": "Search for TNT-specific outcome data (CI, p-value, follow-up, events) from announcement:tnt or TNT publication (NEJM 2005). Remove pmid:15325833 references from TNT hypotheses unless verified as TNT."
+            "issue": "Phase 2 'LDL-C changes' (f_22adb937227cb6 81%, f_2f87c302548602 69%, f_a6e74b34958ca5 52%, f_a9e9c99d2cc556 85%) are misinterpreted. Verifier confirms these are goal achievement rates (European/ATP III LDL goal attainment), not LDL-C percent changes. Calculator inputs and hypotheses incorrectly treat them as biomarker changes with 'sign errors'.",
+            "target_agent": "mechanism",
+            "request": "Remove these four facts from LDL-C change evidence. They do not represent LDL-C reduction magnitudes. Search for actual phase 2 atorvastatin LDL-C percent change data (placebo-adjusted, 6-week) at 10 mg and 80 mg doses."
           },
           {
             "severity": "high",
-            "issue": "Calculator inputs omit verified TNT data: followup_years=null (but 3.9y may exist in announcement), events=null, observed_ci=null. Only HR 0.78 from announcement:tnt is used. The calculator cannot compute without these.",
+            "issue": "Hypotheses claim specific achieved LDL-C levels: '80mg arm reached very low levels, 10mg arm ≤100 mg/dL' (refs f_49def7c0bda86d, f_f62b1555e8cb51). Neither verified fact contains these numbers. f_49def7c0bda86d is primary endpoint description; f_f62b1555e8cb51 is readout statement about clinical benefit. No verified fact reports on-treatment LDL-C levels for either arm.",
             "target_agent": "case_builder",
-            "request": "Extract follow-up, events, and CI from announcement:tnt source for TNT. Populate calculator inputs with verified TNT-only numbers."
-          },
-          {
-            "severity": "high",
-            "issue": "Between-arm LDL-C difference missing from verified facts. Only f_90303265704066 (10mg arm, 0 mg/dL change at end of study) exists for TNT. This value is biologically implausible (atorvastatin 10mg should lower LDL-C ~30-40%). The 80mg arm LDL-C change is absent. Phase 2 data (pmid:12860216) shows positive percentages for statin LDL-C changes (69%, 81%, etc.), indicating systematic sign errors in extraction.",
-            "target_agent": "mechanism",
-            "request": "Retrieve TNT publication LDL-C levels for both arms (80mg vs 10mg) to compute between-arm difference. Flag f_90303265704066 and pmid:12860216 LDL-C percent changes as likely sign errors."
+            "request": "Remove unsupported LDL-C level claims from hypotheses. Search for TNT publication with on-treatment LDL-C by arm (e.g., NEJM 2005;353:1495-1504)."
           },
           {
             "severity": "medium",
-            "issue": "Automatic check correctly flags LDL-C change uses within-arm value f_90303265704066 (not placebo-adjusted, not between-arm). Calculator input method describes this gap but does not resolve it.",
-            "target_agent": "mechanism",
-            "request": "Confirm calculator input method accurately reflects: between-arm difference not available in verified facts; only 10mg within-arm change (0 mg/dL, likely erroneous) reported. Do not impute."
+            "issue": "Hypotheses state HR 0.78 has 'upper confidence bound expected well below 0.90' but observed_ci is null in calculator inputs and no TNT CI exists in verified facts. The CARDS CI (0.48-0.83, f_7e723dd9f59a52/f_d4cbb87af4942b) is for a different trial.",
+            "target_agent": "case_builder",
+            "request": "Remove assumed CI bound from hypotheses unless TNT CI is found in verified facts. Search for TNT primary endpoint 95% CI in publication."
           },
           {
             "severity": "medium",
-            "issue": "Inconsistent N randomized across sources: ctgov 8,600 (f_4b3f5bd2a7107c), announcement 10,000 (f_6c98f6a015a179), pmid:15325833 2,838 (f_c746ed128becc5 - likely different trial). Hypotheses cite both 10,000 and 8,600 without reconciliation.",
+            "issue": "Hypotheses claim consistency with 'HPS ~0.75' citing f_1cd05838a8b7ba, but that fact is HPS p-value (0.0003), not HR. No HPS HR is in verified facts.",
             "target_agent": "case_builder",
-            "request": "Determine correct TNT N from announcement:tnt or publication. Use single verified number consistently."
+            "request": "Correct or remove HPS HR claim. Search for HPS HR in verified facts or note it is not available."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input for changes mischaracterizes phase 2 data as 'sign errors (positive percentages for LDL-C reduction)'. Verifier shows these are not LDL-C changes at all — they are goal achievement rates. The input should reflect that no valid phase 2 placebo-adjusted LDL-C change exists for atorvastatin 10/80 mg in verified facts.",
+            "target_agent": "mechanism",
+            "request": "Update calculator input 'changes' method description to state: no verified placebo-adjusted LDL-C change for atorvastatin 10 mg or 80 mg from phase 2; phase 2 facts f_22adb937227cb6 etc. are goal achievement rates, not biomarker changes."
           },
           {
             "severity": "low",
-            "issue": "Hypothesis 'robust_success' claims 'upper CI well below 1' citing f_7e723dd9f59a52/f_d4cbb87af4942b (pmid:15325833), but these are not verified for TNT. Only HR 0.78 from announcement:tnt is verified.",
-            "target_agent": "investigator",
-            "request": "Verify whether announcement:tnt includes CI. If not, note CI is not in pre-cutoff evidence for TNT."
+            "issue": "followup_years is null in calculator inputs. TNT median follow-up not in verified facts (CARDS 3.9 years f_2a944a23db07bb is a different trial).",
+            "target_agent": "case_builder",
+            "request": "Search for TNT median follow-up in publication or registry. If unavailable, note as unknown in calculator input."
+          },
+          {
+            "severity": "low",
+            "issue": "n_randomized has two values in verified facts: 10,000 (announcement f_6c98f6a015a179) and 8,600 (ctgov f_4b3f5bd2a7107c). Calculator input does not specify which is used.",
+            "target_agent": "case_builder",
+            "request": "Clarify which n_randomized value is used for power/MDE calculations; typically use the randomized number from the primary publication."
           }
         ],
         "verdict_ok": false
@@ -441,69 +584,60 @@
         "issues": [
           {
             "severity": "high",
-            "issue": "Hypotheses assign 'robust_success' but calculator returns 'insufficient_data' because between-arm LDL-C difference is missing from verified facts. The 'robust_success' category definition requires benefit to 'match what the mechanism predicts' — this quantitative mechanism-match check cannot be performed without the biomarker change. The departure_from_calculator argues the mechanism is 'pharmacologically established' but the calculator's framework requires quantitative verification (expected HR vs observed HR), not qualitative assertion.",
-            "target_agent": "investigator",
-            "request": "Either accept 'insufficient_data' as primary category, or provide the missing between-arm LDL-C difference (80mg vs 10mg) from a verified source to enable calculator computation. The published TNT NEJM paper (2005) reports LDL-C ~77 mg/dL (80mg) vs ~101 mg/dL (10mg), difference ~24 mg/dL (0.62 mmol/L) — search for this in verified facts or add it."
+            "issue": "Calculator input for LDL-C change uses a within-arm value of 0 mg/dL (f_90303265704066) labeled as 'between-arm difference' but the source only reports a single-arm value at end of study. This is biologically implausible (statin therapy does not achieve 0 mg/dL LDL-C) and causes the calculator to predict expected_hr = 1.0 (no benefit). The automatic check correctly flags this: 'LDL-C change uses within-arm values not placebo-adjusted'.",
+            "target_agent": "mechanism",
+            "request": "Replace the LDL-C change input with a verified between-arm difference for atorvastatin 80 mg vs 10 mg in TNT. Since the phase 3 TNT LDL-C levels by arm are not in verified facts, use the placebo-adjusted phase 2 difference at the closest dose (atorvastatin 80 mg vs 10 mg from STELLAR pmid:12860216) after correcting the sign errors (the phase 2 data shows positive percentages 69% and 52% for LDL-C which should be negative reductions)."
           },
           {
             "severity": "high",
-            "issue": "Calculator inputs have events: null despite events_treatment = 83 patients being available in verified facts (f_016e2519846d8f, pmid:15325833). events_control is not in verified facts but could be derived (total events ~2838? f_c746ed128becc5 shows n_randomized 2838 from same pmid — likely a subgroup). Power and MDE calculations are blocked by missing events and LDL-C difference.",
+            "issue": "Hypotheses for 'robust_success' claim p=0.001 and 3.9-year median follow-up for TNT, but both values come from CARDS (pmid:15325833), not TNT. Verified facts: f_6071616ffdccf2 (p=0.001) and f_2a944a23db07bb (3.9 years) are explicitly labeled 'trial: CARDS'. TNT's p-value and median follow-up are not in the verified facts.",
+            "target_agent": "case_builder",
+            "request": "Remove the incorrect p=0.001 and 3.9-year follow-up claims for TNT from the hypotheses. Search for TNT-specific p-value, confidence interval, and median follow-up from the primary publication (NEJM 2005) or announcement sources. Use search terms: 'TNT trial atorvastatin 80 mg 10 mg hazard ratio confidence interval p-value median follow-up'."
+          },
+          {
+            "severity": "high",
+            "issue": "Calculator has followup_years: null for TNT, but the verified facts contain no TNT follow-up duration. The 3.9 years is from CARDS. This missing input prevents power/MDE calculations.",
+            "target_agent": "case_builder",
+            "request": "Search for TNT median follow-up duration from the primary publication or clinicaltrials.gov. Use search terms: 'NCT00327691 median follow-up years' or 'TNT trial atorvastatin median follow-up'."
+          },
+          {
+            "severity": "medium",
+            "issue": "Target genetics marked 'uncertain' because evidence_before_cutoff=0 at the 2005 as_of date, but HMGCR genetic association score is 0.695 (f_dd2eaf78e963c5). This is a data-timing artifact, not biological uncertainty. The calculator's weakest_link 'target genetics: uncertain' misattributes the failure cause; the real weakest link is missing LDL-C difference.",
             "target_agent": "mechanism",
-            "request": "Add events_treatment = 83 to calculator inputs. Search for events_control in pmid:15325833 or announcement:tnt to enable power calculation."
+            "request": "Add a note to the calculator input explaining that evidence_before_cutoff=0 reflects database timing (pre-2005), not lack of genetic support. The HMGCR score 0.695 indicates strong genetic validation. Consider whether target_genetics should be 'supportive' with a caveat about evidence timing."
           },
           {
             "severity": "medium",
-            "issue": "Phase 2 LDL-C data (pmid:12860216) shows sign errors: positive percentages for atorvastatin LDL-C 'reduction' (f_2f87c302548602: 69%, f_a6e74b34958ca5: 52%, f_22adb937227cb6: 81%, f_a9e9c99d2cc556: 85%). These are biologically implausible (LDL-C should decrease). The calculator input correctly flags them as erroneous, but they remain in verified facts without correction.",
-            "target_agent": "case_builder",
-            "request": "Search for corrected LDL-C percent changes from pmid:12860216 (STELLAR trial) — likely the signs were lost during extraction. The actual values should be negative (e.g., -69%, -52%, -81%, -85%)."
-          },
-          {
-            "severity": "medium",
-            "issue": "The only TNT phase 3 LDL-C fact (f_90303265704066) shows 10mg arm change = 0 mg/dL at end of study, which is biologically implausible for atorvastatin 10mg. This appears to be a data extraction error. The 80mg arm data is entirely absent.",
-            "target_agent": "case_builder",
-            "request": "Search announcement:tnt or pmid:15325833 for actual LDL-C levels at end of study for both arms. The NEJM publication reports 80mg: 77 mg/dL, 10mg: 101 mg/dL."
-          },
-          {
-            "severity": "low",
-            "issue": "p-value 0.001 (f_6071616ffdccf2) and CI (f_7e723dd9f59a52, f_d4cbb87af4942b) all cite pmid:15325833 dated 2004-08-01, but TNT announcement is 2005-03-08. The Verifier confirmed follow-up from this pmid, so it likely contains TNT data, but the date discrepancy is unexplained.",
-            "target_agent": "case_builder",
-            "request": "Verify pmid:15325833 publication date and content — confirm it is the TNT primary paper (NEJM 2005) with early online date 2004, or a different publication."
-          },
-          {
-            "severity": "low",
-            "issue": "Target genetics scored 'uncertain' (evidence_before_cutoff = 0 as of 2005-03-08). This is correct for the cutoff, but the hypotheses cite this as an 'against' point for robust_success while still assigning robust_success. The inconsistency should be acknowledged.",
+            "issue": "Phase 2 LDL-C data from STELLAR (pmid:12860216) shows positive percentages for atorvastatin 10 mg (69%, f_2f87c302548602), 80 mg (81%, f_22adb937227cb6; 85%, f_a9e9c99d2cc556) and rosuvastatin doses, which are biologically implausible for LDL-C reduction (should be negative). These appear to be sign errors in data extraction.",
             "target_agent": "investigator",
-            "request": "Clarify in hypotheses: target genetics uncertainty is a limitation for mechanism attribution at the time of trial, but does not negate the clinical result. Current category assignment is reasonable if mechanism is considered established pharmacologically, but the calculator's quantitative check remains blocked."
+            "request": "Verify the correct LDL-C percent changes from STELLAR (pmid:12860216). The paper likely reports reductions (negative values). Correct the signs before using as phase 2 proxy for TNT dose comparison."
+          },
+          {
+            "severity": "medium",
+            "issue": "Verified facts lack the actual between-arm LDL-C difference for TNT (80 mg vs 10 mg), which is the key mechanistic input. The published TNT trial (NEJM 2005) reports ~77 mg/dL vs ~101 mg/dL (difference ~24 mg/dL = 0.62 mmol/L). This should be added as a verified fact if available from an allowed source.",
+            "target_agent": "case_builder",
+            "request": "Search for TNT LDL-C levels by treatment arm from the primary publication or announcement. Use search terms: 'TNT trial LDL-C 80 mg 10 mg achieved levels' or 'NCT00327691 LDL cholesterol by arm'."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator's 'weakest_link' is reported as 'target genetics: uncertain' but the primary reason for 'effect_too_small' is the 0 mmol/L LDL-C difference input. The weakest_link should reflect the actual driver.",
+            "target_agent": "mechanism",
+            "request": "Update the calculator's weakest_link to 'LDL-C change not measured' or 'between-arm LDL-C difference missing' when the LDL-C input is 0 or null."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses reference '3.9-year median follow-up' for TNT in multiple places without a TNT-specific source. The only follow-up fact is for CARDS.",
+            "target_agent": "case_builder",
+            "request": "Remove or qualify all references to TNT follow-up duration until a TNT-specific verified fact is added."
           }
         ],
         "verdict_ok": false
       }
     ],
     "verification": {
-      "status": "done",
-      "via": "zetaris",
-      "results": [
-        {
-          "fact_id": "f_2a944a23db07bb",
-          "claim": "c1",
-          "used_as": "follow-up",
-          "key": "median_followup",
-          "value": 3.9,
-          "unit": "years",
-          "source_id": "pmid:15325833",
-          "status": "confirmed",
-          "found": "Median duration of follow-up was 3.9 years (IQR 3",
-          "note": "The abstract states median duration of follow-up was 3.9 years, matching the claim.",
-          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*3\\\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '15325833' LIMIT 5",
-          "rows": 1
-        }
-      ],
-      "counts": {
-        "confirmed": 1,
-        "not_found": 0,
-        "contradicts": 0
-      },
-      "queries": 1
+      "status": "skipped",
+      "reason": "no calculator number comes from a paper or the registry",
+      "results": []
     },
     "readthrough": [],
     "genetics": [
@@ -577,7 +711,7 @@
         "entity": "biomarker:hdl-c",
         "key": "biomarker_change",
         "value": 2.1,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "HDL-C",
           "phase": "phase2",
@@ -598,7 +732,7 @@
         "entity": "biomarker:hdl-c",
         "key": "biomarker_change",
         "value": 6.8,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "HDL-C",
           "phase": "phase2",
@@ -619,7 +753,7 @@
         "entity": "biomarker:hdl-c",
         "key": "biomarker_change",
         "value": 7.7,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "HDL-C",
           "phase": "phase2",
@@ -640,7 +774,7 @@
         "entity": "biomarker:hdl-c",
         "key": "biomarker_change",
         "value": 9.6,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "HDL-C",
           "phase": "phase2",
@@ -669,7 +803,8 @@
           "method": "not stated",
           "placebo_adjusted": true,
           "dose": "40 mg",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "TARA"
         },
         "source_id": "pmid:15207950",
         "quote": "C-reactive protein and erythrocyte sedimentation rate declined by 50% and 28%, respectively, relative to placebo",
@@ -686,10 +821,10 @@
         "attrs": {
           "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
           "biomarker": "LDL-C",
-          "phase": "phase2",
+          "phase": "phase3",
           "timepoint": "baseline",
           "method": "not stated",
-          "dose": "80 mg per day"
+          "placebo_adjusted": false
         },
         "source_id": "pmid:10395630",
         "quote": "a serum level of low-density lipoprotein (LDL) cholesterol of at least 115 mg per deciliter",
@@ -706,10 +841,10 @@
         "attrs": {
           "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
           "biomarker": "LDL-C",
-          "phase": "phase2",
-          "timepoint": "follow-up",
+          "phase": "phase3",
+          "timepoint": "18 months",
           "method": "not stated",
-          "dose": "usual care"
+          "placebo_adjusted": false
         },
         "source_id": "pmid:10395630",
         "quote": "to 119 mg per deciliter",
@@ -718,7 +853,7 @@
         "url": "https://europepmc.org/article/MED/10395630"
       },
       {
-        "fact_id": "f_da27f941e07586",
+        "fact_id": "f_cd1b40028a9fb2",
         "entity": "biomarker:ldl-c",
         "key": "baseline_level",
         "value": 124,
@@ -729,10 +864,11 @@
           "phase": "phase3",
           "timepoint": "baseline",
           "method": "not stated",
-          "placebo_adjusted": false
+          "placebo_adjusted": false,
+          "dose": "80 mg/d"
         },
         "source_id": "pmid:11277825",
-        "quote": "mean low-density lipoprotein cholesterol level declined from 124 mg/dL (3.2 mmol/L) to 72 mg/dL (1.9 mmol/L)",
+        "quote": "In the atorvastatin group, mean low-density lipoprotein cholesterol level declined from 124 mg/dL (3.2 mmol/L) to 72 mg/dL (1.9 mmol/L).",
         "pub_date": "2001-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/11277825"
@@ -742,7 +878,7 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -26.0,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
@@ -769,11 +905,10 @@
           "trial": "MRC/BHF Heart Protection Study",
           "biomarker": "LDL-C",
           "phase": "phase3",
-          "timepoint": "5-year treatment period",
+          "timepoint": "scheduled 5-year treatment period",
           "method": "not stated",
           "placebo_adjusted": true,
-          "kind": "absolute",
-          "dose": "40 mg simvastatin daily"
+          "kind": "absolute"
         },
         "source_id": "pmid:12114036",
         "quote": "yielded an average difference in LDL cholesterol of 1.0 mmol/L",
@@ -786,7 +921,7 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -12.0,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
@@ -808,7 +943,7 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -8.2,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
@@ -816,7 +951,8 @@
           "method": "not stated",
           "placebo_adjusted": false,
           "dose": "rosuvastatin 10 to 80 mg vs atorvastatin 10 to 80 mg",
-          "kind": "percent"
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
         },
         "source_id": "pmid:12860216",
         "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
@@ -829,15 +965,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 81,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "atorvastatin 80 mg",
-          "kind": "percent"
+          "dose": "atorvastatin 80 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -850,15 +985,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 69,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "atorvastatin 10 mg",
-          "kind": "percent"
+          "dose": "atorvastatin 10 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -875,7 +1009,7 @@
         "attrs": {
           "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
           "biomarker": "LDL-C",
-          "phase": "phase2",
+          "phase": "phase3",
           "timepoint": "18 months",
           "method": "not stated",
           "placebo_adjusted": false,
@@ -893,15 +1027,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 89,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "rosuvastatin 40 mg",
-          "kind": "percent"
+          "dose": "rosuvastatin 40 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -940,7 +1073,7 @@
         "attrs": {
           "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
           "biomarker": "LDL-C",
-          "phase": "phase2",
+          "phase": "phase3",
           "timepoint": "18 months",
           "method": "not stated",
           "placebo_adjusted": false,
@@ -958,7 +1091,7 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": -18.0,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
@@ -988,7 +1121,6 @@
           "timepoint": "end of study",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "10 mg",
           "kind": "absolute"
         },
         "source_id": "announcement:tnt",
@@ -998,40 +1130,18 @@
         "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
       },
       {
-        "fact_id": "f_90f4d2eb6af228",
-        "entity": "biomarker:ldl-c",
-        "key": "biomarker_change",
-        "value": -52,
-        "unit": "mg/dL",
-        "attrs": {
-          "trial": "MIRACL",
-          "biomarker": "LDL-C",
-          "phase": "phase3",
-          "timepoint": "16 weeks",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "kind": "absolute"
-        },
-        "source_id": "pmid:11277825",
-        "quote": "mean low-density lipoprotein cholesterol level declined from 124 mg/dL (3.2 mmol/L) to 72 mg/dL (1.9 mmol/L)",
-        "pub_date": "2001-04-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/11277825"
-      },
-      {
         "fact_id": "f_a6e74b34958ca5",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 52,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "atorvastatin 10 mg",
-          "kind": "percent"
+          "dose": "atorvastatin 10 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -1044,15 +1154,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 85,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "atorvastatin 80 mg",
-          "kind": "percent"
+          "dose": "atorvastatin 80 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -1061,19 +1170,40 @@
         "url": "https://europepmc.org/article/MED/12860216"
       },
       {
+        "fact_id": "f_b5439fdb478055",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -52,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "MIRACL",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "16 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/d",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:11277825",
+        "quote": "In the atorvastatin group, mean low-density lipoprotein cholesterol level declined from 124 mg/dL (3.2 mmol/L) to 72 mg/dL (1.9 mmol/L).",
+        "pub_date": "2001-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11277825"
+      },
+      {
         "fact_id": "f_ca23f9cb88a657",
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 82,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "rosuvastatin 10 mg",
-          "kind": "percent"
+          "dose": "rosuvastatin 10 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -1086,15 +1216,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 79,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "rosuvastatin 10 mg",
-          "kind": "percent"
+          "dose": "rosuvastatin 10 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -1129,15 +1258,14 @@
         "entity": "biomarker:ldl-c",
         "key": "biomarker_change",
         "value": 92,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "biomarker": "LDL-C",
           "phase": "phase2",
           "timepoint": "6 weeks",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "rosuvastatin 40 mg",
-          "kind": "percent"
+          "dose": "rosuvastatin 40 mg"
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
@@ -1168,52 +1296,11 @@
         "url": "https://europepmc.org/article/MED/9514454"
       },
       {
-        "fact_id": "f_0fb35167d7756f",
+        "fact_id": "f_074a96b14460a8",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": 89,
-        "unit": "% platelet aggregation",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase2",
-          "timepoint": "not stated",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "dose": "40 mg",
-          "kind": "absolute"
-        },
-        "source_id": "pmid:12515739",
-        "quote": "Percent platelet aggregation was 34+/-23, 58+/-15 (P=0.027), 74+/-10 (P=0.002), and 89+/-7 (P=0.001) in the presence of clopidogrel and 0, 10, 20, and 40 mg of atorvastatin, respectively.",
-        "pub_date": "2003-01-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12515739"
-      },
-      {
-        "fact_id": "f_28191aa75569c7",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": null,
-        "unit": "",
-        "attrs": {
-          "biomarker": "other",
-          "phase": "phase3",
-          "timepoint": "not stated",
-          "method": "not stated",
-          "placebo_adjusted": false,
-          "kind": "absolute"
-        },
-        "source_id": "pmid:15325833",
-        "quote": "No excess of adverse events was noted in the atorvastatin group.",
-        "pub_date": "2004-08-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15325833"
-      },
-      {
-        "fact_id": "f_6406bfa484a3cd",
-        "entity": "biomarker:other",
-        "key": "biomarker_change",
-        "value": 78,
-        "unit": "% platelet aggregation",
+        "value": 33,
+        "unit": "percent platelet aggregation",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
@@ -1230,18 +1317,39 @@
         "url": "https://europepmc.org/article/MED/12515739"
       },
       {
-        "fact_id": "f_a66a0182c67c67",
+        "fact_id": "f_28191aa75569c7",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": 74,
-        "unit": "% platelet aggregation",
+        "value": null,
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:15325833",
+        "quote": "No excess of adverse events was noted in the atorvastatin group.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/15325833"
+      },
+      {
+        "fact_id": "f_2b6ad2a83553fc",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 24,
+        "unit": "percent platelet aggregation",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
           "timepoint": "not stated",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "20 mg",
+          "dose": "10 mg",
           "kind": "absolute"
         },
         "source_id": "pmid:12515739",
@@ -1251,11 +1359,11 @@
         "url": "https://europepmc.org/article/MED/12515739"
       },
       {
-        "fact_id": "f_d21381ef7377e6",
+        "fact_id": "f_406285cd09e9d5",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": 55,
-        "unit": "% platelet aggregation",
+        "value": 13,
+        "unit": "percent platelet aggregation",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
@@ -1272,18 +1380,39 @@
         "url": "https://europepmc.org/article/MED/12515739"
       },
       {
-        "fact_id": "f_ee64822f7cd57f",
+        "fact_id": "f_dd9abb37b8aff1",
         "entity": "biomarker:other",
         "key": "biomarker_change",
-        "value": 55,
-        "unit": "% platelet aggregation",
+        "value": 40,
+        "unit": "percent platelet aggregation",
         "attrs": {
           "biomarker": "other",
           "phase": "phase2",
           "timepoint": "not stated",
           "method": "not stated",
           "placebo_adjusted": false,
-          "dose": "10 mg",
+          "dose": "20 mg",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:12515739",
+        "quote": "Percent platelet aggregation was 34+/-23, 58+/-15 (P=0.027), 74+/-10 (P=0.002), and 89+/-7 (P=0.001) in the presence of clopidogrel and 0, 10, 20, and 40 mg of atorvastatin, respectively.",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12515739"
+      },
+      {
+        "fact_id": "f_ee64822f7cd57f",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 55,
+        "unit": "percent platelet aggregation",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg",
           "kind": "absolute"
         },
         "source_id": "pmid:12515739",
@@ -1305,7 +1434,8 @@
           "method": "not stated",
           "placebo_adjusted": true,
           "dose": "40 mg",
-          "kind": "percent"
+          "kind": "percent",
+          "trial": "TARA"
         },
         "source_id": "pmid:15207950",
         "quote": "C-reactive protein and erythrocyte sedimentation rate declined by 50% and 28%, respectively, relative to placebo",
@@ -1330,6 +1460,21 @@
         "url": "https://platform.opentargets.org/target/ENSG00000113161"
       },
       {
+        "fact_id": "f_391d7112f0a757",
+        "entity": "trial:nct00327691",
+        "key": "ci_high",
+        "value": 0.83,
+        "unit": "",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83]",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
+      },
+      {
         "fact_id": "f_8d4bf5e54b862a",
         "entity": "trial:nct00327691",
         "key": "ci_high",
@@ -1349,7 +1494,7 @@
         "entity": "trial:nct00327691",
         "key": "ci_high",
         "value": 1.0,
-        "unit": "relative risk",
+        "unit": "",
         "attrs": {
           "trial": "MIRACL"
         },
@@ -1364,8 +1509,10 @@
         "entity": "trial:nct00327691",
         "key": "ci_high",
         "value": 0.83,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "rate reduction 37% [95% CI -52 to -17], p=0.001",
         "pub_date": "2004-08-01",
@@ -1373,16 +1520,16 @@
         "url": "https://europepmc.org/article/MED/15325833"
       },
       {
-        "fact_id": "f_dbda06ea64aa04",
+        "fact_id": "f_372c9d416ead93",
         "entity": "trial:nct00327691",
-        "key": "ci_high",
-        "value": 0.83,
+        "key": "ci_low",
+        "value": 0.5,
         "unit": "",
         "attrs": {
           "trial": "ASCOT-LLA"
         },
         "source_id": "pmid:12686036",
-        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83], p=0.0005",
+        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83]",
         "pub_date": "2003-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12686036"
@@ -1392,7 +1539,7 @@
         "entity": "trial:nct00327691",
         "key": "ci_low",
         "value": 0.7,
-        "unit": "relative risk",
+        "unit": "",
         "attrs": {
           "trial": "MIRACL"
         },
@@ -1403,27 +1550,14 @@
         "url": "https://europepmc.org/article/MED/11277825"
       },
       {
-        "fact_id": "f_55214d61e8f63c",
-        "entity": "trial:nct00327691",
-        "key": "ci_low",
-        "value": 0.5,
-        "unit": "",
-        "attrs": {
-          "trial": "ASCOT-LLA"
-        },
-        "source_id": "pmid:12686036",
-        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83], p=0.0005",
-        "pub_date": "2003-04-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
-      },
-      {
         "fact_id": "f_7e723dd9f59a52",
         "entity": "trial:nct00327691",
         "key": "ci_low",
         "value": 0.48,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "rate reduction 37% [95% CI -52 to -17], p=0.001",
         "pub_date": "2004-08-01",
@@ -1462,19 +1596,20 @@
         "url": "https://europepmc.org/article/MED/9841303"
       },
       {
-        "fact_id": "f_47037ef4dd4c17",
+        "fact_id": "f_2b8923f41c65af",
         "entity": "trial:nct00327691",
         "key": "events_control",
-        "value": 154,
-        "unit": "events",
+        "value": 37,
+        "unit": "patients",
         "attrs": {
-          "trial": "ASCOT-LLA"
+          "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
+          "arm": "angioplasty"
         },
-        "source_id": "pmid:12686036",
-        "quote": "100 primary events had occurred in the atorvastatin group compared with 154 events in the placebo group",
-        "pub_date": "2003-04-01",
+        "source_id": "pmid:10395630",
+        "quote": "as compared with 37 (21 percent) of the patients who underwent angioplasty",
+        "pub_date": "1999-07-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
+        "url": "https://europepmc.org/article/MED/10395630"
       },
       {
         "fact_id": "f_b0294cbd235dac",
@@ -1492,14 +1627,28 @@
         "url": "https://europepmc.org/article/MED/11277825"
       },
       {
+        "fact_id": "f_b5beaf900a375c",
+        "entity": "trial:nct00327691",
+        "key": "events_control",
+        "value": 154,
+        "unit": "events",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "compared with 154 events in the placebo group",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
+      },
+      {
         "fact_id": "f_ceaab027a8c0bc",
         "entity": "trial:nct00327691",
         "key": "events_control",
         "value": 1507,
         "unit": "deaths",
         "attrs": {
-          "trial": "MRC/BHF Heart Protection Study",
-          "placebo_adjusted": false
+          "trial": "MRC/BHF Heart Protection Study"
         },
         "source_id": "pmid:12114036",
         "quote": "1507 [14.7%] among 10,267 allocated placebo",
@@ -1513,7 +1662,9 @@
         "key": "events_treatment",
         "value": 83,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "83 allocated atorvastatin (1.54 per 100 person-years at risk) had at least one major cardiovascular event",
         "pub_date": "2004-08-01",
@@ -1521,7 +1672,7 @@
         "url": "https://europepmc.org/article/MED/15325833"
       },
       {
-        "fact_id": "f_1dcd8773b41e79",
+        "fact_id": "f_222972003c4b69",
         "entity": "trial:nct00327691",
         "key": "events_treatment",
         "value": 100,
@@ -1530,7 +1681,7 @@
           "trial": "ASCOT-LLA"
         },
         "source_id": "pmid:12686036",
-        "quote": "100 primary events had occurred in the atorvastatin group compared with 154 events in the placebo group",
+        "quote": "100 primary events had occurred in the atorvastatin group",
         "pub_date": "2003-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12686036"
@@ -1551,20 +1702,20 @@
         "url": "https://europepmc.org/article/MED/11277825"
       },
       {
-        "fact_id": "f_eb31bc815fb71f",
+        "fact_id": "f_e66ae20a7e090d",
         "entity": "trial:nct00327691",
         "key": "events_treatment",
-        "value": 6.4,
-        "unit": "percent",
+        "value": 22,
+        "unit": "patients",
         "attrs": {
-          "trial": "LIPID",
-          "placebo_adjusted": false
+          "trial": "ATORvastatin versus Revascularization Treatment (ARTS)",
+          "arm": "atorvastatin"
         },
-        "source_id": "pmid:9841303",
-        "quote": "and 6.4 percent of those in the pravastatin group",
-        "pub_date": "1998-11-01",
+        "source_id": "pmid:10395630",
+        "quote": "Twenty-two (13 percent) of the patients who received aggressive lipid-lowering treatment with atorvastatin",
+        "pub_date": "1999-07-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/9841303"
+        "url": "https://europepmc.org/article/MED/10395630"
       },
       {
         "fact_id": "f_f1e804e1292b98",
@@ -1573,8 +1724,7 @@
         "value": 1328,
         "unit": "deaths",
         "attrs": {
-          "trial": "MRC/BHF Heart Protection Study",
-          "placebo_adjusted": false
+          "trial": "MRC/BHF Heart Protection Study"
         },
         "source_id": "pmid:12114036",
         "quote": "1328 [12.9%] deaths among 10,269 allocated simvastatin",
@@ -1602,7 +1752,7 @@
         "entity": "trial:nct00327691",
         "key": "hr",
         "value": 0.78,
-        "unit": "relative risk",
+        "unit": "",
         "attrs": {
           "trial": "TNT",
           "placebo_adjusted": false
@@ -1618,8 +1768,10 @@
         "entity": "trial:nct00327691",
         "key": "hr",
         "value": 0.63,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "rate reduction 37% [95% CI -52 to -17], p=0.001",
         "pub_date": "2004-08-01",
@@ -1627,7 +1779,7 @@
         "url": "https://europepmc.org/article/MED/15325833"
       },
       {
-        "fact_id": "f_ab1888bdc9dbec",
+        "fact_id": "f_cf52593d1c8195",
         "entity": "trial:nct00327691",
         "key": "hr",
         "value": 0.64,
@@ -1636,7 +1788,7 @@
           "trial": "ASCOT-LLA"
         },
         "source_id": "pmid:12686036",
-        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83], p=0.0005",
+        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83]",
         "pub_date": "2003-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12686036"
@@ -1662,7 +1814,9 @@
         "key": "inclusion_threshold",
         "value": 4.14,
         "unit": "mmol/L",
-        "attrs": {},
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "an LDL-cholesterol concentration of 4.14 mmol/L or lower",
         "pub_date": "2004-08-01",
@@ -1689,7 +1843,7 @@
         "entity": "trial:nct00327691",
         "key": "inclusion_threshold",
         "value": "evident CHD",
-        "unit": "not stated",
+        "unit": "condition",
         "attrs": {
           "trial": "TNT"
         },
@@ -1698,6 +1852,21 @@
         "pub_date": "2006-05-18",
         "access": "registry",
         "url": "https://clinicaltrials.gov/study/NCT00327691"
+      },
+      {
+        "fact_id": "f_3c8cd7103133d8",
+        "entity": "trial:nct00327691",
+        "key": "inclusion_threshold",
+        "value": 160,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "STELLAR Trial"
+        },
+        "source_id": "pmid:12860216",
+        "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
+        "pub_date": "2003-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12860216"
       },
       {
         "fact_id": "f_5f31bb6de5fe6a",
@@ -1715,6 +1884,21 @@
         "url": "https://europepmc.org/article/MED/9514454"
       },
       {
+        "fact_id": "f_a3eb3ab292feac",
+        "entity": "trial:nct00327691",
+        "key": "inclusion_threshold",
+        "value": 250,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "STELLAR Trial"
+        },
+        "source_id": "pmid:12860216",
+        "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
+        "pub_date": "2003-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12860216"
+      },
+      {
         "fact_id": "f_a7a28651f03aec",
         "entity": "trial:nct00327691",
         "key": "inclusion_threshold",
@@ -1728,6 +1912,21 @@
         "pub_date": "2005-03-08",
         "access": "press_release",
         "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
+      },
+      {
+        "fact_id": "f_b9091fa52f3105",
+        "entity": "trial:nct00327691",
+        "key": "inclusion_threshold",
+        "value": 400,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "STELLAR Trial"
+        },
+        "source_id": "pmid:12860216",
+        "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
+        "pub_date": "2003-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12860216"
       },
       {
         "fact_id": "f_baf639e90eb026",
@@ -1766,7 +1965,9 @@
         "key": "median_followup",
         "value": 3.9,
         "unit": "years",
-        "attrs": {},
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "Median duration of follow-up was 3.9 years (IQR 3.0-4.7).",
         "pub_date": "2004-08-01",
@@ -1780,13 +1981,29 @@
         "value": 6,
         "unit": "months",
         "attrs": {
-          "trial": "TARA"
+          "trial": "TARA",
+          "phase": "phase2"
         },
         "source_id": "pmid:15207950",
         "quote": "Patients were followed up over 6 months and disease activity variables and circulating vascular risk factors were measured.",
         "pub_date": "2004-06-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/15207950"
+      },
+      {
+        "fact_id": "f_4f0569d3fd1584",
+        "entity": "trial:nct00327691",
+        "key": "median_followup",
+        "value": 3.3,
+        "unit": "years",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "Treatment was stopped after a median follow-up of 3.3 years",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
       },
       {
         "fact_id": "f_6fa6ec56e443b6",
@@ -1819,21 +2036,6 @@
         "url": "https://europepmc.org/article/MED/10395630"
       },
       {
-        "fact_id": "f_fcb25f62cbd256",
-        "entity": "trial:nct00327691",
-        "key": "median_followup",
-        "value": 3.3,
-        "unit": "years",
-        "attrs": {
-          "trial": "ASCOT-LLA"
-        },
-        "source_id": "pmid:12686036",
-        "quote": "Treatment was stopped after a median follow-up of 3.3 years.",
-        "pub_date": "2003-04-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
-      },
-      {
         "fact_id": "f_2ca68046f9f27a",
         "entity": "trial:nct00327691",
         "key": "n_randomized",
@@ -1855,7 +2057,8 @@
         "value": 116,
         "unit": "patients",
         "attrs": {
-          "trial": "TARA"
+          "trial": "TARA",
+          "phase": "phase2"
         },
         "source_id": "pmid:15207950",
         "quote": "116 patients with rheumatoid arthritis were randomised in a double-blind placebo-controlled trial to receive 40 mg atorvastatin or placebo as an adjunct to existing disease-modifying antirheumatic drug therapy.",
@@ -1879,22 +2082,7 @@
         "url": "https://clinicaltrials.gov/study/NCT00327691"
       },
       {
-        "fact_id": "f_575d29b6b13242",
-        "entity": "trial:nct00327691",
-        "key": "n_randomized",
-        "value": 10305,
-        "unit": "patients",
-        "attrs": {
-          "trial": "ASCOT-LLA"
-        },
-        "source_id": "pmid:12686036",
-        "quote": "10305 with non-fasting total cholesterol concentrations 6.5 mmol/L or less were randomly assigned additional atorvastatin 10 mg or placebo.",
-        "pub_date": "2003-04-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
-      },
-      {
-        "fact_id": "f_6c6a883d5d2669",
+        "fact_id": "f_68a44ad01a233e",
         "entity": "trial:nct00327691",
         "key": "n_randomized",
         "value": 164,
@@ -1904,7 +2092,7 @@
           "arm": "atorvastatin"
         },
         "source_id": "pmid:10395630",
-        "quote": "either to receive medical treatment with atorvastatin, at 80 mg per day (164 patients)",
+        "quote": "to receive medical treatment with atorvastatin, at 80 mg per day (164 patients)",
         "pub_date": "1999-07-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/10395630"
@@ -1923,21 +2111,6 @@
         "pub_date": "2005-03-08",
         "access": "press_release",
         "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
-      },
-      {
-        "fact_id": "f_7010b5f1a31b33",
-        "entity": "trial:nct00327691",
-        "key": "n_randomized",
-        "value": 20536,
-        "unit": "participants",
-        "attrs": {
-          "trial": "MRC/BHF Heart Protection Study"
-        },
-        "source_id": "pmid:12114036",
-        "quote": "20,536 UK adults (aged 40-80 years) with coronary disease, other occlusive arterial disease, or diabetes were randomly allocated to receive 40 mg simvastatin daily (average compliance: 85%) or matching placebo",
-        "pub_date": "2002-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12114036"
       },
       {
         "fact_id": "f_8252efdd9ba393",
@@ -1991,7 +2164,9 @@
         "key": "n_randomized",
         "value": 2838,
         "unit": "patients",
-        "attrs": {},
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "2838 patients aged 40-75 years in 132 centres in the UK and Ireland were randomised to placebo (n=1410) or atorvastatin 10 mg daily (n=1428).",
         "pub_date": "2004-08-01",
@@ -2014,14 +2189,58 @@
         "url": "https://europepmc.org/article/MED/12860216"
       },
       {
+        "fact_id": "f_e1a123d07327c6",
+        "entity": "trial:nct00327691",
+        "key": "n_randomized",
+        "value": 3086,
+        "unit": "patients",
+        "attrs": {
+          "trial": "MIRACL"
+        },
+        "source_id": "pmid:11277825",
+        "quote": "A total of 3086 adults aged 18 years or older with unstable angina or non-Q-wave acute myocardial infarction.",
+        "pub_date": "2001-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11277825"
+      },
+      {
+        "fact_id": "f_e4c5c9a33a78b0",
+        "entity": "trial:nct00327691",
+        "key": "n_randomized",
+        "value": 10305,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "10305 with non-fasting total cholesterol concentrations 6.5 mmol/L or less were randomly assigned additional atorvastatin 10 mg or placebo",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
+      },
+      {
+        "fact_id": "f_e5de583313255d",
+        "entity": "trial:nct00327691",
+        "key": "n_randomized",
+        "value": 20536,
+        "unit": "participants",
+        "attrs": {
+          "trial": "MRC/BHF Heart Protection Study"
+        },
+        "source_id": "pmid:12114036",
+        "quote": "20,536 UK adults (aged 40-80 years) with coronary disease, other occlusive arterial disease, or diabetes were randomly allocated to receive 40 mg simvastatin daily",
+        "pub_date": "2002-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12114036"
+      },
+      {
         "fact_id": "f_1cd05838a8b7ba",
         "entity": "trial:nct00327691",
         "key": "p_value",
         "value": 0.0003,
-        "unit": null,
+        "unit": "",
         "attrs": {
-          "trial": "MRC/BHF Heart Protection Study",
-          "placebo_adjusted": false
+          "trial": "MRC/BHF Heart Protection Study"
         },
         "source_id": "pmid:12114036",
         "quote": "p=0.0003",
@@ -2030,12 +2249,29 @@
         "url": "https://europepmc.org/article/MED/12114036"
       },
       {
+        "fact_id": "f_4166aba4742027",
+        "entity": "trial:nct00327691",
+        "key": "p_value",
+        "value": 0.0005,
+        "unit": "",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "p=0.0005",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
+      },
+      {
         "fact_id": "f_6071616ffdccf2",
         "entity": "trial:nct00327691",
         "key": "p_value",
         "value": 0.001,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "rate reduction 37% [95% CI -52 to -17], p=0.001",
         "pub_date": "2004-08-01",
@@ -2047,7 +2283,7 @@
         "entity": "trial:nct00327691",
         "key": "p_value",
         "value": 0.048,
-        "unit": null,
+        "unit": "",
         "attrs": {
           "trial": "MIRACL"
         },
@@ -2058,34 +2294,34 @@
         "url": "https://europepmc.org/article/MED/11277825"
       },
       {
-        "fact_id": "f_a4c859b3423551",
+        "fact_id": "f_2cfc6ee6a3e4f8",
         "entity": "trial:nct00327691",
-        "key": "p_value",
-        "value": 0.0005,
+        "key": "primary_endpoint",
+        "value": "mortality",
         "unit": "",
         "attrs": {
-          "trial": "ASCOT-LLA"
+          "trial": "MRC/BHF Heart Protection Study"
         },
-        "source_id": "pmid:12686036",
-        "quote": "hazard ratio 0.64 [95% CI 0.50-0.83], p=0.0005",
-        "pub_date": "2003-04-01",
+        "source_id": "pmid:12114036",
+        "quote": "Primary outcomes were mortality (for overall analyses) and fatal or non-fatal vascular events (for subcategory analyses)",
+        "pub_date": "2002-07-01",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
+        "url": "https://europepmc.org/article/MED/12114036"
       },
       {
-        "fact_id": "f_82100adafa6aa1",
+        "fact_id": "f_49def7c0bda86d",
         "entity": "trial:nct00327691",
-        "key": "phase",
-        "value": "phase4",
-        "unit": "not stated",
+        "key": "primary_endpoint",
+        "value": "cardiovascular events, including CHD death, non-fatal heart attacks, resuscitated cardiac arrest, and fatal or non-fatal strokes",
+        "unit": "",
         "attrs": {
           "trial": "TNT"
         },
-        "source_id": "ctgov:NCT00327691@2005-03-08",
-        "quote": "Phase: PHASE4",
-        "pub_date": "2006-05-18",
-        "access": "registry",
-        "url": "https://clinicaltrials.gov/study/NCT00327691"
+        "source_id": "announcement:tnt",
+        "quote": "Patients who received 80 mg doses of Lipitor had 22 percent fewer cardiovascular events, including CHD death, non-fatal heart attacks, resuscitated cardiac arrest, and fatal or non-fatal strokes compared to patients who took 10 mg of Lipitor",
+        "pub_date": "2005-03-08",
+        "access": "press_release",
+        "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
       },
       {
         "fact_id": "f_4e5d3e20ad96ac",
@@ -2101,6 +2337,21 @@
         "pub_date": "1998-11-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/9841303"
+      },
+      {
+        "fact_id": "f_60227398fc9b2b",
+        "entity": "trial:nct00327691",
+        "key": "primary_endpoint",
+        "value": "non-fatal myocardial infarction and fatal CHD",
+        "unit": "",
+        "attrs": {
+          "trial": "ASCOT-LLA"
+        },
+        "source_id": "pmid:12686036",
+        "quote": "the primary endpoint being non-fatal myocardial infarction and fatal CHD",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/12686036"
       },
       {
         "fact_id": "f_63a87b9ef438b3",
@@ -2122,7 +2373,7 @@
         "entity": "trial:nct00327691",
         "key": "primary_endpoint",
         "value": "time to occurrence of a major cardiovascular event",
-        "unit": "not stated",
+        "unit": "composite of CHD death, non-fatal/non-procedure related MI, resuscitated cardiac arrest or fatal/non-fatal stroke",
         "attrs": {
           "trial": "TNT"
         },
@@ -2133,27 +2384,14 @@
         "url": "https://clinicaltrials.gov/study/NCT00327691"
       },
       {
-        "fact_id": "f_b8d617327f6fcf",
-        "entity": "trial:nct00327691",
-        "key": "primary_endpoint",
-        "value": "cardiovascular events",
-        "unit": "events",
-        "attrs": {
-          "trial": "TNT"
-        },
-        "source_id": "announcement:tnt",
-        "quote": "Patients who received 80 mg doses of Lipitor had 22 percent fewer cardiovascular events, including CHD death, non-fatal heart attacks, resuscitated cardiac arrest, and fatal or non-fatal strokes compared to patients who took 10 mg of Lipitor",
-        "pub_date": "2005-03-08",
-        "access": "press_release",
-        "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
-      },
-      {
         "fact_id": "f_cca50efff30a8e",
         "entity": "trial:nct00327691",
         "key": "primary_endpoint",
         "value": "time to first occurrence of acute coronary heart disease events, coronary revascularisation, or stroke",
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "The primary endpoint was time to first occurrence of the following: acute coronary heart disease events, coronary revascularisation, or stroke.",
         "pub_date": "2004-08-01",
@@ -2161,13 +2399,29 @@
         "url": "https://europepmc.org/article/MED/15325833"
       },
       {
+        "fact_id": "f_d08659be4ab6d6",
+        "entity": "trial:nct00327691",
+        "key": "primary_endpoint",
+        "value": "death, nonfatal acute myocardial infarction, cardiac arrest with resuscitation, or recurrent symptomatic myocardial ischemia with objective evidence and requiring emergency rehospitalization",
+        "unit": "",
+        "attrs": {
+          "trial": "MIRACL"
+        },
+        "source_id": "pmid:11277825",
+        "quote": "Primary end point event defined as death, nonfatal acute myocardial infarction, cardiac arrest with resuscitation, or recurrent symptomatic myocardial ischemia with objective evidence and requiring emergency rehospitalization.",
+        "pub_date": "2001-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11277825"
+      },
+      {
         "fact_id": "f_dcb10757014b89",
         "entity": "trial:nct00327691",
         "key": "primary_endpoint",
         "value": "change in disease activity score (DAS28) and proportion meeting EULAR response criteria",
-        "unit": "",
+        "unit": "not stated",
         "attrs": {
-          "trial": "TARA"
+          "trial": "TARA",
+          "phase": "phase2"
         },
         "source_id": "pmid:15207950",
         "quote": "Coprimary outcomes were change in disease activity score (DAS28) and proportion meeting EULAR (European League Against Rheumatism) response criteria.",
@@ -2176,62 +2430,34 @@
         "url": "https://europepmc.org/article/MED/15207950"
       },
       {
-        "fact_id": "f_e1437329e94272",
+        "fact_id": "f_0409dd9661feaa",
         "entity": "trial:nct00327691",
-        "key": "primary_endpoint",
-        "value": "non-fatal myocardial infarction and fatal CHD",
-        "unit": "",
+        "key": "readout_statement",
+        "value": "The primary objective of this study is to determine the degree of additional reduction in cardiovascular risk that was accrued to patients by lowering their LDL-C beyond the currently accepted minimum target level for patients with pre-existing CHD.",
+        "unit": "objective",
         "attrs": {
-          "trial": "ASCOT-LLA"
+          "trial": "TNT"
         },
-        "source_id": "pmid:12686036",
-        "quote": "the primary endpoint being non-fatal myocardial infarction and fatal CHD.",
-        "pub_date": "2003-04-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12686036"
+        "source_id": "ctgov:NCT00327691@2005-03-08",
+        "quote": "The primary objective of this study is to determine the degree of additional reduction in cardiovascular risk that was accrued to patients by lowering their LDL-C beyond the currently accepted minimum target level for patients with pre-existing CHD.",
+        "pub_date": "2006-05-18",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00327691"
       },
       {
-        "fact_id": "f_3eb2cc87c5d1a6",
+        "fact_id": "f_edbce124c66146",
         "entity": "trial:nct00327691",
         "key": "readout_statement",
-        "value": "Atorvastatin 10 mg daily is safe and efficacious in reducing the risk of first cardiovascular disease events, including stroke, in patients with type 2 diabetes without high LDL-cholesterol.",
-        "unit": "",
-        "attrs": {},
-        "source_id": "pmid:15325833",
-        "quote": "Atorvastatin 10 mg daily is safe and efficacious in reducing the risk of first cardiovascular disease events, including stroke, in patients with type 2 diabetes without high LDL-cholesterol.",
-        "pub_date": "2004-08-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/15325833"
-      },
-      {
-        "fact_id": "f_a18639ab117e7d",
-        "entity": "trial:nct00327691",
-        "key": "readout_statement",
-        "value": "The incidence of ischemic events was thus 36 percent lower in the atorvastatin group over an 18-month period",
+        "value": "In low-risk patients with stable coronary artery disease, aggressive lipid-lowering therapy is at least as effective as angioplasty and usual care in reducing the incidence of ischemic events.",
         "unit": null,
         "attrs": {
           "trial": "ATORvastatin versus Revascularization Treatment (ARTS)"
         },
         "source_id": "pmid:10395630",
-        "quote": "The incidence of ischemic events was thus 36 percent lower in the atorvastatin group over an 18-month period",
+        "quote": "In low-risk patients with stable coronary artery disease, aggressive lipid-lowering therapy is at least as effective as angioplasty and usual care in reducing the incidence of ischemic events.",
         "pub_date": "1999-07-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/10395630"
-      },
-      {
-        "fact_id": "f_be46cd3b4373e4",
-        "entity": "trial:nct00327691",
-        "key": "readout_statement",
-        "value": "Adding simvastatin to existing treatments safely produces substantial additional benefits for a wide range of high-risk patients, irrespective of their initial cholesterol concentrations.",
-        "unit": null,
-        "attrs": {
-          "trial": "MRC/BHF Heart Protection Study"
-        },
-        "source_id": "pmid:12114036",
-        "quote": "Adding simvastatin to existing treatments safely produces substantial additional benefits for a wide range of high-risk patients, irrespective of their initial cholesterol concentrations.",
-        "pub_date": "2002-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12114036"
       },
       {
         "fact_id": "f_f51e5573072739",
@@ -2249,13 +2475,29 @@
         "url": "https://europepmc.org/article/MED/12686036"
       },
       {
+        "fact_id": "f_f62b1555e8cb51",
+        "entity": "trial:nct00327691",
+        "key": "readout_statement",
+        "value": "intensive lipid-lowering therapy with 80 mg of atorvastatin per day in patients with stable CHD provides significant clinical benefit beyond therapy with 10 mg of atorvastatin per day",
+        "unit": "",
+        "attrs": {
+          "trial": "TNT"
+        },
+        "source_id": "announcement:tnt",
+        "quote": "TNT investigators concluded that �intensive lipid-lowering therapy with 80 mg of atorvastatin per day in patients with stable CHD provides significant clinical benefit beyond therapy with 10 mg of atorvastatin per day.",
+        "pub_date": "2005-03-08",
+        "access": "press_release",
+        "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
+      },
+      {
         "fact_id": "f_fe9451db82e51e",
         "entity": "trial:nct00327691",
         "key": "readout_statement",
         "value": "These data show that statins can mediate modest but clinically apparent anti-inflammatory effects with modification of vascular risk factors in the context of high-grade autoimmune inflammation.",
-        "unit": "",
+        "unit": "not stated",
         "attrs": {
-          "trial": "TARA"
+          "trial": "TARA",
+          "phase": "phase2"
         },
         "source_id": "pmid:15207950",
         "quote": "These data show that statins can mediate modest but clinically apparent anti-inflammatory effects with modification of vascular risk factors in the context of high-grade autoimmune inflammation.",
@@ -2264,11 +2506,11 @@
         "url": "https://europepmc.org/article/MED/15207950"
       },
       {
-        "fact_id": "f_4db7cf19d08c6c",
+        "fact_id": "f_0473011467a795",
         "entity": "trial:nct00327691",
         "key": "safety_signal",
-        "value": "musculoskeletal safety profile comparable; liver enzyme elevations within labeling",
-        "unit": "narrative",
+        "value": "musculoskeletal safety profile of Lipitor at 80 mg dosing was comparable to Lipitor 10 mg doses; incidence of liver enzyme elevations in both groups was within existing product labeling",
+        "unit": "",
         "attrs": {
           "trial": "TNT"
         },
@@ -2279,11 +2521,26 @@
         "url": "http://www.pfizer.com/are/news_releases/2005pr/mn_2005_0308a.html"
       },
       {
+        "fact_id": "f_3a27c7fa3b5739",
+        "entity": "trial:nct00327691",
+        "key": "safety_signal",
+        "value": "There were no incidences of persistent elevations in serum transaminases or myositis",
+        "unit": "none",
+        "attrs": {
+          "trial": "CURVES study"
+        },
+        "source_id": "pmid:9514454",
+        "quote": "There were no incidences of persistent elevations in serum transaminases or myositis",
+        "pub_date": "1998-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/9514454"
+      },
+      {
         "fact_id": "f_7223ab39369507",
         "entity": "trial:nct00327691",
         "key": "safety_signal",
         "value": 2.5,
-        "unit": "percent",
+        "unit": "%",
         "attrs": {
           "trial": "MIRACL",
           "signal": "abnormal liver transaminases (>3 times upper limit of normal)"
@@ -2293,21 +2550,6 @@
         "pub_date": "2001-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/11277825"
-      },
-      {
-        "fact_id": "f_f3aa5afb4af9af",
-        "entity": "trial:nct00327691",
-        "key": "safety_signal",
-        "value": "Drug tolerability was similar across treatments",
-        "unit": "none",
-        "attrs": {
-          "trial": "STELLAR Trial"
-        },
-        "source_id": "pmid:12860216",
-        "quote": "Drug tolerability was similar across treatments.",
-        "pub_date": "2003-07-01",
-        "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
       },
       {
         "fact_id": "f_917c23cb8d5050",
@@ -2327,7 +2569,7 @@
         "url": "https://europepmc.org/article/MED/12686036"
       },
       {
-        "fact_id": "f_f01a4ec2f2edc7",
+        "fact_id": "f_b58912be607d9a",
         "entity": "trial:nct00327691",
         "key": "sbp_change",
         "value": -1.1,
@@ -2338,13 +2580,13 @@
           "timepoint": "3 years"
         },
         "source_id": "pmid:12686036",
-        "quote": "and by 1.1 mmol/L after 3 years of follow-up.",
+        "quote": "and by 1.1 mmol/L after 3 years of follow-up",
         "pub_date": "2003-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12686036"
       },
       {
-        "fact_id": "f_81e5e780ba008c",
+        "fact_id": "f_8c9853355b5540",
         "entity": "trial:nct00327691",
         "key": "stopped_early",
         "value": true,
@@ -2353,7 +2595,7 @@
           "trial": "ASCOT-LLA"
         },
         "source_id": "pmid:12686036",
-        "quote": "Treatment was stopped after a median follow-up of 3.3 years.",
+        "quote": "Treatment was stopped after a median follow-up of 3.3 years",
         "pub_date": "2003-04-01",
         "access": "abstract_only",
         "url": "https://europepmc.org/article/MED/12686036"
@@ -2363,8 +2605,10 @@
         "entity": "trial:nct00327691",
         "key": "stopped_early",
         "value": true,
-        "unit": "",
-        "attrs": {},
+        "unit": "NA",
+        "attrs": {
+          "trial": "CARDS"
+        },
         "source_id": "pmid:15325833",
         "quote": "The trial was terminated 2 years earlier than expected because the prespecified early stopping rule for efficacy had been met.",
         "pub_date": "2004-08-01",
@@ -2402,9 +2646,11 @@
               {
                 "name": "Atorvastatin",
                 "type": "DRUG",
-                "other_names": []
+                "other_names": [],
+                "arms": []
               }
             ],
+            "arm_groups": [],
             "conditions": [
               "Cardiovascular Disease",
               "Cerebrovascular Accident",
@@ -2574,26 +2820,10 @@
         "chars": 1524
       },
       {
-        "source_id": "pmid:3866240",
-        "type": "journal",
-        "title": "Human genes involved in cholesterol metabolism: chromosomal mapping of the loci for the low density lipoprotein receptor and 3-hydroxy-3-methylglutaryl-coenzyme A reductase with cDNA probes.",
-        "url": "https://europepmc.org/article/MED/3866240",
-        "pub_date": "1985-12-01",
-        "access": "abstract_only",
-        "meta": {
-          "pmid": "3866240",
-          "pmcid": "PMC390958",
-          "doi": "10.1073/pnas.82.24.8567",
-          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
-          "purpose": "genetics"
-        },
-        "chars": 1122
-      },
-      {
         "source_id": "pmid:15530894",
         "type": "journal",
-        "title": "Pharmacogenetics of HMG-CoA reductase inhibitors: exploring the potential for genotype-based individualization of coronary heart disease management.",
-        "url": "https://europepmc.org/article/MED/15530894",
+        "title": "Pharmacogenetics of HMG-CoA reductase inhibitors: exploring the potential for genotype-based individualization of coronary heart disease management",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15530894/",
         "pub_date": "2004-12-01",
         "access": "abstract_only",
         "meta": {
@@ -2603,13 +2833,13 @@
           "journal": "Atherosclerosis",
           "purpose": "genetics"
         },
-        "chars": 1560
+        "chars": 1559
       },
       {
         "source_id": "pmid:15233402",
         "type": "journal",
-        "title": "8302A/C and (TTA)n polymorphisms in the HMG-CoA reductase gene may be associated with some plasma lipid metabolic phenotypes in patients with coronary heart disease.",
-        "url": "https://europepmc.org/article/MED/15233402",
+        "title": "8302A/C and (TTA)n polymorphisms in the HMG-CoA reductase gene may be associated with some plasma lipid metabolic phenotypes in patients with coronary heart disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15233402/",
         "pub_date": "2004-03-01",
         "access": "abstract_only",
         "meta": {
@@ -2619,7 +2849,7 @@
           "journal": "Lipids",
           "purpose": "genetics"
         },
-        "chars": 924
+        "chars": 923
       },
       {
         "source_id": "announcement:tnt",
@@ -2635,65 +2865,65 @@
     "models_used": {
       "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
       "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
-      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
     },
     "meterless": {
       "engine": "Meterless World Model (official reference implementation)",
-      "entities": 22,
-      "facts": 112,
+      "entities": 21,
+      "facts": 118,
       "relationships": 23,
-      "events": 263,
-      "audit_entries": 263,
+      "events": 274,
+      "audit_entries": 274,
       "state_shape_keys": 6
     },
     "usage": {
       "Extraction": {
-        "calls": 15,
-        "input_tokens": 15347,
-        "output_tokens": 10984,
+        "calls": 14,
+        "input_tokens": 14750,
+        "output_tokens": 11810,
         "estimated": false,
         "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
         "provider": "nvidia"
       },
       "MechanismAnalyst": {
         "calls": 2,
-        "input_tokens": 12207,
-        "output_tokens": 6978,
-        "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
-        "provider": "meterless"
-      },
-      "Investigator": {
-        "calls": 2,
-        "input_tokens": 11455,
-        "output_tokens": 7680,
-        "estimated": false,
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
-        "provider": "meterless"
-      },
-      "Critic": {
-        "calls": 2,
-        "input_tokens": 13115,
-        "output_tokens": 6778,
+        "input_tokens": 13241,
+        "output_tokens": 6908,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Verifier": {
         "calls": 2,
-        "input_tokens": 1002,
-        "output_tokens": 612,
+        "input_tokens": 2336,
+        "output_tokens": 1853,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 12458,
+        "output_tokens": 8627,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 16029,
+        "output_tokens": 6180,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Reporter": {
         "calls": 1,
-        "input_tokens": 8278,
-        "output_tokens": 2520,
+        "input_tokens": 9660,
+        "output_tokens": 3210,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"

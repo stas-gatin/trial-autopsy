@@ -1,0 +1,15 @@
+{
+  "key": "e8ff273f1f4bc176c2d6",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T23:27:44+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: VESALIUS-CV NCT03872401 - Effect of Evolocumab in Patients at High Cardiovascular Risk Without Prior Myocardial Infarction or Stroke\nInvestigational drug: evolocumab\nDocument: In vivo genome editing using Staphylococcus aureus Cas9. (journal, published 2015-04-01, source pmid:25830891)\n\n--- DOCUMENT TEXT ---\nIn vivo genome editing using Staphylococcus aureus Cas9.\n\nThe RNA-guided endonuclease Cas9 has emerged as a versatile genome-editing platform. However, the size of the commonly used Cas9 from Streptococcus pyogenes (SpCas9) limits its utility for basic research and therapeutic applications that use the highly versatile adeno-associated virus (AAV) delivery vehicle. Here, we characterize six smaller Cas9 orthologues and show that Cas9 from Staphylococcus aureus (SaCas9) can edit the genome with efficiencies similar to those of SpCas9, while being more than 1 kilobase shorter. We packaged SaCas9 and its single guide RNA expression cassette into a single AAV vector and targeted the cholesterol regulatory gene Pcsk9 in the mouse liver. Within one week of injection, we observed >40% gene modification, accompanied by significant reductions in serum Pcsk9 and total cholesterol levels. We further assess the genome-wide targeting specificity of SaCas9 and SpCas9 using BLESS, and demonstrate that SaCas9-mediated in vivo genome editing has the potential to be efficient and specific.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 552,
+    "output_tokens": 7
+  }
+}

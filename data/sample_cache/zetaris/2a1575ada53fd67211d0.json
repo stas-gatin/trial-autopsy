@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A20863951+OR+EXT_ID%3A21989792&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*43\\\\.5%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '20863951' LIMIT 5",
+ "rows": [
+  [
+   " At 24 weeks, respective reductions with varespladib and placebo were as follows: LDL-C 43.5% versus 37"
+  ]
+ ],
+ "error": null
+}

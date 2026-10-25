@@ -1,0 +1,15 @@
+{
+  "key": "6a926a832d49561a45d3",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T23:07:26+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: CIRT NCT01594333 - Cardiovascular Inflammation Reduction Trial\nInvestigational drug: methotrexate\nDocument: Coamplification and coexpression of human tissue-type plasminogen activator and murine dihydrofolate reductase sequences in Chinese hamster ovary cells. (journal, published 1985-07-01, source pmid:4040603)\n\n--- DOCUMENT TEXT ---\nCoamplification and coexpression of human tissue-type plasminogen activator and murine dihydrofolate reductase sequences in Chinese hamster ovary cells.\n\nExpression of human tissue-type plasminogen activator (t-PA) at high levels has been achieved in Chinese hamster ovary (CHO) cells by cotransfection and subsequent coamplification of the transfected sequences. Expression vectors containing the t-PA cDNA gene and dihydrofolate reductase (DHFR) cDNA gene were cotransfected into CHO DHFR-deficient cells. Transformants expressing DHFR were selected by growth in media lacking nucleosides and contained low numbers of t-PA genes and DHFR genes. Stepwise selection of the DHFR+ transformants in increasing concentrations of methotrexate generated cells which had amplified both DHFR genes and t-PA genes over 100-fold. These cell lines expressed elevated levels of enzymatically active t-PA. To optimize both t-PA sequence amplification and t-PA expression, various modifications of the original procedure were used. These included alterations to the DHFR expression vector, optimization of the molar ratio of t-PA to DHFR sequences in the cotransfection, and modification of the methotrexate resistance selection procedure. The structure of the amplified DNA, its chromosomal location, and its stability during growth in the absence of methotrexate are reported.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 7
+  }
+}

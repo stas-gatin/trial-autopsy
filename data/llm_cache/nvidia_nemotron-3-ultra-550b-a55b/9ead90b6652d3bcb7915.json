@@ -1,0 +1,15 @@
+{
+  "key": "9ead90b6652d3bcb7915",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T22:36:09+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: VICTORION-2P NCT05030428 - Study of Inclisiran to Prevent Cardiovascular (CV) Events in Participants With Established Cardiovascular Disease\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | LDL-C change used by the calculator | biomarker_change = -41.0 % | {\"biomarker\": \"LDL-C\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase3\", \"placebo_adjusted\": true, \"timepoint\": \"Day 90 to Day 540\", \"trial\": \"ORION-11\"} | source pmcid:PMC9769955 | quote: \"with a corresponding time-adjusted change of −41.0% (95% CI: −47.8 to −34.2)\"\nc2 | LDL-C change used by the calculator | inclusion_threshold = 70 mg/dL | {\"trial\": \"VICTORION-2P\"} | source ctgov:NCT05030428 | quote: \"Fasting LDL-C ≥ 70 mg/dL at randomization visit\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*41\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC9769955' LIMIT 5 | rows: [[\"6] with a corresponding time-adjusted change of -41.0% (95% CI: -47\"]]\nc2 | SQL: SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*70 mg/dL[^.]*)', 1) AS sentence FROM registry LIMIT 5 | rows: [[\" Fasting LDL-C ≥ 70 mg/dL at randomization visit\\n2\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"6] with a corresponding time-adjusted change of -41.0% (95% CI: -47\", \"note\": \"The abstract contains the exact time-adjusted LDL-C change of -41.0%.\"}, {\"claim\": \"c2\", \"status\": \"confirmed\", \"found\": \"Fasting LDL-C ≥ 70 mg/dL at randomization visit\", \"note\": \"The eligibility criteria includes the LDL-C threshold of 70 mg/dL.\"}]}",
+  "usage": {
+    "input_tokens": 534,
+    "output_tokens": 387
+  }
+}

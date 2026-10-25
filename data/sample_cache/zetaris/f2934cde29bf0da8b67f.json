@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A28304224+OR+EXT_ID%3A38160917&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*4\\.5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '38160917' LIMIT 5",
+ "rows": [
+  [
+   " The trial is planned to continue until at least 751 patients experience an adjudicated triple endpoint, at least 1254 experience an adjudicated quadruple endpoint, and the median follow-up is ≥4.5 years"
+  ]
+ ],
+ "error": null
+}

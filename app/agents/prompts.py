@@ -80,6 +80,11 @@ Decide:
    assay distortion, which only works like-for-like). Include both when both exist.
    A percent change only counts with a baseline. For Lp(a) give the outcome trial's measured baseline, or else
    its entry threshold (e.g. "Lp(a) >= 70 mg/dL") as a lower bound, and cite that fact too.
+   Lipid-lowering effects carry over between populations as PERCENT changes, not absolute ones (a statin or PCSK9
+   inhibitor lowers LDL-C by about the same percent whatever the starting level). When the change comes from a
+   different trial than the outcome trial and the outcome trial's own baseline is stated (measured, or its entry
+   threshold as a lower bound), give pct_change with that baseline and leave abs_change null; give the other
+   trial's absolute change only when no baseline of the outcome trial is stated.
 5. followup_years (median follow-up; when only a minimum follow-up and a planned total duration are stated, as in
    event-driven trials, use the midpoint of the two and say so; leave it null only when no fact states any
    duration, follow-up or treatment period for the outcome trial), events (actual total primary events if the trial
@@ -146,6 +151,9 @@ Category definitions (pick the primary one by these, not by tone):
 
 Rules:
 - Every evidence item cites fact_ids or "calculator". No outside facts, no invented numbers.
+- In mode "autopsy" the actual outcome, as read by code from the announcement, is given below. The primary category
+  must agree with it: one of the success categories if the trial met its primary endpoint, one of the failure or risk
+  categories if it did not. Use insufficient_data only when no explanation can be supported at all.
 - If the calculator abstained (pathway not quantifiable), judge qualitatively and say so.
 - Keep the calculator's verdict unless verified facts contradict it; if you depart from it, explain why.
 
@@ -158,6 +166,7 @@ Return JSON only:
 
 INVESTIGATOR_PROMPT = """Case: {trial_label} | mode: {mode} | as_of: {as_of}
 Drug: {drug} ({mechanism})
+Actual outcome: {outcome}
 
 Calculator inputs:
 {case_input}
@@ -262,6 +271,13 @@ VERIFIER_PAPERS_SCHEMA = """Table `papers`: the cited papers' Europe PMC records
   FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '<pmid>'
 Search the abstract for a number with LIKE (r.abstractText LIKE '%73.7%') and return the sentence around it with
 regexp_extract(r.abstractText, '([^.]*73\\\\.7[^.]*)', 1). Abstracts only: a number from the full text may not be there."""
+
+VERIFIER_PAPERS_SCHEMA_PUBMED = """Table `papers`: the cited papers' PubMed records in BioC form (Europe PMC is unavailable), two
+arrays to explode: documents, then each document's passages (title and abstract).
+  SELECT d.id AS pmid, p.infons.type AS part, p.text
+  FROM papers LATERAL VIEW explode(documents) AS d LATERAL VIEW explode(d.passages) AS p WHERE d.id = '<pmid>'
+Search the abstract for a number with LIKE (p.text LIKE '%73.7%') and return the sentence around it with
+regexp_extract(p.text, '([^.]*73\\\\.7[^.]*)', 1). Abstracts only: a number from the full text may not be there."""
 
 VERIFIER_QUERY_SYSTEM = """You are the Verifier in a trial-autopsy system. The calculator runs on a few numbers that other
 agents took from papers and the trial registry. You check each one independently against the source of record by

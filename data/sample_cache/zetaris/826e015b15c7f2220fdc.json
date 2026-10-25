@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A33470195+OR+PMCID%3APMC8883220&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*42 months[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '33470195' LIMIT 5",
+ "rows": [
+  [
+   " The trial will continue until 1620 patients experience a primary endpoint, with a minimum of 810 hard ischemic events (cardiovascular death, nonfatal myocardial infarction or nonfatal stroke) and minimum treatment duration of 36 months and a projected median treatment exposure of 42 months"
+  ]
+ ],
+ "error": null
+}

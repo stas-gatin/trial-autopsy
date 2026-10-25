@@ -7,7 +7,7 @@
   "as_of": "2017-06-22",
   "readout_date": "2017-06-22",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01327846@2017-06-22",
@@ -41,17 +41,49 @@
               "type": "DRUG",
               "other_names": [
                 "ACZ885"
+              ],
+              "arms": [
+                "Canakinumab Dose 150 mg",
+                "Canakinumab Dose 300 mg",
+                "Canakinumab Dose 50 mg"
               ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
             },
             {
               "name": "Standard of care",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Canakinumab Dose 150 mg",
+                "Canakinumab Dose 300 mg",
+                "Canakinumab Dose 50 mg",
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Canakinumab Dose 50 mg",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Canakinumab Dose 150 mg",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Canakinumab Dose 300 mg",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -71,9 +103,9 @@
       "source_id": "pmcid:PMC5064025",
       "file": "docs/pmcid_PMC5064025.txt",
       "type": "journal",
-      "title": "Arterial Effects of Canakinumab in Patients With Atherosclerosis and Type 2 Diabetes or Glucose Intolerance.",
-      "url": "https://europepmc.org/article/MED/27737744",
-      "pub_date": "2016-10-01",
+      "title": "Arterial Effects of Canakinumab in Patients With Atherosclerosis and Type 2 Diabetes or Glucose Intolerance",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27737744/",
+      "pub_date": "2016-10-18",
       "access": "open_full_text",
       "meta": {
         "pmid": "27737744",
@@ -84,17 +116,33 @@
       "note": ""
     },
     {
+      "source_id": "pmid:25240532",
+      "file": "docs/pmid_25240532.txt",
+      "type": "journal",
+      "title": "Pharmacokinetic and pharmacodynamic characteristics of single-dose Canakinumab in patients with type 2 diabetes mellitus",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25240532/",
+      "pub_date": "2014-09-18",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "25240532",
+        "pmcid": null,
+        "doi": "10.1016/j.clinthera.2014.08.004",
+        "journal": "Clinical therapeutics"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:23129601",
       "file": "docs/pmid_23129601.txt",
       "type": "journal",
-      "title": "Effects of interleukin-1β inhibition with canakinumab on hemoglobin A1c, lipids, C-reactive protein, interleukin-6, and fibrinogen: a phase IIb randomized, placebo-controlled trial.",
-      "url": "https://europepmc.org/article/MED/23129601",
+      "title": "Effects of interleukin-1β inhibition with canakinumab on hemoglobin A1c, lipids, C-reactive protein, interleukin-6, and fibrinogen: a phase IIb randomized, placebo-controlled trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23129601/",
       "pub_date": "2012-11-05",
       "access": "abstract_only",
       "meta": {
         "pmid": "23129601",
         "pmcid": null,
-        "doi": "10.1161/circulationaha.112.122556",
+        "doi": "10.1161/CIRCULATIONAHA.112.122556",
         "journal": "Circulation"
       },
       "note": ""
@@ -103,8 +151,8 @@
       "source_id": "pmid:21982649",
       "file": "docs/pmid_21982649.txt",
       "type": "journal",
-      "title": "Interleukin-1β inhibition and the prevention of recurrent cardiovascular events: rationale and design of the Canakinumab Anti-inflammatory Thrombosis Outcomes Study (CANTOS).",
-      "url": "https://europepmc.org/article/MED/21982649",
+      "title": "Interleukin-1β inhibition and the prevention of recurrent cardiovascular events: rationale and design of the Canakinumab Anti-inflammatory Thrombosis Outcomes Study (CANTOS)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21982649/",
       "pub_date": "2011-09-14",
       "access": "abstract_only",
       "meta": {
@@ -116,164 +164,148 @@
       "note": ""
     },
     {
-      "source_id": "pmid:23252526",
-      "file": "docs/pmid_23252526.txt",
+      "source_id": "pmcid:PMC5260050",
+      "file": "docs/pmcid_PMC5260050.txt",
       "type": "journal",
-      "title": "Two randomized trials of canakinumab in systemic juvenile idiopathic arthritis.",
-      "url": "https://europepmc.org/article/MED/23252526",
-      "pub_date": "2012-12-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "23252526",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa1205099",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:22586173",
-      "file": "docs/pmid_22586173.txt",
-      "type": "journal",
-      "title": "Canakinumab for acute gouty arthritis in patients with limited treatment options: results from two randomised, multicentre, active-controlled, double-blind trials and their initial extensions.",
-      "url": "https://europepmc.org/article/MED/22586173",
-      "pub_date": "2012-05-14",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "22586173",
-        "pmcid": null,
-        "doi": "10.1136/annrheumdis-2011-200908",
-        "journal": "Annals of the rheumatic diseases"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC3103669",
-      "file": "docs/pmcid_PMC3103669.txt",
-      "type": "journal",
-      "title": "Canakinumab reduces the risk of acute gouty arthritis flares during initiation of allopurinol treatment: results of a double-blind, randomised study.",
-      "url": "https://europepmc.org/article/MED/21540198",
-      "pub_date": "2011-05-03",
+      "title": "Early changes in gene expression and inflammatory proteins in systemic juvenile idiopathic arthritis patients on canakinumab therapy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28115015/",
+      "pub_date": "2017-01-23",
       "access": "open_full_text",
       "meta": {
-        "pmid": "21540198",
-        "pmcid": "PMC3103669",
-        "doi": "10.1136/ard.2010.144063",
-        "journal": "Annals of the rheumatic diseases"
+        "pmid": "28115015",
+        "pmcid": "PMC5260050",
+        "doi": "10.1186/s13075-016-1212-x",
+        "journal": "Arthritis research & therapy"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:21859692",
-      "file": "docs/pmid_21859692.txt",
+      "source_id": "pmcid:PMC5264306",
+      "file": "docs/pmcid_PMC5264306.txt",
       "type": "journal",
-      "title": "Two-year results from an open-label, multicentre, phase III study evaluating the safety and efficacy of canakinumab in patients with cryopyrin-associated periodic syndrome across different severity phenotypes.",
-      "url": "https://europepmc.org/article/MED/21859692",
-      "pub_date": "2011-08-21",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "21859692",
-        "pmcid": null,
-        "doi": "10.1136/ard.2011.152728",
-        "journal": "Annals of the rheumatic diseases"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:20533546",
-      "file": "docs/pmid_20533546.txt",
-      "type": "journal",
-      "title": "Canakinumab for the treatment of acute flares in difficult-to-treat gouty arthritis: Results of a multicenter, phase II, dose-ranging study.",
-      "url": "https://europepmc.org/article/MED/20533546",
-      "pub_date": "2010-10-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "20533546",
-        "pmcid": null,
-        "doi": "10.1002/art.27600",
-        "journal": "Arthritis and rheumatism"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:19494217",
-      "file": "docs/pmid_19494217.txt",
-      "type": "journal",
-      "title": "Use of canakinumab in the cryopyrin-associated periodic syndrome.",
-      "url": "https://europepmc.org/article/MED/19494217",
-      "pub_date": "2009-06-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19494217",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa0810787",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC3584253",
-      "file": "docs/pmcid_PMC3584253.txt",
-      "type": "journal",
-      "title": "Pharmacokinetic and pharmacodynamic properties of canakinumab, a human anti-interleukin-1β monoclonal antibody.",
-      "url": "https://europepmc.org/article/MED/22550964",
-      "pub_date": "2012-06-01",
+      "title": "Canakinumab reverses overexpression of inflammatory response genes in tumour necrosis factor receptor-associated periodic syndrome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27474763/",
+      "pub_date": "2016-07-29",
       "access": "open_full_text",
       "meta": {
-        "pmid": "22550964",
-        "pmcid": "PMC3584253",
-        "doi": "10.2165/11599820-000000000-00000",
-        "journal": "Clinical pharmacokinetics"
+        "pmid": "27474763",
+        "pmcid": "PMC5264306",
+        "doi": "10.1136/annrheumdis-2016-209335",
+        "journal": "Annals of the rheumatic diseases"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:24307174",
-      "file": "docs/pmid_24307174.txt",
+      "source_id": "pmid:27119439",
+      "file": "docs/pmid_27119439.txt",
       "type": "journal",
-      "title": "Lipopolysaccharide activates Toll-like receptor 4 (TLR4)-mediated NF-κB signaling pathway and proinflammatory response in human pericytes.",
-      "url": "https://europepmc.org/article/MED/24307174",
-      "pub_date": "2013-12-04",
+      "title": "Pharmacokinetics and Pharmacodynamics of Canakinumab in Patients With Systemic Juvenile Idiopathic Arthritis",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27119439/",
+      "pub_date": "2016-06-08",
       "access": "abstract_only",
       "meta": {
-        "pmid": "24307174",
-        "pmcid": "PMC3900988",
-        "doi": "10.1074/jbc.m113.521161",
-        "journal": "The Journal of biological chemistry",
+        "pmid": "27119439",
+        "pmcid": null,
+        "doi": "10.1002/jcph.754",
+        "journal": "Journal of clinical pharmacology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27658762",
+      "file": "docs/pmid_27658762.txt",
+      "type": "journal",
+      "title": "Efficacy and safety of canakinumab in Schnitzler syndrome: A multicenter randomized placebo-controlled study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27658762/",
+      "pub_date": "2016-09-19",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27658762",
+        "pmcid": null,
+        "doi": "10.1016/j.jaci.2016.07.041",
+        "journal": "The Journal of allergy and clinical immunology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27974104",
+      "file": "docs/pmid_27974104.txt",
+      "type": "journal",
+      "title": "Long-term safety and efficacy of canakinumab in cryopyrin-associated periodic syndrome: results from an open-label, phase III pivotal study in Japanese patients",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27974104/",
+      "pub_date": "2016-12-14",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27974104",
+        "pmcid": null,
+        "doi": null,
+        "journal": "Clinical and experimental rheumatology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC5264215",
+      "file": "docs/pmcid_PMC5264215.txt",
+      "type": "journal",
+      "title": "Canakinumab treatment for patients with active recurrent or chronic TNF receptor-associated periodic syndrome (TRAPS): an open-label, phase II study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27269295/",
+      "pub_date": "2016-06-07",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "27269295",
+        "pmcid": "PMC5264215",
+        "doi": "10.1136/annrheumdis-2015-209031",
+        "journal": "Annals of the rheumatic diseases"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:28366330",
+      "file": "docs/pmid_28366330.txt",
+      "type": "journal",
+      "title": "Cytokine polymorphisms are associated with daytime napping in adults living with HIV",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28366330/",
+      "pub_date": "2017-01-20",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "28366330",
+        "pmcid": "PMC5628054",
+        "doi": "10.1016/j.sleep.2016.12.021",
+        "journal": "Sleep medicine",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:28432199",
-      "file": "docs/pmid_28432199.txt",
+      "source_id": "pmid:21132345",
+      "file": "docs/pmid_21132345.txt",
       "type": "journal",
-      "title": "Phagocytosis imprints heterogeneity in tissue-resident macrophages.",
-      "url": "https://europepmc.org/article/MED/28432199",
-      "pub_date": "2017-04-21",
+      "title": "Inflammatory single nucleotide polymorphisms and the risk of atrial fibrillation: a case control study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21132345/",
+      "pub_date": "2010-12-04",
       "access": "abstract_only",
       "meta": {
-        "pmid": "28432199",
-        "pmcid": "PMC5413334",
-        "doi": "10.1084/jem.20161375",
-        "journal": "The Journal of experimental medicine",
+        "pmid": "21132345",
+        "pmcid": null,
+        "doi": "10.1007/s00011-010-0285-2",
+        "journal": "Inflammation research : official journal of the European Histamine Research Society ... [et al.]",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:27207962",
-      "file": "docs/pmid_27207962.txt",
+      "source_id": "pmid:18573495",
+      "file": "docs/pmid_18573495.txt",
       "type": "journal",
-      "title": "NLRP3 Inflammasome Expression and Activation in Human Atherosclerosis.",
-      "url": "https://europepmc.org/article/MED/27207962",
-      "pub_date": "2016-05-20",
+      "title": "IL1B genetic variation and plasma C-reactive protein level among young adults: the CARDIA study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18573495/",
+      "pub_date": "2008-05-18",
       "access": "abstract_only",
       "meta": {
-        "pmid": "27207962",
-        "pmcid": "PMC4889178",
-        "doi": "10.1161/jaha.115.003031",
-        "journal": "Journal of the American Heart Association",
+        "pmid": "18573495",
+        "pmcid": "PMC2847778",
+        "doi": "10.1016/j.atherosclerosis.2008.05.018",
+        "journal": "Atherosclerosis",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -287,7 +319,7 @@
       "pub_date": "2017-06-22",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }

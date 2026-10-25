@@ -1,0 +1,2190 @@
+{
+  "run_id": "example-obicetrapib",
+  "status": "success",
+  "mode": "forecast",
+  "as_of": null,
+  "backtest": false,
+  "readout_date": null,
+  "analysis_date": "2026-10-25",
+  "trial": {
+    "nct_id": "NCT05202509",
+    "acronym": "PREVAIL",
+    "title": "Cardiovascular Outcome Study to Evaluate the Effect of Obicetrapib in Patients With Cardiovascular Disease",
+    "sponsor": "NewAmsterdam Pharma",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 9541,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerotic Cardiovascular Disease"
+    ],
+    "primary_completion": "2026-11"
+  },
+  "drug": {
+    "name": "obicetrapib",
+    "chembl_id": "CHEMBL3785197",
+    "aliases": [
+      "AMG-899",
+      "CASA",
+      "DEZ-001",
+      "TA-8995",
+      "Ta-8995"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Cholesteryl ester transfer protein inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000087237",
+        "symbol": "CETP",
+        "name": "cholesteryl ester transfer protein"
+      }
+    ],
+    "searched_as": "Obicetrapib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-example-obicetrapib",
+  "log_file": "logs/trace-example-obicetrapib.jsonl",
+  "execution_time_seconds": 1.2,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "not_computable",
+      "outcome_basis": "calculator forecast",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "success_with_caveats",
+      "secondary_categories": [
+        "narrow_success",
+        "robust_success"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "intended biomarker HDL-C is not causal"
+    },
+    "report": {
+      "headline": "The PREVAIL trial of obicetrapib is forecast as likely to succeed based on a projected 18% relative risk reduction from LDL-C lowering, but the verdict carries caveats because follow-up duration and event count are unknown.",
+      "summary": "PREVAIL has randomized 9,541 patients with atherosclerotic cardiovascular disease on maximally tolerated lipid-lowering therapy and LDL-C >55 mg/dL, with a MACE primary endpoint. Obicetrapib lowered LDL-C by 31.9% (placebo-adjusted) in phase 3, with consistent reductions in apoB (-26.3%), non-HDL-C (-30.3%), and Lp(a) (-33.5%). The calculator projects an 18.2% relative risk reduction (HR 0.818) from an LDL-C reduction equivalent of 0.807 mmol/L, requiring 781 events for 80% power. However, follow-up duration is unknown, the low LDL-C entry threshold may reduce event rates, and the massive HDL-C increase (+136%) is not causal for benefit. A 20.5% increase in p-tau217 in ApoE4 carriers warrants monitoring. Confidence is medium.",
+      "key_evidence": [
+        "9,541 participants randomized (ClinicalTrials.gov NCT05202509 PREVAIL)",
+        "LDL-C entry threshold 55 mg/dL (ClinicalTrials.gov NCT05202509 PREVAIL)",
+        "Primary endpoint: Major Adverse Cardiovascular Effect (MACE) (ClinicalTrials.gov NCT05202509 PREVAIL)",
+        "LDL-C reduction -31.9% in phase 3 (Fixed-dose combination of obicetrapib and ezetimibe for LDL cholesterol reduction (TANDEM): a phase 3, randomised, double-blind, placebo-controlled trial.)",
+        "HDL-C increase +136.3% (Effect of obicetrapib, a potent cholesteryl ester transfer protein inhibitor, on p-tau217 levels in patients with cardiovascular disease.)",
+        "apoB reduction -26.3% (Obicetrapib as an Adjunct to Stable Statin Therapy in Japanese Subjects: Results from a Randomized Phase 2 Trial.)",
+        "non-HDL-C reduction -30.3% (Obicetrapib as an Adjunct to Stable Statin Therapy in Japanese Subjects: Results from a Randomized Phase 2 Trial.)",
+        "Lp(a) reduction -33.5% (Effect of obicetrapib, a potent cholesteryl ester transfer protein inhibitor, on p-tau217 levels in patients with cardiovascular disease.)",
+        "p-tau217 increase +20.5% in ApoE4 carriers (Effect of obicetrapib, a potent cholesteryl ester transfer protein inhibitor, on p-tau217 levels in patients with cardiovascular disease.)",
+        "CETP genetic association score 0.736 for CAD (opentargets:CETP)",
+        "Projected HR 0.818 (18.2% RRR) from LDL-C equivalent 0.807 mmol/L (calculator)",
+        "781 events needed for 80% power (calculator)",
+        "No adverse safety signals in phase 2 (Obicetrapib as an Adjunct to Stable Statin Therapy in Japanese Subjects: Results from a Randomized Phase 2 Trial.)"
+      ],
+      "what_would_change_this": "Confirm PREVAIL follow-up duration and projected event count; verify on-treatment LDL-C reduction in the PREVAIL population.",
+      "readthrough_note": "Anacetrapib (REVEAL) succeeded via LDL-C lowering, supporting the LDL-C pathway for CETP inhibition; other Lp(a)-lowering programmes (e.g., olpasiran, pelacarsen) may provide complementary evidence on residual risk reduction."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.736 for CETP",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.807 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.182,
+        "detail": "expected HR 0.818 at 5 y (relative risk reduction 18.2%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 781",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "prevail",
+      "ldl_equivalent_mmol": 0.807,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 0.818,
+      "causal_rrr": 0.182,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "intended biomarker HDL-C is not causal",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "follow-up unknown, effect shown at 5 years"
+      ],
+      "notes": [
+        "events needed for 80% power: 781"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "prevail",
+      "mode": "forecast",
+      "target_genetics": "causal",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -31.9,
+          "baseline": 2.53,
+          "method": "placebo-adjusted phase 3 monotherapy day 84 from TANDEM (obicetrapib 10 mg) applied to BROADWAY-like baseline (98 mg/dL = 2.53 mmol/L) matching PREVAIL population (ASCVD on maximally tolerated statin)",
+          "source": "pmid:40337982,pmid:40347969"
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -26.3,
+          "baseline": null,
+          "method": "placebo-adjusted phase 2 week 8 (10 mg); no phase 3 day 84 value available for PREVAIL-like population",
+          "source": "pmcid:PMC11456355"
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -30.3,
+          "baseline": null,
+          "method": "placebo-adjusted phase 2 week 8 (10 mg); no phase 3 day 84 value available for PREVAIL-like population",
+          "source": "pmcid:PMC11456355"
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -33.5,
+          "baseline": null,
+          "method": "placebo-adjusted phase 3 day 84 from BROADWAY (10 mg); PREVAIL baseline not available, no Lp(a) entry threshold stated for PREVAIL",
+          "source": "pmcid:PMC12811769"
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": 136.3,
+          "baseline": null,
+          "method": "placebo-adjusted phase 3 day 84 from BROADWAY (10 mg); PREVAIL baseline not available",
+          "source": "pmcid:PMC12811769"
+        }
+      ],
+      "followup_years": null,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "Open Targets CETP genetic association score 0.736 with 8 pre-cutoff coronary artery disease studies (GCST90132315, GCST90132314, GCST005196, GCST90668074) showing protective effect (negative beta for rs9939224, rs1800775, rs247616). Score >= 0.5 with CAD evidence meets causal threshold.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -31.9,
+          "baseline": 2.53,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted phase 3 monotherapy day 84 from TANDEM (obicetrapib 10 mg) applied to BROADWAY-like baseline (98 mg/dL = 2.53 mmol/L) matching PREVAIL population (ASCVD on maximally tolerated statin)",
+          "fact_ids": [
+            "f_d42d5900de816b",
+            "f_3efd044a568fbe"
+          ]
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -26.3,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 2 week 8 (10 mg); no phase 3 day 84 value available for PREVAIL-like population",
+          "fact_ids": [
+            "f_256bd6d49029ff"
+          ]
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "pct_change": -30.3,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted phase 2 week 8 (10 mg); no phase 3 day 84 value available for PREVAIL-like population",
+          "fact_ids": [
+            "f_42e1b9042f76fd"
+          ]
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": -33.5,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 3 day 84 from BROADWAY (10 mg); PREVAIL baseline not available, no Lp(a) entry threshold stated for PREVAIL",
+          "fact_ids": [
+            "f_36b2ca93f3f8ea"
+          ]
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 136.3,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 3 day 84 from BROADWAY (10 mg); PREVAIL baseline not available",
+          "fact_ids": [
+            "f_537b16060ca326"
+          ]
+        }
+      ],
+      "followup_years": null,
+      "followup_fact_ids": [],
+      "events": null,
+      "events_basis": "planned",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "PREVAIL median follow-up duration",
+        "PREVAIL planned primary events",
+        "PREVAIL baseline LDL-C",
+        "PREVAIL baseline apoB",
+        "PREVAIL baseline non-HDL-C",
+        "PREVAIL baseline Lp(a)",
+        "PREVAIL baseline HDL-C",
+        "PREVAIL placebo-adjusted SBP change"
+      ],
+      "notes": "LDL-C: Used TANDEM monotherapy phase 3 placebo-adjusted -31.9% (f_d42d5900de816b) with BROADWAY baseline 2.53 mmol/L (f_3efd044a568fbe) as PREVAIL population matches BROADWAY (ASCVD/HeFH on max tolerated statin). Critic flagged original -29.9% (f_800cf8bdb54d87) as non-placebo-adjusted. apoB/non-HDL-C: Only phase 2 week 8 placebo-adjusted values available (pmcid:PMC11456355); no BROADWAY phase 3 values in evidence. Lp(a)/HDL-C: BROADWAY phase 3 day 84 placebo-adjusted values used (f_36b2ca93f3f8ea, f_537b16060ca326). PREVAIL event count and follow-up not in evidence; trial is event-driven (MACE primary). Alpha 0.05 two-sided assumed per NCT05421078 (f_a560ad2bf8947e)."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "CETP target has strong causal genetics for CAD (score 0.736, 8 pre-cutoff studies)",
+            "refs": [
+              "f_2b1f1a1a2c6252"
+            ]
+          },
+          {
+            "text": "Obicetrapib lowers LDL-C by 31.9% (placebo-adjusted, phase 3 monotherapy, day 84)",
+            "refs": [
+              "f_d42d5900de816b"
+            ]
+          },
+          {
+            "text": "Consistent reductions in causal biomarkers: apoB -26.3% (phase 2), non-HDL-C -30.3% (phase 2), Lp(a) -33.5% (phase 3)",
+            "refs": [
+              "f_256bd6d49029ff",
+              "f_42e1b9042f76fd",
+              "f_36b2ca93f3f8ea"
+            ]
+          },
+          {
+            "text": "Calculator projects 18.2% RRR (HR 0.818) from LDL-C reduction of 0.807 mmol/L",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Large event-driven trial (9,541 randomized) with MACE primary endpoint",
+            "refs": [
+              "f_9cbfcf66817a4d",
+              "f_585ef71102d63b"
+            ]
+          },
+          {
+            "text": "Phase 2/3 safety clean: no adverse safety signals in Japanese phase 2 study",
+            "refs": [
+              "f_859157ecf4e3cf"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Follow-up duration unknown; calculator assumes 5 years for full effect",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Entry LDL-C threshold only >55 mg/dL (1.4 mmol/L) — lower than prior CVOTs, may reduce event rate",
+            "refs": [
+              "f_7e039e85b2aae3"
+            ]
+          },
+          {
+            "text": "Intended biomarker HDL-C (+136%) is not causal per reference table",
+            "refs": [
+              "calculator",
+              "f_537b16060ca326"
+            ]
+          }
+        ],
+        "would_settle": "Confirm PREVAIL follow-up duration and projected event count; verify on-treatment LDL-C reduction in PREVAIL population"
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Projected HR 0.818 has upper CI ~0.90-0.95 if event count near minimum (781 for 80% power)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Baseline LDL-C in PREVAIL may be lower than TANDEM/BROADWAY (entry >55 vs >70-100 mg/dL)",
+            "refs": [
+              "f_7e039e85b2aae3",
+              "f_66af2f44748b2b",
+              "f_a27ba1cecaa990"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "18% RRR is comparable to PCSK9 inhibitor CVOTs (FOURIER 15%, ODYSSEY 15%) which were clear successes",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Percent LDL-C reduction likely similar even at lower baseline; absolute reduction scales with baseline",
+            "refs": [
+              "f_d42d5900de816b"
+            ]
+          }
+        ],
+        "would_settle": "Actual baseline LDL-C distribution in PREVAIL; final event count and follow-up"
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Massive HDL-C increase (+136%) is not causal and does not explain benefit; benefit derives from LDL-C/apoB/Lp(a) lowering",
+            "refs": [
+              "f_537b16060ca326",
+              "calculator"
+            ]
+          },
+          {
+            "text": "p-tau217 increased 20.5% in ApoE4 carriers in BROADWAY — potential neurological signal in subgroup",
+            "refs": [
+              "f_bc522456ce1872"
+            ]
+          },
+          {
+            "text": "Follow-up duration unknown; if <3 years, benefit may not fully accrue",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Population on maximally tolerated statin with relatively low LDL-C threshold — residual risk may be less lipid-driven",
+            "refs": [
+              "f_4b8d112aaec8ea",
+              "f_7e039e85b2aae3"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No BP increase or major safety signal in phase 2/3 (unlike torcetrapib)",
+            "refs": [
+              "f_859157ecf4e3cf"
+            ]
+          },
+          {
+            "text": "p-tau217 signal confined to ApoE4 subgroup; overall AD biomarkers showed consistent reductions",
+            "refs": [
+              "f_afa767df391abb",
+              "f_c4fdfd0afd3d91",
+              "f_d9511b15265516",
+              "f_1d2e474a48ec22"
+            ]
+          }
+        ],
+        "would_settle": "PREVAIL safety data including neurocognitive outcomes; final follow-up duration"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "HDL-C is the intended biomarker for CETP inhibitors but is not causal for CAD",
+            "refs": [
+              "calculator",
+              "f_537b16060ca326"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator correctly uses LDL-C (causal) as basis, not HDL-C; LDL-C/apoB/Lp(a) all reduced",
+            "refs": [
+              "calculator",
+              "f_d42d5900de816b",
+              "f_256bd6d49029ff",
+              "f_36b2ca93f3f8ea"
+            ]
+          },
+          {
+            "text": "CETP genetics support target causality via LDL-C/apoB pathway, not HDL-C",
+            "refs": [
+              "f_2b1f1a1a2c6252"
+            ]
+          }
+        ],
+        "would_settle": "N/A — calculator already accounts for this"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If follow-up <3 years or event rate low, trial may be underpowered for HR 0.818",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Low LDL-C entry threshold (55 mg/dL) reduces absolute event rate vs prior CVOTs",
+            "refs": [
+              "f_7e039e85b2aae3"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Projected 18% RRR is large for lipid-lowering; 781 events needed for 80% power — achievable with 9,541 pts over 3-5 years",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Statin and PCSK9i trials showed benefit within 2-3 years at similar RRR",
+            "refs": []
+          }
+        ],
+        "would_settle": "PREVAIL event rate and follow-up duration; interim analysis plans"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Patients on maximally tolerated statin with LDL-C >55 mg/dL — residual events may be driven by non-lipid pathways (inflammation, thrombosis)",
+            "refs": [
+              "f_4b8d112aaec8ea",
+              "f_7e039e85b2aae3"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "LDL-C remains causal at all levels; IMPROVE-IT, FOURIER, ODYSSEY showed benefit on top of statins at similar LDL-C",
+            "refs": []
+          },
+          {
+            "text": "Obicetrapib also lowers apoB, non-HDL-C, Lp(a) — multiple causal pathways",
+            "refs": [
+              "f_256bd6d49029ff",
+              "f_42e1b9042f76fd",
+              "f_36b2ca93f3f8ea"
+            ]
+          }
+        ],
+        "would_settle": "PREVAIL baseline characteristics and event adjudication by cause"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Historical CETP inhibitors: torcetrapib (BP increase, mortality), dalcetrapib (neutral), anacetrapib (clean)",
+            "refs": []
+          },
+          {
+            "text": "p-tau217 increase in ApoE4 carriers in BROADWAY",
+            "refs": [
+              "f_bc522456ce1872"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Obicetrapib phase 2/3: no adverse safety signals, no BP increase reported",
+            "refs": [
+              "f_859157ecf4e3cf"
+            ]
+          },
+          {
+            "text": "p-tau217 signal only in ApoE4 subgroup; overall AD biomarker profile favorable",
+            "refs": [
+              "f_afa767df391abb",
+              "f_c4fdfd0afd3d91"
+            ]
+          }
+        ],
+        "would_settle": "PREVAIL safety data including BP, neurocognitive, and mortality outcomes"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Follow-up duration unknown; if fixed short follow-up rather than event-driven, may miss benefit",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "CTgov describes placebo-controlled, double-blind, randomized phase 3 — standard event-driven CVOT design",
+            "refs": [
+              "f_4b8d112aaec8ea"
+            ]
+          },
+          {
+            "text": "MACE endpoint appropriate for lipid-lowering therapy",
+            "refs": [
+              "f_585ef71102d63b"
+            ]
+          }
+        ],
+        "would_settle": "Confirm event-driven vs fixed follow-up design; statistical analysis plan"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Large trial (9,541) requires substantial recruitment and retention",
+            "refs": [
+              "f_9cbfcf66817a4d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial registered 2022, large pharma backing (NewAmsterdam/Eli Lilly), 9,541 randomized suggests recruitment on track",
+            "refs": [
+              "f_9cbfcf66817a4d",
+              "ctgov:NCT05202509"
+            ]
+          }
+        ],
+        "would_settle": "Trial status updates, recruitment completion, discontinuation rates"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator category 'insufficient_data' — follow-up duration and event count unknown, cannot compute power",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Actual on-treatment LDL-C reduction in PREVAIL population not yet known",
+            "refs": []
+          },
+          {
+            "text": "No PREVAIL-specific biomarker data available yet",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Strong surrogate data from phase 2/3 (TANDEM, BROADWAY) in similar populations",
+            "refs": [
+              "f_d42d5900de816b",
+              "f_28e2af174de660",
+              "f_41763b0c38ecab"
+            ]
+          },
+          {
+            "text": "CETP genetics and LDL-C/apoB/Lp(a) causality well established",
+            "refs": [
+              "f_2b1f1a1a2c6252"
+            ]
+          }
+        ],
+        "would_settle": "PREVAIL design publication with follow-up duration; baseline characteristics; interim biomarker data"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "LDL-C change of -29.9% from BROADWAY (f_800cf8bdb54d87) is marked placebo_adjusted: false. Calculator inputs must use placebo-adjusted values. The placebo-adjusted phase 2 value at 10 mg/day 84 is -32.6% (f_3e1175571f80fa); TANDEM phase 3 monotherapy placebo-adjusted is -31.9% (f_d42d5900de816b). Using non-placebo-adjusted value underestimates treatment effect.",
+            "target_agent": "mechanism",
+            "request": "Replace LDL-C pct_change with placebo-adjusted value: either -32.6% (phase 2, day 84, pmid:40337982) or -31.9% (TANDEM monotherapy phase 3, day 84, pmid:40347969). Update source citation accordingly."
+          },
+          {
+            "severity": "high",
+            "issue": "Baseline LDL-C assumed as 2.0 mmol/L in calculator (assumption: 'LDL-C: no baseline given, assumed 2.0'), but verified baselines are 2.4-2.6 mmol/L: BROADWAY 98 mg/dL (2.53 mmol/L, f_3efd044a568fbe), TANDEM monotherapy 2.6 mmol/L (f_a27ba1cecaa990), TANDEM FDC 2.5 mmol/L (f_dfdce66d386d0b), TANDEM placebo 2.4 mmol/L (f_fa8e4aee477cef). This affects ldl_equivalent_mmol calculation (currently 0.598 mmol/L).",
+            "target_agent": "mechanism",
+            "request": "Use population-appropriate baseline: ~2.5 mmol/L (BROADWAY/ PREVAIL-like population). Recalculate ldl_equivalent_mmol and expected_hr."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C change source cited as 'ctgov:NCT05202509,pmid:40337982' but NCT05202509 is PREVAIL (no biomarker data yet). The -29.9% comes from BROADWAY (pmid:40337982). Source should reference BROADWAY only.",
+            "target_agent": "case_builder",
+            "request": "Correct source field for LDL-C change to 'pmid:40337982 (BROADWAY)' or 'pmcid:PMC12811769 (BROADWAY)'."
+          },
+          {
+            "severity": "medium",
+            "issue": "apoB (-26.3%, f_256bd6d49029ff), non-HDL-C (-30.3%, f_42e1b9042f76fd), Lp(a) (-33.5%, f_36b2ca93f3f8ea), HDL-C (136.3%, f_537b16060ca326) changes are from different trials/phases (phase 2 week 8 vs phase 3 day 84). Calculator only uses LDL-C (basis='LDL-C'), but secondary biomarker array includes mixed timepoints/trials. For consistency, prefer phase 3 day 84 placebo-adjusted values from BROADWAY where available.",
+            "target_agent": "mechanism",
+            "request": "Verify which biomarker changes are from BROADWAY phase 3 day 84 (placebo-adjusted): HDL-C 136.3% (f_537b16060ca326) and Lp(a) -33.5% (f_36b2ca93f3f8ea) are. apoB and non-HDL-C are from phase 2 week 8 (pmcid:PMC11456355). Note this limitation or replace with BROADWAY phase 3 values if available."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator notes 'follow-up unknown, effect shown at 5 years' but PREVAIL is event-driven (f_4b8d112aaec8ea). Median follow-up not yet public. This is a forecast limitation, not an input error.",
+            "target_agent": "case_builder",
+            "request": "Add search for PREVAIL event-driven design details: target event count, expected median follow-up, enrollment completion date."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator uses LDL-C -31.9% from TANDEM monotherapy (baseline ~100 mg/dL) applied to BROADWAY baseline 98 mg/dL, but PREVAIL entry threshold is LDL-C >55 mg/dL (f_7e039e85b2aae3) — substantially lower than BROADWAY (55-100 mg/dL with risk factors or >100 mg/dL, f_66af2f44748b2b) and TANDEM (>70 mg/dL, f_1cec50470dbd97). PREVAIL baseline LDL-C likely lower, so absolute LDL-C reduction (mmol/L) and expected HR will be overestimated. Need PREVAIL-specific baseline LDL-C or a justified adjustment.",
+            "target_agent": "mechanism",
+            "request": "Re-estimate absolute LDL-C reduction using a PREVAIL-representative baseline (e.g., median ~70-80 mg/dL based on >55 mg/dL threshold) and recalculate expected_hr. Or explicitly model the baseline-dependency of absolute effect."
+          },
+          {
+            "severity": "high",
+            "issue": "Contradictory evidence on p-tau217 in ApoE4: f_bc522456ce1872 reports 20.48% increase (sign_set_by_code: 'sentence says increase') while f_afa767df391abb states 'obicetrapib reduced p-tau217 levels by a placebo-adjusted 20.48%' in ApoE4/E4. Hypotheses cite only the increase (f_bc522456ce1872) as a safety concern. This contradiction must be resolved before citing as a caveat.",
+            "target_agent": "case_builder",
+            "request": "Search full text of BROADWAY (pmcid:PMC12811769) for p-tau217 ApoE4 subgroup results to determine direction of effect. Update hypothesis accordingly."
+          },
+          {
+            "severity": "medium",
+            "issue": "Verifier reports 'not_found' for apoB (-26.3%), non-HDL-C (-30.3%), Lp(a) (-33.5%), HDL-C (136.3%) in abstracts, but these facts exist in verified facts with pmcid references (PMC11456355, PMC12811769). Per instructions, missing phase 3 biomarker data is a caveat (medium), never a reason to drop verified inputs. However, the case should explicitly flag that apoB/non-HDL-C are phase 2 week 8 (not phase 3 day 84) and Lp(a)/HDL-C are from BROADWAY (statin background) not PREVAIL population.",
+            "target_agent": "case_builder",
+            "request": "Add explicit caveats in hypotheses and calculator inputs method fields: apoB/non-HDL-C from phase 2 week 8 (10 mg); Lp(a)/HDL-C from BROADWAY phase 3 day 84 (statin background). Note PREVAIL-specific biomarker data not yet available."
+          },
+          {
+            "severity": "medium",
+            "issue": "Follow-up duration unknown — calculator assumes 5 years for full effect (per assumptions). PREVAIL may have shorter follow-up; event-driven design not confirmed in CTgov description (f_4b8d112aaec8ea says 'placebo-controlled, double-blind, randomized, phase 3' but doesn't specify event-driven). If fixed follow-up <3 years, benefit may not fully accrue. This is a key design uncertainty.",
+            "target_agent": "case_builder",
+            "request": "Search for PREVAIL protocol publications, statistical analysis plan, or CTgov updates specifying follow-up duration and event-driven vs fixed design. Add as would_settle item."
+          },
+          {
+            "severity": "low",
+            "issue": "Several 'against' points in hypotheses have empty refs arrays (e.g., 'Statin and PCSK9i trials showed benefit within 2-3 years at similar RRR', 'LDL-C remains causal at all levels; IMPROVE-IT, FOURIER, ODYSSEY showed benefit on top of statins at similar LDL-C'). These should reference established trial results or meta-analyses.",
+            "target_agent": "case_builder",
+            "request": "Add appropriate references for established CVOT results (FOURIER, ODYSSEY, IMPROVE-IT) and LDL-C causality evidence."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator input for HDL-C change shows unit 'mg/dL' but pct_change 136.3% — unit should be consistent (percent) or baseline provided for absolute change. Method field says 'placebo-adjusted phase 3 day 84 from BROADWAY (10 mg); PREVAIL baseline not available' but no baseline value given.",
+            "target_agent": "mechanism",
+            "request": "Either add HDL-C baseline from BROADWAY (if available in verified facts) or change unit to 'percent' for consistency with other percent-change entries."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_d42d5900de816b",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -31.9,
+          "unit": "%",
+          "source_id": "pmid:40347969",
+          "status": "confirmed",
+          "found": "Obicetrapib monotherapy decreased LDL cholesterol by 31·9% (22·1 to 41·6) versus placebo",
+          "note": "Abstract states LDL-C decreased by 31.9% versus placebo at day 84 in TANDEM trial.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*31[·.]9%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40347969' AND (r.abstractText LIKE '%31.9%%' OR r.abstractText LIKE '%31·9%%') LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_3efd044a568fbe",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 98,
+          "unit": "mg per deciliter",
+          "source_id": "pmid:40337982",
+          "status": "confirmed",
+          "found": "the mean baseline LDL cholesterol level was 98 mg per deciliter",
+          "note": "Abstract reports mean baseline LDL-C of 98 mg/dL in BROADWAY trial.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*98[^.]*mg[^.]*deciliter[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40337982' AND r.abstractText LIKE '%98%mg%deciliter%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_256bd6d49029ff",
+          "claim": "c3",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -26.3,
+          "unit": "percent",
+          "source_id": "pmcid:PMC11456355",
+          "status": "not_found",
+          "found": "",
+          "note": "No sentence containing 26.3% found in abstract of PMC11456355.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*26\\.3%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC11456355' AND r.abstractText LIKE '%26.3%%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_42e1b9042f76fd",
+          "claim": "c4",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -30.3,
+          "unit": "percent",
+          "source_id": "pmcid:PMC11456355",
+          "status": "not_found",
+          "found": "",
+          "note": "No sentence containing 30.3% found in abstract of PMC11456355.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*30\\.3%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC11456355' AND r.abstractText LIKE '%30.3%%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_36b2ca93f3f8ea",
+          "claim": "c5",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": -33.5,
+          "unit": "%",
+          "source_id": "pmcid:PMC12811769",
+          "status": "not_found",
+          "found": "",
+          "note": "No sentence containing 33.5% found in abstract of PMC12811769.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*33\\.5%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC12811769' AND r.abstractText LIKE '%33.5%%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_537b16060ca326",
+          "claim": "c6",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 136.3,
+          "unit": "%",
+          "source_id": "pmcid:PMC12811769",
+          "status": "not_found",
+          "found": "",
+          "note": "No sentence containing 136.3% found in abstract of PMC12811769.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*136\\.3%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC12811769' AND r.abstractText LIKE '%136.3%%' LIMIT 5",
+          "rows": 0
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 4,
+        "contradicts": 0
+      },
+      "queries": 6
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "CETP",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.661,
+        "genetic_association_score": 0.736,
+        "evidence_count": 13,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.982,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.03727168,
+            "p": "4.620999813079834e-11",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.981,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.004391835319535299,
+            "p": "3.2086009979248047e-11",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.978,
+            "study_id": "GCST005196",
+            "trait": "Coronary artery disease",
+            "n": 250736,
+            "publication_date": "2017-12-06",
+            "pmid": "29212778",
+            "variant": "rs1800775",
+            "beta": -0.0405,
+            "p": "6e-10",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.975,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs247617",
+            "beta": null,
+            "p": "1e-149",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.966,
+            "study_id": "GCST90668074",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 310368,
+            "publication_date": "2025-09-29",
+            "pmid": "41022758",
+            "variant": "rs247616",
+            "beta": -6.8670974,
+            "p": "7e-12",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.962,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00602080072392998,
+            "p": "2.3929998874664307e-9",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.96,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00566730664302942,
+            "p": "6.335000038146973e-9",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.943,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12446515",
+            "beta": -0.00478232983009403,
+            "p": "9.745523452758789e-12",
+            "published_before_cutoff": true
+          }
+        ],
+        "evidence_before_cutoff": 8
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_256bd6d49029ff",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -26.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Non-HDL-C and apoB concentrations were also significantly reduced from baseline with obicetrapib vs. placebo by up to 30.3% and 26.3%, respectively, at the highest obicetrapib dose",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_537b16060ca326",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 136.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "Treatment with obicetrapib also significantly increased HDL-C by 136.3 %",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_3efd044a568fbe",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 98,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "the mean baseline LDL cholesterol level was 98 mg per deciliter",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_a27ba1cecaa990",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 2.6,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "TANDEM",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "obicetrapib monotherapy group"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Mean baseline LDL cholesterol was 2·4 mmol/L, 2·5 mmol/L, 2·6 mmol/L, and 2·5 mmol/L in the placebo (n=102), ezetimibe monotherapy (n=101), obicetrapib monotherapy (n=102), and FDC groups (n=102), respectively.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_dfdce66d386d0b",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 2.5,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "TANDEM",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "FDC group"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Mean baseline LDL cholesterol was 2·4 mmol/L, 2·5 mmol/L, 2·6 mmol/L, and 2·5 mmol/L in the placebo (n=102), ezetimibe monotherapy (n=101), obicetrapib monotherapy (n=102), and FDC groups (n=102), respectively.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_fa8e4aee477cef",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 2.4,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "TANDEM",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo group"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Mean baseline LDL cholesterol was 2·4 mmol/L, 2·5 mmol/L, 2·6 mmol/L, and 2·5 mmol/L in the placebo (n=102), ezetimibe monotherapy (n=101), obicetrapib monotherapy (n=102), and FDC groups (n=102), respectively.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_08eb2c6ec73874",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "2.5 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Median Friedewald-calculated LDL-C was significantly reduced by 24.8%, 31.9%, and 45.8% for obicetrapib doses of 2.5, 5, and 10 mg, respectively, compared to a reduction of 0.89% with placebo",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_3e1175571f80fa",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -32.6,
+        "unit": "percentage points",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 84",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "10 mg once daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "for a between-group difference of -32.6 percentage points (95% CI, -35.8 to -29.5; P",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_5bb5ea80d4860f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -31.9,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "5 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Median Friedewald-calculated LDL-C was significantly reduced by 24.8%, 31.9%, and 45.8% for obicetrapib doses of 2.5, 5, and 10 mg, respectively, compared to a reduction of 0.89% with placebo",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_7afb362c6af65d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 32.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent",
+          "trial": "BROADWAY",
+          "sign_set_by_code": "sentence says increase"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "yielding a difference of 32.6 % (P < 0.001)",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_800cf8bdb54d87",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -29.9,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "day 84",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg once daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "The least-squares mean percent change from baseline to day 84 in the LDL cholesterol level was -29.9% (95% confidence interval [CI], -32.1 to -27.8) in the obicetrapib group",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_951e03712506de",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "The primary efficacy endpoint was the percent change in LDL-C from baseline to day 84.",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_a2fb8f19a2bd17",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -48.6,
+        "unit": "%",
+        "attrs": {
+          "trial": "TANDEM",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "obicetrapib 10 mg plus ezetimibe 10 mg FDC",
+          "kind": "percent"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "At day 84, percent differences in LDL cholesterol reduction with the FDC were -48·6% (95% CI -58·3 to -38·9) versus placebo",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_d42d5900de816b",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -31.9,
+        "unit": "%",
+        "attrs": {
+          "trial": "TANDEM",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "obicetrapib 10 mg monotherapy",
+          "kind": "percent"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Obicetrapib monotherapy decreased LDL cholesterol by 31·9% (22·1 to 41·6) versus placebo.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_e44c7ebd7f33e1",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -45.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Median Friedewald-calculated LDL-C was significantly reduced by 24.8%, 31.9%, and 45.8% for obicetrapib doses of 2.5, 5, and 10 mg, respectively, compared to a reduction of 0.89% with placebo",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_36b2ca93f3f8ea",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -33.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "day 84",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "and lowered lipoprotein(a) by 33.5 %",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_42e1b9042f76fd",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -30.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "week 8",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Non-HDL-C and apoB concentrations were also significantly reduced from baseline with obicetrapib vs. placebo by up to 30.3% and 26.3%, respectively, at the highest obicetrapib dose",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_dfddfc92105e12",
+        "entity": "biomarker:p-tau217",
+        "key": "baseline_level",
+        "value": 0.56,
+        "unit": "pg/mL",
+        "attrs": {
+          "biomarker": "p-tau217",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": null,
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "ApoE4/E4 participants exhibiting the highest median concentration (0.56 pg/mL)",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_bc522456ce1872",
+        "entity": "biomarker:p-tau217",
+        "key": "biomarker_change",
+        "value": 20.48,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "p-tau217",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg daily",
+          "kind": "percent",
+          "trial": "BROADWAY",
+          "sign_set_by_code": "sentence says increase"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "yielding a 20.48 % difference in means (p = 0.010)",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_c4fdfd0afd3d91",
+        "entity": "biomarker:p-tau217",
+        "key": "biomarker_change",
+        "value": -4.99,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "p-tau217",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg daily",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "or a 4.99 % difference in means (p = 0.041)",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_d9511b15265516",
+        "entity": "biomarker:p-tau217",
+        "key": "biomarker_change",
+        "value": -2.84,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "p-tau217",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg daily",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "representing a 2.84 % reduction from placebo (p = 0.025)",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_1d2e474a48ec22",
+        "entity": "biomarker:p-tau217/(aβ42:40)",
+        "key": "biomarker_change",
+        "value": -4.04,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "p-tau217/(Aβ42:40)",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "10 mg daily",
+          "kind": "percent",
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "obicetrapib also significantly limiting increases in the p-tau217/Aβ42:40 ratio compared to placebo (2.51 % vs 6.55 %",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_2b1f1a1a2c6252",
+        "entity": "target:cetp",
+        "key": "genetic_association_score",
+        "value": 0.736,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 13,
+          "evidence_before_cutoff": 8
+        },
+        "source_id": "opentargets:CETP",
+        "quote": "\"genetic_association_score\": 0.736",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000087237"
+      },
+      {
+        "fact_id": "f_a560ad2bf8947e",
+        "entity": "trial:nct05202509",
+        "key": "alpha",
+        "value": 0.05,
+        "unit": "two-sided",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "at a two-sided significance level of 0.05",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_0da4287ea06deb",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REMBRANDT"
+        },
+        "source_id": "pmid:40683616",
+        "quote": "Individuals aged 45 years or older with ASCVD (imaging evidence of vascular disease or clinically manifested ASCVD) and an LDL-C of ≥70 mg/dL despite maximally tolerated lipid-modifying therapy are eligible to participate.",
+        "pub_date": "2025-07-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40683616"
+      },
+      {
+        "fact_id": "f_1cec50470dbd97",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": 1.8,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "TANDEM"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "LDL cholesterol concentrations of 1·8 mmol/L (70 mg/dL) or greater despite maximally tolerated lipid-lowering therapy excluding ezetimibe",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_1d00cb3f541442",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": "LDL-C >70 mg/dL or non-HDL-C >100 mg/dL and triglycerides (TG) <400 mg/dL",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "had LDL-C ＞70 mg/dL or non-high-density lipoprotein cholesterol (non-HDL-C) ＞100 mg/dL and triglycerides (TG) ＜400 mg/dL",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_618616cbdad0d4",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": "LDL-C is not adequately controlled",
+        "unit": "category",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "whose LDL-C is not adequately controlled",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_66af2f44748b2b",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": "LDL cholesterol level of 100 mg per deciliter or higher or a non-high-density lipoprotein (HDL) cholesterol level of 130 mg per deciliter or higher, as well as those with an LDL cholesterol level of 55 to 100 mg per deciliter or a non-HDL cholesterol level of 85 to 130 mg per deciliter and at least one additional cardiovascular risk factor",
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "Patients with an LDL cholesterol level of 100 mg per deciliter or higher or a non-high-density lipoprotein (HDL) cholesterol level of 130 mg per deciliter or higher, as well as those with an LDL cholesterol level of 55 to 100 mg per deciliter or a non-HDL cholesterol level of 85 to 130 mg per deciliter and at least one additional cardiovascular risk factor, were eligible for inclusion",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_7e039e85b2aae3",
+        "entity": "trial:nct05202509",
+        "key": "inclusion_threshold",
+        "value": 55,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "PREVAIL"
+        },
+        "source_id": "ctgov:NCT05202509",
+        "quote": "Fasting LDL-C ≥ 55 mg/dL",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05202509"
+      },
+      {
+        "fact_id": "f_11eeb5f4720741",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 102,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "In the 102 randomized subjects (mean age 64.8 y, 71.6% male)",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_28e2af174de660",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 2530,
+        "unit": "participants",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "Of the 2530 randomized participants, 1535 met the criteria for inclusion in analysis population.",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_41763b0c38ecab",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 2530,
+        "unit": "patients",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "A total of 2530 patients underwent randomization",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_8a330cfff08831",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 354,
+        "unit": "participants",
+        "attrs": {
+          "trial": "BROOKLYN"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "and 354 in BROOKLYN",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_97116df5569ac3",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 407,
+        "unit": "participants",
+        "attrs": {
+          "trial": "TANDEM"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Between March 4 and July 3, 2024, 407 participants were randomly assigned.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_9cbfcf66817a4d",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 9541,
+        "unit": "participants",
+        "attrs": {
+          "trial": "PREVAIL"
+        },
+        "source_id": "ctgov:NCT05202509",
+        "quote": "Enrollment: 9541 (ACTUAL)",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05202509"
+      },
+      {
+        "fact_id": "f_e5cdc004543573",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 2532,
+        "unit": "participants",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "A total of 2,532 participants were randomized in BROADWAY",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_f50f92906bcd4a",
+        "entity": "trial:nct05202509",
+        "key": "n_randomized",
+        "value": 300,
+        "unit": "participants",
+        "attrs": {
+          "trial": "REMBRANDT"
+        },
+        "source_id": "pmid:40683616",
+        "quote": "Eligible participants (N = 300) will be randomized in a 1:1 ratio to obicetrapib 10 mg and ezetimibe 10 mg FDC once daily or placebo tablet once daily.",
+        "pub_date": "2025-07-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40683616"
+      },
+      {
+        "fact_id": "f_238f349230c1d4",
+        "entity": "trial:nct05202509",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "PREVAIL"
+        },
+        "source_id": "ctgov:NCT05202509",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05202509"
+      },
+      {
+        "fact_id": "f_59e59b2b9797f0",
+        "entity": "trial:nct05202509",
+        "key": "power",
+        "value": 90,
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "A sample size of at least 100 evaluable participants (25 per treatment group) was expected to provide more than 90% power to detect a 30% difference in LDL-C reduction at week 8",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_1e114a1d0adac7",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "percent change in total NCPV from baseline to 18 months",
+        "unit": "percent",
+        "attrs": {
+          "trial": "REMBRANDT"
+        },
+        "source_id": "pmid:40683616",
+        "quote": "The primary efficacy outcome of REMBRANDT is percent change in total NCPV from baseline to 18 months as assessed by coronary computed tomographic angiography (CCTA).",
+        "pub_date": "2025-07-17",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40683616"
+      },
+      {
+        "fact_id": "f_23d0924e017379",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline to week 8 in Friedewald-calculated LDL-C for each obicetrapib group compared with placebo",
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "The primary endpoint was the percent change from baseline to week 8 in Friedewald-calculated LDL-C for each obicetrapib group compared with placebo.",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_585ef71102d63b",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "Major Adverse Cardiovascular Effect (MACE)",
+        "unit": "",
+        "attrs": {
+          "trial": "PREVAIL"
+        },
+        "source_id": "ctgov:NCT05202509",
+        "quote": "Primary outcome(s): Major Adverse Cardiovascular Effect (MACE) [30 months after last participant randomized]",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05202509"
+      },
+      {
+        "fact_id": "f_c0199d0fce0dcc",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "percent LDL cholesterol changes in the FDC group compared with placebo, ezetimibe monotherapy, and obicetrapib monotherapy, and the placebo-adjusted change in the obicetrapib monotherapy group",
+        "unit": "percent",
+        "attrs": {
+          "trial": "TANDEM"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "The co-primary endpoints in the intention-to-treat population were the percent LDL cholesterol changes in the FDC group compared with placebo, ezetimibe monotherapy, and obicetrapib monotherapy, and the placebo-adjusted change in the obicetrapib monotherapy group.",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_e9fc1a687fccef",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "percent change in LDL-C from baseline to day 84",
+        "unit": "percent",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "The primary efficacy endpoint was the percent change in LDL-C from baseline to day 84.",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_ff60b72a230865",
+        "entity": "trial:nct05202509",
+        "key": "primary_endpoint",
+        "value": "percent change in LDL cholesterol level from baseline to day 84",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "The primary end point was the percent change in the LDL cholesterol level from baseline to day 84",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_4b8d112aaec8ea",
+        "entity": "trial:nct05202509",
+        "key": "readout_statement",
+        "value": "This study will be a placebo-controlled, double-blind, randomized, phase 3 study in participants with Atherosclerotic Cardiovascular Disease (ASCVD) who are not adequately controlled despite maximally tolerated lipid-lowering therapy.",
+        "unit": "",
+        "attrs": {
+          "trial": "PREVAIL"
+        },
+        "source_id": "ctgov:NCT05202509",
+        "quote": "Brief summary: This study will be a placebo-controlled, double-blind, randomized, phase 3 study in participants with Atherosclerotic Cardiovascular Disease (ASCVD) who are not adequately controlled despite maximally tolerated lipid-lowering therapy.",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05202509"
+      },
+      {
+        "fact_id": "f_70c4cc4bec02f3",
+        "entity": "trial:nct05202509",
+        "key": "readout_statement",
+        "value": "All doses of obicetrapib taken as an adjunct to stable statin therapy significantly lowered atherogenic lipoprotein lipid parameters, showed near complete elimination of drug by 4 weeks, and were safe and well tolerated in a Japanese population",
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "All doses of obicetrapib taken as an adjunct to stable statin therapy significantly lowered atherogenic lipoprotein lipid parameters, showed near complete elimination of drug by 4 weeks, and were safe and well tolerated in a Japanese population",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      },
+      {
+        "fact_id": "f_9d872e3a912c86",
+        "entity": "trial:nct05202509",
+        "key": "readout_statement",
+        "value": "Results from both trials are anticipated in 2024.",
+        "unit": "text",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:38705341",
+        "quote": "Results from both trials are anticipated in 2024.",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/38705341"
+      },
+      {
+        "fact_id": "f_afa767df391abb",
+        "entity": "trial:nct05202509",
+        "key": "readout_statement",
+        "value": "Among ApoE4/E4 participants, obicetrapib reduced p-tau217 levels by a placebo-adjusted 20.48 % and demonstrated consistent effects across multiple AD biomarkers.",
+        "unit": null,
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmcid:PMC12811769",
+        "quote": "Among ApoE4/E4 participants, obicetrapib reduced p-tau217 levels by a placebo-adjusted 20.48 % and demonstrated consistent effects across multiple AD biomarkers.",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41109840"
+      },
+      {
+        "fact_id": "f_d1162c24cb3b21",
+        "entity": "trial:nct05202509",
+        "key": "readout_statement",
+        "value": "Among patients with atherosclerotic cardiovascular disease or heterozygous familial hypercholesterolemia who were receiving maximum tolerated doses of lipid-lowering therapy and were at high risk for cardiovascular events, obicetrapib reduced LDL cholesterol levels by 29.9%.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "BROADWAY"
+        },
+        "source_id": "pmid:40337982",
+        "quote": "Among patients with atherosclerotic cardiovascular disease or heterozygous familial hypercholesterolemia who were receiving maximum tolerated doses of lipid-lowering therapy and were at high risk for cardiovascular events, obicetrapib reduced LDL cholesterol levels by 29.9%",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40337982"
+      },
+      {
+        "fact_id": "f_48ad4bb4aa046f",
+        "entity": "trial:nct05202509",
+        "key": "safety_signal",
+        "value": 1,
+        "unit": "deaths",
+        "attrs": {
+          "trial": "TANDEM",
+          "arm": "FDC"
+        },
+        "source_id": "pmid:40347969",
+        "quote": "Deaths occurred in one [1%] of 102 participants with FDC",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40347969"
+      },
+      {
+        "fact_id": "f_859157ecf4e3cf",
+        "entity": "trial:nct05202509",
+        "key": "safety_signal",
+        "value": "no adverse safety signals",
+        "unit": "none",
+        "attrs": {
+          "trial": "NCT05421078"
+        },
+        "source_id": "pmcid:PMC11456355",
+        "quote": "Obicetrapib was well tolerated and there were no adverse safety signals.",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/38569868"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT05202509",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT05202509 PREVAIL",
+        "url": "https://clinicaltrials.gov/study/NCT05202509",
+        "pub_date": "2022-01-21",
+        "access": "registry",
+        "meta": {
+          "design_only_view": false,
+          "summary": {
+            "nct_id": "NCT05202509",
+            "acronym": "PREVAIL",
+            "title": "Cardiovascular Outcome Study to Evaluate the Effect of Obicetrapib in Patients With Cardiovascular Disease",
+            "official_title": "Placebo Controlled, Double Blind, Randomized Cardiovascular Outcome Study to Evaluate the Effect of 10 mg Obicetrapib in Participants With ASCVD Not Adequately Controlled Despite Maximally Tolerated Lipid Modifying Therapies",
+            "sponsor": "NewAmsterdam Pharma",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2022-02-07",
+            "primary_completion": "2026-11",
+            "first_posted": "2022-01-21",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 9541,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Obicetrapib",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "obicetrapib 10mg"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "obicetrapib 10mg",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Atherosclerotic Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Major Adverse Cardiovascular Effect (MACE) [30 months after last participant randomized]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 2387
+      },
+      {
+        "source_id": "pmid:40337982",
+        "type": "journal",
+        "title": "Safety and Efficacy of Obicetrapib in Patients at High Cardiovascular Risk.",
+        "url": "https://europepmc.org/article/MED/40337982",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40337982",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa2415820",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2209
+      },
+      {
+        "source_id": "pmid:40347969",
+        "type": "journal",
+        "title": "Fixed-dose combination of obicetrapib and ezetimibe for LDL cholesterol reduction (TANDEM): a phase 3, randomised, double-blind, placebo-controlled trial.",
+        "url": "https://europepmc.org/article/MED/40347969",
+        "pub_date": "2025-05-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40347969",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(25)00721-4",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 2835
+      },
+      {
+        "source_id": "pmcid:PMC12811769",
+        "type": "journal",
+        "title": "Effect of obicetrapib, a potent cholesteryl ester transfer protein inhibitor, on p-tau217 levels in patients with cardiovascular disease.",
+        "url": "https://europepmc.org/article/MED/41109840",
+        "pub_date": "2025-10-17",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "41109840",
+          "pmcid": "PMC12811769",
+          "doi": "10.1016/j.tjpad.2025.100394",
+          "journal": "The journal of prevention of Alzheimer's disease"
+        },
+        "chars": 64085
+      },
+      {
+        "source_id": "pmid:40683616",
+        "type": "journal",
+        "title": "Rationale and design of the REMBRANDT trial: A phase 3 study to evaluate the effect of obicetrapib/ezetimibe on coronary plaque characteristics.",
+        "url": "https://europepmc.org/article/MED/40683616",
+        "pub_date": "2025-07-17",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40683616",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2025.07.012",
+          "journal": "American heart journal"
+        },
+        "chars": 1886
+      },
+      {
+        "source_id": "pmid:38705341",
+        "type": "journal",
+        "title": "Obicetrapib on top of maximally tolerated lipid-modifying therapies in participants with or at high risk for atherosclerotic cardiovascular disease: rationale and designs of BROADWAY and BROOKLYN.",
+        "url": "https://europepmc.org/article/MED/38705341",
+        "pub_date": "2024-05-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "38705341",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2024.05.002",
+          "journal": "American heart journal"
+        },
+        "chars": 2272
+      },
+      {
+        "source_id": "pmcid:PMC11456355",
+        "type": "journal",
+        "title": "Obicetrapib as an Adjunct to Stable Statin Therapy in Japanese Subjects: Results from a Randomized Phase 2 Trial.",
+        "url": "https://europepmc.org/article/MED/38569868",
+        "pub_date": "2024-04-03",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "38569868",
+          "pmcid": "PMC11456355",
+          "doi": "10.5551/jat.64828",
+          "journal": "Journal of atherosclerosis and thrombosis"
+        },
+        "chars": 38148
+      },
+      {
+        "source_id": "pmid:18193043",
+        "type": "journal",
+        "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
+        "url": "https://europepmc.org/article/MED/18193043",
+        "pub_date": "2008-01-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18193043",
+          "pmcid": "PMC5206900",
+          "doi": "10.1038/ng.76",
+          "journal": "Nature genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1538
+      },
+      {
+        "source_id": "pmid:29083408",
+        "type": "journal",
+        "title": "Exome-wide association study of plasma lipids in &gt;300,000 individuals.",
+        "url": "https://europepmc.org/article/MED/29083408",
+        "pub_date": "2017-10-30",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "29083408",
+          "pmcid": "PMC5709146",
+          "doi": "10.1038/ng.3977",
+          "journal": "Nature genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1228
+      },
+      {
+        "source_id": "pmid:12034052",
+        "type": "journal",
+        "title": "Thyroid disease and lipids.",
+        "url": "https://europepmc.org/article/MED/12034052",
+        "pub_date": "2002-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12034052",
+          "pmcid": null,
+          "doi": "10.1089/10507250252949405",
+          "journal": "Thyroid : official journal of the American Thyroid Association",
+          "purpose": "genetics"
+        },
+        "chars": 2483
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 21,
+      "facts": 66,
+      "relationships": 23,
+      "events": 170,
+      "audit_entries": 170,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 10,
+        "input_tokens": 18708,
+        "output_tokens": 7644,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 9086,
+        "output_tokens": 9128,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 5018,
+        "output_tokens": 3407,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 8343,
+        "output_tokens": 9112,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 12197,
+        "output_tokens": 5147,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 5840,
+        "output_tokens": 3272,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

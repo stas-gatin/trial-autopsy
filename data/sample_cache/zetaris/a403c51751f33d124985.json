@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A18436114+OR+EXT_ID%3A24678955+OR+PMCID%3APMC3750980+OR+PMCID%3APMC3930668&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*13\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18436114' LIMIT 5",
+ "rows": [
+  [
+   "028) and high-sensitivity C-reactive protein (hs-CRP) by 13.0% (95% CI -28% to +5%; p = 0"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,7 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25773607+OR+EXT_ID%3A26920601&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, regexp_extract(r.abstractText, '([^.]*1630[^.]*)', 1) as sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26920601' AND r.abstractText LIKE '%1630%' LIMIT 5",
+ "rows": [],
+ "error": null
+}

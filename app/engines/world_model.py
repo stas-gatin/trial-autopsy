@@ -72,6 +72,7 @@ class WorldStoreService:
         self.audit_path = config.logs_dir() / f"world-{run_id}.jsonl"
         self.audit_path.write_text("")
         self._lock = threading.Lock()
+        self.sources_written: set[str] = set()   # source ids this run has written
         from app.engines.meterless import MeterlessClient
         self.meterless = MeterlessClient(run_id)  # the official Meterless engine, run as a local service
 
@@ -96,8 +97,13 @@ class IngestPipelineService:
         self.store = store
 
     def upsert_source(self, doc) -> str:
+        # The sources table is shared by all runs: a run's first write of a source replaces what an earlier run
+        # stored (say, a date read from another literature service), so a run never sees another run's metadata
+        # and gives the same result on an empty database (a fresh clone).
+        first = doc.source_id not in self.store.sources_written
+        self.store.sources_written.add(doc.source_id)
         self.store.execute(
-            "INSERT OR IGNORE INTO sources VALUES (?,?,?,?,?,?,?)",
+            f"INSERT OR {'REPLACE' if first else 'IGNORE'} INTO sources VALUES (?,?,?,?,?,?,?)",
             (doc.source_id, doc.type, doc.title, doc.url, doc.pub_date, doc.access,
              json.dumps({k: v for k, v in doc.meta.items() if k != "summary"}, default=str)))
         self.store.meterless.source(doc)

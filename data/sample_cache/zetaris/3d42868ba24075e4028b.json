@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A19061694&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*5,?250[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19061694' LIMIT 5",
+ "rows": [
+  [
+   "5 years and until at least 5,250 patients experience a primary end point"
+  ]
+ ],
+ "error": null
+}

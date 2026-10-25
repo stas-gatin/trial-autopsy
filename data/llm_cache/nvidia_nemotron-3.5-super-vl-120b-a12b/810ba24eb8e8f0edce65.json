@@ -1,0 +1,15 @@
+{
+  "key": "810ba24eb8e8f0edce65",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T16:14:06+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: ILLUMINATE NCT00134264 - A Study Examining Torcetrapib/Atorvastatin And Atorvastatin Effects On Clinical CV Events In Patients With Heart Disease\nInvestigational drug: torcetrapib\nDocument: Gene polymorphisms affecting HDL-cholesterol levels in the normolipidemic population (journal, published 2005-06-01, source pmid:15955471)\n\n--- DOCUMENT TEXT ---\nGene polymorphisms affecting HDL-cholesterol levels in the normolipidemic population\n\nBACKGROUND AND AIM: HDL-cholesterol (HDL-C) is inversely related to the risk of ischemic heart disease. Many genes are reported to affect HDL-C serum levels in both hyperlipidemic and normolipidemic populations, though the data are controversial. We examined the effect of common gene polymorphisms known to interfere with HDL-C metabolism (apolipoprotein E, cholesterol ester transfer protein and apolipoprotein A-IV gene polymorphisms) on HDL-C plasma levels in normolipidemic subjects. METHODS AND RESULTS: The study population consisted of 200 normolipidemic individuals visiting our clinic for a routine check-up. None of the above gene polymorphisms affected HDL-C levels in our population. However, participants carrying the allele E4 of the apolipoprotein (apo) E gene, the allele B1 of the TaqIB polymorphisms in the cholesterol ester transfer protein (CETP) gene and the allele T of the apoA-IV gene (A to T polymorphism at site 347) (n = 28) had statistically significantly lower HDL-C levels compared to those not carrying the above allele combination (0.99+/-0.33 vs 1.28+/-0.35 mmol/L, p = 0.04). CONCLUSION: In this study, we describe a subgroup of normolipidemic individuals with low HDL-C levels due to genetic variability, and we discuss the underlying possible mechanisms involved.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 649,
+    "output_tokens": 7
+  }
+}

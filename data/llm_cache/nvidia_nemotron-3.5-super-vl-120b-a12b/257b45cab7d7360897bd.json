@@ -1,0 +1,15 @@
+{
+  "key": "257b45cab7d7360897bd",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T19:43:15+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: SPARCL NCT00147602 - Lipitor In The Prevention Of Stroke, For Patients Who Have Had A Previous Stroke\nInvestigational drug: atorvastatin\nDocument: 8302A/C and (TTA)n polymorphisms in the HMG-CoA reductase gene may be associated with some plasma lipid metabolic phenotypes in patients with coronary heart disease (journal, published 2004-03-01, source pmid:15233402)\n\n--- DOCUMENT TEXT ---\n8302A/C and (TTA)n polymorphisms in the HMG-CoA reductase gene may be associated with some plasma lipid metabolic phenotypes in patients with coronary heart disease\n\nHMG-CoA reductase (HMGCR) is a rate-limiting enzyme that participates in cholesterol metabolism. Here we analyzed the 8302A/C and the (TTA)n polymorphisms in the HMGCR gene in 169 Chinese patients with coronary heart disease (CHD) and 161 age-matched controls. Results indicated that the levels of plasma VLDL and TG in patients with the AA genotype of the 8302A/C locus were significantly higher than in patients with other genotypes (P < 0.05). In addition, the frequency of allele A4 of the (TTA)n locus was higher (P < 0.05) and the frequency of allele A5 was lower (P = 0.002) in CHD patients than in the controls. This suggests that both polymorphisms in the HMGCR gene may be associated with lipid and lipoprotein abnormalities in CHD in the Chinese.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 573,
+    "output_tokens": 7
+  }
+}

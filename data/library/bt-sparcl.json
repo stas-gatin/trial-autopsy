@@ -1,0 +1,1448 @@
+{
+  "run_id": "bt-sparcl",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2006-08-09",
+  "backtest": true,
+  "readout_date": "2006-08-09",
+  "analysis_date": "2006-08-09",
+  "trial": {
+    "nct_id": "NCT00147602",
+    "acronym": "SPARCL",
+    "title": "Lipitor In The Prevention Of Stroke, For Patients Who Have Had A Previous Stroke",
+    "sponsor": "Pfizer",
+    "status": "COMPLETED",
+    "enrollment": 4732,
+    "phases": [
+      "PHASE4"
+    ],
+    "conditions": [
+      "Cardiovascular Disease"
+    ],
+    "primary_completion": null
+  },
+  "drug": {
+    "name": "atorvastatin",
+    "chembl_id": "CHEMBL1487",
+    "aliases": [
+      "80 mg lipitor tablets",
+      "ATORVASTATINA",
+      "ATORVASTATINE",
+      "Atorvastatina",
+      "Atorvastatine",
+      "CARDYL",
+      "Cardyl",
+      "LIPITOR",
+      "Lipitor",
+      "PREVENCOR",
+      "Prevencor",
+      "SORTIS",
+      "Sortis",
+      "TAHOR",
+      "Tahor",
+      "ZARATOR",
+      "Zarator",
+      "amlodipine/atorvastatin",
+      "ator",
+      "atora",
+      "atorva",
+      "atorvastatin 40 mg",
+      "atorvastatin ca",
+      "atv",
+      "fluvastatin",
+      "lcp-atorfen",
+      "lipilou",
+      "lipinon",
+      "liprimar",
+      "pravastatin",
+      "rosuvastatin",
+      "simvastatin"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "HMG-CoA reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000113161",
+        "symbol": "HMGCR",
+        "name": "3-hydroxy-3-methylglutaryl-CoA reductase"
+      }
+    ],
+    "searched_as": "atorvastatin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-sparcl",
+  "log_file": "logs/trace-bt-sparcl.jsonl",
+  "execution_time_seconds": 0.5,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"\"Patients taking Lipitor in this trial showed a significant reduction in stroke and coronary events.\" (announcement:sparcl)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "success_with_caveats",
+      "secondary_categories": [
+        "off_target_harm"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium-high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "SPARCL met its primary endpoint with a 16% relative reduction in fatal or non-fatal stroke (HR 0.84) that closely matches the mechanism-based prediction, but a hemorrhagic stroke safety signal warrants a caveat.",
+      "summary": "The trial randomized 4,732 patients with prior stroke or TIA to atorvastatin 80 mg or placebo for a median of 5 years. The primary endpoint of fatal or non-fatal stroke occurred with HR 0.84, described as a \"significant reduction in stroke and coronary events\" in the Pfizer announcement. A phase 2 apoB reduction of 23% (placebo-adjusted) predicts an expected HR of 0.855, nearly identical to the observed 0.84, supporting a causal LDL-lowering mechanism. However, the announcement explicitly noted a hemorrhagic stroke safety signal, a recognized off-target harm of intensive statin therapy in stroke survivors. At the 2006 cut-off, HMGCR genetic evidence was not yet published (score 0.695 but zero pre-cutoff studies), leaving target genetics formally uncertain. The result is a success with caveats: the benefit is real and mechanism-consistent, but the hemorrhagic stroke risk tempers the classification.",
+      "key_evidence": [
+        "Primary endpoint met: HR 0.84 for fatal/non-fatal stroke, described as \"significant reduction\" — Pfizer's Lipitor Shown to Reduce the Chance of Additional Strokes in Stroke Patients",
+        "Mechanism prediction: apoB reduction -23% (placebo-adjusted) predicts HR 0.855, matching observed HR 0.84 — Effect of atorvastatin on chylomicron remnant metabolism in visceral obesity: a study employing a new stable isotope breath test; calculator",
+        "Sample and follow-up: 4,732 patients, median 5 years — Design and baseline characteristics of the stroke prevention by aggressive reduction in cholesterol levels (SPARCL) study; Pfizer's Lipitor Shown to Reduce the Chance of Additional Strokes in Stroke Patients",
+        "Safety signal: hemorrhagic stroke reported in announcement — Pfizer's Lipitor Shown to Reduce the Chance of Additional Strokes in Stroke Patients",
+        "Target genetics: HMGCR score 0.695 but evidence_before_cutoff = 0 at 2006 — opentargets:HMGCR"
+      ],
+      "what_would_change_this": "Publication of the primary endpoint confidence interval (to confirm upper bound well below 0.90 for robust_success) and hemorrhagic stroke incidence rates by arm (to quantify the off-target harm).",
+      "readthrough_note": "The mechanism-consistent effect supports LDL-C lowering as causal for stroke prevention; the hemorrhagic stroke signal aligns with subsequent intensive statin trials (e.g., TNT, IDEAL) and informs risk-benefit in secondary stroke prevention."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.695 for HMGCR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.63 mmol/L via apoB",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.145,
+        "detail": "expected HR 0.855 at 5.0 y (relative risk reduction 14.5%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 1281",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "sparcl",
+      "ldl_equivalent_mmol": 0.63,
+      "basis": "apoB",
+      "time_factor": 1.0,
+      "expected_hr": 0.855,
+      "causal_rrr": 0.145,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "apoB: no baseline given, assumed 80.0"
+      ],
+      "notes": [
+        "events needed for 80% power: 1281"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "sparcl",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "No placebo-adjusted LDL-C change measured in SPARCL outcome trial or in a similar population (prior stroke/TIA) on same background therapy at 80 mg dose. Phase 2 data (pmid:16413806) are not placebo-adjusted, use a non-human dose (0.06% in diet), and report baselines in g/L likely from animal models.",
+          "source": ""
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "percent",
+          "pct_change": -23.0,
+          "baseline": null,
+          "method": "Phase 2, placebo-adjusted, dose not stated (pmid:11971941, 2002). Not from outcome trial population or dose.",
+          "source": "pmid:11971941"
+        }
+      ],
+      "followup_years": 5.0,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.84,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (all 4 Open Targets studies published 2016-2023, after 2006-08-09 cut-off). No pre-cutoff genetic evidence for this well-studied target; per rules, uncertain.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "No placebo-adjusted LDL-C change measured in SPARCL outcome trial or in a similar population (prior stroke/TIA) on same background therapy at 80 mg dose. Phase 2 data (pmid:16413806) are not placebo-adjusted, use a non-human dose (0.06% in diet), and report baselines in g/L likely from animal models.",
+          "fact_ids": []
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -23.0,
+          "baseline": null,
+          "unit": "percent",
+          "method": "Phase 2, placebo-adjusted, dose not stated (pmid:11971941, 2002). Not from outcome trial population or dose.",
+          "fact_ids": [
+            "f_b5a247cc7d29aa"
+          ]
+        }
+      ],
+      "followup_years": 5.0,
+      "followup_fact_ids": [
+        "f_eed3d53474edea"
+      ],
+      "events": null,
+      "events_basis": "actual",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": 0.84,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_31d215d858464d",
+        "f_82562dd6f43e16"
+      ],
+      "missing": [
+        "LDL-C placebo-adjusted change in outcome trial or similar population",
+        "outcome trial baseline LDL-C",
+        "total primary events count",
+        "observed HR confidence interval",
+        "SBP change"
+      ],
+      "notes": "SPARCL (NCT00147602) tested atorvastatin 80 mg vs placebo in 4732 patients with prior stroke/TIA, median follow-up 5 years. Primary endpoint: fatal/non-fatal stroke. Announced HR 0.84 (f_31d215d858464d). No verified facts provide placebo-adjusted LDL-C change from the outcome trial or a comparable human 80 mg study. Phase 2 LDL-C data (f_7c94fe16d2c5e2, f_90eb99a60cb8f3) are not placebo-adjusted and use a non-clinical dose. ApoB change (f_b5a247cc7d29aa) is placebo-adjusted but from an unspecified phase 2 dose. Event count and HR CI not in verified facts."
+    },
+    "hypotheses": [
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met primary endpoint with HR 0.84 for fatal/non-fatal stroke, described as 'significant reduction in stroke and coronary events' (f_31d215d858464d, f_82562dd6f43e16).",
+            "refs": [
+              "f_31d215d858464d",
+              "f_82562dd6f43e16"
+            ]
+          },
+          {
+            "text": "Mechanism-based prediction using apoB reduction (-23% from phase 2, placebo-adjusted) yields expected HR 0.855, closely matching observed HR 0.84 (calculator).",
+            "refs": [
+              "f_b5a247cc7d29aa",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Explicit safety signal of hemorrhagic stroke reported in the announcement (f_ed32d62e60af01), a known caveat of intensive statin therapy in secondary stroke prevention.",
+            "refs": [
+              "f_ed32d62e60af01"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Effect size is not modest (HR 0.84) and matches mechanism prediction well, arguing against narrow_success.",
+            "refs": [
+              "calculator",
+              "f_31d215d858464d"
+            ]
+          },
+          {
+            "text": "No evidence that benefit is limited to subgroup or secondary endpoint; primary endpoint was met.",
+            "refs": [
+              "f_3dba1d26ffae00",
+              "f_82562dd6f43e16"
+            ]
+          }
+        ],
+        "would_settle": "Full publication with confidence intervals for primary endpoint and hemorrhagic stroke incidence by arm."
+      },
+      {
+        "category": "robust_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Observed HR 0.84 with 4732 patients and 5-year follow-up likely has upper confidence bound well below 0.90 (f_1df37c8d2c7898, f_eed3d53474edea).",
+            "refs": [
+              "f_1df37c8d2c7898",
+              "f_eed3d53474edea",
+              "f_31d215d858464d"
+            ]
+          },
+          {
+            "text": "Mechanism prediction (expected HR 0.855) aligns almost exactly with observed effect (calculator).",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Hemorrhagic stroke safety signal constitutes an important caveat, preventing classification as robust_success per definition.",
+            "refs": [
+              "f_ed32d62e60af01"
+            ]
+          },
+          {
+            "text": "Target genetics uncertain at 2006 cut-off (evidence_before_cutoff: 0), though HMGCR is now established causal (f_6c61b442086456).",
+            "refs": [
+              "f_6c61b442086456"
+            ]
+          }
+        ],
+        "would_settle": "Published confidence interval for primary endpoint to confirm upper bound well below 0.90."
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If confidence interval upper bound is near 1.0 or p-value near 0.05, would fit narrow_success.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Effect size (HR 0.84) is not modest and matches mechanism prediction (HR 0.855), not smaller than expected.",
+            "refs": [
+              "calculator",
+              "f_31d215d858464d"
+            ]
+          },
+          {
+            "text": "Large sample (4732) and long follow-up (5 years) make borderline significance unlikely.",
+            "refs": [
+              "f_1df37c8d2c7898",
+              "f_eed3d53474edea"
+            ]
+          }
+        ],
+        "would_settle": "Exact p-value and confidence interval from primary publication."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Hemorrhagic stroke signal reported in announcement (f_ed32d62e60af01), a recognized off-target harm of intensive LDL lowering in stroke survivors.",
+            "refs": [
+              "f_ed32d62e60af01"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Harm did not offset primary benefit; net effect on primary endpoint was positive (HR 0.84).",
+            "refs": [
+              "f_31d215d858464d"
+            ]
+          }
+        ],
+        "would_settle": "Incidence rates of hemorrhagic stroke by treatment arm from full publication."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Genetic association score 0.695 but evidence_before_cutoff: 0 at 2006 (f_6c61b442086456).",
+            "refs": [
+              "f_6c61b442086456"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HMGCR is a well-validated causal target for cardiovascular disease; lack of pre-2006 genetic evidence reflects timing, not biology.",
+            "refs": [
+              "f_6c61b442086456"
+            ]
+          },
+          {
+            "text": "Observed benefit matches mechanism prediction, supporting target causality.",
+            "refs": [
+              "calculator",
+              "f_31d215d858464d"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable; genetics timing issue resolved by subsequent evidence."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C/apoB lowering is causally linked to stroke reduction; mechanism prediction matches observed effect.",
+            "refs": [
+              "calculator",
+              "f_31d215d858464d"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable."
+      },
+      {
+        "category": "population",
+        "status": "undetermined",
+        "for": [],
+        "against": [],
+        "would_settle": "Subgroup analyses by stroke subtype or baseline LDL-C from full publication."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "undetermined",
+        "for": [],
+        "against": [],
+        "would_settle": "Not applicable; design appears appropriate."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "undetermined",
+        "for": [],
+        "against": [],
+        "would_settle": "Not applicable."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator returned insufficient_data due to uncertain genetics and missing LDL-C change from outcome trial.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial provided clear positive result (HR 0.84) with mechanism-consistent effect size; safety signal documented.",
+            "refs": [
+              "f_31d215d858464d",
+              "f_ed32d62e60af01",
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable; outcome known."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "The apoB change (-23%) used for mechanism prediction comes from a phase 2 trial (pmid:11971941) with unstated atorvastatin dose, not the 80 mg dose used in SPARCL. The calculator input method acknowledges this limitation. A placebo-adjusted apoB change at 80 mg in a stroke/TIA population would be more appropriate for the mechanism prediction.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted apoB or LDL-C change with atorvastatin 80 mg in secondary stroke prevention population (e.g., SPARCL biomarker substudy or similar trial)."
+          },
+          {
+            "severity": "medium",
+            "issue": "The calculator assumes a baseline apoB of 80 mg/dL (noted in assumptions) without a verified fact reference. This assumption directly affects the ldl_equivalent_mmol calculation (0.63 mmol/L) and thus the expected HR (0.855).",
+            "target_agent": "mechanism",
+            "request": "Find baseline apoB level in SPARCL trial population or similar prior-stroke/TIA population from published sources."
+          },
+          {
+            "severity": "low",
+            "issue": "A second hazard ratio of 0.65 is reported in the announcement (f_53ec5a2a47d3c2) but not explained in the hypotheses. It is unclear whether this corresponds to the coronary event component, a composite endpoint, or a subgroup.",
+            "target_agent": "investigator",
+            "request": "Clarify what endpoint the HR 0.65 refers to in the SPARCL announcement (stroke, coronary events, or composite)."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator input for LDL-C change has no fact citation (automatic check flagged this). While the method correctly explains that no placebo-adjusted LDL-C change exists from the outcome trial or similar population at 80 mg, the entry lacks a source field citation even for the explanatory method.",
+            "target_agent": "case_builder",
+            "request": "Add a source citation to the LDL-C change method explanation (e.g., reference to SPARCL design paper or announcement confirming no biomarker substudy reported)."
+          },
+          {
+            "severity": "low",
+            "issue": "Event count for the primary endpoint is not provided (events: null), preventing power and minimum detectable effect calculations. The calculator notes 1281 events needed for 80% power but actual events unknown.",
+            "target_agent": "case_builder",
+            "request": "Search for number of primary endpoint events (fatal/non-fatal stroke) in SPARCL from publication or announcement."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_b5a247cc7d29aa",
+          "claim": "c1",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -23,
+          "unit": "percent",
+          "source_id": "pmid:11971941",
+          "status": "confirmed",
+          "found": "ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0",
+          "note": "The abstract reports a 23% decrease in ApoB-48, matching the claimed value.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*23%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '11971941' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 1
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "HMGCR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.722,
+        "genetic_association_score": 0.695,
+        "evidence_count": 4,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.816,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs7703051",
+            "beta": null,
+            "p": "9e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.791,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12916",
+            "beta": 0.02883433,
+            "p": "6.954999923706055e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.787,
+            "study_id": "GCST90428732",
+            "trait": "Gall stone disease or coronary artery disease",
+            "n": 1716127,
+            "publication_date": "2023-09-13",
+            "pmid": "37705021",
+            "variant": "rs12916",
+            "beta": null,
+            "p": "8e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.676,
+            "study_id": "GCST90451698",
+            "trait": "Type 2 diabetes mellitus or coronary artery disease (pleiotropy)",
+            "n": 2063820,
+            "publication_date": "2023-12-08",
+            "pmid": "38062574",
+            "variant": "rs10474433",
+            "beta": null,
+            "p": "5e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_b5a247cc7d29aa",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -23,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0.002) and 33% (P = 0.045), respectively.",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_633669eea417ac",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 4.55,
+        "unit": "g/l",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmid:16413806",
+        "quote": "RO birds exhibited greatly elevated baseline plasma total cholesterol (CHOL) and triglyceride (TG) concentrations (1.56 vs. 4.55 g/l",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_a22aa0d3e79cea",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 1.56,
+        "unit": "g/l",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmid:16413806",
+        "quote": "RO birds exhibited greatly elevated baseline plasma total cholesterol (CHOL) and triglyceride (TG) concentrations (1.56 vs. 4.55 g/l",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_7c94fe16d2c5e2",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -45.1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "20 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.06% atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16413806",
+        "quote": "by 45.1% and 34.3%, respectively, in RO hens",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_90eb99a60cb8f3",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -60.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "20 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.06% atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16413806",
+        "quote": "AT attenuated plasma CHOL and TG concentrations by 60.3% and 70.1%, respectively, in NL hens",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_58f56518343a91",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -33,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0.002) and 33% (P = 0.045), respectively.",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_fcbcd9f559b996",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.036,
+        "unit": "pools/h",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "The FCR of the remnant-like emulsion increased significantly from 0.054 +/- 0.008 to 0.090 +/- 0.010 pools/h (P = 0.002).",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_86f1eb00bb9884",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 30.7,
+        "unit": "g/l",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmid:16413806",
+        "quote": "and 30.7 vs. 138.4 g/l, respectively)",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_ff720c3ab938df",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 138.4,
+        "unit": "g/l",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmid:16413806",
+        "quote": "and 30.7 vs. 138.4 g/l, respectively)",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_3c3c35c770951f",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -34.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "20 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.06% atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16413806",
+        "quote": "by 45.1% and 34.3%, respectively, in RO hens",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_5427aecd89cfea",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -70.1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "20 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.06% atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16413806",
+        "quote": "AT attenuated plasma CHOL and TG concentrations by 60.3% and 70.1%, respectively, in NL hens",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/"
+      },
+      {
+        "fact_id": "f_6c61b442086456",
+        "entity": "target:hmgcr",
+        "key": "genetic_association_score",
+        "value": 0.695,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 4,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:HMGCR",
+        "quote": "\"genetic_association_score\": 0.695",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161"
+      },
+      {
+        "fact_id": "f_31d215d858464d",
+        "entity": "trial:nct00147602",
+        "key": "hr",
+        "value": 0.84,
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "In the trial, Lipitor was shown to reduce the risk of an additional stroke by 16 percent and major coronary events such as heart attack, cardiac death or resuscitated cardiac arrest, by 35 percent compared to placebo.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_53ec5a2a47d3c2",
+        "entity": "trial:nct00147602",
+        "key": "hr",
+        "value": 0.65,
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "In the trial, Lipitor was shown to reduce the risk of an additional stroke by 16 percent and major coronary events such as heart attack, cardiac death or resuscitated cardiac arrest, by 35 percent compared to placebo.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_2ea0f2403f7d5c",
+        "entity": "trial:nct00147602",
+        "key": "inclusion_threshold",
+        "value": "Previous stroke or TIA",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "ctgov:NCT00147602@2006-08-09",
+        "quote": "Previous stroke or TIA",
+        "pub_date": "2005-09-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00147602"
+      },
+      {
+        "fact_id": "f_4feab6d4883650",
+        "entity": "trial:nct00147602",
+        "key": "inclusion_threshold",
+        "value": 80,
+        "unit": "mg/day",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "pmid:14584489",
+        "quote": "atorvastatin 80 mg/day",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14584489/"
+      },
+      {
+        "fact_id": "f_eed3d53474edea",
+        "entity": "trial:nct00147602",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "In SPARCL, 4,731 patients who had no history of heart disease and had experienced a stroke or TIA within six months prior to trial enrollment were followed for an average of about five years.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_1df37c8d2c7898",
+        "entity": "trial:nct00147602",
+        "key": "n_randomized",
+        "value": 4732,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "pmid:14584489",
+        "quote": "A total of 4732 patients have been enrolled",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14584489/"
+      },
+      {
+        "fact_id": "f_1fd1cd94af7c0a",
+        "entity": "trial:nct00147602",
+        "key": "n_randomized",
+        "value": 4732,
+        "unit": "participants",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "ctgov:NCT00147602@2006-08-09",
+        "quote": "Enrollment: 4732 (None)",
+        "pub_date": "2005-09-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00147602"
+      },
+      {
+        "fact_id": "f_9a4b7d946c3bd8",
+        "entity": "trial:nct00147602",
+        "key": "n_randomized",
+        "value": 23,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Short-term adjuvant atorvastatin improves frequency domain indices of heart rate variability in stable systolic heart failure",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:16142595",
+        "quote": "We studied a group of 23 patients with stable systolic ventricular impairment and randomised them single (patient) blind to high dose Atorvastatin 40 mg daily or placebo in addition to standard therapies over a 12-week treatment interval.",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16142595/"
+      },
+      {
+        "fact_id": "f_f5c19f3a586fad",
+        "entity": "trial:nct00147602",
+        "key": "n_randomized",
+        "value": 4731,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "In SPARCL, 4,731 patients who had no history of heart disease and had experienced a stroke or TIA within six months prior to trial enrollment were followed for an average of about five years.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_3dba1d26ffae00",
+        "entity": "trial:nct00147602",
+        "key": "primary_endpoint",
+        "value": "Time to occurrence of fatal or non-fatal stroke",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "ctgov:NCT00147602@2006-08-09",
+        "quote": "Primary outcome(s): Time to occurrence of fatal or non-fatal stroke",
+        "pub_date": "2005-09-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00147602"
+      },
+      {
+        "fact_id": "f_6ebbaade66d8c7",
+        "entity": "trial:nct00147602",
+        "key": "primary_endpoint",
+        "value": "frequency domain indices of heart rate variability",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Short-term adjuvant atorvastatin improves frequency domain indices of heart rate variability in stable systolic heart failure",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:16142595",
+        "quote": "Impact on the autonomic nervous system was assessed by anonymised short-term (20 min) standardised supine heart rate variability analyses.",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16142595/"
+      },
+      {
+        "fact_id": "f_a6e0053dcd505f",
+        "entity": "trial:nct00147602",
+        "key": "primary_endpoint",
+        "value": "additional stroke",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "Patients taking Lipitor® (atorvastatin calcium) Tablets (80 mg) who had a prior stroke reduced their chances of having an additional stroke and major coronary event such as heart attack, according to results from the first major study designed to examine the benefits of lipid lowering in stroke patients.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_e64440cbb7e2c5",
+        "entity": "trial:nct00147602",
+        "key": "primary_endpoint",
+        "value": "effects of atorvastatin 80 mg/day in patients who previously experienced a stroke or transient ischaemic attack",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "pmid:14584489",
+        "quote": "designed to evaluate the effects of atorvastatin 80 mg/day in patients who previously experienced a stroke or transient ischaemic attack",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14584489/"
+      },
+      {
+        "fact_id": "f_155886ffba30df",
+        "entity": "trial:nct00147602",
+        "key": "readout_statement",
+        "value": "To determine whether Lipitor reduces stroke, compared to placebo in patients who have had a previous stroke or transient ischemic attack.",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "ctgov:NCT00147602@2006-08-09",
+        "quote": "Brief summary: To determine whether Lipitor reduces stroke, compared to placebo in patients who have had a previous stroke or transient ischemic attack.",
+        "pub_date": "2005-09-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00147602"
+      },
+      {
+        "fact_id": "f_82562dd6f43e16",
+        "entity": "trial:nct00147602",
+        "key": "readout_statement",
+        "value": "Patients taking Lipitor® (atorvastatin calcium) Tablets (80 mg) who had a prior stroke reduced their chances of having an additional stroke and major coronary event such as heart attack",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "Patients taking Lipitor® (atorvastatin calcium) Tablets (80 mg) who had a prior stroke reduced their chances of having an additional stroke and major coronary event such as heart attack, according to results from the first major study designed to examine the benefits of lipid lowering in stroke patients.",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      },
+      {
+        "fact_id": "f_877630f6eb9109",
+        "entity": "trial:nct00147602",
+        "key": "readout_statement",
+        "value": "Frequency domain but not time domain HRV indices improved with active statin therapy suggesting beneficial effects in attenuating sympathetic tone.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Short-term adjuvant atorvastatin improves frequency domain indices of heart rate variability in stable systolic heart failure",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:16142595",
+        "quote": "Frequency domain but not time domain HRV indices improved with active statin therapy suggesting beneficial effects in attenuating sympathetic tone.",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16142595/"
+      },
+      {
+        "fact_id": "f_ed32d62e60af01",
+        "entity": "trial:nct00147602",
+        "key": "safety_signal",
+        "value": "hemorrhagic stroke",
+        "unit": "",
+        "attrs": {
+          "trial": "SPARCL"
+        },
+        "source_id": "announcement:sparcl",
+        "quote": "There were more patients in the Lipitor group who experienced hemorrhagic stroke (2.3 percent) compared to patients taking placebo (1.4 percent).",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00147602@2006-08-09",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00147602 SPARCL",
+        "url": "https://clinicaltrials.gov/study/NCT00147602",
+        "pub_date": "2005-09-07",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00147602",
+            "acronym": "SPARCL",
+            "title": "Lipitor In The Prevention Of Stroke, For Patients Who Have Had A Previous Stroke",
+            "official_title": "A Double-Blind, Randomized, Placebo- Controlled Study Of Atorvastatin As Prevention Of Cerebrovascular Events In Patients With A Previous Transient Ischemic Attack (TIA) Or Stroke",
+            "sponsor": "Pfizer",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "1998-11",
+            "primary_completion": null,
+            "first_posted": "2005-09-07",
+            "phases": [
+              "PHASE4"
+            ],
+            "enrollment": 4732,
+            "enrollment_type": null,
+            "interventions": [
+              {
+                "name": "atorvastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              }
+            ],
+            "arm_groups": [],
+            "conditions": [
+              "Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Time to occurrence of fatal or non-fatal stroke"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 810
+      },
+      {
+        "source_id": "pmid:16470128",
+        "type": "journal",
+        "title": "The effect of atorvastatin treatment on HIV-1-infected patients interrupting antiretroviral therapy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16470128/",
+        "pub_date": "2006-02-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16470128",
+          "pmcid": null,
+          "doi": "10.1097/01.aids.0000210617.90954.0e",
+          "journal": "AIDS (London, England)"
+        },
+        "chars": 572
+      },
+      {
+        "source_id": "pmid:16302686",
+        "type": "journal",
+        "title": "Avascular necrosis prevention with lipitor in lupus erythematosus",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16302686/",
+        "pub_date": "2005-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16302686",
+          "pmcid": null,
+          "doi": "10.1191/0961203305lu2189xx",
+          "journal": "Lupus"
+        },
+        "chars": 67
+      },
+      {
+        "source_id": "pmid:16142595",
+        "type": "journal",
+        "title": "Short-term adjuvant atorvastatin improves frequency domain indices of heart rate variability in stable systolic heart failure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16142595/",
+        "pub_date": "2005-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16142595",
+          "pmcid": null,
+          "doi": "10.1007/s10557-005-2219-8",
+          "journal": "Cardiovascular drugs and therapy"
+        },
+        "chars": 1368
+      },
+      {
+        "source_id": "pmid:12767434",
+        "type": "journal",
+        "title": "Effect of atorvastatin (80 mg) on recurrent ischemia in unstable angina pectoris or non-ST-elevation acute myocardial infarction",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12767434/",
+        "pub_date": "2003-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12767434",
+          "pmcid": null,
+          "doi": "10.1016/s0002-9149(03)00330-8",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 130
+      },
+      {
+        "source_id": "pmid:12580994",
+        "type": "journal",
+        "title": "Low-dose atorvastatin therapy does not augment endothelial function in active hypercholesterolaemic males",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12580994/",
+        "pub_date": "2003-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12580994",
+          "pmcid": "PMC1894731",
+          "doi": "10.1046/j.1365-2125.2003.t01-1-01752.x",
+          "journal": "British journal of clinical pharmacology"
+        },
+        "chars": 1231
+      },
+      {
+        "source_id": "pmid:12372577",
+        "type": "journal",
+        "title": "Effects of atorvastatin 80 mg daily early after onset of unstable angina pectoris or non-Q-wave myocardial infarction",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12372577/",
+        "pub_date": "2002-10-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12372577",
+          "pmcid": null,
+          "doi": "10.1016/s0002-9149(02)02711-x",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 119
+      },
+      {
+        "source_id": "pmid:11971941",
+        "type": "journal",
+        "title": "Effect of atorvastatin on chylomicron remnant metabolism in visceral obesity: a study employing a new stable isotope breath test",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11971941",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1663
+      },
+      {
+        "source_id": "pmid:11428488",
+        "type": "journal",
+        "title": "Effects of atorvastatin on early recurrent ischemic events in acute coronary syndromes. The MIRACL study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11428488/",
+        "pub_date": "2001-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11428488",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Indian heart journal"
+        },
+        "chars": 106
+      },
+      {
+        "source_id": "pmid:16464853",
+        "type": "journal",
+        "title": "Active metabolite of atorvastatin inhibits membrane cholesterol domain formation by an antioxidant mechanism",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16464853/",
+        "pub_date": "2006-02-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16464853",
+          "pmcid": null,
+          "doi": "10.1074/jbc.M513000200",
+          "journal": "The Journal of biological chemistry"
+        },
+        "chars": 1389
+      },
+      {
+        "source_id": "pmid:16413806",
+        "type": "journal",
+        "title": "Effects of atorvastatin on lipid metabolism in normolipidemic and hereditary hyperlipidemic, non-laying hens",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16413806/",
+        "pub_date": "2006-01-18",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16413806",
+          "pmcid": null,
+          "doi": "10.1016/j.cbpb.2005.12.002",
+          "journal": "Comparative biochemistry and physiology. Part B, Biochemistry & molecular biology"
+        },
+        "chars": 1450
+      },
+      {
+        "source_id": "pmid:14584489",
+        "type": "journal",
+        "title": "Design and baseline characteristics of the stroke prevention by aggressive reduction in cholesterol levels (SPARCL) study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14584489/",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14584489",
+          "pmcid": null,
+          "doi": "10.1159/000072562",
+          "journal": "Cerebrovascular diseases (Basel, Switzerland)",
+          "purpose": "design"
+        },
+        "chars": 931
+      },
+      {
+        "source_id": "pmid:15530894",
+        "type": "journal",
+        "title": "Pharmacogenetics of HMG-CoA reductase inhibitors: exploring the potential for genotype-based individualization of coronary heart disease management",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15530894/",
+        "pub_date": "2004-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15530894",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2004.09.004",
+          "journal": "Atherosclerosis",
+          "purpose": "genetics"
+        },
+        "chars": 1559
+      },
+      {
+        "source_id": "pmid:15233402",
+        "type": "journal",
+        "title": "8302A/C and (TTA)n polymorphisms in the HMG-CoA reductase gene may be associated with some plasma lipid metabolic phenotypes in patients with coronary heart disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15233402/",
+        "pub_date": "2004-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15233402",
+          "pmcid": null,
+          "doi": "10.1007/s11745-004-1225-3",
+          "journal": "Lipids",
+          "purpose": "genetics"
+        },
+        "chars": 923
+      },
+      {
+        "source_id": "announcement:sparcl",
+        "type": "press_release",
+        "title": "Pfizer's Lipitor Shown to Reduce the Chance of Additional Strokes in Stroke Patients",
+        "url": "http://mediaroom.pfizer.com/index.php?s=press_releases&item=89",
+        "pub_date": "2006-08-09",
+        "access": "press_release",
+        "meta": {},
+        "chars": 10116
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 22,
+      "facts": 29,
+      "relationships": 9,
+      "events": 83,
+      "audit_entries": 83,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 14,
+        "input_tokens": 11799,
+        "output_tokens": 2786,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 2950,
+        "output_tokens": 2709,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1120,
+        "output_tokens": 2340,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 2796,
+        "output_tokens": 3242,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 3735,
+        "output_tokens": 2636,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 3877,
+        "output_tokens": 2153,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

@@ -1,0 +1,1557 @@
+{
+  "run_id": "bt-gissi_hf",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2008-08-31",
+  "backtest": true,
+  "readout_date": "2008-08-31",
+  "analysis_date": "2008-08-31",
+  "trial": {
+    "nct_id": "NCT00336336",
+    "acronym": "GISSI-HF",
+    "title": "GISSI-HF- Effects of n-3 PUFA and Rosuvastatin on Mortality-Morbidity of Patients With Symptomatic CHF",
+    "sponsor": "Gruppo di Ricerca GISSI",
+    "status": "COMPLETED",
+    "enrollment": 6975,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Heart Failure"
+    ],
+    "primary_completion": "2008-04"
+  },
+  "drug": {
+    "name": "rosuvastatin",
+    "chembl_id": "CHEMBL1496",
+    "aliases": [
+      "Creston",
+      "Rosuvastatina",
+      "Rosuvastatine",
+      "X-plended",
+      "ZD-4522",
+      "ZD4522",
+      "atorvastatin",
+      "cresto",
+      "crestor 20mg",
+      "fluvastatin",
+      "high-dose rosuvastatin",
+      "high-intensity rosuvastatin",
+      "monorova",
+      "pravastatin",
+      "rosuvastatin 10 mg",
+      "rosuvastatin 20 mg",
+      "rsv",
+      "simvastatin"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "HMG-CoA reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000113161",
+        "symbol": "HMGCR",
+        "name": "3-hydroxy-3-methylglutaryl-CoA reductase"
+      }
+    ],
+    "searched_as": "rosuvastatin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-gissi_hf",
+  "log_file": "logs/trace-bt-gissi_hf.jsonl",
+  "execution_time_seconds": 0.1,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "observed HR CI 0.898-1.122 includes 1",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "population",
+      "secondary_categories": [
+        "effect_too_small",
+        "insufficient_data"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "skipped",
+      "probability_of_success": null,
+      "weakest_link": "LDL-C change not measured"
+    },
+    "report": {
+      "headline": "GISSI-HF found rosuvastatin 10 mg daily had no effect on all-cause mortality (HR 1.00, 95% CI 0.898–1.122, p=0.943) or the composite of death/CV hospitalization (HR 1.01, 95% CI 0.908–1.112, p=0.903) in 4,574 patients with symptomatic chronic heart failure (NYHA II–IV) over 3.9 years, confirming that LDL-C lowering does not translate into benefit in advanced HF where pump failure and arrhythmia dominate mortality.",
+      "summary": "The trial randomized 4,574 patients with chronic heart failure of any cause to rosuvastatin 10 mg or placebo in a factorial design with n-3 PUFA. The primary endpoints — all-cause mortality and death or CV hospitalization — showed hazard ratios of 1.00 and 1.01 with tight confidence intervals excluding the prespecified 15% and 20% relative risk reductions. The calculator cannot compute an expected effect because on-treatment LDL-C change was not measured in the trial. However, the neutral result aligns with the contemporaneous CORONA trial (rosuvastatin in ischemic systolic HF, HR 0.92, p=0.12) and reflects a population mismatch: in advanced HF, most deaths are from pump failure and sudden arrhythmia, not atherosclerotic events that LDL-C lowering prevents. The drug appeared safe. Confidence in this qualitative diagnosis is high despite the calculator's 'insufficient_data' output.",
+      "key_evidence": [
+        "HR 1.00 for all-cause mortality (95% CI 0.898–1.122, p=0.943) — The GISSI-HF Trial: Effects of Rosuvastatin in 4,574 Patients with Chronic Heart Failure",
+        "HR 1.01 for death/CV hospitalization (95% CI 0.908–1.112, p=0.903) — The GISSI-HF Trial: Effects of Rosuvastatin in 4,574 Patients with Chronic Heart Failure",
+        "4,574 patients randomized, median follow-up 3.9 years, 1,301 deaths observed vs 1,252 planned — The GISSI-HF Trial: Effects of Rosuvastatin in 4,574 Patients with Chronic Heart Failure; Rationale and design of the GISSI heart failure trial...",
+        "Prespecified target: 15% RRR in mortality, 20% RRR in composite; MDE HR at 80% power = 0.856 — Rationale and design of the GISSI heart failure trial...; Calculator",
+        "Population: symptomatic CHF NYHA class II–IV (advanced HF) — ClinicalTrials.gov NCT00336336",
+        "CORONA trial (rosuvastatin 10 mg in ischemic systolic HF, 33-month follow-up) also neutral on primary endpoint — Randomized clinical outcome trials of statins in heart failure",
+        "LDL-C change not measured in GISSI-HF (calculator weakest_link) — Calculator",
+        "Readout: 'rosuvastatin... did not affect clinical outcomes... the drug seemed to be safe' — The GISSI-HF Trial: Effects of Rosuvastatin in 4,574 Patients with Chronic Heart Failure"
+      ],
+      "what_would_change_this": "Measured on-treatment LDL-C change in GISSI-HF participants would allow the calculator to quantify the expected effect; a subgroup analysis showing benefit in ischemic-etiology patients or those with higher baseline LDL-C would challenge the population-mismatch explanation.",
+      "readthrough_note": ""
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.695 for HMGCR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change None mmol/L via LDL-C change not measured",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "gissi_hf",
+      "ldl_equivalent_mmol": null,
+      "basis": "LDL-C change not measured",
+      "time_factor": 0.866,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": 0.856,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "LDL-C change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "no measured change in LDL-C: the effect is unknown, not zero"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "gissi_hf",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured in provided facts",
+          "source": ""
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured in provided facts",
+          "source": ""
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured in provided facts",
+          "source": ""
+        }
+      ],
+      "followup_years": 3.9,
+      "events": 1301,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": 1.0,
+      "observed_ci": [
+        0.898,
+        1.122
+      ]
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "Open Targets reports an overall genetic association score of 0.695 for HMGCR and coronary artery disorder, but all 4 supporting studies (GCST004045, GCST90132315, GCST90428732, GCST90451698) were published between 2016 and 2023, i.e., after the evidence cut-off of 2008-08-31. The provided evidence_before_cutoff count is 0. At trial launch, no genetic evidence linking HMGCR variants to coronary disease was available in Open Targets; the target is well-studied (statins were proven effective by 2008) but genetic evidence at cut-off is absent, so status is uncertain per the rule: 'no genetic evidence at all for a well-studied target -> not_causal only if supported; otherwise uncertain.'",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "not measured in provided facts",
+          "fact_ids": []
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "not measured in provided facts",
+          "fact_ids": []
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "not measured in provided facts",
+          "fact_ids": []
+        }
+      ],
+      "followup_years": 3.9,
+      "followup_fact_ids": [
+        "f_e6af1c319e8ee4"
+      ],
+      "events": 1301,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_c765bc8439f92b",
+        "f_2059034814537f"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": 1.0,
+      "observed_ci": [
+        0.898,
+        1.122
+      ],
+      "outcome_fact_ids": [
+        "f_258798827e34e4",
+        "f_3dadfe28fc9232",
+        "f_3ffd4947de19d7",
+        "f_c765bc8439f92b",
+        "f_2059034814537f"
+      ],
+      "missing": [
+        "LDL-C change",
+        "apoB change",
+        "non-HDL-C change",
+        "baseline LDL-C",
+        "sbp_change_mmhg"
+      ],
+      "notes": "No placebo-adjusted on-treatment lipid biomarker changes (LDL-C, apoB, non-HDL-C) for rosuvastatin 10 mg daily in a heart failure population on background therapy were provided in the verified facts. The only biomarker fact (f_9946933904fade) is an in vitro -50% change for 'other' at 1 microM, not placebo-adjusted, not clinically relevant. Genetic evidence for HMGCR-coronary disease at cut-off (2008-08-31) shows 0 studies before cutoff despite overall Open Targets score 0.695. Trial used rosuvastatin 10 mg daily (f_cbe0e2fbf883b0), median follow-up 3.9 years (f_e6af1c319e8ee4), 4574 patients randomized per announcement (f_840a8587d9367c). Co-primary endpoints: all-cause mortality (actual events 1301, HR 1.00, 95% CI 0.898-1.122) and death/CV hospitalization (actual events 2588, HR 1.01, 95% CI 0.908-1.112). Safety: rosuvastatin seemed safe in GISSI-HF (f_4133e629517a91), though CORONA showed newly diagnosed diabetes (f_0489f6ebcc98ce). Trial not stopped early (f_a754e0bf0bb408)."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Open Targets genetic association score for HMGCR is 0.695 but with evidence_before_cutoff=0 (all 4 supporting studies published after 2008-08-31)",
+            "refs": [
+              "f_cfed63a5b57877"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HMGCR is the established target of statins, which had proven cardiovascular benefit in multiple populations (post-MI, primary prevention) by 2008",
+            "refs": []
+          }
+        ],
+        "would_settle": "Genetic studies linking HMGCR variants to coronary disease outcomes published before 2008"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "LDL-C change was not measured in the GISSI-HF trial (calculator weakest_link)",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "LDL-C is a causal biomarker for coronary disease per reference table; rosuvastatin 10 mg daily lowers LDL-C by ~50% in general populations",
+            "refs": []
+          }
+        ],
+        "would_settle": "Measured on-treatment LDL-C change in GISSI-HF participants"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Observed HR 1.00 for death (CI 0.898-1.122) and 1.01 for death/CV hospitalization (CI 0.908-1.112)",
+            "refs": [
+              "f_258798827e34e4",
+              "f_4ad03f12977cbd",
+              "f_3dadfe28fc9232",
+              "f_3ffd4947de19d7",
+              "f_def5873640c9e4",
+              "f_aaf224fa3cb0ca"
+            ]
+          },
+          {
+            "text": "Trial powered for 15% RRR in mortality and 20% RRR in composite (HR ~0.85-0.80)",
+            "refs": [
+              "f_480ad61ee859e9",
+              "f_756da4df6503b1"
+            ]
+          },
+          {
+            "text": "Calculator MDE HR at 80% power = 0.856",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Statins typically show 20-25% RRR in atherosclerotic populations; 15% assumption was reasonable based on prior data",
+            "refs": []
+          }
+        ],
+        "would_settle": "Meta-analysis of statin trials specifically in heart failure populations"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "CORONA trial (rosuvastatin in ischemic systolic HF) showed increased newly diagnosed diabetes",
+            "refs": [
+              "f_0489f6ebcc98ce"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "GISSI-HF announcement states 'rosuvastatin seemed to be safe' with no safety signal reported",
+            "refs": [
+              "f_4133e629517a91"
+            ]
+          }
+        ],
+        "would_settle": "Detailed safety data from GISSI-HF including glucose/diabetes outcomes"
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Patients had symptomatic CHF NYHA class II-IV (advanced heart failure)",
+            "refs": [
+              "f_85ffe8ed69dbe6"
+            ]
+          },
+          {
+            "text": "In advanced HF, mortality is driven by pump failure and arrhythmia rather than atherosclerotic events that LDL-C lowering prevents",
+            "refs": []
+          },
+          {
+            "text": "CORONA trial (rosuvastatin 10mg in ischemic systolic HF, median follow-up 33 months) also showed neutral result on primary endpoint",
+            "refs": [
+              "f_9087204885e336",
+              "f_2dbabe3baea0a8"
+            ]
+          },
+          {
+            "text": "Assumed 15-20% RRR not observed despite adequate events (1301 deaths vs 1252 planned) and follow-up (3.9 years)",
+            "refs": [
+              "f_1a6e162d8f65b8",
+              "f_467d492fce6df5",
+              "f_e6af1c319e8ee4",
+              "f_c765bc8439f92b",
+              "f_2059034814537f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Statins benefit post-MI patients with reduced ejection fraction; pleiotropic effects (anti-inflammatory, endothelial) hypothesized to help HF",
+            "refs": []
+          }
+        ],
+        "would_settle": "Subgroup analysis by ischemic vs non-ischemic etiology; comparison of event modes (sudden vs pump failure) between statin and placebo"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Composite endpoint includes CV hospitalization which may be less related to LDL-C lowering",
+            "refs": [
+              "f_007603bdd15f29"
+            ]
+          },
+          {
+            "text": "Factorial design with n-3 PUFA (though separate randomization)",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary endpoint includes all-cause mortality (hard, unbiased endpoint)",
+            "refs": [
+              "f_007603bdd15f29"
+            ]
+          },
+          {
+            "text": "Median follow-up 3.9 years adequate for mortality endpoint",
+            "refs": [
+              "f_e6af1c319e8ee4"
+            ]
+          },
+          {
+            "text": "Trial not stopped early; planned events nearly reached (1301 vs 1252 deaths)",
+            "refs": [
+              "f_a754e0bf0bb408",
+              "f_1a6e162d8f65b8",
+              "f_c765bc8439f92b",
+              "f_2059034814537f"
+            ]
+          }
+        ],
+        "would_settle": "Component analysis of death/CV hospitalization endpoint; adherence and crossover data"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed as planned without early stopping",
+            "refs": [
+              "f_a754e0bf0bb408"
+            ]
+          },
+          {
+            "text": "Large sample size (~4574-7000 randomized) with definitive null p-values (0.943, 0.903)",
+            "refs": [
+              "f_840a8587d9367c",
+              "f_bd238ad6819741",
+              "f_cb04a9a6f516c3",
+              "f_d63b66c17de41c",
+              "f_e976b7a65700cc"
+            ]
+          }
+        ],
+        "would_settle": "Adherence rates, concomitant medication use, dropout data"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator cannot compute expected HR or causal RRR because LDL-C change was not measured in the trial (weakest_link)",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial outcome, population characteristics, and mechanism of action are known, allowing qualitative assessment",
+            "refs": []
+          }
+        ],
+        "would_settle": "Measured on-treatment LDL-C change in GISSI-HF"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "LDL-C change for rosuvastatin 10 mg in the GISSI-HF population is missing from calculator inputs. In autopsy mode (trial results published 2008), the trial's own placebo-adjusted on-treatment LDL-C change should be available from the full publication (Lancet 2008) and used as the primary input. The current input 'not measured in provided facts' forces the calculator to 'insufficient_data' and prevents quantitative causal RRR estimation.",
+            "target_agent": "mechanism",
+            "request": "Search for and add the placebo-adjusted LDL-C change (absolute mmol/L and/or percent) from the GISSI-HF full publication for the rosuvastatin 10 mg arm at the primary analysis timepoint. Use the trial's own biomarker data, not phase 2 surrogates."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator input 'pathway' is null. For completeness and traceability, the causal pathway (HMGCR inhibition → LDL-C lowering → reduced atherosclerotic events) should be specified even if not used in computation.",
+            "target_agent": "mechanism",
+            "request": "Add pathway description: 'HMGCR inhibition → LDL-C lowering → reduced atherosclerotic cardiovascular events' to calculator inputs."
+          },
+          {
+            "severity": "low",
+            "issue": "Events input (1301) reflects only the all-cause mortality co-primary endpoint. The death/CV hospitalization composite had 2,588 events (1,305 + 1,283). While using the mortality endpoint for power/MDE is reasonable, the composite endpoint's higher event count yields a lower MDE HR (~0.91) which could be noted for completeness.",
+            "target_agent": "case_builder",
+            "request": "Verify whether the calculator should incorporate both co-primary endpoints or if the mortality endpoint alone is the correct basis for the MDE calculation. Add a note if the composite endpoint changes the MDE interpretation."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "skipped",
+      "reason": "no calculator number comes from a paper or the registry",
+      "results": []
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "HMGCR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.722,
+        "genetic_association_score": 0.695,
+        "evidence_count": 4,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.816,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs7703051",
+            "beta": null,
+            "p": "9e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.791,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12916",
+            "beta": 0.02883433,
+            "p": "6.954999923706055e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.787,
+            "study_id": "GCST90428732",
+            "trait": "Gall stone disease or coronary artery disease",
+            "n": 1716127,
+            "publication_date": "2023-09-13",
+            "pmid": "37705021",
+            "variant": "rs12916",
+            "beta": null,
+            "p": "8e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.676,
+            "study_id": "GCST90451698",
+            "trait": "Type 2 diabetes mellitus or coronary artery disease (pleiotropy)",
+            "n": 2063820,
+            "publication_date": "2023-12-08",
+            "pmid": "38062574",
+            "variant": "rs10474433",
+            "beta": null,
+            "p": "5e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_9946933904fade",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -50,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1 microM",
+          "kind": "percent"
+        },
+        "source_id": "pmid:15135256",
+        "quote": "MMP-7 levels were reduced in a dose-dependent manner with maximal inhibition of 50% (P < 0.01) at 1 microM.",
+        "pub_date": "2004-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15135256/"
+      },
+      {
+        "fact_id": "f_cfed63a5b57877",
+        "entity": "target:hmgcr",
+        "key": "genetic_association_score",
+        "value": 0.695,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 4,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:HMGCR",
+        "quote": "\"genetic_association_score\": 0.695",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161"
+      },
+      {
+        "fact_id": "f_480ad61ee859e9",
+        "entity": "trial:nct00336336",
+        "key": "assumed_rrr",
+        "value": 15,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "which assume the same co-primary endpoints: (a) 15% reduction of all-cause mortality and (b) 20% reduction of all-cause mortality or cardiovascular hospitalizations.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_756da4df6503b1",
+        "entity": "trial:nct00336336",
+        "key": "assumed_rrr",
+        "value": 20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "which assume the same co-primary endpoints: (a) 15% reduction of all-cause mortality and (b) 20% reduction of all-cause mortality or cardiovascular hospitalizations.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_3ffd4947de19d7",
+        "entity": "trial:nct00336336",
+        "key": "ci_high",
+        "value": 1.122,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_aaf224fa3cb0ca",
+        "entity": "trial:nct00336336",
+        "key": "ci_high",
+        "value": 1.112,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_3dadfe28fc9232",
+        "entity": "trial:nct00336336",
+        "key": "ci_low",
+        "value": 0.898,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_def5873640c9e4",
+        "entity": "trial:nct00336336",
+        "key": "ci_low",
+        "value": 0.908,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_cbe0e2fbf883b0",
+        "entity": "trial:nct00336336",
+        "key": "dose",
+        "value": 10,
+        "unit": "mg daily",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Randomization 2 (R2): rosuvastatin 10 mg daily vs corresponding placebo.",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_2059034814537f",
+        "entity": "trial:nct00336336",
+        "key": "events_control",
+        "value": 644,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_38f39a1a3769a5",
+        "entity": "trial:nct00336336",
+        "key": "events_control",
+        "value": 1283,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_c020167123ed01",
+        "entity": "trial:nct00336336",
+        "key": "events_treatment",
+        "value": 1305,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_c765bc8439f92b",
+        "entity": "trial:nct00336336",
+        "key": "events_treatment",
+        "value": 657,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_258798827e34e4",
+        "entity": "trial:nct00336336",
+        "key": "hr",
+        "value": 1.0,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_4ad03f12977cbd",
+        "entity": "trial:nct00336336",
+        "key": "hr",
+        "value": 1.01,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_55dee4d562b661",
+        "entity": "trial:nct00336336",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "According to data available in heart failure registries, it is expected that 70% of the patients will be suitable to enter both components of the trial",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_85ffe8ed69dbe6",
+        "entity": "trial:nct00336336",
+        "key": "inclusion_threshold",
+        "value": "NYHA class II-IV",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Clinical evidence of heart failure according to the European Society of Cardiology guidelines (New York Heart Association class II-IV)",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_9087204885e336",
+        "entity": "trial:nct00336336",
+        "key": "median_followup",
+        "value": 33,
+        "unit": "months",
+        "attrs": {
+          "trial": "CORONA"
+        },
+        "source_id": "pmid:18433703",
+        "quote": "Over a median follow-up of 33 months, there were no significant differences in the primary end point or in all-cause mortality",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18433703/"
+      },
+      {
+        "fact_id": "f_e6af1c319e8ee4",
+        "entity": "trial:nct00336336",
+        "key": "median_followup",
+        "value": 3.9,
+        "unit": "years",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "Patients were followed- up for a median of 3·9 years.",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_840a8587d9367c",
+        "entity": "trial:nct00336336",
+        "key": "n_randomized",
+        "value": 4574,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "Up to 4,574 patients (mean age 68 ± 11 yr) with chronic heart failure of New York Heart Association class II-–IV, irrespective of cause and left ventricular ejection fraction, were included in a double-blind randomised trial testing rosuvastatin 10 mg daily (n=2,285) against placebo (n=2,289).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_bd238ad6819741",
+        "entity": "trial:nct00336336",
+        "key": "n_randomized",
+        "value": 6975,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Enrollment: 6975 (ACTUAL)",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_cb04a9a6f516c3",
+        "entity": "trial:nct00336336",
+        "key": "n_randomized",
+        "value": 7000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "The recruitment of the planned sample size of approximately 7000 patients randomized in the n-3 PUFA trial is expected to be completed within 18 months from the trial start.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_d63b66c17de41c",
+        "entity": "trial:nct00336336",
+        "key": "p_value",
+        "value": 0.943,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death from any cause",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "According to the intention to treat analysis, 657 (29%) patients died from any cause in the rosuvastatin group (28·8%) and 644 (28%) in the placebo group (adjusted hazard ratio [HR] 1·00, [95·5% CI 0·898-–1·122], p=0·943).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_e976b7a65700cc",
+        "entity": "trial:nct00336336",
+        "key": "p_value",
+        "value": 0.903,
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF",
+          "endpoint": "death or admission to hospital for cardiovascular reasons",
+          "placebo_adjusted": true
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "No differences were found also with respect to the other primary end-point: 1305 (57%) patients in the rosuvastatin group died or were admitted to hospital for cardiovascular reasons and 1283 (56%) in the placebo group (adjusted HR 1·01, [99% CI [0·908-–1·112], p=0·903).",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_505586b72be82c",
+        "entity": "trial:nct00336336",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_1a6e162d8f65b8",
+        "entity": "trial:nct00336336",
+        "key": "planned_events",
+        "value": 1252,
+        "unit": "deaths",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "The trial is event-driven and will continue either until at least 1252 deaths have been recorded or a reduction of all-cause mortality will satisfy the significance boundaries, which have been established to stop the study.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_467d492fce6df5",
+        "entity": "trial:nct00336336",
+        "key": "planned_events",
+        "value": 1252,
+        "unit": "deaths",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "All-cause mortality [from enrollment to 1252 deaths in R2 arm]",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_007603bdd15f29",
+        "entity": "trial:nct00336336",
+        "key": "primary_endpoint",
+        "value": "time to death, and time to death or admission to hospital for cardiovascular reasons",
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "Primary endpoints were time to death, and time to death or admission to hospital for cardiovascular reasons.",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_2dbabe3baea0a8",
+        "entity": "trial:nct00336336",
+        "key": "primary_endpoint",
+        "value": "primary end point",
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA"
+        },
+        "source_id": "pmid:18433703",
+        "quote": "Over a median follow-up of 33 months, there were no significant differences in the primary end point or in all-cause mortality",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18433703/"
+      },
+      {
+        "fact_id": "f_a0ad156b668380",
+        "entity": "trial:nct00336336",
+        "key": "primary_endpoint",
+        "value": "15% reduction of all-cause mortality and 20% reduction of all-cause mortality or cardiovascular hospitalizations",
+        "unit": "NA",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "which assume the same co-primary endpoints: (a) 15% reduction of all-cause mortality and (b) 20% reduction of all-cause mortality or cardiovascular hospitalizations.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      },
+      {
+        "fact_id": "f_db29177f2b4e31",
+        "entity": "trial:nct00336336",
+        "key": "primary_endpoint",
+        "value": "All cause mortality or hospitalizations for any reason",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Primary outcome(s): All-cause mortality [from enrollment to 1252 deaths in R2 arm] | All cause mortality or hospitalizations for any reason [from enrollment to 1252 deaths]",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_ede2375df796d6",
+        "entity": "trial:nct00336336",
+        "key": "primary_endpoint",
+        "value": "All-cause mortality",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "quote": "Primary outcome(s): All-cause mortality [from enrollment to 1252 deaths in R2 arm]",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00336336"
+      },
+      {
+        "fact_id": "f_7356d53a0d2e29",
+        "entity": "trial:nct00336336",
+        "key": "readout_statement",
+        "value": "rosuvastatin, in doses of 10 mg daily, did not affect clinical outcomes in patients with chronic heart failure of any cause, in whom the drug seemed to be safe",
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "Our conclusion is that rosuvastatin, in doses of 10 mg daily, did not affect clinical outcomes in patients with chronic heart failure of any cause, in whom the drug seemed to be safe.",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_0489f6ebcc98ce",
+        "entity": "trial:nct00336336",
+        "key": "safety_signal",
+        "value": "newly diagnosed diabetes",
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA"
+        },
+        "source_id": "pmid:18433703",
+        "quote": "There were significant reductions in the number of cardiovascular hospitalizations and, in a post hoc analysis, in nonfatal ischemic events.",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18433703/"
+      },
+      {
+        "fact_id": "f_4133e629517a91",
+        "entity": "trial:nct00336336",
+        "key": "safety_signal",
+        "value": "rosuvastatin seemed to be safe",
+        "unit": "",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "announcement:gissi_hf",
+        "quote": "The GISSI-HF trial found rosuvastatin (10 mg daily) did not affect clinical outcomes in patients with chronic heart failure of any cause, in whom the drug seemed to be safe.",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx"
+      },
+      {
+        "fact_id": "f_a754e0bf0bb408",
+        "entity": "trial:nct00336336",
+        "key": "stopped_early",
+        "value": false,
+        "unit": "NA",
+        "attrs": {
+          "trial": "GISSI-HF"
+        },
+        "source_id": "pmid:15302013",
+        "quote": "The trial is event-driven and will continue either until at least 1252 deaths have been recorded or a reduction of all-cause mortality will satisfy the significance boundaries, which have been established to stop the study.",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00336336@2008-08-31",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00336336",
+        "url": "https://clinicaltrials.gov/study/NCT00336336",
+        "pub_date": "2006-06-13",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00336336",
+            "acronym": null,
+            "title": "GISSI-HF- Effects of n-3 PUFA and Rosuvastatin on Mortality-Morbidity of Patients With Symptomatic CHF",
+            "official_title": "A Large Scale Clinical Trial Testing the Effects of n-3 PUFA and Rosuvastatin on Mortality-Morbidity of Patients With Symptomatic Congestive Heart Failure",
+            "sponsor": "Gruppo di Ricerca GISSI",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2002-08",
+            "primary_completion": "2008-04",
+            "first_posted": "2006-06-13",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 6975,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "n-3 PUFA",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "1"
+                ]
+              },
+              {
+                "name": "Rosuvastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "3"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "2"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "4"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "1",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "2",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "3",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "4",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Heart Failure"
+            ],
+            "primary_outcomes": [
+              "All-cause mortality [from enrollment to 1252 deaths in R2 arm]",
+              "All cause mortality or hospitalizations for any reason [from enrollment to 1252 deaths]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 3968
+      },
+      {
+        "source_id": "pmid:16384561",
+        "type": "journal",
+        "title": "Efficacy and tolerability of combined treatment with L-carnitine and simvastatin in lowering lipoprotein(a) serum levels in patients with type 2 diabetes mellitus",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16384561/",
+        "pub_date": "2005-12-27",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16384561",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2005.11.024",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1941
+      },
+      {
+        "source_id": "pmid:18549865",
+        "type": "journal",
+        "title": "Controlled Rosuvastatin Multinational Trial In Heart Failure (the positive negative trial)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18549865/",
+        "pub_date": "2008-04-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18549865",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2008.02.084",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 92
+      },
+      {
+        "source_id": "pmid:18173807",
+        "type": "journal",
+        "title": "CORONA--rosuvastatin in older patients with systolic heart failure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18173807/",
+        "pub_date": "2008-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18173807",
+          "pmcid": null,
+          "doi": "10.1111/j.1742-1241.2007.01663.x",
+          "journal": "International journal of clinical practice"
+        },
+        "chars": 68
+      },
+      {
+        "source_id": "pmid:18344117",
+        "type": "journal",
+        "title": "Anti-hypertensive effects of Rosuvastatin are associated with decreased inflammation and oxidative stress markers in hypertensive rats",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18344117/",
+        "pub_date": "2008-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18344117",
+          "pmcid": null,
+          "doi": "10.1080/10715760701885380",
+          "journal": "Free radical research"
+        },
+        "chars": 1174
+      },
+      {
+        "source_id": "pmid:15135256",
+        "type": "journal",
+        "title": "Rosuvastatin reduces MMP-7 secretion by human monocyte-derived macrophages: potential relevance to atherosclerotic plaque stability",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15135256/",
+        "pub_date": "2004-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15135256",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2004.01.009",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1668
+      },
+      {
+        "source_id": "pmid:15031044",
+        "type": "journal",
+        "title": "Rosuvastatin-warfarin drug interaction",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15031044/",
+        "pub_date": "2004-03-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15031044",
+          "pmcid": null,
+          "doi": "10.1016/S0140-6736(04)15747-4",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 40
+      },
+      {
+        "source_id": "pmid:14579811",
+        "type": "journal",
+        "title": "Rosuvastatin calcium",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14579811/",
+        "pub_date": "2003-10-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14579811",
+          "pmcid": null,
+          "doi": "10.1038/nrd1205",
+          "journal": "Nature reviews. Drug discovery"
+        },
+        "chars": 22
+      },
+      {
+        "source_id": "pmid:11732211",
+        "type": "journal",
+        "title": "Rosuvastatin--'the super statin'",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11732211/",
+        "pub_date": "2001-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11732211",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Journal of Ayub Medical College, Abbottabad : JAMC"
+        },
+        "chars": 34
+      },
+      {
+        "source_id": "pmid:17953460",
+        "type": "journal",
+        "title": "Rosuvastatin in elderly patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17953460/",
+        "pub_date": "2007-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17953460",
+          "pmcid": null,
+          "doi": "10.2165/00002512-200724110-00005",
+          "journal": "Drugs & aging"
+        },
+        "chars": 1103
+      },
+      {
+        "source_id": "pmid:18433703",
+        "type": "journal",
+        "title": "Randomized clinical outcome trials of statins in heart failure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18433703/",
+        "pub_date": "2008-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18433703",
+          "pmcid": null,
+          "doi": "10.1016/j.hfc.2008.02.001",
+          "journal": "Heart failure clinics"
+        },
+        "chars": 1241
+      },
+      {
+        "source_id": "pmid:15302013",
+        "type": "journal",
+        "title": "Rationale and design of the GISSI heart failure trial: a large trial to assess the effects of n-3 polyunsaturated fatty acids and rosuvastatin in symptomatic congestive heart failure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15302013/",
+        "pub_date": "2004-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15302013",
+          "pmcid": null,
+          "doi": "10.1016/j.ejheart.2004.03.001",
+          "journal": "European journal of heart failure",
+          "purpose": "design"
+        },
+        "chars": 2064
+      },
+      {
+        "source_id": "pmid:15553328",
+        "type": "journal",
+        "title": "[The QDF-HF (Quality of life, Depression and Cognitive Functioning in Heart Failure). The project and study protocol]",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15553328/",
+        "pub_date": "2004-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15553328",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Assistenza infermieristica e ricerca : AIR",
+          "purpose": "design"
+        },
+        "chars": 1650
+      },
+      {
+        "source_id": "pmid:18056971",
+        "type": "journal",
+        "title": "Acute myocardial infarction and proinflammatory gene variants",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18056971/",
+        "pub_date": "2007-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18056971",
+          "pmcid": null,
+          "doi": "10.1196/annals.1404.004",
+          "journal": "Annals of the New York Academy of Sciences",
+          "purpose": "genetics"
+        },
+        "chars": 1425
+      },
+      {
+        "source_id": "pmid:17563401",
+        "type": "journal",
+        "title": "Genetic analysis of fluvastatin response and dyslipidemia in renal transplant recipients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17563401/",
+        "pub_date": "2007-06-11",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17563401",
+          "pmcid": null,
+          "doi": "10.1194/jlr.M700076-JLR200",
+          "journal": "Journal of lipid research",
+          "purpose": "genetics"
+        },
+        "chars": 1359
+      },
+      {
+        "source_id": "pmid:15530894",
+        "type": "journal",
+        "title": "Pharmacogenetics of HMG-CoA reductase inhibitors: exploring the potential for genotype-based individualization of coronary heart disease management",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15530894/",
+        "pub_date": "2004-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15530894",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2004.09.004",
+          "journal": "Atherosclerosis",
+          "purpose": "genetics"
+        },
+        "chars": 1559
+      },
+      {
+        "source_id": "announcement:gissi_hf",
+        "type": "press_release",
+        "title": "The GISSI-HF Trial: Effects of Rosuvastatin in 4,574 Patients with Chronic Heart Failure",
+        "url": "http://www.escardio.org/about/press/press-releases/congress-08/Pages/HotLine1-Tognoni-GISSI-HF.aspx",
+        "pub_date": "2008-08-31",
+        "access": "press_release",
+        "meta": {},
+        "chars": 5209
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 21,
+      "facts": 38,
+      "relationships": 6,
+      "events": 100,
+      "audit_entries": 100,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 17,
+        "input_tokens": 14477,
+        "output_tokens": 3784,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 2834,
+        "output_tokens": 3104,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 2612,
+        "output_tokens": 3552,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 3524,
+        "output_tokens": 3484,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4004,
+        "output_tokens": 1626,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

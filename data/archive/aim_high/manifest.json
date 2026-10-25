@@ -7,7 +7,7 @@
   "as_of": "2011-05-26",
   "readout_date": "2011-05-26",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT00120289@2011-05-26",
@@ -41,6 +41,9 @@
               "type": "DRUG",
               "other_names": [
                 "Niaspan"
+              ],
+              "arms": [
+                "Combination Therapy"
               ]
             },
             {
@@ -48,7 +51,21 @@
               "type": "DRUG",
               "other_names": [
                 "Zocor"
+              ],
+              "arms": [
+                "Combination Therapy",
+                "Monotherapy"
               ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Combination Therapy",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Monotherapy",
+              "type": "ACTIVE_COMPARATOR"
             }
           ],
           "conditions": [
@@ -68,13 +85,13 @@
       "note": "design-only registry view"
     },
     {
-      "source_id": "pmid:21392609",
-      "file": "docs/pmid_21392609.txt",
+      "source_id": "pmcid:PMC3120223",
+      "file": "docs/pmcid_PMC3120223.txt",
       "type": "journal",
-      "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol: baseline characteristics of study participants. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: impact on Global Health outcomes (AIM-HIGH) trial.",
-      "url": "https://europepmc.org/article/MED/21392609",
+      "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol: baseline characteristics of study participants. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: impact on Global Health outcomes (AIM-HIGH) trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/",
       "pub_date": "2011-02-02",
-      "access": "abstract_only",
+      "access": "open_full_text",
       "meta": {
         "pmid": "21392609",
         "pmcid": "PMC3120223",
@@ -84,148 +101,165 @@
       "note": ""
     },
     {
-      "source_id": "pmid:21392600",
-      "file": "docs/pmid_21392600.txt",
+      "source_id": "pmid:19166443",
+      "file": "docs/pmid_19166443.txt",
       "type": "journal",
-      "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol Rationale and study design. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: Impact on Global Health outcomes (AIM-HIGH).",
-      "url": "https://europepmc.org/article/MED/21392600",
-      "pub_date": "2011-02-02",
+      "title": "Lipid-modifying efficacy and tolerability of extended-release niacin/laropiprant in patients with primary hypercholesterolaemia or mixed dyslipidaemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/",
+      "pub_date": "2008-12-01",
       "access": "abstract_only",
+      "meta": {
+        "pmid": "19166443",
+        "pmcid": null,
+        "doi": "10.1111/j.1742-1241.2008.01938.x",
+        "journal": "International journal of clinical practice"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:2243429",
+      "file": "docs/pmid_2243429.txt",
+      "type": "journal",
+      "title": "Beneficial effects of colestipol-niacin on coronary atherosclerosis. A 4-year follow-up",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/",
+      "pub_date": "1990-12-19",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "2243429",
+        "pmcid": null,
+        "doi": null,
+        "journal": "JAMA"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:1972218",
+      "file": "docs/pmid_1972218.txt",
+      "type": "journal",
+      "title": "Kava-induced dermopathy: a niacin deficiency?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/1972218/",
+      "pub_date": "1990-06-16",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "1972218",
+        "pmcid": null,
+        "doi": "10.1016/0140-6736(90)91458-m",
+        "journal": "Lancet (London, England)"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:4569673",
+      "file": "docs/pmid_4569673.txt",
+      "type": "journal",
+      "title": "Niacin in the long-term treatment of schizophrenia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/4569673/",
+      "pub_date": "1973-03-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "4569673",
+        "pmcid": null,
+        "doi": "10.1001/archpsyc.1973.01750330010002",
+        "journal": "Archives of general psychiatry"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:21401825",
+      "file": "docs/pmid_21401825.txt",
+      "type": "journal",
+      "title": "Niacin: the only vitamin that reduces cardiovascular events",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21401825/",
+      "pub_date": "2011-04-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21401825",
+        "pmcid": null,
+        "doi": "10.1111/j.1742-1241.2011.02630.x",
+        "journal": "International journal of clinical practice"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:3174043",
+      "file": "docs/pmid_3174043.txt",
+      "type": "journal",
+      "title": "Niacin maculopathy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/",
+      "pub_date": "1988-07-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "3174043",
+        "pmcid": null,
+        "doi": "10.1016/s0161-6420(88)33073-3",
+        "journal": "Ophthalmology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:20079958",
+      "file": "docs/pmid_20079958.txt",
+      "type": "journal",
+      "title": "Binder blinders-niacin of omission?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20079958/",
+      "pub_date": "2010-01-15",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20079958",
+        "pmcid": null,
+        "doi": "10.1053/j.ajkd.2009.12.015",
+        "journal": "American journal of kidney diseases : the official journal of the National Kidney Foundation"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:19812221",
+      "file": "docs/pmid_19812221.txt",
+      "type": "journal",
+      "title": "Niacin status impacts chromatin structure",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19812221/",
+      "pub_date": "2009-10-07",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "19812221",
+        "pmcid": null,
+        "doi": "10.3945/jn.109.111757",
+        "journal": "The Journal of nutrition"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:11988158",
+      "file": "docs/pmid_11988158.txt",
+      "type": "journal",
+      "title": "[Niacin-induced hepatitis]",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11988158/",
+      "pub_date": "2002-04-20",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "11988158",
+        "pmcid": null,
+        "doi": null,
+        "journal": "Medicina clinica"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC3120226",
+      "file": "docs/pmcid_PMC3120226.txt",
+      "type": "journal",
+      "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol Rationale and study design. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: Impact on Global Health outcomes (AIM-HIGH)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/",
+      "pub_date": "2011-02-02",
+      "access": "open_full_text",
       "meta": {
         "pmid": "21392600",
         "pmcid": "PMC3120226",
         "doi": "10.1016/j.ahj.2010.11.017",
-        "journal": "American heart journal"
+        "journal": "American heart journal",
+        "purpose": "design"
       },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:19915217",
-      "file": "docs/pmid_19915217.txt",
-      "type": "journal",
-      "title": "Extended-release niacin or ezetimibe and carotid intima-media thickness.",
-      "url": "https://europepmc.org/article/MED/19915217",
-      "pub_date": "2009-11-15",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19915217",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa0907569",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:15537681",
-      "file": "docs/pmid_15537681.txt",
-      "type": "journal",
-      "title": "Arterial Biology for the Investigation of the Treatment Effects of Reducing Cholesterol (ARBITER) 2: a double-blind, placebo-controlled study of extended-release niacin on atherosclerosis progression in secondary prevention patients treated with statins.",
-      "url": "https://europepmc.org/article/MED/15537681",
-      "pub_date": "2004-11-10",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "15537681",
-        "pmcid": null,
-        "doi": "10.1161/01.cir.0000148955.19792.8d",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:12123399",
-      "file": "docs/pmid_12123399.txt",
-      "type": "journal",
-      "title": "Efficacy, safety, and tolerability of once-daily niacin for the treatment of dyslipidemia associated with type 2 diabetes: results of the assessment of diabetes control and evaluation of the efficacy of niaspan trial.",
-      "url": "https://europepmc.org/article/MED/12123399",
-      "pub_date": "2002-07-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "12123399",
-        "pmcid": null,
-        "doi": "10.1001/archinte.162.14.1568",
-        "journal": "Archives of internal medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:11757504",
-      "file": "docs/pmid_11757504.txt",
-      "type": "journal",
-      "title": "Simvastatin and niacin, antioxidant vitamins, or the combination for the prevention of coronary disease.",
-      "url": "https://europepmc.org/article/MED/11757504",
-      "pub_date": "2001-11-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "11757504",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa011090",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:10979113",
-      "file": "docs/pmid_10979113.txt",
-      "type": "journal",
-      "title": "Effect of niacin on lipid and lipoprotein levels and glycemic control in patients with diabetes and peripheral arterial disease: the ADMIT study: A randomized trial. Arterial Disease Multiple Intervention Trial.",
-      "url": "https://europepmc.org/article/MED/10979113",
-      "pub_date": "2000-09-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "10979113",
-        "pmcid": null,
-        "doi": "10.1001/jama.284.10.1263",
-        "journal": "JAMA"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:3287837",
-      "file": "docs/pmid_3287837.txt",
-      "type": "journal",
-      "title": "Reduction of mortality in the Stockholm Ischaemic Heart Disease Secondary Prevention Study by combined treatment with clofibrate and nicotinic acid.",
-      "url": "https://europepmc.org/article/MED/3287837",
-      "pub_date": "1988-01-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "3287837",
-        "pmcid": null,
-        "doi": "10.1111/j.0954-6820.1988.tb15891.x",
-        "journal": "Acta medica Scandinavica"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:3295315",
-      "file": "docs/pmid_3295315.txt",
-      "type": "journal",
-      "title": "Beneficial effects of combined colestipol-niacin therapy on coronary atherosclerosis and coronary venous bypass grafts.",
-      "url": "https://europepmc.org/article/MED/3295315",
-      "pub_date": "1987-06-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "3295315",
-        "pmcid": null,
-        "doi": "10.1001/jama.1987.03390230069027",
-        "journal": "JAMA"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:3782631",
-      "file": "docs/pmid_3782631.txt",
-      "type": "journal",
-      "title": "Fifteen year mortality in Coronary Drug Project patients: long-term benefit with niacin.",
-      "url": "https://europepmc.org/article/MED/3782631",
-      "pub_date": "1986-12-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "3782631",
-        "pmcid": null,
-        "doi": "10.1016/s0735-1097(86)80293-5",
-        "journal": "Journal of the American College of Cardiology"
-      },
-      "note": ""
+      "note": "design or baseline paper of the outcome trial"
     },
     {
       "source_id": "announcement:aim_high",
@@ -236,7 +270,7 @@
       "pub_date": "2011-05-26",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }

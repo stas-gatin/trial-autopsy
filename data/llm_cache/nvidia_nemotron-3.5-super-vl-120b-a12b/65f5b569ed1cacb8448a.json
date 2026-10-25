@@ -1,0 +1,15 @@
+{
+  "key": "65f5b569ed1cacb8448a",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T23:07:23+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: CIRT NCT01594333 - Cardiovascular Inflammation Reduction Trial\nInvestigational drug: methotrexate\nDocument: The extremely slow and variable activity of dihydrofolate reductase in human liver and its implications for high folic acid intake. (journal, published 2009-08-24, source pmid:19706381)\n\n--- DOCUMENT TEXT ---\nThe extremely slow and variable activity of dihydrofolate reductase in human liver and its implications for high folic acid intake.\n\nNumerous clinical trials using folic acid for prevention of cardiovascular disease, stroke, cognitive decline, and neural tube defects have been completed or are underway. Yet, all functions of folate are performed by tetrahydrofolate and its one-carbon derivatives. Folic acid is a synthetic oxidized form not significantly found in fresh natural foods; to be used it must be converted to tetrahydrofolate by dihydrofolate reductase (DHFR). Increasing evidence suggests that this process may be slow in humans. Here we show, using a sensitive assay we developed, that the reduction of folic acid by DHFR per gram of human liver (n = 6) obtained from organ donors or directly from surgery is, on average, less than 2% of that in rat liver at physiological pH. Moreover, in contrast to rats, there was almost a 5-fold variation of DHFR activity among the human samples. This limited ability to activate the synthetic vitamer raises issues about clinical trials using high levels of folic acid. The extremely low rate of conversion of folic acid suggests that the benefit of its use in high doses will be limited by saturation of DHFR, especially in individuals possessing lower than average activity. These results are also consistent with the reports of unmetabolized folic acid in plasma and urine.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 7
+  }
+}

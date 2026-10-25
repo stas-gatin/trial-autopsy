@@ -322,6 +322,26 @@ def complete_inputs(m: dict, facts: dict) -> list[str]:
                 if v and (v < 0) != (sign < 0):
                     c[k] = -v
                     filled.append(f"{bm} {k} sign set to match cited facts {c.get('fact_ids')}")
+    # An entry threshold ("LDL-C >= 70 mg/dL") is not the patients' starting level, which is well above it: a lipid
+    # baseline that is just a cited threshold is left out, and the calculator applies its stated default instead.
+    for c in m.get("changes") or []:
+        bm, base = c.get("biomarker"), _num(c.get("baseline"))
+        if bm not in ("LDL-C", "non-HDL-C", "apoB") or base is None:
+            continue
+        for i in c.get("fact_ids") or []:
+            f = facts.get(i)
+            v = _num(f["value"]) if f and f.get("key") == "inclusion_threshold" else None
+            if v is None:
+                continue
+            levels = [v] if bm == "apoB" else [v, v / MGDL_PER_MMOL]
+            if any(abs(base - x) <= 0.03 * abs(x) for x in levels if x):
+                pct, absolute = _num(c.get("pct_change")), _num(c.get("abs_change"))
+                c["baseline"] = None
+                if pct is not None and absolute is not None and abs(absolute - pct / 100 * base) <= 0.03 * abs(absolute):
+                    c["abs_change"] = None   # it was only the percent applied to the threshold
+                filled.append(f"{bm} baseline {base} is the outcome trial's entry threshold ({i}), not the patients' "
+                              f"starting level: left out, the calculator applies its stated default baseline")
+                break
     if _num(m.get("events")) is None:
         cited = [facts[i] for i in m.get("events_fact_ids") or [] if i in facts and _num(facts[i]["value"]) is not None]
         if len(cited) == 1:
@@ -436,9 +456,18 @@ def calculate(state: RunState):
 
 # --- Investigator -------------------------------------------------------------
 
+def _outcome_line(state: RunState) -> str:
+    if state.mode != "autopsy":
+        return "not known yet (forecast)"
+    actual, basis = actual_outcome(state)
+    if not actual:
+        return "not stated in the evidence"
+    return f"{'met its primary endpoint' if actual == 'success' else 'did not meet its primary endpoint'} ({basis})"
+
+
 def investigate(state: RunState):
     facts_text, _ = facts_block(state)
-    prompt = prompts.INVESTIGATOR_PROMPT.format(
+    prompt = prompts.INVESTIGATOR_PROMPT.format(outcome=_outcome_line(state),
         trial_label=state.trial_label, mode=state.mode, as_of=state.as_of or "today", drug=state.drug.get("name"),
         mechanism="; ".join(state.drug.get("mechanisms", [])),
         case_input=json.dumps(asdict(state.case_input), default=str),
@@ -504,7 +533,7 @@ def report(state: RunState):
 # "discontinued" alone is not a failure ("stopped early for efficacy", "discontinuation rates were similar"), and a
 # biomarker that fell significantly is not a result.
 _TRIAL = r"(?:trial|study|program|programme|development|outcomes? study)"
-_STOP = r"(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
+_STOP = r"\b(?:stop\w*|halt\w*|clos\w*|end(?:s|ed)?|terminat\w*|discontinu\w*)"
 _EVENTS = r"(?:events?|risk|mortality|deaths?|heart attacks?|strokes?|mace|endpoint|morbidity)"
 _PATIENTS_REACHED = re.compile(r"\b(patients|participants|subjects)\b[^.]{0,80}\b(met|achieved|reached)\b", re.I)
 _NEGATED = re.compile(r"\b(no|not|without|lack of|failed to)\b[^.]{0,40}\b(benefit|reduc\w*|decreas\w*|lower\w*|efficacy)", re.I)
@@ -512,6 +541,8 @@ READOUT_RULES = [
     ("failure", 0, re.compile(r"\b(did not|does not|didn't|failed to|fails? to) (meet|achieve|reach) (its|the|their) (\w+ ){0,2}primary|"
                               r"primary (\w+ ){0,3}(was |were )?not (met|achieved|reached)|missed (its|the) (\w+ ){0,2}primary|"
                               r"no (statistically )?significant (difference|reduction|benefit) in (the )?(\w+ ){0,2}primary", re.I)),
+    ("failure", 0, re.compile(r"primary (composite |combined )?end[- ]?point(?:[^.]|\.\d){0,160}\b(was |were |is )?not (statistically )?significant|"
+                              r"\bnot statistically significant[^.]{0,60}\bprimary", re.I)),
     ("success", 0, re.compile(r"\b(met|meets|achieved|achieves) (its|the|their|both) (\w+ ){0,2}primary|"
                               r"primary (\w+ ){0,3}(was|were) (met|achieved)", re.I)),
     ("stopped_harm", 1, re.compile(rf"{_STOP}[^.]{{0,120}}\b(imbalance|excess|increase\w*|higher)\b[^.]{{0,40}}\b(mortality|deaths?|"
@@ -520,17 +551,40 @@ READOUT_RULES = [
                               rf"overwhelming)", re.I)),
     ("failure", 2, re.compile(rf"futility|lack of efficacy|insufficient efficacy|unlikely to (show|demonstrate|meet|achieve|be met|be achieved)|"
                               rf"did not (benefit|show a (significant )?benefit)|\bno (significant )?(clinical )?benefit|"
+                              rf"\bdid not (affect|improve|change) (\w+ ){{0,2}}(clinical )?outcomes|"
+                              rf"\bno differences? (\w+ ){{0,4}}(with respect to|in|on) (the )?(\w+ ){{0,2}}primary|"
                               rf"\b(did|do|does) not (\w+ ){{0,2}}(reduce|lower|decrease) (\w+ ){{0,6}}{_EVENTS}|"
                               rf"{_STOP} (the |its |a |all )?([\w()\-\"'\u201c\u201d]+ ){{0,6}}{_TRIAL}|"
                               rf"{_TRIAL} (was |is |has been |will be )?(stopped|halted|terminated|discontinued)", re.I)),
-    ("success", 3, re.compile(rf"significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}", re.I)),
-    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)", re.I)),
+    ("primary_p", 1, re.compile(r"primary (composite |combined )?end[- ]?point(?:[^.]|\.\d){0,160}\bp ?(=|<|<=|≤) ?0?\.\d+|"
+                                r"\bp ?(=|<|<=|≤) ?0?\.\d+(?:[^.]|\.\d){0,80}\bprimary (composite |combined )?end[- ]?point", re.I)),
+    ("success", 3, re.compile(rf"(?<!no )(?<!not )(?<!non-)\bstatistically significant (\w+ ){{0,2}}(difference|reduction)(?:[^.]|\.\d){{0,40}}"
+                              rf"\b(event rates?|{_EVENTS})", re.I)),
+    ("success", 3, re.compile(rf"(?<![\w-])significant(ly)?\s+(\S+\s+){{0,3}}(reduc|decreas|lower)\w*\s+(\w+\s+){{0,6}}{_EVENTS}",
+                              re.I)),
+    ("failure", 4, re.compile(r"did not (\w+ ){0,2}(reduce|lower|decrease)|no (statistically )?significant (reduction|difference|benefit)|"
+                              r"\b(non-?|in)significant (\w+ ){0,2}(reduction|difference|benefit|decrease)|"
+                              r"too small to (show|detect|demonstrate)", re.I)),
 ]
+
+
+def _primary_p(text: str) -> str | None:
+    """A p-value stated with the primary endpoint: below 0.05 the endpoint was met, else not."""
+    m = re.search(r"\bp ?(=|<|<=|≤) ?(0?\.\d+)", text, re.I)
+    if not m:
+        return None
+    value = float(m.group(2))
+    return "success" if value < 0.05 or (m.group(1) in ("<", "<=", "≤") and value <= 0.05) else "failure"
 
 
 def classify_readout(text: str):
     """(outcome, rank) for the strongest statement in one sentence or title, or None."""
+    text = text.replace("\u00b7", ".")   # 'p=0\u00b7943': the Lancet's raised decimal point
     for outcome, rank, rule in READOUT_RULES:
+        if outcome == "primary_p":
+            if rule.search(text) and _primary_p(text):
+                return _primary_p(text), rank
+            continue
         if rank == 0 and outcome == "success" and _PATIENTS_REACHED.search(text):
             continue
         if rule.search(text) and not (rank in (1, 3) and outcome == "success" and _NEGATED.search(text)):
@@ -589,6 +643,10 @@ def verdict_block(state: RunState) -> dict:
     primary = inv.get("primary_category") or c.category
     if actual in ("failure", "stopped_harm") and primary in SUCCESS_CODES:
         primary = "effect_too_small" if (c.power or 0) < 0.9 else "insufficient_data"
+    elif actual == "success" and primary not in SUCCESS_CODES:
+        # A trial that met its endpoint is not explained by a failure cause: take the investigator's own success
+        # category if it named one, else "with caveats" (the benefit is real but the system could not explain it).
+        primary = next((x for x in inv.get("secondary_categories") or [] if x in SUCCESS_CODES), "success_with_caveats")
     consistency = ""
     if actual and c.power is not None:
         expected_success = c.outcome in ("success", "likely_success")

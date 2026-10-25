@@ -1,0 +1,12 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25773607+OR+EXT_ID%3A26920601&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT r.pmid, regexp_extract(r.abstractText, '([^.]*120 mg per deciliter[^.]*)', 1) as sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25773607' AND r.abstractText LIKE '%120 mg per deciliter%' LIMIT 5",
+ "rows": [
+  [
+   "25773607",
+   "<h4>Results</h4>As compared with standard therapy alone, evolocumab reduced the level of LDL cholesterol by 61%, from a median of 120 mg per deciliter to 48 mg per deciliter (P<0"
+  ]
+ ],
+ "error": null
+}

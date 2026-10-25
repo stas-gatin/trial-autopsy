@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A25440796+OR+EXT_ID%3A27793396+OR+PMCID%3APMC5485164+OR+PMCID%3APMC5698740&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1613[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25440796' LIMIT 5",
+ "rows": [
+  [
+   " The trial is expected to continue until 1613 primary end point events have occurred with minimum follow-up of at least 2 years, providing 90% power to detect a 15% hazard reduction"
+  ]
+ ],
+ "error": null
+}

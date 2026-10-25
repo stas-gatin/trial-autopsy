@@ -1,0 +1,15 @@
+{
+  "key": "c21a7ad43082fc89c68a",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T14:58:40+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: GISSI-HF NCT00336336 - GISSI-HF- Effects of n-3 PUFA and Rosuvastatin on Mortality-Morbidity of Patients With Symptomatic CHF\nInvestigational drug: rosuvastatin\nDocument: Genetic analysis of fluvastatin response and dyslipidemia in renal transplant recipients (journal, published 2007-06-11, source pmid:17563401)\n\n--- DOCUMENT TEXT ---\nGenetic analysis of fluvastatin response and dyslipidemia in renal transplant recipients\n\nThe Assessment of Lescol in Renal Transplantation clinical trial demonstrated the efficacy of fluvastatin in reducing cardiovascular (CV) disease in renal transplant recipients. The study included a voluntary pharmacogenetic component, enrolling 1,404 patients, which allowed association testing of baseline measures and longitudinal analysis of the 707 fluvastatin-treated and 697 placebo-treated individuals. A candidate gene approach, examining 42 polymorphisms in 18 genes, was used to test for association between selected polymorphisms and major adverse cardiac events, graft failure, change in LDL and HDL cholesterol, and baseline LDL and HDL cholesterol. Reported associations between cholesteryl ester transfer protein (CETP) and baseline HDL cholesterol were replicated, with four previously implicated single nucleotide polymorphisms significantly associated in males and one in females; tests of reported associations between CETP and CV disease yielded varying results. We found no evidence for genetic factors affecting fluvastatin response. Polymorphisms in 3-hydroxy-3-methylglutaryl-coenzyme A reductase (HMGCR) previously reported to affect the efficacy of pravastatin did not show a similar effect on the reduction of LDL cholesterol by fluvastatin.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 603,
+    "output_tokens": 7
+  }
+}

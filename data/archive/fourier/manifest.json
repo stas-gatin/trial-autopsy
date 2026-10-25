@@ -7,7 +7,7 @@
   "as_of": "2017-02-02",
   "readout_date": "2017-02-02",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT01764633@2017-02-02",
@@ -42,12 +42,28 @@
               "other_names": [
                 "AMG 145",
                 "Repatha"
+              ],
+              "arms": [
+                "Evolocumab"
               ]
             },
             {
               "name": "Placebo",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
+            },
+            {
+              "label": "Evolocumab",
+              "type": "EXPERIMENTAL"
             }
           ],
           "conditions": [
@@ -65,9 +81,9 @@
       "source_id": "pmid:27846344",
       "file": "docs/pmid_27846344.txt",
       "type": "journal",
-      "title": "Effect of Evolocumab on Progression of Coronary Disease in Statin-Treated Patients: The GLAGOV Randomized Clinical Trial.",
-      "url": "https://europepmc.org/article/MED/27846344",
-      "pub_date": "2016-12-01",
+      "title": "Effect of Evolocumab on Progression of Coronary Disease in Statin-Treated Patients: The GLAGOV Randomized Clinical Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/",
+      "pub_date": "2016-12-13",
       "access": "abstract_only",
       "meta": {
         "pmid": "27846344",
@@ -78,12 +94,28 @@
       "note": ""
     },
     {
+      "source_id": "pmid:26946077",
+      "file": "docs/pmid_26946077.txt",
+      "type": "journal",
+      "title": "Comparison of PCSK9 Inhibitor Evolocumab vs Ezetimibe in Statin-Intolerant Patients: Design of the Goal Achievement After Utilizing an Anti-PCSK9 Antibody in Statin-Intolerant Subjects 3 (GAUSS-3) Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/",
+      "pub_date": "2016-03-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "26946077",
+        "pmcid": "PMC6490723",
+        "doi": "10.1002/clc.22518",
+        "journal": "Clinical cardiology"
+      },
+      "note": ""
+    },
+    {
       "source_id": "pmid:27039291",
       "file": "docs/pmid_27039291.txt",
       "type": "journal",
-      "title": "Efficacy and Tolerability of Evolocumab vs Ezetimibe in Patients With Muscle-Related Statin Intolerance: The GAUSS-3 Randomized Clinical Trial.",
-      "url": "https://europepmc.org/article/MED/27039291",
-      "pub_date": "2016-04-01",
+      "title": "Efficacy and Tolerability of Evolocumab vs Ezetimibe in Patients With Muscle-Related Statin Intolerance: The GAUSS-3 Randomized Clinical Trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/",
+      "pub_date": "2016-04-19",
       "access": "abstract_only",
       "meta": {
         "pmid": "27039291",
@@ -94,18 +126,82 @@
       "note": ""
     },
     {
-      "source_id": "pmid:25773607",
-      "file": "docs/pmid_25773607.txt",
+      "source_id": "pmid:27389448",
+      "file": "docs/pmid_27389448.txt",
       "type": "journal",
-      "title": "Efficacy and safety of evolocumab in reducing lipids and cardiovascular events.",
-      "url": "https://europepmc.org/article/MED/25773607",
-      "pub_date": "2015-03-15",
+      "title": "PCSK9 inhibitors may improve cardiovascular outcomes-Can we afford them?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/",
+      "pub_date": "2016-06-23",
       "access": "abstract_only",
       "meta": {
-        "pmid": "25773607",
+        "pmid": "27389448",
         "pmcid": null,
-        "doi": "10.1056/nejmoa1500858",
-        "journal": "The New England journal of medicine"
+        "doi": "10.1016/j.ijcard.2016.06.126",
+        "journal": "International journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27941065",
+      "file": "docs/pmid_27941065.txt",
+      "type": "journal",
+      "title": "Factorial Effects of Evolocumab and Atorvastatin on Lipoprotein Metabolism",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/",
+      "pub_date": "2016-12-09",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27941065",
+        "pmcid": null,
+        "doi": "10.1161/CIRCULATIONAHA.116.025080",
+        "journal": "Circulation"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmcid:PMC4919379",
+      "file": "docs/pmcid_PMC4919379.txt",
+      "type": "journal",
+      "title": "Efficacy and Safety of the PCSK9 Inhibitor Evolocumab in Patients with Mixed Hyperlipidemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27240673/",
+      "pub_date": "2016-06-01",
+      "access": "open_full_text",
+      "meta": {
+        "pmid": "27240673",
+        "pmcid": "PMC4919379",
+        "doi": "10.1007/s10557-016-6666-1",
+        "journal": "Cardiovascular drugs and therapy"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27707817",
+      "file": "docs/pmid_27707817.txt",
+      "type": "journal",
+      "title": "Effect of evolocumab on cholesterol synthesis and absorption",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/",
+      "pub_date": "2016-10-05",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27707817",
+        "pmcid": "PMC5321223",
+        "doi": "10.1194/jlr.P071704",
+        "journal": "Journal of lipid research"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:27619750",
+      "file": "docs/pmid_27619750.txt",
+      "type": "journal",
+      "title": "Evaluation of the efficacy, safety and glycaemic effects of evolocumab (AMG 145) in hypercholesterolaemic patients stratified by glycaemic status and metabolic syndrome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/",
+      "pub_date": "2016-10-14",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "27619750",
+        "pmcid": null,
+        "doi": "10.1111/dom.12788",
+        "journal": "Diabetes, obesity & metabolism"
       },
       "note": ""
     },
@@ -113,8 +209,8 @@
       "source_id": "pmid:26920601",
       "file": "docs/pmid_26920601.txt",
       "type": "journal",
-      "title": "Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial.",
-      "url": "https://europepmc.org/article/MED/26920601",
+      "title": "Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/",
       "pub_date": "2015-12-17",
       "access": "abstract_only",
       "meta": {
@@ -126,148 +222,68 @@
       "note": ""
     },
     {
-      "source_id": "pmid:25282519",
-      "file": "docs/pmid_25282519.txt",
+      "source_id": "pmid:25773607",
+      "file": "docs/pmid_25773607.txt",
       "type": "journal",
-      "title": "PCSK9 inhibition with evolocumab (AMG 145) in heterozygous familial hypercholesterolaemia (RUTHERFORD-2): a randomised, double-blind, placebo-controlled trial.",
-      "url": "https://europepmc.org/article/MED/25282519",
-      "pub_date": "2014-10-01",
+      "title": "Efficacy and safety of evolocumab in reducing lipids and cardiovascular events",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/",
+      "pub_date": "2015-03-15",
       "access": "abstract_only",
       "meta": {
-        "pmid": "25282519",
+        "pmid": "25773607",
         "pmcid": null,
-        "doi": "10.1016/s0140-6736(14)61399-4",
-        "journal": "Lancet (London, England)"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:25282520",
-      "file": "docs/pmid_25282520.txt",
-      "type": "journal",
-      "title": "Inhibition of PCSK9 with evolocumab in homozygous familial hypercholesterolaemia (TESLA Part B): a randomised, double-blind, placebo-controlled trial.",
-      "url": "https://europepmc.org/article/MED/25282520",
-      "pub_date": "2014-10-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "25282520",
-        "pmcid": null,
-        "doi": "10.1016/s0140-6736(14)61374-x",
-        "journal": "Lancet (London, England)"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:24678979",
-      "file": "docs/pmid_24678979.txt",
-      "type": "journal",
-      "title": "A 52-week placebo-controlled trial of evolocumab in hyperlipidemia.",
-      "url": "https://europepmc.org/article/MED/24678979",
-      "pub_date": "2014-03-29",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "24678979",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa1316222",
+        "doi": "10.1056/NEJMoa1500858",
         "journal": "The New England journal of medicine"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:24694531",
-      "file": "docs/pmid_24694531.txt",
+      "source_id": "pmid:27839699",
+      "file": "docs/pmid_27839699.txt",
       "type": "journal",
-      "title": "Anti-PCSK9 antibody effectively lowers cholesterol in patients with statin intolerance: the GAUSS-2 randomized, placebo-controlled phase 3 clinical trial of evolocumab.",
-      "url": "https://europepmc.org/article/MED/24694531",
-      "pub_date": "2014-03-30",
+      "title": "HEART UK statement on the management of homozygous familial hypercholesterolaemia in the United Kingdom",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27839699/",
+      "pub_date": "2016-11-05",
       "access": "abstract_only",
       "meta": {
-        "pmid": "24694531",
+        "pmid": "27839699",
         "pmcid": null,
-        "doi": "10.1016/j.jacc.2014.03.019",
-        "journal": "Journal of the American College of Cardiology"
+        "doi": "10.1016/j.atherosclerosis.2016.10.017",
+        "journal": "Atherosclerosis",
+        "purpose": "genetics"
       },
-      "note": ""
+      "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:24825642",
-      "file": "docs/pmid_24825642.txt",
+      "source_id": "pmid:15893177",
+      "file": "docs/pmid_15893177.txt",
       "type": "journal",
-      "title": "Effect of evolocumab or ezetimibe added to moderate- or high-intensity statin therapy on LDL-C lowering in patients with hypercholesterolemia: the LAPLACE-2 randomized clinical trial.",
-      "url": "https://europepmc.org/article/MED/24825642",
-      "pub_date": "2014-05-01",
+      "title": "What promise does PCSK9 hold?",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15893177/",
+      "pub_date": "2005-05-17",
       "access": "abstract_only",
       "meta": {
-        "pmid": "24825642",
+        "pmid": "15893177",
         "pmcid": null,
-        "doi": "10.1001/jama.2014.4030",
-        "journal": "JAMA"
+        "doi": "10.1016/j.jacc.2005.02.056",
+        "journal": "Journal of the American College of Cardiology",
+        "purpose": "genetics"
       },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:24691094",
-      "file": "docs/pmid_24691094.txt",
-      "type": "journal",
-      "title": "Anti-PCSK9 monotherapy for hypercholesterolemia: the MENDEL-2 randomized, controlled phase III clinical trial of evolocumab.",
-      "url": "https://europepmc.org/article/MED/24691094",
-      "pub_date": "2014-03-29",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "24691094",
-        "pmcid": null,
-        "doi": "10.1016/j.jacc.2014.03.018",
-        "journal": "Journal of the American College of Cardiology"
-      },
-      "note": ""
+      "note": "genetic association paper on the target"
     },
     {
       "source_id": "pmid:16554528",
       "file": "docs/pmid_16554528.txt",
       "type": "journal",
-      "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease.",
-      "url": "https://europepmc.org/article/MED/16554528",
-      "pub_date": "2006-03-01",
+      "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16554528/",
+      "pub_date": "2006-03-23",
       "access": "abstract_only",
       "meta": {
         "pmid": "16554528",
         "pmcid": null,
-        "doi": "10.1056/nejmoa054013",
+        "doi": "10.1056/NEJMoa054013",
         "journal": "The New England journal of medicine",
-        "purpose": "genetics"
-      },
-      "note": "genetic association paper on the target"
-    },
-    {
-      "source_id": "pmid:25830891",
-      "file": "docs/pmid_25830891.txt",
-      "type": "journal",
-      "title": "In vivo genome editing using Staphylococcus aureus Cas9.",
-      "url": "https://europepmc.org/article/MED/25830891",
-      "pub_date": "2015-04-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "25830891",
-        "pmcid": "PMC4393360",
-        "doi": "10.1038/nature14299",
-        "journal": "Nature",
-        "purpose": "genetics"
-      },
-      "note": "genetic association paper on the target"
-    },
-    {
-      "source_id": "pmid:18193043",
-      "file": "docs/pmid_18193043.txt",
-      "type": "journal",
-      "title": "Newly identified loci that influence lipid concentrations and risk of coronary artery disease.",
-      "url": "https://europepmc.org/article/MED/18193043",
-      "pub_date": "2008-01-13",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "18193043",
-        "pmcid": "PMC5206900",
-        "doi": "10.1038/ng.76",
-        "journal": "Nature genetics",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -281,7 +297,7 @@
       "pub_date": "2017-02-02",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }

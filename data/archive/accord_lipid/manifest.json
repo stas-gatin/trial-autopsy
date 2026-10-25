@@ -7,7 +7,7 @@
   "as_of": "2010-03-14",
   "readout_date": "2010-03-14",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT00000620@2010-03-14",
@@ -55,6 +55,10 @@
                 "human regular insulin (Novolin R)",
                 "insulin glargine (Lantus)",
                 "Acarbose"
+              ],
+              "arms": [
+                "Glycemia Trial: intensive control",
+                "Glycemia Trial: standard control"
               ]
             },
             {
@@ -80,6 +84,10 @@
                 "candesartan / hydrochlorothiazide (Atacand HCT)",
                 "valsartan / hydrochlorothiazide (Diovan HCT)",
                 "amlodipine / benazepril (Lotrel)"
+              ],
+              "arms": [
+                "BP Trial: intensive control",
+                "BP Trial: standard control"
               ]
             },
             {
@@ -87,7 +95,37 @@
               "type": "DRUG",
               "other_names": [
                 "fenofibrate (Tricor)"
+              ],
+              "arms": [
+                "Lipid Trial: fenofibrate",
+                "Lipid Trial: placebo"
               ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Glycemia Trial: intensive control",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Glycemia Trial: standard control",
+              "type": "ACTIVE_COMPARATOR"
+            },
+            {
+              "label": "BP Trial: intensive control",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "BP Trial: standard control",
+              "type": "ACTIVE_COMPARATOR"
+            },
+            {
+              "label": "Lipid Trial: fenofibrate",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Lipid Trial: placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -273,8 +311,8 @@
       "source_id": "pmid:12006394",
       "file": "docs/pmid_12006394.txt",
       "type": "journal",
-      "title": "Association between the PPARA L162V polymorphism and plasma lipid levels: the Framingham Offspring Study.",
-      "url": "https://europepmc.org/article/MED/12006394",
+      "title": "Association between the PPARA L162V polymorphism and plasma lipid levels: the Framingham Offspring Study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12006394/",
       "pub_date": "2002-05-01",
       "access": "abstract_only",
       "meta": {
@@ -287,35 +325,35 @@
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:19124612",
-      "file": "docs/pmid_19124612.txt",
+      "source_id": "pmid:19208777",
+      "file": "docs/pmid_19208777.txt",
       "type": "journal",
-      "title": "Bezafibrate at clinically relevant doses decreases serum/liver triglycerides via down-regulation of sterol regulatory element-binding protein-1c in mice: a novel peroxisome proliferator-activated receptor alpha-independent mechanism.",
-      "url": "https://europepmc.org/article/MED/19124612",
-      "pub_date": "2009-01-05",
+      "title": "Genetic variation in the ADIPOR2 gene is associated with liver fat content and its surrogate markers in three independent cohorts",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19208777/",
+      "pub_date": "2009-02-10",
       "access": "abstract_only",
       "meta": {
-        "pmid": "19124612",
-        "pmcid": "PMC2684924",
-        "doi": "10.1124/mol.108.052928",
-        "journal": "Molecular pharmacology",
+        "pmid": "19208777",
+        "pmcid": null,
+        "doi": "10.1530/EJE-08-0900",
+        "journal": "European journal of endocrinology",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:18549840",
-      "file": "docs/pmid_18549840.txt",
+      "source_id": "pmid:18586686",
+      "file": "docs/pmid_18586686.txt",
       "type": "journal",
-      "title": "Cholesterol ester transfer protein, interleukin-8, peroxisome proliferator activator receptor alpha, and Toll-like receptor 4 genetic variations and risk of incident nonfatal myocardial infarction and ischemic stroke.",
-      "url": "https://europepmc.org/article/MED/18549840",
-      "pub_date": "2008-04-09",
+      "title": "Peroxisome proliferator-activated receptor-alpha (PPARA) genetic polymorphisms and breast cancer risk: a Long Island ancillary study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18586686/",
+      "pub_date": "2008-06-26",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18549840",
-        "pmcid": "PMC2577871",
-        "doi": "10.1016/j.amjcard.2008.02.052",
-        "journal": "The American journal of cardiology",
+        "pmid": "18586686",
+        "pmcid": "PMC2722854",
+        "doi": "10.1093/carcin/bgn154",
+        "journal": "Carcinogenesis",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -329,7 +367,7 @@
       "pub_date": "2010-03-14",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2010-03-22)"
     }
   ]
 }

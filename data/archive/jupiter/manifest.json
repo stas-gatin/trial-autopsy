@@ -7,7 +7,7 @@
   "as_of": "2008-03-31",
   "readout_date": "2008-03-31",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT00239681@2008-03-31",
@@ -41,12 +41,28 @@
               "type": "DRUG",
               "other_names": [
                 "Crestor"
+              ],
+              "arms": [
+                "Rosuvastatin"
               ]
             },
             {
               "name": "Placebo",
               "type": "OTHER",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "Placebo"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "Rosuvastatin",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR"
             }
           ],
           "conditions": [
@@ -221,51 +237,85 @@
       "note": ""
     },
     {
-      "source_id": "pmid:18332269",
-      "file": "docs/pmid_18332269.txt",
+      "source_id": "pmid:12948872",
+      "file": "docs/pmid_12948872.txt",
       "type": "journal",
-      "title": "Variation in the 3-hydroxyl-3-methylglutaryl coenzyme a reductase gene is associated with racial differences in low-density lipoprotein cholesterol response to simvastatin treatment.",
-      "url": "https://europepmc.org/article/MED/18332269",
-      "pub_date": "2008-03-10",
+      "title": "High-sensitivity C-reactive protein and cardiovascular risk: rationale for screening and primary prevention",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12948872/",
+      "pub_date": "2003-08-21",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18332269",
+        "pmid": "12948872",
         "pmcid": null,
-        "doi": "10.1161/circulationaha.107.708388",
-        "journal": "Circulation",
+        "doi": "10.1016/s0002-9149(03)00774-4",
+        "journal": "The American journal of cardiology",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
+      "source_id": "pmid:18036365",
+      "file": "docs/pmid_18036365.txt",
+      "type": "journal",
+      "title": "Baseline characteristics of participants in the JUPITER trial, a randomized placebo-controlled primary prevention trial of statin therapy among individuals with low low-density lipoprotein cholesterol and elevated high-sensitivity C-reactive protein",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18036365/",
+      "pub_date": "2007-10-24",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "18036365",
+        "pmcid": null,
+        "doi": "10.1016/j.amjcard.2007.09.072",
+        "journal": "The American journal of cardiology",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
+      "source_id": "pmid:18056971",
+      "file": "docs/pmid_18056971.txt",
+      "type": "journal",
+      "title": "Acute myocardial infarction and proinflammatory gene variants",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18056971/",
+      "pub_date": "2007-11-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "18056971",
+        "pmcid": null,
+        "doi": "10.1196/annals.1404.004",
+        "journal": "Annals of the New York Academy of Sciences",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:3866240",
-      "file": "docs/pmid_3866240.txt",
+      "source_id": "pmid:17563401",
+      "file": "docs/pmid_17563401.txt",
       "type": "journal",
-      "title": "Human genes involved in cholesterol metabolism: chromosomal mapping of the loci for the low density lipoprotein receptor and 3-hydroxy-3-methylglutaryl-coenzyme A reductase with cDNA probes.",
-      "url": "https://europepmc.org/article/MED/3866240",
-      "pub_date": "1985-12-01",
+      "title": "Genetic analysis of fluvastatin response and dyslipidemia in renal transplant recipients",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17563401/",
+      "pub_date": "2007-06-11",
       "access": "abstract_only",
       "meta": {
-        "pmid": "3866240",
-        "pmcid": "PMC390958",
-        "doi": "10.1073/pnas.82.24.8567",
-        "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+        "pmid": "17563401",
+        "pmcid": null,
+        "doi": "10.1194/jlr.M700076-JLR200",
+        "journal": "Journal of lipid research",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:18261733",
-      "file": "docs/pmid_18261733.txt",
+      "source_id": "pmid:15530894",
+      "file": "docs/pmid_15530894.txt",
       "type": "journal",
-      "title": "Genetic variation at the LDL receptor and HMG-CoA reductase gene loci, lipid levels, statin response, and cardiovascular disease incidence in PROSPER.",
-      "url": "https://europepmc.org/article/MED/18261733",
-      "pub_date": "2008-02-07",
+      "title": "Pharmacogenetics of HMG-CoA reductase inhibitors: exploring the potential for genotype-based individualization of coronary heart disease management",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15530894/",
+      "pub_date": "2004-12-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "18261733",
-        "pmcid": "PMC4565152",
-        "doi": "10.1016/j.atherosclerosis.2007.12.004",
+        "pmid": "15530894",
+        "pmcid": null,
+        "doi": "10.1016/j.atherosclerosis.2004.09.004",
         "journal": "Atherosclerosis",
         "purpose": "genetics"
       },
@@ -280,7 +330,7 @@
       "pub_date": "2008-03-31",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (Wayback Machine capture of 2008-04-01)"
     }
   ]
 }

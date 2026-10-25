@@ -1,0 +1,15 @@
+{
+  "key": "70adccbc80b0b9d06c9f",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T19:17:50+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: SHARP NCT00125593 - Study of Heart and Renal Protection\nInvestigational drug: simvastatin\nDocument: The relationship between HMGCR genetic variation, alternative splicing, and statin efficacy (journal, published 2010-06-01, source pmid:20587337)\n\n--- DOCUMENT TEXT ---\nThe relationship between HMGCR genetic variation, alternative splicing, and statin efficacy\n\nStatins are a class of cholesterol lowering drugs that inhibit 3-hydroxy-3-methylglutaryl coenzyme A reductase (HMGCR), the enzyme which catalyzes the rate limiting step of cholesterol biosynthesis. Although numerous trials have demonstrated statin efficacy in the reduction of cardiovascular disease risk, there is substantial variation between individuals in the magnitude of plasma LDL-cholesterol reduction. Pharmacogenetic studies have identified HMGCR genetic variation associated with this inter-individual variation. Here we describe how these studies lead to the discovery that HMGCR alternative splicing of exon 13 is not only a marker, but also a determinant of statin efficacy; not only for the treatment of hypercholesterolemia, but also as a chemopreventive agent for colorectal cancer.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 487,
+    "output_tokens": 7
+  }
+}

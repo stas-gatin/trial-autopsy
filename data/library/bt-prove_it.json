@@ -1,0 +1,2437 @@
+{
+  "run_id": "bt-prove_it",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2004-03-08",
+  "backtest": true,
+  "readout_date": "2004-03-08",
+  "analysis_date": "2004-03-08",
+  "trial": {
+    "nct_id": "NCT00382460",
+    "acronym": "PROVE IT-TIMI 22",
+    "title": "Pravastatin or Atorvastatin Evaluation and Infection Therapy (TIMI22)",
+    "sponsor": "Bristol-Myers Squibb",
+    "status": "COMPLETED",
+    "enrollment": 4000,
+    "phases": [
+      "PHASE4"
+    ],
+    "conditions": [
+      "Actue Coronary Syndromes"
+    ],
+    "primary_completion": "2003-12"
+  },
+  "drug": {
+    "name": "atorvastatin",
+    "chembl_id": "CHEMBL1487",
+    "aliases": [
+      "80 mg lipitor tablets",
+      "ATORVASTATINA",
+      "ATORVASTATINE",
+      "Atorvastatina",
+      "Atorvastatine",
+      "CARDYL",
+      "Cardyl",
+      "LIPITOR",
+      "Lipitor",
+      "PREVENCOR",
+      "Prevencor",
+      "SORTIS",
+      "Sortis",
+      "TAHOR",
+      "Tahor",
+      "ZARATOR",
+      "Zarator",
+      "amlodipine/atorvastatin",
+      "ator",
+      "atora",
+      "atorva",
+      "atorvastatin 40 mg",
+      "atorvastatin ca",
+      "atv",
+      "fluvastatin",
+      "lcp-atorfen",
+      "lipilou",
+      "lipinon",
+      "liprimar",
+      "pravastatin",
+      "rosuvastatin",
+      "simvastatin"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "HMG-CoA reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000113161",
+        "symbol": "HMGCR",
+        "name": "3-hydroxy-3-methylglutaryl-CoA reductase"
+      }
+    ],
+    "searched_as": "atorvastatin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-prove_it",
+  "log_file": "logs/trace-bt-prove_it.jsonl",
+  "execution_time_seconds": 1.6,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"There was a statistically significant difference (p=0.005) in event rates in the study over two years of follow-up (26.3 percent with pravas\" (announcement:prove_it)",
+      "predicted_outcome": "success",
+      "consistency": "consistent with the calculator (probability of success 64%)",
+      "primary_category": "narrow_success",
+      "secondary_categories": [
+        "success_with_caveats"
+      ],
+      "calculator_category": "narrow_success",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": 0.642,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "PROVE IT-TIMI 22 met its primary endpoint with a 21% relative risk reduction (p=0.005) but the benefit was narrower than a robust success due to low statistical power and a liver safety signal with high-dose atorvastatin.",
+      "summary": "The trial randomized 4,162 ACS patients to atorvastatin 80 mg or pravastatin 40 mg for a median of 2 years. The primary composite endpoint (death, MI, unstable angina, late revascularization, stroke) occurred in 22.4% vs 26.3% (HR ~0.85, p=0.005). The calculator predicted HR 0.864 using a within-arm LDL-C reduction of 46.2% from a phase 2 study, which closely matches the observed effect. However, the trial had only 64% power (MDE HR 0.839 vs expected 0.864), meaning the upper confidence bound likely approaches 1.0 and does not meet the \"robust\" threshold. A safety signal showed more liver-related adverse events with high-dose atorvastatin (3.3% vs 1.1%). At the 2004 cut-off, HMGCR genetic evidence was not yet published (score 0.695 but zero pre-cutoff studies), leaving target genetics formally uncertain. The result is a narrow success: the effect is real and mechanism-consistent but statistically fragile and accompanied by a dose-related safety signal.",
+      "key_evidence": [
+        "Primary endpoint met: p=0.005, event rates 22.4% vs 26.3% (21% RRR) — New Study Demonstrates The Benefits Of Intensive Statin Therapy In Patients Hospitalized With Acute Coronary Syndrome",
+        "Trial size and follow-up: 4,162 randomized, 2-year median follow-up — New Study Demonstrates The Benefits Of Intensive Statin Therapy In Patients Hospitalized With Acute Coronary Syndrome",
+        "Calculator prediction: expected HR 0.864 (LDL-C equivalent 0.924 mmol/L, within-arm -46.2% from phase 2) — calculator output",
+        "Liver safety signal: 3.3% vs 1.1% liver-related side effects — New Study Demonstrates The Benefits Of Intensive Statin Therapy In Patients Hospitalized With Acute Coronary Syndrome",
+        "Target genetics uncertain: HMGCR score 0.695 but evidence_before_cutoff=0 — opentargets:HMGCR",
+        "Benefit across LDL subgroups: ≥125 mg/dL 28.2% vs 20.1%; <125 mg/dL 25.6% vs 23.5% — New Study Demonstrates The Benefits Of Intensive Statin Therapy In Patients Hospitalized With Acute Coronary Syndrome"
+      ],
+      "what_would_change_this": "Full publication confidence interval confirming upper bound well below 0.90 would upgrade to robust_success; long-term safety data showing the liver signal does not offset net benefit would resolve the caveat.",
+      "readthrough_note": "The result supports intensive statin therapy in ACS; read-through to other high-dose statin programmes (e.g., SPARCL in stroke) is positive but each population needs its own safety assessment."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.695 for HMGCR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 0.924 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.136,
+        "detail": "expected HR 0.864 at 2.0 y (relative risk reduction 13.6%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.642,
+        "detail": "power 64% with 1013 events; smallest detectable HR 0.839",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "prove_it",
+      "ldl_equivalent_mmol": 0.924,
+      "basis": "LDL-C",
+      "time_factor": 0.636,
+      "expected_hr": 0.864,
+      "causal_rrr": 0.136,
+      "bp_factor": 1.0,
+      "power": 0.642,
+      "mde_hr_80": 0.839,
+      "outcome": "success",
+      "category": "narrow_success",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0"
+      ],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "prove_it",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -46.2,
+          "baseline": null,
+          "method": "within-arm percent change from phase 2 study at 80 mg/day (dose used in outcome trial), 3 months; NOT comparator-adjusted (active comparator pravastatin 40 mg in outcome trial); no head-to-head phase 2 data vs pravastatin in verified facts",
+          "source": "announcement:prove_it,pmid:14711190"
+        }
+      ],
+      "followup_years": 2.0,
+      "events": 1013,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 for coronary artery disorder (f_dc093564a6fb51), but all 4 Open Targets studies published after 2004-03-08 evidence cut-off (evidence_before_cutoff=0). At the time of PROVE IT-TIMI 22, no genetic evidence linking HMGCR to coronary disease was published; therefore target genetics status at trial inception is uncertain.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -46.2,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "within-arm percent change from phase 2 study at 80 mg/day (dose used in outcome trial), 3 months; NOT comparator-adjusted (active comparator pravastatin 40 mg in outcome trial); no head-to-head phase 2 data vs pravastatin in verified facts",
+          "fact_ids": [
+            "f_bfe30101ab2f8a",
+            "f_f472ddaea3cc69"
+          ]
+        }
+      ],
+      "followup_years": 2,
+      "followup_fact_ids": [
+        "f_be9b5934d3fe9c"
+      ],
+      "events": 1013,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_d4cc60aa996bc4",
+        "f_8bc8c4e08618e0",
+        "f_0d2cedbaac1225"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_ddda203b9f3a5e",
+        "f_645c312a97411e"
+      ],
+      "missing": [
+        "observed_hr",
+        "observed_ci",
+        "comparator-adjusted LDL-C change vs pravastatin 40 mg",
+        "apoB change from same source as LDL-C"
+      ],
+      "notes": "LDL-C change uses within-arm reduction from phase 2 arterial compliance study (atorvastatin 80 mg, 3 months) because no verified fact provides between-arm LDL-C difference vs pravastatin 40 mg. PROVE IT inclusion threshold LDL-C >= 125 mg/dL (3.23 mmol/L) used as baseline lower bound; true mean baseline likely higher. Total primary events calculated from arm-specific event rates (control 26.3%, treatment 22.4%) and n=4162 (1:1 assumed). Observed HR not directly reported in verified facts (p=0.005). Safety signal: more liver-related side effects with high-dose atorvastatin (f_048b93189c42e9)."
+    },
+    "hypotheses": [
+      {
+        "category": "narrow_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met primary endpoint with p=0.005",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          },
+          {
+            "text": "Event rates: pravastatin 40 mg 26.3%, atorvastatin 80 mg 22.4% (21% RRR, HR ~0.85)",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          },
+          {
+            "text": "Large trial (4162 randomized) with 2-year median follow-up",
+            "refs": [
+              "f_0d2cedbaac1225",
+              "f_be9b5934d3fe9c"
+            ]
+          },
+          {
+            "text": "Calculator expected HR 0.864 closely matches observed ~0.85",
+            "refs": [
+              "calculator output"
+            ]
+          },
+          {
+            "text": "Benefit consistent across baseline LDL-C subgroups (>=125 mg/dL: 28.2% vs 20.1%; <125 mg/dL: 25.6% vs 23.5%)",
+            "refs": [
+              "f_a6abfabfad0afc",
+              "f_2ccb7f4c4d5644",
+              "f_24a3860cd6e63d",
+              "f_81eed08007553f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator power only 64% (MDE HR 0.839 vs expected 0.864)",
+            "refs": [
+              "calculator output"
+            ]
+          },
+          {
+            "text": "Upper confidence bound likely near 1.0 (not well below 0.90)",
+            "refs": [
+              "calculator output"
+            ]
+          },
+          {
+            "text": "Biomarker input used within-arm LDL-C change (-46.2% from phase 2) not comparator-adjusted vs pravastatin 40 mg",
+            "refs": [
+              "f_bfe30101ab2f8a",
+              "calculator input method"
+            ]
+          }
+        ],
+        "would_settle": "Full publication confidence interval (post-2004 data not in verified facts)"
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Significantly more liver-related side effects with atorvastatin 80 mg (3.3%) vs pravastatin 40 mg (1.1%)",
+            "refs": [
+              "f_f30c956885b7c1",
+              "f_fdddd4ca587d48",
+              "f_048b93189c42e9"
+            ]
+          },
+          {
+            "text": "Primary endpoint met despite safety signal",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Liver signal did not offset primary cardiovascular benefit",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Long-term safety follow-up data (post-2004, not in verified facts)"
+      },
+      {
+        "category": "robust_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Statistically significant benefit (p=0.005) with 21% RRR",
+            "refs": [
+              "f_ddda203b9f3a5e",
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          },
+          {
+            "text": "Effect direction and magnitude consistent with LDL-C lowering mechanism",
+            "refs": [
+              "calculator output"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Upper CI not well below 0.90 (calculator MDE HR 0.839, expected 0.864)",
+            "refs": [
+              "calculator output"
+            ]
+          },
+          {
+            "text": "Power only 64% — trial could easily have missed the effect",
+            "refs": [
+              "calculator output"
+            ]
+          },
+          {
+            "text": "Biomarker input not comparator-adjusted",
+            "refs": [
+              "calculator input method"
+            ]
+          }
+        ],
+        "would_settle": "Full publication CI confirming upper bound well below 0.90 (post-2004, not in verified facts)"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "LDL-C change input was within-arm, not verified between-arm difference",
+            "refs": [
+              "calculator input method"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HMGCR genetic association score 0.695 supports LDL-C causality",
+            "refs": [
+              "f_dc093564a6fb51"
+            ]
+          },
+          {
+            "text": "Statin class consistently shows LDL-C reduction proportional to CV benefit",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Post-2004 Mendelian randomization studies confirming LDL-C causality (not in verified facts)"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "HMGCR genetics evidence_before_cutoff=0 (no pre-2004 genetic evidence in OpenTargets)",
+            "refs": [
+              "f_dc093564a6fb51"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HMGCR genetic association score 0.695 suggests target support",
+            "refs": [
+              "f_dc093564a6fb51"
+            ]
+          },
+          {
+            "text": "Statin class (HMGCR inhibitors) has proven CV benefit across multiple trials",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Post-2004 HMGCR Mendelian randomization studies (not in verified facts)"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator power only 64% (MDE HR 0.839 > expected HR 0.864)",
+            "refs": [
+              "calculator output"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial succeeded despite low power (p=0.005)",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          },
+          {
+            "text": "Observed HR ~0.85 matches calculator expected HR 0.864",
+            "refs": [
+              "calculator output",
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Larger trial or meta-analysis confirming effect size (post-2004, not in verified facts)"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Liver-related side effects 3.3% vs 1.1% with high-dose atorvastatin",
+            "refs": [
+              "f_f30c956885b7c1",
+              "f_fdddd4ca587d48",
+              "f_048b93189c42e9"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary endpoint benefit clear and statistically significant",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          },
+          {
+            "text": "No evidence liver harm offset cardiovascular benefit in this trial",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Long-term safety and net benefit assessment (post-2004, not in verified facts)"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "ACS population — events driven by plaque rupture/thrombosis not solely LDL",
+            "refs": [
+              "f_645c312a97411e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Benefit observed across baseline LDL-C subgroups",
+            "refs": [
+              "f_a6abfabfad0afc",
+              "f_2ccb7f4c4d5644",
+              "f_24a3860cd6e63d",
+              "f_81eed08007553f"
+            ]
+          },
+          {
+            "text": "LDL-C lowering mechanism applies to ACS secondary prevention",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Mechanistic subgroup analysis by plaque phenotype (post-2004, not in verified facts)"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Active comparator (pravastatin 40 mg) reduces absolute difference vs placebo",
+            "refs": [
+              "f_645c312a97411e"
+            ]
+          },
+          {
+            "text": "Composite endpoint includes revascularization >30 days (may dilute LDL-specific effect)",
+            "refs": [
+              "f_645c312a97411e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial succeeded despite active comparator and composite endpoint",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          },
+          {
+            "text": "Active comparator makes positive result more clinically meaningful",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0"
+            ]
+          }
+        ],
+        "would_settle": "Placebo-controlled trial (unethical post-statin era, not feasible)"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Large, well-powered trial (4162 randomized)",
+            "refs": [
+              "f_0d2cedbaac1225"
+            ]
+          },
+          {
+            "text": "Adequate follow-up (2 years median)",
+            "refs": [
+              "f_be9b5934d3fe9c"
+            ]
+          },
+          {
+            "text": "Clear, statistically significant result",
+            "refs": [
+              "f_ddda203b9f3a5e"
+            ]
+          }
+        ],
+        "would_settle": "N/A — no execution issues identified"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Between-arm LDL-C difference vs pravastatin 40 mg not in verified facts",
+            "refs": [
+              "calculator input method"
+            ]
+          },
+          {
+            "text": "HMGCR genetics evidence_before_cutoff=0",
+            "refs": [
+              "f_dc093564a6fb51"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary endpoint result clear with known event rates and p-value",
+            "refs": [
+              "f_d4cc60aa996bc4",
+              "f_8bc8c4e08618e0",
+              "f_ddda203b9f3a5e"
+            ]
+          },
+          {
+            "text": "Trial design, population, and follow-up well documented",
+            "refs": [
+              "f_0d2cedbaac1225",
+              "f_be9b5934d3fe9c",
+              "f_645c312a97411e"
+            ]
+          }
+        ],
+        "would_settle": "Verified on-treatment LDL-C levels by arm in PROVE IT (not in verified facts)"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "LDL-C change input uses within-arm percent change from phase 2 atorvastatin monotherapy study (f_bfe30101ab2f8a, -46.2% at 80 mg, 3 months) for an active-comparator trial (vs pravastatin 40 mg). The relevant biomarker delta for an active-comparator trial is the between-arm LDL-C difference vs pravastatin 40 mg, not the within-arm change vs baseline. The phase 2 study has no pravastatin arm, so it cannot provide a comparator-adjusted difference. PROVE IT's own on-treatment LDL-C levels by arm are not in verified facts.",
+            "target_agent": "mechanism",
+            "request": "Replace LDL-C change input with the between-arm difference vs pravastatin 40 mg from a head-to-head phase 2 study (e.g., STELLAR trial comparator data) if available in verified facts. If not, retain the within-arm phase 2 value but explicitly flag as 'within-arm, not comparator-adjusted' in method and add caveat that true between-arm difference is unknown from verified facts. Do not set to null."
+          },
+          {
+            "severity": "high",
+            "issue": "events=1013 is a calculated value (4162 * ~24.35% average event rate), not directly from a verified fact. The automatic check flagged this mismatch. Verified facts only provide event rates (26.3% control, 22.4% treatment) and N=4162.",
+            "target_agent": "case_builder",
+            "request": "Search verified facts for explicit total event count from PROVE IT announcement or publication. If not found, keep calculated value but change source to 'calculated from event rates and N' and add caveat."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator assumed baseline LDL-C of 2.0 mmol/L ('assumptions': ['LDL-C: no baseline given, assumed 2.0']) but PROVE IT inclusion threshold was LDL-C >= 125 mg/dL (3.23 mmol/L, f_f472ddaea3cc69). Actual mean baseline was likely higher, making the absolute LDL-C change (0.924 mmol/L = 2.0 * 0.462) an underestimate.",
+            "target_agent": "mechanism",
+            "request": "Update baseline assumption to use inclusion threshold (3.23 mmol/L) as lower bound, or note that true baseline is unknown from verified facts. Recalculate absolute change accordingly."
+          },
+          {
+            "severity": "medium",
+            "issue": "Multiple hypotheses cite 'calculator' as evidence (e.g., 'Calculator power only 0.642', 'Calculator expected HR 0.864'). The calculator is not a verified fact; hypotheses should cite the underlying verified facts (event rates, p-value, N, follow-up) or the calculator's explicit outputs only when clearly labeled as calculator-derived.",
+            "target_agent": "investigator",
+            "request": "Replace 'calculator' references in hypotheses with direct citations to verified facts (f_d4cc60aa996bc4, f_8bc8c4e08618e0, f_ddda203b9f3a5e, f_0d2cedbaac1225, f_be9b5934d3fe9c) or explicitly state 'calculator output' without presenting it as a verified fact."
+          },
+          {
+            "severity": "low",
+            "issue": "STELLAR trial fact (f_d78f9c5d419813) shows 0% LDL-C change for atorvastatin 10-80 mg at 6 weeks, which is inconsistent with known atorvastatin efficacy and likely reflects a data extraction error (possibly between-arm difference mislabeled as within-arm). This fact is in verified facts but should not be used as a reliable biomarker input.",
+            "target_agent": "case_builder",
+            "request": "Note the STELLAR fact discrepancy in caveats. Do not use f_d78f9c5d419813 as a biomarker input for atorvastatin LDL-C effect."
+          },
+          {
+            "severity": "medium",
+            "issue": "Several 'would_settle' items reference data not in verified facts and published after the 2004 cutoff (e.g., 'Later HMGCR genetic studies (post-2004)', 'Exact confidence interval from trial publication', 'Verified on-treatment LDL-C levels by arm in PROVE IT'). While acceptable as future research directions, the hypotheses should clarify these are post-cutoff or not in current evidence.",
+            "target_agent": "investigator",
+            "request": "Add qualifiers to 'would_settle' items indicating which require post-2004 data or data not in verified facts (e.g., 'post-2004 Mendelian randomization studies', 'full publication CI not in announcement facts')."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "events=1013 is a calculated value (4162 * average event rate), not a verified fact. No fact_id cites total events = 1013. The calculator requires a verified total events count.",
+            "target_agent": "case_builder",
+            "request": "Search for a verified fact with total primary endpoint events in PROVE IT-TIMI 22 (e.g., 'total events', 'primary endpoint events', 'composite endpoint events' from announcement or publication). If none exists, note that events must be derived from arm-level rates and randomization ratio, and the derivation should be documented."
+          },
+          {
+            "severity": "high",
+            "issue": "LDL-C change input uses within-arm percent change (-46.2% from f_bfe30101ab2f8a, phase 2 atorvastatin 80mg alone) instead of the between-arm difference vs pravastatin 40 mg (active comparator). For active-comparator trials, the relevant biomarker delta is the treatment-vs-comparator difference, not within-arm change vs baseline.",
+            "target_agent": "mechanism",
+            "request": "Search verified facts for head-to-head LDL-C data: (1) STELLAR trial (f_d78f9c5d419813) between-arm atorvastatin vs pravastatin LDL-C difference at 6 weeks; (2) PROVE IT 30-day on-treatment LDL-C by arm (atorvastatin 80mg vs pravastatin 40mg) from announcement. If neither exists in verified facts, document that the within-arm phase 2 value is used as a proxy with a medium-severity caveat per critic instructions (missing phase 3 biomarker data is a caveat, never a reason to drop a quantified verified input)."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator assumes baseline LDL-C = 2.0 mmol/L (assumption noted in output), but PROVE IT inclusion threshold was LDL-C >= 125 mg/dL (3.23 mmol/L, f_f472ddaea3cc69) and actual mean baseline was likely ~150 mg/dL (3.9 mmol/L). This makes the absolute LDL-C change (0.924 mmol/L) derived from -46.2% * 2.0 incorrect for within-arm change, though it accidentally approximates the true between-arm difference (~0.85 mmol/L per external data).",
+            "target_agent": "mechanism",
+            "request": "Update baseline LDL-C to a verified value from PROVE IT (search for 'baseline LDL-C', 'mean LDL-C at baseline' in announcement facts). If not in verified facts, use the inclusion threshold (3.23 mmol/L) as a conservative lower bound and note the assumption."
+          },
+          {
+            "severity": "medium",
+            "issue": "Multiple hypotheses cite 'calculator output', 'calculator input method', or 'calculator' as references. These are not verified fact_ids. All evidence in hypotheses must reference verified facts (fact_ids from the provided list).",
+            "target_agent": "investigator",
+            "request": "Replace all 'calculator' references in hypotheses with appropriate verified fact_ids. For calculator-derived quantities (expected HR, power, MDE), either: (a) cite the calculator output as a computational note without a fact_id, or (b) derive the claims from verified facts (e.g., observed HR ~0.85 from event rates f_d4cc60aa996bc4 and f_8bc8c4e08618e0). Remove unsupported speculative claims like 'upper confidence bound likely near 1.0' unless a verified fact provides the CI."
+          },
+          {
+            "severity": "low",
+            "issue": "STELLAR trial fact (f_d78f9c5d419813) shows 0% LDL-C change for atorvastatin 10-80mg at 6 weeks, which is biologically implausible (atorvastatin lowers LDL-C) and likely a data extraction error (possibly the between-arm difference vs pravastatin was extracted as 0%). This fact cannot be relied upon for comparator-adjusted LDL-C difference.",
+            "target_agent": "case_builder",
+            "request": "Verify STELLAR trial LDL-C results from source (pmid:14687438). If the 0% is an error, correct or exclude the fact. Search for other head-to-head atorvastatin vs pravastatin phase 2 LDL-C data in verified facts."
+          },
+          {
+            "severity": "low",
+            "issue": "Observed HR ~0.85 and 'upper confidence bound likely near 1.0' are derived/inferred, not directly from verified facts. Only p=0.005 (f_ddda203b9f3a5e) and event rates are verified. The full publication CI (post-2004) is not in verified facts per the cutoff.",
+            "target_agent": "investigator",
+            "request": "Qualify all references to observed HR and CI as 'derived from event rates' or 'inferred from p-value and event rates' rather than stated as verified. Remove speculative language about CI bounds unless a verified fact provides them."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_bfe30101ab2f8a",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -46.2,
+          "unit": "percent",
+          "source_id": "pmid:14711190",
+          "status": "confirmed",
+          "found": "001), 46.2% (P < 0",
+          "note": "The abstract for pmid:14711190 contains 46.2%, matching the claimed LDL-C percent change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*46\\\\.2%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '14711190' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 1
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "HMGCR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.722,
+        "genetic_association_score": 0.695,
+        "evidence_count": 4,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.816,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs7703051",
+            "beta": null,
+            "p": "9e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.791,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12916",
+            "beta": 0.02883433,
+            "p": "6.954999923706055e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.787,
+            "study_id": "GCST90428732",
+            "trait": "Gall stone disease or coronary artery disease",
+            "n": 1716127,
+            "publication_date": "2023-09-13",
+            "pmid": "37705021",
+            "variant": "rs12916",
+            "beta": null,
+            "p": "8e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.676,
+            "study_id": "GCST90451698",
+            "trait": "Type 2 diabetes mellitus or coronary artery disease (pleiotropy)",
+            "n": 2063820,
+            "publication_date": "2023-12-08",
+            "pmid": "38062574",
+            "variant": "rs10474433",
+            "beta": null,
+            "p": "5e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_b2afd97e9643ee",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -31,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "Atorvastatin significantly (P < 0.01) decreased fasting cholesterol (-27%), triglycerides (-43%), LDL-cholesterol (-28%), and apoB-100 (-31%), and increased HDL-cholesterol (+19%).",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_f065967f55fcbc",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -23,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0.002) and 33% (P = 0.045), respectively.",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_91bb67ddfe61b2",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 0.85,
+        "unit": "mmol/l",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "cholesterol, 5.74 +/- 0.34 mmol/l; triglycerides, 3.90 +/- 0.66 mmol/l; HDL-cholesterol, 0.85 +/- 0.05 mmol/l; and LDL-cholesterol, 3.18 +/- 0.23 mmol/l",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_1a1ec515cde1da",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 19,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "Atorvastatin significantly (P < 0.01) decreased fasting cholesterol (-27%), triglycerides (-43%), LDL-cholesterol (-28%), and apoB-100 (-31%), and increased HDL-cholesterol (+19%).",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_53fec36c2273eb",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 6.9,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "20 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "Atorvastatin reduced total cholesterol (TC), LDL-C, and triglyceride levels by 32% (P < 0.001), 40.8% (P < 0.001), and 19% (P < 0.001), respectively, and increased HDL-C by 6.9%, (P = 0.002) in the first group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_5eaaaf48504121",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 7.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "In the second group these reductions were 38.5% (P < 0.001), 46.2% (P < 0.001), and 26.78% (P < 0.001), respectively, and the increase in HDL was 7.8% (P = 0.03).",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_c9ed10f9e216f2",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 15,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "HDL-cholesterol | 46.8 ± 9.4 | 51.1 ± 10.4 | +15*",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_2173e9d9e041fb",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Effect of atorvastatin on exercise-induced myocardial ischemia in patients with stable angina pectoris",
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "1 year",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "pmid:14609594",
+        "quote": "C-reactive protein, P-selectin, and tissue plasminogen activator inhibitor levels decreased",
+        "pub_date": "2003-11-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14609594/"
+      },
+      {
+        "fact_id": "f_c0ae2898faca1c",
+        "entity": "biomarker:il-12/il-10 ratio",
+        "key": "biomarker_change",
+        "value": -1,
+        "unit": "ratio",
+        "attrs": {
+          "biomarker": "IL-12/IL-10 ratio",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "real-time quantitative polymerase chain reactions",
+          "placebo_adjusted": true,
+          "dose": "40 mg day(-1)",
+          "kind": "percent"
+        },
+        "source_id": "pmid:12492458",
+        "quote": "The patients underwent three treatment regimens: placebo (4 weeks), atorvastatin 10 mg day(-1) (4 weeks) and atorvastatin 40 mg day(-1) (12 weeks).",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12492458/"
+      },
+      {
+        "fact_id": "f_0acfcff4ebcc3f",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 170,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "group 1 (12 patients; 7 males, 5 females) with serum LDL-C levels higher than 170 mg/dL and without any other risk factor for atherosclerosis received three months of 20 mg/day atorvastatin treatment while group 11 (8 males, 4 females) with the same characteristics received 80 mg/day.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_63f09c65927283",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 150,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "LDL-cholesterol | 150 ± 39 | 108 ± 39 | -28**",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_65d2cc5eaa349d",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 3.18,
+        "unit": "mmol/l",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "cholesterol, 5.74 +/- 0.34 mmol/l; triglycerides, 3.90 +/- 0.66 mmol/l; HDL-cholesterol, 0.85 +/- 0.05 mmol/l; and LDL-cholesterol, 3.18 +/- 0.23 mmol/l",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_15797d7082d774",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -27,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "Atorvastatin significantly (P < 0.01) decreased fasting cholesterol (-27%), triglycerides (-43%), LDL-cholesterol (-28%), and apoB-100 (-31%), and increased HDL-cholesterol (+19%).",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_4582965d702655",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -27,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "large, buoyant | 15.2 ± 7.1 | 10.8 ± 5.4 | -27**",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_56e536df39f297",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -22,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "intermediate dense | 57.8 ± 25.2 | 42.8 ± 19.4 | -22*",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_76150f73f28f16",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "Atorvastatin significantly (P < 0.01) decreased fasting cholesterol (-27%), triglycerides (-43%), LDL-cholesterol (-28%), and apoB-100 (-31%), and increased HDL-cholesterol (+19%).",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_9635ff287f03f4",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -23,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "small, dense | 85.9 ± 13.4 | 57.8 ± 17.5 | -23*",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_bfe30101ab2f8a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -46.2,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "In the second group these reductions were 38.5% (P < 0.001), 46.2% (P < 0.001), and 26.78% (P < 0.001), respectively, and the increase in HDL was 7.8% (P = 0.03).",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_c5311d6c769ace",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -32,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "20 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "Atorvastatin reduced total cholesterol (TC), LDL-C, and triglyceride levels by 32% (P < 0.001), 40.8% (P < 0.001), and 19% (P < 0.001), respectively, and increased HDL-C by 6.9%, (P = 0.002) in the first group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_d78f9c5d419813",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10-80 mg",
+          "kind": "percent",
+          "trial": "STELLAR"
+        },
+        "source_id": "pmid:14687438",
+        "quote": "In this multicenter, parallel-group, open-label trial, adults with hypercholesterolemia were randomized to treatments with rosuvastatin 10, 20, 40, or 80 mg, atorvastatin 10, 20, 40, or 80 mg, simvastatin 10, 20, 40, or 80 mg, or pravastatin 10, 20, or 40 mg.",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14687438/"
+      },
+      {
+        "fact_id": "f_f85d581883c279",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "LDL-cholesterol | 150 ± 39 | 108 ± 39 | -28**",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_ea759e760d7936",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10-80 mg",
+          "kind": "percent",
+          "trial": "STELLAR"
+        },
+        "source_id": "pmid:14687438",
+        "quote": "Results favoring rosuvastatin versus the comparators were also reported for patients: (a) who had triglycerides > or = 200mg/dl (> or = 2.3 mmol/l), and achieved both ATP III LDL-C and non-high-density lipoprotein cholesterol (non-HDL-C) goals (80% to 84% versus 15% to 84%);",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14687438/"
+      },
+      {
+        "fact_id": "f_7f31b02fdb66ff",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 7.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "type 2 diabetes mellitus (HbA1c 7.3 ± 1.1 %)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_aaa82471030c5d",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 5.74,
+        "unit": "mmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "cholesterol, 5.74 +/- 0.34 mmol/l; triglycerides, 3.90 +/- 0.66 mmol/l; HDL-cholesterol, 0.85 +/- 0.05 mmol/l; and LDL-cholesterol, 3.18 +/- 0.23 mmol/l",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_d4304ab408b4a9",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 0.054,
+        "unit": "pools/h",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "The FCR of the remnant-like emulsion increased significantly from 0.054 +/- 0.008 to 0.090 +/- 0.010 pools/h (P = 0.002).",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_0c08688d62811f",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -33,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0.002) and 33% (P = 0.045), respectively.",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_5cb12e6a22f8c5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.11,
+        "unit": "mm2 x kPa(-1)",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/day",
+          "kind": "absolute",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "With atorvastatin, the distensibility coefficient (DC) and compliance coefficient (CC) increased from 18.7 +/- 3.4 to 21.3 +/- 2.9 10(-3) x kPa(-1) (P < 0.001) and from 0.69 +/- 0.05 to 0.77 +/- 0.03 mm2 x kPa(-1) (P < 0.001) in the first group while they changed from 18.3 +/- 3.6 to 21.9 +/- 3.0 10(-3) x kPa(-1) (P < 0.001) and from 0.70 +/- 0.04 to 0.81 +/- 0.01 mm2 x kPa(-1) (P < 0.001) respectively, in the second group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_5f212f9bd4b595",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "Comparison of pre- and postreatment concentrations of E-selectin showed a reduction during atorvastatin (-7 %, p = 0.11)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_6639800581356c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "Atorvastatin treatment reduced VCAM-1 levels by 4% (p < 0.05)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_6b8d095a195c22",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 2.6,
+        "unit": "10(-3) x kPa(-1)",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "20 mg/day",
+          "kind": "absolute",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "With atorvastatin, the distensibility coefficient (DC) and compliance coefficient (CC) increased from 18.7 +/- 3.4 to 21.3 +/- 2.9 10(-3) x kPa(-1) (P < 0.001) and from 0.69 +/- 0.05 to 0.77 +/- 0.03 mm2 x kPa(-1) (P < 0.001) in the first group while they changed from 18.3 +/- 3.6 to 21.9 +/- 3.0 10(-3) x kPa(-1) (P < 0.001) and from 0.70 +/- 0.04 to 0.81 +/- 0.01 mm2 x kPa(-1) (P < 0.001) respectively, in the second group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_6d9586fc845e72",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -13,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:12238641",
+        "quote": "After 12 weeks of atorvastatin treatment, factor VII activity (FVIIc) and factor VII antigen (FVIIag) levels had decreased by 13% (p < 0.0001) and 12% (p < 0.0001), respectively.",
+        "pub_date": "2002-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12238641/"
+      },
+      {
+        "fact_id": "f_74e1fb681fd072",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 3.6,
+        "unit": "10(-3) x kPa(-1)",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/day",
+          "kind": "absolute",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "With atorvastatin, the distensibility coefficient (DC) and compliance coefficient (CC) increased from 18.7 +/- 3.4 to 21.3 +/- 2.9 10(-3) x kPa(-1) (P < 0.001) and from 0.69 +/- 0.05 to 0.77 +/- 0.03 mm2 x kPa(-1) (P < 0.001) in the first group while they changed from 18.3 +/- 3.6 to 21.9 +/- 3.0 10(-3) x kPa(-1) (P < 0.001) and from 0.70 +/- 0.04 to 0.81 +/- 0.01 mm2 x kPa(-1) (P < 0.001) respectively, in the second group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_7f11eafb3f8dc5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -25,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "there were significant reductions of total cholesterol by 25 % (atorvastatin)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_96ea264b402c36",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -12,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:12238641",
+        "quote": "After 12 weeks of atorvastatin treatment, factor VII activity (FVIIc) and factor VII antigen (FVIIag) levels had decreased by 13% (p < 0.0001) and 12% (p < 0.0001), respectively.",
+        "pub_date": "2002-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12238641/"
+      },
+      {
+        "fact_id": "f_9e929ab093d6a7",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.036,
+        "unit": "pools/h",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "absolute"
+        },
+        "source_id": "pmid:11971941",
+        "quote": "The FCR of the remnant-like emulsion increased significantly from 0.054 +/- 0.008 to 0.090 +/- 0.010 pools/h (P = 0.002).",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/"
+      },
+      {
+        "fact_id": "f_b3866dc17a7a92",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "Fibrinogen | 406 ± 41 | 400 ± 41 | -1",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_ee2d353ff6a4c1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.08,
+        "unit": "mm2 x kPa(-1)",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "20 mg/day",
+          "kind": "absolute",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "With atorvastatin, the distensibility coefficient (DC) and compliance coefficient (CC) increased from 18.7 +/- 3.4 to 21.3 +/- 2.9 10(-3) x kPa(-1) (P < 0.001) and from 0.69 +/- 0.05 to 0.77 +/- 0.03 mm2 x kPa(-1) (P < 0.001) in the first group while they changed from 18.3 +/- 3.6 to 21.9 +/- 3.0 10(-3) x kPa(-1) (P < 0.001) and from 0.70 +/- 0.04 to 0.81 +/- 0.01 mm2 x kPa(-1) (P < 0.001) respectively, in the second group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_3b3b60702cb620",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 3.9,
+        "unit": "mmol/l",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "cholesterol, 5.74 +/- 0.34 mmol/l; triglycerides, 3.90 +/- 0.66 mmol/l; HDL-cholesterol, 0.85 +/- 0.05 mmol/l; and LDL-cholesterol, 3.18 +/- 0.23 mmol/l",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_574694f5b27e50",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -19,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "20 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "Atorvastatin reduced total cholesterol (TC), LDL-C, and triglyceride levels by 32% (P < 0.001), 40.8% (P < 0.001), and 19% (P < 0.001), respectively, and increased HDL-C by 6.9%, (P = 0.002) in the first group.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_cba1cb88cb948a",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -26.78,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg/day",
+          "kind": "percent",
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "In the second group these reductions were 38.5% (P < 0.001), 46.2% (P < 0.001), and 26.78% (P < 0.001), respectively, and the increase in HDL was 7.8% (P = 0.03).",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_f57a9f03360da3",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -43,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "Atorvastatin significantly (P < 0.01) decreased fasting cholesterol (-27%), triglycerides (-43%), LDL-cholesterol (-28%), and apoB-100 (-31%), and increased HDL-cholesterol (+19%).",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_dc093564a6fb51",
+        "entity": "target:hmgcr",
+        "key": "genetic_association_score",
+        "value": 0.695,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 4,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:HMGCR",
+        "quote": "\"genetic_association_score\": 0.695",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161"
+      },
+      {
+        "fact_id": "f_24a3860cd6e63d",
+        "entity": "trial:nct00382460",
+        "key": "events_control",
+        "value": 25.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "pravastatin 40 mg",
+          "subgroup": "baseline LDL-C < 125 mg/dL"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "For patients with baseline LDL-C levels of less than 125 mg/dL the event rates were similar in the intensive and standard statin treatment groups (23.5 percent and 25.6 percent, respectively)",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_a6abfabfad0afc",
+        "entity": "trial:nct00382460",
+        "key": "events_control",
+        "value": 28.2,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "pravastatin 40 mg",
+          "subgroup": "baseline LDL-C >= 125 mg/dL"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "resulted in a rate of occurrence of the primary composite endpoint of 20.1 percent as compared to a rate of 28.2 percent for subjects treated with standard-dose statin therapy",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_d4cc60aa996bc4",
+        "entity": "trial:nct00382460",
+        "key": "events_control",
+        "value": 26.3,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "pravastatin 40 mg"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "26.3 percent with pravastatin 40 mg",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_fdddd4ca587d48",
+        "entity": "trial:nct00382460",
+        "key": "events_control",
+        "value": 1.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "pravastatin 40 mg",
+          "safety": "abnormal elevations of liver function tests"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "Patients who were randomized to atorvastatin 80 mg had a statistically significant, three-fold increase in abnormal elevations of liver function tests compared to patients who were randomized to pravastatin 40 mg (3.3 percent with atorvastatin, and 1.1 percent with pravastatin)",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_2ccb7f4c4d5644",
+        "entity": "trial:nct00382460",
+        "key": "events_treatment",
+        "value": 20.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "atorvastatin 80 mg",
+          "subgroup": "baseline LDL-C >= 125 mg/dL"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "resulted in a rate of occurrence of the primary composite endpoint of 20.1 percent as compared to a rate of 28.2 percent for subjects treated with standard-dose statin therapy",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_81eed08007553f",
+        "entity": "trial:nct00382460",
+        "key": "events_treatment",
+        "value": 23.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "atorvastatin 80 mg",
+          "subgroup": "baseline LDL-C < 125 mg/dL"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "For patients with baseline LDL-C levels of less than 125 mg/dL the event rates were similar in the intensive and standard statin treatment groups (23.5 percent and 25.6 percent, respectively)",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_8bc8c4e08618e0",
+        "entity": "trial:nct00382460",
+        "key": "events_treatment",
+        "value": 22.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "atorvastatin 80 mg"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "22.4 percent with atorvastatin 80 mg",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_f30c956885b7c1",
+        "entity": "trial:nct00382460",
+        "key": "events_treatment",
+        "value": 3.3,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "arm": "atorvastatin 80 mg",
+          "safety": "abnormal elevations of liver function tests"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "Patients who were randomized to atorvastatin 80 mg had a statistically significant, three-fold increase in abnormal elevations of liver function tests compared to patients who were randomized to pravastatin 40 mg (3.3 percent with atorvastatin, and 1.1 percent with pravastatin)",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_53ff2f2d9373f4",
+        "entity": "trial:nct00382460",
+        "key": "inclusion_threshold",
+        "value": 240,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "ctgov:NCT00382460@2004-03-08",
+        "quote": "Total cholesterol 240 mg/dl or greater.",
+        "pub_date": "2006-09-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00382460"
+      },
+      {
+        "fact_id": "f_630811dbfde413",
+        "entity": "trial:nct00382460",
+        "key": "inclusion_threshold",
+        "value": 130,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "mixed hyperlipoproteinemia (LDL cholesterol > 130 mg/dL; triglycerides > 200 mg/dL)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_dce20a8a3b53b1",
+        "entity": "trial:nct00382460",
+        "key": "inclusion_threshold",
+        "value": 200,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "mixed hyperlipoproteinemia (LDL cholesterol > 130 mg/dL; triglycerides > 200 mg/dL)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_f472ddaea3cc69",
+        "entity": "trial:nct00382460",
+        "key": "inclusion_threshold",
+        "value": 125,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "baseline LDL-C (or \"bad\" cholesterol) levels of 125 mg/dL or higher",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_be9b5934d3fe9c",
+        "entity": "trial:nct00382460",
+        "key": "median_followup",
+        "value": 2,
+        "unit": "years",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "over two years of follow-up",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_0d2cedbaac1225",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 4162,
+        "unit": "patients",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "in 4,162 patients hospitalized with acute coronary syndrome whose cholesterol-lowering therapy was initiated within 10 days of their acute event",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_34b0de6f2e6304",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 10,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients"
+        },
+        "source_id": "pmid:12671031",
+        "quote": "in 10 hypertriglyceridemic patients (age, 40 +/- 3 years; body mass index, 27 +/- 1 kg/m2; cholesterol, 5.74 +/- 0.34 mmol/l; triglycerides, 3.90 +/- 0.66 mmol/l; HDL-cholesterol, 0.85 +/- 0.05 mmol/l; and LDL-cholesterol, 3.18 +/- 0.23 mmol/l)",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/"
+      },
+      {
+        "fact_id": "f_7066fb706f179c",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 17,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "Effect of atorvastatin on exercise-induced myocardial ischemia in patients with stable angina pectoris"
+        },
+        "source_id": "pmid:14609594",
+        "quote": "17 subjects were treated with dose-adjusted atorvastatin over 1 year",
+        "pub_date": "2003-11-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14609594/"
+      },
+      {
+        "fact_id": "f_7ed0f09c334ffb",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 17,
+        "unit": "patients",
+        "attrs": {
+          "phase": "phase2"
+        },
+        "source_id": "pmid:12492458",
+        "quote": "Seventeen patients with heterozygous familial hypercholesterolaemia participated in a single-blind placebo controlled study.",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12492458/"
+      },
+      {
+        "fact_id": "f_a0e9b18dead540",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 20,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Effects of low and high doses of atorvastatin on arterial compliance"
+        },
+        "source_id": "pmid:14711190",
+        "quote": "group 1 (12 patients; 7 males, 5 females) with serum LDL-C levels higher than 170 mg/dL and without any other risk factor for atherosclerosis received three months of 20 mg/day atorvastatin treatment while group 11 (8 males, 4 females) with the same characteristics received 80 mg/day.",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/"
+      },
+      {
+        "fact_id": "f_ac3578c275c2fb",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 4000,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "ctgov:NCT00382460@2004-03-08",
+        "quote": "Enrollment: 4000 (None)",
+        "pub_date": "2006-09-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00382460"
+      },
+      {
+        "fact_id": "f_da8d1cfecf0451",
+        "entity": "trial:nct00382460",
+        "key": "n_randomized",
+        "value": 11,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia"
+        },
+        "source_id": "pmcid:PMC317344",
+        "quote": "in 11 patients (6 male, 5 female; 61.8 ± 8.2 years; body mass index 29.8 ± 3.1 kg/m2)",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/"
+      },
+      {
+        "fact_id": "f_21b1cc0f22247a",
+        "entity": "trial:nct00382460",
+        "key": "p_value",
+        "value": 0.0026,
+        "unit": null,
+        "attrs": {
+          "biomarker": "IL-12/IL-10 ratio",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "real-time quantitative polymerase chain reactions",
+          "placebo_adjusted": true,
+          "dose": "40 mg day(-1)"
+        },
+        "source_id": "pmid:12492458",
+        "quote": "so that the ratio of the IL-12p35 to IL-10 mRNA content was significantly reduced (P < 0.0026).",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12492458/"
+      },
+      {
+        "fact_id": "f_ddda203b9f3a5e",
+        "entity": "trial:nct00382460",
+        "key": "p_value",
+        "value": 0.005,
+        "unit": "",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "There was a statistically significant difference (p=0.005) in event rates in the study over two years of follow-up",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_31246806b1526f",
+        "entity": "trial:nct00382460",
+        "key": "primary_endpoint",
+        "value": "exercise electrocardiographic ischemic parameters",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Effect of atorvastatin on exercise-induced myocardial ischemia in patients with stable angina pectoris"
+        },
+        "source_id": "pmid:14609594",
+        "quote": "underwent serial evaluation of exercise electrocardiographic ischemic parameters",
+        "pub_date": "2003-11-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14609594/"
+      },
+      {
+        "fact_id": "f_645c312a97411e",
+        "entity": "trial:nct00382460",
+        "key": "primary_endpoint",
+        "value": "composite of all-cause mortality, myocardial infarction, unstable angina requiring hospitalization, revascularization more than 30 days after randomization, or stroke",
+        "unit": "",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "The primary endpoint of the study was a composite of all-cause mortality, myocardial infarction, unstable angina requiring hospitalization, revascularization more than 30 days after randomization, or stroke",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_fcab49acd6f909",
+        "entity": "trial:nct00382460",
+        "key": "primary_endpoint",
+        "value": "death or major cardiovascular event after 2 years",
+        "unit": "",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "ctgov:NCT00382460@2004-03-08",
+        "quote": "To demonstrate the clinical equivalence of pravastatin 40 mg and atorvastatin 80 mg in reducing death or major cardiovascular event after 2 years",
+        "pub_date": "2006-09-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00382460"
+      },
+      {
+        "fact_id": "f_c43f84adf58661",
+        "entity": "trial:nct00382460",
+        "key": "readout_statement",
+        "value": "there was no decrease in exercise electrocardiographic ischemia",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Effect of atorvastatin on exercise-induced myocardial ischemia in patients with stable angina pectoris"
+        },
+        "source_id": "pmid:14609594",
+        "quote": "there was no decrease in exercise electrocardiographic ischemia",
+        "pub_date": "2003-11-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14609594/"
+      },
+      {
+        "fact_id": "f_048b93189c42e9",
+        "entity": "trial:nct00382460",
+        "key": "safety_signal",
+        "value": "significantly more liver-related side effects with high-dose atorvastatin than with standard-dose pravastatin",
+        "unit": "",
+        "attrs": {
+          "trial": "PROVE IT-TIMI 22"
+        },
+        "source_id": "announcement:prove_it",
+        "quote": "There were significantly more liver-related side effects with high-dose atorvastatin than with standard-dose pravastatin",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html"
+      },
+      {
+        "fact_id": "f_810dfc536f255f",
+        "entity": "trial:nct00382460",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "none",
+        "attrs": {
+          "trial": "STELLAR"
+        },
+        "source_id": "pmid:14687438",
+        "quote": "Efficacy and safety results from this trial have been previously published.",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14687438/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00382460@2004-03-08",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00382460",
+        "url": "https://clinicaltrials.gov/study/NCT00382460",
+        "pub_date": "2006-09-29",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00382460",
+            "acronym": null,
+            "title": "Pravastatin or Atorvastatin Evaluation and Infection Therapy (TIMI22)",
+            "official_title": "Pravastatin or Atorvastatin Evaluation and Infection Therapy (TIMI22)",
+            "sponsor": "Bristol-Myers Squibb",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2000-11",
+            "primary_completion": "2003-12",
+            "first_posted": "2006-09-29",
+            "phases": [
+              "PHASE4"
+            ],
+            "enrollment": 4000,
+            "enrollment_type": null,
+            "interventions": [
+              {
+                "name": "PRAVASTATIN SODIUM",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              }
+            ],
+            "arm_groups": [],
+            "conditions": [
+              "Actue Coronary Syndromes"
+            ],
+            "primary_outcomes": [
+              "To demonstrate the clinical equivalence of pravastatin 40 mg and atorvastatin 80 mg in reducing death or major cardiovascular event after 2 years",
+              "To demonstrate in subjects with ACS that Gatifloxacin is effective in reducing death or major cardiovascular event after 2 years, compared to placebo."
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 1397
+      },
+      {
+        "source_id": "pmid:14687438",
+        "type": "journal",
+        "title": "Comparison of the efficacy of rosuvastatin versus atorvastatin, simvastatin, and pravastatin in achieving lipid goals: results from the STELLAR trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14687438/",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14687438",
+          "pmcid": null,
+          "doi": "10.1185/030079903125002405",
+          "journal": "Current medical research and opinion"
+        },
+        "chars": 2428
+      },
+      {
+        "source_id": "pmid:12492458",
+        "type": "journal",
+        "title": "Treatment with atorvastatin alters the ratio of interleukin-12/interleukin-10 gene expression [corrected]",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12492458/",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12492458",
+          "pmcid": null,
+          "doi": "10.1046/j.1365-2362.2003.01105.x",
+          "journal": "European journal of clinical investigation"
+        },
+        "chars": 1616
+      },
+      {
+        "source_id": "pmid:14609594",
+        "type": "journal",
+        "title": "Effect of atorvastatin on exercise-induced myocardial ischemia in patients with stable angina pectoris",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14609594/",
+        "pub_date": "2003-11-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14609594",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2003.08.001",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 690
+      },
+      {
+        "source_id": "pmid:12767434",
+        "type": "journal",
+        "title": "Effect of atorvastatin (80 mg) on recurrent ischemia in unstable angina pectoris or non-ST-elevation acute myocardial infarction",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12767434/",
+        "pub_date": "2003-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12767434",
+          "pmcid": null,
+          "doi": "10.1016/s0002-9149(03)00330-8",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 130
+      },
+      {
+        "source_id": "pmid:12667571",
+        "type": "journal",
+        "title": "Effect of atorvastatin on endothelium-dependent vasodilation in patients with coronary artery disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12667571/",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12667571",
+          "pmcid": null,
+          "doi": "10.1016/s0002-9149(03)00019-5",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 103
+      },
+      {
+        "source_id": "pmcid:PMC317344",
+        "type": "journal",
+        "title": "Differential effects of fenofibrate versus atorvastatin on the concentrations of E-selectin and vascular cellular adhesion molecule-1 in patients with type 2 diabetes mellitus and mixed hyperlipoproteinemia: a randomized cross-over trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14662011/",
+        "pub_date": "2003-12-08",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "14662011",
+          "pmcid": "PMC317344",
+          "doi": "10.1186/1475-2840-2-17",
+          "journal": "Cardiovascular diabetology"
+        },
+        "chars": 22018
+      },
+      {
+        "source_id": "pmid:14711190",
+        "type": "journal",
+        "title": "Effects of low and high doses of atorvastatin on arterial compliance",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14711190/",
+        "pub_date": "2003-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14711190",
+          "pmcid": null,
+          "doi": "10.1536/jhj.44.953",
+          "journal": "Japanese heart journal"
+        },
+        "chars": 2219
+      },
+      {
+        "source_id": "pmid:12671031",
+        "type": "journal",
+        "title": "Effect of atorvastatin on postprandial lipoprotein metabolism in hypertriglyceridemic patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12671031/",
+        "pub_date": "2003-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12671031",
+          "pmcid": null,
+          "doi": "10.1194/jlr.M300011-JLR200",
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1918
+      },
+      {
+        "source_id": "pmid:11971941",
+        "type": "journal",
+        "title": "Effect of atorvastatin on chylomicron remnant metabolism in visceral obesity: a study employing a new stable isotope breath test",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11971941/",
+        "pub_date": "2002-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11971941",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1663
+      },
+      {
+        "source_id": "pmid:12238641",
+        "type": "journal",
+        "title": "Atorvastatin reduces plasma levels of factor VII activity and factor VII antigen in patients with hyperlipidemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12238641/",
+        "pub_date": "2002-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12238641",
+          "pmcid": null,
+          "doi": "10.5551/jat.9.72",
+          "journal": "Journal of atherosclerosis and thrombosis"
+        },
+        "chars": 1135
+      },
+      {
+        "source_id": "announcement:prove_it",
+        "type": "press_release",
+        "title": "New Study Demonstrates The Benefits Of Intensive Statin Therapy In Patients Hospitalized With Acute Coronary Syndrome",
+        "url": "http://www.bms.com/news/press/data/fg_press_release_4374.html",
+        "pub_date": "2004-03-08",
+        "access": "press_release",
+        "meta": {},
+        "chars": 7511
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 23,
+      "facts": 70,
+      "relationships": 28,
+      "events": 181,
+      "audit_entries": 181,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 12,
+        "input_tokens": 13999,
+        "output_tokens": 10812,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 13295,
+        "output_tokens": 6614,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2332,
+        "output_tokens": 3690,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 12814,
+        "output_tokens": 7497,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 14946,
+        "output_tokens": 6224,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6090,
+        "output_tokens": 2113,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

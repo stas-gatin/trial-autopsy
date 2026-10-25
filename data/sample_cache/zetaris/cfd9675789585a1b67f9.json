@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A40337982+OR+EXT_ID%3A40347969+OR+PMCID%3APMC11456355+OR+PMCID%3APMC12811769&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*31[·.]9%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40347969' AND (r.abstractText LIKE '%31.9%%' OR r.abstractText LIKE '%31·9%%') LIMIT 5",
+ "rows": [
+  [
+   " Obicetrapib monotherapy decreased LDL cholesterol by 31·9% (22·1 to 41·6) versus placebo"
+  ]
+ ],
+ "error": null
+}

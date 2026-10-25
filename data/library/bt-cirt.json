@@ -1,0 +1,2189 @@
+{
+  "run_id": "bt-cirt",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2018-11-10",
+  "backtest": true,
+  "readout_date": "2018-11-10",
+  "analysis_date": "2018-11-10",
+  "trial": {
+    "nct_id": "NCT01594333",
+    "acronym": "CIRT",
+    "title": "Cardiovascular Inflammation Reduction Trial",
+    "sponsor": "Brigham and Women's Hospital",
+    "status": "COMPLETED",
+    "enrollment": 4786,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Disease"
+    ],
+    "primary_completion": "2019-04-15"
+  },
+  "drug": {
+    "name": "methotrexate",
+    "chembl_id": "CHEMBL34259",
+    "aliases": [
+      "(r)-methotrexate",
+      "ADX-2191",
+      "Amethopterin",
+      "CL 14377",
+      "CL-14377",
+      "D-amethopterin",
+      "D-methotrexate",
+      "EMT-25299",
+      "Ebetrex",
+      "Emtexate high-pot",
+      "Emtexate pf",
+      "Jylamvo",
+      "Maxtrex",
+      "Methotrexate, (r)-",
+      "Methotrexate, d-",
+      "Methotrexatum",
+      "Methylaminopterin",
+      "Metoject",
+      "Metotrexato",
+      "NSC-740",
+      "Nordimet",
+      "Otrexup",
+      "Otrexup pfs",
+      "R-9985",
+      "R-methotrexate",
+      "Rasuvo",
+      "Reditrex",
+      "Zlatal",
+      "azathioprine",
+      "fbl-mtx",
+      "hd mtx",
+      "hd-mtx",
+      "hdmtx",
+      "high dose methotrexate",
+      "high-dose methotrexate",
+      "high-dose mtx",
+      "intrathecal methotrexate",
+      "it mtx",
+      "ldm",
+      "ldmtx",
+      "leflunomide",
+      "low dose methotrexate",
+      "low-dose methotrexate",
+      "metoject prefilled pen",
+      "mini methotrexate",
+      "mtx",
+      "mtx it",
+      "mtx-lde"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Dihydrofolate reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000228716",
+        "symbol": "DHFR",
+        "name": "dihydrofolate reductase"
+      }
+    ],
+    "searched_as": "low-dose methotrexate"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-cirt",
+  "log_file": "logs/trace-bt-cirt.jsonl",
+  "execution_time_seconds": 1.0,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events\" (announcement:cirt)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "target_not_causal",
+      "secondary_categories": [
+        "biomarker_not_causal"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: not_causal"
+    },
+    "report": {
+      "headline": "CIRT failed because low-dose methotrexate did not inhibit the IL-1β/IL-6/CRP inflammatory pathway and showed no reduction in major adverse cardiovascular events.",
+      "summary": "The Cardiovascular Inflammation Reduction Trial randomized 4,786 participants with prior myocardial infarction plus type 2 diabetes or metabolic syndrome and persistent hsCRP elevation to low-dose methotrexate or placebo. After a median follow-up of 2.3 years, major adverse cardiovascular events (composite of nonfatal MI, nonfatal stroke, and cardiovascular death) occurred in 207 control and 201 treatment participants — a neutral result. The trial's own readout states that low-dose methotrexate 'neither inhibited that same inflammatory pathway nor reduced major adverse cardiovascular event rates,' corroborated by a 0% change in hsCRP. Human genetics provide independent support: the drug target DHFR shows a genetic association score of 0.0 with coronary artery disease (zero evidence items). The primary explanation is target_not_causal, with high confidence.",
+      "key_evidence": [
+        "4,786 participants randomized (ClinicalTrials.gov NCT01594333 CIRT)",
+        "Median follow-up 2.3 years (Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events)",
+        "Primary endpoint events: 207 control vs 201 treatment (Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events)",
+        "hsCRP change 0% (Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events)",
+        "DHFR genetic association score 0.0 with coronary artery disease (opentargets:DHFR)",
+        "Trial readout: 'low-dose methotrexate neither inhibited that same inflammatory pathway nor reduced major adverse cardiovascular event rates' (Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events)",
+        "Minimum detectable hazard ratio at 80% power: 0.758 (calculator)"
+      ],
+      "what_would_change_this": "Mendelian randomization of DHFR variants on CVD outcomes or direct placebo-adjusted measurement of IL-1β, IL-6, and hsCRP changes from the final CIRT dataset showing pathway inhibition would be needed to overturn the target_not_causal conclusion.",
+      "readthrough_note": "CANTOS (canakinumab) succeeded in a similar hsCRP-enriched post-MI population, demonstrating that the inflammatory hypothesis can work when the pathway is effectively inhibited. Methotrexate's failure is specific to its inability to suppress the IL-1β/IL-6/CRP axis at low dose, not a refutation of the inflammatory hypothesis itself."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "not_causal",
+        "detail": "Open Targets genetic association 0.0 for DHFR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "hsCRP",
+        "detail": "intended biomarker hsCRP is causal or unknown; LDL-equivalent change None mmol/L via no lipid change",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "cirt",
+      "ldl_equivalent_mmol": null,
+      "basis": "no lipid change",
+      "time_factor": 0.672,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": 0.758,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "target genetics: not_causal",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "IL-1beta pathway has no validated trial-scale coefficient; effect size not computable"
+      ],
+      "partial_expected_hr": 1.0
+    },
+    "calculator_inputs": {
+      "case_id": "cirt",
+      "mode": "autopsy",
+      "target_genetics": "not_causal",
+      "intended_biomarker": "hsCRP",
+      "changes": [
+        {
+          "biomarker": "hsCRP",
+          "abs_change": 0.0,
+          "unit": "mg/L",
+          "pct_change": 0.0,
+          "baseline": null,
+          "method": "measured, not placebo-adjusted",
+          "source": "announcement:cirt"
+        },
+        {
+          "biomarker": "IL-6",
+          "abs_change": null,
+          "unit": "pg/mL",
+          "pct_change": -20.0,
+          "baseline": null,
+          "method": "measured, not placebo-adjusted; biomarker identity inferred from 'other' in source",
+          "source": "pmcid:PMC5336700"
+        },
+        {
+          "biomarker": "IL-1beta",
+          "abs_change": null,
+          "unit": "pg/mL",
+          "pct_change": -27.0,
+          "baseline": null,
+          "method": "measured, not placebo-adjusted; biomarker identity inferred from 'other' in source",
+          "source": "pmcid:PMC5336700"
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured",
+          "source": ""
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured",
+          "source": ""
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": null,
+          "method": "not measured",
+          "source": ""
+        }
+      ],
+      "followup_years": 2.3,
+      "events": 408,
+      "alpha_two_sided": 0.05,
+      "pathway": "IL-1beta",
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "not_causal",
+      "target_genetics_rationale": "DHFR genetic association score 0.0 with 0 evidence items for coronary artery disorder (f_925d5507ccb947). As a well-studied target with no supporting genetic evidence for CAD causality, classified as not_causal.",
+      "intended_biomarker": "hsCRP",
+      "pathway": "IL-1beta",
+      "changes": [
+        {
+          "biomarker": "hsCRP",
+          "abs_change": 0,
+          "pct_change": 0,
+          "baseline": null,
+          "unit": "mg/L",
+          "method": "measured, not placebo-adjusted",
+          "fact_ids": [
+            "f_d2836ffd67af8e"
+          ]
+        },
+        {
+          "biomarker": "IL-6",
+          "abs_change": null,
+          "pct_change": -20,
+          "baseline": null,
+          "unit": "pg/mL",
+          "method": "measured, not placebo-adjusted; biomarker identity inferred from 'other' in source",
+          "fact_ids": [
+            "f_c5ff8db7eb233d"
+          ]
+        },
+        {
+          "biomarker": "IL-1beta",
+          "abs_change": null,
+          "pct_change": -27,
+          "baseline": null,
+          "unit": "pg/mL",
+          "method": "measured, not placebo-adjusted; biomarker identity inferred from 'other' in source",
+          "fact_ids": [
+            "f_dc139f69fc5fd7"
+          ]
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "not measured",
+          "fact_ids": []
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "not measured",
+          "fact_ids": []
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "not measured",
+          "fact_ids": []
+        }
+      ],
+      "followup_years": 2.3,
+      "followup_fact_ids": [
+        "f_8cff0da3637a1d"
+      ],
+      "events": 408,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_ee5f51fc7efabb",
+        "f_c5aa7a6e4d3e82"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_e6e41255ff5e75"
+      ],
+      "missing": [
+        "IL-6 baseline",
+        "IL-1beta baseline",
+        "LDL-C measurement confirmation in CIRT",
+        "apoB measurement confirmation in CIRT",
+        "Lp(a) measurement confirmation in CIRT",
+        "observed HR with CI from primary analysis"
+      ],
+      "notes": "hsCRP change from CIRT phase 3 (f_d2836ffd67af8e) shows 0 absolute change, not placebo-adjusted. Two 'other' biomarker changes reported in CIRT (f_c5ff8db7eb233d: -20%; f_dc139f69fc5fd7: -27%, both not placebo-adjusted) are inferred to be IL-6 and IL-1beta respectively given trial's inflammatory hypothesis, but source (pmcid:PMC5336700) does not specify biomarker identity. No verified facts confirm LDL-C, apoB, or Lp(a) measurement in CIRT. Total primary events: 201 treatment + 207 control = 408 (f_ee5f51fc7efabb, f_c5aa7a6e4d3e82). Median follow-up 2.3 years (f_8cff0da3637a1d). Trial readout: methotrexate did not inhibit inflammatory pathway nor reduce MACE (f_e6e41255ff5e75)."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "DHFR genetic association score 0.0 with coronary artery disorder, 0 evidence items — no human genetic support for target causality",
+            "refs": [
+              "f_925d5507ccb947"
+            ]
+          },
+          {
+            "text": "Trial readout explicitly states: 'low-dose methotrexate neither inhibited that same inflammatory pathway nor reduced major adverse cardiovascular event rates'",
+            "refs": [
+              "f_e6e41255ff5e75"
+            ]
+          },
+          {
+            "text": "hsCRP (the canonical downstream biomarker of the IL-1β/IL-6/CRP pathway) showed 0% change in the trial",
+            "refs": [
+              "f_d2836ffd67af8e"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Mendelian randomization of DHFR variants on CVD outcomes; direct measurement of IL-1β/IL-6/CRP pathway inhibition in CIRT participants"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Reference table indicates hsCRP is not causal for CVD (causal=no)",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Drug did not move the intended biomarker (hsCRP change 0%), so the classic biomarker_not_causal scenario (drug moves biomarker but biomarker doesn't cause disease) does not apply",
+            "refs": [
+              "f_d2836ffd67af8e"
+            ]
+          },
+          {
+            "text": "Inferred IL-6 (-20%) and IL-1β (-27%) reductions are from a 2016 publication (pmcid:PMC5336700), not placebo-adjusted, and contradicted by the trial's own 2018 readout stating the inflammatory pathway was not inhibited",
+            "refs": [
+              "f_c5ff8db7eb233d",
+              "f_dc139f69fc5fd7",
+              "f_e6e41255ff5e75"
+            ]
+          }
+        ],
+        "would_settle": "Placebo-adjusted IL-1β, IL-6, and hsCRP changes from the final CIRT dataset"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Observational data show methotrexate associated with CVD odds ratio ~0.73 (95% CI 0.70–0.77)",
+            "refs": [
+              "f_3ee59def76de95",
+              "f_8012cbe8e4df39"
+            ]
+          },
+          {
+            "text": "Trial MDE HR 0.758 (80% power) — observational effect size near detection threshold",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Target genetics not causal and pathway not inhibited — the mechanism itself is unsupported, making 'effect too small' the wrong framing",
+            "refs": [
+              "f_925d5507ccb947",
+              "f_e6e41255ff5e75"
+            ]
+          },
+          {
+            "text": "Calculator could not compute expected HR because IL-1β pathway lacks a validated trial-scale coefficient",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "A validated IL-1β pathway coefficient from a positive trial (e.g., CANTOS) applied to the observed biomarker changes"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Safety signals: elevations of liver enzymes, reductions in leucocytes and hematocrit, higher incidence of non-basal cell skin cancers",
+            "refs": [
+              "f_a58145800565df"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "MACE events nearly identical (control 207 vs treatment 201) — no signal of cardiovascular harm offsetting benefit",
+            "refs": [
+              "f_ee5f51fc7efabb",
+              "f_c5aa7a6e4d3e82"
+            ]
+          },
+          {
+            "text": "Known methotrexate toxicities are not known to increase atherosclerotic event rates",
+            "refs": [
+              "f_a58145800565df"
+            ]
+          }
+        ],
+        "would_settle": "Cause-specific mortality and non-CV safety event rates by arm"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Enrollment required prior MI plus type 2 diabetes or metabolic syndrome plus persistent hsCRP elevation — a high-risk secondary prevention population",
+            "refs": [
+              "f_f713be77e7bcf3",
+              "f_bf2b343c78051f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "CANTOS (canakinumab) succeeded in a similar hsCRP-enriched post-MI population, showing the inflammatory hypothesis can work in this population",
+            "refs": [
+              "f_3e25cdbd686956"
+            ]
+          },
+          {
+            "text": "Failure is explained by drug not inhibiting the pathway, not by population mismatch",
+            "refs": [
+              "f_e6e41255ff5e75"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analysis by baseline hsCRP level (e.g., >2 mg/L vs lower) in CIRT"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Median follow-up 2.3 years",
+            "refs": [
+              "f_8cff0da3637a1d"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "2.3 years is sufficient for anti-inflammatory MACE reduction (CANTOS showed early separation)",
+            "refs": [
+              "f_3e25cdbd686956"
+            ]
+          },
+          {
+            "text": "Standard MACE endpoint (nonfatal MI, nonfatal stroke, CV death) — not diluted by non-atherothrombotic events",
+            "refs": [
+              "f_c0ecc1179894b9",
+              "f_6eb2d15876992a"
+            ]
+          }
+        ],
+        "would_settle": "Landmark analysis at 1 year and 2 years in CIRT"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed with 4,786 randomized participants and 408 primary endpoint events — adequate size and follow-through",
+            "refs": [
+              "f_9bdccdd1b7badb",
+              "f_a626577109c3f0",
+              "f_ee5f51fc7efabb",
+              "f_c5aa7a6e4d3e82"
+            ]
+          },
+          {
+            "text": "No reported adherence, recruitment, or sponsor-decision issues",
+            "refs": [
+              "f_e6e41255ff5e75"
+            ]
+          }
+        ],
+        "would_settle": "CONSORT flow diagram and adherence data from final publication"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator returned 'insufficient_data' because IL-1β pathway lacks a validated coefficient",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetic evidence (DHFR score 0.0) and trial readout (pathway not inhibited) provide a clear explanation independent of pathway coefficient",
+            "refs": [
+              "f_925d5507ccb947",
+              "f_e6e41255ff5e75"
+            ]
+          },
+          {
+            "text": "hsCRP change measured (0%) and safety/events data available",
+            "refs": [
+              "f_d2836ffd67af8e",
+              "f_ee5f51fc7efabb",
+              "f_c5aa7a6e4d3e82"
+            ]
+          }
+        ],
+        "would_settle": "N/A — existing data suffice to identify target_not_causal as primary explanation"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "hsCRP calculator input method says 'not measured (placebo-adjusted)' but verified fact f_d2836ffd67af8e shows hsCRP was measured (0 NA) in CIRT phase 3, just not placebo-adjusted. The input misrepresents what was measured.",
+            "target_agent": "mechanism",
+            "request": "Correct hsCRP change input: set method to 'measured, not placebo-adjusted', abs_change=0, pct_change=0, source='f_d2836ffd67af8e'. If the announcement gives a placebo-adjusted value, use that instead."
+          },
+          {
+            "severity": "high",
+            "issue": "IL-6 and IL-1beta calculator inputs show 'not measured (placebo-adjusted)' with empty sources, but verified facts f_c5ff8db7eb233d (-20%) and f_dc139f69fc5fd7 (-27%) report 'other' biomarker changes in CIRT phase 3 (not placebo-adjusted). These may be IL-6/IL-1beta. Automatic checks flag missing citations for both.",
+            "target_agent": "mechanism",
+            "request": "Identify what the 'other' biomarkers are in f_c5ff8db7eb233d and f_dc139f69fc5fd7. If they are IL-6 and IL-1beta, update inputs with those values (method: 'measured, not placebo-adjusted', source: respective fact IDs). If not, add source confirming IL-6/IL-1beta were not measured."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C, apoB, Lp(a) inputs show 'not measured' with empty sources. No verified facts confirm these were or weren't measured in CIRT.",
+            "target_agent": "mechanism",
+            "request": "Search for CIRT lipid biomarker data (publication or announcement) to confirm whether LDL-C, apoB, Lp(a) were measured. If measured, add values with sources; if not measured, cite source stating they weren't assessed."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator inputs have observed_hr=null and observed_ci=null, but autopsy mode should include the actual trial result. Verified facts contain several odds ratios for CIRT (f_16cc318d06b6da 0.8, f_a0beae5e0999f3 0.71, f_e92d38386e6e84 0.73, f_8b7d898419c2b3 0.77, f_c3badab49ab7e3 0.75, f_c546bc601d3fac 0.97) but these are labeled odds ratios, not HR, and may be for subgroups. The announcement (f_e6e41255ff5e75) states the drug didn't reduce MACE rates.",
+            "target_agent": "case_builder",
+            "request": "Search for the primary endpoint hazard ratio and 95% CI from the CIRT announcement or primary publication (NEJM 2019). Add observed_hr and observed_ci to calculator inputs."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'biomarker_not_causal' cites calculator reference table for hsCRP causal=no, but the automatic check shows hsCRP change uses within-arm values not placebo-adjusted. The hypothesis says 'drug did not significantly lower hsCRP' but the input currently says 'not measured'.",
+            "target_agent": "investigator",
+            "request": "Align hypothesis text with corrected hsCRP input once mechanism analyst updates it. Clarify whether biomarker_not_causal applies given the drug didn't move the biomarker (target engagement failure) vs. biomarker being non-causal."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'effect_too_small' cites observational OR ~0.73 (f_3ee59def76de95) but this is from RA populations, not the CIRT population (post-MI + diabetes/metabolic syndrome + elevated hsCRP). The comparison may not be directly applicable.",
+            "target_agent": "investigator",
+            "request": "Note the population difference in the hypothesis 'against' section or adjust the effect size estimate to reflect CIRT-eligible population if data exists."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "IL-6 and IL-1beta biomarker changes in calculator inputs are not supported by the cited source (pmcid:PMC5336700). Verifier (Zetaris SQL) reports 'not_found' for both: the abstract does not contain 20% IL-6 or 27% IL-1beta biomarker changes; the quoted percentages refer to cardiovascular event risk reduction (odds ratios), not biomarker changes. The calculator incorrectly treats these as measured biomarker reductions.",
+            "target_agent": "mechanism",
+            "request": "Remove IL-6 and IL-1beta biomarker change entries from calculator inputs, or set to 'not measured' with appropriate caveat. The only verified inflammatory biomarker change from CIRT is hsCRP 0% (announcement:cirt). The trial readout explicitly states the inflammatory pathway was not inhibited (f_e6e41255ff5e75)."
+          },
+          {
+            "severity": "high",
+            "issue": "Hypotheses for 'biomarker_not_causal' and 'effect_too_small' reference the incorrect IL-6 (-20%) and IL-1beta (-27%) reductions as if they were real biomarker measurements. These must be revised to reflect that no placebo-adjusted IL-6/IL-1beta data exist from CIRT, and the trial's own conclusion is that the pathway was not inhibited.",
+            "target_agent": "investigator",
+            "request": "Revise hypotheses to remove references to inferred IL-6/IL-1beta reductions from pmcid:PMC5336700. Base biomarker_not_causal assessment solely on hsCRP 0% change and trial readout stating pathway not inhibited."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C, apoB, and Lp(a) are marked as 'not measured' with empty source fields. No verified fact confirms these lipids were not measured in CIRT. While they may truly be unmeasured, a fact citation or explicit note is needed.",
+            "target_agent": "case_builder",
+            "request": "Search for CIRT lipid biomarker measurements (LDL-C, apoB, Lp(a)) in trial publications (pmid:23895801 design paper, announcement:cirt, final NEJM publication). If confirmed unmeasured, add a fact with method 'not measured' and cite the source confirming absence. If measured, add the values."
+          },
+          {
+            "severity": "medium",
+            "issue": "hsCRP change (0%) is from the trial announcement (announcement:cirt) and is not placebo-adjusted. The automatic check flags this. Per critic guidance, missing placebo-adjusted phase 3 biomarker data is a caveat (severity medium), not a reason to drop the input. The method should explicitly state 'measured, not placebo-adjusted; from trial announcement' and the caveat noted.",
+            "target_agent": "mechanism",
+            "request": "Update hsCRP method field to clarify: 'measured, not placebo-adjusted; from trial announcement (2018-11-10); placebo-adjusted change not reported in topline results'. Keep the 0% value as best verified estimate."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator returned 'insufficient_data' because IL-1beta pathway lacks a validated trial-scale coefficient. However, the differential diagnosis correctly identifies target_not_causal as primary explanation using genetics (DHFR score 0.0) and trial readout (pathway not inhibited), which do not require a pathway coefficient. This is a calculator limitation, not an input error.",
+            "target_agent": "mechanism",
+            "request": "Note in calculator assumptions that expected HR is non-computable for IL-1beta pathway due to missing validated coefficient, but differential diagnosis can still proceed using genetic and mechanistic evidence."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_c5ff8db7eb233d",
+          "claim": "c1",
+          "used_as": "IL-6 change used by the calculator",
+          "key": "biomarker_change",
+          "value": -20,
+          "unit": "percent",
+          "source_id": "pmcid:PMC5336700",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain a 20% IL-6 biomarker change; the quoted 20% refers to cardiovascular event risk reduction.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*20%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5336700' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_dc139f69fc5fd7",
+          "claim": "c2",
+          "used_as": "IL-1beta change used by the calculator",
+          "key": "biomarker_change",
+          "value": -27,
+          "unit": "percent",
+          "source_id": "pmcid:PMC5336700",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain a 27% IL-1beta biomarker change; the quoted 27% refers to cardiovascular disease risk reduction.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*27%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5336700' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 0,
+        "not_found": 2,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "DHFR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.314,
+        "genetic_association_score": 0.0,
+        "evidence_count": 0,
+        "top_evidence": [],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_d2836ffd67af8e",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "NA",
+        "attrs": {
+          "trial": "CIRT",
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "low-dose methotrexate as used in CIRT did not reduce the inflammatory pathway leading from interleukin-1 to interleukin-6 and on to hsCRP.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_a9371e9e95b170",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 62,
+        "unit": "%",
+        "attrs": {
+          "trial": "PREMIER",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "year 1",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16385520",
+        "quote": "At year 1, more patients receiving combination therapy exhibited an ACR50 response (62%) than did patients who received MTX or adalimumab monotherapy (46% and 41%, respectively; both P",
+        "pub_date": "2006-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16385520"
+      },
+      {
+        "fact_id": "f_c5ff8db7eb233d",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "biomarker": "other",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "use of methotrexate predicted a reduction of 20% in the risk of cardiovascular events.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_dc139f69fc5fd7",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -27,
+        "unit": "percent",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "biomarker": "other",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "methotrexate was shown to be associated with a decrease of 27% (Fig. 2) in the cardiovascular disease risk",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_925d5507ccb947",
+        "entity": "target:dhfr",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 0,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:DHFR",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000228716"
+      },
+      {
+        "fact_id": "f_44760bcca542a6",
+        "entity": "trial:nct01594333",
+        "key": "ci_high",
+        "value": 1.32,
+        "unit": "hazards ratio",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "Overall survival was similar on both arms (hazards ratio [HR], 1.04; 95% confidence interval [CI], 0.82 to 1.32; P = .75)",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_8b7d898419c2b3",
+        "entity": "trial:nct01594333",
+        "key": "ci_high",
+        "value": 0.77,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_c3badab49ab7e3",
+        "entity": "trial:nct01594333",
+        "key": "ci_high",
+        "value": 0.75,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001).",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_c546bc601d3fac",
+        "entity": "trial:nct01594333",
+        "key": "ci_high",
+        "value": 0.97,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022) for studies adjusting for clinical severity of RA.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_d4caa20bb42960",
+        "entity": "trial:nct01594333",
+        "key": "ci_high",
+        "value": 1.34,
+        "unit": "hazard ratio",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "Overall survival was similar in both arms (hazard ratio [HR], 1.09; 95% CI, 0.88 to 1.34; P = .66)",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_346c6069b420af",
+        "entity": "trial:nct01594333",
+        "key": "ci_low",
+        "value": 0.7,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_4c60b533296966",
+        "entity": "trial:nct01594333",
+        "key": "ci_low",
+        "value": 0.66,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022) for studies adjusting for clinical severity of RA.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_6e2ce074c2298b",
+        "entity": "trial:nct01594333",
+        "key": "ci_low",
+        "value": 0.67,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001).",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_8486ed2ec5bfd2",
+        "entity": "trial:nct01594333",
+        "key": "ci_low",
+        "value": 0.82,
+        "unit": "hazards ratio",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "Overall survival was similar on both arms (hazards ratio [HR], 1.04; 95% confidence interval [CI], 0.82 to 1.32; P = .75)",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_8b1ca09ef2314b",
+        "entity": "trial:nct01594333",
+        "key": "ci_low",
+        "value": 0.88,
+        "unit": "hazard ratio",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "Overall survival was similar in both arms (hazard ratio [HR], 1.09; 95% CI, 0.88 to 1.34; P = .66)",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_14542fffc8ebd7",
+        "entity": "trial:nct01594333",
+        "key": "events_control",
+        "value": 27,
+        "unit": "percent",
+        "attrs": {
+          "trial": "A trial of etanercept, a recombinant tumor necrosis factor receptor:Fc fusion protein, in patients with rheumatoid arthritis receiving methotrexate"
+        },
+        "source_id": "pmid:9920948",
+        "quote": "and 27 percent of those receiving placebo plus methotrexate met the ACR 20 criteria",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/9920948"
+      },
+      {
+        "fact_id": "f_1d5f13cca4eda3",
+        "entity": "trial:nct01594333",
+        "key": "events_control",
+        "value": 20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ATTRACT",
+          "arm": "placebo plus methotrexate",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:10622295",
+        "quote": "compared with 20% of patients receiving placebo plus methotrexate",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_d4db68531f5506",
+        "entity": "trial:nct01594333",
+        "key": "events_control",
+        "value": 171,
+        "unit": "patients",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "At the time of analysis, 347 patients had died (GC arm, 176 patients; MVAC arm, 171 patients).",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_ee5f51fc7efabb",
+        "entity": "trial:nct01594333",
+        "key": "events_control",
+        "value": 207,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "The team reports that 201 patients taking methotrexate suffered a major cardiovascular event compared to 207 patients taking the placebo.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_69b71faf585e7f",
+        "entity": "trial:nct01594333",
+        "key": "events_total",
+        "value": 347,
+        "unit": "patients",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "At the time of analysis, 347 patients had died (GC arm, 176 patients; MVAC arm, 171 patients).",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_283080d5bb2668",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 176,
+        "unit": "patients",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "At the time of analysis, 347 patients had died (GC arm, 176 patients; MVAC arm, 171 patients).",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_5b6ac5c0a3ab95",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 58,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ATTRACT",
+          "arm": "infliximab 10 mg/kg every 4 weeks",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:10622295",
+        "quote": "53, 50, 58, and 52% of patients receiving 3 mg/kg every 4 or 8 weeks or 10 mg/kg every 4 or 8 weeks",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_815b4608b7f563",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 52,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ATTRACT",
+          "arm": "infliximab 10 mg/kg every 8 weeks",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:10622295",
+        "quote": "53, 50, 58, and 52% of patients receiving 3 mg/kg every 4 or 8 weeks or 10 mg/kg every 4 or 8 weeks",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_82c50745b2f989",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 50,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ATTRACT",
+          "arm": "infliximab 3 mg/kg every 8 weeks",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:10622295",
+        "quote": "53, 50, 58, and 52% of patients receiving 3 mg/kg every 4 or 8 weeks or 10 mg/kg every 4 or 8 weeks",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_c5aa7a6e4d3e82",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 201,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "The team reports that 201 patients taking methotrexate suffered a major cardiovascular event compared to 207 patients taking the placebo.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_f35fda73e849d6",
+        "entity": "trial:nct01594333",
+        "key": "events_treatment",
+        "value": 53,
+        "unit": "percent",
+        "attrs": {
+          "trial": "ATTRACT",
+          "arm": "infliximab 3 mg/kg every 4 weeks",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:10622295",
+        "quote": "53, 50, 58, and 52% of patients receiving 3 mg/kg every 4 or 8 weeks or 10 mg/kg every 4 or 8 weeks",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_16cc318d06b6da",
+        "entity": "trial:nct01594333",
+        "key": "hr",
+        "value": 0.8,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022) for studies adjusting for clinical severity of RA.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_a0beae5e0999f3",
+        "entity": "trial:nct01594333",
+        "key": "hr",
+        "value": 0.71,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001).",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_a2fc12f4a3716e",
+        "entity": "trial:nct01594333",
+        "key": "hr",
+        "value": 1.04,
+        "unit": "hazards ratio",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "Overall survival was similar on both arms (hazards ratio [HR], 1.04; 95% confidence interval [CI], 0.82 to 1.32; P = .75)",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_d9d53d3c9f589b",
+        "entity": "trial:nct01594333",
+        "key": "hr",
+        "value": 1.09,
+        "unit": "hazard ratio",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "Overall survival was similar in both arms (hazard ratio [HR], 1.09; 95% CI, 0.88 to 1.34; P = .66)",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_e92d38386e6e84",
+        "entity": "trial:nct01594333",
+        "key": "hr",
+        "value": 0.73,
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_bf2b343c78051f",
+        "entity": "trial:nct01594333",
+        "key": "inclusion_threshold",
+        "value": "persistent elevations of hsCRP",
+        "unit": "",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "pmid:19630828",
+        "quote": "allocate 7000 stable coronary artery disease patients with persistent elevations of hsCRP",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19630828"
+      },
+      {
+        "fact_id": "f_eda44d45aa82ba",
+        "entity": "trial:nct01594333",
+        "key": "inclusion_threshold",
+        "value": "60",
+        "unit": "percent",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "ctgov:NCT01594333@2018-11-10",
+        "quote": "an angiographic lesion of 60% or greater",
+        "pub_date": "2012-05-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01594333"
+      },
+      {
+        "fact_id": "f_f713be77e7bcf3",
+        "entity": "trial:nct01594333",
+        "key": "inclusion_threshold",
+        "value": "prior myocardial infarction (MI) and either type 2 diabetes or the metabolic syndrome",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:23895801",
+        "quote": "will randomly allocate 7,000 patients with prior myocardial infarction (MI) and either type 2 diabetes or the metabolic syndrome to low-dose methotrexate (target dose 15-20 mg/wk) or placebo over an average follow-up period of 3 to 5 years.",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23895801"
+      },
+      {
+        "fact_id": "f_3007b75a9bfff3",
+        "entity": "trial:nct01594333",
+        "key": "median_followup",
+        "value": 15.2,
+        "unit": "months",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "with a median survival of 14.0 months for GC and 15.2 months for MVAC.",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_49a642b7a79cab",
+        "entity": "trial:nct01594333",
+        "key": "median_followup",
+        "value": 14.0,
+        "unit": "months",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "with a median survival of 14.0 months for GC and 15.2 months for MVAC.",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_8cff0da3637a1d",
+        "entity": "trial:nct01594333",
+        "key": "median_followup",
+        "value": 2.3,
+        "unit": "years",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "The trial stopped after a median follow-up of 2.3 years.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_bcf5e899b63fa6",
+        "entity": "trial:nct01594333",
+        "key": "median_followup",
+        "value": 4,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:23895801",
+        "quote": "over an average follow-up period of 3 to 5 years.",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23895801"
+      },
+      {
+        "fact_id": "f_245b5cfcd50fb7",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 799,
+        "unit": "patients",
+        "attrs": {
+          "trial": "PREMIER"
+        },
+        "source_id": "pmid:16385520",
+        "quote": "This was a 2-year, multicenter, double-blind, active comparator-controlled study of 799 RA patients with active disease of",
+        "pub_date": "2006-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16385520"
+      },
+      {
+        "fact_id": "f_5fd57efd4a6244",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 89,
+        "unit": "patients",
+        "attrs": {
+          "trial": "A trial of etanercept, a recombinant tumor necrosis factor receptor:Fc fusion protein, in patients with rheumatoid arthritis receiving methotrexate"
+        },
+        "source_id": "pmid:9920948",
+        "quote": "we randomly assigned 89 patients with persistently active rheumatoid arthritis despite at least 6 months of methotrexate therapy",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/9920948"
+      },
+      {
+        "fact_id": "f_9bdccdd1b7badb",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 4786,
+        "unit": "participants",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "ctgov:NCT01594333@2018-11-10",
+        "quote": "Enrollment: 4786 (ACTUAL)",
+        "pub_date": "2012-05-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01594333"
+      },
+      {
+        "fact_id": "f_a626577109c3f0",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 4786,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "CIRT enrolled 4,786 North American patients with prior heart attack or multi-vessel coronary disease who additionally had either type 2 diabetes or a metabolic syndrome.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_b08e6ca34893db",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 428,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ATTRACT"
+        },
+        "source_id": "pmid:10622295",
+        "quote": "428 patients who had active rheumatoid arthritis, who had received continuous methotrexate for at least 3 months and at a stable dose for at least 4 weeks, were randomised",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_ca6d7c81b182d6",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 405,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "Four hundred five patients were randomized (GC, n = 203; MVAC, n = 202).",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_dc644b0439f792",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 405,
+        "unit": "patients",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "A total of 405 patients were randomly assigned: 203 to the GC arm and 202 to the MVAC arm.",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_dcbbce93acafbe",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 7000,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:23895801",
+        "quote": "will randomly allocate 7,000 patients with prior myocardial infarction (MI) and either type 2 diabetes or the metabolic syndrome to low-dose methotrexate (target dose 15-20 mg/wk) or placebo over an average follow-up period of 3 to 5 years.",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23895801"
+      },
+      {
+        "fact_id": "f_e5cdb1d124ea30",
+        "entity": "trial:nct01594333",
+        "key": "n_randomized",
+        "value": 7000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "pmid:19630828",
+        "quote": "the cardiovascular inflammation reduction trial (CIRT) proposes to allocate 7000 stable coronary artery disease patients with persistent elevations of hsCRP to placebo or very-low-dose-methotrexate (VLDM, 10 mg weekly)",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19630828"
+      },
+      {
+        "fact_id": "f_5cc220db430a20",
+        "entity": "trial:nct01594333",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "p-value",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_9ef83086801ea6",
+        "entity": "trial:nct01594333",
+        "key": "p_value",
+        "value": 0.66,
+        "unit": "P value",
+        "attrs": {
+          "trial": "gemcitabine plus cisplatin vs methotrexate, vinblastine, doxorubicin, plus cisplatin"
+        },
+        "source_id": "pmid:16034041",
+        "quote": "Overall survival was similar in both arms (hazard ratio [HR], 1.09; 95% CI, 0.88 to 1.34; P = .66)",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16034041"
+      },
+      {
+        "fact_id": "f_c5b29bd9831744",
+        "entity": "trial:nct01594333",
+        "key": "p_value",
+        "value": 0.75,
+        "unit": "probability",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "Overall survival was similar on both arms (hazards ratio [HR], 1.04; 95% confidence interval [CI], 0.82 to 1.32; P = .75)",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_c88bc9cd82c176",
+        "entity": "trial:nct01594333",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "p-value",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001).",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_ec921c7d9adfbc",
+        "entity": "trial:nct01594333",
+        "key": "p_value",
+        "value": 0.022,
+        "unit": "p-value",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022) for studies adjusting for clinical severity of RA.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_272e6d269afbbb",
+        "entity": "trial:nct01594333",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "ctgov:NCT01594333@2018-11-10",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2012-05-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01594333"
+      },
+      {
+        "fact_id": "f_1a90a520aba2e2",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "American College of Rheumatology (20) response criteria",
+        "unit": "response rate",
+        "attrs": {
+          "trial": "ATTRACT",
+          "timepoint": "30 weeks"
+        },
+        "source_id": "pmid:10622295",
+        "quote": "At 30 weeks, the American College of Rheumatology (20) response criteria, representing a 20% improvement from baseline, were achieved",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/10622295"
+      },
+      {
+        "fact_id": "f_200fe5ce15353d",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "ACR50 response",
+        "unit": "",
+        "attrs": {
+          "trial": "PREMIER"
+        },
+        "source_id": "pmid:16385520",
+        "quote": "At year 1, more patients receiving combination therapy exhibited an ACR50 response (62%) than did patients who received MTX or adalimumab monotherapy (46% and 41%, respectively; both P",
+        "pub_date": "2006-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/16385520"
+      },
+      {
+        "fact_id": "f_6eb2d15876992a",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "major adverse cardiovascular events",
+        "unit": "NA",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "The federally-funded CIRT was designed to rigorously test whether low-dose methotrexate could effectively reduce risk of major adverse cardiovascular events – that is, heart attacks, stroke and cardiovascular death.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_a4e0c841765c9a",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "vascular event rates",
+        "unit": "",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "pmid:19630828",
+        "quote": "it remains unknown whether inhibition of inflammation per se will lower vascular event rates",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19630828"
+      },
+      {
+        "fact_id": "f_c0ecc1179894b9",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "composite of nonfatal MI, nonfatal stroke, and cardiovascular death",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:23895801",
+        "quote": "The CIRT primary end point is a composite of nonfatal MI, nonfatal stroke, and cardiovascular death.",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23895801"
+      },
+      {
+        "fact_id": "f_cc5ed078a1b56e",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "Number of Subjects With Major Adverse Cardiovascular Events",
+        "unit": "",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "ctgov:NCT01594333@2018-11-10",
+        "quote": "Primary outcome(s): Number of Subjects With Major Adverse Cardiovascular Events [From randomization to trial end (April 2, 2018) up to a maximum of 5 years]",
+        "pub_date": "2012-05-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01594333"
+      },
+      {
+        "fact_id": "f_ead9c852fe2367",
+        "entity": "trial:nct01594333",
+        "key": "primary_endpoint",
+        "value": "ACR 20",
+        "unit": "categorical",
+        "attrs": {
+          "trial": "A trial of etanercept, a recombinant tumor necrosis factor receptor:Fc fusion protein, in patients with rheumatoid arthritis receiving methotrexate"
+        },
+        "source_id": "pmid:9920948",
+        "quote": "The primary measure of clinical response was the American College of Rheumatology criteria for a 20 percent improvement in measures of disease activity (ACR 20) at 24 weeks.",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/9920948"
+      },
+      {
+        "fact_id": "f_00d7c0902f9da8",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "For studies adjusting for RA clinical severity, the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022)",
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "When stratified meta-analysis models were assessed, the pooled OR was 0.80 (95% CI=0.66-0.97; p=0.022) for studies adjusting for clinical severity of RA.",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_3e25cdbd686956",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "If successful, CIRT would both confirm the inflammatory hypothesis of atherothrombosis and open novel approaches to the treatment and prevention of cardiovascular disorders.",
+        "unit": "",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "pmid:19630828",
+        "quote": "If successful, CIRT would both confirm the inflammatory hypothesis of atherothrombosis and open novel approaches to the treatment and prevention of cardiovascular disorders.",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/19630828"
+      },
+      {
+        "fact_id": "f_3ee59def76de95",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "Methotrexate use was associated with significantly reduced cardiovascular disease risk (overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001)",
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "On the basis of our meta-analysis, methotrexate use was associated with significantly reduced cardiovascular disease risk (overall pooled odds ratio: 0.73; 95% CI=0.70-0.77 p<0.001)",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_4e99e0000ac6dc",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "If low-dose methotrexate reduces cardiovascular events, CIRT would provide a novel therapeutic approach for the secondary prevention of heart attack, stroke, and cardiovascular death.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:23895801",
+        "quote": "If low-dose methotrexate reduces cardiovascular events, CIRT would provide a novel therapeutic approach for the secondary prevention of heart attack, stroke, and cardiovascular death.",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23895801"
+      },
+      {
+        "fact_id": "f_8012cbe8e4df39",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001)",
+        "unit": "odds ratio",
+        "attrs": {
+          "trial": "CIRT NCT01594333",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC5336700",
+        "quote": "Furthermore, the OR was even more significant after adjustment for concomitant use of other drugs specific for RA (OR=0.71, 95% CI=0.67-0.75, p<0.001).",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/26467356"
+      },
+      {
+        "fact_id": "f_e6e41255ff5e75",
+        "entity": "trial:nct01594333",
+        "key": "readout_statement",
+        "value": "low-dose methotrexate neither inhibited that same inflammatory pathway nor reduced major adverse cardiovascular event rates",
+        "unit": "NA",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "By contrast, the findings from CIRT showed that low-dose methotrexate neither inhibited that same inflammatory pathway nor reduced major adverse cardiovascular event rates.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      },
+      {
+        "fact_id": "f_26a95e50b3aa25",
+        "entity": "trial:nct01594333",
+        "key": "safety_signal",
+        "value": "Toxic death rate was 1% on GC arm and 3% on MVAC arm",
+        "unit": "percent",
+        "attrs": {
+          "trial": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer"
+        },
+        "source_id": "pmid:11001674",
+        "quote": "The toxic death rate was 1% on the GC arm and 3% on the MVAC arm.",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/11001674"
+      },
+      {
+        "fact_id": "f_a58145800565df",
+        "entity": "trial:nct01594333",
+        "key": "safety_signal",
+        "value": "elevations of liver enzymes, reductions in leucocytes and hematocrit, and a higher incidence of non-basal cell skin cancers",
+        "unit": "NA",
+        "attrs": {
+          "trial": "CIRT"
+        },
+        "source_id": "announcement:cirt",
+        "quote": "Yet, methotrexate was associated with elevations of liver enzymes, reductions in leucocytes and hematocrit, and a higher incidence of non-basal cell skin cancers.",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01594333@2018-11-10",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01594333 CIRT",
+        "url": "https://clinicaltrials.gov/study/NCT01594333",
+        "pub_date": "2012-05-09",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01594333",
+            "acronym": "CIRT",
+            "title": "Cardiovascular Inflammation Reduction Trial",
+            "official_title": "A Randomized, Double-blind, Placebo-controlled, Event-driven Trial of Weekly Low-dose Methotrexate (LDM) in the Prevention of Cardiovascular Events Among Stable Coronary Artery Disease Patients With Type 2 Diabetes or Metabolic Syndrome",
+            "sponsor": "Brigham and Women's Hospital",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2013-04",
+            "primary_completion": "2019-04-15",
+            "first_posted": "2012-05-09",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 4786,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Methotrexate",
+                "type": "DRUG",
+                "other_names": [
+                  "Trexall, TEVA Inc (brand of methotrexate)"
+                ],
+                "arms": [
+                  "Methotrexate"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Methotrexate",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Number of Subjects With Major Adverse Cardiovascular Events [From randomization to trial end (April 2, 2018) up to a maximum of 5 years]",
+              "Number of Subjects With Major Adverse Cardiovascular Event or Hospitalization for Unstable Angina That Led to Urgent Coronary Revascularization [From randomization to trial end (April 2, 2018) - up to a maximum of 5 years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 4920
+      },
+      {
+        "source_id": "pmid:16385520",
+        "type": "journal",
+        "title": "The PREMIER study: A multicenter, randomized, double-blind clinical trial of combination therapy with adalimumab plus methotrexate versus methotrexate alone or adalimumab alone in patients with early, aggressive rheumatoid arthritis who had not had previous methotrexate treatment.",
+        "url": "https://europepmc.org/article/MED/16385520",
+        "pub_date": "2006-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16385520",
+          "pmcid": null,
+          "doi": "10.1002/art.21519",
+          "journal": "Arthritis and rheumatism"
+        },
+        "chars": 1240
+      },
+      {
+        "source_id": "pmid:16034041",
+        "type": "journal",
+        "title": "Long-term survival results of a randomized trial comparing gemcitabine plus cisplatin, with methotrexate, vinblastine, doxorubicin, plus cisplatin in patients with bladder cancer.",
+        "url": "https://europepmc.org/article/MED/16034041",
+        "pub_date": "2005-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16034041",
+          "pmcid": null,
+          "doi": "10.1200/jco.2005.07.757",
+          "journal": "Journal of clinical oncology : official journal of the American Society of Clinical Oncology"
+        },
+        "chars": 1668
+      },
+      {
+        "source_id": "pmid:15001324",
+        "type": "journal",
+        "title": "Therapeutic effect of the combination of etanercept and methotrexate compared with each treatment alone in patients with rheumatoid arthritis: double-blind randomised controlled trial.",
+        "url": "https://europepmc.org/article/MED/15001324",
+        "pub_date": "2004-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15001324",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(04)15640-7",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 1822
+      },
+      {
+        "source_id": "pmid:12528101",
+        "type": "journal",
+        "title": "Adalimumab, a fully human anti-tumor necrosis factor alpha monoclonal antibody, for the treatment of rheumatoid arthritis in patients taking concomitant methotrexate: the ARMADA trial.",
+        "url": "https://europepmc.org/article/MED/12528101",
+        "pub_date": "2003-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12528101",
+          "pmcid": null,
+          "doi": "10.1002/art.10697",
+          "journal": "Arthritis and rheumatism"
+        },
+        "chars": 1385
+      },
+      {
+        "source_id": "pmid:11096166",
+        "type": "journal",
+        "title": "Infliximab and methotrexate in the treatment of rheumatoid arthritis. Anti-Tumor Necrosis Factor Trial in Rheumatoid Arthritis with Concomitant Therapy Study Group.",
+        "url": "https://europepmc.org/article/MED/11096166",
+        "pub_date": "2000-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11096166",
+          "pmcid": null,
+          "doi": "10.1056/nejm200011303432202",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1481
+      },
+      {
+        "source_id": "pmid:11001674",
+        "type": "journal",
+        "title": "Gemcitabine and cisplatin versus methotrexate, vinblastine, doxorubicin, and cisplatin in advanced or metastatic bladder cancer: results of a large, randomized, multinational, multicenter, phase III study.",
+        "url": "https://europepmc.org/article/MED/11001674",
+        "pub_date": "2000-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11001674",
+          "pmcid": null,
+          "doi": "10.1200/jco.2000.18.17.3068",
+          "journal": "Journal of clinical oncology : official journal of the American Society of Clinical Oncology"
+        },
+        "chars": 2275
+      },
+      {
+        "source_id": "pmid:10622295",
+        "type": "journal",
+        "title": "Infliximab (chimeric anti-tumour necrosis factor alpha monoclonal antibody) versus placebo in rheumatoid arthritis patients receiving concomitant methotrexate: a randomised phase III trial. ATTRACT Study Group.",
+        "url": "https://europepmc.org/article/MED/10622295",
+        "pub_date": "1999-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "10622295",
+          "pmcid": null,
+          "doi": "10.1016/s0140-6736(99)05246-0",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 1798
+      },
+      {
+        "source_id": "pmid:9920948",
+        "type": "journal",
+        "title": "A trial of etanercept, a recombinant tumor necrosis factor receptor:Fc fusion protein, in patients with rheumatoid arthritis receiving methotrexate.",
+        "url": "https://europepmc.org/article/MED/9920948",
+        "pub_date": "1999-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "9920948",
+          "pmcid": null,
+          "doi": "10.1056/nejm199901283400401",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1635
+      },
+      {
+        "source_id": "pmcid:PMC5336700",
+        "type": "journal",
+        "title": "Protective effects of methotrexate against ischemic cardiovascular disorders in patients treated for rheumatoid arthritis or psoriasis: novel therapeutic insights coming from a meta-analysis of the literature data.",
+        "url": "https://europepmc.org/article/MED/26467356",
+        "pub_date": "2016-01-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "26467356",
+          "pmcid": "PMC5336700",
+          "doi": "10.5152/akd.2015.6136",
+          "journal": "Anatolian journal of cardiology"
+        },
+        "chars": 38939
+      },
+      {
+        "source_id": "pmid:22850632",
+        "type": "journal",
+        "title": "Protective effect of methotrexate in patients with rheumatoid arthritis and cardiovascular comorbidity.",
+        "url": "https://europepmc.org/article/MED/22850632",
+        "pub_date": "2012-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22850632",
+          "pmcid": "PMC3400102",
+          "doi": "10.1177/1759720x11436239",
+          "journal": "Therapeutic advances in musculoskeletal disease"
+        },
+        "chars": 1216
+      },
+      {
+        "source_id": "pmid:23895801",
+        "type": "journal",
+        "title": "Rationale and design of the Cardiovascular Inflammation Reduction Trial: a test of the inflammatory hypothesis of atherothrombosis.",
+        "url": "https://europepmc.org/article/MED/23895801",
+        "pub_date": "2013-05-03",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23895801",
+          "pmcid": "PMC3888829",
+          "doi": "10.1016/j.ahj.2013.03.018",
+          "journal": "American heart journal",
+          "purpose": "design"
+        },
+        "chars": 2077
+      },
+      {
+        "source_id": "pmid:19630828",
+        "type": "journal",
+        "title": "Testing the inflammatory hypothesis of atherothrombosis: scientific rationale for the cardiovascular inflammation reduction trial (CIRT).",
+        "url": "https://europepmc.org/article/MED/19630828",
+        "pub_date": "2009-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19630828",
+          "pmcid": null,
+          "doi": "10.1111/j.1538-7836.2009.03404.x",
+          "journal": "Journal of thrombosis and haemostasis : JTH",
+          "purpose": "design"
+        },
+        "chars": 1441
+      },
+      {
+        "source_id": "pmid:19706381",
+        "type": "journal",
+        "title": "The extremely slow and variable activity of dihydrofolate reductase in human liver and its implications for high folic acid intake.",
+        "url": "https://europepmc.org/article/MED/19706381",
+        "pub_date": "2009-08-24",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19706381",
+          "pmcid": "PMC2730961",
+          "doi": "10.1073/pnas.0902072106",
+          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+          "purpose": "genetics"
+        },
+        "chars": 1432
+      },
+      {
+        "source_id": "pmid:4040603",
+        "type": "journal",
+        "title": "Coamplification and coexpression of human tissue-type plasminogen activator and murine dihydrofolate reductase sequences in Chinese hamster ovary cells.",
+        "url": "https://europepmc.org/article/MED/4040603",
+        "pub_date": "1985-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "4040603",
+          "pmcid": "PMC367294",
+          "doi": "10.1128/mcb.5.7.1750-1759.1985",
+          "journal": "Molecular and cellular biology",
+          "purpose": "genetics"
+        },
+        "chars": 1364
+      },
+      {
+        "source_id": "pmid:19660467",
+        "type": "journal",
+        "title": "Mechanistic insights into folic acid-dependent vascular protection: dihydrofolate reductase (DHFR)-mediated reduction in oxidant stress in endothelial cells and angiotensin II-infused mice: a novel HPLC-based fluorescent assay for DHFR activity.",
+        "url": "https://europepmc.org/article/MED/19660467",
+        "pub_date": "2009-08-03",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19660467",
+          "pmcid": "PMC2784291",
+          "doi": "10.1016/j.yjmcc.2009.07.025",
+          "journal": "Journal of molecular and cellular cardiology",
+          "purpose": "genetics"
+        },
+        "chars": 2082
+      },
+      {
+        "source_id": "announcement:cirt",
+        "type": "press_release",
+        "title": "Low-Dose Methotrexate Does Not Reduce Risk of Cardiovascular Events",
+        "url": "https://www.brighamandwomens.org/about-bwh/newsroom/press-releases-detail?id=3191",
+        "pub_date": "2018-11-10",
+        "access": "press_release",
+        "meta": {},
+        "chars": 5750
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 22,
+      "facts": 71,
+      "relationships": 14,
+      "events": 174,
+      "audit_entries": 174,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 17,
+        "input_tokens": 19078,
+        "output_tokens": 6628,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 9079,
+        "output_tokens": 9122,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 8831,
+        "output_tokens": 9617,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 11466,
+        "output_tokens": 4783,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1334,
+        "output_tokens": 2045,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 7102,
+        "output_tokens": 1814,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

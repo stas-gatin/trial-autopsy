@@ -7,7 +7,7 @@
   "as_of": "2014-11-17",
   "readout_date": "2014-11-17",
   "mode": "autopsy",
-  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents published BEFORE as_of that mention the drug or its code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3)\n  4. The topline announcement itself (press release on the readout day), fetched from its URL\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
+  "rule": "Build a frozen time-machine archive for a golden-set case.\n\nRule (fixed, applied identically to every case):\n  as_of = the case's readout_date (the day of the first public topline announcement)\n  1. ClinicalTrials.gov record in \"design-only\" view (status, stop reason, results removed)\n  2. Europe PMC documents (PubMed when Europe PMC is unavailable) published BEFORE as_of that mention the drug or its\n     code names\n     (same queries as live mode); ranked: drug in title, then trials, then cardiometabolic topic,\n     then most recent; at most 10; open full text when available (rule v2). A paper found only by\n     the trial acronym must spell it in capitals and be on a cardiometabolic topic, so common-word\n     acronyms (SPRINT, STRENGTH) do not pull in papers about running or muscle strength (rule v4)\n  3. Up to 3 genetic-association papers per target published BEFORE as_of (rule v3), and up to 2 design or baseline\n     papers of the outcome trial itself (title says design, rationale, baseline characteristics or protocol, and\n     spells the acronym), published BEFORE as_of: they state the planned events and the population (rule v5)\n     In 2 and 3, a paper dated only to a month (stored as the 1st) in the readout month is left out: it may\n     have been printed after the readout (rule v4)\n  4. The topline announcement itself (press release on the readout day): the Wayback Machine capture nearest that day\n     (within a year, same page), else the live page if it was not redirected elsewhere (rule v5)\nNothing is added by hand. Documents that reveal the outcome cannot exist before as_of,\nexcept the topline announcement, which is what a real analyst would have on that day.",
   "documents": [
     {
       "source_id": "ctgov:NCT00202878@2014-11-17",
@@ -42,6 +42,9 @@
               "other_names": [
                 "Vytorin",
                 "Inegy"
+              ],
+              "arms": [
+                "ezetimibe/simvastatin"
               ]
             },
             {
@@ -49,17 +52,37 @@
               "type": "DRUG",
               "other_names": [
                 "Zocor"
+              ],
+              "arms": [
+                "simvastatin"
               ]
             },
             {
               "name": "Placebo for simvastatin 40 mg",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "ezetimibe/simvastatin",
+                "simvastatin"
+              ]
             },
             {
               "name": "Placebo for ezetimibe 10 mg/simvastatin 40 mg combination",
               "type": "DRUG",
-              "other_names": []
+              "other_names": [],
+              "arms": [
+                "simvastatin"
+              ]
+            }
+          ],
+          "arm_groups": [
+            {
+              "label": "ezetimibe/simvastatin",
+              "type": "EXPERIMENTAL"
+            },
+            {
+              "label": "simvastatin",
+              "type": "ACTIVE_COMPARATOR"
             }
           ],
           "conditions": [
@@ -75,172 +98,206 @@
       "note": "design-only registry view"
     },
     {
-      "source_id": "pmid:24825642",
-      "file": "docs/pmid_24825642.txt",
+      "source_id": "pmid:23770175",
+      "file": "docs/pmid_23770175.txt",
       "type": "journal",
-      "title": "Effect of evolocumab or ezetimibe added to moderate- or high-intensity statin therapy on LDL-C lowering in patients with hypercholesterolemia: the LAPLACE-2 randomized clinical trial.",
-      "url": "https://europepmc.org/article/MED/24825642",
-      "pub_date": "2014-05-01",
+      "title": "Effect of overweight and obesity on cardiovascular events in asymptomatic aortic stenosis: a SEAS substudy (Simvastatin Ezetimibe in Aortic Stenosis)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23770175/",
+      "pub_date": "2013-06-13",
       "access": "abstract_only",
       "meta": {
-        "pmid": "24825642",
+        "pmid": "23770175",
         "pmcid": null,
-        "doi": "10.1001/jama.2014.4030",
-        "journal": "JAMA"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:22633824",
-      "file": "docs/pmid_22633824.txt",
-      "type": "journal",
-      "title": "Effect of a monoclonal antibody to PCSK9, REGN727/SAR236553, to reduce low-density lipoprotein cholesterol in patients with heterozygous familial hypercholesterolaemia on stable statin dose with or without ezetimibe therapy: a phase 2 randomised controlled trial.",
-      "url": "https://europepmc.org/article/MED/22633824",
-      "pub_date": "2012-05-26",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "22633824",
-        "pmcid": null,
-        "doi": "10.1016/s0140-6736(12)60771-5",
-        "journal": "Lancet (London, England)"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmcid:PMC3145073",
-      "file": "docs/pmcid_PMC3145073.txt",
-      "type": "journal",
-      "title": "The effects of lowering LDL cholesterol with simvastatin plus ezetimibe in patients with chronic kidney disease (Study of Heart and Renal Protection): a randomised placebo-controlled trial.",
-      "url": "https://europepmc.org/article/MED/21663949",
-      "pub_date": "2011-06-12",
-      "access": "open_full_text",
-      "meta": {
-        "pmid": "21663949",
-        "pmcid": "PMC3145073",
-        "doi": "10.1016/s0140-6736(11)60739-3",
-        "journal": "Lancet (London, England)"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:19915217",
-      "file": "docs/pmid_19915217.txt",
-      "type": "journal",
-      "title": "Extended-release niacin or ezetimibe and carotid intima-media thickness.",
-      "url": "https://europepmc.org/article/MED/19915217",
-      "pub_date": "2009-11-15",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "19915217",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa0907569",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:18765433",
-      "file": "docs/pmid_18765433.txt",
-      "type": "journal",
-      "title": "Intensive lipid lowering with simvastatin and ezetimibe in aortic stenosis.",
-      "url": "https://europepmc.org/article/MED/18765433",
-      "pub_date": "2008-09-02",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "18765433",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa0804602",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:18376000",
-      "file": "docs/pmid_18376000.txt",
-      "type": "journal",
-      "title": "Simvastatin with or without ezetimibe in familial hypercholesterolemia.",
-      "url": "https://europepmc.org/article/MED/18376000",
-      "pub_date": "2008-03-30",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "18376000",
-        "pmcid": null,
-        "doi": "10.1056/nejmoa0800742",
-        "journal": "The New England journal of medicine"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:12719279",
-      "file": "docs/pmid_12719279.txt",
-      "type": "journal",
-      "title": "Effect of ezetimibe coadministered with atorvastatin in 628 patients with primary hypercholesterolemia: a prospective, randomized, double-blind trial.",
-      "url": "https://europepmc.org/article/MED/12719279",
-      "pub_date": "2003-04-28",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "12719279",
-        "pmcid": null,
-        "doi": "10.1161/01.cir.0000068312.21969.c8",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:12370217",
-      "file": "docs/pmid_12370217.txt",
-      "type": "journal",
-      "title": "Inhibition of intestinal cholesterol absorption by ezetimibe in humans.",
-      "url": "https://europepmc.org/article/MED/12370217",
-      "pub_date": "2002-10-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "12370217",
-        "pmcid": null,
-        "doi": "10.1161/01.cir.0000034044.95911.dc",
-        "journal": "Circulation"
-      },
-      "note": ""
-    },
-    {
-      "source_id": "pmid:12505224",
-      "file": "docs/pmid_12505224.txt",
-      "type": "journal",
-      "title": "Ezetimibe coadministered with simvastatin in patients with primary hypercholesterolemia.",
-      "url": "https://europepmc.org/article/MED/12505224",
-      "pub_date": "2002-12-01",
-      "access": "abstract_only",
-      "meta": {
-        "pmid": "12505224",
-        "pmcid": null,
-        "doi": "10.1016/s0735-1097(02)02610-4",
+        "doi": "10.1016/j.jacc.2013.04.081",
         "journal": "Journal of the American College of Cardiology"
       },
       "note": ""
     },
     {
-      "source_id": "pmid:15928087",
-      "file": "docs/pmid_15928087.txt",
+      "source_id": "pmcid:PMC3749834",
+      "file": "docs/pmcid_PMC3749834.txt",
       "type": "journal",
-      "title": "The target of ezetimibe is Niemann-Pick C1-Like 1 (NPC1L1).",
-      "url": "https://europepmc.org/article/MED/15928087",
-      "pub_date": "2005-05-31",
-      "access": "abstract_only",
+      "title": "Effects of ezetimibe added to statin therapy on markers of cholesterol absorption and synthesis and LDL-C lowering in hyperlipidemic patients",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/",
+      "pub_date": "2012-09-13",
+      "access": "open_full_text",
       "meta": {
-        "pmid": "15928087",
-        "pmcid": "PMC1149415",
-        "doi": "10.1073/pnas.0500269102",
-        "journal": "Proceedings of the National Academy of Sciences of the United States of America"
+        "pmid": "23040830",
+        "pmcid": "PMC3749834",
+        "doi": "10.1016/j.atherosclerosis.2012.09.001",
+        "journal": "Atherosclerosis"
       },
       "note": ""
+    },
+    {
+      "source_id": "pmid:21817821",
+      "file": "docs/pmid_21817821.txt",
+      "type": "journal",
+      "title": "Clinical usefulness of additional treatment with ezetimibe in patients with coronary artery disease on statin therapy. - From the viewpoint of cholesterol metabolism.-",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/",
+      "pub_date": "2011-01-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21817821",
+        "pmcid": null,
+        "doi": "10.1253/circj.cj-11-0391",
+        "journal": "Circulation journal : official journal of the Japanese Circulation Society"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:21359598",
+      "file": "docs/pmid_21359598.txt",
+      "type": "journal",
+      "title": "Ezetimibe treatment lowers indicators of oxidative stress in hypercholesterolemic subjects with high oxidative stress",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/",
+      "pub_date": "2011-02-26",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "21359598",
+        "pmcid": null,
+        "doi": "10.1007/s11745-011-3539-z",
+        "journal": "Lipids"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:20837371",
+      "file": "docs/pmid_20837371.txt",
+      "type": "journal",
+      "title": "Influence of age, gender, and race on the efficacy of adding ezetimibe to atorvastatin vs. atorvastatin up-titration in patients at moderately high or high risk for coronary heart disease",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/",
+      "pub_date": "2010-09-15",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20837371",
+        "pmcid": null,
+        "doi": "10.1016/j.ijcard.2010.08.043",
+        "journal": "International journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:20599002",
+      "file": "docs/pmid_20599002.txt",
+      "type": "journal",
+      "title": "Effect of ezetimibe/atorvastatin combination on oxidized low density lipoprotein cholesterol in patients with coronary artery disease or coronary artery disease equivalent",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20599002/",
+      "pub_date": "2010-07-15",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20599002",
+        "pmcid": null,
+        "doi": "10.1016/j.amjcard.2010.03.016",
+        "journal": "The American journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:19228478",
+      "file": "docs/pmid_19228478.txt",
+      "type": "journal",
+      "title": "Simvastatin with or without ezetimibe in familial hypercholesterolemia (the ENHANCE trial)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19228478/",
+      "pub_date": "2009-03-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "19228478",
+        "pmcid": null,
+        "doi": "10.1007/s11883-009-0013-y",
+        "journal": "Current atherosclerosis reports"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:20152243",
+      "file": "docs/pmid_20152243.txt",
+      "type": "journal",
+      "title": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/",
+      "pub_date": "2009-11-13",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20152243",
+        "pmcid": null,
+        "doi": "10.1016/j.amjcard.2009.10.001",
+        "journal": "The American journal of cardiology"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:19828909",
+      "file": "docs/pmid_19828909.txt",
+      "type": "journal",
+      "title": "Baseline cholesterol absorption and the response to ezetimibe/simvastatin therapy: a post-hoc analysis of the ENHANCE trial",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19828909/",
+      "pub_date": "2009-10-14",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "19828909",
+        "pmcid": "PMC2842149",
+        "doi": "10.1194/jlr.M001487",
+        "journal": "Journal of lipid research"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:17058629",
+      "file": "docs/pmid_17058629.txt",
+      "type": "journal",
+      "title": "Ezetimibe added to ongoing statin therapy improves LDL-C goal attainment and lipid profile in patients with diabetes or metabolic syndrome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/",
+      "pub_date": "2006-09-01",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "17058629",
+        "pmcid": null,
+        "doi": "10.3132/dvdr.2006.020",
+        "journal": "Diabetes & vascular disease research"
+      },
+      "note": ""
+    },
+    {
+      "source_id": "pmid:19061694",
+      "file": "docs/pmid_19061694.txt",
+      "type": "journal",
+      "title": "Rationale and design of IMPROVE-IT (IMProved Reduction of Outcomes: Vytorin Efficacy International Trial): comparison of ezetimbe/simvastatin versus simvastatin monotherapy on cardiovascular outcomes in patients with acute coronary syndromes",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/",
+      "pub_date": "2008-09-02",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "19061694",
+        "pmcid": null,
+        "doi": "10.1016/j.ahj.2008.07.023",
+        "journal": "American heart journal",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
+    },
+    {
+      "source_id": "pmid:20435175",
+      "file": "docs/pmid_20435175.txt",
+      "type": "journal",
+      "title": "An update on the IMProved reduction of outcomes: Vytorin Efficacy International Trial (IMPROVE-IT) design",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20435175/",
+      "pub_date": "2010-03-15",
+      "access": "abstract_only",
+      "meta": {
+        "pmid": "20435175",
+        "pmcid": null,
+        "doi": "10.1016/j.ahj.2010.03.004",
+        "journal": "American heart journal",
+        "purpose": "design"
+      },
+      "note": "design or baseline paper of the outcome trial"
     },
     {
       "source_id": "pmid:20686565",
       "file": "docs/pmid_20686565.txt",
       "type": "journal",
-      "title": "Biological, clinical and population relevance of 95 loci for blood lipids.",
-      "url": "https://europepmc.org/article/MED/20686565",
-      "pub_date": "2010-08-01",
+      "title": "Biological, clinical and population relevance of 95 loci for blood lipids",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/20686565/",
+      "pub_date": "2010-08-05",
       "access": "abstract_only",
       "meta": {
         "pmid": "20686565",
@@ -252,35 +309,35 @@
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:25390462",
-      "file": "docs/pmid_25390462.txt",
+      "source_id": "pmid:15679830",
+      "file": "docs/pmid_15679830.txt",
       "type": "journal",
-      "title": "Inactivating mutations in NPC1L1 and protection from coronary heart disease.",
-      "url": "https://europepmc.org/article/MED/25390462",
-      "pub_date": "2014-11-12",
+      "title": "Compound heterozygosity for two non-synonymous polymorphisms in NPC1L1 in a non-responder to ezetimibe",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15679830/",
+      "pub_date": "2005-02-01",
       "access": "abstract_only",
       "meta": {
-        "pmid": "25390462",
-        "pmcid": "PMC4335708",
-        "doi": "10.1056/nejmoa1405386",
-        "journal": "The New England journal of medicine",
+        "pmid": "15679830",
+        "pmcid": null,
+        "doi": "10.1111/j.1399-0004.2004.00388.x",
+        "journal": "Clinical genetics",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
     },
     {
-      "source_id": "pmid:16449388",
-      "file": "docs/pmid_16449388.txt",
+      "source_id": "pmid:19272334",
+      "file": "docs/pmid_19272334.txt",
       "type": "journal",
-      "title": "Multiple rare variants in NPC1L1 associated with reduced sterol absorption and plasma low-density lipoprotein levels.",
-      "url": "https://europepmc.org/article/MED/16449388",
-      "pub_date": "2006-01-31",
+      "title": "Niemann-Pick C1 Like 1 (NPC1L1) an intestinal sterol transporter",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19272334/",
+      "pub_date": "2009-01-19",
       "access": "abstract_only",
       "meta": {
-        "pmid": "16449388",
-        "pmcid": "PMC1413637",
-        "doi": "10.1073/pnas.0508483103",
-        "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+        "pmid": "19272334",
+        "pmcid": null,
+        "doi": "10.1016/j.bbalip.2009.01.002",
+        "journal": "Biochimica et biophysica acta",
         "purpose": "genetics"
       },
       "note": "genetic association paper on the target"
@@ -294,7 +351,7 @@
       "pub_date": "2014-11-17",
       "access": "press_release",
       "meta": {},
-      "note": "topline announcement on the readout day"
+      "note": "topline announcement on the readout day (live page (no usable Wayback capture), sentences naming later years left out)"
     }
   ]
 }

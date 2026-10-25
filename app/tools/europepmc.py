@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+import time
 import xml.etree.ElementTree as ET
 from datetime import date
 
@@ -11,7 +12,45 @@ from app.tools.documents import Document
 API = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 
 
+# When Europe PMC is down (HTTP 5xx, 429 or no connection), PubMed answers instead, and Europe PMC is not asked again
+# for a few minutes, so an outage costs one set of retries, not one per query.
+_OUTAGE = {"until": 0.0, "why": ""}
+OUTAGE_PAUSE_S = 600
+
+
+def is_outage(exc: Exception) -> bool:
+    """A service failure (5xx, 429, timeout, no connection), as opposed to an answer such as 404."""
+    text = str(exc)
+    return not re.search(r"HTTP 4(?!29)\d\d", text)
+
+
+def _fallback(kind: str, tracer, why: str):
+    if tracer:
+        tracer.log("Tools", "source_fallback", input_summary=f"Europe PMC {kind}",
+                   output_summary=f"Europe PMC unavailable ({why[:120]}); PubMed used instead",
+                   status="warning", source="PubMed")
+
+
+def _down(exc: Exception):
+    _OUTAGE.update(until=time.time() + OUTAGE_PAUSE_S, why=str(exc))
+
+
 def search(query: str, as_of: date | None = None, page_size: int = 15, tracer=None) -> list[dict]:
+    from app.tools import pubmed
+    if time.time() < _OUTAGE["until"]:
+        _fallback("search", tracer, _OUTAGE["why"])
+        return pubmed.search(query, as_of, page_size, tracer)
+    try:
+        return _search(query, as_of, page_size, tracer)
+    except http.SourceError as exc:
+        if not is_outage(exc):
+            raise
+        _down(exc)
+        _fallback("search", tracer, str(exc))
+        return pubmed.search(query, as_of, page_size, tracer)
+
+
+def _search(query: str, as_of: date | None = None, page_size: int = 15, tracer=None) -> list[dict]:
     q = query
     if as_of:
         q = f"({query}) AND FIRST_PDATE:[1900-01-01 TO {as_of.isoformat()}]"
@@ -35,18 +74,34 @@ def search(query: str, as_of: date | None = None, page_size: int = 15, tracer=No
 def full_text(pmcid: str, tracer=None) -> str | None:
     """Open full text, or None. Failures are remembered so document selection stays reproducible."""
     from app import config
+    from app.tools import pubmed
     miss = config.DATA / "cache" / "negative" / f"{pmcid}.miss"
     if miss.exists():
         return None
+    if time.time() < _OUTAGE["until"]:
+        _fallback("full text", tracer, _OUTAGE["why"])
+        return _pmc_full_text(pmcid, tracer)
     try:
         xml = http.get_text(f"{API}/{pmcid}/fullTextXML", tracer=tracer, source="Europe PMC full text")
     except http.OfflineMiss:
         return None
-    except http.SourceError:
+    except http.SourceError as exc:
+        if is_outage(exc):     # the service is down: not evidence that the article has no full text
+            _down(exc)
+            _fallback("full text", tracer, str(exc))
+            return _pmc_full_text(pmcid, tracer)
         miss.parent.mkdir(parents=True, exist_ok=True)
         miss.write_text("full text unavailable")
         return None
     return xml_to_text(xml)
+
+
+def _pmc_full_text(pmcid: str, tracer=None) -> str | None:
+    from app.tools import pubmed
+    try:
+        return pubmed.full_text(pmcid, tracer)
+    except (http.SourceError, http.OfflineMiss):
+        return None
 
 
 def xml_to_text(xml: str) -> str:
@@ -88,7 +143,8 @@ def to_document(record: dict, text: str | None = None) -> Document:
     sid = f"pmcid:{record['pmcid']}" if full and record.get("pmcid") else f"pmid:{record.get('pmid') or record.get('doi')}"
     return Document(
         source_id=sid, type="journal", title=record["title"], text=body,
-        url=f"https://europepmc.org/article/MED/{record['pmid']}" if record.get("pmid") else "",
+        url=(f"https://pubmed.ncbi.nlm.nih.gov/{record['pmid']}/" if record.get("source") == "PubMed" else
+             f"https://europepmc.org/article/MED/{record['pmid']}") if record.get("pmid") else "",
         pub_date=record.get("first_pub_date"), access="open_full_text" if full else "abstract_only",
         meta={k: record.get(k) for k in ("pmid", "pmcid", "doi", "journal")},
     )
