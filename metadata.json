@@ -34,7 +34,7 @@
         "app/engines/meterless.py",
         "app/engines/world_model.py"
       ],
-      "how": "Nightshift: the app calls Nightshift's OpenAI-compatible endpoint with the runtime token, the meterless-app and meterless-scope headers and a routing mode chosen per step in Settings; the NVIDIA key stays in Nightshift. In the 26 recorded runs all 235 reasoning calls went through Nightshift, with no direct fallback, answered by NVIDIA Nemotron. I also reported Nightshift's first-token limit, which Meterless is making configurable. I reported a Nightshift bug with its fix (github.com/Meterless/Meterless/issues/4), fixed by Meterless the same night, and documented the Nightshift settings a strict pipeline needs (tier-split off, app bound to fast; extraction calls NVIDIA directly because the reasoning switch is not passed on). World Model: the official reference engine, unchanged, passes its conformance suite 8/8 and runs as a local service; every source, entity and fact is stored with provenance (562 entities, 2,097 facts, 627 links across the 26 analyses)."
+      "how": "Nightshift: the app calls Nightshift's OpenAI-compatible endpoint with the runtime token, the meterless-app and meterless-scope headers and a routing mode chosen per step in Settings; the NVIDIA key stays in Nightshift. In the 41 recorded runs 373 of 377 reasoning calls went through Nightshift (the other 4 went to NVIDIA directly after Nightshift cut them twice), all answered by NVIDIA Nemotron. I also reported Nightshift's first-token limit, which Meterless is making configurable. I reported a Nightshift bug with its fix (github.com/Meterless/Meterless/issues/4), fixed by Meterless the same night, and documented the Nightshift settings a strict pipeline needs (tier-split off, app bound to fast; extraction calls NVIDIA directly because the reasoning switch is not passed on). World Model: the official reference engine, unchanged, passes its conformance suite 8/8 and runs as a local service; every source, entity and fact is stored with provenance (562 entities, 2,097 facts, 627 links across the 26 analyses)."
     },
     "nvidia": {
       "role": "Models behind every AI step",
@@ -51,7 +51,7 @@
         "app/config.py",
         "app/llm/generator.py"
       ],
-      "how": "Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). Blind backtest on 24 finished trials: outcome 11/15 where the trial could be sized, experts' main cause 15/24, cause among those named 21/24, expected hazard ratio within 0.03 of the answer key 15/20. Open models, so a company can run the same analysis on its own hardware, for example an NVIDIA DGX Spark."
+      "how": "Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). Blind backtest on 36 finished trials: experts' main cause 26/36, cause among those named 35/36, outcome 16/22 where the trial could be sized, expected hazard ratio within 0.03 of the answer key 8/25; on the 6 trials added after the code freeze: main cause 4/6, cause named 6/6. Open models, so a company can run the same analysis on its own hardware, for example an NVIDIA DGX Spark."
     }
   },
   "open_source": {
@@ -63,10 +63,12 @@
   },
   "explanation": "docs/SPONSOR_TECHNOLOGY.md",
   "evidence": [
-    "logs/ (step logs and World Model audit logs of the 26 recorded runs)",
+    "logs/ (step logs and World Model audit logs of the 41 recorded runs)",
     "docs/evidence/nightshift_runs.md",
     "docs/evidence/meterless_world_model_conformance.txt",
-    "eval/results/backtest_2026-10-23.json",
+    "eval/results/backtest_2026-10-25.json",
+    "eval/results/backtest_2026-10-25_frozen6.json",
+    "eval/predictions/",
     "scripts/check_replay.py"
   ]
 }

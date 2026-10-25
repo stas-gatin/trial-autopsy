@@ -2,7 +2,7 @@
 
     python scripts/make_readme_art.py
 
-Writes docs/images/art/{hero,pipeline,results}.svg. The numbers come from data/library/ and the latest
+Writes docs/images/art/{hero,pipeline,results,nemotron,hardware}.svg. The numbers come from data/library/ and the latest
 eval/results/backtest_*.json, so the pictures stay true after a new set of runs. The animations are CSS and SMIL
 inside the SVG (no scripts), which GitHub renders in a README image.
 """
@@ -235,9 +235,9 @@ def pipeline() -> str:
 # --------------------------------------------------------------------------------------------------- results
 def results(scores: dict, numbers: dict) -> str:
     items = [
-        (scores["prediction_correct"], scores["prediction_scored"], "outcomes called right", "where the trial could be sized", TEAL),
         (scores["category_correct"], scores["completed"], "experts' main cause", "named as the main cause", TEAL),
         (scores["category_overlap"], scores["completed"], "experts' cause named", "among the causes given", TEAL),
+        (scores["prediction_correct"], scores["prediction_scored"], "outcomes called right", "where the trial could be sized", TEAL),
         (scores["expected_hr_within_0_03"], scores["expected_hr_compared"], "effect size on target", "expected HR within 0.03", TEAL),
         (numbers["nightshift"], numbers["reasoning"], "reasoning calls", "through Meterless Nightshift", NV),
     ]
@@ -271,6 +271,133 @@ def results(scores: dict, numbers: dict) -> str:
 """
 
 
+# --------------------------------------------------------------------------------------------------- nemotron
+STEPS = [("CaseBuilder", "Case builder", "reads every document, extracts facts with quotes"),
+         ("MechanismAnalyst", "Mechanism analyst", "turns the facts into calculator inputs"),
+         ("Verifier", "Verifier", "writes the SQL that re-checks each number in Zetaris"),
+         ("Investigator", "Investigator", "weighs eleven competing explanations"),
+         ("Critic", "Critic", "reviews the work and can send it back"),
+         ("Reporter", "Reporter", "writes the report"),
+         ("ReadThrough", "Read-through", "forecasts the rival drugs on the same target")]
+
+
+def model_calls(runs: list[dict]) -> dict:
+    """(step, model, route) -> calls, from each run's trace: every model call is one step that names its model."""
+    calls: dict = {}
+    for run in runs:
+        trace = ROOT / "data" / "library" / "traces" / f"trace-{run.get('run_id')}.jsonl"
+        for line in (trace.read_text().splitlines() if trace.exists() else []):
+            step = json.loads(line)
+            if step.get("model"):
+                route, _, model = step["model"].partition(":")
+                key = (step.get("agent_name"), "Ultra" if "ultra" in model else "Super", route)
+                calls[key] = calls.get(key, 0) + 1
+    return calls
+
+
+def nemotron(runs: list[dict]) -> str:
+    calls = model_calls(runs)
+    total = sum(calls.values())
+    rows, y = "", 92
+    most = max(sum(v for (a, _, _), v in calls.items() if a == name) for name, _, _ in STEPS) or 1
+    for i, (name, label, does) in enumerate(STEPS):
+        mine = {k: v for k, v in calls.items() if k[0] == name}
+        n = sum(mine.values())
+        if not n:
+            continue
+        ultra = sum(v for (_, m, _), v in mine.items() if m == "Ultra")
+        ns = sum(v for (_, _, r), v in mine.items() if r == "meterless")
+        model = "Nemotron 3 Ultra 550B" if ultra * 2 >= n else "Nemotron 3.5 Super 120B"
+        route = "through Meterless Nightshift" if ns * 2 >= n else "NVIDIA API, reasoning off"
+        detail = []
+        if ultra and ultra != n:
+            detail.append(f"{n - ultra} on 3.5 Super" if ultra * 2 >= n else f"{ultra} on 3 Ultra")
+        if ns and ns != n:
+            detail.append(f"{n - ns} direct after Nightshift cuts" if ns * 2 >= n else f"{ns} through Nightshift")
+        bar = 300 * n / most
+        rows += f"""
+    <g class="row" style="animation-delay:{i * 0.3:.2f}s">
+      <text x="40" y="{y}" class="t" font-size="15" font-weight="700" fill="{INK}">{esc(label)}</text>
+      <text x="40" y="{y + 19}" class="t" font-size="12" fill="{MUTED}">{esc(does)}</text>
+      <rect x="430" y="{y - 15}" width="236" height="26" rx="13" fill="#f3f9e8" stroke="#a8d36a"/>
+      {use('nvidia-mark', 442, y - 9, 21, 14)}
+      <text x="470" y="{y + 3}" class="t" font-size="13" font-weight="700" fill="{NV}">{esc(model)}</text>
+      <text x="684" y="{y + 3}" class="t" font-size="13" fill="{INK2}">{esc(route)}</text>
+      <rect x="900" y="{y - 10}" width="300" height="14" rx="7" fill="#edf1f5"/>
+      <rect x="900" y="{y - 10}" width="0" height="14" rx="7" fill="{NV}">
+        <animate attributeName="width" from="0" to="{bar:.1f}" dur="1.2s" begin="{0.3 + i * 0.3:.2f}s" fill="freeze"/>
+      </rect>
+      <text x="1240" y="{y + 2}" class="t" font-size="15" font-weight="700" fill="{INK}" text-anchor="end">{n}</text>
+      <text x="900" y="{y + 22}" class="t" font-size="11" fill="{MUTED}">{esc(' · '.join(detail))}</text>
+    </g>"""
+        y += 52
+    height = y + 24
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 {height}" width="1280" height="{height}" role="img"
+  aria-label="Built on NVIDIA Nemotron: {total} model calls in {len(runs)} recorded analyses, by step, model and route.">
+  <defs>{logo_defs('nvidia-mark.svg')}<style>
+    .t {{ font-family: {FONT}; }}
+    .row {{ opacity: 0; animation: up 0.6s ease-out forwards; }}
+    @keyframes up {{ from {{ opacity: 0; transform: translateY(8px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+  </style></defs>
+  <rect width="1280" height="{height}" rx="24" fill="#f7f9fb" stroke="{LINE}"/>
+  <text x="40" y="44" class="t" font-size="13" font-weight="700" letter-spacing="2" fill="{NV}">BUILT ON NVIDIA NEMOTRON · {total} MODEL CALLS IN {len(runs)} RECORDED ANALYSES</text>
+  <text x="1240" y="44" class="t" font-size="12" fill="{MUTED}" text-anchor="end">calls per step, counted from the run traces</text>
+  {rows}
+</svg>
+"""
+
+
+# --------------------------------------------------------------------------------------------------- hardware
+def hardware() -> str:
+    box = lambda x, y, w, h, fill, stroke, dash="": (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="14" fill="{fill}" '
+                                                    f'stroke="{stroke}" stroke-width="2"{dash}/>')
+    used = ' stroke-dasharray="0"'
+    maybe = ' stroke-dasharray="7 6"'
+    targets = [  # (y, title, sub, ran)
+        (60, "NVIDIA API (build.nvidia.com)", "extraction, reasoning off · used in every run", True),
+        (170, "Meterless Nightshift on a Mac", "every reasoning step · used in every run", True),
+        (280, "Nightshift lane on an NVIDIA DGX Spark", "same app, same Nightshift setup · not run", False),
+        (390, "NVIDIA NIM serving Nemotron, on site", "set NVIDIA_BASE_URL · not run", False),
+    ]
+    paths, nodes = "", ""
+    for i, (y, title, sub, ran) in enumerate(targets):
+        d = f"M420 260 C 560 260, 560 {y + 34}, 700 {y + 34}"
+        color = NV if ran else "#9aa8b8"
+        paths += f'<path d="{d}" fill="none" stroke="{color}" stroke-width="2.4"{used if ran else maybe} class="{"" if ran else "dash"}"/>'
+        if ran:
+            paths += "".join(f'<circle r="5" fill="{NV}"><animateMotion dur="3s" begin="{b}s" repeatCount="indefinite" path="{d}"/></circle>'
+                             for b in (0, 1.5))
+        nodes += f"""
+    <g class="t">
+      {box(700, y, 540, 68, "#f3f9e8" if ran else "#ffffff", "#a8d36a" if ran else "#b8c4d2", "" if ran else maybe)}
+      {use('nvidia-mark', 718, y + 16, 27, 18)}
+      <text x="756" y="{y + 30}" font-size="15" font-weight="700" fill="{INK}">{esc(title)}</text>
+      <text x="756" y="{y + 51}" font-size="12" fill="{MUTED if ran else WARN}">{esc(sub)}</text>
+      <text x="1224" y="{y + 30}" font-size="11" font-weight="700" letter-spacing="1.5" fill="{NV if ran else MUTED}" text-anchor="end">{'RAN' if ran else 'POSSIBLE'}</text>
+    </g>"""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" width="1280" height="520" role="img"
+  aria-label="The path to your own hardware: every model call goes to an OpenAI-compatible endpoint. Used: the NVIDIA API and Meterless Nightshift on a Mac. Possible with no code change, not run: a Nightshift lane on an NVIDIA DGX Spark, or an NVIDIA NIM serving Nemotron on site.">
+  <defs>{logo_defs('nvidia-mark.svg')}<style>
+    .t {{ font-family: {FONT}; }}
+    .dash {{ animation: run 1.6s linear infinite; }}
+    @keyframes run {{ to {{ stroke-dashoffset: -26; }} }}
+  </style></defs>
+  <rect width="1280" height="520" rx="24" fill="#f7f9fb" stroke="{LINE}"/>
+  <text x="40" y="40" class="t" font-size="13" font-weight="700" letter-spacing="2" fill="{NV}">THE PATH TO YOUR OWN NVIDIA HARDWARE</text>
+  <g class="t">
+    {box(40, 190, 380, 140, "#ffffff", TEAL)}
+    <text x="64" y="226" font-size="17" font-weight="700" fill="{INK}">Trial Autopsy</text>
+    <text x="64" y="252" font-size="13" fill="{INK2}">agents, prompts, checks, recordings</text>
+    <text x="64" y="276" font-size="13" fill="{INK2}">one OpenAI-compatible endpoint</text>
+    <text x="64" y="306" font-size="12" class="m" fill="{MUTED}" font-family="{MONO}">NVIDIA_BASE_URL · METERLESS_URL</text>
+  </g>
+  {paths}
+  {nodes}
+  <text x="40" y="496" class="t" font-size="12" fill="{MUTED}">Moving to a DGX Spark or a local NIM changes one setting, not the code, and unpublished trial data never leaves the company. I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.</text>
+</svg>
+"""
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     runs = library()
@@ -278,6 +405,8 @@ def main():
     (OUT / "hero.svg").write_text(hero(pelacarsen))
     (OUT / "pipeline.svg").write_text(pipeline())
     (OUT / "results.svg").write_text(results(latest_scores(), run_numbers(runs)))
+    (OUT / "nemotron.svg").write_text(nemotron(runs))
+    (OUT / "hardware.svg").write_text(hardware())
     for p in sorted(OUT.glob("*.svg")):
         print(p.relative_to(ROOT), f"{p.stat().st_size // 1024} KB")
 
