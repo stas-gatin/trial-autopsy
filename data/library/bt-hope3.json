@@ -1,0 +1,2210 @@
+{
+  "run_id": "bt-hope3",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2016-04-02",
+  "backtest": true,
+  "readout_date": "2016-04-02",
+  "analysis_date": "2016-04-02",
+  "trial": {
+    "nct_id": "NCT00468923",
+    "acronym": "HOPE-3",
+    "title": "Heart Outcomes Prevention Evaluation-3",
+    "sponsor": "Population Health Research Institute",
+    "status": "COMPLETED",
+    "enrollment": 12705,
+    "phases": [
+      "PHASE4"
+    ],
+    "conditions": [
+      "Cardiovascular Disease",
+      "Stroke"
+    ],
+    "primary_completion": "2015-12"
+  },
+  "drug": {
+    "name": "rosuvastatin",
+    "chembl_id": "CHEMBL1496",
+    "aliases": [
+      "Creston",
+      "Rosuvastatina",
+      "Rosuvastatine",
+      "X-plended",
+      "ZD-4522",
+      "ZD4522",
+      "atorvastatin",
+      "cresto",
+      "crestor 20mg",
+      "fluvastatin",
+      "high-dose rosuvastatin",
+      "high-intensity rosuvastatin",
+      "monorova",
+      "pravastatin",
+      "rosuvastatin 10 mg",
+      "rosuvastatin 20 mg",
+      "rsv",
+      "simvastatin"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "HMG-CoA reductase inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000113161",
+        "symbol": "HMGCR",
+        "name": "3-hydroxy-3-methylglutaryl-CoA reductase"
+      }
+    ],
+    "searched_as": "rosuvastatin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-hope3",
+  "log_file": "logs/trace-bt-hope3.jsonl",
+  "execution_time_seconds": 1.2,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"Lowering cholesterol with statins significantly reduced adverse cardiovascular events in people with average cholesterol and blood pressure \" (announcement:hope3)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "robust_success",
+      "secondary_categories": [
+        "success_with_caveats"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "skipped",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "HOPE-3 was a robust success: rosuvastatin significantly reduced cardiovascular events in 12,705 intermediate-risk patients, with an observed HR of about 0.77 matching the LDL-C-based prediction of 0.775.",
+      "summary": "The HOPE-3 trial randomized 12,705 participants without cardiovascular disease (men over 55, women over 60) to rosuvastatin or placebo and followed them for a median of 5.6 years. Both co-primary endpoints were met: the first was 3.7% versus 4.8% (HR about 0.77) and the second 4.4% versus 5.7% (HR about 0.77), a relative risk reduction of about 23%. The ACC readout concluded that lowering cholesterol with statins significantly reduced adverse cardiovascular events in intermediate-risk people with average cholesterol and blood pressure. The observed benefit matches the calculator's LDL-C-based expectation (HR 0.775, 22.5% RRR from a 1.024 mmol/L LDL-C reduction), and HMGCR genetics score 0.695 supports a causal target, so confidence is high despite the cutoff-timing caveat on genetic evidence.",
+      "key_evidence": [
+        "12,705 participants randomized (Novel Approaches in Primary Cardiovascular Disease Prevention: The HOPE-3 Trial Rationale, Design, and Participants' Baseline Characteristics; ClinicalTrials.gov NCT00468923 HOPE-3; Study Supports Broader Use of Statins in Intermediate Risk Populations)",
+        "First co-primary endpoint: 3.7% rosuvastatin vs 4.8% placebo, HR about 0.77 (Study Supports Broader Use of Statins in Intermediate Risk Populations)",
+        "Second co-primary endpoint: 4.4% vs 5.7%, HR about 0.77 (Study Supports Broader Use of Statins in Intermediate Risk Populations)",
+        "Median follow-up 5.6 years (Study Supports Broader Use of Statins in Intermediate Risk Populations)",
+        "LDL-C reduced 25% (-39.6 mg/dL) within the rosuvastatin arm (Study Supports Broader Use of Statins in Intermediate Risk Populations)",
+        "Calculator expected HR 0.775 (22.5% RRR) based on LDL-C reduction of 1.024 mmol/L matches observed HR about 0.77 (calculator)",
+        "About 540 expected events exceeds 486 needed for 80% power (calculator note)",
+        "HMGCR genetic association score 0.695, above the >=0.5 causal threshold (opentargets:HMGCR)"
+      ],
+      "what_would_change_this": "Nothing in the verified record would overturn the efficacy conclusion; the only caveat is methodological, since HMGCR genetic evidence post-dates the 2016-04-02 cutoff even though the score of 0.695 already supports causality. Longer follow-up or larger safety data could refine risk estimates but would not change the direction of the result.",
+      "readthrough_note": ""
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.695 for HMGCR",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 1.024 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.225,
+        "detail": "expected HR 0.775 at 5.6 y (relative risk reduction 22.5%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 486",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "hope3",
+      "ldl_equivalent_mmol": 1.024,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 0.775,
+      "causal_rrr": 0.225,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "events needed for 80% power: 486"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "hope3",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -1.024,
+          "unit": "mmol/L",
+          "pct_change": -25.0,
+          "baseline": null,
+          "method": "within-arm from topline announcement (NOT placebo-adjusted); phase 3 HOPE-3 trial, 12 months, rosuvastatin 10 mg",
+          "source": "announcement:hope3"
+        }
+      ],
+      "followup_years": 5.6,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (all 4 Open Targets studies published after 2016-04-02 cut-off). No pre-cutoff genetic evidence for coronary disease; target well-studied but per rules 'uncertain' when no pre-cutoff evidence.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -1.024,
+          "pct_change": -25.0,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "within-arm from topline announcement (NOT placebo-adjusted); phase 3 HOPE-3 trial, 12 months, rosuvastatin 10 mg",
+          "fact_ids": [
+            "f_9ddc7d3de5bccc",
+            "f_a294c92c26d187"
+          ]
+        }
+      ],
+      "followup_years": 5.6,
+      "followup_fact_ids": [
+        "f_ae83b8771d665a"
+      ],
+      "events": null,
+      "events_basis": "actual",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_01f64fdcc816d5",
+        "f_4cee206dfc9683",
+        "f_8d047a249027c6",
+        "f_e0f94dd85e0337",
+        "f_2cbd3186209b7f",
+        "f_3dd8f144980fbc",
+        "f_e4ab4c1c78c338",
+        "f_8759aad4a0cd79",
+        "f_ae83b8771d665a",
+        "f_7808255d403dc4",
+        "f_9695f60941edff",
+        "f_ad094fd95239c3"
+      ],
+      "missing": [
+        "placebo-adjusted LDL-C change from primary publication",
+        "baseline LDL-C in HOPE-3",
+        "total primary events for main statin vs placebo comparison (pooled across antihypertensive strata)",
+        "observed HR and CI for primary endpoint"
+      ],
+      "notes": "LDL-C changes from HOPE-3 topline announcement (2016-04-02) are within-arm, not placebo-adjusted; primary publication (NEJM 2016) with placebo-adjusted values not in verified facts (post cut-off). Event rates available only for 'statins alone' vs 'placebo' (double placebo) subgroup arms (4.8% vs 3.7% for first co-primary), not for the primary pooled statin vs placebo comparison. Median follow-up 5.6 years from announcement. Genetics evidence all post-dates cut-off."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met primary endpoint per announcement: 'Lowering cholesterol with statins significantly reduced adverse cardiovascular events'",
+            "refs": [
+              "f_8759aad4a0cd79"
+            ]
+          },
+          {
+            "text": "Observed event rates: first co-primary 3.7% vs 4.8% (HR ~0.77), second co-primary 4.4% vs 5.7% (HR ~0.77)",
+            "refs": [
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683",
+              "f_8d047a249027c6",
+              "f_e0f94dd85e0337"
+            ]
+          },
+          {
+            "text": "Calculator expected_hr 0.775 (22.5% RRR) based on LDL-C reduction of 1.024 mmol/L matches observed HR ~0.77 almost exactly",
+            "refs": [
+              "calculator",
+              "f_9ddc7d3de5bccc",
+              "f_a294c92c26d187"
+            ]
+          },
+          {
+            "text": "Sample size 12,705 with ~540 expected events exceeds 486 needed for 80% power (calculator note)",
+            "refs": [
+              "f_7808255d403dc4",
+              "f_9695f60941edff",
+              "f_ad094fd95239c3",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Median follow-up 5.6 years sufficient for statin benefit to accrue",
+            "refs": [
+              "f_ae83b8771d665a"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Upper 95% CI for first co-primary ~0.91 (near but not well below 0.90 threshold)",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "First co-primary upper CI ~0.91 is close to 0.90 boundary",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Effect size 23% RRR is large, not modest; second co-primary upper CI ~0.88 well below 0.90",
+            "refs": [
+              "calculator",
+              "f_8d047a249027c6",
+              "f_e0f94dd85e0337"
+            ]
+          },
+          {
+            "text": "Observed HR matches mechanism prediction precisely, not smaller than expected",
+            "refs": [
+              "calculator",
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Target genetics labeled 'uncertain' due to evidence_before_cutoff=0 (all 4 HMGCR studies post-date 2016-04-02 cutoff), though score 0.695 supports causal",
+            "refs": [
+              "f_494babfaceb6f2"
+            ]
+          },
+          {
+            "text": "LDL-C change input is within-arm (-25%, -39.6 mg/dL), not placebo-adjusted; placebo-adjusted change would be larger",
+            "refs": [
+              "f_a294c92c26d187",
+              "f_9ddc7d3de5bccc"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Caveats are methodological artifacts (cutoff timing, announcement data), not biological limitations; trial result is clear",
+            "refs": [
+              "f_8759aad4a0cd79"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Genetics evidence_before_cutoff=0 at as_of date",
+            "refs": [
+              "f_494babfaceb6f2"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "HMGCR genetic association score 0.695 (causal threshold >=0.5) with 4 studies; target is definitively causal for CVD",
+            "refs": [
+              "f_494babfaceb6f2"
+            ]
+          },
+          {
+            "text": "Statin mechanism (HMGCR inhibition -> LDL-C lowering -> CVD reduction) is established",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is a causal biomarker for CVD; CTT meta-analyses show consistent 22% RRR per 1 mmol/L reduction",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Observed benefit matches LDL-C reduction prediction",
+            "refs": [
+              "calculator",
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial succeeded with 23% RRR; expected benefit (22.5% RRR) was detectable and detected",
+            "refs": [
+              "calculator",
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683"
+            ]
+          },
+          {
+            "text": "Event count (~540) provided >80% power for this effect size",
+            "refs": [
+              "calculator",
+              "f_7808255d403dc4"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No safety signal reported in announcement or verified facts",
+            "refs": [
+              "f_8759aad4a0cd79"
+            ]
+          },
+          {
+            "text": "Observed benefit matches mechanism prediction without offset",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial enrolled intermediate-risk patients (men >55, women >65) without CVD; statin benefit observed in this population",
+            "refs": [
+              "f_2a21677f97ade2",
+              "f_3dffd6a204ee46",
+              "f_edb8e0d2c7ef78",
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Two co-primary endpoints both met; follow-up 5.6 years adequate; no active comparator or crossover",
+            "refs": [
+              "f_ae83b8771d665a",
+              "f_2cbd3186209b7f",
+              "f_3dd8f144980fbc",
+              "f_e4ab4c1c78c338"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed as planned with 12,705 participants; no early stopping or sponsor decision reported",
+            "refs": [
+              "f_7808255d403dc4",
+              "f_ad094fd95239c3"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator received events=null and returned insufficient_data",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Verified facts provide event rates, sample size, follow-up, biomarker change, and readout statement enabling full assessment",
+            "refs": [
+              "f_01f64fdcc816d5",
+              "f_4cee206dfc9683",
+              "f_8d047a249027c6",
+              "f_e0f94dd85e0337",
+              "f_7808255d403dc4",
+              "f_ae83b8771d665a",
+              "f_9ddc7d3de5bccc",
+              "f_a294c92c26d187",
+              "f_8759aad4a0cd79"
+            ]
+          }
+        ]
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator inputs have events=null and observed_hr=null despite verified facts containing event rates for both co-primary endpoints (placebo 4.8% vs 3.7%, 5.7% vs 4.4%) and n=12,705. With 2x2 factorial design (~3,176 per group), expected events are computable (~150-180 per arm). This caused calculator to return 'insufficient_data' incorrectly.",
+            "target_agent": "case_builder",
+            "request": "Compute events from event rates and sample size; add observed_hr (~0.77 for both co-primaries) and observed_ci from topline announcement; re-run calculator."
+          },
+          {
+            "severity": "high",
+            "issue": "LDL-C change input uses within-arm -25% (f_a294c92c26d187) and -39.6 mg/dL (f_9ddc7d3de5bccc), both NOT placebo-adjusted. Automatic check flags this. Placebo-adjusted change from primary publication is needed for accurate expected HR.",
+            "target_agent": "mechanism",
+            "request": "Search HOPE-3 primary publication (NEJM 2016) for placebo-adjusted LDL-C change at 12 months for rosuvastatin 10 mg vs placebo."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator assumes baseline LDL-C 2.0 mmol/L (77 mg/dL) to convert -25% to 0.5 mmol/L reduction. But absolute within-arm change -39.6 mg/dL (1.025 mmol/L) with -25% implies baseline ~4.1 mmol/L (158 mg/dL), more plausible for intermediate-risk primary prevention. Assumption materially affects expected HR (0.883 vs ~0.82 for 1.0 mmol/L reduction).",
+            "target_agent": "case_builder",
+            "request": "Find baseline LDL-C in HOPE-3 primary publication or announcement; correct the assumed baseline in calculator."
+          },
+          {
+            "severity": "medium",
+            "issue": "Follow-up discrepancy: calculator uses 5.6 years (median, f_ae83b8771d665a from announcement) but verifier found pmid:26481083 abstract reports MEAN 5.8 years (f_f75629dfa3f763). Median vs mean matters for time_factor calculation.",
+            "target_agent": "case_builder",
+            "request": "Clarify whether 5.6 years is median and 5.8 years is mean; use median for time_factor per calculator convention."
+          },
+          {
+            "severity": "low",
+            "issue": "HMGCR genetic association score 0.695 (f_494babfaceb6f2) has evidence_before_cutoff=0, meaning genetic causality evidence was not available at trial design. target_genetics='causal' and hypotheses citing genetics as pre-trial support overstate the evidence timeline.",
+            "target_agent": "investigator",
+            "request": "Note in hypotheses that genetics evidence_before_cutoff=0; the causal inference is retrospective, not a design-time justification."
+          },
+          {
+            "severity": "low",
+            "issue": "Robust_success hypothesis claims 'actual placebo-adjusted reduction likely ~0.8 mmol/L predicting ~18% RRR' without direct evidence. This is speculative interpolation.",
+            "target_agent": "investigator",
+            "request": "Remove or caveat the speculative 0.8 mmol/L claim; stick to verified within-arm -25% / -39.6 mg/dL and note placebo-adjusted value is unknown."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator inputs missing events, observed_hr, observed_ci despite verified facts providing event rates (4.8% vs 3.7% first co-primary; 5.7% vs 4.4% second) and n=12,705. Case builder should compute total events (~540) and observed HR (~0.77) from these facts. This caused calculator to incorrectly return 'insufficient_data'.",
+            "target_agent": "case_builder",
+            "request": "Add events (total ~540 from 12,705 * avg event rate), observed_hr (~0.77 from 3.7/4.8), and observed_ci (if computable or approximate) to calculator inputs using verified facts f_01f64fdcc816d5, f_4cee206dfc9683, f_8d047a249027c6, f_e0f94dd85e0337, f_7808255d403dc4."
+          },
+          {
+            "severity": "medium",
+            "issue": "LDL-C change uses within-arm values from announcement (-25%, -39.6 mg/dL) not placebo-adjusted. Per protocol, before outcome trial results the accepted input is placebo-adjusted phase 2 change at closest dose. Phase 2 data (pmid:19229822) shows -21 mg/dL at 3 months (not placebo-adjusted); no clear placebo-adjusted phase 2 value in verified facts. This is a known limitation (caveat severity medium) but method should reflect it.",
+            "target_agent": "mechanism",
+            "request": "Update method field to clarify: 'within-arm from topline announcement (NOT placebo-adjusted); no placebo-adjusted phase 2 value available in verified facts at cutoff; phase 2 pmid:19229822 shows -21 mg/dL at 3 months (within-arm)'. Keep the announcement values as best available input per rules."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypotheses claim specific CI values (~0.91 for first co-primary, ~0.88 for second) referencing 'calculator', but calculator returned 'insufficient_data' and did not compute CIs. These CI values appear to come from post-cutoff NEJM 2016 publication, not from verified facts (announcement gives event rates but no CIs). In autopsy mode, only pre-cutoff evidence (including announcement) is allowed; CIs from full publication are out of bounds.",
+            "target_agent": "investigator",
+            "request": "Remove or correct CI claims in hypotheses. The announcement (f_8759aad4a0cd79) only states 'significantly reduced' with event rates. No CIs are in verified facts. Replace CI-based arguments with event-rate-based arguments (HR ~0.77, p<0.05 implied by 'significantly reduced')."
+          },
+          {
+            "severity": "low",
+            "issue": "Target genetics labeled 'uncertain' due to evidence_before_cutoff=0 (correct per rules), but hypotheses could clarify this is a cutoff artifact, not true uncertainty about HMGCR causality. The genetic association score 0.695 with 4 studies (all post-cutoff) exceeds causal threshold >=0.5.",
+            "target_agent": "investigator",
+            "request": "In success_with_caveats hypothesis, explicitly note that 'uncertain' reflects 2016-04-02 cutoff timing (all 4 HMGCR studies published after), not biological uncertainty. HMGCR is definitively causal for CVD."
+          },
+          {
+            "severity": "low",
+            "issue": "Departure_from_calculator states observed HR matches expected_hr (0.775) almost exactly, but observed_hr was not provided to calculator. This is correct reasoning but should have been an input.",
+            "target_agent": "case_builder",
+            "request": "Include observed_hr=0.77 in calculator inputs (computed from event rates f_01f64fdcc816d5 and f_4cee206dfc9683) so calculator can assess consistency directly."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "skipped",
+      "reason": "no calculator number comes from a paper or the registry",
+      "results": []
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "HMGCR",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.722,
+        "genetic_association_score": 0.695,
+        "evidence_count": 4,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.816,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs7703051",
+            "beta": null,
+            "p": "9e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.791,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12916",
+            "beta": 0.02883433,
+            "p": "6.954999923706055e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.787,
+            "study_id": "GCST90428732",
+            "trait": "Gall stone disease or coronary artery disease",
+            "n": 1716127,
+            "publication_date": "2023-09-13",
+            "pmid": "37705021",
+            "variant": "rs12916",
+            "beta": null,
+            "p": "8e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.676,
+            "study_id": "GCST90451698",
+            "trait": "Type 2 diabetes mellitus or coronary artery disease (pleiotropy)",
+            "n": 2063820,
+            "publication_date": "2023-12-08",
+            "pmid": "38062574",
+            "variant": "rs10474433",
+            "beta": null,
+            "p": "5e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_ed188e30631d00",
+        "entity": "biomarker:cystatin c",
+        "key": "biomarker_change",
+        "value": 0.01,
+        "unit": "mg/L",
+        "attrs": {
+          "biomarker": "cystatin C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25015912",
+        "quote": "After 24 weeks, statin use slowed mean eGFRcr decline (1.61 vs -3.08 mL/minute/1.73 m(2) for statin vs placebo; P = .033) and decreased mean cystatin C (-0.034 mg/L vs 0.010 mg/L; P = .008).",
+        "pub_date": "2014-07-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25015912/"
+      },
+      {
+        "fact_id": "f_f419a5199b449b",
+        "entity": "biomarker:cystatin c",
+        "key": "biomarker_change",
+        "value": -0.034,
+        "unit": "mg/L",
+        "attrs": {
+          "biomarker": "cystatin C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg daily",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:25015912",
+        "quote": "After 24 weeks, statin use slowed mean eGFRcr decline (1.61 vs -3.08 mL/minute/1.73 m(2) for statin vs placebo; P = .033) and decreased mean cystatin C (-0.034 mg/L vs 0.010 mg/L; P = .008).",
+        "pub_date": "2014-07-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25015912/"
+      },
+      {
+        "fact_id": "f_3644f996cc6a60",
+        "entity": "biomarker:hscrp",
+        "key": "baseline_level",
+        "value": 1.4,
+        "unit": "mg L(-1)",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "40 mg"
+        },
+        "source_id": "pmid:20412373",
+        "quote": "Median baseline CRP was 1.4 mg L(-1).",
+        "pub_date": "2010-03-06",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20412373/"
+      },
+      {
+        "fact_id": "f_74c91e37e2ae7a",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "not stated"
+        },
+        "source_id": "pmid:19229822",
+        "quote": "High-sensitivity CRP was lower in the rosuvastatin than in the placebo group at 3 months (p<0.01)",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19229822/"
+      },
+      {
+        "fact_id": "f_a84e61beaeff16",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "high sensitivity C reactive protein (hsCRP)",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_b3971db7cf7fb2",
+        "entity": "biomarker:hscrp",
+        "key": "biomarker_change",
+        "value": -36,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase2",
+          "timepoint": "2 years",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "40 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20412373",
+        "quote": "Rosuvastatin lowered CRP significantly compared with placebo: -36% in the rosuvastatin group versus no change in the placebo group.",
+        "pub_date": "2010-03-06",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20412373/"
+      },
+      {
+        "fact_id": "f_9202a6bc290b13",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "Lipid values were normalised by the 3(rd) treatment month.",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_958bec0a3b3eee",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -21,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:19229822",
+        "quote": "LDL cholesterol (90+/-39 mg/dL to 69+/-32 mg/dL; p<0.05)",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19229822/"
+      },
+      {
+        "fact_id": "f_9ddc7d3de5bccc",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -39.6,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "HOPE-3",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "absolute",
+          "dose": "10 mg rosuvastatin"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "Patients taking statins experienced, on average, a drop in low-density lipoprotein, or LDL, cholesterol of 39.6 mg/dL",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_a294c92c26d187",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -25,
+        "unit": "percent",
+        "attrs": {
+          "trial": "HOPE-3",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "12 months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "10 mg rosuvastatin"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "about 25 percent, after 12 months",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_ca377a1706f6f3",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -22,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:19229822",
+        "quote": "non-HDL cholesterol (121+/-46 mg/dL to 99+/-39 mg/dL; p<0.05)",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19229822/"
+      },
+      {
+        "fact_id": "f_d9d9278fa310b5",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 66,
+        "unit": "years",
+        "attrs": {
+          "trial": "HOPE-3",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:26481083",
+        "quote": "Mean age at randomization was 66 years",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_024edbee48845d",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.079,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "24 months",
+          "method": "QCA",
+          "placebo_adjusted": false,
+          "dose": "5 or 2.5mg/day",
+          "kind": "absolute",
+          "trial": "APOLLO study",
+          "lesion": "non-target lesions",
+          "measure": "minimal lumen diameter (MLD)"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "The changes in MLD and ALD from baseline to 24 months in the non-target lesions were significantly smaller in the rosuvastatin group than in the non-statin group (-0.079 ± 0.014 mm vs.-0.135 ± 0.019 mm, p=0.022",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_1ad2bdb4ccc5b2",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.4,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10mg/day",
+          "kind": "absolute",
+          "trial": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus"
+        },
+        "source_id": "pmid:26589368",
+        "quote": "the former group exhibited a statistically significant reduction from baseline of sd LDL-C levels, sd LDL-C/total LDL-C ratio compared with the latter group (-3.8 mg/dL vs. -1.4 mg/dL, p=0.014; -2.3% vs. -0.6%, p=0.004, respectively)",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/"
+      },
+      {
+        "fact_id": "f_22a6fee492fe7c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.062,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "24 months",
+          "method": "QCA",
+          "placebo_adjusted": false,
+          "dose": "5 or 2.5mg/day",
+          "kind": "absolute",
+          "trial": "APOLLO study",
+          "lesion": "non-target lesions",
+          "measure": "average lumen diameter (ALD)"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "-0.062 ± 0.012 mmvs. -0.109 ± 0.016mm, p=0.025)",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_2cfb2f224f5dc1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.011,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 to 24 months",
+          "method": "QCA",
+          "placebo_adjusted": false,
+          "dose": "5 or 2.5mg/day",
+          "kind": "absolute",
+          "trial": "APOLLO study",
+          "lesion": "target lesions",
+          "measure": "minimal lumen diameter (MLD)",
+          "stent_type": "bare-metal stents"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "versus those treated with bare-metal stents (-0.011 ± 0.094 mm vs. -0.015 ± 0.040 mm, p=0.255)",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_72da3fd5223338",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -30.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "CHARON; Study 4522IL/0086",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:26387811",
+        "quote": "CL/F in female children was approximately 30 % lower than in male children",
+        "pub_date": "2015-09-21",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26387811/"
+      },
+      {
+        "fact_id": "f_7be0e1074c7a6d",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.046,
+        "unit": "mm",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 to 24 months",
+          "method": "QCA",
+          "placebo_adjusted": false,
+          "dose": "5 or 2.5mg/day",
+          "kind": "absolute",
+          "trial": "APOLLO study",
+          "lesion": "target lesions",
+          "measure": "minimal lumen diameter (MLD)",
+          "stent_type": "drug-eluting stents"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "The changes in MLD from six to 24 months in the target lesions were significantly lower in the rosuvastatin group than in the non-statin group among the patients treated with drug-eluting stents (-0.046 ± 0.108 mm vs. -0.133 ± 0.108 mm, p=0.009)",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_a750ff0e272511",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -2.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "5mg/day",
+          "kind": "percent",
+          "trial": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus"
+        },
+        "source_id": "pmid:26589368",
+        "quote": "the former group exhibited a statistically significant reduction from baseline of sd LDL-C levels, sd LDL-C/total LDL-C ratio compared with the latter group (-3.8 mg/dL vs. -1.4 mg/dL, p=0.014; -2.3% vs. -0.6%, p=0.004, respectively)",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/"
+      },
+      {
+        "fact_id": "f_c5d290f1e260f7",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -3.8,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "5mg/day",
+          "kind": "absolute",
+          "trial": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus"
+        },
+        "source_id": "pmid:26589368",
+        "quote": "the former group exhibited a statistically significant reduction from baseline of sd LDL-C levels, sd LDL-C/total LDL-C ratio compared with the latter group (-3.8 mg/dL vs. -1.4 mg/dL, p=0.014; -2.3% vs. -0.6%, p=0.004, respectively)",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/"
+      },
+      {
+        "fact_id": "f_ecd27ddbd881ee",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -0.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10mg/day",
+          "kind": "percent",
+          "trial": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus"
+        },
+        "source_id": "pmid:26589368",
+        "quote": "the former group exhibited a statistically significant reduction from baseline of sd LDL-C levels, sd LDL-C/total LDL-C ratio compared with the latter group (-3.8 mg/dL vs. -1.4 mg/dL, p=0.014; -2.3% vs. -0.6%, p=0.004, respectively)",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/"
+      },
+      {
+        "fact_id": "f_ed29c1c5f79c7d",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -21,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "3 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:19229822",
+        "quote": "total cholesterol (163+/-53 mg/dL to 142+/-43 mg/dL; p<0.05)",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19229822/"
+      },
+      {
+        "fact_id": "f_494babfaceb6f2",
+        "entity": "target:hmgcr",
+        "key": "genetic_association_score",
+        "value": 0.695,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 4,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:HMGCR",
+        "quote": "\"genetic_association_score\": 0.695",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161"
+      },
+      {
+        "fact_id": "f_3f0d69e7566db1",
+        "entity": "trial:nct00468923",
+        "key": "ci_high",
+        "value": 3.61,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "Compared with Group A, Group C had a higher risk of non-fatal myocardial infarction or unstable angina (HR: 2.36, 1.54-3.61; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_574019506949a8",
+        "entity": "trial:nct00468923",
+        "key": "ci_high",
+        "value": 3.68,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina plus coronary revascularization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "this composite plus coronary revascularization (HR: 2.54, 1.76-3.68; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_bdd39f2f3ddff3",
+        "entity": "trial:nct00468923",
+        "key": "ci_high",
+        "value": 1.63,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "HF hospitalization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "as well as HF hospitalization (HR: 1.35, 1.13-1.63; P = 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_5d6d1285202c94",
+        "entity": "trial:nct00468923",
+        "key": "ci_low",
+        "value": 1.13,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "HF hospitalization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "as well as HF hospitalization (HR: 1.35, 1.13-1.63; P = 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_7a8eb3f88af4ca",
+        "entity": "trial:nct00468923",
+        "key": "ci_low",
+        "value": 1.76,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina plus coronary revascularization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "this composite plus coronary revascularization (HR: 2.54, 1.76-3.68; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_dd136b225d25b8",
+        "entity": "trial:nct00468923",
+        "key": "ci_low",
+        "value": 1.54,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "Compared with Group A, Group C had a higher risk of non-fatal myocardial infarction or unstable angina (HR: 2.36, 1.54-3.61; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_01f64fdcc816d5",
+        "entity": "trial:nct00468923",
+        "key": "events_control",
+        "value": 4.8,
+        "unit": "percent",
+        "attrs": {
+          "trial": "HOPE-3",
+          "endpoint": "first co-primary endpoint",
+          "arm": "placebo",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:hope3",
+        "quote": "4.8 percent among patients taking a placebo",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_8d047a249027c6",
+        "entity": "trial:nct00468923",
+        "key": "events_control",
+        "value": 5.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "HOPE-3",
+          "endpoint": "second co-primary endpoint",
+          "arm": "placebo",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:hope3",
+        "quote": "5.7 percent among patients taking a placebo",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_4cee206dfc9683",
+        "entity": "trial:nct00468923",
+        "key": "events_treatment",
+        "value": 3.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "HOPE-3",
+          "endpoint": "first co-primary endpoint",
+          "arm": "statins alone",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:hope3",
+        "quote": "3.7 percent of participants who took statins experienced the first co-primary endpoint",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_e0f94dd85e0337",
+        "entity": "trial:nct00468923",
+        "key": "events_treatment",
+        "value": 4.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "HOPE-3",
+          "endpoint": "second co-primary endpoint",
+          "arm": "statins alone",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:hope3",
+        "quote": "Among patients taking statins, 4.4 percent experienced the second co-primary endpoint",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_0259e8797c10f0",
+        "entity": "trial:nct00468923",
+        "key": "hr",
+        "value": 1.35,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "HF hospitalization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "as well as HF hospitalization (HR: 1.35, 1.13-1.63; P = 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_4141abfa9e52c8",
+        "entity": "trial:nct00468923",
+        "key": "hr",
+        "value": 2.54,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina plus coronary revascularization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "this composite plus coronary revascularization (HR: 2.54, 1.76-3.68; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_4a61c5b8091c2f",
+        "entity": "trial:nct00468923",
+        "key": "hr",
+        "value": 2.36,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "Compared with Group A, Group C had a higher risk of non-fatal myocardial infarction or unstable angina (HR: 2.36, 1.54-3.61; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_2a21677f97ade2",
+        "entity": "trial:nct00468923",
+        "key": "inclusion_threshold",
+        "value": "Women aged > 60 years and men > 55 years",
+        "unit": "age",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "ctgov:NCT00468923@2016-04-02",
+        "quote": "Women aged \\> 60 years and men \\> 55 years",
+        "pub_date": "2007-05-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00468923"
+      },
+      {
+        "fact_id": "f_3dffd6a204ee46",
+        "entity": "trial:nct00468923",
+        "key": "inclusion_threshold",
+        "value": 55,
+        "unit": "years",
+        "attrs": {
+          "trial": "HOPE-3",
+          "population": "men"
+        },
+        "source_id": "pmid:26481083",
+        "quote": "A total of 12,705 women 65 years or older and men 55 years or older",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_edb8e0d2c7ef78",
+        "entity": "trial:nct00468923",
+        "key": "inclusion_threshold",
+        "value": 65,
+        "unit": "years",
+        "attrs": {
+          "trial": "HOPE-3",
+          "population": "women"
+        },
+        "source_id": "pmid:26481083",
+        "quote": "A total of 12,705 women 65 years or older and men 55 years or older",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_937de526ca13c5",
+        "entity": "trial:nct00468923",
+        "key": "median_followup",
+        "value": 33,
+        "unit": "months",
+        "attrs": {
+          "trial": "CORONA"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "over a median follow-up period of 33 months",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_ae83b8771d665a",
+        "entity": "trial:nct00468923",
+        "key": "median_followup",
+        "value": 5.6,
+        "unit": "years",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "Outcomes were tracked for a median of 5.6 years.",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_f75629dfa3f763",
+        "entity": "trial:nct00468923",
+        "key": "median_followup",
+        "value": 5.8,
+        "unit": "years",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "pmid:26481083",
+        "quote": "and will be followed for a mean of 5.8 years",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_2051246c59baf2",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 214,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CHARON; Study 4522IL/0086"
+        },
+        "source_id": "pmid:26387811",
+        "quote": "The dataset included 214 pediatric patients, with 2,029 rosuvastatin concentrations.",
+        "pub_date": "2015-09-21",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26387811/"
+      },
+      {
+        "fact_id": "f_376ccec10092c2",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 143,
+        "unit": "patients",
+        "attrs": {
+          "trial": "APOLLO study"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "A total of 143 patients who underwent elective PCI were randomized to either the rosuvastatin (5 or 2.5mg/day) or non-statin group.",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_574606552b572a",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 20,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Resolution of non-alcoholic steatohepatitis by rosuvastatin monotherapy in patients with metabolic syndrome"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "This prospective study included 20 biopsy proven patients with NASH, metabolic syndrome (MetS) and dyslipidaemia.",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_7808255d403dc4",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 12705,
+        "unit": "participants",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "pmid:26481083",
+        "quote": "A total of 12,705 women 65 years or older and men 55 years or older with at least 1 CV risk factor, no known CV disease, and without any clear indication or contraindication to the study drugs were randomized to rosuvastatin 10 mg/d or placebo",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_9695f60941edff",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 12705,
+        "unit": "participants",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "ctgov:NCT00468923@2016-04-02",
+        "quote": "Enrollment: 12705 (ACTUAL)",
+        "pub_date": "2007-05-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00468923"
+      },
+      {
+        "fact_id": "f_a28d99c2721926",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 4878,
+        "unit": "patients",
+        "attrs": {
+          "trial": "CORONA"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "Four thousand, eight hundred and seventy-eight patients were divided into three categories",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_ad094fd95239c3",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 12705,
+        "unit": "participants",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "The trial included 12,705 people in 21 countries on six continents.",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_b616c84abc8bf7",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 147,
+        "unit": "patients",
+        "attrs": {
+          "trial": "SATURN-HIV"
+        },
+        "source_id": "pmid:25015912",
+        "quote": "The Stopping Atherosclerosis and Treating Unhealthy Bone With Rosuvastatin in HIV (SATURN-HIV) trial randomized 147 patients on stable antiretroviral therapy (ART) with low-density lipoprotein cholesterol ≤130 mg/dL to blinded 10 mg daily rosuvastatin or placebo.",
+        "pub_date": "2014-07-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25015912/"
+      },
+      {
+        "fact_id": "f_d265c9557a0d32",
+        "entity": "trial:nct00468923",
+        "key": "n_randomized",
+        "value": 111,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus"
+        },
+        "source_id": "pmid:26589368",
+        "quote": "There were no significant percent changes from baseline for LDL-C levels between the switched (n=55) and the continued treatment group (n=56).",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/"
+      },
+      {
+        "fact_id": "f_44172002e3afed",
+        "entity": "trial:nct00468923",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina plus coronary revascularization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "this composite plus coronary revascularization (HR: 2.54, 1.76-3.68; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_dcb6dc878d8f8f",
+        "entity": "trial:nct00468923",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "non-fatal myocardial infarction or unstable angina",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "Compared with Group A, Group C had a higher risk of non-fatal myocardial infarction or unstable angina (HR: 2.36, 1.54-3.61; P < 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_f7a038aeebc487",
+        "entity": "trial:nct00468923",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": "",
+        "attrs": {
+          "trial": "CORONA",
+          "endpoint": "HF hospitalization",
+          "comparison": "Group C vs Group A"
+        },
+        "source_id": "pmid:25265976",
+        "quote": "as well as HF hospitalization (HR: 1.35, 1.13-1.63; P = 0.001)",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/"
+      },
+      {
+        "fact_id": "f_f40a96d1e9cbc6",
+        "entity": "trial:nct00468923",
+        "key": "phase",
+        "value": "phase4",
+        "unit": "phase",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "ctgov:NCT00468923@2016-04-02",
+        "quote": "Phase: PHASE4",
+        "pub_date": "2007-05-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00468923"
+      },
+      {
+        "fact_id": "f_2cbd3186209b7f",
+        "entity": "trial:nct00468923",
+        "key": "primary_endpoint",
+        "value": "composite of CV death, nonfatal myocardial infarction (MI), and nonfatal stroke and the composite of CV death, nonfatal MI, nonfatal stroke, resuscitated cardiac arrest, heart failure, and arterial revascularization",
+        "unit": "NA",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "pmid:26481083",
+        "quote": "The coprimary study outcomes are the composite of CV death, nonfatal myocardial infarction (MI), and nonfatal stroke and the composite of CV death, nonfatal MI, nonfatal stroke, resuscitated cardiac arrest, heart failure, and arterial revascularization",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/"
+      },
+      {
+        "fact_id": "f_35c17d5e0a0bd4",
+        "entity": "trial:nct00468923",
+        "key": "primary_endpoint",
+        "value": "resolution of NASH",
+        "unit": "",
+        "attrs": {
+          "trial": "Resolution of non-alcoholic steatohepatitis by rosuvastatin monotherapy in patients with metabolic syndrome"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "The primary endpoint was the resolution of NASH and the secondary endpoints were the changes in liver enzyme and lipid values.",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_3dd8f144980fbc",
+        "entity": "trial:nct00468923",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular deaths, heart attacks and strokes",
+        "unit": "",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "the study’s first co-primary endpoint, a composite of cardiovascular deaths, heart attacks and strokes",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_9decdd80258696",
+        "entity": "trial:nct00468923",
+        "key": "primary_endpoint",
+        "value": "The composite of; Cardiovascular death, non-fatal myocardial infarction, non-fatal stroke.",
+        "unit": "composite endpoint",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "ctgov:NCT00468923@2016-04-02",
+        "quote": "Primary outcome(s): The composite of; Cardiovascular death, non-fatal myocardial infarction, non-fatal stroke. [Biannually]",
+        "pub_date": "2007-05-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00468923"
+      },
+      {
+        "fact_id": "f_e4ab4c1c78c338",
+        "entity": "trial:nct00468923",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular deaths, heart attacks, strokes, heart failure, resuscitated cardiac arrest and revascularization procedures",
+        "unit": "",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "its second co-primary endpoint, a composite of those events plus heart failure, resuscitated cardiac arrest and revascularization procedures, such as bypass surgery or angioplasty",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_8759aad4a0cd79",
+        "entity": "trial:nct00468923",
+        "key": "readout_statement",
+        "value": "Lowering cholesterol with statins significantly reduced adverse cardiovascular events in people with average cholesterol and blood pressure levels who were considered to be at intermediate risk for heart disease",
+        "unit": "",
+        "attrs": {
+          "trial": "HOPE-3"
+        },
+        "source_id": "announcement:hope3",
+        "quote": "Lowering cholesterol with statins significantly reduced adverse cardiovascular events in people with average cholesterol and blood pressure levels who were considered to be at intermediate risk for heart disease",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations"
+      },
+      {
+        "fact_id": "f_cb03b6bcea686a",
+        "entity": "trial:nct00468923",
+        "key": "readout_statement",
+        "value": "The present study demonstrated that the administration of a standard dose of rosuvastatin slows coronary plaque progression and may prevent the late catch-up phenomenon associated with drug-eluting stents in patients who undergo elective PCI.",
+        "unit": "",
+        "attrs": {
+          "trial": "APOLLO study"
+        },
+        "source_id": "pmid:25100236",
+        "quote": "CONCLUSIONS: The present study demonstrated that the administration of a standard dose of rosuvastatin slows coronary plaque progression and may prevent the late catch-up phenomenon associated with drug-eluting stents in patients who undergo elective PCI.",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/"
+      },
+      {
+        "fact_id": "f_eb72c637e43838",
+        "entity": "trial:nct00468923",
+        "key": "readout_statement",
+        "value": "These findings suggest that rosuvastatin monotherapy could ameliorate biopsy proven NASH and resolve MetS within 12 mo.",
+        "unit": "",
+        "attrs": {
+          "trial": "Resolution of non-alcoholic steatohepatitis by rosuvastatin monotherapy in patients with metabolic syndrome"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "These findings suggest that rosuvastatin monotherapy could ameliorate biopsy proven NASH and resolve MetS within 12 mo.",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_7a0c2189b1f4ee",
+        "entity": "trial:nct00468923",
+        "key": "safety_signal",
+        "value": "No safety signal reported",
+        "unit": "",
+        "attrs": {
+          "trial": "Resolution of non-alcoholic steatohepatitis by rosuvastatin monotherapy in patients with metabolic syndrome"
+        },
+        "source_id": "pmid:26167086",
+        "quote": "No patient had MetS by the 9(th) treatment month.",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/"
+      },
+      {
+        "fact_id": "f_85621fa6cf81f8",
+        "entity": "trial:nct00468923",
+        "key": "safety_signal",
+        "value": "slowed mean eGFRcr decline",
+        "unit": "mL/minute/1.73 m(2)",
+        "attrs": {
+          "trial": "SATURN-HIV"
+        },
+        "source_id": "pmid:25015912",
+        "quote": "After 24 weeks, statin use slowed mean eGFRcr decline (1.61 vs -3.08 mL/minute/1.73 m(2) for statin vs placebo; P = .033)",
+        "pub_date": "2014-07-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25015912/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00468923@2016-04-02",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00468923 HOPE-3",
+        "url": "https://clinicaltrials.gov/study/NCT00468923",
+        "pub_date": "2007-05-03",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00468923",
+            "acronym": "HOPE-3",
+            "title": "Heart Outcomes Prevention Evaluation-3",
+            "official_title": "Heart Outcomes Prevention Evaluation-3",
+            "sponsor": "Population Health Research Institute",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2007-05",
+            "primary_completion": "2015-12",
+            "first_posted": "2007-05-03",
+            "phases": [
+              "PHASE4"
+            ],
+            "enrollment": 12705,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Candesartan/HCT",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Candesartan/HCT"
+                ]
+              },
+              {
+                "name": "Rosuvastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Rosuvastatin"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Rosuvastatin",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "Candesartan/HCT",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Disease",
+              "Stroke"
+            ],
+            "primary_outcomes": [
+              "The composite of; Cardiovascular death, non-fatal myocardial infarction, non-fatal stroke. [Biannually]",
+              "The composite of; cardiovascular death, resuscitated cardiac arrest, non-fatal myocardial infarction, non-fatal stroke, heart failure, arterial revascularizations [Biannually]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 2891
+      },
+      {
+        "source_id": "pmid:26589368",
+        "type": "journal",
+        "title": "Switching from atorvastatin to rosuvastatin lowers small, dense low-density lipoprotein cholesterol levels in Japanese hypercholesterolemic patients with type 2 diabetes mellitus",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26589368/",
+        "pub_date": "2015-11-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26589368",
+          "pmcid": null,
+          "doi": "10.1016/j.diabres.2015.10.013",
+          "journal": "Diabetes research and clinical practice"
+        },
+        "chars": 1810
+      },
+      {
+        "source_id": "pmid:25614429",
+        "type": "journal",
+        "title": "The effect of rosuvastatin on platelet-leukocyte interactions in the setting of acute coronary syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25614429/",
+        "pub_date": "2015-01-27",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25614429",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2014.10.047",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 105
+      },
+      {
+        "source_id": "pmid:26387811",
+        "type": "journal",
+        "title": "Population pharmacokinetics of rosuvastatin in pediatric patients with heterozygous familial hypercholesterolemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26387811/",
+        "pub_date": "2015-09-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26387811",
+          "pmcid": null,
+          "doi": "10.1007/s00228-015-1946-4",
+          "journal": "European journal of clinical pharmacology"
+        },
+        "chars": 1826
+      },
+      {
+        "source_id": "pmid:26167086",
+        "type": "journal",
+        "title": "Resolution of non-alcoholic steatohepatitis by rosuvastatin monotherapy in patients with metabolic syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26167086/",
+        "pub_date": "2015-07-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26167086",
+          "pmcid": "PMC4491973",
+          "doi": "10.3748/wjg.v21.i25.7860",
+          "journal": "World journal of gastroenterology"
+        },
+        "chars": 2578
+      },
+      {
+        "source_id": "pmid:25745990",
+        "type": "journal",
+        "title": "Rationale and design of RETAIN study: Rosuvastatin Effect on Telomere-telomerase system in Acute coronary syndrome patients undergoing percutaneous coronary Intervention",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25745990/",
+        "pub_date": "2015-02-24",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25745990",
+          "pmcid": null,
+          "doi": "10.1016/j.ijcard.2015.02.032",
+          "journal": "International journal of cardiology"
+        },
+        "chars": 171
+      },
+      {
+        "source_id": "pmid:25100236",
+        "type": "journal",
+        "title": "Suppressive effects of standard-dose rosuvastatin therapy on the progression of coronary atherosclerosis in Japanese patients: the APOLLO study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25100236/",
+        "pub_date": "2014-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25100236",
+          "pmcid": null,
+          "doi": "10.5551/jat.25437",
+          "journal": "Journal of atherosclerosis and thrombosis"
+        },
+        "chars": 1565
+      },
+      {
+        "source_id": "pmid:25015912",
+        "type": "journal",
+        "title": "Rosuvastatin preserves renal function and lowers cystatin C in HIV-infected subjects on antiretroviral therapy: the SATURN-HIV trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25015912/",
+        "pub_date": "2014-07-11",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25015912",
+          "pmcid": "PMC4271099",
+          "doi": "10.1093/cid/ciu523",
+          "journal": "Clinical infectious diseases : an official publication of the Infectious Diseases Society of America"
+        },
+        "chars": 2089
+      },
+      {
+        "source_id": "pmid:25265976",
+        "type": "journal",
+        "title": "Relationship between angina pectoris and outcomes in patients with heart failure and reduced ejection fraction: an analysis of the Controlled Rosuvastatin Multinational Trial in Heart Failure (CORONA)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25265976/",
+        "pub_date": "2014-09-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25265976",
+          "pmcid": null,
+          "doi": "10.1093/eurheartj/ehu342",
+          "journal": "European heart journal"
+        },
+        "chars": 1704
+      },
+      {
+        "source_id": "pmid:20412373",
+        "type": "journal",
+        "title": "C-reactive protein lowering with rosuvastatin in the METEOR study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20412373/",
+        "pub_date": "2010-03-06",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20412373",
+          "pmcid": null,
+          "doi": "10.1111/j.1365-2796.2010.02230.x",
+          "journal": "Journal of internal medicine"
+        },
+        "chars": 1623
+      },
+      {
+        "source_id": "pmid:19229822",
+        "type": "journal",
+        "title": "Rosuvastatin in hemodialysis: short-term effects on lipids and C-reactive protein",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19229822/",
+        "pub_date": "2009-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19229822",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Journal of nephrology"
+        },
+        "chars": 1391
+      },
+      {
+        "source_id": "pmid:26481083",
+        "type": "journal",
+        "title": "Novel Approaches in Primary Cardiovascular Disease Prevention: The HOPE-3 Trial Rationale, Design, and Participants' Baseline Characteristics",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26481083/",
+        "pub_date": "2015-07-08",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26481083",
+          "pmcid": null,
+          "doi": "10.1016/j.cjca.2015.07.001",
+          "journal": "The Canadian journal of cardiology",
+          "purpose": "design"
+        },
+        "chars": 1862
+      },
+      {
+        "source_id": "pmid:20587337",
+        "type": "journal",
+        "title": "The relationship between HMGCR genetic variation, alternative splicing, and statin efficacy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20587337/",
+        "pub_date": "2010-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20587337",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Discovery medicine",
+          "purpose": "genetics"
+        },
+        "chars": 893
+      },
+      {
+        "source_id": "pmid:25881938",
+        "type": "journal",
+        "title": "Developing medicines that mimic the natural successes of the human genome: lessons from NPC1L1, HMGCR, PCSK9, APOC3, and CETP",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25881938/",
+        "pub_date": "2015-04-21",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25881938",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2015.02.049",
+          "journal": "Journal of the American College of Cardiology",
+          "purpose": "genetics"
+        },
+        "chars": 127
+      },
+      {
+        "source_id": "pmid:19913121",
+        "type": "journal",
+        "title": "Gene-centric association signals for lipids and apolipoproteins identified via the HumanCVD BeadChip",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19913121/",
+        "pub_date": "2009-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19913121",
+          "pmcid": "PMC2775832",
+          "doi": "10.1016/j.ajhg.2009.10.014",
+          "journal": "American journal of human genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1941
+      },
+      {
+        "source_id": "announcement:hope3",
+        "type": "press_release",
+        "title": "Study Supports Broader Use of Statins in Intermediate Risk Populations (American College of Cardiology press release, ACC.16, Apr 02, 2016)",
+        "url": "https://www.acc.org/about-acc/press-releases/2016/04/02/12/28/study-supports-broader-use-of-statins-in-intermediate-risk-populations",
+        "pub_date": "2016-04-02",
+        "access": "press_release",
+        "meta": {},
+        "chars": 14360
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 24,
+      "facts": 65,
+      "relationships": 23,
+      "events": 170,
+      "audit_entries": 170,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 16,
+        "input_tokens": 14576,
+        "output_tokens": 7287,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 10348,
+        "output_tokens": 11204,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1285,
+        "output_tokens": 1903,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 9681,
+        "output_tokens": 8270,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 11527,
+        "output_tokens": 7341,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6018,
+        "output_tokens": 638,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "key": "0b4683689cc31ba53ded",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T14:42:05+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: FOURIER NCT01764633 - Further Cardiovascular Outcomes Research With PCSK9 Inhibition in Subjects With Elevated Risk\nInvestigational drug: evolocumab\nDocument: What promise does PCSK9 hold? (journal, published 2005-05-17, source pmid:15893177)\n\n--- DOCUMENT TEXT ---\nWhat promise does PCSK9 hold?\n\n\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 324,
+    "output_tokens": 7
+  }
+}

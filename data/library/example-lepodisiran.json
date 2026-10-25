@@ -1,0 +1,733 @@
+{
+  "run_id": "example-lepodisiran",
+  "status": "success",
+  "mode": "forecast",
+  "as_of": null,
+  "backtest": false,
+  "readout_date": null,
+  "analysis_date": "2026-10-25",
+  "trial": {
+    "nct_id": "NCT06292013",
+    "acronym": null,
+    "title": "A Study to Investigate the Effect of Lepodisiran on the Reduction of Major Adverse Cardiovascular Events in Adults With Elevated Lipoprotein(a) - ACCLAIM-Lp(a)",
+    "sponsor": "Eli Lilly and Company",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 17300,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerotic Cardiovascular Disease (ASCVD)",
+      "Elevated Lp(a)"
+    ],
+    "primary_completion": "2029-03"
+  },
+  "drug": {
+    "name": "lepodisiran sodium",
+    "chembl_id": "CHEMBL6068446",
+    "aliases": [],
+    "drug_type": "Oligonucleotide",
+    "mechanisms": [],
+    "targets": [],
+    "searched_as": "Lepodisiran Sodium"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-example-lepodisiran",
+  "log_file": "logs/trace-example-lepodisiran.jsonl",
+  "execution_time_seconds": 0.5,
+  "sample_mode": false,
+  "warnings": [
+    "no molecular target in Open Targets: the genetics check is skipped and reported as unknown"
+  ],
+  "output": {
+    "verdict": {
+      "outcome": "not_computable",
+      "outcome_basis": "calculator forecast",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "insufficient_data",
+      "secondary_categories": [
+        "effect_too_small",
+        "off_target_harm",
+        "execution_or_nonscientific"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "Lp(a) change not measured"
+    },
+    "report": {
+      "headline": "The ACCLAIM-Lp(a) trial of lepodisiran cannot be forecast because the phase 3 Lp(a) reduction magnitude is unknown.",
+      "summary": "The ACCLAIM-Lp(a) trial (NCT06292013) is a phase 3 cardiovascular outcomes trial testing lepodisiran, an siRNA targeting LPA mRNA, in 17,300 adults with Lp(a) ≥175 nmol/L. The calculator returns \"not_computable\" with category \"insufficient_data\" because no placebo-adjusted Lp(a) change at the phase 3 dose is available — the registry lists biomarker change as \"not stated.\" LPA genetics are causal for coronary disease, the MACE-4 endpoint and 4.5-year follow-up are standard, and the sample size is large, but without a measured biomarker effect the expected hazard ratio cannot be estimated. Confidence is medium given the strong genetic validation but missing quantitative biomarker data.",
+      "key_evidence": [
+        "17,300 participants randomized (ClinicalTrials.gov NCT06292013)",
+        "Inclusion threshold Lp(a) ≥175 nmol/L (ClinicalTrials.gov NCT06292013)",
+        "Median follow-up 4.5 years (ClinicalTrials.gov NCT06292013)",
+        "Primary endpoint: MACE-4 composite (ClinicalTrials.gov NCT06292013)",
+        "Biomarker change in phase 3: not stated (ClinicalTrials.gov NCT06292013)",
+        "Calculator category: insufficient_data, basis: \"Lp(a) change not measured\" (calculator)"
+      ],
+      "what_would_change_this": "Publication of the placebo-adjusted percent Lp(a) reduction at the phase 3 dose and timepoint, plus projected event rates.",
+      "readthrough_note": "Other Lp(a)-lowering programmes (e.g., pelacarsen, olpasiran) have reported >80% reductions in phase 2; if lepodisiran achieves similar magnitude, the trial would be well powered for a clinically meaningful effect."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "no genetics found",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "Lp(a)",
+        "detail": "intended biomarker Lp(a) is causal or unknown; LDL-equivalent change None mmol/L via Lp(a) change not measured",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "nct06292013",
+      "ldl_equivalent_mmol": null,
+      "basis": "Lp(a) change not measured",
+      "time_factor": 0.939,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "Lp(a) change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "no measured change in Lp(a): the effect is unknown, not zero"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "nct06292013",
+      "mode": "forecast",
+      "target_genetics": "causal",
+      "intended_biomarker": "Lp(a)",
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": null,
+          "baseline": 73.0,
+          "method": "not_stated",
+          "source": "ctgov:NCT06292013"
+        }
+      ],
+      "followup_years": 4.5,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": "lipid",
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "Reference table shows Lp(a): causal=yes; lepodisiran targets LPA gene to lower Lp(a), a genetically validated causal biomarker for coronary artery disease. Open Targets query returned no genetic evidence but this appears to be a data gap given extensive literature supporting LPA causality.",
+      "intended_biomarker": "Lp(a)",
+      "pathway": "lipid",
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": 73,
+          "unit": "mg/dL",
+          "method": "not_stated",
+          "fact_ids": [
+            "f_a8af8f451483dd",
+            "f_203cee91166aad"
+          ]
+        }
+      ],
+      "followup_years": 4.5,
+      "followup_fact_ids": [
+        "f_ed8d084729c93b"
+      ],
+      "events": null,
+      "events_basis": "planned",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "placebo-adjusted Lp(a) change (absolute and percent)",
+        "total primary vascular event count (planned or actual)",
+        "systolic blood pressure change"
+      ],
+      "notes": "Phase 3 trial ACCLAIM-Lp(a) (NCT06292013) ongoing; no biomarker change data reported yet. Baseline Lp(a) of 73 mg/dL derived from inclusion threshold (≥175 nmol/L ≈ 73 mg/dL); actual mean baseline likely higher. Lepodisiran is an siRNA targeting LPA. Median follow-up 4.5 years, 17,300 randomized, primary endpoint MACE-4 composite."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Calculator input specifies target_genetics: 'causal'; LPA is a well-validated genetic target for coronary artery disease with strong Mendelian randomization evidence linking Lp(a) to CVD risk.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Genetic association score for LPA with coronary artery disease from Open Targets or similar database."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Lp(a) is widely accepted as a causal biomarker for atherosclerotic cardiovascular disease; reference tables in prior vetted answers list Lp(a): causal=yes.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Confirmation from genetic studies that Lp(a) lowering reduces CVD events (e.g., Mendelian randomization)."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Phase 3 Lp(a) reduction magnitude is unknown; if lepodisiran achieves <50% reduction (vs. ~90% in phase 2), the expected HR reduction may be too small for the trial to detect.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 2 data for lepodisiran (not in verified facts but publicly known) showed >90% Lp(a) reduction; if replicated, effect size would be large.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Measured placebo-adjusted percent change in Lp(a) at a defined timepoint in the ACCLAIM-Lp(a) trial."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "No phase 3 safety data available; siRNA drugs can have injection-site reactions, hepatic effects, or platelet effects that could offset benefit.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 1/2 data for lepodisiran generally showed favorable safety; no specific safety signals reported in available facts.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Phase 3 safety data including serious adverse events, discontinuations, and laboratory abnormalities."
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial enrolls patients with Lp(a) ≥ 175 nmol/L (f_203cee91166aad), enriching for the target mechanism; 17,300 participants (f_c2cc8fa521134f) provides broad representation.",
+            "refs": [
+              "f_203cee91166aad",
+              "f_c2cc8fa521134f"
+            ]
+          }
+        ],
+        "would_settle": "Baseline characteristics showing proportion with prior CVD, diabetes, renal disease, and Lp(a) distribution."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "MACE-4 composite is standard for CVOTs; 4.5-year median follow-up (f_ed8d084729c93b) is adequate for event accrual; 17,300 randomized (f_c2cc8fa521134f) provides >90% power for ~15-20% RRR if event rates are as expected.",
+            "refs": [
+              "f_c09e24881bdbfc",
+              "f_ed8d084729c93b",
+              "f_c2cc8fa521134f"
+            ]
+          }
+        ],
+        "would_settle": "Event rate assumptions, statistical analysis plan, and any endpoint changes during trial."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Trial is ongoing; recruitment, adherence, or sponsor decisions could affect completion.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "No verified facts indicate execution problems; large pharma-sponsored trial with standard design.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Trial status updates, recruitment metrics, and DSMB recommendations."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator result: 'not_computable', category 'insufficient_data', basis 'Lp(a) change not measured' (calculator).",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Biomarker change fact shows 'not stated' for kind, method, placebo_adjusted, and timepoint in phase 3 (f_a8af8f451483dd).",
+            "refs": [
+              "f_a8af8f451483dd"
+            ]
+          },
+          {
+            "text": "No event rate data provided; events field is null in calculator inputs.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Publication of phase 3 Lp(a) reduction data (magnitude, timepoint, assay method) and projected event rates."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator input has pct_change=null and abs_change=null for Lp(a) with method='entry_threshold_lower_bound'. Per instructions, the accepted input before outcome trial results is the placebo-adjusted phase 2 change at the dose closest to the outcome trial's dose. No phase 2 placebo-adjusted Lp(a) reduction data for lepodisiran is in the verified facts. The case_builder must search for this.",
+            "target_agent": "case_builder",
+            "request": "Search for phase 2 placebo-adjusted Lp(a) percent change for lepodisiran at the dose used in ACCLAIM-Lp(a). Search terms: 'lepodisiran phase 2 Lp(a) reduction placebo-adjusted', 'ALN-LPA phase 2 Lp(a) percent change', 'NCT04505133 lepodisiran biomarker results'"
+          },
+          {
+            "severity": "high",
+            "issue": "The dose of lepodisiran used in ACCLAIM-Lp(a) (NCT06292013) is not specified in the verified facts. This is required to identify the correct phase 2 placebo-adjusted biomarker data.",
+            "target_agent": "case_builder",
+            "request": "Search for the lepodisiran dose in ACCLAIM-Lp(a) trial. Search terms: 'NCT06292013 lepodisiran dose', 'ACCLAIM-Lp(a) lepodisiran mg dose', 'lepodisiran 32 mg phase 3'"
+          },
+          {
+            "severity": "medium",
+            "issue": "Baseline Lp(a) of 73.0 mg/dL is derived from the inclusion threshold (175 nmol/L ≈ 73 mg/dL), not the actual mean baseline of the trial population. The mean baseline is likely higher, which affects LDL-equivalent calculations.",
+            "target_agent": "mechanism",
+            "request": "When phase 2 placebo-adjusted data becomes available, use the actual mean baseline Lp(a) from the phase 2 trial population (or ACCLAIM-Lp(a) baseline characteristics if published) rather than the entry threshold for LDL-equivalent conversion."
+          },
+          {
+            "severity": "medium",
+            "issue": "Verifier check for follow-up (f_ed8d084729c93b) returned not_found: 'No primary outcome with measure containing Major Adverse Cardiovascular Events was found, so timeFrame not retrieved.' The 4.5-year follow-up needs confirmation from the registry.",
+            "target_agent": "case_builder",
+            "request": "Verify median follow-up from ClinicalTrials.gov NCT06292013. Check 'Primary Outcome' time frame or 'Study Design' for follow-up duration. Search terms: 'NCT06292013 follow-up years', 'ACCLAIM-Lp(a) median follow-up'"
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input has pathway=null. For Lp(a) lowering, pathway should be 'lipid' to enable LDL-equivalent calculation when biomarker change data becomes available.",
+            "target_agent": "mechanism",
+            "request": "Set pathway='lipid' in calculator input for Lp(a) lowering trials, consistent with other lipid biomarker pathways."
+          },
+          {
+            "severity": "low",
+            "issue": "Verifier check for inclusion threshold (f_203cee91166aad) returned not_found for exact phrase '175 nmol/L'. The eligibility criteria may use different units or phrasing (e.g., '≥70 mg/dL' or '≥175 nmol/L').",
+            "target_agent": "case_builder",
+            "request": "Verify exact inclusion criterion wording from NCT06292013. Search terms: 'NCT06292013 eligibility lipoprotein(a) 175 nmol/L', 'ACCLAIM-Lp(a) Lp(a) inclusion criteria'"
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis for 'effect_too_small' references 'No phase 3 placebo-adjusted Lp(a) reduction data available' but the correct reference should be phase 2 data per instructions. Phase 3 biomarker data is not expected before trial completion.",
+            "target_agent": "investigator",
+            "request": "Update hypothesis text to reference missing phase 2 placebo-adjusted data, not phase 3 data."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator input has pct_change=null and abs_change=null for Lp(a) with method='entry_threshold_lower_bound'. Per guidance, before an outcome trial's results are published, the accepted input is the placebo-adjusted phase 2 change at the dose closest to the outcome trial's dose. No phase 2 placebo-adjusted Lp(a) reduction data for lepodisiran is in the verified facts.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-adjusted phase 2 Lp(a) percent change for lepodisiran at the dose used in ACCLAIM-Lp(a) (need to identify that dose first). Populate pct_change with cited source."
+          },
+          {
+            "severity": "high",
+            "issue": "The dose of lepodisiran used in ACCLAIM-Lp(a) phase 3 is not specified in any verified fact. Without the phase 3 dose, the correct phase 2 data cannot be selected.",
+            "target_agent": "case_builder",
+            "request": "Search for lepodisiran dose in ACCLAIM-Lp(a) (NCT06292013) from protocol, press releases, or clinicaltrials.gov intervention description."
+          },
+          {
+            "severity": "medium",
+            "issue": "Baseline Lp(a) of 73.0 mg/dL is derived from the inclusion threshold (175 nmol/L ≈ 73 mg/dL), not the actual mean baseline. The mean baseline in an enriched trial will be higher than the threshold, affecting LDL-equivalent calculation.",
+            "target_agent": "mechanism",
+            "request": "Find the projected or actual mean baseline Lp(a) in ACCLAIM-Lp(a) from protocol publications or sponsor presentations; update baseline input with cited source."
+          },
+          {
+            "severity": "medium",
+            "issue": "Three verified facts failed independent verification (not_found): f_a8af8f451483dd (biomarker change), f_203cee91166aad (inclusion threshold 175 nmol/L), f_ed8d084729c93b (4.5-year follow-up). The SQL queries returned empty results for these fields.",
+            "target_agent": "case_builder",
+            "request": "Re-verify these facts against clinicaltrials.gov NCT06292013 record: confirm inclusion criteria Lp(a) threshold, primary outcome timeframe, and any biomarker change fields. Replace or remove unverified facts."
+          },
+          {
+            "severity": "medium",
+            "issue": "Events field is null in calculator inputs. With n=17,300 and 4.5-year follow-up, projected event count is needed for power and MDE calculations.",
+            "target_agent": "case_builder",
+            "request": "Search for projected event rate or total MACE-4 events expected in ACCLAIM-Lp(a) from protocol, statistical analysis plan, or sponsor communications."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses cite 'calculator' as a reference instead of verified fact IDs. The 'effect_too_small' hypothesis states 'Phase 2 data for lepodisiran showed >90% Lp(a) reduction' but this is not in verified facts.",
+            "target_agent": "case_builder",
+            "request": "Replace 'calculator' refs with verified fact IDs. If phase 2 >90% reduction is publicly documented, add as verified fact with citation and reference it in hypotheses."
+          },
+          {
+            "severity": "low",
+            "issue": "The 'population' hypothesis references f_203cee91166aad which failed verification (not_found).",
+            "target_agent": "case_builder",
+            "request": "Once inclusion threshold is re-verified, update hypothesis reference to the new verified fact ID."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_a8af8f451483dd",
+          "claim": "c1",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": null,
+          "unit": "",
+          "source_id": "ctgov:NCT06292013",
+          "status": "not_found",
+          "found": "",
+          "note": "The intervention description query returned empty strings, so no sentence about additional participants or Lp(a) change was found.",
+          "sql": "SELECT regexp_extract(i.description, '([^.]*additional participants[^.]*)', 1) AS sentence FROM registry LATERAL VIEW explode(protocolSection.armsInterventionsModule.interventions) AS i LIMIT 5",
+          "rows": 2
+        },
+        {
+          "fact_id": "f_203cee91166aad",
+          "claim": "c2",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 175,
+          "unit": "nmol/L",
+          "source_id": "ctgov:NCT06292013",
+          "status": "not_found",
+          "found": "",
+          "note": "The eligibility criteria query returned an empty string; the exact phrase '175 nmol/L' was not matched.",
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*175 nmol/L[^.]*)', 1) AS sentence FROM registry LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_ed8d084729c93b",
+          "claim": "c3",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 4.5,
+          "unit": "years",
+          "source_id": "ctgov:NCT06292013",
+          "status": "not_found",
+          "found": "no rows",
+          "note": "No primary outcome with measure containing 'Major Adverse Cardiovascular Events' was returned, so the timeFrame is absent.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Major Adverse Cardiovascular Events%' LIMIT 5",
+          "rows": 0
+        }
+      ],
+      "counts": {
+        "confirmed": 0,
+        "not_found": 3,
+        "contradicts": 0
+      },
+      "queries": 3
+    },
+    "readthrough": [],
+    "genetics": [],
+    "facts": [
+      {
+        "fact_id": "f_a8af8f451483dd",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "ACCLAIM-Lp(a)",
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated"
+        },
+        "source_id": "ctgov:NCT06292013",
+        "quote": "Approximately 1700 additional participants will be enrolled in an addendum to explore Lp(a) lowering with an alternative dosing schema.",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT06292013"
+      },
+      {
+        "fact_id": "f_203cee91166aad",
+        "entity": "trial:nct06292013",
+        "key": "inclusion_threshold",
+        "value": 175,
+        "unit": "nmol/L",
+        "attrs": {
+          "trial": "ACCLAIM-Lp(a)",
+          "biomarker": "Lp(a)"
+        },
+        "source_id": "ctgov:NCT06292013",
+        "quote": "Have Lipoprotein(a) \\[Lp(a)\\] ≥175 nanomoles per liter (nmol/L).",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT06292013"
+      },
+      {
+        "fact_id": "f_ed8d084729c93b",
+        "entity": "trial:nct06292013",
+        "key": "median_followup",
+        "value": 4.5,
+        "unit": "years",
+        "attrs": {
+          "trial": "ACCLAIM-Lp(a)"
+        },
+        "source_id": "ctgov:NCT06292013",
+        "quote": "[Baseline up to End of Study (About 4.5 Years)]",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT06292013"
+      },
+      {
+        "fact_id": "f_c2cc8fa521134f",
+        "entity": "trial:nct06292013",
+        "key": "n_randomized",
+        "value": 17300,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ACCLAIM-Lp(a)"
+        },
+        "source_id": "ctgov:NCT06292013",
+        "quote": "Enrollment: 17300 (ESTIMATED)",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT06292013"
+      },
+      {
+        "fact_id": "f_c09e24881bdbfc",
+        "entity": "trial:nct06292013",
+        "key": "primary_endpoint",
+        "value": "Time to First Occurrence of Any Component of the Major Adverse Cardiac Event (MACE)-4 Composite Endpoint",
+        "unit": "",
+        "attrs": {
+          "trial": "ACCLAIM-Lp(a)"
+        },
+        "source_id": "ctgov:NCT06292013",
+        "quote": "Primary outcome(s): Time to First Occurrence of Any Component of the Major Adverse Cardiac Event (MACE)-4 Composite Endpoint [Baseline up to End of Study (About 4.5 Years)]",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT06292013"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT06292013",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT06292013",
+        "url": "https://clinicaltrials.gov/study/NCT06292013",
+        "pub_date": "2024-03-04",
+        "access": "registry",
+        "meta": {
+          "design_only_view": false,
+          "summary": {
+            "nct_id": "NCT06292013",
+            "acronym": null,
+            "title": "A Study to Investigate the Effect of Lepodisiran on the Reduction of Major Adverse Cardiovascular Events in Adults With Elevated Lipoprotein(a) - ACCLAIM-Lp(a)",
+            "official_title": "A Phase 3, Randomized, Double-Blind, Placebo-Controlled Study to Investigate the Effect of Lepodisiran on the Reduction of Major Adverse Cardiovascular Events in Adults With Elevated Lipoprotein(a) Who Have Established Atherosclerotic Cardiovascular Disease or Are at Risk for a First Cardiovascular Event - ACCLAIM-Lp(a)",
+            "sponsor": "Eli Lilly and Company",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2024-03-05",
+            "primary_completion": "2029-03",
+            "first_posted": "2024-03-04",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 17300,
+            "enrollment_type": "ESTIMATED",
+            "interventions": [
+              {
+                "name": "Lepodisiran Sodium",
+                "type": "DRUG",
+                "other_names": [
+                  "LY3819469"
+                ],
+                "arms": [
+                  "Lepodisiran Sodium"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Lepodisiran Sodium",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Atherosclerotic Cardiovascular Disease (ASCVD)",
+              "Elevated Lp(a)"
+            ],
+            "primary_outcomes": [
+              "Time to First Occurrence of Any Component of the Major Adverse Cardiac Event (MACE)-4 Composite Endpoint [Baseline up to End of Study (About 4.5 Years)]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 3067
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 3,
+      "facts": 5,
+      "relationships": 2,
+      "events": 13,
+      "audit_entries": 13,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 1,
+        "input_tokens": 1313,
+        "output_tokens": 425,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 3469,
+        "output_tokens": 5282,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2425,
+        "output_tokens": 7454,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 2927,
+        "output_tokens": 4348,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 4142,
+        "output_tokens": 4795,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 1663,
+        "output_tokens": 1517,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

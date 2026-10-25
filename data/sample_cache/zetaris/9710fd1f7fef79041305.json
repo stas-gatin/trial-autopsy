@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A35300814+OR+EXT_ID%3A40185318&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*993[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40185318' LIMIT 5",
+ "rows": [
+  [
+   " The study will end when 993 CEC confirmed primary CV events have accumulated"
+  ]
+ ],
+ "error": null
+}

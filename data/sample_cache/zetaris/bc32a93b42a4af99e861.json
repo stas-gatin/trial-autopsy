@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A30125052+OR+EXT_ID%3A30197273&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*26%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '30197273' LIMIT 5",
+ "rows": [
+  [
+   " Serum triglycerides decreased with OM-3CA (-26%, P = "
+  ]
+ ],
+ "error": null
+}

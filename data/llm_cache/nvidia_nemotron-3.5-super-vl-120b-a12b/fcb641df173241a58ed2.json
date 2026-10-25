@@ -1,0 +1,15 @@
+{
+  "key": "fcb641df173241a58ed2",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T13:22:44+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: AURORA NCT00240331 - AURORA: Crestor 10mg Versus Placebo in Subjects With End-stage Renal Disease (ESRD)\nInvestigational drug: rosuvastatin\nDocument: Acute myocardial infarction and proinflammatory gene variants (journal, published 2007-11-01, source pmid:18056971)\n\n--- DOCUMENT TEXT ---\nAcute myocardial infarction and proinflammatory gene variants\n\nWe identified four genetic risk sets for acute myocardial infarction (AMI) from information on functional gene variants that favor inflammation or modulate cholesterol metabolism: IL6 -174 G/C, TNF -308 G/A, IL10 -1082 G/A, SERPINA3 -51 G/T, IFNG +874 T/A, HMGCR -911 C/A, and APOE epsilon2/3/4; 316 patients and 461 healthy subjects, all Italian. Putative risk alleles are shown underlined. The sets were identified using grade-of-membership analysis. Membership scores in the sets are automatically generated for individuals. The 'low intrinsic risk' set had alleles that downregulate inflammation and cholesterol synthesis (IL6, TNF, ILl0, HMGCR). 'AMI across a broad age range' carried multiple proinflammatory alleles (IL6, TNF, IL10, SERPINA3): All 72 persons like this set were affected yet had relatively low plasma cholesterol levels. 'A subset of AMI in middle age' had numerous proinflammatory alleles (IL6, TNF, SERPINA3, IFNG, HMGCR). 'AMI after age 80' had a reduced risk set (IL6, IL10, IFNG). A total of 95% of cases had >/=50% membership in the high intrinsic risk sets. We conclude that proinflammatory gene variants taken together strongly determine an individual's risk for myocardial infarction. This information may better define the pathogenesis of myocardial infarction and identify individuals who might benefit from early interventions.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 676,
+    "output_tokens": 7
+  }
+}

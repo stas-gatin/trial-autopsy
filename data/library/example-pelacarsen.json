@@ -1,0 +1,2336 @@
+{
+  "run_id": "example-pelacarsen",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": null,
+  "backtest": false,
+  "readout_date": "2026-09-04",
+  "analysis_date": "2026-10-25",
+  "trial": {
+    "nct_id": "NCT04023552",
+    "acronym": "Lp(a)HORIZON",
+    "title": "Assessing the Impact of Lipoprotein (a) Lowering With Pelacarsen (TQJ230) on Major Cardiovascular Events in Patients With CVD",
+    "sponsor": "Novartis Pharmaceuticals",
+    "status": "COMPLETED",
+    "enrollment": 8323,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Disease and Lipoprotein(a)"
+    ],
+    "primary_completion": "2026-07-16"
+  },
+  "drug": {
+    "name": "pelacarsen",
+    "chembl_id": "CHEMBL4298202",
+    "aliases": [
+      "AKCEA-APO(a)-LRx",
+      "ISIS 681257",
+      "Ionis-apo(a)-lrx",
+      "tqj230"
+    ],
+    "drug_type": "Oligonucleotide",
+    "mechanisms": [
+      "LPA mRNA antisense inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000198670",
+        "symbol": "LPA",
+        "name": "lipoprotein(a)"
+      }
+    ],
+    "searched_as": "TQJ230"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-example-pelacarsen",
+  "log_file": "logs/trace-example-pelacarsen.jsonl",
+  "execution_time_seconds": 1.2,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"composite of cardiovascular death, non-fatal myocardial infarction, non-fatal stroke, and urgent coronary revascularization requiring hospit\" (user:readout)",
+      "predicted_outcome": "success",
+      "consistency": "calculator expected success with 54% probability; the actual result falls in the remaining 46%",
+      "primary_category": "effect_too_small",
+      "secondary_categories": [
+        "insufficient_data"
+      ],
+      "calculator_category": "narrow_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.541,
+      "weakest_link": "expected effect only 12% relative risk reduction"
+    },
+    "report": {
+      "headline": "The pelacarsen Phase 3 Lp(a)HORIZON trial failed to meet its primary cardiovascular endpoint, consistent with an underpowered design expecting only a 12.3% relative risk reduction (HR 0.877) at 54.1% power.",
+      "summary": "The trial randomized 8,323 patients with established cardiovascular disease and Lp(a) ≥70 mg/dL to pelacarsen or placebo, targeting 993 primary endpoint events. The top-line readout states the trial did not meet its primary endpoint of reducing cardiovascular events. The calculator predicted narrow success with an expected HR of 0.877 (12.3% RRR) and only 54.1% power, below the conventional 80% threshold; the minimum detectable HR at 80% power was 0.837. Phase 2 data showed -67% Lp(a) reduction and -19% LDL-C reduction, but no verified phase 3 on-treatment Lp(a) reduction was reported. Strong genetic evidence supports Lp(a) causality (Open Targets score 0.922; variant ORs 1.38-3.67), so failure most likely reflects an effect too small to detect rather than lack of target validity.",
+      "key_evidence": [
+        "8,323 patients randomized (Readout text supplied by the user; ClinicalTrials.gov NCT04023552 Lp(a)HORIZON; Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).)",
+        "993 planned primary CEC-confirmed CV events (Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).)",
+        "Expected HR 0.877 (12.3% RRR) with 54.1% power; MDE HR 0.837 for 80% power (calculator)",
+        "Primary endpoint: composite of cardiovascular death, nonfatal MI, nonfatal stroke, or urgent coronary revascularization requiring hospitalization (Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).; Readout text supplied by the user)",
+        "Phase 2 Lp(a) reduction -67% (placebo-adjusted, 20-80 mg monthly) (Effect of Pelacarsen on Lipoprotein(a) Cholesterol and Corrected Low-Density Lipoprotein Cholesterol.)",
+        "Phase 2 LDL-C reduction -19% and apoB -16% (placebo-adjusted) (Effect of Pelacarsen on Lipoprotein(a) Cholesterol and Corrected Low-Density Lipoprotein Cholesterol.)",
+        "Median follow-up 2.5 years vs planned 4 years (Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).; ClinicalTrials.gov NCT04023552 Lp(a)HORIZON)",
+        "Inclusion threshold Lp(a) ≥70 mg/dL overall, ≥90 mg/dL subpopulation (Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).; Readout text supplied by the user)",
+        "Genetic association score 0.922; variant ORs 1.38-3.67 for coronary disease (opentargets:LPA; Genetic variants associated with Lp(a) lipoprotein level and coronary disease.)",
+        "Readout: did not meet primary endpoint (Readout text supplied by the user)",
+        "No verified phase 3 on-treatment Lp(a) reduction reported (Readout text supplied by the user; Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).)"
+      ],
+      "what_would_change_this": "The observed hazard ratio and confidence interval from the full trial publication, plus phase 3 on-treatment Lp(a) reduction at 80 mg and actual mean baseline Lp(a) in the randomized cohort, would confirm whether the effect was truly too small or the trial underpowered.",
+      "readthrough_note": "Olpasiran, an LPA-targeting siRNA in Phase 3 (NCT07136012, 11,000 patients, primary completion 2031), achieved 71-97% Lp(a) reduction in Phase 1 and may test whether larger Lp(a) lowering translates to cardiovascular benefit."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.922 for LPA",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "Lp(a)",
+        "detail": "intended biomarker Lp(a) is causal or unknown; LDL-equivalent change 0.669 mmol/L via LDL-C + Lp(a)",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.123,
+        "detail": "expected HR 0.877 at 3.25 y (relative risk reduction 12.3%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.541,
+        "detail": "power 54% with 993 events; smallest detectable HR 0.837",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "lp(a)horizon",
+      "ldl_equivalent_mmol": 0.669,
+      "basis": "LDL-C + Lp(a)",
+      "time_factor": 0.788,
+      "expected_hr": 0.877,
+      "causal_rrr": 0.123,
+      "bp_factor": 1.0,
+      "power": 0.541,
+      "mde_hr_80": 0.837,
+      "outcome": "success",
+      "category": "narrow_success",
+      "secondary": [],
+      "weakest_link": "expected effect only 12% relative risk reduction",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "lp(a)horizon",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "Lp(a)",
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -67.0,
+          "baseline": 70.0,
+          "method": "phase2_placebo_adjusted_20-80mg_monthly_proxy_for_80mg",
+          "source": "pmid:35300814,pmid:40185318"
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -0.207,
+          "unit": "mmol/L",
+          "pct_change": -19.0,
+          "baseline": null,
+          "method": "phase2_placebo_adjusted_20-80mg_monthly",
+          "source": "pmid:35300814"
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -16.0,
+          "baseline": null,
+          "method": "phase2_placebo_adjusted_20-80mg_monthly",
+          "source": "pmid:35300814"
+        }
+      ],
+      "followup_years": 3.25,
+      "events": 993,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "LPA genetic association score 0.922 with 183 evidence items; multiple coronary artery disease studies (GCST010479, FINNGEN_R12_I9_UAP, GCST90436075, GCST008370, GCST90013864) all published before cut-off; reference table confirms Lp(a) causal=yes.",
+      "intended_biomarker": "Lp(a)",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": -67,
+          "baseline": 70,
+          "unit": "mg/dL",
+          "method": "phase2_placebo_adjusted_20-80mg_monthly_proxy_for_80mg",
+          "fact_ids": [
+            "f_6277dd5a7799df",
+            "f_1db6503f0913df"
+          ]
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": -0.207,
+          "pct_change": -19,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "phase2_placebo_adjusted_20-80mg_monthly",
+          "fact_ids": [
+            "f_06dddc238f9482",
+            "f_4b4e03d46ecbee"
+          ]
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -16,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "phase2_placebo_adjusted_20-80mg_monthly",
+          "fact_ids": [
+            "f_0da429d37235b6"
+          ]
+        }
+      ],
+      "followup_years": 3.25,
+      "followup_fact_ids": [
+        "f_aa53dba69890b4",
+        "f_f3e17a33d78737"
+      ],
+      "events": 993,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_4ab7bce48e2dae"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_4359635d69c9da",
+        "f_be2461356f3f43",
+        "f_f27e61b23eb70c"
+      ],
+      "missing": [
+        "actual_median_followup_years",
+        "actual_primary_events",
+        "observed_hr_ci",
+        "phase3_Lp(a)_reduction_HORIZON",
+        "phase3_LDL-C_change_HORIZON",
+        "phase3_apoB_change_HORIZON",
+        "sbp_change",
+        "mean_baseline_Lp(a)_HORIZON",
+        "mean_baseline_LDL-C_HORIZON",
+        "mean_baseline_apoB_HORIZON"
+      ],
+      "notes": "Lp(a) reduction: phase 2 placebo-adjusted -67% (f_6277dd5a7799df, 20-80 mg monthly range) used as proxy for phase 3 80 mg monthly dose; no verified phase 2 data at exact 80 mg dose. FRONTIERS APHERESIS phase 3 (80 mg) showed -72% (f_41e180cd554aed) but in apheresis population. LDL-C: phase 2 absolute change -8.0 mg/dL (-0.207 mmol/L) and percent change -19% from same source (pmid:35300814); multiple conflicting values reported in that paper. apoB: phase 2 -16% (f_0da429d37235b6). Baseline Lp(a): HORIZON inclusion threshold 70 mg/dL overall (f_1db6503f0913df), 90 mg/dL subpopulation (f_735ab4b2f932a3); mean baseline not reported. followup_years=3.25 is midpoint of minimum 2.5y (f_aa53dba69890b4, stated as 'minimum follow-up required') and planned ~4y (f_f3e17a33d78737, protocol timeFrame); actual median follow-up unknown. Events: 993 planned (f_4ab7bce48e2dae); actual events not in verified facts despite trial readout. No SBP, observed HR/CI, or phase 3 lipid changes in verified facts."
+    },
+    "hypotheses": [
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator predicts expected HR 0.877 (12.3% RRR) with only 54.1% power; minimum detectable HR at 80% power is 0.837, meaning the trial was underpowered for the expected effect size",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 2 Lp(a) reduction -67% (placebo-adjusted, 20-80 mg monthly) used as proxy for phase 3 80 mg dose; no verified phase 3 on-treatment Lp(a) reduction reported (f_0996000e9e2a76, f_209b2f91d7b12c)",
+            "refs": [
+              "f_6277dd5a7799df",
+              "f_0996000e9e2a76",
+              "f_209b2f91d7b12c"
+            ]
+          },
+          {
+            "text": "LDL-C reduction -19% and apoB -16% (phase 2, placebo-adjusted) contribute to expected benefit but total expected RRR only 12.3%",
+            "refs": [
+              "f_4b4e03d46ecbee",
+              "f_0da429d37235b6",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Follow-up 3.25 years (midpoint of minimum 2.5 and planned 4 years) may be insufficient for full Lp(a)-lowering benefit to accrue",
+            "refs": [
+              "f_aa53dba69890b4",
+              "f_f3e17a33d78737",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Strong genetic evidence supports Lp(a) causality for CVD (LPA genetic score 0.922, multiple SNPs with OR 1.38-3.67 for coronary disease)",
+            "refs": [
+              "f_84e4bfbca8171e",
+              "f_39c00c23086f46",
+              "f_39cc448a1927c0",
+              "f_7e155c1e029eac",
+              "f_8d2d102bac814b"
+            ]
+          },
+          {
+            "text": "Planned 993 events should provide reasonable precision if effect size matches expectation",
+            "refs": [
+              "f_4ab7bce48e2dae"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and CI from trial readout; phase 3 on-treatment Lp(a) reduction at 80 mg; actual mean baseline Lp(a) in randomized cohort"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Observed HR and confidence interval not available in verified facts",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 3 on-treatment Lp(a) reduction at 80 mg monthly not reported (f_0996000e9e2a76: 'None not stated'; f_209b2f91d7b12c: 'None')",
+            "refs": [
+              "f_0996000e9e2a76",
+              "f_209b2f91d7b12c"
+            ]
+          },
+          {
+            "text": "Actual mean baseline Lp(a) in randomized cohort not reported; only inclusion threshold (≥70 mg/dL overall, ≥90 mg/dL subpopulation) known",
+            "refs": [
+              "f_1db6503f0913df",
+              "f_735ab4b2f932a3",
+              "f_bd83c153b2f2fa"
+            ]
+          },
+          {
+            "text": "Phase 3 LDL-C, apoB changes not reported",
+            "refs": [
+              "f_0996000e9e2a76"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Full trial publication with observed HR, CI, on-treatment biomarker changes, and baseline characteristics"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Primary endpoint is expanded MACE including urgent coronary revascularization requiring hospitalization, a softer component that may dilute treatment effect",
+            "refs": [
+              "f_4359635d69c9da",
+              "f_be2461356f3f43",
+              "f_f27e61b23eb70c"
+            ]
+          },
+          {
+            "text": "Minimum follow-up 2.5 years (f_aa53dba69890b4) vs planned ~4 years (f_f3e17a33d78737); Lp(a) lowering may require longer follow-up for full benefit on atherosclerotic events",
+            "refs": [
+              "f_aa53dba69890b4",
+              "f_f3e17a33d78737"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Similar expanded MACE composites have detected benefits in prior lipid-lowering outcomes trials (e.g., FOURIER, ODYSSEY Outcomes)",
+            "refs": []
+          }
+        ],
+        "would_settle": "Component-specific HRs for each endpoint element; landmark analysis by follow-up duration"
+      },
+      {
+        "category": "population",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Trial enrolls high-risk CVD patients with Lp(a) ≥70 mg/dL overall and ≥90 mg/dL subpopulation; if mean baseline substantially above threshold, absolute Lp(a) reduction would be larger",
+            "refs": [
+              "f_1db6503f0913df",
+              "f_735ab4b2f932a3",
+              "f_bd83c153b2f2fa"
+            ]
+          },
+          {
+            "text": "Phase 2 baseline Lp(a) ~12-16 mg/dL (f_7ca3967915c765, f_ee94d4795ac3e4) vs phase 3 threshold 70 mg/dL; different patient populations",
+            "refs": [
+              "f_7ca3967915c765",
+              "f_ee94d4795ac3e4"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetic evidence suggests Lp(a) causality across range of levels; no verified evidence that benefit is limited to very high Lp(a)",
+            "refs": [
+              "f_84e4bfbca8171e"
+            ]
+          }
+        ],
+        "would_settle": "Actual mean baseline Lp(a) in randomized cohort; subgroup analysis by baseline Lp(a) tertiles"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "No phase 3 safety signal reported in verified facts (f_436a4377f2fb5b: 'None not stated')",
+            "refs": [
+              "f_436a4377f2fb5b"
+            ]
+          },
+          {
+            "text": "No effect on platelet reactivity pathways (thromboxane A2 or P2Y12) in phase 2",
+            "refs": [
+              "f_614c3c1e71b180"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Injection site reactions seen in phase 3 apheresis trial (f_c7a1b61fb1f160) but not cardiovascular harm",
+            "refs": [
+              "f_c7a1b61fb1f160"
+            ]
+          },
+          {
+            "text": "Phase 3 safety data not fully reported in verified facts",
+            "refs": [
+              "f_436a4377f2fb5b"
+            ]
+          }
+        ],
+        "would_settle": "Full phase 3 safety data including adverse event rates, serious adverse events, and discontinuation rates"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Strong human genetics: LPA variants robustly associated with coronary disease (OR 1.38-3.67 per allele/score) and aortic valve calcification",
+            "refs": [
+              "f_84e4bfbca8171e",
+              "f_39c00c23086f46",
+              "f_39cc448a1927c0",
+              "f_7e155c1e029eac",
+              "f_8d2d102bac814b",
+              "f_d5b3946ae9530b"
+            ]
+          },
+          {
+            "text": "OpenTargets genetic association score 0.922 (183 evidence items)",
+            "refs": [
+              "f_84e4bfbca8171e"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; genetics strongly support causality"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Lp(a) is the intended biomarker; human genetics confirm Lp(a) levels causally linked to CVD via LPA variants",
+            "refs": [
+              "f_84e4bfbca8171e",
+              "f_39c00c23086f46",
+              "f_39cc448a1927c0",
+              "f_7e155c1e029eac",
+              "f_8d2d102bac814b"
+            ]
+          }
+        ],
+        "would_settle": "Not needed; biomarker is causal"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial randomized 8,323 patients as planned (f_7ea57b2d47dd85, f_af9f4873c81153, f_dc1fe6207219f9)",
+            "refs": [
+              "f_7ea57b2d47dd85",
+              "f_af9f4873c81153",
+              "f_dc1fe6207219f9"
+            ]
+          },
+          {
+            "text": "No conduct issues (adherence, dropout, crossover, protocol deviations) reported in available facts",
+            "refs": []
+          }
+        ],
+        "would_settle": "Trial conduct metrics: adherence rates, discontinuation rates, crossover, protocol deviations"
+      },
+      {
+        "category": "robust_success",
+        "status": "not_applicable",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial did not meet primary endpoint per readout",
+            "refs": [
+              "user:readout"
+            ]
+          }
+        ],
+        "would_settle": ""
+      },
+      {
+        "category": "narrow_success",
+        "status": "not_applicable",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial did not meet primary endpoint per readout",
+            "refs": [
+              "user:readout"
+            ]
+          }
+        ],
+        "would_settle": ""
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "not_applicable",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial did not meet primary endpoint per readout",
+            "refs": [
+              "user:readout"
+            ]
+          }
+        ],
+        "would_settle": ""
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "design_or_endpoint hypothesis 'against' point claims 'Similar expanded MACE composites have detected benefits in prior lipid-lowering outcomes trials (e.g., FOURIER, ODYSSEY OUTCOMES)' but provides empty refs array. This is an unsupported claim that must be either referenced with verified facts or removed.",
+            "target_agent": "case_builder",
+            "request": "Add verified fact references for FOURIER and ODYSSEY OUTCOMES trial results showing benefit on similar expanded MACE composites, or remove the unsupported claim from the hypothesis."
+          },
+          {
+            "severity": "high",
+            "issue": "execution_or_nonscientific hypothesis 'against' point claims 'no conduct issues (adherence, dropout, crossover, protocol deviations) reported in available facts' but cites only randomization count facts (f_7ea57b2d47dd85, f_af9f4873c81153, f_dc1fe6207219f9) which do not contain conduct metrics. The claim overstates what the references support.",
+            "target_agent": "case_builder",
+            "request": "Either find verified facts reporting adherence, dropout, crossover, or protocol deviation rates for Lp(a)HORIZON, or change the claim to 'no conduct issues reported in available facts' with empty refs (acknowledging absence of evidence rather than evidence of absence)."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator uses phase 2 placebo-adjusted Lp(a) reduction of -67% (f_6277dd5a7799df, upper bound of 20-80 mg monthly range) but phase 3 dose is 80 mg monthly subcutaneous. No verified phase 2 data at the exact 80 mg dose exists in the fact set. The calculator input correctly labels the method as 'phase2_placebo_adjusted_20-80mg_monthly' but this dose mismatch is a caveat for the prediction.",
+            "target_agent": "mechanism",
+            "request": "Note in calculator assumptions that phase 2 dose-range data (20-80 mg) was used as proxy for phase 3 80 mg dose; if phase 2 80 mg-specific data becomes available, re-run calculator."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator followup_years=3.25 uses midpoint of minimum (2.5 years) and planned (~4 years) per instructions. Verifier notes f_aa53dba69890b4 states 'minimum follow-up is required to be 2.5 years' and f_f3e17a33d78737 states 'approximately 4 years' (primary outcome timeFrame), not median follow-up. The midpoint approach is correct per instructions but should be explicitly noted as an assumption.",
+            "target_agent": "mechanism",
+            "request": "Add assumption to calculator notes: 'followup_years=3.25 is midpoint of minimum 2.5y and planned ~4y; actual median follow-up unknown.'"
+          },
+          {
+            "severity": "low",
+            "issue": "Population hypothesis 'for' point states 'Phase 2 baseline Lp(a) was only ~12-16 mg/dL (f_7ca3967915c765, f_ee94d4795ac3e4), not representative of the phase 3 elevated-Lp(a) population.' This is factually correct but the inference that this limits generalizability is not explicitly supported by a verified fact about phase 3 baseline distribution.",
+            "target_agent": "investigator",
+            "request": "Search for any verified fact reporting mean/median baseline Lp(a) in the Lp(a)HORIZON randomized cohort (NCT04023552)."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator has observed_hr=null and observed_ci=null despite autopsy mode and user:readout indicating trial did not meet primary endpoint. The hypotheses acknowledge observed HR/CI not in verified facts. If the readout includes HR/CI, they should be added to calculator inputs for consistency check.",
+            "target_agent": "case_builder",
+            "request": "Search for verified facts containing the observed hazard ratio and confidence interval from the Lp(a)HORIZON topline readout (user:readout 2026-09-04 or later publications)."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "design_or_endpoint hypothesis 'against' point claims 'Similar expanded MACE composites have detected benefits in prior lipid-lowering outcomes trials (e.g., FOURIER, ODYSSEY Outcomes)' but provides empty refs []. This is an unsubstantiated claim that must be either supported with verified facts or removed.",
+            "target_agent": "case_builder",
+            "request": "Search for verified facts about FOURIER and ODYSSEY Outcomes trial results showing benefit on expanded MACE composites, or remove the unsupported claim."
+          },
+          {
+            "severity": "high",
+            "issue": "execution_or_nonscientific hypothesis 'against' point claims 'No conduct issues (adherence, dropout, crossover, protocol deviations) reported in available facts' with empty refs []. Absence of evidence in available facts is not evidence of absence; this claim needs verified conduct metrics or should be rephrased as 'no conduct issues reported in available facts' with appropriate caveat.",
+            "target_agent": "case_builder",
+            "request": "Search for verified facts on trial conduct metrics (adherence, discontinuation, crossover, protocol deviations) for Lp(a)HORIZON, or rephrase to accurately reflect what is/is not in the verified facts."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator uses Lp(a) pct_change -67% (upper end of phase 2 20-80 mg range) as proxy for phase 3 80 mg dose. The phase 2 data (f_6277dd5a7799df) shows dose-dependent decreases from -29% to -67%. Using the maximum reduction may overestimate the expected effect at 80 mg. The method field acknowledges this as a proxy.",
+            "target_agent": "mechanism",
+            "request": "Verify if phase 2 dose-response data at 80 mg specifically exists for Lp(a) reduction. If only range is available, consider using a more conservative estimate (e.g., midpoint) or explicitly model the uncertainty."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator uses LDL-C pct_change -19% (upper end of phase 2 range) and apoB -16% (upper end). The phase 2 data shows ranges: LDL-C -2% to -19% (f_4b4e03d46ecbee), apoB -3% to -16% (f_0da429d37235b6, f_5e6844c1422f2d). Using upper bounds may overestimate benefit.",
+            "target_agent": "mechanism",
+            "request": "Check if dose-specific LDL-C/apoB changes at 80 mg are available in phase 2 data. If only ranges, consider using midpoint or lower bound for conservative estimate."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator uses Lp(a) baseline 70 mg/dL (inclusion threshold) but actual mean baseline in randomized cohort is unknown. Phase 2 baseline was ~12-16 mg/dL (f_7ca3967915c765, f_ee94d4795ac3e4), very different population. The absolute Lp(a) reduction depends on baseline; using threshold as baseline is a proxy that may misestimate absolute change.",
+            "target_agent": "mechanism",
+            "request": "Search for actual mean baseline Lp(a) in Lp(a)HORIZON randomized cohort. If unavailable, document the uncertainty and consider sensitivity analysis with plausible range (e.g., 70-150 mg/dL)."
+          },
+          {
+            "severity": "medium",
+            "issue": "off_target_harm hypothesis references f_c7a1b61fb1f160 (injection site reactions in Lp(a)FRONTIERS APHERESIS trial) as evidence against harm in Lp(a)HORIZON. This is a different trial (apheresis population, different endpoint). The relevance to CVOT safety is limited and should be clarified or removed.",
+            "target_agent": "case_builder",
+            "request": "Remove or clarify the reference to Lp(a)FRONTIERS APHERESIS injection site reactions in the off_target_harm hypothesis for Lp(a)HORIZON. Search for Lp(a)HORIZON-specific safety data."
+          },
+          {
+            "severity": "low",
+            "issue": "Verified fact f_aa53dba69890b4 is labeled 'median_followup' but Verifier found it states 'minimum follow-up is required to be 2.5 years' not median. The calculator correctly uses midpoint (3.25 years) per instructions, but the fact labeling is inaccurate.",
+            "target_agent": "investigator",
+            "request": "Correct the fact label for f_aa53dba69890b4 from 'median_followup' to 'minimum_followup' or add a clarifying note."
+          },
+          {
+            "severity": "low",
+            "issue": "population hypothesis 'for' point references f_7ca3967915c765 and f_ee94d4795ac3e4 (phase 2 baseline Lp(a) ~12-16 mg/dL) to contrast with phase 3 threshold. The comparison is valid but the refs are for phase 2, not phase 3. Should clarify these are phase 2 baselines.",
+            "target_agent": "case_builder",
+            "request": "Update the hypothesis text to explicitly state 'Phase 2 baseline Lp(a) ~12-16 mg/dL (f_7ca3967915c765, f_ee94d4795ac3e4) vs phase 3 inclusion threshold ≥70 mg/dL' for clarity."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_6277dd5a7799df",
+          "claim": "c1",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": -67,
+          "unit": "%",
+          "source_id": "pmid:35300814",
+          "status": "confirmed",
+          "found": "Compared with placebo, pelacarsen resulted in dose-dependent decreases in Lp(a)-C (2% vs -29% to -67%; P = 0",
+          "note": "Row shows -67% as upper end of Lp(a) reduction range, matching claim.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*67%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '35300814' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_1db6503f0913df",
+          "claim": "c2",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 70,
+          "unit": "mg/dL",
+          "source_id": "pmid:40185318",
+          "status": "confirmed",
+          "found": "elevated Lp(a) levels of ≥70 mg/dL (approximately 149 nmol/L)",
+          "note": "Row explicitly states inclusion threshold of ≥70 mg/dL.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*70[^.]*mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40185318' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_06dddc238f9482",
+          "claim": "c3",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -8.0,
+          "unit": "mg/dL",
+          "source_id": "pmid:35300814",
+          "status": "confirmed",
+          "found": "Pelacarsen resulted in mean percent/absolute changes of -2% to -19%/-0",
+          "note": "Row shows -19% as upper end of LDL-C percent change range.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*19%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '35300814' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4b4e03d46ecbee",
+          "claim": "c4",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -19,
+          "unit": "%",
+          "source_id": "pmid:35300814",
+          "status": "confirmed",
+          "found": "7 to -8.0 mg/dL (P = 0",
+          "note": "Row shows -8.0 mg/dL as part of LDL-C absolute change range.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*8\\.0[^.]*mg/dL[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '35300814' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_0da429d37235b6",
+          "claim": "c5",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -16,
+          "unit": "%",
+          "source_id": "pmid:35300814",
+          "status": "confirmed",
+          "found": "Total apoB declined by 3%-16% (P = 0",
+          "note": "Row shows -16% as upper end of apoB percent change range.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*16%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '35300814' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4ab7bce48e2dae",
+          "claim": "c6",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 993,
+          "unit": "CEC confirmed primary CV events",
+          "source_id": "pmid:40185318",
+          "status": "confirmed",
+          "found": "The study will end when 993 CEC confirmed primary CV events have accumulated",
+          "note": "Row matches planned event count exactly.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*993[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40185318' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_aa53dba69890b4",
+          "claim": "c7",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 2.5,
+          "unit": "years",
+          "source_id": "pmid:40185318",
+          "status": "not_found",
+          "found": "The minimum follow-up is required to be 2.5 years",
+          "note": "Row states minimum follow-up, not median follow-up; median follow-up not mentioned.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*2\\.5[^.]*years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '40185318' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_f3e17a33d78737",
+          "claim": "c8",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 4,
+          "unit": "years",
+          "source_id": "ctgov:NCT04023552",
+          "status": "confirmed",
+          "found": "approximately 4 years",
+          "note": "Registry primary outcome timeFrame shows approximately 4 years, matching claim value.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Time to first occurrence%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 7,
+        "not_found": 1,
+        "contradicts": 0
+      },
+      "queries": 8
+    },
+    "readthrough": [
+      {
+        "drug": "olpasiran",
+        "target": "LPA",
+        "stage": "PHASE_3",
+        "trial": {
+          "nct_id": "NCT07136012",
+          "acronym": null,
+          "status": "RECRUITING",
+          "enrollment": 11000,
+          "primary_completion": "2031-10-20"
+        },
+        "biomarker_change": {
+          "biomarker": "Lp(a)",
+          "value": 71,
+          "unit": "%",
+          "quote": "Participants tolerated single doses of olpasiran well and experienced a 71-97% reduction in Lp(a) concentration with effects persisting for several months after administration of doses of 9 mg or higher.",
+          "source": "pmid:35027752",
+          "source_title": "Preclinical development and phase 1 trial of a novel siRNA targeting lipoprotein(a)."
+        },
+        "expected_hr_5y": 1.129,
+        "events_needed_80": null,
+        "comparison": "smaller expected effect than the index drug",
+        "notes": [
+          "baseline borrowed from the index trial (70.0)",
+          "follow-up unknown, effect shown at 5 years"
+        ]
+      }
+    ],
+    "genetics": [
+      {
+        "target": "LPA",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.591,
+        "genetic_association_score": 0.922,
+        "evidence_count": 183,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.944,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs56393506",
+            "beta": 0.13976194237515863,
+            "p": "5e-34",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "FINNGEN_R12_I9_UAP",
+            "trait": "Unstable angina pectoris",
+            "n": 460589,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs56393506",
+            "beta": 0.0880448597190566,
+            "p": "1.0360000133514404e-16",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "GCST90436075",
+            "trait": "Coronary atherosclerosis (PheCode 411.4)",
+            "n": 397126,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs56393506",
+            "beta": 0.011478900054015655,
+            "p": "9.762269973754883e-52",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs56393506",
+            "beta": 0.010785575212149661,
+            "p": "1.2374534606933594e-44",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90013864",
+            "trait": "Coronary artery disease (Firth correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs56393506",
+            "beta": 0.01326871309476942,
+            "p": "1.9297810792922974e-56",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90693007",
+            "trait": "Coronary atherosclerosis (PheCode 411.4)",
+            "n": 414464,
+            "publication_date": "2025-09-18",
+            "pmid": "40968291",
+            "variant": "rs56393506",
+            "beta": 0.01327665168690646,
+            "p": "3.354611873626709e-65",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs56393506",
+            "beta": 0.01337357867717055,
+            "p": "9.905274391174316e-55",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90692990",
+            "trait": "ICD10 I25: Chronic ischaemic heart disease",
+            "n": 429407,
+            "publication_date": "2025-09-18",
+            "pmid": "40968291",
+            "variant": "rs56393506",
+            "beta": 0.012526833506364488,
+            "p": "1.0458709001541138e-62",
+            "published_before_cutoff": true
+          }
+        ],
+        "evidence_before_cutoff": 8
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_0da429d37235b6",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -16,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Total apoB declined by 3%-16% (P = 0.40-",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_5e6844c1422f2d",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Total apoB declined by 3%-16% (P = 0.40-",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_06dddc238f9482",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -8.0,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Pelacarsen resulted in mean percent/absolute changes of -2% to -19%/-0.7 to -8.0 mg/dL (P = 0.95-0.05) in LDL-C corr",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_4b4e03d46ecbee",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -19,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Pelacarsen resulted in mean percent/absolute changes of -2% to -19%/-0.7 to -8.0 mg/dL (P = 0.95-0.05) in LDL-C corr",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_5757fee64c6d14",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -0.7,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Pelacarsen resulted in mean percent/absolute changes of -2% to -19%/-0.7 to -8.0 mg/dL (P = 0.95-0.05) in LDL-C corr",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_5ab11064c5cf11",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -26,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "-7% to -26%/-5.4 to -9.4 mg/dL (P = 0.44- corrDahlén",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_80cc8055dd9055",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -9.4,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "-7% to -26%/-5.4 to -9.4 mg/dL (P = 0.44- corrDahlén",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_96d3d0b06f713e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Pelacarsen resulted in mean percent/absolute changes of -2% to -19%/-0.7 to -8.0 mg/dL (P = 0.95-0.05) in LDL-C corr",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_dc765e00edf96b",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -5.4,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "-7% to -26%/-5.4 to -9.4 mg/dL (P = 0.44- corrDahlén",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_e902bd4a97cdaf",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "-7% to -26%/-5.4 to -9.4 mg/dL (P = 0.44- corrDahlén",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_0f785315dbdcf7",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 85.4,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "biomarker": "Lp(a)",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": null
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "mean Lp(a) at baseline 85.4 mg/dL",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_7ca3967915c765",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 11.9,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "20-80 mg monthly"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "The baseline median Lp(a)-C values in the groups ranged from 11.9 to 15.6 mg/dL.",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_ee94d4795ac3e4",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 15.6,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "20-80 mg monthly"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "The baseline median Lp(a)-C values in the groups ranged from 11.9 to 15.6 mg/dL.",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_0996000e9e2a76",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3",
+          "biomarker": "Lp(a)",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "not stated",
+          "dose": "not stated"
+        },
+        "source_id": "user:readout",
+        "quote": "Consistent with previous studies, substantially lower lipoprotein (a) [Lp(a)] levels were achieved with pelacarsen",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_209b2f91d7b12c",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg monthly subcutaneous"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "Patients were randomized in a 1:1 ratio to receive either monthly subcutaneous (SQ) injections of pelacarsen 80 mg or matching placebo on a background of optimized standard of care therapy for CVD.",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_3d551e1fa16874",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -75.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmid:33872986",
+        "quote": "The Lp(a) and OxPL lowering effects of pelacarsen were independent of both LPA genetic variants and isoform size.",
+        "pub_date": "2021-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33872986"
+      },
+      {
+        "fact_id": "f_41e180cd554aed",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -72,
+        "unit": "percent",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "biomarker": "Lp(a)",
+          "timepoint": "week 52",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "80 mg every 4 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "The placebo-adjusted Lp(a) change from baseline at week 52 was −72% (95% CI: −79%, −61%; P < .0001).",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_6277dd5a7799df",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -67,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Compared with placebo, pelacarsen resulted in dose-dependent decreases in Lp(a)-C (2% vs -29% to -67%; P = 0.001-",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_6b128b9c595750",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -58.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "Day 30",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "40 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36529659",
+        "quote": "-58.9% (p=0.0003)",
+        "pub_date": "2022-12-08",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36529659"
+      },
+      {
+        "fact_id": "f_7b9355e22df534",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -55.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "Day 30",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "20 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36529659",
+        "quote": "-55.4% (p=0.0008)",
+        "pub_date": "2022-12-08",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36529659"
+      },
+      {
+        "fact_id": "f_e4061f46b5389a",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -29,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "20-80 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:35300814",
+        "quote": "Compared with placebo, pelacarsen resulted in dose-dependent decreases in Lp(a)-C (2% vs -29% to -67%; P = 0.001-",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35300814"
+      },
+      {
+        "fact_id": "f_aca08c9f6866e4",
+        "entity": "biomarker:oxpl-apo(a)",
+        "key": "biomarker_change",
+        "value": -75.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apo(a)",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmid:33872986",
+        "quote": "The Lp(a) and OxPL lowering effects of pelacarsen were independent of both LPA genetic variants and isoform size.",
+        "pub_date": "2021-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33872986"
+      },
+      {
+        "fact_id": "f_5808aa81681c03",
+        "entity": "biomarker:oxpl-apob",
+        "key": "biomarker_change",
+        "value": -75.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "not stated"
+        },
+        "source_id": "pmid:33872986",
+        "quote": "The Lp(a) and OxPL lowering effects of pelacarsen were independent of both LPA genetic variants and isoform size.",
+        "pub_date": "2021-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33872986"
+      },
+      {
+        "fact_id": "f_84e4bfbca8171e",
+        "entity": "target:lpa",
+        "key": "genetic_association_score",
+        "value": 0.922,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 183,
+          "evidence_before_cutoff": 8
+        },
+        "source_id": "opentargets:LPA",
+        "quote": "\"genetic_association_score\": 0.922",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000198670"
+      },
+      {
+        "fact_id": "f_2255bfd9b17e7e",
+        "entity": "trial:nct04023552",
+        "key": "ci_high",
+        "value": 1653.15,
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "time to LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "hazard ratio [HR]: 88.26; 95% CI: 4.71, 1653.15; P = .0014",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_38caa86f9ec81d",
+        "entity": "trial:nct04023552",
+        "key": "ci_low",
+        "value": 4.71,
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "time to LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "hazard ratio [HR]: 88.26; 95% CI: 4.71, 1653.15; P = .0014",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_182eddfd61ce63",
+        "entity": "trial:nct04023552",
+        "key": "events_control",
+        "value": 19,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "occurring in 19 patients (73.1%) vs none in the placebo arm",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_19965f4e71ae12",
+        "entity": "trial:nct04023552",
+        "key": "events_treatment",
+        "value": 0,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "none in the placebo arm",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_cca342c60b9543",
+        "entity": "trial:nct04023552",
+        "key": "hr",
+        "value": 88.26,
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "time to LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "hazard ratio [HR]: 88.26; 95% CI: 4.71, 1653.15; P = .0014",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_1db6503f0913df",
+        "entity": "trial:nct04023552",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "elevated Lp(a) levels of ≥70 mg/dL (approximately 149 nmol/L)",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_735ab4b2f932a3",
+        "entity": "trial:nct04023552",
+        "key": "inclusion_threshold",
+        "value": 90,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3",
+          "population": "subpopulation"
+        },
+        "source_id": "user:readout",
+        "quote": "evaluated in the overall population (Lp(a) ≥70 mg/dL) and subpopulation (Lp(a) ≥90 mg/dL)",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_b3fb826fbd248f",
+        "entity": "trial:nct04023552",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "ctgov:NCT04023552",
+        "quote": "Lp(a) ≥ 70 mg/dL at the screening visit, measured at the Central laboratory",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT04023552"
+      },
+      {
+        "fact_id": "f_ba9df81c4813ca",
+        "entity": "trial:nct04023552",
+        "key": "inclusion_threshold",
+        "value": 60,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "biomarker": "Lp(a)"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "Adult patients with Lp(a) levels >60 mg/dl",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_bd83c153b2f2fa",
+        "entity": "trial:nct04023552",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3",
+          "population": "overall"
+        },
+        "source_id": "user:readout",
+        "quote": "evaluated in the overall population (Lp(a) ≥70 mg/dL) and subpopulation (Lp(a) ≥90 mg/dL)",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_aa53dba69890b4",
+        "entity": "trial:nct04023552",
+        "key": "median_followup",
+        "value": 2.5,
+        "unit": "years",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "The minimum follow-up is required to be 2.5 years.",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_f3e17a33d78737",
+        "entity": "trial:nct04023552",
+        "key": "median_followup",
+        "value": 4,
+        "unit": "years",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "ctgov:NCT04023552",
+        "quote": "[approximately 4 years]",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT04023552"
+      },
+      {
+        "fact_id": "f_0f65704cdfee9b",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 455,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:33872986",
+        "quote": "We analyzed data from 4 clinical trials of the ASO pelacarsen targeting apolipoprotein(a) that included 455 patients.",
+        "pub_date": "2021-03-30",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/33872986"
+      },
+      {
+        "fact_id": "f_18d6622c77876e",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 286,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "Lp(a)HORIZON NCT04023552"
+        },
+        "source_id": "pmid:37338713",
+        "quote": "Of the 286 subjects randomized",
+        "pub_date": "2023-06-20",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37338713"
+      },
+      {
+        "fact_id": "f_7ea57b2d47dd85",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 8323,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3"
+        },
+        "source_id": "user:readout",
+        "quote": "evaluating the effect of pelacarsen on the incidence of 4-point major adverse cardiovascular events (MACE) in 8,323 patients with elevated Lp(a) and established CVD",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_7ff99b0aa23a9d",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 51,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "Fifty-one patients were randomized",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_af9f4873c81153",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 8323,
+        "unit": "participants",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "ctgov:NCT04023552",
+        "quote": "Enrollment: 8323 (ACTUAL)",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT04023552"
+      },
+      {
+        "fact_id": "f_dc1fe6207219f9",
+        "entity": "trial:nct04023552",
+        "key": "n_randomized",
+        "value": 8323,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "Lp(a) HORIZON is a phase 3, randomized, placebo-controlled, double-blind, parallel-group, multinational trial in 8,323 patients with established CVD and elevated Lp(a) levels of ≥70 mg/dL",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_ae3eae9909c9f9",
+        "entity": "trial:nct04023552",
+        "key": "p_value",
+        "value": 0.0014,
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "endpoint": "time to LA avoidance"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "hazard ratio [HR]: 88.26; 95% CI: 4.71, 1653.15; P = .0014",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_5afd39dab1eafb",
+        "entity": "trial:nct04023552",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "ctgov:NCT04023552",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT04023552"
+      },
+      {
+        "fact_id": "f_4ab7bce48e2dae",
+        "entity": "trial:nct04023552",
+        "key": "planned_events",
+        "value": 993,
+        "unit": "CEC confirmed primary CV events",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "The study will end when 993 CEC confirmed primary CV events have accumulated.",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_4359635d69c9da",
+        "entity": "trial:nct04023552",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, nonfatal MI, nonfatal stroke, or urgent coronary revascularization requiring hospitalization",
+        "unit": "",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:40185318",
+        "quote": "The primary endpoint is a composite of cardiovascular death, nonfatal MI, nonfatal stroke, or urgent coronary revascularization requiring hospitalization.",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/40185318"
+      },
+      {
+        "fact_id": "f_b3b7dc861082b2",
+        "entity": "trial:nct04023552",
+        "key": "primary_endpoint",
+        "value": "rate of performed LA sessions normalized to the weekly LA schedule",
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "The primary endpoint was the rate of performed LA sessions normalized to the weekly LA schedule (the number of actual LA sessions divided by the number of planned LA sessions during the 52-week period).",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_be2461356f3f43",
+        "entity": "trial:nct04023552",
+        "key": "primary_endpoint",
+        "value": "Time to first occurrence of clinical endpoint committee confirmed expanded major adverse cardiovascular events in patients with elevated Lp(a) ≥ 70 mg/dL",
+        "unit": "time to event",
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "ctgov:NCT04023552",
+        "quote": "Primary outcome(s): Time to first occurrence of clinical endpoint committee confirmed expanded major adverse cardiovascular events in patients with elevated Lp(a) ≥ 70 mg/dL [approximately 4 years]",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT04023552"
+      },
+      {
+        "fact_id": "f_f27e61b23eb70c",
+        "entity": "trial:nct04023552",
+        "key": "primary_endpoint",
+        "value": "composite of cardiovascular death, non-fatal myocardial infarction, non-fatal stroke, and urgent coronary revascularization requiring hospitalization",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3"
+        },
+        "source_id": "user:readout",
+        "quote": "did not meet its primary endpoint of reducing the risk of cardiovascular events, a composite of cardiovascular death, non-fatal myocardial infarction, non-fatal stroke, and urgent coronary revascularization requiring hospitalization, compared to placebo",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_1f3eeb58bbe71f",
+        "entity": "trial:nct04023552",
+        "key": "readout_statement",
+        "value": "The phase 3 Lp(a)HORIZON outcomes trial is currently testing the effect of pelacarsen, an antisense oligonucleotide, on ASCVD risk.",
+        "unit": null,
+        "attrs": {
+          "trial": "Lp(a)HORIZON"
+        },
+        "source_id": "pmid:37076218",
+        "quote": "The phase 3 Lp(a)HORIZON (Assessing the Impact of Lipoprotein(a) Lowering with TQJ230 on Major Cardiovascular Events in Patients With CVD) outcomes trial is currently testing the effect of pelacarsen, an antisense oligonucleotide, on ASCVD risk.",
+        "pub_date": "2023-04-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37076218"
+      },
+      {
+        "fact_id": "f_a1e4d5e392356b",
+        "entity": "trial:nct04023552",
+        "key": "readout_statement",
+        "value": "Pelacarsen is a highly effective and well-tolerated Lp(a)-targeted therapy that substantially reduces the need for LA in patients with elevated Lp(a) and established CVD.",
+        "unit": "unitless",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3"
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "Pelacarsen is a highly effective and well-tolerated Lp(a)-targeted therapy that substantially reduces the need for LA in patients with elevated Lp(a) and established CVD.",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_436a4377f2fb5b",
+        "entity": "trial:nct04023552",
+        "key": "safety_signal",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Lp(a)HORIZON",
+          "phase": "phase3"
+        },
+        "source_id": "user:readout",
+        "quote": "Pelacarsen demonstrated an acceptable safety profile",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "url": ""
+      },
+      {
+        "fact_id": "f_614c3c1e71b180",
+        "entity": "trial:nct04023552",
+        "key": "safety_signal",
+        "value": "no effect on platelet reactivity",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "Lp(a)HORIZON NCT04023552",
+          "pathway": "thromboxane A2 or P2Y12 platelet receptor pathways"
+        },
+        "source_id": "pmid:37338713",
+        "quote": "Pelacarsen does not modify on-treatment platelet reactivity through the thromboxane A 2 or P2Y12 platelet receptor pathways.",
+        "pub_date": "2023-06-20",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/37338713"
+      },
+      {
+        "fact_id": "f_c7a1b61fb1f160",
+        "entity": "trial:nct04023552",
+        "key": "safety_signal",
+        "value": "injection site erythema",
+        "unit": "percentage",
+        "attrs": {
+          "trial": "Lp(a)FRONTIERS APHERESIS",
+          "phase": "phase3",
+          "dose": "80 mg every 4 weeks",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC13318419",
+        "quote": "mostly mild injection site erythema (pelacarsen 38.5%; placebo 0%)",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/41721795"
+      },
+      {
+        "fact_id": "f_39c00c23086f46",
+        "entity": "trial:nct04023552",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "genotype score involving both LPA SNPs",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.8,
+          "ci_high": 3.67
+        },
+        "source_id": "pmid:20032323",
+        "quote": "and 2.57 (95% CI, 1.80 to 3.67) for two or more variants.",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_39cc448a1927c0",
+        "entity": "trial:nct04023552",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs3798220",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.48,
+          "ci_high": 2.49
+        },
+        "source_id": "pmid:20032323",
+        "quote": "and another independent variant (rs3798220) with an odds ratio of 1.92 (95% CI, 1.48 to 2.49)",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_7e155c1e029eac",
+        "entity": "trial:nct04023552",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs10455872",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.49,
+          "ci_high": 1.95
+        },
+        "source_id": "pmid:20032323",
+        "quote": "We identified a common variant (rs10455872) at the LPA locus with an odds ratio for coronary disease of 1.70 (95% confidence interval [CI], 1.49 to 1.95)",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_8d2d102bac814b",
+        "entity": "trial:nct04023552",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "genotype score involving both LPA SNPs",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.38,
+          "ci_high": 1.66
+        },
+        "source_id": "pmid:20032323",
+        "quote": "A meta-analysis showed that with a genotype score involving both LPA SNPs, the odds ratios for coronary disease were 1.51 (95% CI, 1.38 to 1.66) for one variant",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_d5b3946ae9530b",
+        "entity": "trial:nct04023552",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs10455872",
+          "outcome": "aortic-valve calcification",
+          "direction": "harmful",
+          "effect_on_biomarker": "mediated by Lp(a) levels",
+          "n": 6942,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "source_id": "pmid:23388002",
+        "quote": "One SNP in the lipoprotein(a) (LPA) locus (rs10455872) reached genomewide significance for the presence of aortic-valve calcification (odds ratio per allele, 2.05; P=9.0×10(-10))",
+        "pub_date": "2013-02-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23388002"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT04023552",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT04023552 Lp(a)HORIZON",
+        "url": "https://clinicaltrials.gov/study/NCT04023552",
+        "pub_date": "2019-07-17",
+        "access": "registry",
+        "meta": {
+          "design_only_view": false,
+          "summary": {
+            "nct_id": "NCT04023552",
+            "acronym": "Lp(a)HORIZON",
+            "title": "Assessing the Impact of Lipoprotein (a) Lowering With Pelacarsen (TQJ230) on Major Cardiovascular Events in Patients With CVD",
+            "official_title": "A Randomized Double-blind, Placebo-controlled, Multicenter Trial Assessing the Impact of Lipoprotein (a) Lowering With Pelacarsen (TQJ230) on Major Cardiovascular Events in Patients With Established Cardiovascular Disease",
+            "sponsor": "Novartis Pharmaceuticals",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2019-12-12",
+            "primary_completion": "2026-07-16",
+            "first_posted": "2019-07-17",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 8323,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "TQJ230",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "TQJ230"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [
+                  "Placebo to match TQJ230"
+                ],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "TQJ230",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Disease and Lipoprotein(a)"
+            ],
+            "primary_outcomes": [
+              "Time to first occurrence of clinical endpoint committee confirmed expanded major adverse cardiovascular events in patients with elevated Lp(a) ≥ 70 mg/dL [approximately 4 years]",
+              "Time to the first occurrence of clinical endpoint committee confirmed expanded major adverse cardiovascular events in a population of patients with elevated Lp(a) ≥ 90 mg/dL. [approximately 4 years]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 2107
+      },
+      {
+        "source_id": "user:readout",
+        "type": "user_input",
+        "title": "Readout text supplied by the user",
+        "url": "",
+        "pub_date": "2026-09-04",
+        "access": "user",
+        "meta": {},
+        "chars": 3611
+      },
+      {
+        "source_id": "pmcid:PMC13318419",
+        "type": "journal",
+        "title": "Pelacarsen and lipoprotein(a) apheresis in secondary prevention: the Lp(a)FRONTIERS APHERESIS trial.",
+        "url": "https://europepmc.org/article/MED/41721795",
+        "pub_date": "2026-07-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "41721795",
+          "pmcid": "PMC13318419",
+          "doi": "10.1093/eurheartj/ehag073",
+          "journal": "European heart journal"
+        },
+        "chars": 39610
+      },
+      {
+        "source_id": "pmid:40185318",
+        "type": "journal",
+        "title": "Design and Rationale of Lp(a)HORIZON Trial: Assessing the Effect of Lipoprotein(a) Lowering With Pelacarsen on Major Cardiovascular Events in Patients With CVD and Elevated Lp(a).",
+        "url": "https://europepmc.org/article/MED/40185318",
+        "pub_date": "2025-04-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40185318",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2025.03.019",
+          "journal": "American heart journal"
+        },
+        "chars": 2208
+      },
+      {
+        "source_id": "pmid:37338713",
+        "type": "journal",
+        "title": "On-treatment platelet reactivity through the thromboxane A&lt;sub&gt;2&lt;/sub&gt; or P2Y12 platelet receptor pathways is not affected by pelacarsen.",
+        "url": "https://europepmc.org/article/MED/37338713",
+        "pub_date": "2023-06-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "37338713",
+          "pmcid": null,
+          "doi": "10.1007/s11239-023-02818-6",
+          "journal": "Journal of thrombosis and thrombolysis"
+        },
+        "chars": 1611
+      },
+      {
+        "source_id": "pmid:35300814",
+        "type": "journal",
+        "title": "Effect of Pelacarsen on Lipoprotein(a) Cholesterol and Corrected Low-Density Lipoprotein Cholesterol.",
+        "url": "https://europepmc.org/article/MED/35300814",
+        "pub_date": "2022-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35300814",
+          "pmcid": "PMC8972555",
+          "doi": "10.1016/j.jacc.2021.12.032",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1645
+      },
+      {
+        "source_id": "pmid:36529659",
+        "type": "journal",
+        "title": "Efficacy and safety of pelacarsen in lowering Lp(a) in healthy Japanese subjects.",
+        "url": "https://europepmc.org/article/MED/36529659",
+        "pub_date": "2022-12-08",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "36529659",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2022.12.001",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1545
+      },
+      {
+        "source_id": "pmid:33872986",
+        "type": "journal",
+        "title": "Prevalence and influence of LPA gene variants and isoform size on the Lp(a)-lowering effect of pelacarsen.",
+        "url": "https://europepmc.org/article/MED/33872986",
+        "pub_date": "2021-03-30",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "33872986",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2021.03.036",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1272
+      },
+      {
+        "source_id": "pmid:37076218",
+        "type": "journal",
+        "title": "Clinical Trial Design for Lipoprotein(a)-Lowering Therapies: JACC Focus Seminar 2/3.",
+        "url": "https://europepmc.org/article/MED/37076218",
+        "pub_date": "2023-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "37076218",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2023.02.033",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1101
+      },
+      {
+        "source_id": "pmid:20032323",
+        "type": "journal",
+        "title": "Genetic variants associated with Lp(a) lipoprotein level and coronary disease.",
+        "url": "https://europepmc.org/article/MED/20032323",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20032323",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa0902604",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 2120
+      },
+      {
+        "source_id": "pmid:23388002",
+        "type": "journal",
+        "title": "Genetic associations with valvular calcification and aortic stenosis.",
+        "url": "https://europepmc.org/article/MED/23388002",
+        "pub_date": "2013-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23388002",
+          "pmcid": "PMC3766627",
+          "doi": "10.1056/nejmoa1109034",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1381
+      },
+      {
+        "source_id": "pmid:27005778",
+        "type": "journal",
+        "title": "Genome-wide study for circulating metabolites identifies 62 loci and reveals novel systemic effects of LPA.",
+        "url": "https://europepmc.org/article/MED/27005778",
+        "pub_date": "2016-03-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27005778",
+          "pmcid": "PMC4814583",
+          "doi": "10.1038/ncomms11122",
+          "journal": "Nature communications",
+          "purpose": "genetics"
+        },
+        "chars": 1312
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "ReadThrough": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "Reporter": "meterless:nvidia/nemotron-3.5-super-vl-120b-a12b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 20,
+      "facts": 62,
+      "relationships": 20,
+      "events": 157,
+      "audit_entries": 157,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 12,
+        "input_tokens": 15230,
+        "output_tokens": 6758,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 9579,
+        "output_tokens": 10520,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 5118,
+        "output_tokens": 7140,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 8788,
+        "output_tokens": 6252,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 12355,
+        "output_tokens": 6843,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "ReadThrough": {
+        "calls": 1,
+        "input_tokens": 832,
+        "output_tokens": 400,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 5419,
+        "output_tokens": 998,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

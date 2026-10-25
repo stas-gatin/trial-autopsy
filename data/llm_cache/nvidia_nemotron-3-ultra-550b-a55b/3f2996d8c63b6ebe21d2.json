@@ -1,0 +1,15 @@
+{
+  "key": "3f2996d8c63b6ebe21d2",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T23:24:33+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: OMEMI NCT01841944 - Omega-3 Fatty Acids in Elderly Patients With Acute Myocardial Infarction\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | number of primary events | n_randomized = 1027 participants | {\"trial\": \"OMEMI\"} | source ctgov:NCT01841944@2020-11-15 | quote: \"Enrollment: 1027 (ACTUAL)\"\nc2 | follow-up | median_followup = 24 months | {\"trial\": \"OMEMI\"} | source ctgov:NCT01841944@2020-11-15 | quote: \"[24months]\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT protocolSection.enrollmentInfo.count FROM registry LIMIT 5 | rows: ERROR: rejected: with an evidence cut-off only design-time fields may be read (no results, status, enrollment, whole sections or SELECT *)\nc2 | SQL: SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%24 months%' OR o.timeFrame LIKE '%24months%' LIMIT 5 | rows: [[\"24months\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"not_found\", \"found\": \"ERROR: enrollment field rejected\", \"note\": \"Enrollment field not accessible per evidence cut-off\"}, {\"claim\": \"c2\", \"status\": \"confirmed\", \"found\": \"24months\", \"note\": \"Primary outcome timeFrame shows 24months\"}]}",
+  "usage": {
+    "input_tokens": 450,
+    "output_tokens": 657
+  }
+}

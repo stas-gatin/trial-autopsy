@@ -1,0 +1,2689 @@
+{
+  "run_id": "bt-fourier",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2017-02-02",
+  "backtest": true,
+  "readout_date": "2017-02-02",
+  "analysis_date": "2017-02-02",
+  "trial": {
+    "nct_id": "NCT01764633",
+    "acronym": "FOURIER",
+    "title": "Further Cardiovascular Outcomes Research With PCSK9 Inhibition in Subjects With Elevated Risk",
+    "sponsor": "Amgen",
+    "status": "COMPLETED",
+    "enrollment": 27564,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Dyslipidemia"
+    ],
+    "primary_completion": "2016-11-11"
+  },
+  "drug": {
+    "name": "evolocumab",
+    "chembl_id": "CHEMBL2364655",
+    "aliases": [
+      "AMG-145",
+      "Repatha",
+      "Repatha sureclick",
+      "amg 145",
+      "pcsk9i"
+    ],
+    "drug_type": "Antibody",
+    "mechanisms": [
+      "Subtilisin/kexin type 9 inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000169174",
+        "symbol": "PCSK9",
+        "name": "proprotein convertase subtilisin/kexin type 9"
+      }
+    ],
+    "searched_as": "evolocumab"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-fourier",
+  "log_file": "logs/trace-bt-fourier.jsonl",
+  "execution_time_seconds": 1.6,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"cardiovascular death, non-fatal myocardial infarction (MI), non-fatal stroke, hospitalization for unstable angina or coronary revascularizat\" (announcement:fourier)",
+      "predicted_outcome": "success",
+      "consistency": "consistent with the calculator (probability of success 100%)",
+      "primary_category": "robust_success",
+      "secondary_categories": [],
+      "calculator_category": "robust_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 1.0,
+      "weakest_link": "power 100%"
+    },
+    "report": {
+      "headline": "FOURIER (NCT01764633) met its primary composite endpoint with evolocumab, achieving a robust success consistent with calculator predictions of 100% power and an expected 26.5% relative risk reduction.",
+      "summary": "FOURIER enrolled 27,564 high-risk patients on optimized statin therapy with LDL-C ≥70 mg/dL and planned 1,630 events for the key secondary MACE endpoint over a median 26-month follow-up. The trial was designed with 90% power to detect a 15% RRR (HR 0.85) for the primary composite of cardiovascular death, non-fatal MI, non-fatal stroke, hospitalization for unstable angina, or coronary revascularization. The calculator, using a 61% placebo-adjusted LDL-C reduction at ~1 year from phase 3 OSLER trials at the same doses and genetic evidence supporting LDL-C causality via PCSK9, predicted an expected HR of 0.735 (26.5% RRR) with 100% power and a minimum detectable effect HR of 0.87 at 80% power. Amgen's announcement confirmed the primary endpoint was met, stating \"Repatha significantly reduced the risk of cardiovascular events in FOURIER outcomes study\" with no new safety issues observed. Confidence is high given convergence of calculator prediction, genetic evidence, biomarker data, trial design, and the announcement of success, though the actual observed HR and 95% CI are not yet published.",
+      "key_evidence": [
+        "27,564 patients randomized (Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial; ClinicalTrials.gov NCT01764633 FOURIER)",
+        "LDL-C inclusion threshold ≥70 mg/dL (ClinicalTrials.gov NCT01764633 FOURIER; Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial; Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study)",
+        "Primary endpoint: cardiovascular death, non-fatal MI, non-fatal stroke, hospitalization for unstable angina or coronary revascularization composite (Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study; Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial)",
+        "Planned 1,630 events for key secondary MACE (Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial; Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study)",
+        "Median follow-up 26 months (ClinicalTrials.gov NCT01764633 FOURIER)",
+        "Placebo-adjusted LDL-C reduction 61% at ~1 year in phase 3 OSLER at FOURIER doses (Efficacy and safety of evolocumab in reducing lipids and cardiovascular events)",
+        "Calculator predicts expected HR 0.735 (26.5% RRR) with 100% power, MDE HR 0.87 at 80% power (calculator)",
+        "PCSK9 genetic variants associate with lower LDL-C and substantially reduced CHD risk (HR 0.32–0.79 for sequence variations; HR 0.02–0.81 for nonsense mutations) (Sequence variations in PCSK9, low LDL, and protection against coronary heart disease)",
+        "OSLER exploratory analysis HR 0.47 (95% CI 0.28–0.78) for MACE (Efficacy and safety of evolocumab in reducing lipids and cardiovascular events)",
+        "Announcement: \"Repatha significantly reduced the risk of cardiovascular events in FOURIER outcomes study\" (Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study)",
+        "Safety: \"No new safety issues were observed\" (Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study)",
+        "Trial designed for 90% power to detect 15% RRR (HR 0.85) (Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial)"
+      ],
+      "what_would_change_this": "Publication of the full FOURIER results with the observed hazard ratio and 95% confidence interval for the primary composite endpoint would confirm the magnitude of benefit and allow direct comparison with the calculator's predicted HR of 0.735.",
+      "readthrough_note": "The robust success of FOURIER supports the LDL-C hypothesis and PCSK9 inhibition as a causal mechanism for cardiovascular risk reduction, providing a strong read-through for other PCSK9 inhibitors (e.g., alirocumab in ODYSSEY OUTCOMES) and LDL-lowering therapies in high-risk secondary prevention populations."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.949 for PCSK9",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change 1.891 mmol/L via LDL-C",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.265,
+        "detail": "expected HR 0.735 at 2.17 y (relative risk reduction 26.5%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 1.0,
+        "detail": "power 100% with 1630 events; smallest detectable HR 0.87",
+        "pass": true
+      }
+    ],
+    "calculator": {
+      "case_id": "fourier",
+      "ldl_equivalent_mmol": 1.891,
+      "basis": "LDL-C",
+      "time_factor": 0.657,
+      "expected_hr": 0.735,
+      "causal_rrr": 0.265,
+      "bp_factor": 1.0,
+      "power": 1.0,
+      "mde_hr_80": 0.87,
+      "outcome": "success",
+      "category": "robust_success",
+      "secondary": [],
+      "weakest_link": "power 100%",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "fourier",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -61.0,
+          "baseline": 3.1,
+          "method": "placebo-adjusted, phase 3 (OSLER-1/2), same doses as FOURIER (140 mg q2w or 420 mg monthly), approximately 1 year follow-up, baseline LDL-C from OSLER median (120 mg/dL = 3.1 mmol/L)",
+          "source": "pmid:25773607"
+        }
+      ],
+      "followup_years": 2.17,
+      "events": 1630,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "PCSK9 Open Targets genetic association score 0.949 for coronary artery disorder but all 51 studies published after 2017-02-02 cut-off (evidence_before_cutoff=0 per f_1fa75c5465276b). However, verified literature facts f_9ab568f2bb5b4f and f_e2aefaf8f41dd1 (pmid:16554528, 2006) show PCSK9 loss-of-function variants associate with 15-28% lower LDL-C and 21-98% lower CHD risk (HR 0.32-0.79 and 0.02-0.81), published well before cut-off. Meets rule: genetic association with coronary-disease studies -> causal.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -61.0,
+          "baseline": 3.1,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted, phase 3 (OSLER-1/2), same doses as FOURIER (140 mg q2w or 420 mg monthly), approximately 1 year follow-up, baseline LDL-C from OSLER median (120 mg/dL = 3.1 mmol/L)",
+          "fact_ids": [
+            "f_1291f8ecf1b194",
+            "f_d2f386748d6b17"
+          ]
+        }
+      ],
+      "followup_years": 2.17,
+      "followup_fact_ids": [
+        "f_9c1d58bac10184"
+      ],
+      "events": 1630,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_cc63fbdddb71b4",
+        "f_fcb5ae6af007f0"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_ecc2b232e6ffa3",
+        "f_f698c430e6a687",
+        "f_1d6b182f55fb71"
+      ],
+      "missing": [
+        "sbp_change_mmhg",
+        "observed_hr",
+        "observed_ci",
+        "primary_endpoint_planned_events",
+        "apoB_change",
+        "non-HDL-C_change",
+        "Lp(a)_change"
+      ],
+      "notes": "LDL-C change from OSLER-1/2 (phase 3, same doses, placebo-adjusted, ~1 year) used as best pre-FOURIER estimate. Baseline 3.1 mmol/L from OSLER median (120 mg/dL, f_d2f386748d6b17) replaces prior assumed 2.0 mmol/L. Events (1630) are planned for key secondary endpoint (CV death/MI/stroke); primary endpoint event count not separately stated in verified facts. No verified placebo-adjusted SBP, apoB, non-HDL-C, or Lp(a) changes at FOURIER dose in phase 3. Observed HR/CI not yet public at 2017-02-02 cut-off (announcement confirms success only)."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator predicts expected HR 0.735 (26.5% RRR) with 100% power and MDE HR 0.87 at 80% power, well below the 0.90 threshold for robust success",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "PCSK9 genetic variants associate with lower LDL-C and substantially reduced coronary heart disease risk (HR 0.32-0.79 for sequence variations; HR 0.02-0.81 for nonsense mutations)",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          },
+          {
+            "text": "Placebo-adjusted LDL-C reduction of 61% at ~1 year in phase 3 OSLER trials at same doses as FOURIER (140 mg q2w or 420 mg monthly)",
+            "refs": [
+              "f_1291f8ecf1b194"
+            ]
+          },
+          {
+            "text": "Baseline LDL-C in OSLER (phase 3, same doses) was 120 mg/dL (3.1 mmol/L), providing large absolute LDL-C reduction",
+            "refs": [
+              "f_d2f386748d6b17"
+            ]
+          },
+          {
+            "text": "FOURIER enrolled 27,564 high-risk patients on optimized statin therapy with LDL-C ≥70 mg/dL, planned 1,630 events for key secondary MACE, median follow-up 26 months",
+            "refs": [
+              "f_b2a4bfb6f8d006",
+              "f_cc2b0f8abd667b",
+              "f_09d7475857a9a7",
+              "f_cc63fbdddb71b4",
+              "f_fcb5ae6af007f0",
+              "f_9c1d58bac10184"
+            ]
+          },
+          {
+            "text": "OSLER exploratory analysis showed HR 0.47 (95% CI 0.28-0.78) for MACE with evolocumab",
+            "refs": [
+              "f_222ac36ab8e29a",
+              "f_1a03fd87e86784",
+              "f_f8300225d78fef"
+            ]
+          },
+          {
+            "text": "FOURIER announcement confirms primary endpoint met: 'Repatha significantly reduced the risk of cardiovascular events in FOURIER outcomes study'",
+            "refs": [
+              "f_1d6b182f55fb71"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Actual observed HR and confidence interval not yet published in available facts; announcement only states significance without magnitude",
+            "refs": [
+              "f_1d6b182f55fb71"
+            ]
+          }
+        ],
+        "would_settle": "Publication of FOURIER primary results with observed HR and 95% CI for the primary composite endpoint"
+      },
+      {
+        "category": "narrow_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If the observed HR were near the minimum detectable effect (MDE HR 0.87 at 80% power), the success would be narrow",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator predicts expected HR 0.735, substantially below MDE HR 0.87, indicating expected effect is large, not marginal",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Genetic evidence supports large causal effect of LDL-C lowering via PCSK9 on CHD (HR 0.32-0.79)",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          },
+          {
+            "text": "61% placebo-adjusted LDL-C reduction at ~1 year in phase 3 at FOURIER doses is a large biomarker effect",
+            "refs": [
+              "f_1291f8ecf1b194"
+            ]
+          }
+        ],
+        "would_settle": "Publication of FOURIER primary results with observed HR and 95% CI"
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "OSLER trials reported neurocognitive events more frequently in evolocumab group",
+            "refs": [
+              "f_a2fb369e0e1e97"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "FOURIER announcement states 'No new safety issues were observed'",
+            "refs": [
+              "f_f7bbaaa7dcfc28"
+            ]
+          },
+          {
+            "text": "No subgroup limitation or secondary-endpoint-only benefit reported in announcement",
+            "refs": [
+              "f_1d6b182f55fb71"
+            ]
+          },
+          {
+            "text": "Mechanism (LDL-C lowering) fully explains expected benefit; no unexplained effect",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1",
+              "f_1291f8ecf1b194"
+            ]
+          }
+        ],
+        "would_settle": "Full safety data from FOURIER publication"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 genetic variants causing lower LDL-C associate with substantially reduced CHD risk (HR 0.32-0.79 and 0.02-0.81)",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          },
+          {
+            "text": "LDL-C is established causal biomarker for atherosclerotic cardiovascular disease",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — genetics strongly support LDL-C causality"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "PCSK9 nonsense mutations and sequence variations associate with lower LDL-C and lower CHD risk",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          },
+          {
+            "text": "Open Targets genetic association score 0.949 (though all 51 studies published after 2017-02-02 cutoff)",
+            "refs": [
+              "f_1fa75c5465276b"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — pre-cutoff genetic evidence strongly supports causality"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Calculator shows 100% power with expected HR 0.735 vs MDE HR 0.87 at 80% power",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Trial designed for 90% power to detect 15% RRR (HR 0.85); mechanism predicts 26.5% RRR",
+            "refs": [
+              "f_edbfc3b74625f9",
+              "f_d012701375658d",
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — power is ample"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "OSLER reported neurocognitive events more frequent with evolocumab",
+            "refs": [
+              "f_a2fb369e0e1e97"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "FOURIER announcement: 'No new safety issues were observed'",
+            "refs": [
+              "f_f7bbaaa7dcfc28"
+            ]
+          },
+          {
+            "text": "No blood pressure increase or other off-target harm signal in available facts",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Full FOURIER safety data publication"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "FOURIER enrolled very high-risk patients on optimized statin therapy; residual events may include non-atherosclerotic mechanisms",
+            "refs": [
+              "f_09d7475857a9a7",
+              "f_7ac52e8932a4dd",
+              "f_ed1732cd339281"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetic evidence shows PCSK9 variants reduce CHD in general populations",
+            "refs": [
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1"
+            ]
+          },
+          {
+            "text": "Primary endpoint components (CV death, MI, stroke, revascularization) are atherosclerotic events LDL-C lowering should prevent",
+            "refs": [
+              "f_4b51b1e3b2ea7a",
+              "f_ecc2b232e6ffa3",
+              "f_f698c430e6a687"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses by baseline risk in FOURIER publication"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Primary endpoint includes CV death, MI, stroke, unstable angina hospitalization, coronary revascularization — all plausibly reduced by LDL-C lowering",
+            "refs": [
+              "f_4b51b1e3b2ea7a",
+              "f_ecc2b232e6ffa3",
+              "f_f698c430e6a687"
+            ]
+          },
+          {
+            "text": "Follow-up 26 months (2.17 years) with time_factor 0.657 in calculator — sufficient for LDL-C lowering effect to accumulate",
+            "refs": [
+              "f_9c1d58bac10184",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Placebo-controlled, no crossover reported, endpoint not changed during trial",
+            "refs": [
+              "f_d14214e30d6c61",
+              "f_cc2b0f8abd667b"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — design appropriate"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial completed as planned (27,564 randomized), not stopped early",
+            "refs": [
+              "f_b2a4bfb6f8d006",
+              "f_cc2b0f8abd667b",
+              "f_f7bbaaa7dcfc28"
+            ]
+          },
+          {
+            "text": "No adherence or recruitment issues reported in available facts",
+            "refs": [
+              "f_f7bbaaa7dcfc28"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — execution appears sound"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Actual observed HR and 95% CI not yet available in verified facts",
+            "refs": [
+              "f_1d6b182f55fb71"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator prediction, genetic evidence, biomarker data, trial design, and announcement of success all converge",
+            "refs": [
+              "calculator",
+              "f_9ab568f2bb5b4f",
+              "f_e2aefaf8f41dd1",
+              "f_1291f8ecf1b194",
+              "f_d2f386748d6b17",
+              "f_1d6b182f55fb71"
+            ]
+          }
+        ],
+        "would_settle": "Publication of full FOURIER results"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator assumes baseline LDL-C of 2.0 mmol/L (77 mg/dL) but verified fact f_d2f386748d6b17 shows median baseline LDL-C of 120 mg/dL (3.1 mmol/L) in OSLER trial (same doses, phase 3, placebo-adjusted). FOURIER entry threshold was ≥70 mg/dL (1.8 mmol/L) but actual baseline in this high-risk statin-treated population is ~90-100 mg/dL. Using 2.0 mmol/L underestimates absolute LDL-C reduction (ldl_equivalent_mmol 1.22 vs ~1.9 mmol/L), biasing expected_hr toward null.",
+            "target_agent": "mechanism",
+            "request": "Replace assumed baseline with verified median baseline from OSLER (3.1 mmol/L) or FOURIER design paper expected baseline. Recalculate ldl_equivalent_mmol, expected_hr, power."
+          },
+          {
+            "severity": "high",
+            "issue": "Verifier returned 'not_found' for f_cc63fbdddb71b4 (1630 planned events for key secondary endpoint from design paper pmid:26920601). Calculator uses events=1630. Although announcement fact f_fcb5ae6af007f0 also states 1630, the design paper verification failed. This number drives power calculation (98%) and MDE HR.",
+            "target_agent": "case_builder",
+            "request": "Search for FOURIER design paper (pmid:26920601) or protocol to confirm planned events for key secondary endpoint (CV death/MI/stroke). If 1630 is correct, add a verified fact that the verifier can confirm."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input changes[0].baseline is null but method description says 'using FOURIER entry threshold as baseline lower bound' (70 mg/dL = 1.8 mmol/L). Assumption log says 'assumed 2.0'. Three different baselines (1.8, 2.0, 3.1 mmol/L) create ambiguity. The input should specify the baseline used for ldl_equivalent_mmol calculation.",
+            "target_agent": "mechanism",
+            "request": "Set changes[0].baseline to the actual value used (3.1 mmol/L from OSLER median) and update method description accordingly. Remove 'using FOURIER entry threshold' if not used."
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypothesis 'narrow_success' against argument 'Upper confidence bound expected well below 0.90 (MDE HR 0.87 at 80% power)' references only 'calculator' — not a verifiable fact ID. Should reference the calculator output fact or be removed.",
+            "target_agent": "investigator",
+            "request": "Add a calculator output fact for MDE HR 0.87 or replace with a verifiable reference."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator result 'weakest_link': 'power 98%' mislabels a strength as a weakness. The actual weakest link is the baseline LDL-C assumption or use of OSLER (not FOURIER) biomarker data.",
+            "target_agent": "mechanism",
+            "request": "Update weakest_link to reflect true limitation: 'baseline LDL-C assumption' or 'biomarker change from OSLER not FOURIER'."
+          },
+          {
+            "severity": "low",
+            "issue": "Biomarker change timepoint described as 'approximately 1 year' but OSLER median follow-up was 11.1 months (f_c64a01cf57b2f8). Minor inaccuracy in method description.",
+            "target_agent": "mechanism",
+            "request": "Update method description to '~11 months (OSLER median follow-up)' for precision."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator uses 1630 events (key secondary MACE: CV death, MI, stroke) but FOURIER primary endpoint includes additional components (unstable angina hospitalization, coronary revascularization) and would have higher event count. Trial was powered for primary endpoint (90% power for 15% RRR). Using secondary endpoint event count is conservative but imprecise.",
+            "target_agent": "mechanism",
+            "request": "Verify primary endpoint event count from FOURIER protocol (pmid:26920601) or registry; if different from 1630, update calculator events input to primary endpoint planned events."
+          },
+          {
+            "severity": "low",
+            "issue": "Baseline LDL-C (3.1 mmol/L / 120 mg/dL) sourced from OSLER trial, not FOURIER. FOURIER entry threshold was LDL-C ≥70 mg/dL; actual FOURIER baseline likely lower (~90-100 mg/dL). However, using OSLER baseline with OSLER % change is methodologically consistent per pre-publication rules.",
+            "target_agent": "mechanism",
+            "request": "Search for FOURIER baseline LDL-C in protocol (pmid:26920601) or design paper to confirm if OSLER baseline is appropriate proxy."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator time_factor (0.657 for 2.17 years) lacks explicit fact reference. Based on CTT collaboration LDL-C effect accumulation curve but not documented in inputs.",
+            "target_agent": "mechanism",
+            "request": "Add reference or note for time_factor derivation (e.g., CTT 2010/2015 meta-analysis showing ~65% of full LDL-C benefit at 2 years)."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator output 'weakest_link: power 100%' is misleading phrasing — 100% power is a strength, not a weakness. Should reflect actual limiting factor (e.g., 'observed HR not yet published' or 'biomarker data from OSLER not FOURIER').",
+            "target_agent": "mechanism",
+            "request": "Update weakest_link to reflect true uncertainty: lack of published observed HR/CI or use of OSLER rather than FOURIER biomarker data."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_1291f8ecf1b194",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -61,
+          "unit": "%",
+          "source_id": "pmid:25773607",
+          "status": "confirmed",
+          "found": "evolocumab reduced the level of LDL cholesterol by 61%",
+          "note": "Row shows 61% LDL-C reduction vs standard therapy.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*61%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25773607' AND r.abstractText LIKE '%61%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d2f386748d6b17",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 120,
+          "unit": "mg per deciliter",
+          "source_id": "pmid:25773607",
+          "status": "confirmed",
+          "found": "from a median of 120 mg per deciliter",
+          "note": "Row shows baseline median LDL-C of 120 mg/dL.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*120 mg per deciliter[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25773607' AND r.abstractText LIKE '%120 mg per deciliter%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_cc63fbdddb71b4",
+          "claim": "c3",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 1630,
+          "unit": "patients",
+          "source_id": "pmid:26920601",
+          "status": "confirmed",
+          "found": "at least 1,630 patients experience the secondary end point",
+          "note": "Row states planned secondary endpoint events of 1,630 patients.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1,630[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26920601' AND r.abstractText LIKE '%1,630%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_9c1d58bac10184",
+          "claim": "c4",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 26,
+          "unit": "months",
+          "source_id": "ctgov:NCT01764633@2017-02-02",
+          "status": "confirmed",
+          "found": "the median duration of follow-up was 26 months",
+          "note": "Row reports median follow-up of 26 months.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%26 months%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 4,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 4
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PCSK9",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.732,
+        "genetic_association_score": 0.949,
+        "evidence_count": 51,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.971,
+            "study_id": "GCST010867",
+            "trait": "Coronary artery disease",
+            "n": 168228,
+            "publication_date": "2020-10-05",
+            "pmid": "33020668",
+            "variant": "rs151193009",
+            "beta": -0.447667,
+            "p": "1e-14",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.965,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs472495",
+            "beta": 0.006884953522584949,
+            "p": "3.7131738662719727e-13",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.951,
+            "study_id": "GCST90449059",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 185000,
+            "publication_date": "2024-11-13",
+            "pmid": "39537608",
+            "variant": "rs11206510",
+            "beta": -0.0255560596854,
+            "p": "2.8949999809265137e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.948,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.193186932710206,
+            "p": "9.26200008392334e-31",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs11206510",
+            "beta": -0.06765864847381481,
+            "p": "1e-8",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs11591147",
+            "beta": -0.010701321233358261,
+            "p": "1.431955337524414e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs11591147",
+            "beta": -0.012468438835740718,
+            "p": "1.3121823072433472e-14",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.946,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs11591147",
+            "beta": -0.203581973859205,
+            "p": "5.118000030517578e-26",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_d5dc1ab3e0e6d6",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg every 2 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "Evolocumab but not atorvastatin decreased the production rate of intermediate-density lipoprotein-apoB (P=0.043) and LDL-apoB (P<0.001)",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_0796c063ebcc99",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 92.5,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:27846344",
+        "quote": "mean LDL-C level, 92.5 mg/dL [SD, 27.2]",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_58ee2258f4994d",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 219.9,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "entry",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "entry mean LDL-C level, 219.9 [SD, 72] mg/dL",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_d2f386748d6b17",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 120,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "140 mg every 2 weeks or 420 mg monthly"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "from a median of 120 mg per deciliter",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_04247b6360cb69",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg every 2 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "Evolocumab but not atorvastatin decreased the production rate of intermediate-density lipoprotein-apoB (P=0.043) and LDL-apoB (P<0.001)",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_075aa94095d2ea",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -102.9,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "absolute change, -102.9 mg/dL (P < .001)",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_1291f8ecf1b194",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -61,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "approximately 1 year",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "140 mg every 2 weeks or 420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "evolocumab reduced the level of LDL cholesterol by 61%",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_23c1265558a856",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -56.5,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 78",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "Compared with placebo, the evolocumab group achieved lower mean, time-weighted LDL-C levels (93.0 vs 36.6 mg/dL; difference, -56.5 mg/dL [95% CI, -59.7 to -53.4]; P < .001).",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_29c6dd123f3653",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -37.8,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "mean of weeks 22 and 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "For the mean of weeks 22 and 24, between-group difference in LDL-C was -37.8%",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_3e1bafe0c7b4a7",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -106.8,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "mean of weeks 22 and 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "absolute change, -106.8 mg/dL (P < .001)",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_48a9790319cd5f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -52.8,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "with evolocumab was 104.1 mg/dL; mean percent change, -52.8% (95% CI, -55.8% to -49.8%)",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_846059a74cb8bb",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -36.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "For week 24, between-group difference in LDL-C was -36.1%",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_8b88bfa2c7cca2",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "absolute",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "evolocumab 420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "change from baseline in LDL-C",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_ab01c95b2b2282",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -75.8,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "mean of weeks 22 and 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "absolute difference, -75.8 mg/dL",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_c11f58a2e6503a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -50,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 52",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly subcutaneous",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27619750",
+        "quote": "evolocumab reduced LDL-C by >50% in all subgroups",
+        "pub_date": "2016-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/"
+      },
+      {
+        "fact_id": "f_c3aab55baf0f0e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -60,
+        "unit": "%",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "140 mg subcutaneously every 2 weeks or 420 mg subcutaneously every month"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "Evolocumab is a fully human monoclonal antibody inhibitor of proprotein convertase subtilisin/kexin type 9 that reduces low-density lipoprotein cholesterol by approximately 60% across various populations",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_cc48006b4b4355",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -71.7,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "absolute difference, -71.7 mg/dL",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_e1c66884ad7b80",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -54.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "mean of weeks 22 and 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "with evolocumab was 103.6 mg/dL; mean percent change, -54.5% (95% CI, -57.2% to -51.8%)",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_e80659f1c48ddd",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "evolocumab 420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "percent change from baseline in LDL-C at week 24",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_f92903c18aeeaa",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "weeks 22 and 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "evolocumab 420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "mean percent change from baseline in LDL-C at weeks 22 and 24",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_28495f26620d3b",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 26,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "2 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27707817",
+        "quote": "At 2 weeks, changes in β-sitosterol/total cholesterol (TC) from baseline were 4% for placebo, 10% for evolocumab 140 mg (nonsignificant vs. placebo), and 26% for evolocumab 420 mg (P < 0.001 vs. placebo).",
+        "pub_date": "2016-10-05",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/"
+      },
+      {
+        "fact_id": "f_30a2be17a5b45c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 78",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "The primary efficacy parameter, PAV, increased 0.05% with placebo and decreased 0.95% with evolocumab (difference, -1.0% [95% CI, -1.8% to -0.64%]; P < .001).",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_5b52033741db64",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "2 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "140 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27707817",
+        "quote": "At 2 weeks, changes in desmosterol/TC were 1% for placebo, 7% for evolocumab 140 mg (nonsignificant vs. placebo), and 15% for evolocumab 420 mg (P < 0.01 vs. placebo).",
+        "pub_date": "2016-10-05",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/"
+      },
+      {
+        "fact_id": "f_6f0318b5264efe",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 10,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "2 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "140 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27707817",
+        "quote": "At 2 weeks, changes in β-sitosterol/total cholesterol (TC) from baseline were 4% for placebo, 10% for evolocumab 140 mg (nonsignificant vs. placebo), and 26% for evolocumab 420 mg (P < 0.001 vs. placebo).",
+        "pub_date": "2016-10-05",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/"
+      },
+      {
+        "fact_id": "f_72aa963b2ae9f1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "80 mg daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "atorvastatin lowered the lathosterol/campesterol ratio (a measure of cholesterol synthesis/absorption) and apoC-III concentration",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_8a6e11ff27cbe5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 15,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "2 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27707817",
+        "quote": "At 2 weeks, changes in desmosterol/TC were 1% for placebo, 7% for evolocumab 140 mg (nonsignificant vs. placebo), and 15% for evolocumab 420 mg (P < 0.01 vs. placebo).",
+        "pub_date": "2016-10-05",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/"
+      },
+      {
+        "fact_id": "f_a8f271eb803c63",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg every 2 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "Whereas evolocumab but not atorvastatin lowered the concentration of free PCSK9",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_b47c001fa0c75f",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -4.9,
+        "unit": "mm3",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "week 78",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "420 mg monthly",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "The secondary efficacy parameter, normalized TAV, decreased 0.9 mm3 with placebo and 5.8 mm3 with evolocumab (difference, -4.9 mm3 [95% CI, -7.3 to -2.5]; P < .001).",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_f0c3802f8ea3fa",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "420 mg every 2 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "Both interventions decreased plasma apoE",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_aaf117ef0042c5",
+        "entity": "biomarker:total cholesterol",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "biomarker": "total cholesterol",
+          "phase": "phase3",
+          "timepoint": "week 24",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "evolocumab 420 mg monthly",
+          "kind": "percent"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "percent change from baseline in total cholesterol",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_1fa75c5465276b",
+        "entity": "target:pcsk9",
+        "key": "genetic_association_score",
+        "value": 0.949,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 51,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:PCSK9",
+        "quote": "\"genetic_association_score\": 0.949",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000169174"
+      },
+      {
+        "fact_id": "f_d012701375658d",
+        "entity": "trial:nct01764633",
+        "key": "assumed_rrr",
+        "value": 15,
+        "unit": "%",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "thereby providing 90% power to detect a relative reduction of ≥15% in this end point",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_f8300225d78fef",
+        "entity": "trial:nct01764633",
+        "key": "ci_high",
+        "value": 0.78,
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "95% confidence interval, 0.28 to 0.78",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_1a03fd87e86784",
+        "entity": "trial:nct01764633",
+        "key": "ci_low",
+        "value": 0.28,
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "95% confidence interval, 0.28 to 0.78",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_022332355ee390",
+        "entity": "trial:nct01764633",
+        "key": "events_control",
+        "value": 22,
+        "unit": "myocardial infarctions",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_9ec65518947aa7",
+        "entity": "trial:nct01764633",
+        "key": "events_control",
+        "value": 5,
+        "unit": "unstable anginas",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_ac0525ecf4e9f3",
+        "entity": "trial:nct01764633",
+        "key": "events_control",
+        "value": 2.18,
+        "unit": "%",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "The rate of cardiovascular events at 1 year was reduced from 2.18% in the standard-therapy group to 0.95% in the evolocumab group",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_78a4d220fd95a5",
+        "entity": "trial:nct01764633",
+        "key": "events_total",
+        "value": 35,
+        "unit": "MACE",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_65e1c9a8c34fc7",
+        "entity": "trial:nct01764633",
+        "key": "events_treatment",
+        "value": 8,
+        "unit": "cardiovascular deaths",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_8c24212f0c1b72",
+        "entity": "trial:nct01764633",
+        "key": "events_treatment",
+        "value": 0,
+        "unit": "strokes",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_cad52e6e7c301c",
+        "entity": "trial:nct01764633",
+        "key": "events_treatment",
+        "value": 0.95,
+        "unit": "%",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "The rate of cardiovascular events at 1 year was reduced from 2.18% in the standard-therapy group to 0.95% in the evolocumab group",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_222ac36ab8e29a",
+        "entity": "trial:nct01764633",
+        "key": "hr",
+        "value": 0.47,
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "hazard ratio in the evolocumab group, 0.47",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_09d7475857a9a7",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "quote": "Fasting low-density lipoprotein cholesterol (LDL-C) ≥ 70 mg/dL (≥ 1.8 mmol/L)",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01764633"
+      },
+      {
+        "fact_id": "f_2fe734e55df53c",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "non-HDL-C"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "have a low-density lipoprotein ≥70 mg/dL or a non-high-density lipoprotein cholesterol ≥100 mg/dL on an optimized statin regimen",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_65901401a986d8",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "FOURIER",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "have a low-density lipoprotein ≥70 mg/dL or a non-high-density lipoprotein cholesterol ≥100 mg/dL on an optimized statin regimen",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_7ac52e8932a4dd",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3",
+          "biomarker": "non-HDL-C",
+          "condition": "LDL ≥70 mg/dL or non-HDL-C ≥100 mg/dL on optimized statin therapy"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "an LDL ≥70 mg/dL or a non-HDL-C ≥100 mg/dL on optimized statin therapy",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_ed1732cd339281",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3",
+          "biomarker": "LDL-C",
+          "condition": "LDL ≥70 mg/dL or non-HDL-C ≥100 mg/dL on optimized statin therapy"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "an LDL ≥70 mg/dL or a non-HDL-C ≥100 mg/dL on optimized statin therapy",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_f7af8860a810f7",
+        "entity": "trial:nct01764633",
+        "key": "inclusion_threshold",
+        "value": "LDL-C above the National Cholesterol Education Project Adult Treatment Panel III target level for the appropriate coronary heart disease risk category",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "GAUSS-3"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "Eligible patients had LDL-C above the National Cholesterol Education Project Adult Treatment Panel III target level for the appropriate coronary heart disease risk category",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_9c1d58bac10184",
+        "entity": "trial:nct01764633",
+        "key": "median_followup",
+        "value": 26,
+        "unit": "months",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "quote": "the median duration of follow-up was 26 months",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01764633"
+      },
+      {
+        "fact_id": "f_af150d91d24cbe",
+        "entity": "trial:nct01764633",
+        "key": "median_followup",
+        "value": 4903,
+        "unit": "patient-years",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "PCSK9i treatment in the OSLER and ODYSSEY LONG TERM trials resulted in prevention of 35 MACE in a total of 4903 patient-years: 8 cardiovascular deaths, 22 myocardial infarctions, 0 strokes and 5 unstable anginas.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_c64a01cf57b2f8",
+        "entity": "trial:nct01764633",
+        "key": "median_followup",
+        "value": 11.1,
+        "unit": "months",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "Patients were followed for a median of 11.1 months",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_09516808fdba90",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 81,
+        "unit": "participants",
+        "attrs": {
+          "trial": "NCT02189837",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "in 81 healthy, normolipidemic, nonobese men",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_1dce10fcc0d740",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 511,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GAUSS-3"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "Recruitment of 511 patients was completed on November 28, 2014.",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_481e5bd0d51e80",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 4529,
+        "unit": "patients",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "Outcome data of the 4529 patients treated with PCSK9i in the OSLER and ODYSSEY LONG TERM trials were collected from the published reports.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_76c19b3365ac86",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 4465,
+        "unit": "patients",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "In two open-label, randomized trials, we enrolled 4465 patients who had completed 1 of 12 phase 2 or 3 studies",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_94558dfa97ace3",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 968,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "enrolling 968 patients presenting for coronary angiography",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_99a3fbe79b6684",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 218,
+        "unit": "patients",
+        "attrs": {
+          "trial": "GAUSS-3"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "(N = 218, with 73 randomized to ezetimibe and 145 to evolocumab; entry mean LDL-C level, 219.9 [SD, 72] mg/dL)",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_b2a4bfb6f8d006",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "The study population consists of 27,564 patients who have had a myocardial infarction (MI), an ischemic stroke, or symptomatic peripheral artery disease",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_b556a51149d6cd",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 905,
+        "unit": "patients",
+        "attrs": {
+          "trial": "DESCARTES"
+        },
+        "source_id": "pmid:27619750",
+        "quote": "randomized 905 patients from 88 study centres in 9 countries",
+        "pub_date": "2016-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/"
+      },
+      {
+        "fact_id": "f_cc2b0f8abd667b",
+        "entity": "trial:nct01764633",
+        "key": "n_randomized",
+        "value": 27564,
+        "unit": "participants",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "quote": "Enrollment: 27564 (ACTUAL)",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01764633"
+      },
+      {
+        "fact_id": "f_d14214e30d6c61",
+        "entity": "trial:nct01764633",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01764633"
+      },
+      {
+        "fact_id": "f_cc63fbdddb71b4",
+        "entity": "trial:nct01764633",
+        "key": "planned_events",
+        "value": 1630,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER",
+          "endpoint": "key secondary end point (cardiovascular death, MI, or stroke)"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "The trial is planned to continue until at least 1,630 patients experience the secondary end point",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_fcb5ae6af007f0",
+        "entity": "trial:nct01764633",
+        "key": "planned_events",
+        "value": 1630,
+        "unit": "patients",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3",
+          "endpoint_type": "key secondary MACE"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "The study continued until at least 1,630 patients experienced a key secondary MACE (major adverse cardiac event) endpoint of cardiovascular death, MI or stroke",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_edbfc3b74625f9",
+        "entity": "trial:nct01764633",
+        "key": "power",
+        "value": 90,
+        "unit": "%",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "thereby providing 90% power to detect a relative reduction of ≥15% in this end point",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_0ac5d462ac201e",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "cardiovascular death, non-fatal MI or non-fatal stroke",
+        "unit": "composite endpoint",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3",
+          "endpoint_type": "key secondary"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "and the key secondary composite endpoint (cardiovascular death, non-fatal MI or non-fatal stroke)",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_17b064294857d3",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "mean percent change from baseline in LDL-C at weeks 22 and 24 and percent change from baseline in LDL-C at week 24",
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3"
+        },
+        "source_id": "pmid:26946077",
+        "quote": "This trial has 2 co-primary endpoints: mean percent change from baseline in LDL-C at weeks 22 and 24 and percent change from baseline in LDL-C at week 24.",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/"
+      },
+      {
+        "fact_id": "f_454084eec86661",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "mean percent change in LDL-C level from baseline to the mean of weeks 22 and 24 levels and from baseline to week 24 levels",
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "Coprimary end points were the mean percent change in LDL-C level from baseline to the mean of weeks 22 and 24 levels and from baseline to week 24 levels.",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_4b51b1e3b2ea7a",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "cardiovascular death, non-fatal myocardial infarction (MI), non-fatal stroke, hospitalization for unstable angina or coronary revascularization",
+        "unit": "composite endpoint",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "met its primary composite endpoint (cardiovascular death, non-fatal myocardial infarction (MI), non-fatal stroke, hospitalization for unstable angina or coronary revascularization)",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_5b81d7e67be2c3",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "nominal change in percent atheroma volume (PAV) from baseline to week 78",
+        "unit": "percent",
+        "attrs": {
+          "trial": "GLAGOV"
+        },
+        "source_id": "pmid:27846344",
+        "quote": "The primary efficacy measure was the nominal change in percent atheroma volume (PAV) from baseline to week 78, measured by serial intravascular ultrasonography (IVUS) imaging.",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/"
+      },
+      {
+        "fact_id": "f_e855439845cd42",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "non-inferior to placebo for the effect on cognitive function",
+        "unit": "endpoint",
+        "attrs": {
+          "trial": "EBBINGHAUS",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "demonstrating that Repatha was non-inferior to placebo for the effect on cognitive function",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_ec5b62378c533c",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "LDL cholesterol levels, safety, and adjudicated cardiovascular events",
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "assessment of lipid levels, safety, and (as a prespecified exploratory analysis) adjudicated cardiovascular events",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_ecc2b232e6ffa3",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "major cardiovascular events defined as the composite of cardiovascular death, MI, stroke, hospitalization for unstable angina, or coronary revascularization",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "pmid:26920601",
+        "quote": "The primary end point is major cardiovascular events defined as the composite of cardiovascular death, MI, stroke, hospitalization for unstable angina, or coronary revascularization",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/"
+      },
+      {
+        "fact_id": "f_f698c430e6a687",
+        "entity": "trial:nct01764633",
+        "key": "primary_endpoint",
+        "value": "Time to Cardiovascular Death, Myocardial Infarction, Hospitalization for Unstable Angina, Stroke, or Coronary Revascularization",
+        "unit": "",
+        "attrs": {
+          "trial": "FOURIER"
+        },
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "quote": "Primary outcome(s): Time to Cardiovascular Death, Myocardial Infarction, Hospitalization for Unstable Angina, Stroke, or Coronary Revascularization",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01764633"
+      },
+      {
+        "fact_id": "f_111c4e1276a077",
+        "entity": "trial:nct01764633",
+        "key": "readout_statement",
+        "value": "Evolocumab showed encouraging safety and efficacy at 52 weeks in patients with or without dysglycaemia or MetS.",
+        "unit": "none",
+        "attrs": {
+          "trial": "DESCARTES"
+        },
+        "source_id": "pmid:27619750",
+        "quote": "Evolocumab showed encouraging safety and efficacy at 52 weeks in patients with or without dysglycaemia or MetS.",
+        "pub_date": "2016-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/"
+      },
+      {
+        "fact_id": "f_1d6b182f55fb71",
+        "entity": "trial:nct01764633",
+        "key": "readout_statement",
+        "value": "Repatha significantly reduced the risk of cardiovascular events in FOURIER outcomes study",
+        "unit": "statement",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "Amgen Announces Repatha® (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_60a341c8e4cbb3",
+        "entity": "trial:nct01764633",
+        "key": "readout_statement",
+        "value": "According to the current published data, using PCSK9i to prevent MACE seems to be a very expensive strategy.",
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER and ODYSSEY LONG TERM"
+        },
+        "source_id": "pmid:27389448",
+        "quote": "CONCLUSIONS: According to the current published data, using PCSK9i to prevent MACE seems to be a very expensive strategy.",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/"
+      },
+      {
+        "fact_id": "f_8809759ddc2def",
+        "entity": "trial:nct01764633",
+        "key": "readout_statement",
+        "value": "During approximately 1 year of therapy, the use of evolocumab plus standard therapy, as compared with standard therapy alone, significantly reduced LDL cholesterol levels and reduced the incidence of cardiovascular events in a prespecified but exploratory analysis.",
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "During approximately 1 year of therapy, the use of evolocumab plus standard therapy, as compared with standard therapy alone, significantly reduced LDL cholesterol levels and reduced the incidence of cardiovascular events in a prespecified but exploratory analysis.",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_903713ee6eb108",
+        "entity": "trial:nct01764633",
+        "key": "readout_statement",
+        "value": "In healthy, normolipidemic subjects, evolocumab decreased the concentration of atherogenic lipoproteins, particularly LDL, by accelerating their catabolism.",
+        "unit": "",
+        "attrs": {
+          "trial": "NCT02189837",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:27941065",
+        "quote": "In healthy, normolipidemic subjects, evolocumab decreased the concentration of atherogenic lipoproteins, particularly LDL, by accelerating their catabolism.",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/"
+      },
+      {
+        "fact_id": "f_243ed14aa213af",
+        "entity": "trial:nct01764633",
+        "key": "safety_signal",
+        "value": 20.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "phase": "phase2",
+          "dose": "420 mg monthly"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "Muscle symptoms were reported in 28.8% of ezetimibe-treated patients and 20.7% of evolocumab-treated patients (log-rank P = .17).",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_46c646017faffd",
+        "entity": "trial:nct01764633",
+        "key": "safety_signal",
+        "value": false,
+        "unit": "none",
+        "attrs": {
+          "trial": "DESCARTES"
+        },
+        "source_id": "pmid:27619750",
+        "quote": "Incidences of AEs were similar in evolocumab- and placebo-treated patients.",
+        "pub_date": "2016-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/"
+      },
+      {
+        "fact_id": "f_a2fb369e0e1e97",
+        "entity": "trial:nct01764633",
+        "key": "safety_signal",
+        "value": "neurocognitive events were reported more frequently in the evolocumab group",
+        "unit": "",
+        "attrs": {
+          "trial": "OSLER-1 and OSLER-2"
+        },
+        "source_id": "pmid:25773607",
+        "quote": "neurocognitive events were reported more frequently in the evolocumab group",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/"
+      },
+      {
+        "fact_id": "f_c79a5c0302e052",
+        "entity": "trial:nct01764633",
+        "key": "safety_signal",
+        "value": 0.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "GAUSS-3",
+          "phase": "phase2",
+          "dose": "420 mg monthly"
+        },
+        "source_id": "pmid:27039291",
+        "quote": "Active study drug was stopped for muscle symptoms in 5 of 73 ezetimibe-treated patients (6.8%) and 1 of 145 evolocumab-treated patients (0.7%).",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/"
+      },
+      {
+        "fact_id": "f_f7bbaaa7dcfc28",
+        "entity": "trial:nct01764633",
+        "key": "safety_signal",
+        "value": "No new safety issues were observed",
+        "unit": "statement",
+        "attrs": {
+          "trial": "FOURIER",
+          "phase": "phase3"
+        },
+        "source_id": "announcement:fourier",
+        "quote": "No new safety issues were observed.",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study"
+      },
+      {
+        "fact_id": "f_9ab568f2bb5b4f",
+        "entity": "trial:nct01764633",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "sequence variation in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "15 percent reduction in LDL cholesterol",
+          "n": 9524,
+          "ci_low": 0.32,
+          "ci_high": 0.79
+        },
+        "source_id": "pmid:16554528",
+        "quote": "a sequence variation in PCSK9 that was associated with a 15 percent reduction in LDL cholesterol and a 47 percent reduction in the risk of CHD (hazard ratio, 0.50; 95 percent confidence interval, 0.32 to 0.79; P=0.003)",
+        "pub_date": "2006-03-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16554528/"
+      },
+      {
+        "fact_id": "f_e2aefaf8f41dd1",
+        "entity": "trial:nct01764633",
+        "key": "unknown",
+        "value": null,
+        "unit": "HR",
+        "attrs": {
+          "gene": "PCSK9",
+          "variant_or_score": "nonsense mutations in PCSK9",
+          "outcome": "coronary heart disease",
+          "direction": "protective",
+          "effect_on_biomarker": "28 percent reduction in mean LDL cholesterol",
+          "n": 3363,
+          "ci_low": 0.02,
+          "ci_high": 0.81
+        },
+        "source_id": "pmid:16554528",
+        "quote": "these mutations were associated with a 28 percent reduction in mean LDL cholesterol and an 88 percent reduction in the risk of CHD (P=0.008 for the reduction; hazard ratio, 0.11; 95 percent confidence interval, 0.02 to 0.81; P=0.03)",
+        "pub_date": "2006-03-23",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16554528/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01764633@2017-02-02",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01764633 FOURIER",
+        "url": "https://clinicaltrials.gov/study/NCT01764633",
+        "pub_date": "2013-01-09",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01764633",
+            "acronym": "FOURIER",
+            "title": "Further Cardiovascular Outcomes Research With PCSK9 Inhibition in Subjects With Elevated Risk",
+            "official_title": "A Double-blind, Randomized, Placebo-controlled, Multicenter Study Assessing the Impact of Additional LDL-Cholesterol Reduction on Major Cardiovascular Events When Evolocumab (AMG 145) is Used in Combination With Statin Therapy In Patients With Clinically Evident Cardiovascular Disease",
+            "sponsor": "Amgen",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2013-02-08",
+            "primary_completion": "2016-11-11",
+            "first_posted": "2013-01-09",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 27564,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Evolocumab",
+                "type": "BIOLOGICAL",
+                "other_names": [
+                  "AMG 145",
+                  "Repatha"
+                ],
+                "arms": [
+                  "Evolocumab"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "Evolocumab",
+                "type": "EXPERIMENTAL"
+              }
+            ],
+            "conditions": [
+              "Dyslipidemia"
+            ],
+            "primary_outcomes": [
+              "Time to Cardiovascular Death, Myocardial Infarction, Hospitalization for Unstable Angina, Stroke, or Coronary Revascularization [Events that occurred from randomization to the last confirmed survival status date; the median duration of follow-up was 26 months. KM estimates at 6, 12, 18, 24, 30 and 36 months are reported.]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 2008
+      },
+      {
+        "source_id": "pmid:27846344",
+        "type": "journal",
+        "title": "Effect of Evolocumab on Progression of Coronary Disease in Statin-Treated Patients: The GLAGOV Randomized Clinical Trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27846344/",
+        "pub_date": "2016-12-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27846344",
+          "pmcid": null,
+          "doi": "10.1001/jama.2016.16951",
+          "journal": "JAMA"
+        },
+        "chars": 2928
+      },
+      {
+        "source_id": "pmid:26946077",
+        "type": "journal",
+        "title": "Comparison of PCSK9 Inhibitor Evolocumab vs Ezetimibe in Statin-Intolerant Patients: Design of the Goal Achievement After Utilizing an Anti-PCSK9 Antibody in Statin-Intolerant Subjects 3 (GAUSS-3) Trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26946077/",
+        "pub_date": "2016-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26946077",
+          "pmcid": "PMC6490723",
+          "doi": "10.1002/clc.22518",
+          "journal": "Clinical cardiology"
+        },
+        "chars": 1961
+      },
+      {
+        "source_id": "pmid:27039291",
+        "type": "journal",
+        "title": "Efficacy and Tolerability of Evolocumab vs Ezetimibe in Patients With Muscle-Related Statin Intolerance: The GAUSS-3 Randomized Clinical Trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27039291/",
+        "pub_date": "2016-04-19",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27039291",
+          "pmcid": null,
+          "doi": "10.1001/jama.2016.3608",
+          "journal": "JAMA"
+        },
+        "chars": 3185
+      },
+      {
+        "source_id": "pmid:27389448",
+        "type": "journal",
+        "title": "PCSK9 inhibitors may improve cardiovascular outcomes-Can we afford them?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27389448/",
+        "pub_date": "2016-06-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27389448",
+          "pmcid": null,
+          "doi": "10.1016/j.ijcard.2016.06.126",
+          "journal": "International journal of cardiology"
+        },
+        "chars": 1710
+      },
+      {
+        "source_id": "pmid:27941065",
+        "type": "journal",
+        "title": "Factorial Effects of Evolocumab and Atorvastatin on Lipoprotein Metabolism",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27941065/",
+        "pub_date": "2016-12-09",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27941065",
+          "pmcid": null,
+          "doi": "10.1161/CIRCULATIONAHA.116.025080",
+          "journal": "Circulation"
+        },
+        "chars": 2774
+      },
+      {
+        "source_id": "pmcid:PMC4919379",
+        "type": "journal",
+        "title": "Efficacy and Safety of the PCSK9 Inhibitor Evolocumab in Patients with Mixed Hyperlipidemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27240673/",
+        "pub_date": "2016-06-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "27240673",
+          "pmcid": "PMC4919379",
+          "doi": "10.1007/s10557-016-6666-1",
+          "journal": "Cardiovascular drugs and therapy"
+        },
+        "chars": 35594
+      },
+      {
+        "source_id": "pmid:27707817",
+        "type": "journal",
+        "title": "Effect of evolocumab on cholesterol synthesis and absorption",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27707817/",
+        "pub_date": "2016-10-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27707817",
+          "pmcid": "PMC5321223",
+          "doi": "10.1194/jlr.P071704",
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1538
+      },
+      {
+        "source_id": "pmid:27619750",
+        "type": "journal",
+        "title": "Evaluation of the efficacy, safety and glycaemic effects of evolocumab (AMG 145) in hypercholesterolaemic patients stratified by glycaemic status and metabolic syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27619750/",
+        "pub_date": "2016-10-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27619750",
+          "pmcid": null,
+          "doi": "10.1111/dom.12788",
+          "journal": "Diabetes, obesity & metabolism"
+        },
+        "chars": 1851
+      },
+      {
+        "source_id": "pmid:26920601",
+        "type": "journal",
+        "title": "Rationale and design of the Further cardiovascular OUtcomes Research with PCSK9 Inhibition in subjects with Elevated Risk trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26920601/",
+        "pub_date": "2015-12-17",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "26920601",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2015.11.015",
+          "journal": "American heart journal"
+        },
+        "chars": 1980
+      },
+      {
+        "source_id": "pmid:25773607",
+        "type": "journal",
+        "title": "Efficacy and safety of evolocumab in reducing lipids and cardiovascular events",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25773607/",
+        "pub_date": "2015-03-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25773607",
+          "pmcid": null,
+          "doi": "10.1056/NEJMoa1500858",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2164
+      },
+      {
+        "source_id": "pmid:27839699",
+        "type": "journal",
+        "title": "HEART UK statement on the management of homozygous familial hypercholesterolaemia in the United Kingdom",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27839699/",
+        "pub_date": "2016-11-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27839699",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2016.10.017",
+          "journal": "Atherosclerosis",
+          "purpose": "genetics"
+        },
+        "chars": 1593
+      },
+      {
+        "source_id": "pmid:15893177",
+        "type": "journal",
+        "title": "What promise does PCSK9 hold?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15893177/",
+        "pub_date": "2005-05-17",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15893177",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2005.02.056",
+          "journal": "Journal of the American College of Cardiology",
+          "purpose": "genetics"
+        },
+        "chars": 31
+      },
+      {
+        "source_id": "pmid:16554528",
+        "type": "journal",
+        "title": "Sequence variations in PCSK9, low LDL, and protection against coronary heart disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16554528/",
+        "pub_date": "2006-03-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16554528",
+          "pmcid": null,
+          "doi": "10.1056/NEJMoa054013",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1722
+      },
+      {
+        "source_id": "announcement:fourier",
+        "type": "press_release",
+        "title": "Amgen Announces Repatha (Evolocumab) Significantly Reduced The Risk Of Cardiovascular Events In FOURIER Outcomes Study",
+        "url": "https://www.amgen.com/newsroom/press-releases/2017/02/amgen-announces-repatha-evolocumab-significantly-reduced-the-risk-of-cardiovascular-events-in-fourier-outcomes-study",
+        "pub_date": "2017-02-02",
+        "access": "press_release",
+        "meta": {},
+        "chars": 19903
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 23,
+      "facts": 92,
+      "relationships": 26,
+      "events": 227,
+      "audit_entries": 227,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 14,
+        "input_tokens": 15419,
+        "output_tokens": 9730,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 11863,
+        "output_tokens": 7324,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 4110,
+        "output_tokens": 5166,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "nvidia"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 11091,
+        "output_tokens": 7056,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 13551,
+        "output_tokens": 7735,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6914,
+        "output_tokens": 3368,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

@@ -1,0 +1,3220 @@
+{
+  "run_id": "bt-reveal",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2017-06-27",
+  "backtest": true,
+  "readout_date": "2017-06-27",
+  "analysis_date": "2017-06-27",
+  "trial": {
+    "nct_id": "NCT01252953",
+    "acronym": "REVEAL",
+    "title": "REVEAL: Randomized EValuation of the Effects of Anacetrapib Through Lipid-modification",
+    "sponsor": "University of Oxford",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 30449,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerotic Cardiovascular Disease"
+    ],
+    "primary_completion": "2017-01-31"
+  },
+  "drug": {
+    "name": "anacetrapib",
+    "chembl_id": "CHEMBL1800807",
+    "aliases": [
+      "MK-0859",
+      "MK0859",
+      "ana"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Cholesteryl ester transfer protein inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000087237",
+        "symbol": "CETP",
+        "name": "cholesteryl ester transfer protein"
+      }
+    ],
+    "searched_as": "anacetrapib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-reveal",
+  "log_file": "logs/trace-bt-reveal.jsonl",
+  "execution_time_seconds": 1.3,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"major coronary events (composite of coronary death, myocardial infarction, and coronary revascularization) met its primary endpoint, signifi\" (announcement:reveal)",
+      "predicted_outcome": "success",
+      "consistency": "consistent with the calculator (probability of success 67%)",
+      "primary_category": "narrow_success",
+      "secondary_categories": [
+        "biomarker_not_causal",
+        "effect_too_small"
+      ],
+      "calculator_category": "narrow_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.671,
+      "weakest_link": "intended biomarker HDL-C is not causal"
+    },
+    "report": {
+      "headline": "REVEAL met its primary endpoint for major coronary events with anacetrapib, a narrow success driven by LDL-C lowering rather than the intended HDL-C raising mechanism.",
+      "summary": "The REVEAL trial (30,449 participants with vascular disease, 4.1-year median follow-up) met its primary endpoint of major coronary events (coronary death, MI, or coronary revascularization) per the Merck announcement on June 27, 2017. The calculator predicted success with 67% probability based on a 0.626 mmol/L LDL-C equivalent reduction (expected HR 0.871, 12.9% RRR), though power was only 67% at the stringent alpha=0.01 (MDE for 80% power HR 0.855). The design assumed 15% RRR with 88% power. The intended biomarker HDL-C increased 118% (A Multiregional, Randomized Evaluation...) to 138% (REVEAL trial design paper), but CETP genetics (score 0.736) indicate benefit is mediated through LDL-C lowering, not HDL-C raising. No off-target safety signals emerged. Confidence is high given the trial completed as planned with pre-specified endpoint met.",
+      "key_evidence": [
+        "30,449 participants randomized (ClinicalTrials.gov NCT01252953 REVEAL)",
+        "Primary endpoint: major coronary events (coronary death, MI, coronary revascularization) met per announcement (Merck Provides Update on REVEAL Outcomes Study of Anacetrapib (June 27, 2017))",
+        "1900 planned events, 4.1-year median follow-up (Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial...)",
+        "Alpha=0.01 two-tailed, design assumed 15% RRR with 88% power (Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial...)",
+        "Calculator: expected HR 0.871 (12.9% RRR), power 67%, MDE HR 0.855 for 80% power (calculator)",
+        "LDL-C baseline 61 mg/dL on statin background (Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial...)",
+        "HDL-C increased 118% (A Multiregional, Randomized Evaluation of the Lipid-Modifying Efficacy and Tolerability of Anacetrapib...) to 138% (Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial...)",
+        "CETP genetic association score 0.736 for CAD; benefit via LDL-C lowering (0.626 mmol/L equivalent), not HDL-C (opentargets:CETP)",
+        "No clinically meaningful safety differences; no BP/aldosterone effects (A Multiregional, Randomized Evaluation..., Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial...)"
+      ],
+      "what_would_change_this": "Publication of the observed HR and 95% CI for the primary endpoint and hard coronary outcomes (coronary death/MI) would confirm the magnitude of benefit and whether it aligns with the LDL-C-mediated prediction.",
+      "readthrough_note": "The result supports LDL-C lowering as the causal pathway for CETP inhibition; other CETP inhibitors (e.g., obicetrapib) should be evaluated on LDL-C/apoB reduction rather than HDL-C raising. The narrow success at alpha=0.01 highlights the importance of adequate powering for modest effect sizes."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.736 for CETP",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.626 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.129,
+        "detail": "expected HR 0.871 at 4.1 y (relative risk reduction 12.9%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.671,
+        "detail": "power 67% with 1900 events; smallest detectable HR 0.855",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "reveal",
+      "ldl_equivalent_mmol": 0.626,
+      "basis": "LDL-C",
+      "time_factor": 0.891,
+      "expected_hr": 0.871,
+      "causal_rrr": 0.129,
+      "bp_factor": 1.0,
+      "power": 0.671,
+      "mde_hr_80": 0.855,
+      "outcome": "success",
+      "category": "narrow_success",
+      "secondary": [
+        "biomarker_not_causal"
+      ],
+      "weakest_link": "intended biomarker HDL-C is not causal",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "reveal",
+      "mode": "autopsy",
+      "target_genetics": "causal",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -39.7,
+          "baseline": 1.577,
+          "method": "placebo-adjusted, phase 3 (REALIZE trial), 100 mg, week 52; percent change applied to REVEAL phase 3 baseline (61 mg/dL = 1.577 mmol/L)",
+          "source": "pmcid:PMC5419667,pmid:25743173"
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": 118.0,
+          "baseline": 40.0,
+          "method": "placebo-adjusted, phase 3, 100 mg, 24 weeks (pmid:28624096); baseline from REVEAL phase 3",
+          "source": "pmcid:PMC5419667,pmid:28624096"
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -28.7,
+          "baseline": null,
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; no REVEAL apoB baseline available",
+          "source": "pmid:28478132"
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -48.3,
+          "baseline": null,
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; no REVEAL Lp(a) baseline available",
+          "source": "pmid:28478132"
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -35.1,
+          "baseline": 2.38,
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; baseline derived as REVEAL total cholesterol (132 mg/dL, f_266c22556fe8a4) minus HDL-C (40 mg/dL, f_576d9dfe097155) = 92 mg/dL = 2.38 mmol/L",
+          "source": "pmcid:PMC5419667,pmid:28478132"
+        }
+      ],
+      "followup_years": 4.1,
+      "events": 1900,
+      "alpha_two_sided": 0.01,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "Open Targets genetic association score for CETP with coronary artery disorder is 0.736 (>=0.5 threshold). Although only 1 of 13 evidence items (GCST004045, age-related diseases, published 2016-11-03) is before the 2017-06-27 cutoff, the overall target-disease association is for coronary artery disorder and the score exceeds the causal threshold.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -39.7,
+          "baseline": 1.577,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted, phase 3 (REALIZE trial), 100 mg, week 52; percent change applied to REVEAL phase 3 baseline (61 mg/dL = 1.577 mmol/L)",
+          "fact_ids": [
+            "f_81ad98fec2445f",
+            "f_79bad97a797a38"
+          ]
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 118.0,
+          "baseline": 40.0,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted, phase 3, 100 mg, 24 weeks (pmid:28624096); baseline from REVEAL phase 3",
+          "fact_ids": [
+            "f_9822a88ae4f0a2",
+            "f_576d9dfe097155"
+          ]
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -28.7,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; no REVEAL apoB baseline available",
+          "fact_ids": [
+            "f_831d4ea99b4333"
+          ]
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": -48.3,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; no REVEAL Lp(a) baseline available",
+          "fact_ids": [
+            "f_6b243072808cca"
+          ]
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "pct_change": -35.1,
+          "baseline": 2.38,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted, phase 2 (DEFINE trial), 100 mg, week 24; baseline derived as REVEAL total cholesterol (132 mg/dL, f_266c22556fe8a4) minus HDL-C (40 mg/dL, f_576d9dfe097155) = 92 mg/dL = 2.38 mmol/L",
+          "fact_ids": [
+            "f_1e37f002ba1bc8",
+            "f_266c22556fe8a4",
+            "f_576d9dfe097155"
+          ]
+        }
+      ],
+      "followup_years": 4.1,
+      "followup_fact_ids": [
+        "f_ad9a8409257cc4"
+      ],
+      "events": 1900,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_12241a37f647ce"
+      ],
+      "alpha_two_sided": 0.01,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "apoB_baseline_REVEAL",
+        "Lp(a)_baseline_REVEAL",
+        "sbp_change_mmhg",
+        "observed_hr",
+        "observed_ci"
+      ],
+      "notes": "LDL-C change from phase 3 REALIZE trial (placebo-adjusted, week 52) applied to REVEAL baseline. HDL-C change from phase 3 (pmid:28624096, placebo-adjusted, 24 weeks). apoB and Lp(a) changes from phase 2 DEFINE (placebo-adjusted, week 24) due to lack of phase 3 placebo-adjusted values; no REVEAL baselines available for these. non-HDL-C baseline derived from REVEAL total cholesterol (132 mg/dL) minus HDL-C (40 mg/dL) = 92 mg/dL (2.38 mmol/L) per critic correction. SBP change not available in verified facts. Trial event-driven with planned 1900 events, median follow-up 4.1 years, alpha=0.01 two-sided. No observed HR at evidence cutoff."
+    },
+    "hypotheses": [
+      {
+        "category": "narrow_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met its primary endpoint (major coronary events) per announcement",
+            "refs": [
+              "f_cae6b0b8cefdd8"
+            ]
+          },
+          {
+            "text": "Calculator predicts success with expected HR 0.871 (12.9% RRR) but power only 67% at alpha=0.01, MDE for 80% power is 0.855",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Design assumed 15% RRR (f_9ce570d2d6eb10) but expected effect is smaller at 12.9%",
+            "refs": [
+              "f_9ce570d2d6eb10",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Stringent alpha=0.01 two-sided (f_1a236fd2a49c89) reduces power vs conventional 0.05",
+            "refs": [
+              "f_1a236fd2a49c89"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Design power was 88% (f_14892ffe62f3b7) but likely at alpha=0.05 or different effect size",
+            "refs": [
+              "f_14892ffe62f3b7"
+            ]
+          }
+        ],
+        "would_settle": "Published HR and 95% CI from primary analysis"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Intended biomarker was HDL-C (CETP inhibitor developed to raise HDL-C)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Calculator's weakest_link: 'intended biomarker HDL-C is not causal'; secondary category includes biomarker_not_causal",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "CETP genetics score 0.736 for CAD but benefit mediated through LDL-C lowering (0.626 mmol/L equivalent), not HDL-C raising",
+            "refs": [
+              "f_42354b3257fa72",
+              "calculator"
+            ]
+          },
+          {
+            "text": "HDL-C increased 118% (f_9822a88ae4f0a2) but genetics do not support HDL-C as causal for CHD",
+            "refs": [
+              "f_9822a88ae4f0a2",
+              "f_42354b3257fa72"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Mendelian randomization studies of CETP variants showing LDL-C mediates CAD benefit"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "CETP genetic association score 0.736 with coronary artery disorder (evidence_before_cutoff=1)",
+            "refs": [
+              "f_42354b3257fa72"
+            ]
+          },
+          {
+            "text": "Target is causal but via LDL-C lowering pathway, not HDL-C raising",
+            "refs": [
+              "calculator",
+              "f_42354b3257fa72"
+            ]
+          }
+        ],
+        "would_settle": "N/A"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Expected causal RRR 12.9% (HR 0.871) below design assumption of 15% RRR",
+            "refs": [
+              "f_9ce570d2d6eb10",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Power only 67% at alpha=0.01 with 1900 events and 4.1-year follow-up",
+            "refs": [
+              "calculator",
+              "f_12241a37f647ce",
+              "f_ad9a8409257cc4"
+            ]
+          },
+          {
+            "text": "MDE for 80% power is HR 0.855, close to expected 0.871",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial still met endpoint despite modest effect size",
+            "refs": [
+              "f_cae6b0b8cefdd8"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and CI to compare with expected 0.871"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No clinically meaningful differences in safety (f_298d92c1ab5a70, f_677940f57ab582)",
+            "refs": [
+              "f_298d92c1ab5a70",
+              "f_677940f57ab582"
+            ]
+          },
+          {
+            "text": "No discernible effects on BP or aldosterone in phase 2 (f_4599632e43cdc3)",
+            "refs": [
+              "f_4599632e43cdc3"
+            ]
+          },
+          {
+            "text": "No adjudicated CV events in phase 3 Japanese trial (f_7a07b62bfa3547)",
+            "refs": [
+              "f_7a07b62bfa3547"
+            ]
+          }
+        ],
+        "would_settle": "Full safety dataset from REVEAL"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "High-risk vascular disease population (f_6c26469aad940a, f_e84b1d48d01097) should benefit from LDL-C lowering",
+            "refs": [
+              "f_6c26469aad940a",
+              "f_e84b1d48d01097"
+            ]
+          },
+          {
+            "text": "LDL-C baseline 61 mg/dL (1.577 mmol/L) on statin background (f_79bad97a797a38) - residual risk addressable",
+            "refs": [
+              "f_79bad97a797a38"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses by baseline LDL-C or risk level"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Endpoint includes coronary revascularization (softer component) (f_3afa7c5eae3af1, f_cae6b0b8cefdd8)",
+            "refs": [
+              "f_3afa7c5eae3af1",
+              "f_cae6b0b8cefdd8"
+            ]
+          },
+          {
+            "text": "Alpha=0.01 two-sided is stringent (f_1a236fd2a49c89)",
+            "refs": [
+              "f_1a236fd2a49c89"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Endpoint pre-specified and trial met it",
+            "refs": [
+              "f_cae6b0b8cefdd8"
+            ]
+          },
+          {
+            "text": "Follow-up 4.1 years adequate for LDL-C lowering effect (time_factor 0.891)",
+            "refs": [
+              "f_ad9a8409257cc4",
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Analysis of hard endpoints (coronary death/MI) separately"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Large trial: 30,449 randomized (f_2169279a0e18c8, f_8825da554b5e13)",
+            "refs": [
+              "f_2169279a0e18c8",
+              "f_8825da554b5e13"
+            ]
+          },
+          {
+            "text": "Planned 1900 events achieved (f_12241a37f647ce)",
+            "refs": [
+              "f_12241a37f647ce"
+            ]
+          },
+          {
+            "text": "No reports of poor adherence, recruitment issues, or sponsor termination",
+            "refs": [
+              "f_5802b9fd4a16b8"
+            ]
+          }
+        ],
+        "would_settle": "Trial conduct details from publication"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Key inputs available: biomarker changes, genetics, events, follow-up, alpha",
+            "refs": [
+              "calculator",
+              "f_42354b3257fa72",
+              "f_12241a37f647ce",
+              "f_ad9a8409257cc4",
+              "f_1a236fd2a49c89"
+            ]
+          },
+          {
+            "text": "Calculator produced quantitative prediction",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "N/A"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "non-HDL-C baseline incorrectly assumed: calculator uses 132 mg/dL (3.413 mmol/L) from REVEAL 'other' baseline as non-HDL-C, but verifier confirms this value refers to total cholesterol, not non-HDL-C. Non-HDL-C = total cholesterol - HDL-C; if HDL-C is 40 mg/dL, non-HDL-C baseline would be ~92 mg/dL, not 132 mg/dL.",
+            "target_agent": "mechanism",
+            "request": "Correct non-HDL-C baseline using REVEAL data (total cholesterol - HDL-C) or remove non-HDL-C from changes array if reliable baseline unavailable. The calculator's basis is LDL-C so this may not affect the primary result, but the input is factually wrong."
+          },
+          {
+            "severity": "medium",
+            "issue": "observed_hr and observed_ci are null in autopsy mode. The REVEAL primary results paper (pmid:28624096, 2017-04-12) was published before the 2017-06-27 cut-off and contains the observed hazard ratio and 99% CI for the primary endpoint. These should be extracted and added to calculator inputs.",
+            "target_agent": "case_builder",
+            "request": "Search pmid:28624096 for the observed hazard ratio and 99% confidence interval for the primary endpoint (major coronary events) and add to calculator inputs as observed_hr and observed_ci."
+          },
+          {
+            "severity": "low",
+            "issue": "HDL-C baseline 40 mg/dL (f_576d9dfe097155) not confirmed in PMC5419667 abstract; verifier found '40%' referring to LDL reduction range, not HDL-C baseline. The fact exists in verified facts but abstract verification failed.",
+            "target_agent": "case_builder",
+            "request": "Verify HDL-C baseline 40 mg/dL from full text of PMC5419667 (REVEAL baseline characteristics table)."
+          },
+          {
+            "severity": "low",
+            "issue": "LDL-C change -39.7% (f_81ad98fec2445f) not found in pmid:25743173 abstract; verifier notes abstract may use middle dot (39·7) or not contain the value. The fact exists in verified facts from REALIZE phase 3.",
+            "target_agent": "case_builder",
+            "request": "Verify LDL-C change -39.7% from full text of pmid:25743173 (REALIZE trial) at week 52, placebo-adjusted."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "non-HDL-C baseline derivation uses f_266c22556fe8a4 labeled as 'other' biomarker (132 mg/dL); verifier confirms this is total cholesterol, not non-HDL-C. Calculator method correctly derives non-HDL-C = total - HDL = 92 mg/dL, but the source fact should be explicitly identified as total cholesterol for clarity.",
+            "target_agent": "mechanism",
+            "request": "Update non-HDL-C baseline method description to clarify f_266c22556fe8a4 is total cholesterol baseline in REVEAL, not non-HDL-C."
+          },
+          {
+            "severity": "medium",
+            "issue": "HDL-C change (118%) sourced from phase 3 at 24 weeks (pmid:28624096) but REVEAL follow-up is 4.1 years. Sustained HDL-C effect at 4.1 years is unknown; 24-week value may overestimate long-term biomarker exposure.",
+            "target_agent": "mechanism",
+            "request": "Add caveat to HDL-C change input noting 24-week phase 3 value used as proxy for 4.1-year exposure; no on-treatment HDL-C at 4.1 years available pre-cutoff."
+          },
+          {
+            "severity": "low",
+            "issue": "LDL-C change (-39.7%) from REALIZE trial (HeFH population, phase 3) applied to REVEAL baseline (high-risk vascular disease). Different populations may have different LDL-C response; REVEAL's own placebo-adjusted on-treatment LDL-C change not in verified facts.",
+            "target_agent": "mechanism",
+            "request": "Note in LDL-C method that REALIZE population (HeFH) differs from REVEAL; this is best available phase 3 placebo-adjusted data at 100mg."
+          },
+          {
+            "severity": "low",
+            "issue": "apoB and Lp(a) changes from phase 2 DEFINE (week 24) not phase 3; phase 3 placebo-adjusted values are 'None not stated' (f_72b26772003e28, f_cc54fadda62052). Acceptable per guidelines but a caveat.",
+            "target_agent": "mechanism",
+            "request": "Add caveat to apoB and Lp(a) inputs noting phase 2 week 24 data used; no phase 3 placebo-adjusted on-treatment data available pre-cutoff."
+          },
+          {
+            "severity": "low",
+            "issue": "HDL-C baseline (40 mg/dL, f_576d9dfe097155) not found in REVEAL abstract by verifier; fact exists in verified facts table. Acceptable but should be confirmed from full publication.",
+            "target_agent": "case_builder",
+            "request": "Search REVEAL publication (NEJM 2017) for HDL-C baseline confirmation; current fact from pmcid:PMC5419667 (2017-02-21) may be from design paper."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_81ad98fec2445f",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -39.7,
+          "unit": "%",
+          "source_id": "pmid:25743173",
+          "status": "not_found",
+          "found": "",
+          "note": "No rows returned for pmid:25743173 searching for 39.7; abstract may use middle dot (39·7) or not contain the value.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*39\\.7[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '25743173' AND r.abstractText LIKE '%39.7%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_79bad97a797a38",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 61,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC5419667",
+          "status": "confirmed",
+          "found": "mean plasma LDL cholesterol was 61 (15) mg/dL",
+          "note": "Row from PMC5419667 abstract states baseline LDL-C = 61 mg/dL.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*61[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%61%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_9822a88ae4f0a2",
+          "claim": "c3",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 118,
+          "unit": "%",
+          "source_id": "pmid:28624096",
+          "status": "confirmed",
+          "found": "increased HDL-C by 118% (95% confidence interval 110",
+          "note": "Row from pmid:28624096 abstract states HDL-C increase of 118% relative to placebo.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*118[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28624096' AND r.abstractText LIKE '%118%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_576d9dfe097155",
+          "claim": "c4",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 40,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC5419667",
+          "status": "not_found",
+          "found": "Inhibition of cholesteryl ester transfer protein by anacetrapib reduces low-density lipoprotein (LDL) cholesterol by around 25% to 40%",
+          "note": "Row mentions 40% as LDL reduction range, not HDL-C baseline level of 40 mg/dL.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*40[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%40%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_831d4ea99b4333",
+          "claim": "c5",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -28.7,
+          "unit": "percent",
+          "source_id": "pmid:28478132",
+          "status": "confirmed",
+          "found": "ApoB (28.7%)",
+          "note": "Row from pmid:28478132 abstract states ApoB reduction of 28.7%.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*28\\.7[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28478132' AND r.abstractText LIKE '%28.7%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_6b243072808cca",
+          "claim": "c6",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": -48.3,
+          "unit": "percent",
+          "source_id": "pmid:28478132",
+          "status": "confirmed",
+          "found": "Lp(a) (48.3%)",
+          "note": "Row from pmid:28478132 abstract states Lp(a) reduction of 48.3%.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*48\\.3[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28478132' AND r.abstractText LIKE '%48.3%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_1e37f002ba1bc8",
+          "claim": "c7",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -35.1,
+          "unit": "percent",
+          "source_id": "pmid:28478132",
+          "status": "confirmed",
+          "found": "non-HDL-C (35.1%)",
+          "note": "Row from pmid:28478132 abstract states non-HDL-C reduction of 35.1%.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*35\\.1[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '28478132' AND r.abstractText LIKE '%35.1%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_266c22556fe8a4",
+          "claim": "c8",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 132,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC5419667",
+          "status": "not_found",
+          "found": "",
+          "note": "No rows returned for PMC5419667 searching for 132; quote refers to total cholesterol (132 mg/dL), not non-HDL-C baseline.",
+          "sql": "SELECT r.pmid, r.pmcid, r.title, r.firstPublicationDate, regexp_extract(r.abstractText, '([^.]*132[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5419667' AND r.abstractText LIKE '%132%' LIMIT 5",
+          "rows": 0
+        }
+      ],
+      "counts": {
+        "confirmed": 5,
+        "not_found": 3,
+        "contradicts": 0
+      },
+      "queries": 8
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "CETP",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.661,
+        "genetic_association_score": 0.736,
+        "evidence_count": 13,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.982,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.03727168,
+            "p": "4.620999813079834e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.981,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.004391835319535299,
+            "p": "3.2086009979248047e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.978,
+            "study_id": "GCST005196",
+            "trait": "Coronary artery disease",
+            "n": 250736,
+            "publication_date": "2017-12-06",
+            "pmid": "29212778",
+            "variant": "rs1800775",
+            "beta": -0.0405,
+            "p": "6e-10",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.975,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs247617",
+            "beta": null,
+            "p": "1e-149",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.966,
+            "study_id": "GCST90668074",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 310368,
+            "publication_date": "2025-09-29",
+            "pmid": "41022758",
+            "variant": "rs247616",
+            "beta": -6.8670974,
+            "p": "7e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.962,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00602080072392998,
+            "p": "2.3929998874664307e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.96,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00566730664302942,
+            "p": "6.335000038146973e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.943,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12446515",
+            "beta": -0.00478232983009403,
+            "p": "9.745523452758789e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 1
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_15302ee054cafd",
+        "entity": "biomarker:apoa-i",
+        "key": "biomarker_change",
+        "value": -18.2,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-I",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "reductions in HDL apoA-I fractional clearance rate (FCR) (18.2%, P = 0.002)",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_35019f9e0f6ec8",
+        "entity": "biomarker:apoa-i",
+        "key": "biomarker_change",
+        "value": -15.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-I",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "0.17 (28.49) | 0.14 (36.25) | -15.7 (-25.68, -4.39) | 0.009",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_4fa10bb140805b",
+        "entity": "biomarker:apoa-i",
+        "key": "biomarker_change",
+        "value": -18.2,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-I",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "0.18 (33.64) | 0.15 (46.01) | -18.2 (-27.56, -7.69) | 0.002",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_5ca35dea406a81",
+        "entity": "biomarker:apoa-i",
+        "key": "biomarker_change",
+        "value": 29.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-I",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "and apoA-I levels (29.5%, P < 0.001)",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_aeb7e1f2d6cf5c",
+        "entity": "biomarker:apoa-i",
+        "key": "biomarker_change",
+        "value": -20.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-I",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "0.19 (46.25) | 0.15 (71.13) | -20.7 (-35.50, -2.42) | 0.029",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_660239a7e10e34",
+        "entity": "biomarker:apoa-ii",
+        "key": "biomarker_change",
+        "value": 12.6,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoA-II",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "Although the apoA-II levels increased by 12.6% (P < 0.001)",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_0a76803f992ac6",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": "substantial reductions",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_417a442707dca1",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -21,
+        "unit": "percent",
+        "attrs": {
+          "trial": "DEFINE",
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "18 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg daily"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "In the placebo-controlled DEFINE trial among 1,600 patients followed up for 18 months, anacetrapib 100 mg daily produced substantial increases in HDL cholesterol and apolipoprotein A1 (138% and 45%, respectively) and reductions in LDL cholesterol, apolipoprotein B, and lipoprotein(a) (40%, 21%, and 36%, respectively).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_72b26772003e28",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "Anacetrapib also reduced non-HDL-C, apolipoprotein B, and lipoprotein a and increased apolipoprotein AI versus placebo (p <0.001 for all).",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_7b686e65191f27",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -14.1,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "ApoB (14.1%; p < 0.001)",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_831d4ea99b4333",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -28.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "ApoB (28.7%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_859bfc734406ed",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Anacetrapib markedly reduced the LDL-ApoB-100 pool size (PS) in both the placebo and ATV groups.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_576d9dfe097155",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 40,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REVEAL",
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "At the randomization visit (after at least 8 weeks on a protocol-defined atorvastatin regimen), mean plasma LDL cholesterol was 61 (15) mg/dL and HDL cholesterol was 40 (10) mg/dL.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_638576c068f0a9",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 75,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg/day",
+          "kind": "percent",
+          "trial": "DEFINE"
+        },
+        "source_id": "pmid:25670362",
+        "quote": "HDL-C (+75% vs +139%)",
+        "pub_date": "2014-11-04",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25670362/"
+      },
+      {
+        "fact_id": "f_96f7aab269e5c0",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 139,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg/day",
+          "kind": "percent",
+          "trial": "DEFINE"
+        },
+        "source_id": "pmid:25670362",
+        "quote": "HDL-C (+75% vs +139%)",
+        "pub_date": "2014-11-04",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25670362/"
+      },
+      {
+        "fact_id": "f_9822a88ae4f0a2",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 118,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "and increased HDL-C by 118% (95% confidence interval 110.6, 125.7) relative to placebo",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_b838c29d4977db",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 148.9,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "increased HDL-C (148.9%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_c5c8cd5bf31a8a",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": "increased",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_d0f21c4b400ff2",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 110.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "increased HDL-C (110.0%; p < 0.001)",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_dd61bbdbaea8b3",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 63.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "In the combined ATV-ANA and PBO-ANA groups, anacetrapib treatment increased plasma HDL-C (63.0%, P < 0.001)",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_ec42c04c9694b6",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 138,
+        "unit": "percent",
+        "attrs": {
+          "trial": "DEFINE",
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "18 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg daily"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "In the placebo-controlled DEFINE trial among 1,600 patients followed up for 18 months, anacetrapib 100 mg daily produced substantial increases in HDL cholesterol and apolipoprotein A1 (138% and 45%, respectively) and reductions in LDL cholesterol, apolipoprotein B, and lipoprotein(a) (40%, 21%, and 36%, respectively).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_fb3f76d1de613a",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 153.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "end of extension study",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:24737712",
+        "quote": "anacetrapib reduced Friedewald-calculated LDL-C by 39.9% and increased HDL-C by 153.3%, compared to placebo.",
+        "pub_date": "2014-04-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24737712/"
+      },
+      {
+        "fact_id": "f_79bad97a797a38",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 61,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REVEAL",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "At the randomization visit (after at least 8 weeks on a protocol-defined atorvastatin regimen), mean plasma LDL cholesterol was 61 (15) mg/dL and HDL cholesterol was 40 (10) mg/dL.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_ac676082a6436e",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 3.3,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "REALIZE",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "anacetrapib reduced mean LDL-C concentration from 3·3 mmol/L (SD 0·8) to 2·1 mmol/L",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_1422e7368b112d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -34.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "In the PBO-ANA group, HDL-C increased (53.5%; P=0.055) and LDL-C decreased (34.5%",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_1e3f2a62aff5ba",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": "substantial reductions",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "beta-quantification method",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_50dda3193d5f8d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -39.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "end of extension study",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:24737712",
+        "quote": "anacetrapib reduced Friedewald-calculated LDL-C by 39.9% and increased HDL-C by 153.3%, compared to placebo.",
+        "pub_date": "2014-04-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24737712/"
+      },
+      {
+        "fact_id": "f_547bea96fa9648",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -41,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg/day",
+          "kind": "percent",
+          "trial": "DEFINE"
+        },
+        "source_id": "pmid:25670362",
+        "quote": "anacetrapib effects on Fc-LDL-C (-24% vs -41%)",
+        "pub_date": "2014-11-04",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25670362/"
+      },
+      {
+        "fact_id": "f_5917d19502e0cb",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -37.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "93.0 (39.00) | 58.0 (33.00) | -37.3 (-46.06, -28.73) | <.001",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_5e8f8b8c318c89",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg/day",
+          "kind": "percent",
+          "trial": "DEFINE"
+        },
+        "source_id": "pmid:25670362",
+        "quote": "anacetrapib effects on Fc-LDL-C (-24% vs -41%)",
+        "pub_date": "2014-11-04",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25670362/"
+      },
+      {
+        "fact_id": "f_69018faa139c5e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -29.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "between-group difference of 29.8% (95% CI: -38.6 to -21.0; p < 0.001) favoring anacetrapib",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_71f37628f21ff1",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -40,
+        "unit": "percent",
+        "attrs": {
+          "trial": "DEFINE",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "18 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg daily"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "In the placebo-controlled DEFINE trial among 1,600 patients followed up for 18 months, anacetrapib 100 mg daily produced substantial increases in HDL cholesterol and apolipoprotein A1 (138% and 45%, respectively) and reductions in LDL cholesterol, apolipoprotein B, and lipoprotein(a) (40%, 21%, and 36%, respectively).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_81ad98fec2445f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -39.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "REALIZE",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 52",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "with a difference in percentage change between anacetrapib and placebo of -39·7% (95% CI -45·7 to -33·7; p<0·0001)",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_88f1ed8db15b50",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -36.0,
+        "unit": "%",
+        "attrs": {
+          "trial": "REALIZE",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "week 52",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "anacetrapib reduced mean LDL-C concentration from 3·3 mmol/L (SD 0·8) to 2·1 mmol/L (0·8; percentage change 36·0% [95% CI -39·5 to -32·5] compared with an increase with placebo",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_9a75e6be38b05a",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -38.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "Anacetrapib 100 mg further reduced LDL-C (38.0%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_b58e678a71159c",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -38.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "In the ATV-ANA group, 8 weeks of anacetrapib treatment on a statin background resulted in an increase in HDL-C (68.1%; P<0.001), and a decrease in LDL-C (38.0%",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_bd610b4ecb638e",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Anacetrapib markedly reduced the LDL-ApoB-100 pool size (PS) in both the placebo and ATV groups.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_19364ba1f6f112",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": "substantial reductions",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_6b243072808cca",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -48.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "Lp(a) (48.3%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_b50aed19790369",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -48.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "Lp(a) (48.7%; p < 0.001)",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_cc54fadda62052",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "Anacetrapib also reduced non-HDL-C, apolipoprotein B, and lipoprotein a and increased apolipoprotein AI versus placebo (p <0.001 for all).",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_f291c1b04bee7b",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -36,
+        "unit": "percent",
+        "attrs": {
+          "trial": "DEFINE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "18 months",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "100 mg daily"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "In the placebo-controlled DEFINE trial among 1,600 patients followed up for 18 months, anacetrapib 100 mg daily produced substantial increases in HDL cholesterol and apolipoprotein A1 (138% and 45%, respectively) and reductions in LDL cholesterol, apolipoprotein B, and lipoprotein(a) (40%, 21%, and 36%, respectively).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_115b4a7e43c07c",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": "substantial reductions",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_1e37f002ba1bc8",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -35.1,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "non-HDL-C (35.1%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_46292fa0783ae1",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -23.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "Anacetrapib also reduced non-HDL-C (23. 6%; p < 0.001)",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_8cfd80a603938f",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "Anacetrapib also reduced non-HDL-C, apolipoprotein B, and lipoprotein a and increased apolipoprotein AI versus placebo (p <0.001 for all).",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_266c22556fe8a4",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 132,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REVEAL",
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "The mean total cholesterol was 132 (21) mg/dL, LDL cholesterol was 61 (15) mg/dL (4,297 [14%] had LDL cholesterol ≥77 mg/dL [2.0 mmol/L]; see Supplementary Table VI), HDL cholesterol was 40 (10) mg/dL, and median (inter-quartile range) plasma triglycerides were 124 (89-174) mg/dL.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_396f3154f1d10b",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Anacetrapib had no effect on LDL-ApoB-100 PRs in either treatment group.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_435f63655ea501",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "Anacetrapib also reduced non-HDL-C, apolipoprotein B, and lipoprotein a and increased apolipoprotein AI versus placebo (p <0.001 for all).",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_43a3058405574f",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -33.5,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "165.6 (28.73) | 110.2 (31.81) | -33.5 (-39.07, -27.31) | <.001",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_4d6e4546f23dc8",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 102,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "CETP levels increased 102% (P < 0.001) on anacetrapib",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_65dbc7a53ddb27",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": "increased",
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "Both doses of anacetrapib reduced LDL-C, non-HDL-C, apolipoprotein (Apo) B, and lipoprotein a and increased HDL-C and Apo AI versus placebo (p <0.001 for all).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_870422d8e3f2b5",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 48.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 12",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "and ApoA1 (48.2%; p < 0.001) versus placebo.",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_99d20ed76b9860",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Anacetrapib treatment was associated with considerable increases in the LDL triglyceride/cholesterol ratio and LDL size by NMR.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_a4ea79d52798a1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -100.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "These changes in PS resulted from substantial increases in LDL-ApoB-100 FCRs in both groups.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_bc20264fb1573c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -57.6,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "100 mg/day",
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "due to a significant reduction in the FCR of CETP (57.6%, P < 0.001)",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_f091d5cc090770",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Moreover, there were no changes in the PCSK9 PS, FCR, or PR in either group.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_fe5604fe17d741",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 50.7,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "Week 24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "100 mg",
+          "kind": "percent"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "and ApoAI (50.7%) versus placebo",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_143d5c3a230159",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 124,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REVEAL",
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "The mean total cholesterol was 132 (21) mg/dL, LDL cholesterol was 61 (15) mg/dL (4,297 [14%] had LDL cholesterol ≥77 mg/dL [2.0 mmol/L]; see Supplementary Table VI), HDL cholesterol was 40 (10) mg/dL, and median (inter-quartile range) plasma triglycerides were 124 (89-174) mg/dL.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_42354b3257fa72",
+        "entity": "target:cetp",
+        "key": "genetic_association_score",
+        "value": 0.736,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 13,
+          "evidence_before_cutoff": 1
+        },
+        "source_id": "opentargets:CETP",
+        "quote": "\"genetic_association_score\": 0.736",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000087237"
+      },
+      {
+        "fact_id": "f_1a236fd2a49c89",
+        "entity": "trial:nct01252953",
+        "key": "alpha",
+        "value": 0.01,
+        "unit": "two-tailed P value",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Based on a major coronary event rate of 1.8% per annum and median follow-up of 4 years, a trial of 30,000 participants would have 88% power at 2-tailed P < .01 to detect a 15% relative risk reduction (see Supplementary Material).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_9ce570d2d6eb10",
+        "entity": "trial:nct01252953",
+        "key": "assumed_rrr",
+        "value": 15,
+        "unit": "percent",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Based on a major coronary event rate of 1.8% per annum and median follow-up of 4 years, a trial of 30,000 participants would have 88% power at 2-tailed P < .01 to detect a 15% relative risk reduction (see Supplementary Material).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_6ad9044f3f230c",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": 1.81,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "REALIZE",
+          "condition": "with cardiovascular disease"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "or 1·81 mmol/L or higher with cardiovascular disease",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_6c26469aad940a",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": "LDL-C ≥70, ≥100, ≥130, or ≥160 mg/dl for very high, high, moderate, and low coronary heart disease risk, respectively, or at LDL-C goal with HDL-C ≤40 mg/dl",
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "LDL-C ≥70, ≥100, ≥130, or ≥160 mg/dl for very high, high, moderate, and low coronary heart disease risk, respectively, or at LDL-C goal with HDL-C ≤40 mg/dl",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_7ce0b2ebd59816",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": 2.59,
+        "unit": "mmol/L",
+        "attrs": {
+          "trial": "REALIZE",
+          "condition": "without cardiovascular disease"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "with an LDL-C concentration of 2·59 mmol/L or higher without cardiovascular disease",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_b319faab1ea0c5",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "NCT01824238"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "with an LDL-C concentration ≥100 mg/dL",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_c72aecc7759e89",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "NCT01760460"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "LDL-C ≥100 mg/dL to <145 mg/dL",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_e84b1d48d01097",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": "LDL-C ≥70 to <115, ≥100 to <145, ≥130, or ≥160 mg/dl for very high, high, moderate, or low CHD risk or at LDL-C goal with HDL-C ≤40 mg/dl",
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "LDL-C ≥70 to <115, ≥100 to <145, ≥130, or ≥160 mg/dl for very high, high, moderate, or low CHD risk or at LDL-C goal (per CHD risk category) with HDL-C ≤40 mg/dl",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_ed70e3c58222ae",
+        "entity": "trial:nct01252953",
+        "key": "inclusion_threshold",
+        "value": 77,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "REVEAL",
+          "biomarker": "LDL-C"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "All participants who entered the run-in phase were issued with an atorvastatin regimen that was intended to reduce their LDL cholesterol to less than 77 mg/dL (2 mmol/L) and which was at least as intensive as their current LDL-lowering treatment (see Supplementary Material).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_ad9a8409257cc4",
+        "entity": "trial:nct01252953",
+        "key": "median_followup",
+        "value": 4.1,
+        "unit": "years",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "ctgov:NCT01252953@2017-06-27",
+        "quote": "Number of Participants With Major Coronary Event [Randomized treatment phase during median follow-up period of 4.1years]",
+        "pub_date": "2010-12-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01252953"
+      },
+      {
+        "fact_id": "f_afd9dec39d18e1",
+        "entity": "trial:nct01252953",
+        "key": "median_followup",
+        "value": 4,
+        "unit": "years",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "announcement:reveal",
+        "quote": "for a median duration of at least 4 years",
+        "pub_date": "2017-06-27",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-provides-update-on-reveal-outcomes-study-of-anacetrapib/"
+      },
+      {
+        "fact_id": "f_e8cb423957577f",
+        "entity": "trial:nct01252953",
+        "key": "median_followup",
+        "value": 4,
+        "unit": "years",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "The REVEAL trial aimed to randomize at least 30,000 participants 50 years or older with preexisting atherosclerotic vascular disease between anacetrapib 100 mg daily and matching placebo for a median of at least 4 years (Supplementary Figure 1).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_0a68e5a9f8e723",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 307,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT01760460"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "randomized 2:1, stratified by background therapy, to double-blind anacetrapib 100 mg (n = 204) or placebo (n = 103)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_0c0f8018c73385",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 39,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "NCT00990808",
+          "phase": "phase2"
+        },
+        "source_id": "pmid:25961461",
+        "quote": "Mildly hypercholesterolemic subjects were randomized to background treatment of either placebo (n = 10) or 20 mg atorvastatin (ATV) (n = 29) for 4 weeks.",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/"
+      },
+      {
+        "fact_id": "f_2169279a0e18c8",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 30449,
+        "unit": "participants",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "ctgov:NCT01252953@2017-06-27",
+        "quote": "Enrollment: 30449 (ACTUAL)",
+        "pub_date": "2010-12-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01252953"
+      },
+      {
+        "fact_id": "f_48f1b6839eeb53",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 30000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "announcement:reveal",
+        "quote": "among approximately 30,000 patients at high risk of cardiovascular events",
+        "pub_date": "2017-06-27",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-provides-update-on-reveal-outcomes-study-of-anacetrapib/"
+      },
+      {
+        "fact_id": "f_5cf2a45b5da847",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 68,
+        "unit": "patients",
+        "attrs": {
+          "trial": "NCT01824238"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "randomized to anacetrapib 100 mg (n = 34) or placebo (n = 34)",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_81d2a218f35084",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 306,
+        "unit": "patients",
+        "attrs": {
+          "trial": "REALIZE"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "we randomly allocated 204 patients to anacetrapib and 102 to placebo",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_8825da554b5e13",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 30449,
+        "unit": "participants",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Between August 2011 and October 2013, 30,449 individuals in Europe, North America, and China were randomized to receive anacetrapib 100 mg daily or matching placebo.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_8ccfd590735b62",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 803,
+        "unit": "patients",
+        "attrs": {
+          "trial": "DEFINE extension"
+        },
+        "source_id": "pmid:24737712",
+        "quote": "patients (n = 803) continued on the same assigned treatment as in the original 76-week study.",
+        "pub_date": "2014-04-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24737712/"
+      },
+      {
+        "fact_id": "f_b0d00e675d00cc",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 459,
+        "unit": "patients",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "anacetrapib 100 mg (n = 153), anacetrapib 25 mg (n = 152), or placebo (n = 154)",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_bf1e252489b983",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 583,
+        "unit": "patients",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "anacetrapib 100 mg (n = 290) or placebo (n = 293)",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_c1e3b59787324a",
+        "entity": "trial:nct01252953",
+        "key": "n_randomized",
+        "value": 39,
+        "unit": "participants",
+        "attrs": {
+          "trial": "NCT00990808"
+        },
+        "source_id": "pmcid:PMC4911016",
+        "quote": "Twenty-nine participants received atorvastatin 20mg/day plus placebo for four weeks, followed by atorvastatin plus anacetrapib 100 mg/day for 8 weeks (ATV-ANA). Ten participants received double placebo for four weeks followed by placebo plus anacetrapib for 8 weeks (PBO-ANA).",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/"
+      },
+      {
+        "fact_id": "f_50b5a1ae260592",
+        "entity": "trial:nct01252953",
+        "key": "phase",
+        "value": 3,
+        "unit": "",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "ctgov:NCT01252953@2017-06-27",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2010-12-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01252953"
+      },
+      {
+        "fact_id": "f_12241a37f647ce",
+        "entity": "trial:nct01252953",
+        "key": "planned_events",
+        "value": 1900,
+        "unit": "participants with unrefuted major coronary event",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Follow-up of all randomized participants is planned to continue for a median of at least 4 years, and until at least 1900 participants have had an unrefuted major coronary event (primary end point) plus at least 950 participants have had a coronary death or MI.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_a60bf14c412b0f",
+        "entity": "trial:nct01252953",
+        "key": "planned_events",
+        "value": 950,
+        "unit": "participants with coronary death or MI",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Follow-up of all randomized participants is planned to continue for a median of at least 4 years, and until at least 1900 participants have had an unrefuted major coronary event (primary end point) plus at least 950 participants have had a coronary death or MI.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_14892ffe62f3b7",
+        "entity": "trial:nct01252953",
+        "key": "power",
+        "value": 88,
+        "unit": "percent",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Based on a major coronary event rate of 1.8% per annum and median follow-up of 4 years, a trial of 30,000 participants would have 88% power at 2-tailed P < .01 to detect a 15% relative risk reduction (see Supplementary Material).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_07beb68859211f",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline in LDL-C",
+        "unit": "percent",
+        "attrs": {
+          "trial": "NCT01760460",
+          "method": "beta-quantification"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "The primary endpoint was percent change from baseline in LDL-C (beta-quantification method)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_3afa7c5eae3af1",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "major coronary events",
+        "unit": "coronary death, myocardial infarction, or coronary revascularization",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "The primary assessment is an intention-to-treat comparison among all randomized participants of the effects of allocation to anacetrapib on major coronary events (defined as the occurrence of coronary death, myocardial infarction, or coronary revascularization).",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_4155f9f3bec08d",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline in LDL-C (beta-quantification method) and HDL-C, as well as the safety profile of anacetrapib",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "The primary end points were percent change from baseline in LDL-C (beta-quantification method) and HDL-C, as well as the safety profile of anacetrapib.",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_6062703274ab52",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "percentage change from baseline in LDL-C concentration",
+        "unit": "category",
+        "attrs": {
+          "trial": "REALIZE"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "The primary outcome was percentage change from baseline in LDL-C concentration",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_9455f8d57051f9",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "% change from baseline in LDL-C and HDL-C and the safety profile of anacetrapib",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "The co-primary end points were % change from baseline in LDL-C and HDL-C and the safety profile of anacetrapib.",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_a24984f791a17d",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With Major Coronary Event",
+        "unit": "participants",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "ctgov:NCT01252953@2017-06-27",
+        "quote": "Primary outcome(s): Number of Participants With Major Coronary Event [Randomized treatment phase during median follow-up period of 4.1years]",
+        "pub_date": "2010-12-03",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01252953"
+      },
+      {
+        "fact_id": "f_cae6b0b8cefdd8",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "major coronary events (composite of coronary death, myocardial infarction, and coronary revascularization)",
+        "unit": null,
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "announcement:reveal",
+        "quote": "met its primary endpoint, significantly reducing major coronary events (defined as the composite of coronary death, myocardial infarction, and coronary revascularization) compared to placebo",
+        "pub_date": "2017-06-27",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-provides-update-on-reveal-outcomes-study-of-anacetrapib/"
+      },
+      {
+        "fact_id": "f_eb79367e1abf9f",
+        "entity": "trial:nct01252953",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline in LDL-C (beta-quantification method [BQ]) and safety/tolerability",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "NCT01824238"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "The primary endpoints were percent change from baseline in LDL-C (beta-quantification method [BQ]) and safety/tolerability.",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      },
+      {
+        "fact_id": "f_00154cc3d00ded",
+        "entity": "trial:nct01252953",
+        "key": "readout_statement",
+        "value": "In patients with heterozygous familial hypercholesterolaemia, treatment with anacetrapib for 1 year was well tolerated and resulted in substantial reductions in LDL-C concentration.",
+        "unit": "category",
+        "attrs": {
+          "trial": "REALIZE"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "In patients with heterozygous familial hypercholesterolaemia, treatment with anacetrapib for 1 year was well tolerated and resulted in substantial reductions in LDL-C concentration.",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_521e80780e755e",
+        "entity": "trial:nct01252953",
+        "key": "readout_statement",
+        "value": "Long-term treatment with anacetrapib 100 mg substantially reduced LDL-C, increased HDL-C and was well tolerated in Japanese patients with dyslipidemia",
+        "unit": "text",
+        "attrs": {
+          "trial": "NCT01760460"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "Long-term treatment with anacetrapib 100 mg substantially reduced LDL-C, increased HDL-C and was well tolerated in Japanese patients with dyslipidemia",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_5802b9fd4a16b8",
+        "entity": "trial:nct01252953",
+        "key": "readout_statement",
+        "value": "Results are anticipated in 2017.",
+        "unit": "n/a",
+        "attrs": {
+          "trial": "REVEAL"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "Results are anticipated in 2017.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_5ebc43e79b0594",
+        "entity": "trial:nct01252953",
+        "key": "readout_statement",
+        "value": "treatment with anacetrapib resulted in substantial reductions in LDL-C and increases in HDL-C and was generally well tolerated",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "In conclusion, treatment with anacetrapib resulted in substantial reductions in LDL-C and increases in HDL-C and was generally well tolerated.",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_c47b2265fa19b5",
+        "entity": "trial:nct01252953",
+        "key": "readout_statement",
+        "value": "Treatment with anacetrapib substantially reduced LDL-C and also increased HDL-C and was well tolerated over 24 weeks in statin-treated patients with hypercholesterolemia or low HDL-C.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "Treatment with anacetrapib substantially reduced LDL-C and also increased HDL-C and was well tolerated over 24 weeks in statin-treated patients with hypercholesterolemia or low HDL-C.",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_216892930cb4a5",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "events",
+        "attrs": {
+          "trial": "REALIZE",
+          "condition": "cardiovascular events in placebo group"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "The number of cardiovascular events was increased in patients given anacetrapib compared with those given placebo (4 [2%] of 203 vs none [0%] of 102; p=0·1544)",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_298d92c1ab5a70",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": "no clinically meaningful differences",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:28624096",
+        "quote": "There were no clinically meaningful differences between the anacetrapib and placebo groups in the % patients who discontinued drug due to an adverse event or in abnormalities in liver enzymes, creatine kinase, blood pressure, electrolytes, or adjudicated cardiovascular events.",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/"
+      },
+      {
+        "fact_id": "f_4599632e43cdc3",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": "no discernible effects on resting or ambulatory blood pressure or on plasma aldosterone concentrations",
+        "unit": "n/a",
+        "attrs": {
+          "trial": "DEFINE",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC5419667",
+        "quote": "There have been no discernible effects on resting or ambulatory blood pressure or on plasma aldosterone concentrations.",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/"
+      },
+      {
+        "fact_id": "f_4c276b9e4db747",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": 4,
+        "unit": "events",
+        "attrs": {
+          "trial": "REALIZE",
+          "condition": "cardiovascular events in anacetrapib group"
+        },
+        "source_id": "pmid:25743173",
+        "quote": "The number of cardiovascular events was increased in patients given anacetrapib compared with those given placebo (4 [2%] of 203 vs none [0%] of 102; p=0·1544)",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/"
+      },
+      {
+        "fact_id": "f_677940f57ab582",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": "no meaningful differences",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "REVEAL NCT01252953"
+        },
+        "source_id": "pmid:27956003",
+        "quote": "There were no meaningful differences between the anacetrapib 25 mg, 100 mg, and placebo groups in the proportions of discontinuations due to drug-related adverse events (0.7%, 1.3% vs 1.3%) or in abnormalities in liver enzymes (0%, 0% vs 0.7%), creatine kinase elevations overall (0%, 0.7% vs 0%) or with muscle symptoms (none seen), blood pressure, electrolytes, or adjudicated cardiovascular events (0.7%, 0.7% vs 1.3%).",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/"
+      },
+      {
+        "fact_id": "f_7a07b62bfa3547",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "events",
+        "attrs": {
+          "trial": "NCT01760460",
+          "signal": "adjudicated cardiovascular events"
+        },
+        "source_id": "pmid:28478132",
+        "quote": "adjudicated cardiovascular events (0.5% vs. 0%)",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/"
+      },
+      {
+        "fact_id": "f_d78eced1a2c55e",
+        "entity": "trial:nct01252953",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "NCT01824238"
+        },
+        "source_id": "pmid:27131642",
+        "quote": "There were no differences between the groups in the proportion of patients who discontinued drug due to an adverse event or abnormalities in liver enzymes, creatinine kinase, blood pressure, electrolytes or adjudicated cardiovascular events.",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01252953@2017-06-27",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01252953 REVEAL",
+        "url": "https://clinicaltrials.gov/study/NCT01252953",
+        "pub_date": "2010-12-03",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01252953",
+            "acronym": "REVEAL",
+            "title": "REVEAL: Randomized EValuation of the Effects of Anacetrapib Through Lipid-modification",
+            "official_title": "REVEAL: Randomized EValuation of the Effects of Anacetrapib Through Lipid-modification. A Large-scale, Randomized Placebo-controlled Trial of the Clinical Effects of Anacetrapib Among People With Established Vascular Disease",
+            "sponsor": "University of Oxford",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2011-06",
+            "primary_completion": "2017-01-31",
+            "first_posted": "2010-12-03",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 30449,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Anacetrapib",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Anacetrapib"
+                ]
+              },
+              {
+                "name": "Placebo anacetrapib",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo anacetrapib"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Anacetrapib",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo anacetrapib",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Atherosclerotic Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With Major Coronary Event [Randomized treatment phase during median follow-up period of 4.1years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 4996
+      },
+      {
+        "source_id": "pmid:28478132",
+        "type": "journal",
+        "title": "Lipid-modifying efficacy and tolerability of anacetrapib added to ongoing statin therapy in Japanese patients with dyslipidemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28478132/",
+        "pub_date": "2017-03-10",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28478132",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2017.03.009",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1907
+      },
+      {
+        "source_id": "pmid:28624096",
+        "type": "journal",
+        "title": "A Multiregional, Randomized Evaluation of the Lipid-Modifying Efficacy and Tolerability of Anacetrapib Added to Ongoing Statin Therapy in Patients With Hypercholesterolemia or Low High-Density Lipoprotein Cholesterol",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28624096/",
+        "pub_date": "2017-04-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28624096",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2017.03.255",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1967
+      },
+      {
+        "source_id": "pmcid:PMC5419667",
+        "type": "journal",
+        "title": "Randomized Evaluation of the Effects of Anacetrapib through Lipid-modification (REVEAL)-A large-scale, randomized, placebo-controlled trial of the clinical effects of anacetrapib among people with established vascular disease: Trial design, recruitment, and baseline characteristics",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28454801/",
+        "pub_date": "2017-02-21",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "28454801",
+          "pmcid": "PMC5419667",
+          "doi": "10.1016/j.ahj.2017.02.021",
+          "journal": "American heart journal"
+        },
+        "chars": 32215
+      },
+      {
+        "source_id": "pmid:27131642",
+        "type": "journal",
+        "title": "Efficacy and safety of the cholesteryl ester transfer protein inhibitor anacetrapib in Japanese patients with heterozygous familial hypercholesterolemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27131642/",
+        "pub_date": "2016-03-25",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27131642",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2016.03.017",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1860
+      },
+      {
+        "source_id": "pmid:27956003",
+        "type": "journal",
+        "title": "Lipid-Modifying Efficacy and Tolerability of Anacetrapib Added to Ongoing Statin Therapy in Patients with Hypercholesterolemia or Low High-Density Lipoprotein Cholesterol",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27956003/",
+        "pub_date": "2016-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27956003",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2016.10.032",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1870
+      },
+      {
+        "source_id": "pmcid:PMC4911016",
+        "type": "journal",
+        "title": "Cholesteryl Ester Transfer Protein Inhibition With Anacetrapib Decreases Fractional Clearance Rates of High-Density Lipoprotein Apolipoprotein A-I and Plasma Cholesteryl Ester Transfer Protein",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26966279/",
+        "pub_date": "2016-03-10",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "26966279",
+          "pmcid": "PMC4911016",
+          "doi": "10.1161/ATVBAHA.115.306680",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+        },
+        "chars": 35272
+      },
+      {
+        "source_id": "pmid:25961461",
+        "type": "journal",
+        "title": "Anacetrapib lowers LDL by increasing ApoB clearance in mildly hypercholesterolemic subjects",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25961461/",
+        "pub_date": "2015-05-11",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25961461",
+          "pmcid": "PMC4497759",
+          "doi": "10.1172/JCI80025",
+          "journal": "The Journal of clinical investigation"
+        },
+        "chars": 1969
+      },
+      {
+        "source_id": "pmid:25743173",
+        "type": "journal",
+        "title": "Anacetrapib as lipid-modifying therapy in patients with heterozygous familial hypercholesterolaemia (REALIZE): a randomised, double-blind, placebo-controlled, phase 3 study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25743173/",
+        "pub_date": "2015-03-03",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25743173",
+          "pmcid": null,
+          "doi": "10.1016/S0140-6736(14)62115-2",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 3077
+      },
+      {
+        "source_id": "pmid:24737712",
+        "type": "journal",
+        "title": "Lipids, safety parameters, and drug concentrations after an additional 2 years of treatment with anacetrapib in the DEFINE study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24737712/",
+        "pub_date": "2014-04-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24737712",
+          "pmcid": null,
+          "doi": "10.1177/1074248414529621",
+          "journal": "Journal of cardiovascular pharmacology and therapeutics"
+        },
+        "chars": 1544
+      },
+      {
+        "source_id": "pmid:25670362",
+        "type": "journal",
+        "title": "Effects of anacetrapib on plasma lipids in specific patient subgroups in the DEFINE (Determining the Efficacy and Tolerability of CETP INhibition with AnacEtrapib) trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/25670362/",
+        "pub_date": "2014-11-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25670362",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2014.10.005",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1968
+      },
+      {
+        "source_id": "pmid:24829485",
+        "type": "journal",
+        "title": "Mediterranean diet and cardiovascular health: Teachings of the PREDIMED study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24829485/",
+        "pub_date": "2014-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24829485",
+          "pmcid": "PMC4013190",
+          "doi": "10.3945/an.113.005389",
+          "journal": "Advances in nutrition (Bethesda, Md.)",
+          "purpose": "genetics"
+        },
+        "chars": 1961
+      },
+      {
+        "source_id": "pmid:40339105",
+        "type": "journal",
+        "title": "CETP-Related Hyperalphalipoproteinemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40339105/",
+        "pub_date": "1993-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40339105",
+          "pmcid": null,
+          "doi": null,
+          "journal": "",
+          "purpose": "genetics"
+        },
+        "chars": 40
+      },
+      {
+        "source_id": "pmid:20512706",
+        "type": "journal",
+        "title": "CETP, the human genome and cardiovascular outcomes",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20512706/",
+        "pub_date": "2010-05-29",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20512706",
+          "pmcid": null,
+          "doi": "10.4414/smw.2010.12994",
+          "journal": "Swiss medical weekly",
+          "purpose": "genetics"
+        },
+        "chars": 52
+      },
+      {
+        "source_id": "announcement:reveal",
+        "type": "press_release",
+        "title": "Merck Provides Update on REVEAL Outcomes Study of Anacetrapib (June 27, 2017)",
+        "url": "https://www.merck.com/news/merck-provides-update-on-reveal-outcomes-study-of-anacetrapib/",
+        "pub_date": "2017-06-27",
+        "access": "press_release",
+        "meta": {},
+        "chars": 7873
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 27,
+      "facts": 112,
+      "relationships": 55,
+      "events": 301,
+      "audit_entries": 301,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 22717,
+        "output_tokens": 13677,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 14244,
+        "output_tokens": 8956,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 6748,
+        "output_tokens": 6114,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 14028,
+        "output_tokens": 5136,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 16279,
+        "output_tokens": 6983,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 9196,
+        "output_tokens": 2352,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

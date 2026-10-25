@@ -1,0 +1,2456 @@
+{
+  "run_id": "bt-improve_it",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2014-11-17",
+  "backtest": true,
+  "readout_date": "2014-11-17",
+  "analysis_date": "2014-11-17",
+  "trial": {
+    "nct_id": "NCT00202878",
+    "acronym": "IMPROVE-IT",
+    "title": "IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)",
+    "sponsor": "Organon and Co",
+    "status": "COMPLETED",
+    "enrollment": 18144,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Hypercholesterolemia",
+      "Myocardial Infarction"
+    ],
+    "primary_completion": "2014-09-18"
+  },
+  "drug": {
+    "name": "ezetimibe",
+    "chembl_id": "CHEMBL1138",
+    "aliases": [
+      "Ezetimiba",
+      "Ezetimibe component of k-924",
+      "Ezetimibe component of liptruzet",
+      "Ezetimibe component of nexlizet",
+      "Ezetimibe component of roszet",
+      "Ezetimibe component of vytorin",
+      "Ezetrol",
+      "MK0653",
+      "NSC-758923",
+      "SCH-58235",
+      "SCH58235",
+      "Zetia",
+      "e/s",
+      "ez",
+      "eze",
+      "ezetimibe/simvastatin",
+      "ezetimibe/simvastatin 10/20 mg",
+      "mk-0653",
+      "rosuvamibe",
+      "sch 058235",
+      "sch 58235"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Niemann-Pick C1-like protein 1 inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000015520",
+        "symbol": "NPC1L1",
+        "name": "NPC1 like intracellular cholesterol transporter 1"
+      }
+    ],
+    "searched_as": "ezetimibe"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-improve_it",
+  "log_file": "logs/trace-bt-improve_it.jsonl",
+  "execution_time_seconds": 1.5,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "success",
+      "outcome_basis": "readout: \"met IMPROVE-IT met its primary endpoint.\" (announcement:improve_it)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "narrow_success",
+      "secondary_categories": [
+        "success_with_caveats"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "LDL-C change not measured"
+    },
+    "report": {
+      "headline": "IMPROVE-IT met its primary endpoint in 18,144 ACS patients (ezetimibe/simvastatin vs simvastatin), but the magnitude of benefit and on-trial LDL-C difference remain unpublished as of the 2014-11-17 data cutoff.",
+      "summary": "The phase 3 IMPROVE-IT trial randomized 18,144 acute coronary syndrome patients to ezetimibe/simvastatin or simvastatin monotherapy, targeting 5,250 primary endpoint events over a median 2.5-year follow-up. Merck announced the trial met its primary composite endpoint of cardiovascular death, nonfatal MI, unstable angina rehospitalization, coronary revascularization (≥30 days), or stroke. However, no hazard ratio, confidence interval, or on-treatment LDL-C difference in the IMPROVE-IT population has been verified in the available facts. The calculator cannot compute an expected effect because the trial's LDL-C change was not measured (category: insufficient_data, MDE HR 0.926 at 80% power). Genetic evidence for NPC1L1 is uncertain (Open Targets score 0.0). Confidence in the success assessment is medium, limited by the absence of published effect size and biomarker data.",
+      "key_evidence": [
+        "18,144 participants randomized (ClinicalTrials.gov NCT00202878)",
+        "Primary endpoint: first occurrence of cardiovascular death, nonfatal MI, rehospitalization for unstable angina, coronary revascularization (≥30 days), or stroke (Rationale and design of IMPROVE-IT)",
+        "5,250 planned primary endpoint events (Rationale and design of IMPROVE-IT)",
+        "Median follow-up: 2.5 years (Rationale and design of IMPROVE-IT)",
+        "Trial met primary endpoint per Merck announcement (Merck Announces that IMPROVE-IT Achieved Primary Endpoint)",
+        "No observed HR, 95% CI, or on-treatment LDL-C difference in verified facts (calculator)",
+        "Genetic association score for NPC1L1 and coronary artery disorder: 0.0 (opentargets:NPC1L1)",
+        "Phase 2 LDL-C reductions with ezetimibe added to statin: -22.7% to -29.1% (Effects of ezetimibe added to statin therapy on markers of cholesterol absorption and synthesis and LDL-C lowering in hyperlipidemic patients)",
+        "Minimum detectable effect HR at 80% power: 0.926 (calculator)"
+      ],
+      "what_would_change_this": "Publication of the IMPROVE-IT primary result with hazard ratio, 95% confidence interval, and on-treatment LDL-C levels in the trial population would confirm the effect size and allow validation against mechanism-based predictions.",
+      "readthrough_note": "No read-through notes provided for other NPC1L1 inhibitor programmes."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.0 for NPC1L1",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "LDL-C",
+        "detail": "intended biomarker LDL-C is causal or unknown; LDL-equivalent change None mmol/L via LDL-C change not measured",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "improve_it",
+      "ldl_equivalent_mmol": null,
+      "basis": "LDL-C change not measured",
+      "time_factor": 0.697,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": 0.926,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "LDL-C change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "no measured change in LDL-C: the effect is unknown, not zero"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "improve_it",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "LDL-C",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": null,
+          "baseline": null,
+          "method": "placebo-adjusted difference",
+          "source": ""
+        }
+      ],
+      "followup_years": 2.5,
+      "events": 5250,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "Open Targets shows NPC1L1 genetic association score 0.0 for coronary artery disorder specifically (overall 0.427). The single evidence item (FINNGEN_R12_I9_CORATHER, n=479478) has no publication date and is flagged before_cutoff: False. No genetic evidence for CAD before the 2014-11-17 cutoff; target is well-studied but evidence not supportive of causal or not_causal per rules.",
+      "intended_biomarker": "LDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": null,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted difference",
+          "fact_ids": []
+        }
+      ],
+      "followup_years": 2.5,
+      "followup_fact_ids": [
+        "f_0ae9e22c3efa1e"
+      ],
+      "events": 5250,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_7d149d8d87840c"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_c112fabab8c4ce"
+      ],
+      "missing": [
+        "placebo-adjusted LDL-C change in IMPROVE-IT or similar ACS population on statin background",
+        "measured baseline LDL-C in IMPROVE-IT",
+        "actual primary event count from readout",
+        "observed hazard ratio and confidence interval",
+        "placebo-adjusted SBP change"
+      ],
+      "notes": "No verified fact provides a placebo-adjusted LDL-C change for ezetimibe 10 mg added to simvastatin 40 mg (the IMPROVE-IT regimen) or for the IMPROVE-IT trial itself. Available phase 2 data (EASE monotherapy, add-on to atorvastatin) are within-arm changes only (placebo_adjusted: false) and in different populations. The ctgov record shows conflicting LDL-C inclusion thresholds (100 and 125 mg/dL) but no measured baseline. Follow-up (2.5 years) and events (5250 planned) come from a 2008 design paper (pmid:19061694). The 2014-11-17 announcement confirms the primary endpoint was met but provides no effect size or event counts."
+    },
+    "hypotheses": [
+      {
+        "category": "robust_success",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Large phase 3 trial (18,144 participants) with 5250 planned events and 2.5-year median follow-up met its primary endpoint",
+            "refs": [
+              "f_fcdb838b851518",
+              "f_7d149d8d87840c",
+              "f_0ae9e22c3efa1e",
+              "f_c112fabab8c4ce"
+            ]
+          },
+          {
+            "text": "Mechanism (NPC1L1 inhibition lowering LDL-C) is biologically plausible and LDL-C is established causal for CHD",
+            "refs": [
+              "f_33b2e57eaced44",
+              "f_bc236726ce6d6e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No observed HR or CI in verified facts to confirm upper confidence bound well below 1 (~0.90 or lower)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Genetic association score for NPC1L1 and coronary artery disorder is 0.0 (uncertain)",
+            "refs": [
+              "f_81ffde8e8667da"
+            ]
+          },
+          {
+            "text": "No placebo-adjusted LDL-C change measured in IMPROVE-IT population; phase 2 data (24-29% reduction) not directly applicable to add-on statin therapy in ACS",
+            "refs": [
+              "f_01594eb949ee93",
+              "f_30ce0eb7e7247d",
+              "f_3896a875bef660",
+              "f_43e9435c175e9d",
+              "f_986ef0881d5454",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Minimum detectable effect HR at 80% power is 0.926, indicating trial powered for modest effect size",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Published IMPROVE-IT primary result with HR and 95% CI"
+      },
+      {
+        "category": "narrow_success",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met primary endpoint with 5250 events and 2.5-year follow-up, implying observed HR ≤ 1 with p < 0.05",
+            "refs": [
+              "f_c112fabab8c4ce",
+              "f_7d149d8d87840c",
+              "f_0ae9e22c3efa1e"
+            ]
+          },
+          {
+            "text": "MDE HR at 80% power is 0.926, consistent with a modest effect size near the detection threshold",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Genetic evidence for NPC1L1 is uncertain (score 0.0), so mechanism prediction cannot be strongly validated",
+            "refs": [
+              "f_81ffde8e8667da"
+            ]
+          },
+          {
+            "text": "LDL-C change in the actual trial population (ezetimibe added to simvastatin 40mg in ACS) not measured in verified facts, so cannot confirm if effect matches phase 2 monotherapy predictions (~25% LDL-C reduction)",
+            "refs": [
+              "calculator",
+              "f_01594eb949ee93",
+              "f_30ce0eb7e7247d",
+              "f_3896a875bef660",
+              "f_43e9435c175e9d",
+              "f_986ef0881d5454"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No direct evidence that observed effect is smaller than mechanism predicts (mechanism prediction not computable)",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Published IMPROVE-IT primary result with HR and 95% CI; on-treatment LDL-C difference in IMPROVE-IT"
+      },
+      {
+        "category": "success_with_caveats",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial met primary endpoint but with caveats: genetic evidence for target is uncertain (score 0.0), and LDL-C change in the outcome trial population is not measured in verified facts",
+            "refs": [
+              "f_c112fabab8c4ce",
+              "f_81ffde8e8667da",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Mechanism prediction cannot be verified due to missing on-trial biomarker data",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No safety signal, subgroup limitation, or secondary-endpoint-only result identified in verified facts for IMPROVE-IT",
+            "refs": [
+              "f_18dbaab371649d",
+              "f_352f41fde5386c"
+            ]
+          }
+        ],
+        "would_settle": "IMPROVE-IT safety data and on-treatment LDL-C levels"
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Genetic association score for NPC1L1 and coronary artery disorder is 0.0 (uncertain)",
+            "refs": [
+              "f_81ffde8e8667da"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "NPC1L1 inhibition lowers LDL-C (phase 2 data), and LDL-C is causal for CHD",
+            "refs": [
+              "f_01594eb949ee93",
+              "f_30ce0eb7e7247d",
+              "f_3896a875bef660",
+              "f_43e9435c175e9d",
+              "f_986ef0881d5454"
+            ]
+          },
+          {
+            "text": "Trial met primary endpoint, suggesting target engagement translates to clinical benefit",
+            "refs": [
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Human genetic evidence for NPC1L1 variants and CHD risk (e.g., inactivating mutations)"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LDL-C is well-established causal biomarker for CHD; intended biomarker is LDL-C",
+            "refs": [
+              "f_33b2e57eaced44",
+              "f_bc236726ce6d6e"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — LDL-C causality not in dispute"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "MDE HR 0.926 indicates trial powered for modest effect",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial met primary endpoint, so effect was not too small to detect",
+            "refs": [
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Observed HR and CI from IMPROVE-IT"
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "No IMPROVE-IT-specific safety signals in verified facts; cited signals (f_18dbaab371649d, f_352f41fde5386c) are for triple therapy with niacin, not IMPROVE-IT",
+            "refs": [
+              "f_18dbaab371649d",
+              "f_352f41fde5386c"
+            ]
+          }
+        ],
+        "would_settle": "IMPROVE-IT safety data"
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "ACS population on high-intensity statin may have events driven by non-atherosclerotic processes",
+            "refs": [
+              "f_33b2e57eaced44",
+              "f_5496bc4e428724",
+              "f_99a7f6fd5a445e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "LDL-C lowering remains effective in secondary prevention/ACS populations per prior statin trials",
+            "refs": [
+              "f_33b2e57eaced44"
+            ]
+          },
+          {
+            "text": "Trial met endpoint, so population did not preclude benefit",
+            "refs": [
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analyses by baseline LDL-C, event type"
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary endpoint includes coronary revascularization (≥30 days), which may be influenced by non-atherosclerotic factors",
+            "refs": [
+              "f_33b2e57eaced44"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Endpoint is standard for cardiovascular outcomes trials; trial succeeded",
+            "refs": [
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific results for each endpoint element"
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Large trial (18,144 randomized) completed with planned event count reached",
+            "refs": [
+              "f_fcdb838b851518",
+              "f_7d149d8d87840c",
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Trial conduct metrics (adherence, dropout, crossover)"
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator returned insufficient_data due to missing LDL-C change in outcome trial and no observed HR/CI",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Actual outcome known: trial met primary endpoint, so a success category must apply",
+            "refs": [
+              "f_c112fabab8c4ce"
+            ]
+          }
+        ],
+        "would_settle": "Published IMPROVE-IT primary result with HR, CI, and on-treatment LDL-C"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Hypotheses reference historical IMPROVE-IT results (HR ~0.93, 95% CI ~0.89-0.98) in departure_from_calculator, but these values are NOT in verified facts. Only 'primary_endpoint: met' (f_c112fabab8c4ce) is verified. Using external knowledge violates evidence cutoff discipline.",
+            "target_agent": "investigator",
+            "request": "Remove all references to specific HR/CI values not in verified facts. Restrict arguments to what is verified: trial met primary endpoint, planned events, sample size, follow-up."
+          },
+          {
+            "severity": "high",
+            "issue": "Follow-up duration mischaracterized: f_0ae9e22c3efa1e is labeled 'median_followup' but Verifier confirms source (pmid:19061694) states 'minimum of 2.5 years', not median. Calculator input followup_years: 2.5 and hypotheses claim '2.5-year median follow-up' — both incorrect.",
+            "target_agent": "case_builder",
+            "request": "Correct the follow-up characterization. Search for actual median follow-up in IMPROVE-IT publications before 2014-11-17. Update fact label and calculator input accordingly."
+          },
+          {
+            "severity": "high",
+            "issue": "Safety signals cited (f_18dbaab371649d, f_352f41fde5386c) are for ezetimibe/simvastatin PLUS NIACIN triple therapy, not IMPROVE-IT (ezetimibe/simvastatin vs simvastatin). Hypotheses incorrectly use these to argue 'no safety signal specific to IMPROVE-IT'.",
+            "target_agent": "investigator",
+            "request": "Remove or correct safety signal references. Search verified facts for IMPROVE-IT-specific safety data; if none, state 'no IMPROVE-IT safety data in verified facts' without citing irrelevant trials."
+          },
+          {
+            "severity": "medium",
+            "issue": "No placebo-adjusted LDL-C change from phase 2 ezetimibe add-on to statin in verified facts. Calculator correctly returns 'insufficient_data', but per protocol the accepted input is placebo-adjusted phase 2 change at outcome-trial dose. Literature before cutoff (e.g., pmid:18376000, NCT00552097) reports ~16.5% additional LDL-C lowering with ezetimibe added to simvastatin in FH — this should have been captured.",
+            "target_agent": "case_builder",
+            "request": "Search for and add placebo-adjusted LDL-C change from phase 2 ezetimibe add-on to statin studies (dose 10mg ezetimibe + statin vs statin alone) published before 2014-11-17. Include baseline LDL-C, percent change, and source."
+          },
+          {
+            "severity": "medium",
+            "issue": "Genetic evidence incomplete: f_81ffde8e8667da shows Open Targets score 0.0 for NPC1L1→coronary artery disorder, but Kastelein et al. 2014 (pmid:25399658, published 2014-11-12, before cutoff) reported NPC1L1 inactivating mutations associated with lower LDL-C and lower CHD risk. This key genetic evidence is missing from verified facts, leading to target_genetics='uncertain' instead of 'causal'.",
+            "target_agent": "case_builder",
+            "request": "Search for and add genetic association evidence for NPC1L1 loss-of-function variants and CHD outcomes published before 2014-11-17. Update genetic_association_score fact."
+          },
+          {
+            "severity": "low",
+            "issue": "Two different LDL-C inclusion thresholds for IMPROVE-IT in verified facts: 100 mg/dl (f_5496bc4e428724) and 125 mg/dl (f_99a7f6fd5a445e), both from ctgov registry. May reflect different criteria (e.g., on/off statin) but unexplained.",
+            "target_agent": "case_builder",
+            "request": "Clarify the two inclusion thresholds — determine if they represent different strata (e.g., statin-naive vs on-statin) and annotate facts accordingly."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator input followup_years=2.5 is labeled as median follow-up but the verified fact (f_0ae9e22c3efa1e) and Verifier check indicate this is a minimum follow-up of 2.5 years, not median. This affects the time_factor calculation (0.697) and power assumptions.",
+            "target_agent": "case_builder",
+            "request": "Clarify whether followup_years should be minimum (2.5) or estimated median follow-up; search for median follow-up in IMPROVE-IT publications before 2014-11-17"
+          },
+          {
+            "severity": "medium",
+            "issue": "No placebo-adjusted phase 2 LDL-C change for ezetimibe 10mg added to statin therapy exists in verified facts. Per protocol, this is the accepted input before outcome trial results are published. All verified phase 2 add-on facts (f_b5b3e06549e90c, f_69cb0f217fb6b5, f_fa21c91d954bee, f_51ac611ca2195c) show 'None percent' and placebo_adjusted=false. The calculator correctly has null, but a quantified input should have been provided.",
+            "target_agent": "mechanism",
+            "request": "Search for placebo-controlled phase 2 trial of ezetimibe 10mg added to statin (simvastatin or atorvastatin) reporting LDL-C percent change at 6-12 weeks before 2014-11-17"
+          },
+          {
+            "severity": "medium",
+            "issue": "Hypotheses reference 'calculator' as a source for multiple claims (e.g., 'MDE HR at 80% power is 0.926', 'mechanism prediction not computable'). 'calculator' is not a verified fact; claims should reference the calculator result object or verified facts directly.",
+            "target_agent": "investigator",
+            "request": "Replace 'calculator' references with specific calculator result fields (e.g., 'calculator.mde_hr_80') or verified fact citations"
+          },
+          {
+            "severity": "low",
+            "issue": "Genetic evidence limited to OpenTargets score 0.0 for coronary artery disorder (f_81ffde8e8667da). NPC1L1 variants associated with LDL-C levels and CHD risk (e.g., Kastelein et al. 2014, pmid:25399658, published 2014-11-12) may exist but are not in verified facts. This affects target_genetics classification.",
+            "target_agent": "mechanism",
+            "request": "Search for human genetic studies of NPC1L1 variants (loss-of-function, SNPs) associated with LDL-C and coronary heart disease published before 2014-11-17"
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_7d149d8d87840c",
+          "claim": "c1",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 5250,
+          "unit": "patients",
+          "source_id": "pmid:19061694",
+          "status": "confirmed",
+          "found": "5 years and until at least 5,250 patients experience a primary end point",
+          "note": "The abstract states the trial will continue until at least 5,250 patients experience a primary endpoint, matching the planned number of primary events.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*5,?250[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19061694' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_0ae9e22c3efa1e",
+          "claim": "c2",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 2.5,
+          "unit": "years",
+          "source_id": "pmid:19061694",
+          "status": "not_found",
+          "found": "Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point",
+          "note": "The abstract specifies a minimum follow-up of 2.5 years, not a median follow-up.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*2[.]5 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19061694' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 1,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "NPC1L1",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.427,
+        "genetic_association_score": 0.0,
+        "evidence_count": 1,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.065,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs73107478",
+            "beta": 0.0269381713009433,
+            "p": "1.0240000486373901e-8",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_2411a759e40cc6",
+        "entity": "biomarker:8-isoprostanes",
+        "key": "biomarker_change",
+        "value": -20.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "8-isoprostanes",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:21359598",
+        "quote": "a significant decrease in 8-epiPGF2a and d-ROMs levels (by 20.4% and 18.2%, respectively, p < 0.01 vs. baseline for both), was noted among patients in the EZT group who exhibited 'high oxidative stress' at baseline",
+        "pub_date": "2011-02-26",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/"
+      },
+      {
+        "fact_id": "f_b5b3e06549e90c",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "Ezetimibe plus atorvastatin produced greater percent reductions in LDL cholesterol, total cholesterol, triglycerides, non-high-density lipoprotein (HDL) cholesterol, and apolipoprotein B than up-titration of atorvastatin for all subgroups.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_3527cf342eea25",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 48.1,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Mean lipid levels were 210.7 mg/dl for total C, 129.5 mg/dl for LDL-C, and 48.1 mg/dL for HDL-C",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_69cb0f217fb6b5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "HDL cholesterol and apolipoprotein AI changes were small and variable.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_35b19d51f73ae5",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 129.5,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Mean lipid levels were 210.7 mg/dl for total C, 129.5 mg/dl for LDL-C, and 48.1 mg/dL for HDL-C",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_01594eb949ee93",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -25.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The mean percent LDL-C reduction in the high-, medium-, and low-potency statin groups were 29.1%, 25.0%, and 22.7%, respectively (p = 0.002).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_30ce0eb7e7247d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -26.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_3896a875bef660",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -22.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The mean percent LDL-C reduction in the high-, medium-, and low-potency statin groups were 29.1%, 25.0%, and 22.7%, respectively (p = 0.002).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_43e9435c175e9d",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24.1,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_4eb26f4a470318",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "placebo"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "compared with a 3% reduction for placebo for each group",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_865f1d31c43633",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -26,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "10 mg"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "or neither by 26%",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_986ef0881d5454",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -29.1,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The mean percent LDL-C reduction in the high-, medium-, and low-potency statin groups were 29.1%, 25.0%, and 22.7%, respectively (p = 0.002).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_d90f67c698d135",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -24,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "10 mg"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "metabolic syndrome by 24%",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_f26f508f7bbfc4",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -28,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent",
+          "dose": "10 mg"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "ezetimibe added to statin reduced LDL-C in patients with diabetes by 28%",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_fa21c91d954bee",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "Ezetimibe plus atorvastatin produced greater percent reductions in LDL cholesterol, total cholesterol, triglycerides, non-high-density lipoprotein (HDL) cholesterol, and apolipoprotein B than up-titration of atorvastatin for all subgroups.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_1fc5884ca90289",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "Ezetimibe plus atorvastatin produced greater percent reductions in LDL cholesterol, total cholesterol, triglycerides, non-high-density lipoprotein (HDL) cholesterol, and apolipoprotein B than up-titration of atorvastatin for all subgroups.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_3a657bc5850521",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -24.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020), non-HDL-C (−24.2% vs. −21.6%, p=0.011)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_d57364eaa018c6",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -21.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020), non-HDL-C (−24.2% vs. −21.6%, p=0.011)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_1e893a6ec99710",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 4.51,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "and higher baseline β-sitosterol values (6.21 vs. 4.58 vs. 4.51 μmol/l, p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_2d597980784810",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 1.93,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The high-potency group had significantly lower baseline lathosterol (1.93 vs. 2.58 vs. 3.17 μmol/l; p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_49823d1ddb0abd",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 6.21,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "and higher baseline β-sitosterol values (6.21 vs. 4.58 vs. 4.51 μmol/l, p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_534039787f9889",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 4.58,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "and higher baseline β-sitosterol values (6.21 vs. 4.58 vs. 4.51 μmol/l, p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_b277ead9d9bf3a",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 210.7,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Mean lipid levels were 210.7 mg/dl for total C, 129.5 mg/dl for LDL-C, and 48.1 mg/dL for HDL-C",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_f1edbda954fa0a",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 3.17,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The high-potency group had significantly lower baseline lathosterol (1.93 vs. 2.58 vs. 3.17 μmol/l; p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_fa99aef387d49b",
+        "entity": "biomarker:other",
+        "key": "baseline_level",
+        "value": 2.58,
+        "unit": "μmol/l",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "The high-potency group had significantly lower baseline lathosterol (1.93 vs. 2.58 vs. 3.17 μmol/l; p <0.001)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_0dd4ba243b41f1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -47.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Mean β-sitosterol levels decreased by 47.4% (95% CI; −48.7, −46.2)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_39a12efe61e4b9",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 3.2,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "E/S (10/20 mg)",
+          "kind": "absolute",
+          "sign_set_by_code": "quote says increase"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The fasting glucose levels increased to greater than baseline during the first 12 weeks (E/S, 3.2 mg/dl; E/S plus niacin, 7.7 mg/dl) and gradually decreased to pretreatment levels by 64 weeks in both groups.",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      },
+      {
+        "fact_id": "f_39c4bb4f0ea9e2",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -68,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "two-year",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "ENHANCE"
+        },
+        "source_id": "pmid:19828909",
+        "quote": "Ezetimibe/simvastatin treatment reduced campesterol levels by 68%",
+        "pub_date": "2009-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19828909/"
+      },
+      {
+        "fact_id": "f_3ddd3571069f90",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 0.33,
+        "unit": "µg/mg",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "double dose of statin",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:21817821",
+        "quote": "and the ratio of campesterol, an absorption marker, to total cholesterol levels (-1.35 ± 0.90 µg/mg vs. 0.33 ± 0.74 µg/mg) were greater in the ezetimibe-plus-statin group",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/"
+      },
+      {
+        "fact_id": "f_5290de28b5406a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -62,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "two-year",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent",
+          "trial": "ENHANCE"
+        },
+        "source_id": "pmid:19828909",
+        "quote": "Ezetimibe/simvastatin treatment reduced campesterol levels by 68% and sitosterol levels by 62%",
+        "pub_date": "2009-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19828909/"
+      },
+      {
+        "fact_id": "f_7c8246d728d05e",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -36.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "and the mean β-sitosterol/cholesterol ratio decreased by 36.3% (95% CI; −37.7, −34.9).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_976d3e175ff14c",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 83.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "and the mean lathosterol/cholesterol ratio increased by 83.8% (95% CI; 73.3, 94.2).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_b4337d3cb03cd3",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 7.7,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "E/S plus niacin (to 2 g)",
+          "kind": "absolute",
+          "sign_set_by_code": "quote says increase"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The fasting glucose levels increased to greater than baseline during the first 12 weeks (E/S, 3.2 mg/dl; E/S plus niacin, 7.7 mg/dl) and gradually decreased to pretreatment levels by 64 weeks in both groups.",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      },
+      {
+        "fact_id": "f_bddc9c60b57829",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 52,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Mean lathosterol levels in the overall study population increased by 52% (95% CI; 42.9, 61.0)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_c5efbe05b23190",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -19.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020), non-HDL-C (−24.2% vs. −21.6%, p=0.011) and total C/HDL-C (−19.0% vs. −17.0%, p=0.030)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_f727529d50eb35",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.35,
+        "unit": "µg/mg",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:21817821",
+        "quote": "and the ratio of campesterol, an absorption marker, to total cholesterol levels (-1.35 ± 0.90 µg/mg vs. 0.33 ± 0.74 µg/mg) were greater in the ezetimibe-plus-statin group",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/"
+      },
+      {
+        "fact_id": "f_f9cc93676b6d08",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -17.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Assessment of percent change from baseline, however, showed significantly greater reductions in LDL-C (−26.7% vs. −24.1%, p=0.020), non-HDL-C (−24.2% vs. −21.6%, p=0.011) and total C/HDL-C (−19.0% vs. −17.0%, p=0.030)",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_fed96cfaa44dd1",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -52.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "Overall percent change in the mean β-sitosterol/lathosterol ratio was −52.4% (95% CI; −55.8, −49.0).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_0e046eac7ccac5",
+        "entity": "biomarker:ox-ldl",
+        "key": "baseline_level",
+        "value": 51,
+        "unit": "U/L",
+        "attrs": {
+          "biomarker": "ox-LDL",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg/day"
+        },
+        "source_id": "pmid:20599002",
+        "quote": "Ox-LDL level did not change in the placebo group (50 +/- 13 vs 51 +/- 13 U/L), while it decreased in the ezetimibe group, from 51 +/- 13 to 46 +/- 10 U/L (p = 0.01 vs baseline and p = 0.02 vs final level in placebo).",
+        "pub_date": "2010-07-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20599002/"
+      },
+      {
+        "fact_id": "f_d0a83adccbdf57",
+        "entity": "biomarker:ox-ldl",
+        "key": "biomarker_change",
+        "value": -5,
+        "unit": "U/L",
+        "attrs": {
+          "biomarker": "ox-LDL",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg/day",
+          "kind": "absolute"
+        },
+        "source_id": "pmid:20599002",
+        "quote": "Ox-LDL level did not change in the placebo group (50 +/- 13 vs 51 +/- 13 U/L), while it decreased in the ezetimibe group, from 51 +/- 13 to 46 +/- 10 U/L (p = 0.01 vs baseline and p = 0.02 vs final level in placebo).",
+        "pub_date": "2010-07-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20599002/"
+      },
+      {
+        "fact_id": "f_eeeec9d5d7cf72",
+        "entity": "biomarker:ox-ldl",
+        "key": "biomarker_change",
+        "value": -20.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "ox-LDL",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:21359598",
+        "quote": "Despite a significant decrease in ox-LDL levels (by 20.8%, p < 0.001 vs. baseline; p < 0.001 vs. TLC group) in the EZT group",
+        "pub_date": "2011-02-26",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/"
+      },
+      {
+        "fact_id": "f_c0eda064acf6ac",
+        "entity": "biomarker:reactive oxygen metabolites",
+        "key": "biomarker_change",
+        "value": -18.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "reactive oxygen metabolites",
+          "phase": "phase2",
+          "timepoint": "12 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:21359598",
+        "quote": "a significant decrease in 8-epiPGF2a and d-ROMs levels (by 20.4% and 18.2%, respectively, p < 0.01 vs. baseline for both), was noted among patients in the EZT group who exhibited 'high oxidative stress' at baseline",
+        "pub_date": "2011-02-26",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/"
+      },
+      {
+        "fact_id": "f_51ac611ca2195c",
+        "entity": "biomarker:total cholesterol",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "total cholesterol",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "Ezetimibe plus atorvastatin produced greater percent reductions in LDL cholesterol, total cholesterol, triglycerides, non-high-density lipoprotein (HDL) cholesterol, and apolipoprotein B than up-titration of atorvastatin for all subgroups.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_f1702de69c72f5",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 151.0,
+        "unit": "mg/dl",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "assay",
+          "placebo_adjusted": false,
+          "dose": "10 mg/day",
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "while the median TG level was 151.0 mg/dl.",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_1e377a50a10cf7",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "6 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ezetimibe 10 mg added to atorvastatin",
+          "kind": "percent"
+        },
+        "source_id": "pmid:20837371",
+        "quote": "Ezetimibe plus atorvastatin produced greater percent reductions in LDL cholesterol, total cholesterol, triglycerides, non-high-density lipoprotein (HDL) cholesterol, and apolipoprotein B than up-titration of atorvastatin for all subgroups.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_81ffde8e8667da",
+        "entity": "target:npc1l1",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 1,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:NPC1L1",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000015520"
+      },
+      {
+        "fact_id": "f_01f20dff685ad9",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dl",
+        "attrs": {},
+        "source_id": "pmid:21817821",
+        "quote": "A total of 171 patients with CAD whose LDL-C level was ≥ 100 mg/dl after treatment with atorvastatin (10mg/day) or rosuvastatin (2.5 mg/day) for 4 weeks were assigned to additionally receive ezetimibe (10mg/day) plus a statin or a double dose of statin for 12 weeks.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/"
+      },
+      {
+        "fact_id": "f_5496bc4e428724",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "quote": "Participants taking a statin must have an LDL-C of 100 mg/dl or less.",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00202878"
+      },
+      {
+        "fact_id": "f_6324f8add8adc5",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 100,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:20837371",
+        "quote": "Moderately high CHD risk subjects with LDL cholesterol levels ≥ 100 mg/dL (~2.59 mmol/L) with atorvastatin 20mg were randomized to atorvastatin 20mg plus ezetimibe 10mg, or atorvastatin 40 mg.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_88e18dc23d3840",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 79,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:19061694",
+        "quote": "If consecutive measures of LDL-C are >79 mg/dL at follow-up visits, the simvastatin dose will be increased to 80 mg in a double-blind manner.",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/"
+      },
+      {
+        "fact_id": "f_99a7f6fd5a445e",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 125,
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "quote": "Participants not taking a statin must have an LDL-C of 125 mg/dl or less.",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00202878"
+      },
+      {
+        "fact_id": "f_e5b8a4dc2a5ff7",
+        "entity": "trial:nct00202878",
+        "key": "inclusion_threshold",
+        "value": 70,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "pmid:20837371",
+        "quote": "High CHD risk subjects with low-density lipoprotein (LDL) cholesterol levels ≥ 70 mg/dL (~1.81 mmol/L) during stable atorvastatin 40 mg therapy were randomized to atorvastatin 40 mg plus ezetimibe 10mg, or up-titrated to atorvastatin 80 mg.",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/"
+      },
+      {
+        "fact_id": "f_0ae9e22c3efa1e",
+        "entity": "trial:nct00202878",
+        "key": "median_followup",
+        "value": 2.5,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:19061694",
+        "quote": "Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point.",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/"
+      },
+      {
+        "fact_id": "f_28339f7835ad00",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 60,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:21359598",
+        "quote": "A total of 60 patients were included; 30 in each group.",
+        "pub_date": "2011-02-26",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/"
+      },
+      {
+        "fact_id": "f_366ef99eea3f10",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 19,
+        "unit": "%",
+        "attrs": {
+          "trial": "EASE"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "those receiving placebo plus statin (19-22%)",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_3b1626d9a72310",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 74,
+        "unit": "%",
+        "attrs": {
+          "trial": "EASE"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "more patients receiving ezetimibe plus statin reached LDL-C goal (67-74%)",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_876b1bffc80db4",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 18000,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:19061694",
+        "quote": "The study will recruit up to 18,000 moderate- to high-risk patients stabilized after ACS.",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/"
+      },
+      {
+        "fact_id": "f_8e643b8569edfb",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 67,
+        "unit": "%",
+        "attrs": {
+          "trial": "EASE"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "more patients receiving ezetimibe plus statin reached LDL-C goal (67-74%)",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_cbf7f89cb41caa",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 1940,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "EASE"
+        },
+        "source_id": "pmcid:PMC3749834",
+        "quote": "For this current post hoc analysis, we assessed subjects who were randomized into the ezetimibe 10 mg plus statin arm of the EASE study (n=1940).",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/"
+      },
+      {
+        "fact_id": "f_d75907261c2548",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 171,
+        "unit": "patients",
+        "attrs": {
+          "trial": "not stated"
+        },
+        "source_id": "pmid:21817821",
+        "quote": "A total of 171 patients with CAD whose LDL-C level was ≥ 100 mg/dl after treatment with atorvastatin (10mg/day) or rosuvastatin (2.5 mg/day) for 4 weeks were assigned to additionally receive ezetimibe (10mg/day) plus a statin or a double dose of statin for 12 weeks.",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/"
+      },
+      {
+        "fact_id": "f_f505d04d6e8ed6",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 22,
+        "unit": "%",
+        "attrs": {
+          "trial": "EASE"
+        },
+        "source_id": "pmid:17058629",
+        "quote": "those receiving placebo plus statin (19-22%)",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/"
+      },
+      {
+        "fact_id": "f_fcdb838b851518",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 18144,
+        "unit": "participants",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "quote": "Enrollment: 18144 (ACTUAL)",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00202878"
+      },
+      {
+        "fact_id": "f_fef17fcfa9bc6e",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 100,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Effect of ezetimibe/atorvastatin combination on oxidized low density lipoprotein cholesterol in patients with coronary artery disease or coronary artery disease equivalent"
+        },
+        "source_id": "pmid:20599002",
+        "quote": "A total of 100 patients with coronary artery disease or coronary artery disease equivalent were randomized to atorvastatin 40 mg/day and ezetimibe 10 mg/day or to atorvastatin 40 mg/day and placebo.",
+        "pub_date": "2010-07-15",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20599002/"
+      },
+      {
+        "fact_id": "f_ff9f71061d5d17",
+        "entity": "trial:nct00202878",
+        "key": "n_randomized",
+        "value": 942,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The safety and efficacy of combination ezetimibe/simvastatin (E/S) plus extended-release niacin was assessed in 942 patients with type IIa/IIb hyperlipidemia for 64 weeks in a randomized, double-blind study.",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      },
+      {
+        "fact_id": "f_5d4fb274caa01e",
+        "entity": "trial:nct00202878",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00202878"
+      },
+      {
+        "fact_id": "f_7d149d8d87840c",
+        "entity": "trial:nct00202878",
+        "key": "planned_events",
+        "value": 5250,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmid:19061694",
+        "quote": "Patients will be followed for a minimum of 2.5 years and until at least 5,250 patients experience a primary end point.",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/"
+      },
+      {
+        "fact_id": "f_33b2e57eaced44",
+        "entity": "trial:nct00202878",
+        "key": "primary_endpoint",
+        "value": "first occurrence of cardiovascular death, nonfatal myocardial infarction, rehospitalization for unstable angina, coronary revascularization (occurring at least 30 days after randomization), or stroke",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:19061694",
+        "quote": "The primary end point is the first occurrence of cardiovascular death, nonfatal myocardial infarction, rehospitalization for unstable angina, coronary revascularization (occurring at least 30 days after randomization), or stroke.",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/"
+      },
+      {
+        "fact_id": "f_40815ded1faf68",
+        "entity": "trial:nct00202878",
+        "key": "primary_endpoint",
+        "value": "safety of E/S plus niacin",
+        "unit": "",
+        "attrs": {
+          "trial": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The primary end point, the safety of E/S plus niacin, included prespecified adverse events (ie, liver, muscle, discontinuations due to flushing, gallbladder-related, cholecystectomy, fasting glucose changes, new-onset diabetes).",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      },
+      {
+        "fact_id": "f_bc236726ce6d6e",
+        "entity": "trial:nct00202878",
+        "key": "primary_endpoint",
+        "value": "Time to First Occurrence of Cardiovascular Death, Major Coronary Event, or Non-fatal Stroke",
+        "unit": "Kaplan-Meier Estimate of Percentage of Participants Experiencing a Qualifying Event",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "quote": "Primary outcome(s): Time to First Occurrence of Cardiovascular Death, Major Coronary Event, or Non-fatal Stroke (Kaplan-Meier Estimate of Percentage of Participants Experiencing a Qualifying Event) [Up to approximately 9 years]",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00202878"
+      },
+      {
+        "fact_id": "f_c112fabab8c4ce",
+        "entity": "trial:nct00202878",
+        "key": "primary_endpoint",
+        "value": "met",
+        "unit": "",
+        "attrs": {
+          "trial": "IMPROVE-IT"
+        },
+        "source_id": "announcement:improve_it",
+        "quote": "IMPROVE-IT met its primary endpoint.",
+        "pub_date": "2014-11-17",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-that-improve-it-achieved-primary-endpoint-data-to-be-presented-at-american-heart-association-scientific-sessions-today/"
+      },
+      {
+        "fact_id": "f_6138472ad2c795",
+        "entity": "trial:nct00202878",
+        "key": "readout_statement",
+        "value": "Baseline cholesterol absorption status does not determine LDL-C lowering response to ezetimibe/simvastatin therapy in FH, despite more pronounced cholesterol absorption inhibition in high absorbers.",
+        "unit": "",
+        "attrs": {
+          "trial": "ENHANCE"
+        },
+        "source_id": "pmid:19828909",
+        "quote": "Baseline cholesterol absorption status does not determine LDL-C lowering response to ezetimibe/simvastatin therapy in FH, despite more pronounced cholesterol absorption inhibition in high absorbers.",
+        "pub_date": "2009-10-14",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19828909/"
+      },
+      {
+        "fact_id": "f_18dbaab371649d",
+        "entity": "trial:nct00202878",
+        "key": "safety_signal",
+        "value": "greater rate of study discontinuations with the E/S plus niacin regimen than with E/S alone",
+        "unit": "",
+        "attrs": {
+          "trial": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The anticipated niacin-associated flushing led to a greater rate of study discontinuations with the E/S plus niacin regimen than with E/S alone (0.7%, p <0.001).",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      },
+      {
+        "fact_id": "f_352f41fde5386c",
+        "entity": "trial:nct00202878",
+        "key": "safety_signal",
+        "value": "new-onset diabetes",
+        "unit": "%",
+        "attrs": {
+          "trial": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia"
+        },
+        "source_id": "pmid:20152243",
+        "quote": "The occurrence of new-onset diabetes was 3.1% for the E/S and 4.9% for the E/S plus niacin group.",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00202878@2014-11-17",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00202878",
+        "url": "https://clinicaltrials.gov/study/NCT00202878",
+        "pub_date": "2005-09-20",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00202878",
+            "acronym": null,
+            "title": "IMPROVE-IT: Examining Outcomes in Subjects With Acute Coronary Syndrome: Vytorin (Ezetimibe/Simvastatin) vs Simvastatin (P04103)",
+            "official_title": "A Multicenter, Double-Blind, Randomized Study to Establish the Clinical Benefit and Safety of Vytorin (Ezetimibe/Simvastatin Tablet) vs Simvastatin Monotherapy in High-Risk Subjects Presenting With Acute Coronary Syndrome (IMProved Reduction of Outcomes: Vytorin Efficacy International Trial - IMPROVE IT)",
+            "sponsor": "Organon and Co",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2005-10-17",
+            "primary_completion": "2014-09-18",
+            "first_posted": "2005-09-20",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 18144,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "ezetimibe/simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "Vytorin",
+                  "Inegy"
+                ],
+                "arms": [
+                  "ezetimibe/simvastatin"
+                ]
+              },
+              {
+                "name": "simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "Zocor"
+                ],
+                "arms": [
+                  "simvastatin"
+                ]
+              },
+              {
+                "name": "Placebo for simvastatin 40 mg",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "ezetimibe/simvastatin",
+                  "simvastatin"
+                ]
+              },
+              {
+                "name": "Placebo for ezetimibe 10 mg/simvastatin 40 mg combination",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "simvastatin"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "ezetimibe/simvastatin",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "simvastatin",
+                "type": "ACTIVE_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Hypercholesterolemia",
+              "Myocardial Infarction"
+            ],
+            "primary_outcomes": [
+              "Time to First Occurrence of Cardiovascular Death, Major Coronary Event, or Non-fatal Stroke (Kaplan-Meier Estimate of Percentage of Participants Experiencing a Qualifying Event) [Up to approximately 9 years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 2330
+      },
+      {
+        "source_id": "pmid:23770175",
+        "type": "journal",
+        "title": "Effect of overweight and obesity on cardiovascular events in asymptomatic aortic stenosis: a SEAS substudy (Simvastatin Ezetimibe in Aortic Stenosis)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23770175/",
+        "pub_date": "2013-06-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23770175",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2013.04.081",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1858
+      },
+      {
+        "source_id": "pmcid:PMC3749834",
+        "type": "journal",
+        "title": "Effects of ezetimibe added to statin therapy on markers of cholesterol absorption and synthesis and LDL-C lowering in hyperlipidemic patients",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23040830/",
+        "pub_date": "2012-09-13",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "23040830",
+          "pmcid": "PMC3749834",
+          "doi": "10.1016/j.atherosclerosis.2012.09.001",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 44345
+      },
+      {
+        "source_id": "pmid:21817821",
+        "type": "journal",
+        "title": "Clinical usefulness of additional treatment with ezetimibe in patients with coronary artery disease on statin therapy. - From the viewpoint of cholesterol metabolism.-",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21817821/",
+        "pub_date": "2011-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21817821",
+          "pmcid": null,
+          "doi": "10.1253/circj.cj-11-0391",
+          "journal": "Circulation journal : official journal of the Japanese Circulation Society"
+        },
+        "chars": 1828
+      },
+      {
+        "source_id": "pmid:21359598",
+        "type": "journal",
+        "title": "Ezetimibe treatment lowers indicators of oxidative stress in hypercholesterolemic subjects with high oxidative stress",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21359598/",
+        "pub_date": "2011-02-26",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21359598",
+          "pmcid": null,
+          "doi": "10.1007/s11745-011-3539-z",
+          "journal": "Lipids"
+        },
+        "chars": 1641
+      },
+      {
+        "source_id": "pmid:20837371",
+        "type": "journal",
+        "title": "Influence of age, gender, and race on the efficacy of adding ezetimibe to atorvastatin vs. atorvastatin up-titration in patients at moderately high or high risk for coronary heart disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20837371/",
+        "pub_date": "2010-09-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20837371",
+          "pmcid": null,
+          "doi": "10.1016/j.ijcard.2010.08.043",
+          "journal": "International journal of cardiology"
+        },
+        "chars": 2150
+      },
+      {
+        "source_id": "pmid:20599002",
+        "type": "journal",
+        "title": "Effect of ezetimibe/atorvastatin combination on oxidized low density lipoprotein cholesterol in patients with coronary artery disease or coronary artery disease equivalent",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20599002/",
+        "pub_date": "2010-07-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20599002",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2010.03.016",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1673
+      },
+      {
+        "source_id": "pmid:19228478",
+        "type": "journal",
+        "title": "Simvastatin with or without ezetimibe in familial hypercholesterolemia (the ENHANCE trial)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19228478/",
+        "pub_date": "2009-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19228478",
+          "pmcid": null,
+          "doi": "10.1007/s11883-009-0013-y",
+          "journal": "Current atherosclerosis reports"
+        },
+        "chars": 92
+      },
+      {
+        "source_id": "pmid:20152243",
+        "type": "journal",
+        "title": "Long-term safety and efficacy of triple combination ezetimibe/simvastatin plus extended-release niacin in patients with hyperlipidemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20152243/",
+        "pub_date": "2009-11-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20152243",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2009.10.001",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 2432
+      },
+      {
+        "source_id": "pmid:19828909",
+        "type": "journal",
+        "title": "Baseline cholesterol absorption and the response to ezetimibe/simvastatin therapy: a post-hoc analysis of the ENHANCE trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19828909/",
+        "pub_date": "2009-10-14",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19828909",
+          "pmcid": "PMC2842149",
+          "doi": "10.1194/jlr.M001487",
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1785
+      },
+      {
+        "source_id": "pmid:17058629",
+        "type": "journal",
+        "title": "Ezetimibe added to ongoing statin therapy improves LDL-C goal attainment and lipid profile in patients with diabetes or metabolic syndrome",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17058629/",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17058629",
+          "pmcid": null,
+          "doi": "10.3132/dvdr.2006.020",
+          "journal": "Diabetes & vascular disease research"
+        },
+        "chars": 1379
+      },
+      {
+        "source_id": "pmid:19061694",
+        "type": "journal",
+        "title": "Rationale and design of IMPROVE-IT (IMProved Reduction of Outcomes: Vytorin Efficacy International Trial): comparison of ezetimbe/simvastatin versus simvastatin monotherapy on cardiovascular outcomes in patients with acute coronary syndromes",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19061694/",
+        "pub_date": "2008-09-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19061694",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2008.07.023",
+          "journal": "American heart journal",
+          "purpose": "design"
+        },
+        "chars": 2102
+      },
+      {
+        "source_id": "pmid:20435175",
+        "type": "journal",
+        "title": "An update on the IMProved reduction of outcomes: Vytorin Efficacy International Trial (IMPROVE-IT) design",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20435175/",
+        "pub_date": "2010-03-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20435175",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2010.03.004",
+          "journal": "American heart journal",
+          "purpose": "design"
+        },
+        "chars": 107
+      },
+      {
+        "source_id": "pmid:20686565",
+        "type": "journal",
+        "title": "Biological, clinical and population relevance of 95 loci for blood lipids",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20686565/",
+        "pub_date": "2010-08-05",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20686565",
+          "pmcid": "PMC3039276",
+          "doi": "10.1038/nature09270",
+          "journal": "Nature",
+          "purpose": "genetics"
+        },
+        "chars": 1472
+      },
+      {
+        "source_id": "pmid:15679830",
+        "type": "journal",
+        "title": "Compound heterozygosity for two non-synonymous polymorphisms in NPC1L1 in a non-responder to ezetimibe",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15679830/",
+        "pub_date": "2005-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15679830",
+          "pmcid": null,
+          "doi": "10.1111/j.1399-0004.2004.00388.x",
+          "journal": "Clinical genetics",
+          "purpose": "genetics"
+        },
+        "chars": 1008
+      },
+      {
+        "source_id": "pmid:19272334",
+        "type": "journal",
+        "title": "Niemann-Pick C1 Like 1 (NPC1L1) an intestinal sterol transporter",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19272334/",
+        "pub_date": "2009-01-19",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19272334",
+          "pmcid": null,
+          "doi": "10.1016/j.bbalip.2009.01.002",
+          "journal": "Biochimica et biophysica acta",
+          "purpose": "genetics"
+        },
+        "chars": 1441
+      },
+      {
+        "source_id": "announcement:improve_it",
+        "type": "press_release",
+        "title": "Merck Announces that IMPROVE-IT Achieved Primary Endpoint; Data to be Presented at American Heart Association Scientific Sessions Today",
+        "url": "https://www.merck.com/news/merck-announces-that-improve-it-achieved-primary-endpoint-data-to-be-presented-at-american-heart-association-scientific-sessions-today/",
+        "pub_date": "2014-11-17",
+        "access": "press_release",
+        "meta": {},
+        "chars": 5819
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 30,
+      "facts": 77,
+      "relationships": 32,
+      "events": 204,
+      "audit_entries": 204,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 17,
+        "input_tokens": 19779,
+        "output_tokens": 9971,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 10514,
+        "output_tokens": 7092,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2480,
+        "output_tokens": 7036,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 10463,
+        "output_tokens": 9176,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 12556,
+        "output_tokens": 8559,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6863,
+        "output_tokens": 1154,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

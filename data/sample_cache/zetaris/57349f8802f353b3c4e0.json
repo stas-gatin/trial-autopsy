@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A29298800+OR+EXT_ID%3A30342298+OR+PMCID%3APMC6005227+OR+PMCID%3APMC9292296&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*45%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '29298800' AND r.abstractText LIKE '%45%%' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Results</h4>The pemafibrate groups showed significantly reduced fasting serum triglyceride levels by ∼45% compared with the placebo group (<i>P</i> < 0"
+  ]
+ ],
+ "error": null
+}

@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A17984166+OR+EXT_ID%3A18036365&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*108[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '18036365' LIMIT 5",
+ "rows": [
+  [
+   " In contrast to previous studies of statin therapy in primary prevention, JUPITER is evaluating a group with modest plasma concentrations of LDL cholesterol (median 108 mg/dl, interquartile range 94 to 119)"
+  ]
+ ],
+ "error": null
+}

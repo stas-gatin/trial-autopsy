@@ -1,0 +1,15 @@
+{
+  "key": "4a4363745392594fb40d",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T22:51:24+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: ASCEND NCT00135226 - ASCEND: A Study of Cardiovascular Events iN Diabetes\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | triglycerides change used by the calculator | biomarker_change = -100 percent | {\"biomarker\": \"triglycerides\", \"dose\": \"4 g/day\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase2\", \"placebo_adjusted\": false, \"timepoint\": \"12 weeks\"} | source pmcid:PMC3636648 | quote: \"there was no significant change in any lipid component in the adipose tissue or muscle in these subjects.\"\nc2 | follow-up | median_followup = 7.4 years | {\"trial\": \"ASCEND\"} | source ctgov:NCT00135226@2018-08-26 | quote: \"Randomized treatment phase during a mean of 7.4 years\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*100[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3636648' LIMIT 5 | rows: [[\"\"]]\nc2 | SQL: SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%7.4%' LIMIT 5 | rows: [[\"Randomized treatment phase during a mean of 7.4 years\"], [\"Randomized treatment phase during a mean of 7.4 years\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"not_found\", \"found\": \"\", \"note\": \"The abstract does not contain a -100 percent change for triglycerides; the extracted sentence is empty.\"}, {\"claim\": \"c2\", \"status\": \"confirmed\", \"found\": \"Randomized treatment phase during a mean of 7.4 years\", \"note\": \"The registry primary outcome timeFrame includes 7.4 years, matching the claim.\"}]}",
+  "usage": {
+    "input_tokens": 522,
+    "output_tokens": 952
+  }
+}

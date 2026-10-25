@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12686036&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*3\\\\.3[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12686036' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Findings</h4>Treatment was stopped after a median follow-up of 3.3 years"
+  ]
+ ],
+ "error": null
+}

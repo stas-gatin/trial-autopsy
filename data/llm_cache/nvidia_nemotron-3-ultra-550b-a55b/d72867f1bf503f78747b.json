@@ -1,0 +1,15 @@
+{
+  "key": "d72867f1bf503f78747b",
+  "role": "critic",
+  "provider": "meterless",
+  "model": "nvidia/nemotron-3-ultra-550b-a55b",
+  "recorded_with": "live API via Meterless Runtime (meterless/fast)",
+  "recorded_at": "2026-10-24T19:47:49+00:00",
+  "system": "You are the Verifier in a trial-autopsy system. For each number, decide from the rows the\nZetaris query returned whether the source of record supports it. Use only the rows shown, never outside knowledge.\n\n- confirmed: the rows state the same number for the same quantity (same biomarker, dose, timepoint, arm or comparison).\n- contradicts: the rows state a different value for the same quantity (for example the registry gives another number\n  of patients, or the abstract gives another percent change for the same dose and timepoint).\n- not_found: the rows do not mention the number or the quantity (an error or no rows is always not_found).\n\nReturn JSON only:\n{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed|not_found|contradicts\",\n              \"found\": \"<the value or sentence from the rows, short>\", \"note\": \"<one short sentence>\"}]}",
+  "prompt": "Case: SPARCL NCT00147602 - Lipitor In The Prevention Of Stroke, For Patients Who Have Had A Previous Stroke\n\nNumbers (claim | used as | key = value unit | attributes | source | quote):\nc1 | apoB change used by the calculator | biomarker_change = -23 percent | {\"biomarker\": \"apoB\", \"kind\": \"percent\", \"method\": \"not stated\", \"phase\": \"phase2\", \"placebo_adjusted\": true, \"timepoint\": \"not stated\"} | source pmid:11971941 | quote: \"ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0.002) and 33% (P = 0.045), respectively.\"\n\nQuery results (claim | SQL | rows):\nc1 | SQL: SELECT regexp_extract(r.abstractText, '([^.]*23%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '11971941' LIMIT 5 | rows: [[\" ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0\"]]\n\nJudge each number.",
+  "response": "{\"results\": [{\"claim\": \"c1\", \"status\": \"confirmed\", \"found\": \"ApoB-48 and remnant-like particle-cholesterol (RLP-C) both decreased significantly by 23% (P = 0\", \"note\": \"The abstract reports a 23% decrease in ApoB-48, matching the claimed value.\"}]}",
+  "usage": {
+    "input_tokens": 438,
+    "output_tokens": 1857
+  }
+}

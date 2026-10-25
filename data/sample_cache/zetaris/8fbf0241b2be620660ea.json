@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A30125052&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*3 years[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '30125052' LIMIT 5",
+ "rows": [
+  [
+   " The trial will continue until 1600 patients reach the primary endpoint, with a median duration of therapy of 3 years"
+  ]
+ ],
+ "error": null
+}

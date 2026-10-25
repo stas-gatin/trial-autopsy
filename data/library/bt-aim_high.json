@@ -1,0 +1,1911 @@
+{
+  "run_id": "bt-aim_high",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2011-05-26",
+  "backtest": true,
+  "readout_date": "2011-05-26",
+  "analysis_date": "2011-05-26",
+  "trial": {
+    "nct_id": "NCT00120289",
+    "acronym": "AIM-HIGH",
+    "title": "Niacin Plus Statin to Prevent Vascular Events",
+    "sponsor": "Axio Research. LLC",
+    "status": "TERMINATED",
+    "enrollment": 3414,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Diseases",
+      "Heart Diseases",
+      "Cerebrovascular Accident",
+      "Coronary Disease",
+      "Atherosclerosis",
+      "Myocardial Infarction"
+    ],
+    "primary_completion": "2012-09"
+  },
+  "drug": {
+    "name": "niacin",
+    "chembl_id": "CHEMBL573",
+    "aliases": [
+      "Acide nicotinique",
+      "Acido nicotinico",
+      "Acidum nicotinicum",
+      "NSC-169454",
+      "Niacin component of advicor",
+      "Niacin component of simcor",
+      "Niacin extended release",
+      "Niacin td",
+      "Niacor",
+      "Niaspan",
+      "Niaspan er",
+      "Niaspan titration starter pack",
+      "Nicangin",
+      "Nicolar",
+      "Nicotinate",
+      "Nicotinic acid",
+      "Vitamin b3",
+      "Wampocap",
+      "active placebo",
+      "controlled-ileal-release nicotinic acid",
+      "er niacin",
+      "ern",
+      "extended release niacin",
+      "extended release niacin/laropiprant",
+      "extended-release niacin",
+      "immediate-release niacin",
+      "mk-0524a",
+      "n-er",
+      "na",
+      "ner",
+      "niacin er",
+      "niacin-er",
+      "niacinamide",
+      "niaspan fct",
+      "nicotinamide",
+      "tredaptive"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [],
+    "targets": [],
+    "searched_as": "extended-release niacin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-aim_high",
+  "log_file": "logs/trace-bt-aim_high.jsonl",
+  "execution_time_seconds": 0.9,
+  "sample_mode": false,
+  "warnings": [
+    "no molecular target in Open Targets: the genetics check is skipped and reported as unknown"
+  ],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"Why was the study stopped early?\" (announcement:aim_high)",
+      "predicted_outcome": "failure",
+      "consistency": "consistent with the calculator (probability of success 19%)",
+      "primary_category": "biomarker_not_causal",
+      "secondary_categories": [
+        "effect_too_small"
+      ],
+      "calculator_category": "effect_too_small",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.192,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "AIM-HIGH (3,414 patients) was stopped early for futility after the DSMB found less than a 1 in 10,000 chance of ever showing significant benefit; the trial's explicit hypothesis — incremental benefit from raising HDL-C on top of statin therapy — was doomed because HDL-C is not causal for coronary artery disease.",
+      "summary": "The AIM-HIGH trial randomized 3,414 patients with atherosclerotic cardiovascular disease and optimally treated LDL-C (baseline 71 mg/dL on simvastatin) to extended-release niacin or placebo, with baseline HDL-C of 34.9 mg/dL and triglycerides of 161 mg/dL. The primary endpoint was a composite of coronary heart disease death, nonfatal myocardial infarction, ischemic stroke, hospitalization for acute coronary syndrome, or symptom-driven coronary or cerebral revascularization. The trial was designed for 850 events with 85% power to detect a 25% relative risk reduction based on HDL-C raising, but it was stopped early on 2011-05-26 because the DSMB judged the chance of eventual benefit to be less than 1 in 10,000. The calculator estimates an expected hazard ratio of 0.928 (7.2% RRR) based on LDL-C lowering of 0.338 mmol/L (from -18.4% on baseline 1.836 mmol/L), yielding only 19.2% power against a minimum detectable HR of 0.825 for 80% power. The primary explanation is biomarker_not_causal: the intended biomarker (HDL-C) is non-causal for coronary artery disease, and the trial's explicit rationale was to test incremental benefit from raising HDL-C. The LDL-C lowering effect is real but too small to power the trial, making effect_too_small a valid secondary factor.",
+      "key_evidence": [
+        "3,414 patients randomized (The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events... Rationale and study design... (AIM-HIGH); NHLBI: Questions and Answers: AIM-HIGH Study (dated May 26, 2011); ClinicalTrials.gov NCT00120289)",
+        "Median follow-up 4.1 years at stop (The role of niacin in raising high-density lipoprotein cholesterol... baseline characteristics... (AIM-HIGH) trial); 32 months actual follow-up at stop (NHLBI: Questions and Answers: AIM-HIGH Study (dated May 26, 2011))",
+        "Baseline LDL-C 71 mg/dL on simvastatin; HDL-C 34.9 mg/dL; triglycerides 161 mg/dL (The role of niacin in raising high-density lipoprotein cholesterol... baseline characteristics... (AIM-HIGH) trial)",
+        "Designed for 850 events, 85% power, 25% assumed relative risk reduction (The role of niacin in raising high-density lipoprotein cholesterol... Rationale and study design... (AIM-HIGH))",
+        "Stopped early for futility; less than 1 in 10,000 chance of significant benefit (NHLBI: Questions and Answers: AIM-HIGH Study (dated May 26, 2011))",
+        "Placebo-adjusted phase 2 biomarker changes at 2 g dose: HDL-C +20%, LDL-C -18.4%, TG -25.8%, Lp(a) -20.8%, apoB -18.8%, non-HDL-C -19.8% (Lipid-modifying efficacy and tolerability of extended-release niacin/laropiprant in patients with primary hypercholesterolaemia or mixed dyslipidaemia)",
+        "Within-arm phase 3 HDL-C changes: 15% (The role of niacin in raising high-density lipoprotein cholesterol... Rationale and study design... (AIM-HIGH)), 30% (NHLBI: Questions and Answers: AIM-HIGH Study (dated May 26, 2011))",
+        "Calculator expected HR 0.928 (7.2% RRR) based on LDL-C lowering of 0.338 mmol/L; power 19.2%; MDE HR 0.825 for 80% power (calculator)",
+        "Trial's explicit hypothesis: incremental benefit from raising HDL-C on top of statin therapy (The role of niacin in raising high-density lipoprotein cholesterol... baseline characteristics... (AIM-HIGH) trial); reference table states HDL-C causal=no for coronary artery disease (calculator)"
+      ],
+      "what_would_change_this": "Full publication of AIM-HIGH results with an observed hazard ratio, confidence interval, and placebo-adjusted on-treatment changes in HDL-C, LDL-C, triglycerides, and Lp(a) could revise the effect-size estimate, though the DSMB's futility boundary makes a meaningful benefit highly unlikely.",
+      "readthrough_note": "The same biomarker-not-causal logic applies to other HDL-raising programmes; HPS2-THRIVE (niacin/laropiprant) also failed and showed excess non-fatal serious adverse events, reinforcing that HDL-C elevation is not a valid causal target for cardiovascular risk reduction."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "no genetics found",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.338 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.072,
+        "detail": "expected HR 0.928 at 4.1 y (relative risk reduction 7.2%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.192,
+        "detail": "power 19% with 850 events; smallest detectable HR 0.825",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "aim_high",
+      "ldl_equivalent_mmol": 0.338,
+      "basis": "LDL-C",
+      "time_factor": 0.891,
+      "expected_hr": 0.928,
+      "causal_rrr": 0.072,
+      "bp_factor": 1.0,
+      "power": 0.192,
+      "mde_hr_80": 0.825,
+      "outcome": "failure",
+      "category": "effect_too_small",
+      "secondary": [
+        "biomarker_not_causal"
+      ],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "aim_high",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": 20.0,
+          "baseline": 34.9,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmcid:PMC3120223,pmid:19166443"
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -18.4,
+          "baseline": 1.836,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmcid:PMC3120223,pmid:19166443"
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -25.8,
+          "baseline": 161.0,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmcid:PMC3120223,pmid:19166443"
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -18.8,
+          "baseline": null,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmid:19166443"
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -19.8,
+          "baseline": null,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmid:19166443"
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -20.8,
+          "baseline": null,
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "source": "pmid:19166443"
+        }
+      ],
+      "followup_years": 4.1,
+      "events": 850,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "Open Targets shows no genetic evidence for niacin's target (GPR109A/HM74A) and coronary artery disorder. Target is well-studied but no genetic association found; per rules, this is 'uncertain' rather than 'not_causal'.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 20.0,
+          "baseline": 34.9,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_212132ea6aeaea",
+            "f_e6e9010ac5df36"
+          ]
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -18.4,
+          "baseline": 1.836,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_74266f03abdad6",
+            "f_b280d226870380"
+          ]
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "pct_change": -25.8,
+          "baseline": 161.0,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_f4cdc8a6b7a868",
+            "f_4e489f41b1a507"
+          ]
+        },
+        {
+          "biomarker": "apoB",
+          "abs_change": null,
+          "pct_change": -18.8,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_95ec452286a80f"
+          ]
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "pct_change": -19.8,
+          "baseline": null,
+          "unit": "mmol/L",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_16066b91e843da"
+          ]
+        },
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": -20.8,
+          "baseline": null,
+          "unit": "mg/dL",
+          "method": "placebo-adjusted phase 2 at 2g dose (ERN/LRPT trial, background therapy not specified)",
+          "fact_ids": [
+            "f_de6519b723a963"
+          ]
+        }
+      ],
+      "followup_years": 4.1,
+      "followup_fact_ids": [
+        "f_7c446990ba8219",
+        "f_51df366baa18ae"
+      ],
+      "events": 850,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_ab172c383a399a"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [],
+      "missing": [
+        "actual_events",
+        "observed_hr",
+        "observed_ci",
+        "placebo_adjusted_sbp_change",
+        "AIM-HIGH_placebo_adjusted_biomarker_changes",
+        "Lp(a)_baseline",
+        "apoB_baseline",
+        "non-HDL-C_baseline"
+      ],
+      "notes": "AIM-HIGH stopped early for futility on 2011-05-26 (cut-off date). Biomarker changes from placebo-adjusted phase 2 trial (ERN/LRPT, pmid:19166443) at 2g dose, as AIM-HIGH's own biomarker data (announcement, pmcid:PMC3120226) are within-arm only. Phase 2 background therapy not specified; AIM-HIGH used niacin added to simvastatin. Median follow-up: 4.1 years per NEJM (pmcid:PMC3120223), though announcement cites 32 months. Planned events: 850. No genetic evidence for GPR109A/HM74A target. Intended biomarker: HDL-C (non-causal per reference table)."
+    },
+    "hypotheses": [
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "The trial's explicit rationale was to test incremental benefit of raising HDL-C on top of statin therapy (readout statement: 'determine whether there is incremental clinical benefit of niacin in reducing cardiovascular events in patients who have attained optimal on-treatment levels of LDL-C with a statin').",
+            "refs": [
+              "f_45d708cc302a2e"
+            ]
+          },
+          {
+            "text": "Calculator input confirms intended_biomarker is HDL-C.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Reference table (per system knowledge) states HDL-C causal=no for coronary artery disease.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Niacin raised HDL-C by 20% (placebo-adjusted phase 2 at 2g dose) and 15-30% (within-arm phase 3), confirming biomarker engagement.",
+            "refs": [
+              "f_212132ea6aeaea",
+              "f_4feddea733c96f",
+              "f_7c3d83f5b73fa6"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Niacin also lowers causal biomarkers: LDL-C (-18.4% placebo-adjusted phase 2), triglycerides (-25.8%), Lp(a) (-20.8%), apoB (-18.8%), non-HDL-C (-19.8%).",
+            "refs": [
+              "f_74266f03abdad6",
+              "f_f4cdc8a6b7a868",
+              "f_de6519b723a963",
+              "f_95ec452286a80f",
+              "f_16066b91e843da"
+            ]
+          }
+        ],
+        "would_settle": "Genetic evidence already establishes HDL-C as non-causal; no further data needed."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator estimates expected HR 0.928 (7.2% RRR) based on LDL-C lowering of 0.338 mmol/L (from -18.4% on baseline 1.836 mmol/L = 71 mg/dL).",
+            "refs": [
+              "calculator",
+              "f_74266f03abdad6",
+              "f_b280d226870380"
+            ]
+          },
+          {
+            "text": "Trial was powered for 25% RRR (assumed_rrr 25%), but expected effect is only 7.2% RRR.",
+            "refs": [
+              "f_e72f036655e35c",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Minimum detectable effect for 80% power is HR 0.825; expected HR 0.928 yields only 19.2% power.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Planned events 850, median follow-up 4.1 years (32 months at stop).",
+            "refs": [
+              "f_ab172c383a399a",
+              "f_7c446990ba8219",
+              "f_51df366baa18ae"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "If HDL-C were causal, expected benefit would be larger; the small effect reflects LDL-C already at 71 mg/dL on statin, leaving little room for further LDL lowering.",
+            "refs": [
+              "f_b280d226870380"
+            ]
+          }
+        ],
+        "would_settle": "A trial powered for 7% RRR would require ~30,000 patients and longer follow-up."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Target genetics listed as 'uncertain' — no genetic evidence found for niacin's target (GPR109A/HM74A) and coronary artery disorder.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "'Uncertain' differs from 'not_causal'; absence of genetic evidence for a well-studied target does not prove the target is invalid, only that evidence is lacking.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Mendelian randomization studies of GPR109A variants and CHD outcomes."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Niacin associated with cystoid maculopathy at high doses (3-4.5 g daily).",
+            "refs": [
+              "f_d0169270e74bd8",
+              "f_6acb4905ac115a",
+              "f_8ab32398035871"
+            ]
+          },
+          {
+            "text": "ERN/LRPT phase 2 study noted a safety signal (boolean=1).",
+            "refs": [
+              "f_638fe2803f7d7c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "AIM-HIGH used 1-2 g daily, below doses linked to maculopathy.",
+            "refs": [
+              "f_7c3d83f5b73fa6",
+              "f_d0169270e74bd8"
+            ]
+          },
+          {
+            "text": "Trial stopped for futility, not safety; no evidence harm offset benefit.",
+            "refs": [
+              "f_9706ba8a74013b"
+            ]
+          }
+        ],
+        "would_settle": "Full safety data from AIM-HIGH (not yet published as of 2011-05-26)."
+      },
+      {
+        "category": "population",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Patients had very low baseline LDL-C (71 mg/dL) on simvastatin, so additional LDL lowering has diminishing absolute benefit.",
+            "refs": [
+              "f_b280d226870380"
+            ]
+          },
+          {
+            "text": "Inclusion required LDL-C 40-80 mg/dL and HDL-C ≤40/50 mg/dL, TG 150-400 mg/dL — a residual-risk population.",
+            "refs": [
+              "f_84866e32d6adf1",
+              "f_c47a2ffeee3607",
+              "f_de6b1e00ca29b5"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator already incorporates baseline LDL-C and on-treatment change; population effect is captured in the effect size estimate.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Subgroup analysis by baseline LDL-C tertiles (not available as of 2011-05-26)."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary endpoint includes symptom-driven revascularization, a soft endpoint less sensitive to lipid modification.",
+            "refs": [
+              "f_409146973ab661",
+              "f_74bf87f4fcc597",
+              "f_7b871c9bd99bbb",
+              "f_833d40a618b937"
+            ]
+          },
+          {
+            "text": "Trial stopped early at median 32 months follow-up vs planned longer duration.",
+            "refs": [
+              "f_51df366baa18ae",
+              "f_9706ba8a74013b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Calculator uses 4.1 years follow-up and 850 events (planned), not the truncated data.",
+            "refs": [
+              "calculator",
+              "f_7c446990ba8219",
+              "f_ab172c383a399a"
+            ]
+          },
+          {
+            "text": "Composite endpoint standard for cardiovascular outcomes trials."
+          }
+        ],
+        "would_settle": "Component-specific analysis of hard vs soft endpoints (not available)."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Trial stopped early by DSMB.",
+            "refs": [
+              "f_9706ba8a74013b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Stopped for futility (scientific reason), not business decision or poor execution.",
+            "refs": [
+              "f_9706ba8a74013b"
+            ]
+          },
+          {
+            "text": "Recruitment met target (3,414 randomized).",
+            "refs": [
+              "f_0117c7a1add54f",
+              "f_67516f50cb29a9",
+              "f_72b78158283b1c",
+              "f_b60c1b1a005770"
+            ]
+          }
+        ],
+        "would_settle": "DSMB charter and minutes."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "No phase 3 placebo-adjusted biomarker data available (trial stopped before full results); calculator relies on phase 2 placebo-adjusted data from a different trial (ERN/LRPT) with unspecified background therapy.",
+            "refs": [
+              "calculator",
+              "f_f5c28d3c1ec9e6"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 2 placebo-adjusted data at 2g dose (matching AIM-HIGH max dose) available for all key biomarkers; baseline levels from AIM-HIGH itself; trial design parameters well documented.",
+            "refs": [
+              "f_95ec452286a80f",
+              "f_212132ea6aeaea",
+              "f_74266f03abdad6",
+              "f_de6519b723a963",
+              "f_16066b91e843da",
+              "f_f4cdc8a6b7a868",
+              "f_e6e9010ac5df36",
+              "f_b280d226870380",
+              "f_4e489f41b1a507"
+            ]
+          }
+        ],
+        "would_settle": "Publication of AIM-HIGH full results with placebo-adjusted biomarker changes."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator input 'pathway' is null; niacin is a lipid-modifying agent acting via GPR109A to alter HDL-C, LDL-C, TG, Lp(a). Should be set to 'lipid' for correct calculator routing and assumption tracking.",
+            "target_agent": "mechanism",
+            "request": "Set pathway to 'lipid' in calculator inputs."
+          },
+          {
+            "severity": "medium",
+            "issue": "Verifier SQL returned 'not_found' for LDL-C baseline (71 mg/dL, fact f_b280d226870380) and triglycerides baseline (161 mg/dL, fact f_4e489f41b1a507) from pmcid:PMC3120223, though both facts exist in the verified fact store. This discrepancy must be resolved before finalizing inputs.",
+            "target_agent": "case_builder",
+            "request": "Re-run verifier queries for LDL-C and triglycerides baseline in AIM-HIGH (pmcid:PMC3120223) to confirm 71 mg/dL and 161 mg/dL; if confirmed, update verifier status."
+          },
+          {
+            "severity": "low",
+            "issue": "ERN/LRPT phase 2 trial (pmid:19166443) background therapy is not specified in calculator inputs. AIM-HIGH enrolled patients on simvastatin with LDL-C 40-80 mg/dL; if ERN/LRPT patients were not on statins, the placebo-adjusted lipid changes may overestimate effects in a statin-treated population.",
+            "target_agent": "mechanism",
+            "request": "Search for ERN/LRPT background lipid-lowering therapy (statin use, dose) and document in calculator input 'method' field."
+          },
+          {
+            "severity": "low",
+            "issue": "AIM-HIGH niacin dose was titrated 1-2 g daily (mean ~1.5 g), while ERN/LRPT used fixed 2 g. The phase 2 placebo-adjusted changes at 2 g may overestimate the average on-treatment effect in AIM-HIGH.",
+            "target_agent": "mechanism",
+            "request": "Note dose difference in calculator input 'method' field; consider sensitivity analysis using 1.5 g dose if phase 2 data available."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_212132ea6aeaea",
+          "claim": "c1",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 20.0,
+          "unit": "%",
+          "source_id": "pmid:19166443",
+          "status": "confirmed",
+          "found": "HDL-C; 20.0%",
+          "note": "Abstract reports HDL-C change of 20.0%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*20\\.0%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%20.0%%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_e6e9010ac5df36",
+          "claim": "c2",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 34.9,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC3120223",
+          "status": "confirmed",
+          "found": "mean HDL-C, 34.9 mg/dL",
+          "note": "Abstract states baseline HDL-C 34.9 mg/dL.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*34\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3120223' AND r.abstractText LIKE '%34.9%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_74266f03abdad6",
+          "claim": "c3",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -18.4,
+          "unit": "%",
+          "source_id": "pmid:19166443",
+          "status": "confirmed",
+          "found": "LDL-C (-18.4%)",
+          "note": "Abstract reports LDL-C change -18.4% vs placebo.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*18\\.4%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%18.4%%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_b280d226870380",
+          "claim": "c4",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 71.0,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC3120223",
+          "status": "not_found",
+          "found": "",
+          "note": "No rows returned for this query.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*71\\.0[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3120223' AND r.abstractText LIKE '%71.0%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_f4cdc8a6b7a868",
+          "claim": "c5",
+          "used_as": "triglycerides change used by the calculator",
+          "key": "biomarker_change",
+          "value": -25.8,
+          "unit": "%",
+          "source_id": "pmid:19166443",
+          "status": "confirmed",
+          "found": "triglycerides (TG; -25.8%)",
+          "note": "Abstract reports triglycerides change -25.8%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*25\\.8%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%25.8%%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_4e489f41b1a507",
+          "claim": "c6",
+          "used_as": "triglycerides change used by the calculator",
+          "key": "baseline_level",
+          "value": 161.0,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC3120223",
+          "status": "not_found",
+          "found": "",
+          "note": "No rows returned for this query.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*161\\.0[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC3120223' AND r.abstractText LIKE '%161.0%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_95ec452286a80f",
+          "claim": "c7",
+          "used_as": "apoB change used by the calculator",
+          "key": "biomarker_change",
+          "value": -18.8,
+          "unit": "%",
+          "source_id": "pmid:19166443",
+          "status": "confirmed",
+          "found": "apolipoprotein (Apo) B (-18.8%)",
+          "note": "Abstract reports apoB change -18.8%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*18\\.8%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%18.8%%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_16066b91e843da",
+          "claim": "c8",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -19.8,
+          "unit": "%",
+          "source_id": "pmid:19166443",
+          "status": "confirmed",
+          "found": "non-HDL-C (-19.8%)",
+          "note": "Abstract reports non-HDL-C change -19.8%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*19\\.8%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '19166443' AND r.abstractText LIKE '%19.8%%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 6,
+        "not_found": 2,
+        "contradicts": 0
+      },
+      "queries": 8
+    },
+    "readthrough": [],
+    "genetics": [],
+    "facts": [
+      {
+        "fact_id": "f_95ec452286a80f",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -18.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "apolipoprotein (Apo) B (-18.8%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_e6e9010ac5df36",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 34.9,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "mean HDL-C, 34.9 mg/dL (0.90 mmol/L)",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_212132ea6aeaea",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 20.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "high-density lipoprotein cholesterol (HDL-C; 20.0%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_4feddea733c96f",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 15,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1,500 mg – 2,000 mg per day",
+          "kind": "percent",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "Niacin is most noted for its effects on HDL-C, with HDL-C increases in the 15% to 35% range.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_7c3d83f5b73fa6",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 30,
+        "unit": "percent",
+        "attrs": {
+          "trial": "AIM-HIGH",
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1,000 mg to 2,000 mg",
+          "kind": "percent"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "increases HDL cholesterol levels by 15 to 30 percent",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_21bde6a269bc56",
+        "entity": "biomarker:hscrp",
+        "key": "baseline_level",
+        "value": 2.83,
+        "unit": "mg/L",
+        "attrs": {
+          "biomarker": "hsCRP",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "the overall median high sensitivity C-reactive protein (hsCRP) was 2.83 mg/L",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_b280d226870380",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 71.0,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "Among the 3,194 participants (94%) who were taking a statin at trial entry, baseline LDL-C was 71.0 mg/dL",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_74266f03abdad6",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -18.4,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "ERN/LRPT 2 g produced significant changes vs. placebo in LDL-C (-18.4%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_e4d9ca250f0f46",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -10.0,
+        "unit": "percent",
+        "attrs": {
+          "trial": "AIM-HIGH",
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1,000 mg to 2,000 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "Reductions in LDL cholesterol are modest (less than 10 percent).",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_de6519b723a963",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -20.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "lipoprotein(a) (-20.8%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_16066b91e843da",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -19.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "non-HDL-C",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "non-HDL-C (-19.8%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_4e489f41b1a507",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 161.0,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "median triglycerides,161.0 mg/dL (1.82 mmol/L)",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_0e54a881467c61",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -15.0,
+        "unit": "percent",
+        "attrs": {
+          "trial": "AIM-HIGH",
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "1,000 mg to 2,000 mg",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "High dose niacin (1,000 mg to 2,000 mg or 1 to 2 grams) decreases triglyceride levels by 15 to 20 percent",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_f4cdc8a6b7a868",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -25.8,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase2",
+          "timepoint": "weeks 12-24",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "2 g"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "triglycerides (TG; -25.8%)",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_e72f036655e35c",
+        "entity": "trial:nct00120289",
+        "key": "assumed_rrr",
+        "value": 25,
+        "unit": "percent",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "This event-driven trial will have 85% power to show a 25% reduction in primary event frequency after 850 patients have experienced a primary outcome event.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_84866e32d6adf1",
+        "entity": "trial:nct00120289",
+        "key": "inclusion_threshold",
+        "value": "LDL-C <= 160 mg/dL (4.1 mmol/L); HDL-C <= 40 mg/dL (1.0 mmol/L) for men or <= 50 mg/dL (1.3 mmol/L) for women; TG >= 150 mg/dL (1.7 mmol/L) and <= 400 mg/dL (4.5 mmol/L)",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "quote": "Atherogenic dyslipidemia defined as: (1) LDL-C of less than or equal to 160 mg/dL (4.1 mmol/L); (2) HDL-C of less than or equal to 40 mg/dL (1.0 mmol/L) for men or less than or equal to 50 mg/dL (1.3 mmol/L) for women; (3) TG greater than or equal to 150 mg/dL (1.7 mmol/L) and less than or equal to 400 mg/dL (4.5 mmol/L)",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00120289"
+      },
+      {
+        "fact_id": "f_c47a2ffeee3607",
+        "entity": "trial:nct00120289",
+        "key": "inclusion_threshold",
+        "value": "LDL-C 40-80 mg/dL",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "maintain LDL-C at 40 - 80 mg/dL (1.03-2.07 mmol/L)",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_de6b1e00ca29b5",
+        "entity": "trial:nct00120289",
+        "key": "inclusion_threshold",
+        "value": "LDL-C 40 - 80 mg/dL (1.03 – 2.07 mmol/L)",
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "All participants received simvastatin (or simvastatin plus ezetimibe) at a dose sufficient to maintain LDL-C 40 - 80 mg/dL (1.03 – 2.07 mmol/L).",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_51df366baa18ae",
+        "entity": "trial:nct00120289",
+        "key": "median_followup",
+        "value": 32,
+        "unit": "months",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "The actual average follow-up is 32 months.",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_580c150caa25d4",
+        "entity": "trial:nct00120289",
+        "key": "median_followup",
+        "value": 4.6,
+        "unit": "years",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "All participants will be followed to a common termination date or death (estimated average follow-up 4.6 years; minimum follow-up 30 months and maximum approximately 7 years).",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_7c446990ba8219",
+        "entity": "trial:nct00120289",
+        "key": "median_followup",
+        "value": 4.1,
+        "unit": "years",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "average follow-up of 4.1 years.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_d4253e86af3f2a",
+        "entity": "trial:nct00120289",
+        "key": "median_followup",
+        "value": 36,
+        "unit": "months",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "quote": "Time to first event measured from date of randomization through last follow-up visit (common termination) for an average of 36 months follow-up, maximum 66 months.",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00120289"
+      },
+      {
+        "fact_id": "f_0117c7a1add54f",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 3414,
+        "unit": "patients",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "Of 4,275 patients entering the open label run-in, 3,414 (80%) successfully completed the run-in and agreed to be randomized.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_4f3859703eb50c",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 162,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "The Cholesterol Lowering Atherosclerosis Study (CLAS) was a randomized, placebo-controlled, angiographic trial testing combined colestipol-niacin therapy in 162 subjects.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_67516f50cb29a9",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 3414,
+        "unit": "participants",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "Researchers enrolled 3,414 volunteers.",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_72b78158283b1c",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 3414,
+        "unit": "participants",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "3,414 were randomized to treatment.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_b60c1b1a005770",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 3414,
+        "unit": "participants",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "quote": "Enrollment: 3414 (ACTUAL)",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00120289"
+      },
+      {
+        "fact_id": "f_f5c28d3c1ec9e6",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 1613,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ERN/LRPT lipid-modifying efficacy and tolerability study"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "Dyslipidaemic patients were randomised to ERN/LRPT 1 g (n = 800), ERN 1 g (n = 543) or placebo (n = 270) for 4 weeks.",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_fca353598667c3",
+        "entity": "trial:nct00120289",
+        "key": "n_randomized",
+        "value": 103,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "CLAS-II"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "We now describe a subgroup of 103 subjects treated for 4 years (CLAS-II).",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_9b31c64f8b410c",
+        "entity": "trial:nct00120289",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00120289"
+      },
+      {
+        "fact_id": "f_ab172c383a399a",
+        "entity": "trial:nct00120289",
+        "key": "planned_events",
+        "value": 850,
+        "unit": "events",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "This event-driven trial will have 85% power to show a 25% reduction in primary event frequency after 850 patients have experienced a primary outcome event.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_f9efea12139da8",
+        "entity": "trial:nct00120289",
+        "key": "power",
+        "value": 85,
+        "unit": "percent",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "This event-driven trial will have 85% power to show a 25% reduction in primary event frequency after 850 patients have experienced a primary outcome event.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_409146973ab661",
+        "entity": "trial:nct00120289",
+        "key": "primary_endpoint",
+        "value": "time to occurrence of the first of: coronary heart disease death, non-fatal myocardial infarction, ischemic stroke, hospitalization for acute coronary syndrome, or symptom-driven coronary or cerebral revascularization",
+        "unit": "NA",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120226",
+        "quote": "The primary end-point was time to occurrence of the first of: coronary heart disease death, non-fatal myocardial infarction, ischemic stroke, hospitalization for acute coronary syndrome, or symptom-driven coronary or cerebral revascularization.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/"
+      },
+      {
+        "fact_id": "f_74bf87f4fcc597",
+        "entity": "trial:nct00120289",
+        "key": "primary_endpoint",
+        "value": "combined rates of cardiovascular disease deaths, non-fatal heart attacks, stroke due to blockage of arteries leading to the brain, hospitalization for acute coronary syndrome, or symptom driven coronary or cerebral revascularization surgeries",
+        "unit": "NA",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "a reduction in the combined rates of cardiovascular disease deaths, non-fatal heart attacks, stroke due to blockage of arteries leading to the brain, hospitalization for acute coronary syndrome, or symptom driven coronary or cerebral revascularization surgeries.",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      },
+      {
+        "fact_id": "f_7b871c9bd99bbb",
+        "entity": "trial:nct00120289",
+        "key": "primary_endpoint",
+        "value": "time to the first occurrence of coronary heart disease death, nonfatal myocardial infarction, ischemic stroke, hospitalization for acute coronary syndrome or symptom-driven coronary or cerebral revascularization",
+        "unit": "NA",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "The primary end point is time to the first occurrence of coronary heart disease death, nonfatal myocardial infarction, ischemic stroke, hospitalization for acute coronary syndrome or symptom-driven coronary or cerebral revascularization",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_833d40a618b937",
+        "entity": "trial:nct00120289",
+        "key": "primary_endpoint",
+        "value": "Composite End Point of CHD Death, Nonfatal MI, Ischemic Stroke, Hospitalization for Non-ST Segment Elevation Acute Coronary Syndrome (ACS), or Symptom-driven Coronary or Cerebral Revascularization",
+        "unit": "",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "quote": "Primary outcome(s): Composite End Point of CHD Death, Nonfatal MI, Ischemic Stroke, Hospitalization for Non-ST Segment Elevation Acute Coronary Syndrome (ACS), or Symptom-driven Coronary or Cerebral Revascularization",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00120289"
+      },
+      {
+        "fact_id": "f_9c978094da290e",
+        "entity": "trial:nct00120289",
+        "key": "primary_endpoint",
+        "value": "coronary atherosclerosis progression/regression",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "The Cholesterol Lowering Atherosclerosis Study (CLAS) was a randomized, placebo-controlled, angiographic trial testing combined colestipol-niacin therapy in 162 subjects.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_45d708cc302a2e",
+        "entity": "trial:nct00120289",
+        "key": "readout_statement",
+        "value": "This study should determine whether there is incremental clinical benefit of niacin in reducing cardiovascular events in patients who have attained optimal on-treatment levels of LDL-C with a statin.",
+        "unit": "NA",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "This study should determine whether there is incremental clinical benefit of niacin in reducing cardiovascular events in patients who have attained optimal on-treatment levels of LDL-C with a statin.",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_a090808fe2734b",
+        "entity": "trial:nct00120289",
+        "key": "readout_statement",
+        "value": "These results confirm CLAS-I findings and indicate that regression can continue for 4 years.",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "These results confirm CLAS-I findings and indicate that regression can continue for 4 years.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_48c366d79e0cc3",
+        "entity": "trial:nct00120289",
+        "key": "safety_signal",
+        "value": "not stated",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "Changes in blood lipid, lipoprotein-cholesterol, and apolipoprotein levels were maintained, and at 4 years significantly more drug-treated subjects demonstrated nonprogression (52% drug- vs 15% placebo-treated) and regression (18% drug- vs 6% placebo-treated) in native coronary artery lesions.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_638fe2803f7d7c",
+        "entity": "trial:nct00120289",
+        "key": "safety_signal",
+        "value": 1,
+        "unit": "boolean",
+        "attrs": {
+          "trial": "ERN/LRPT lipid-modifying efficacy and tolerability study"
+        },
+        "source_id": "pmid:19166443",
+        "quote": "ERN/LRPT produced significantly less flushing than ERN during initiation (week 1) and maintenance (weeks 2-24) for all prespecified flushing end-points (incidence, intensity and discontinuation because of flushing).",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/"
+      },
+      {
+        "fact_id": "f_6acb4905ac115a",
+        "entity": "trial:nct00120289",
+        "key": "safety_signal",
+        "value": "reversible toxic cystoid maculopathy",
+        "unit": "",
+        "attrs": {
+          "trial": "Niacin maculopathy",
+          "dose": "1.0-6.0 g daily"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Niacin causes a reversible toxic cystoid maculopathy that occurs in approximately 0.67% of patients taking high doses of the drug",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_8ab32398035871",
+        "entity": "trial:nct00120289",
+        "key": "safety_signal",
+        "value": 0.67,
+        "unit": "%",
+        "attrs": {
+          "trial": "Niacin maculopathy",
+          "dose": "high doses"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Niacin causes a reversible toxic cystoid maculopathy that occurs in approximately 0.67% of patients taking high doses of the drug",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_d0169270e74bd8",
+        "entity": "trial:nct00120289",
+        "key": "safety_signal",
+        "value": "niacin-induced cystoid maculopathy",
+        "unit": "",
+        "attrs": {
+          "trial": "Niacin maculopathy",
+          "dose": "3.0-4.5 g daily"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Three patients with niacin-induced visual symptoms had cystoid maculopathy without leakage on fluorescein angiography",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_53dbf81cbcc7ad",
+        "entity": "trial:nct00120289",
+        "key": "sbp_change",
+        "value": 128.3,
+        "unit": "mm Hg",
+        "attrs": {
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "pmcid:PMC3120223",
+        "quote": "Systolic blood pressure, mm Hg (mean ± SD) | 128.3 ± 16.3",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/"
+      },
+      {
+        "fact_id": "f_9706ba8a74013b",
+        "entity": "trial:nct00120289",
+        "key": "stopped_early",
+        "value": true,
+        "unit": "NA",
+        "attrs": {
+          "trial": "AIM-HIGH"
+        },
+        "source_id": "announcement:aim_high",
+        "quote": "AIM-HIGH data showed that, if the trial had continued, there was less than a 1 in 10,000 chance that it would ever show a significant benefit on the primary outcome measure",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00120289@2011-05-26",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00120289",
+        "url": "https://clinicaltrials.gov/study/NCT00120289",
+        "pub_date": "2005-07-15",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00120289",
+            "acronym": null,
+            "title": "Niacin Plus Statin to Prevent Vascular Events",
+            "official_title": "AIM HIGH: Niacin Plus Statin to Prevent Vascular Events",
+            "sponsor": "Axio Research. LLC",
+            "status": "TERMINATED",
+            "why_stopped": "AIM-HIGH was stopped on the recommendation of the DSMB because of lack of efficacy of niacin in preventing primary outcome events.",
+            "start_date": "2005-09",
+            "primary_completion": "2012-09",
+            "first_posted": "2005-07-15",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 3414,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Extended release niacin",
+                "type": "DRUG",
+                "other_names": [
+                  "Niaspan"
+                ],
+                "arms": [
+                  "Combination Therapy"
+                ]
+              },
+              {
+                "name": "Simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "Zocor"
+                ],
+                "arms": [
+                  "Combination Therapy",
+                  "Monotherapy"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Combination Therapy",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Monotherapy",
+                "type": "ACTIVE_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Diseases",
+              "Heart Diseases",
+              "Cerebrovascular Accident",
+              "Coronary Disease",
+              "Atherosclerosis",
+              "Myocardial Infarction"
+            ],
+            "primary_outcomes": [
+              "Composite End Point of CHD Death, Nonfatal MI, Ischemic Stroke, Hospitalization for Non-ST Segment Elevation Acute Coronary Syndrome (ACS), or Symptom-driven Coronary or Cerebral Revascularization [Time to first event measured from date of randomization through last follow-up visit (common termination) for an average of 36 months follow-up, maximum 66 months.]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 3283
+      },
+      {
+        "source_id": "pmcid:PMC3120223",
+        "type": "journal",
+        "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol: baseline characteristics of study participants. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: impact on Global Health outcomes (AIM-HIGH) trial",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392609/",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "21392609",
+          "pmcid": "PMC3120223",
+          "doi": "10.1016/j.ahj.2010.12.007",
+          "journal": "American heart journal"
+        },
+        "chars": 20714
+      },
+      {
+        "source_id": "pmid:19166443",
+        "type": "journal",
+        "title": "Lipid-modifying efficacy and tolerability of extended-release niacin/laropiprant in patients with primary hypercholesterolaemia or mixed dyslipidaemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19166443/",
+        "pub_date": "2008-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19166443",
+          "pmcid": null,
+          "doi": "10.1111/j.1742-1241.2008.01938.x",
+          "journal": "International journal of clinical practice"
+        },
+        "chars": 1794
+      },
+      {
+        "source_id": "pmid:2243429",
+        "type": "journal",
+        "title": "Beneficial effects of colestipol-niacin on coronary atherosclerosis. A 4-year follow-up",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "2243429",
+          "pmcid": null,
+          "doi": null,
+          "journal": "JAMA"
+        },
+        "chars": 1117
+      },
+      {
+        "source_id": "pmid:1972218",
+        "type": "journal",
+        "title": "Kava-induced dermopathy: a niacin deficiency?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1972218/",
+        "pub_date": "1990-06-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "1972218",
+          "pmcid": null,
+          "doi": "10.1016/0140-6736(90)91458-m",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 862
+      },
+      {
+        "source_id": "pmid:4569673",
+        "type": "journal",
+        "title": "Niacin in the long-term treatment of schizophrenia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/4569673/",
+        "pub_date": "1973-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "4569673",
+          "pmcid": null,
+          "doi": "10.1001/archpsyc.1973.01750330010002",
+          "journal": "Archives of general psychiatry"
+        },
+        "chars": 52
+      },
+      {
+        "source_id": "pmid:21401825",
+        "type": "journal",
+        "title": "Niacin: the only vitamin that reduces cardiovascular events",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21401825/",
+        "pub_date": "2011-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21401825",
+          "pmcid": null,
+          "doi": "10.1111/j.1742-1241.2011.02630.x",
+          "journal": "International journal of clinical practice"
+        },
+        "chars": 61
+      },
+      {
+        "source_id": "pmid:3174043",
+        "type": "journal",
+        "title": "Niacin maculopathy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "3174043",
+          "pmcid": null,
+          "doi": "10.1016/s0161-6420(88)33073-3",
+          "journal": "Ophthalmology"
+        },
+        "chars": 926
+      },
+      {
+        "source_id": "pmid:20079958",
+        "type": "journal",
+        "title": "Binder blinders-niacin of omission?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20079958/",
+        "pub_date": "2010-01-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20079958",
+          "pmcid": null,
+          "doi": "10.1053/j.ajkd.2009.12.015",
+          "journal": "American journal of kidney diseases : the official journal of the National Kidney Foundation"
+        },
+        "chars": 37
+      },
+      {
+        "source_id": "pmid:19812221",
+        "type": "journal",
+        "title": "Niacin status impacts chromatin structure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19812221/",
+        "pub_date": "2009-10-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19812221",
+          "pmcid": null,
+          "doi": "10.3945/jn.109.111757",
+          "journal": "The Journal of nutrition"
+        },
+        "chars": 1191
+      },
+      {
+        "source_id": "pmid:11988158",
+        "type": "journal",
+        "title": "[Niacin-induced hepatitis]",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11988158/",
+        "pub_date": "2002-04-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11988158",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Medicina clinica"
+        },
+        "chars": 28
+      },
+      {
+        "source_id": "pmcid:PMC3120226",
+        "type": "journal",
+        "title": "The role of niacin in raising high-density lipoprotein cholesterol to reduce cardiovascular events in patients with atherosclerotic cardiovascular disease and optimally treated low-density lipoprotein cholesterol Rationale and study design. The Atherothrombosis Intervention in Metabolic syndrome with low HDL/high triglycerides: Impact on Global Health outcomes (AIM-HIGH)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21392600/",
+        "pub_date": "2011-02-02",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "21392600",
+          "pmcid": "PMC3120226",
+          "doi": "10.1016/j.ahj.2010.11.017",
+          "journal": "American heart journal",
+          "purpose": "design"
+        },
+        "chars": 35910
+      },
+      {
+        "source_id": "announcement:aim_high",
+        "type": "press_release",
+        "title": "NHLBI: Questions and Answers: AIM-HIGH Study (dated May 26, 2011)",
+        "url": "https://www.nhlbi.nih.gov/grants-and-training/aim-high-faqs",
+        "pub_date": "2011-05-26",
+        "access": "press_release",
+        "meta": {},
+        "chars": 15537
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 21,
+      "facts": 46,
+      "relationships": 21,
+      "events": 126,
+      "audit_entries": 126,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 13,
+        "input_tokens": 16329,
+        "output_tokens": 4515,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 3538,
+        "output_tokens": 5000,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 2646,
+        "output_tokens": 2968,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 3716,
+        "output_tokens": 4186,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 5181,
+        "output_tokens": 2930,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 6060,
+        "output_tokens": 2476,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

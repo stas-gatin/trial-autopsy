@@ -1,0 +1,1823 @@
+{
+  "run_id": "bt-illuminate",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2006-12-02",
+  "backtest": true,
+  "readout_date": "2006-12-02",
+  "analysis_date": "2006-12-02",
+  "trial": {
+    "nct_id": "NCT00134264",
+    "acronym": "ILLUMINATE",
+    "title": "A Study Examining Torcetrapib/Atorvastatin And Atorvastatin Effects On Clinical CV Events In Patients With Heart Disease",
+    "sponsor": "Pfizer",
+    "status": "TERMINATED",
+    "enrollment": 15067,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Coronary Disease",
+      "Diabetes Mellitus"
+    ],
+    "primary_completion": "2007-06"
+  },
+  "drug": {
+    "name": "torcetrapib",
+    "chembl_id": "CHEMBL479527",
+    "aliases": [
+      "CP-529,414",
+      "CP-529414"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Cholesteryl ester transfer protein inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000087237",
+        "symbol": "CETP",
+        "name": "cholesteryl ester transfer protein"
+      }
+    ],
+    "searched_as": "torcetrapib"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-illuminate",
+  "log_file": "logs/trace-bt-illuminate.jsonl",
+  "execution_time_seconds": 1.0,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "stopped_harm",
+      "outcome_basis": "readout: \"The independent Data Safety Monitoring Board (DSMB) monitoring the ILLUMINATE morbidity and mortality study for torcetrapib recommended term\" (announcement:illuminate)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "off_target_harm",
+      "secondary_categories": [
+        "biomarker_not_causal",
+        "target_not_causal"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: not_causal"
+    },
+    "report": {
+      "headline": "ILLUMINATE (torcetrapib) was stopped for harm on 2006-12-02 after the DSMB found an imbalance of mortality and cardiovascular events, driven by an off-target blood pressure elevation not shared by other CETP inhibitors.",
+      "summary": "The ILLUMINATE trial randomized 15,067 patients with established cardiovascular disease and low HDL-C (men <44 mg/dl; women <54 mg/dl) to torcetrapib 60 mg QD plus atorvastatin versus atorvastatin alone, with time to first major cardiovascular event as the primary endpoint. The independent DSMB recommended terminating the study because of an imbalance of mortality and cardiovascular events. Phase 2 data had shown small increases in systolic and diastolic blood pressure, with significant BP increases in 2 of 140 subjects. The calculator, operating in forecast mode with unknown follow-up and event count, returned not_computable (category insufficient_data) and predicted only a 9% RRR (HR 0.91) based on an assumed LDL-C baseline of 2.0 mmol/L and -18.9% LDL-C lowering at 90 mg/day, requiring 3,560 events for 80% power. The fundamental weaknesses were HDL-C non-causality (the drug class was developed to raise HDL-C, which is classified as non-causal for coronary disease) and absent pre-cutoff CETP genetic evidence (Open Targets score 0.736 but evidence_before_cutoff = 0). The observed harm — opposite to the predicted benefit — confirms off-target toxicity (aldosterone/BP elevation) specific to torcetrapib.",
+      "key_evidence": [
+        "15,067 participants randomized (ClinicalTrials.gov NCT00134264 ILLUMINATE)",
+        "Primary endpoint: time to first major cardiovascular disease event (ClinicalTrials.gov NCT00134264 ILLUMINATE)",
+        "DSMB recommended terminating due to imbalance of mortality and CV events (Pfizer press release Dec 2, 2006)",
+        "Small increases in systolic and diastolic blood pressures noted in phase 2 (Efficacy and safety of torcetrapib... on background of atorvastatin)",
+        "Significant BP increases in 2 of 140 subjects (Efficacy and safety of torcetrapib... in individuals with below-average HDL-C)",
+        "HDL-C increase 40.2% placebo-adjusted at 90 mg/day on atorvastatin background (Efficacy and safety of torcetrapib... on background of atorvastatin)",
+        "HDL-C increases up to 382% across phase 2 studies (multiple sources)",
+        "LDL-C decrease -18.9% at 90 mg/day on atorvastatin background (Efficacy and safety of torcetrapib... on background of atorvastatin)",
+        "LDL-C decrease -22.2% in phase 2 (Efficacy and safety of torcetrapib... in individuals with below-average HDL-C)",
+        "Calculator: expected HR 0.91, causal RRR 9%, category insufficient_data, weakest_link target genetics: not_causal (calculator)",
+        "Calculator assumptions: LDL-C baseline assumed 2.0, follow-up unknown, events needed for 80% power: 3,560 (calculator)",
+        "Open Targets CETP genetic association score 0.736 (opentargets:CETP)"
+      ],
+      "what_would_change_this": "The trial was stopped for definitive harm; nothing would reverse that outcome. Earlier recognition of the off-target blood pressure/aldosterone signal in phase 2 might have prevented the phase 3 launch or prompted dose de-escalation.",
+      "readthrough_note": "Other CETP inhibitors (dalcetrapib, anacetrapib, evacetrapib) were in development; anacetrapib (REVEAL) later showed neutral cardiovascular outcomes without the blood pressure harm, confirming the toxicity was off-target to torcetrapib, not a class effect of CETP inhibition."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "not_causal",
+        "detail": "Open Targets genetic association 0.736 for CETP",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change 0.378 mmol/L via LDL-C",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.09,
+        "detail": "expected HR 0.91 at 5 y (relative risk reduction 9.0%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 3560",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "illuminate",
+      "ldl_equivalent_mmol": 0.378,
+      "basis": "LDL-C",
+      "time_factor": 1.0,
+      "expected_hr": 0.91,
+      "causal_rrr": 0.09,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "target genetics: not_causal",
+      "consistent_with_observed": null,
+      "assumptions": [
+        "LDL-C: no baseline given, assumed 2.0",
+        "follow-up unknown, effect shown at 5 years"
+      ],
+      "notes": [
+        "events needed for 80% power: 3560"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "illuminate",
+      "mode": "autopsy",
+      "target_genetics": "not_causal",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "%",
+          "pct_change": 40.2,
+          "baseline": null,
+          "method": "placebo-adjusted, phase 2, 90 mg/day, 8 weeks (phase 3 dose 60 mg/day; 90 mg/day is closest available placebo-adjusted data)",
+          "source": "pmid:17084250"
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "%",
+          "pct_change": -18.9,
+          "baseline": null,
+          "method": "placebo-adjusted, phase 2, 90 mg/day, 8 weeks (same source as HDL-C 40.2%; phase 3 dose 60 mg/day)",
+          "source": "pmid:17084250"
+        }
+      ],
+      "followup_years": null,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "not_causal",
+      "target_genetics_rationale": "Open Targets genetic association score for CETP and coronary artery disorder is 0.736, but evidence_before_cutoff = 0 (all 13 studies published after 2006-12-02). With no pre-cutoff genetic evidence for this well-studied target, and the intended biomarker HDL-C being non-causal for CAD (per reference table), target genetics assessed as not_causal.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 40.2,
+          "baseline": null,
+          "unit": "%",
+          "method": "placebo-adjusted, phase 2, 90 mg/day, 8 weeks (phase 3 dose 60 mg/day; 90 mg/day is closest available placebo-adjusted data)",
+          "fact_ids": [
+            "f_75056971f04153"
+          ]
+        },
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -18.9,
+          "baseline": null,
+          "unit": "%",
+          "method": "placebo-adjusted, phase 2, 90 mg/day, 8 weeks (same source as HDL-C 40.2%; phase 3 dose 60 mg/day)",
+          "fact_ids": [
+            "f_d682cfc6cb20ed"
+          ]
+        }
+      ],
+      "followup_years": null,
+      "followup_fact_ids": [],
+      "events": null,
+      "events_basis": "planned",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_ce96d57674b2f5"
+      ],
+      "missing": [
+        "followup_years",
+        "events",
+        "sbp_change_mmhg",
+        "observed_hr",
+        "observed_ci",
+        "HDL-C_baseline",
+        "LDL-C_baseline",
+        "placebo_adjusted_apoB"
+      ],
+      "notes": "HDL-C: Two verified facts report placebo-adjusted changes at 90 mg/day, Week 8: f_75056971f04153 (40.2%, pmid:17084250) and f_6551c771a27ddb (54.5%, pmid:17084249). The 40.2% value is used here because it comes from the same publication (pmid:17084250) as the paired LDL-C change (-18.9%, f_d682cfc6cb20ed), ensuring consistency. Phase 3 dose was 60 mg/day; 90 mg/day phase 2 data is the closest available placebo-adjusted pair. SBP: Verified facts note BP increases (f_05ae899bd8c92a: 'small increases'; f_3c00b6042dfc32: 'significant increases in 2 of 140 subjects') but no quantitative mmHg change is available in pre-cutoff evidence. The trial was stopped early for off-target harm (mortality/CV event imbalance and BP elevation), which is the primary failure mode; the calculator's weakest_link would reflect this if sbp_change_mmhg were quantified."
+    },
+    "hypotheses": [
+      {
+        "category": "off_target_harm",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Independent DSMB recommended terminating the ILLUMINATE morbidity/mortality study due to an imbalance of mortality and cardiovascular events.",
+            "refs": [
+              "f_ce96d57674b2f5",
+              "f_df29965f308195"
+            ]
+          },
+          {
+            "text": "Small increases in systolic and diastolic blood pressures were noted in phase 2 trial.",
+            "refs": [
+              "f_05ae899bd8c92a"
+            ]
+          },
+          {
+            "text": "Significant blood pressure increases occurred in 2 of 140 subjects in phase 2 trial.",
+            "refs": [
+              "f_3c00b6042dfc32"
+            ]
+          },
+          {
+            "text": "Trial stopped early (confirmed by ClinicalTrials.gov and announcement).",
+            "refs": [
+              "f_7b1b1c6a86b7a2",
+              "f_df29965f308195"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Full phase 3 safety dataset including blood pressure, aldosterone, electrolyte changes, and adjudicated CV events at the 60 mg QD dose."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "HDL-C is classified as non-causal for coronary disease in the reference table.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Torcetrapib achieved 40.2% placebo-adjusted HDL-C increase at 90 mg/day (phase 2, 8 weeks); higher doses produced up to 382% increases.",
+            "refs": [
+              "f_75056971f04153",
+              "f_61ef8921d975d5",
+              "f_b2c37192c915b5",
+              "f_f45f58e911fc0d"
+            ]
+          },
+          {
+            "text": "Drug class was developed specifically to raise HDL-C.",
+            "refs": [
+              "f_d8ecac5cf1e4b7"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Post-cutoff Mendelian randomization studies confirming HDL-C non-causality for coronary outcomes."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Open Targets genetic association score for CETP is 0.736 but evidence_before_cutoff = 0 (all 13 studies published after 2006-12-02).",
+            "refs": [
+              "f_c145d8bc469bf7"
+            ]
+          },
+          {
+            "text": "Calculator identifies 'target genetics: not_causal' as weakest link.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "CETP is a well-studied target with no pre-cutoff genetic evidence linking variants to CAD outcomes.",
+            "refs": [
+              "f_c145d8bc469bf7"
+            ]
+          }
+        ],
+        "against": [],
+        "would_settle": "Pre-cutoff genetic studies linking CETP variants to coronary artery disease outcomes."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator predicted 9% RRR (HR 0.91) based on LDL-C lowering of -18.9% at 90 mg/day.",
+            "refs": [
+              "calculator",
+              "f_d682cfc6cb20ed"
+            ]
+          },
+          {
+            "text": "Events needed for 80% power: 3,560.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Trial stopped for HARM (mortality/CV event imbalance), not futility.",
+            "refs": [
+              "f_ce96d57674b2f5"
+            ]
+          },
+          {
+            "text": "Observed direction of effect opposite to predicted benefit.",
+            "refs": [
+              "f_ce96d57674b2f5",
+              "f_426c37d0f7147b"
+            ]
+          }
+        ],
+        "would_settle": "Not applicable — harm, not small benefit, was observed."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Trial stopped early by independent DSMB.",
+            "refs": [
+              "f_7b1b1c6a86b7a2",
+              "f_df29965f308195"
+            ]
+          },
+          {
+            "text": "Phase 3 trial with 15,067 participants randomized.",
+            "refs": [
+              "f_19d51e14bec244"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Stopping was scientifically driven by clear harm signal (mortality/CV event imbalance), not business or operational failure.",
+            "refs": [
+              "f_ce96d57674b2f5",
+              "f_426c37d0f7147b"
+            ]
+          }
+        ],
+        "would_settle": "Sponsor's internal communications regarding the decision to halt development after DSMB recommendation."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator uses HDL-C 40.2% at 90 mg/day (pmid:17084250) but another verified fact (f_6551c771a27ddb, pmid:17084249) reports 54.5% at same dose (90 mg/day), same phase (phase 2), same adjustment (placebo-adjusted), same timepoint (Week 8). The calculator should acknowledge this discrepancy or justify the choice.",
+            "target_agent": "mechanism",
+            "request": "Add a note explaining why 40.2% was chosen over 54.5% for HDL-C, or include both in a sensitivity range."
+          },
+          {
+            "severity": "medium",
+            "issue": "sbp_change_mmhg is null despite verified facts showing blood pressure increases (f_05ae899bd8c92a: 'small increases in systolic and diastolic blood pressures'; f_3c00b6042dfc32: 'Significant blood pressure increases were noted in 2 of 140 subjects'). The calculator's bp_factor = 1.0 misses this off-target effect that likely contributed to harm.",
+            "target_agent": "mechanism",
+            "request": "Search for quantitative SBP change (mmHg) at phase 3 dose (60 mg/day) or closest available dose in pre-cutoff sources; if unavailable, note as limitation and consider qualitative adjustment."
+          },
+          {
+            "severity": "high",
+            "issue": "Hypothesis 'execution_or_nonscientific' status is 'supported' but the evidence shows stopping was scientifically driven by DSMB for harm (f_ce96d57674b2f5). The 'against' clause correctly states this. The category 'execution_or_nonscientific' implies operational/business failure, not safety-driven early stopping. Status should be 'weakened' or 'refuted'.",
+            "target_agent": "case_builder",
+            "request": "Change status to 'weakened' and revise 'for' evidence to reflect that early stopping was appropriate scientific response to harm, not execution failure."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'biomarker_not_causal' cites HDL-C increases at 120 mg BID/QD (382%, 153%, 136%) which are far above phase 3 dose (60 mg QD) and even the 90 mg/day used in calculator. While factually correct, this overstates the biomarker effect at the relevant dose.",
+            "target_agent": "case_builder",
+            "request": "Clarify that the very large HDL-C increases (>100%) were at doses 2x the phase 3 dose; the calculator input (40.2% at 90 mg/day) is the relevant benchmark."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator input LDL-C -18.9% at 90 mg/day (placebo-adjusted) vs phase 3 dose 60 mg/day. There is a placebo-adjusted -16.5% at 90 mg/day (f_fb427529042d16) and a non-placebo-adjusted -22.2% at 60 mg/day (f_6461ff9dc1b1af). The choice of -18.9% is reasonable but the dose mismatch should be flagged as a caveat.",
+            "target_agent": "mechanism",
+            "request": "Add explicit caveat that LDL-C effect is from 90 mg/day (phase 2) not 60 mg/day (phase 3); consider sensitivity using -16.5% (same dose, different source) or noting the non-placebo-adjusted -22.2% at correct dose."
+          },
+          {
+            "severity": "medium",
+            "issue": "The calculator's weakest_link is 'target genetics: not_causal' but the primary failure mode was off-target harm (BP elevation), not lack of target validation. The weakest_link should reflect the actual reason for trial failure in autopsy mode.",
+            "target_agent": "mechanism",
+            "request": "Update weakest_link to 'off-target harm (BP elevation) not captured' or similar, since sbp_change_mmhg was null and the calculator predicted benefit."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "The departure_from_calculator states 'off-target harm (blood pressure elevation, aldosterone effects)' but the verified facts only document blood pressure elevation (f_05ae899bd8c92a, f_3c00b6042dfc32). No pre-cutoff verified fact mentions aldosterone or electrolyte changes. This claim appears in the primary explanation without evidentiary support.",
+            "target_agent": "case_builder",
+            "request": "Remove 'aldosterone effects' from departure_from_calculator or add a verified fact reference supporting pre-cutoff aldosterone data."
+          },
+          {
+            "severity": "low",
+            "issue": "Two verified facts report conflicting placebo-adjusted LDL-C changes at 90 mg/day, 8 weeks: f_d682cfc6cb20ed (-18.9%, pmid:17084250) and f_fb427529042d16 (-16.5%, pmid:17084249, explicitly tagged as ILLUMINATE trial). The calculator uses -18.9% without explaining the preference. Both are phase 2, placebo-adjusted, same dose/timepoint.",
+            "target_agent": "mechanism",
+            "request": "Document rationale for selecting -18.9% over -16.5% (e.g., same source as HDL-C 40.2%, larger effect size conservatism, or other)."
+          },
+          {
+            "severity": "low",
+            "issue": "The calculator uses 90 mg/day phase 2 biomarker data for a 60 mg QD phase 3 trial. While the instructions accept this as the closest available placebo-adjusted data, the method field notes the dose mismatch. The predicted HR 0.91 may not reflect the true biomarker effect at the actual phase 3 dose.",
+            "target_agent": "mechanism",
+            "request": "Add a caveat in calculator assumptions noting that 90 mg/day data may overestimate biomarker effects relative to the 60 mg/day phase 3 dose."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_75056971f04153",
+          "claim": "c1",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 40.2,
+          "unit": "%",
+          "source_id": "pmid:17084250",
+          "status": "confirmed",
+          "found": "3% to 40.2% for HDL-C (p < or = 0",
+          "note": "The abstract reports HDL-C change up to 40.2%.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*40\\.2%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '17084250' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d682cfc6cb20ed",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -18.9,
+          "unit": "%",
+          "source_id": "pmid:17084250",
+          "status": "confirmed",
+          "found": "6% to -18.9% for LDL-C (p < 0",
+          "note": "The abstract reports LDL-C change of -18.9% at 90 mg/day.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*-?18\\.9%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '17084250' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "CETP",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.661,
+        "genetic_association_score": 0.736,
+        "evidence_count": 13,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.982,
+            "study_id": "GCST90132315",
+            "trait": "Coronary artery disease",
+            "n": 1378170,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.03727168,
+            "p": "4.620999813079834e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.981,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs9939224",
+            "beta": -0.004391835319535299,
+            "p": "3.2086009979248047e-11",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.978,
+            "study_id": "GCST005196",
+            "trait": "Coronary artery disease",
+            "n": 250736,
+            "publication_date": "2017-12-06",
+            "pmid": "29212778",
+            "variant": "rs1800775",
+            "beta": -0.0405,
+            "p": "6e-10",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.975,
+            "study_id": "GCST004045",
+            "trait": "Age-related diseases, mortality and associated endophenotypes",
+            "n": 9618,
+            "publication_date": "2016-11-03",
+            "pmid": "27790247",
+            "variant": "rs247617",
+            "beta": null,
+            "p": "1e-149",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.966,
+            "study_id": "GCST90668074",
+            "trait": "Coronary artery disease (MTAG)",
+            "n": 310368,
+            "publication_date": "2025-09-29",
+            "pmid": "41022758",
+            "variant": "rs247616",
+            "beta": -6.8670974,
+            "p": "7e-12",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.962,
+            "study_id": "FINNGEN_R12_I9_CORATHER",
+            "trait": "Coronary atherosclerosis",
+            "n": 479478,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00602080072392998,
+            "p": "2.3929998874664307e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.96,
+            "study_id": "FINNGEN_R12_I9_CHD",
+            "trait": "Major coronary heart disease event",
+            "n": 500348,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs247617",
+            "beta": -0.00566730664302942,
+            "p": "6.335000038146973e-9",
+            "published_before_cutoff": false
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.943,
+            "study_id": "GCST90132314",
+            "trait": "Coronary artery disease",
+            "n": 1165690,
+            "publication_date": "2022-12-06",
+            "pmid": "36474045",
+            "variant": "rs12446515",
+            "beta": -0.00478232983009403,
+            "p": "9.745523452758789e-12",
+            "published_before_cutoff": false
+          }
+        ],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_43f1805755dcf3",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg once daily on atorvastatin background",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16574893",
+        "quote": "On a background of atorvastatin, 120 mg torcetrapib significantly reduced VLDL, IDL, and LDL apoB100 pool sizes.",
+        "pub_date": "2006-03-30",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16574893/"
+      },
+      {
+        "fact_id": "f_4a08f698b34a3b",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg twice daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16574893",
+        "quote": "Six subjects in the nonatorvastatin group received 120 mg torcetrapib twice daily for an additional 4 weeks.",
+        "pub_date": "2006-03-30",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16574893/"
+      },
+      {
+        "fact_id": "f_4b7d1014c711ee",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -26.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg twice daily",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "apoB was reduced 26% with 120 mg twice daily",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_5e72aa9582a243",
+        "entity": "biomarker:apob",
+        "key": "biomarker_change",
+        "value": -100,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "apoB",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg once daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:16574893",
+        "quote": "Once-daily 120 mg torcetrapib significantly reduced VLDL, IDL, and LDL apoB100 pool sizes by enhancing the FCR of apoB100 within each fraction.",
+        "pub_date": "2006-03-30",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16574893/"
+      },
+      {
+        "fact_id": "f_4740c213e25118",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 91,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg twice daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "elevations of HDL-C of 16% to 91%",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_5168cd47cf5b41",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 16,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "10 mg daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "elevations of HDL-C of 16% to 91%",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_5f8262fee599b7",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 46,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent"
+        },
+        "source_id": "pmid:16541186",
+        "quote": "Torcetrapib has been shown to increase HDL cholesterol levels by 46% when given alone",
+        "pub_date": "2006-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16541186/"
+      },
+      {
+        "fact_id": "f_61ef8921d975d5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 382,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "120 mg BID",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "whereas an increase of 382% (P<0.01) was observed in the 120 mg twice daily group",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_6551c771a27ddb",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 54.5,
+        "unit": "%",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264",
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "90 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "ranged from 9.0% to 54.5% for HDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_75056971f04153",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 40.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "90 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "After 8 weeks, the percent change from baseline with torcetrapib (least-squares mean difference from placebo) ranged from 8.3% to 40.2% for HDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_7f0e40baa1fcc9",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg QD",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "HDL apoA-I pool size increased by 8+/-15% in the atorvastatin cohort (P=0.16)",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_81598915e7b79c",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 106,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg twice daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:15071125",
+        "quote": "treatment with 120 mg twice daily increased HDL cholesterol by 106 percent (P<0.001)",
+        "pub_date": "2004-04-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15071125/"
+      },
+      {
+        "fact_id": "f_8a84b0532ae65a",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 61,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent"
+        },
+        "source_id": "pmid:16541186",
+        "quote": "and by 61% when given in combination with atorvastatin",
+        "pub_date": "2006-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16541186/"
+      },
+      {
+        "fact_id": "f_b2c37192c915b5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 153,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "120 mg QD",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "Relative to placebo, 120 mg daily torcetrapib increased the amount of apoA-I in alpha1-migrating HDL in the atorvastatin (136%; P<0.001) and nonatorvastatin (153%; P<0.01) cohorts",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_c5ecefff4fa502",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg QD",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "by 8% (P<0.001) in the nonatorvastatin 120 mg QD cohort",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_d4ffe7d69878a0",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 8.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "10 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "After 8 weeks, the percent change from baseline with torcetrapib (least-squares mean difference from placebo) ranged from 8.3% to 40.2% for HDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_e37927f20592c1",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -21,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg BID",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "and by 21% (P<0.01) in the nonatorvastatin 120 mg BID cohort",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_f3cda06f4584bd",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 100,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "not stated",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "kind": "percent"
+        },
+        "source_id": "pmid:16541186",
+        "quote": "When the dosage of torcetrapib was doubled (at maximum tolerated dose), HDL increased by over 100%",
+        "pub_date": "2006-02-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16541186/"
+      },
+      {
+        "fact_id": "f_f45f58e911fc0d",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": 136,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "120 mg QD",
+          "kind": "percent",
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:15761191",
+        "quote": "Relative to placebo, 120 mg daily torcetrapib increased the amount of apoA-I in alpha1-migrating HDL in the atorvastatin (136%; P<0.001)",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/"
+      },
+      {
+        "fact_id": "f_59268ea8e4398f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -17,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "4 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "120 mg daily",
+          "kind": "percent"
+        },
+        "source_id": "pmid:15071125",
+        "quote": "Torcetrapib also reduced low-density lipoprotein (LDL) cholesterol levels by 17 percent in the atorvastatin cohort (P=0.02)",
+        "pub_date": "2004-04-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15071125/"
+      },
+      {
+        "fact_id": "f_6461ff9dc1b1af",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -22.2,
+        "unit": "%",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 8",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "60 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "at 60 mg, the change in LDL-C was 0.1% versus -22.2% (p < 0.0001), respectively",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_c5337c394f4fa9",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -21.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "higher doses",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "including a 21% to 42% lowering of low-density lipoprotein cholesterol at the higher doses",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_d682cfc6cb20ed",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -18.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "90 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "and from 0.6% to -18.9% for LDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_de2e7d5fda343f",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -42.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "higher doses",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "including a 21% to 42% lowering of low-density lipoprotein cholesterol at the higher doses",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_eaf14b2e841745",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": 0.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "10 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "and from 0.6% to -18.9% for LDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_fb427529042d16",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -16.5,
+        "unit": "%",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "Week 8",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "90 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "and from 3.0% to -16.5% for low-density lipoprotein cholesterol (LDL-C)",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_a34dcb2fa4088e",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 66,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "Apolipoprotein A-I and E were elevated 27% and 66%, respectively",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_abd5b3ede80603",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 27,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase1",
+          "timepoint": "14 days",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "percent"
+        },
+        "source_id": "pmid:14739125",
+        "quote": "Apolipoprotein A-I and E were elevated 27% and 66%, respectively",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_c145d8bc469bf7",
+        "entity": "target:cetp",
+        "key": "genetic_association_score",
+        "value": 0.736,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 13,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:CETP",
+        "quote": "\"genetic_association_score\": 0.736",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000087237"
+      },
+      {
+        "fact_id": "f_67a42bfedaf4d8",
+        "entity": "trial:nct00134264",
+        "key": "inclusion_threshold",
+        "value": "men <44 mg/dl; women <54 mg/dl",
+        "unit": "mg/dl",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "A total of 162 subjects with below-average HDL-C (men <44 mg/dl; women <54 mg/dl) who were not taking lipid-modifying therapy were randomized",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_09b841b22410a5",
+        "entity": "trial:nct00134264",
+        "key": "n_randomized",
+        "value": 162,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "A total of 162 subjects with below-average HDL-C (men <44 mg/dl; women <54 mg/dl) who were not taking lipid-modifying therapy were randomized to double-blind treatment with torcetrapib 10, 30, 60, or 90 mg/day or placebo",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_19d51e14bec244",
+        "entity": "trial:nct00134264",
+        "key": "n_randomized",
+        "value": 15067,
+        "unit": "participants",
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "ctgov:NCT00134264@2006-12-02",
+        "quote": "Enrollment: 15067 (ACTUAL)",
+        "pub_date": "2005-08-24",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00134264"
+      },
+      {
+        "fact_id": "f_256ef8134cb061",
+        "entity": "trial:nct00134264",
+        "key": "n_randomized",
+        "value": 19,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "Effects of the cholesteryl ester transfer protein inhibitor torcetrapib on apolipoprotein B100 metabolism in humans"
+        },
+        "source_id": "pmid:16574893",
+        "quote": "Nineteen subjects, 9 of whom were pretreated with 20 mg atorvastatin, received placebo for 4 weeks, followed by 120 mg torcetrapib once daily for 4 weeks.",
+        "pub_date": "2006-03-30",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16574893/"
+      },
+      {
+        "fact_id": "f_c838a41fba8010",
+        "entity": "trial:nct00134264",
+        "key": "n_randomized",
+        "value": 174,
+        "unit": "patients",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "Patients with below-average HDL-C (men <44 mg/dl; women <54 mg/dl) who were eligible for statin therapy according to National Cholesterol Education Program Adult Treatment Panel III guidelines or who had LDL-C >130 mg/dl at screening entered an 8-week run-in period with atorvastatin 20 mg/day before randomization (n = 174) to torcetrapib 10, 30, 60, or 90 mg/day or placebo for 8 weeks.",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_dd6fffb642ffbc",
+        "entity": "trial:nct00134264",
+        "key": "n_randomized",
+        "value": 40,
+        "unit": "subjects",
+        "attrs": {},
+        "source_id": "pmid:14739125",
+        "quote": "Five groups of 8 subjects each were randomized to placebo (n=2) or torcetrapib (n=6) at 10, 30, 60, and 120 mg daily and 120 mg twice daily for 14 days.",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/"
+      },
+      {
+        "fact_id": "f_22043fa0ee7c8d",
+        "entity": "trial:nct00134264",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "ctgov:NCT00134264@2006-12-02",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2005-08-24",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00134264"
+      },
+      {
+        "fact_id": "f_538405b785e4e3",
+        "entity": "trial:nct00134264",
+        "key": "primary_endpoint",
+        "value": "percent change from baseline to Week 8 for HDL-C and LDL-C",
+        "unit": "percent",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "The percent change from baseline to Week 8 with torcetrapib (least-squares mean difference from placebo) was dose-dependent and ranged from 9.0% to 54.5% for HDL-C",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_f97cac47df96af",
+        "entity": "trial:nct00134264",
+        "key": "primary_endpoint",
+        "value": "The time to first occurrence of a major cardiovascular disease event",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "ctgov:NCT00134264@2006-12-02",
+        "quote": "Primary outcome(s): The time to first occurrence of a major cardiovascular disease event",
+        "pub_date": "2005-08-24",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00134264"
+      },
+      {
+        "fact_id": "f_ce96d57674b2f5",
+        "entity": "trial:nct00134264",
+        "key": "readout_statement",
+        "value": "The independent Data Safety Monitoring Board (DSMB) monitoring the ILLUMINATE morbidity and mortality study for torcetrapib recommended terminating the study because of an imbalance of mortality and cardiovascular events.",
+        "unit": null,
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "announcement:illuminate",
+        "quote": "The Company was informed today that the independent Data Safety Monitoring Board (DSMB) monitoring the ILLUMINATE morbidity and mortality study for torcetrapib recommended terminating the study because of an imbalance of mortality and cardiovascular events.",
+        "pub_date": "2006-12-02",
+        "access": "press_release",
+        "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800306000334/ex991202.htm"
+      },
+      {
+        "fact_id": "f_d8ecac5cf1e4b7",
+        "entity": "trial:nct00134264",
+        "key": "readout_statement",
+        "value": "Torcetrapib resulted in substantial dose-dependent elevations in HDL-C, accompanied by moderate decreases in LDL-C at the higher doses. Torcetrapib was generally well tolerated.",
+        "unit": "none",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "Torcetrapib resulted in substantial dose-dependent elevations in HDL-C, accompanied by moderate decreases in LDL-C at the higher doses. Torcetrapib was generally well tolerated.",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_05ae899bd8c92a",
+        "entity": "trial:nct00134264",
+        "key": "safety_signal",
+        "value": "small increases in systolic and diastolic blood pressures were noted",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084250",
+        "quote": "In some treatment groups, small increases in systolic and diastolic blood pressures were noted.",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/"
+      },
+      {
+        "fact_id": "f_3c00b6042dfc32",
+        "entity": "trial:nct00134264",
+        "key": "safety_signal",
+        "value": "Significant blood pressure increases were noted in 2 of 140 subjects",
+        "unit": "subjects",
+        "attrs": {
+          "trial": "ILLUMINATE NCT00134264"
+        },
+        "source_id": "pmid:17084249",
+        "quote": "Significant blood pressure increases were noted in 2 of 140 subjects",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/"
+      },
+      {
+        "fact_id": "f_426c37d0f7147b",
+        "entity": "trial:nct00134264",
+        "key": "safety_signal",
+        "value": true,
+        "unit": null,
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "announcement:illuminate",
+        "quote": "an imbalance of mortality and cardiovascular events",
+        "pub_date": "2006-12-02",
+        "access": "press_release",
+        "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800306000334/ex991202.htm"
+      },
+      {
+        "fact_id": "f_7b1b1c6a86b7a2",
+        "entity": "trial:nct00134264",
+        "key": "stopped_early",
+        "value": true,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "ctgov:NCT00134264@2006-12-02",
+        "quote": "Start date: 2004-07",
+        "pub_date": "2005-08-24",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00134264"
+      },
+      {
+        "fact_id": "f_df29965f308195",
+        "entity": "trial:nct00134264",
+        "key": "stopped_early",
+        "value": true,
+        "unit": null,
+        "attrs": {
+          "trial": "ILLUMINATE"
+        },
+        "source_id": "announcement:illuminate",
+        "quote": "The Company has terminated ILLUMINATE",
+        "pub_date": "2006-12-02",
+        "access": "press_release",
+        "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800306000334/ex991202.htm"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00134264@2006-12-02",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00134264 ILLUMINATE",
+        "url": "https://clinicaltrials.gov/study/NCT00134264",
+        "pub_date": "2005-08-24",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00134264",
+            "acronym": "ILLUMINATE",
+            "title": "A Study Examining Torcetrapib/Atorvastatin And Atorvastatin Effects On Clinical CV Events In Patients With Heart Disease",
+            "official_title": "Phase 3 Multi Center, Double Blind, Randomized, Parallel Group Evaluation Of The Fixed Combination Torcetrapib/Atorvastatin, Administered Orally, Once Daily (Qd), Compared With Atorvastatin Alone, On The Occurrence Of Major Cardiovascular Events In Subjects With Coronary Heart Disease Or Risk Equivalents",
+            "sponsor": "Pfizer",
+            "status": "TERMINATED",
+            "why_stopped": null,
+            "start_date": "2004-07",
+            "primary_completion": "2007-06",
+            "first_posted": "2005-08-24",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 15067,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "torcetrapib/atorvastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              },
+              {
+                "name": "atorvastatin",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": []
+              }
+            ],
+            "arm_groups": [],
+            "conditions": [
+              "Coronary Disease",
+              "Diabetes Mellitus"
+            ],
+            "primary_outcomes": [
+              "The time to first occurrence of a major cardiovascular disease event"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 1832
+      },
+      {
+        "source_id": "pmid:16574893",
+        "type": "journal",
+        "title": "Effects of the cholesteryl ester transfer protein inhibitor torcetrapib on apolipoprotein B100 metabolism in humans",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16574893/",
+        "pub_date": "2006-03-30",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16574893",
+          "pmcid": null,
+          "doi": "10.1161/01.ATV.0000219695.84644.56",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+        },
+        "chars": 1872
+      },
+      {
+        "source_id": "pmid:17084250",
+        "type": "journal",
+        "title": "Efficacy and safety of torcetrapib, a novel cholesteryl ester transfer protein inhibitor, in individuals with below-average high-density lipoprotein cholesterol levels on a background of atorvastatin",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084250/",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17084250",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2006.06.066",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 2073
+      },
+      {
+        "source_id": "pmid:17084249",
+        "type": "journal",
+        "title": "Efficacy and safety of torcetrapib, a novel cholesteryl ester transfer protein inhibitor, in individuals with below-average high-density lipoprotein cholesterol levels",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17084249/",
+        "pub_date": "2006-11-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "17084249",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2006.06.067",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1725
+      },
+      {
+        "source_id": "pmid:14739125",
+        "type": "journal",
+        "title": "Raising high-density lipoprotein in humans through inhibition of cholesteryl ester transfer protein: an initial multidose study of torcetrapib",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14739125/",
+        "pub_date": "2004-01-22",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "14739125",
+          "pmcid": null,
+          "doi": "10.1161/01.ATV.0000118278.21719.17",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+        },
+        "chars": 1658
+      },
+      {
+        "source_id": "pmid:16541186",
+        "type": "journal",
+        "title": "Torcetrapib and atorvastatin: a novel combination therapy for dyslipidemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16541186/",
+        "pub_date": "2006-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16541186",
+          "pmcid": null,
+          "doi": "10.1358/dot.2006.42.2.930119",
+          "journal": "Drugs of today (Barcelona, Spain : 1998)"
+        },
+        "chars": 1324
+      },
+      {
+        "source_id": "pmid:16326978",
+        "type": "journal",
+        "title": "Description of the torcetrapib series of cholesteryl ester transfer protein inhibitors, including mechanism of action",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16326978/",
+        "pub_date": "2005-12-02",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16326978",
+          "pmcid": null,
+          "doi": "10.1194/jlr.M500349-JLR200",
+          "journal": "Journal of lipid research"
+        },
+        "chars": 1701
+      },
+      {
+        "source_id": "pmid:15972861",
+        "type": "journal",
+        "title": "Torcetrapib and atorvastatin--should marketing drive the research agenda?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15972861/",
+        "pub_date": "2005-06-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15972861",
+          "pmcid": null,
+          "doi": "10.1056/NEJMp058075",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 75
+      },
+      {
+        "source_id": "pmid:16181026",
+        "type": "journal",
+        "title": "Torcetrapib/atorvastatin combination therapy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16181026/",
+        "pub_date": "2005-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16181026",
+          "pmcid": null,
+          "doi": "10.1586/14779072.3.5.789",
+          "journal": "Expert review of cardiovascular therapy"
+        },
+        "chars": 1454
+      },
+      {
+        "source_id": "pmid:15761191",
+        "type": "journal",
+        "title": "Effects of cholesteryl ester transfer protein inhibition on high-density lipoprotein subspecies, apolipoprotein A-I metabolism, and fecal sterol excretion",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15761191/",
+        "pub_date": "2005-03-10",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15761191",
+          "pmcid": "PMC3229922",
+          "doi": "10.1161/01.ATV.0000161928.16334.dd",
+          "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+        },
+        "chars": 2318
+      },
+      {
+        "source_id": "pmid:15071125",
+        "type": "journal",
+        "title": "Effects of an inhibitor of cholesteryl ester transfer protein on HDL cholesterol",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15071125/",
+        "pub_date": "2004-04-08",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15071125",
+          "pmcid": null,
+          "doi": "10.1056/NEJMoa031766",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 1899
+      },
+      {
+        "source_id": "pmid:40339105",
+        "type": "journal",
+        "title": "CETP-Related Hyperalphalipoproteinemia",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40339105/",
+        "pub_date": "1993-01-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "40339105",
+          "pmcid": null,
+          "doi": null,
+          "journal": "",
+          "purpose": "genetics"
+        },
+        "chars": 40
+      },
+      {
+        "source_id": "pmid:16960121",
+        "type": "journal",
+        "title": "Sorting out the complexities of reverse cholesterol transport: CETP polymorphisms, HDL, and coronary disease",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16960121/",
+        "pub_date": "2006-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "16960121",
+          "pmcid": null,
+          "doi": "10.1210/jc.2006-1264",
+          "journal": "The Journal of clinical endocrinology and metabolism",
+          "purpose": "genetics"
+        },
+        "chars": 110
+      },
+      {
+        "source_id": "pmid:15955471",
+        "type": "journal",
+        "title": "Gene polymorphisms affecting HDL-cholesterol levels in the normolipidemic population",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15955471/",
+        "pub_date": "2005-06-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "15955471",
+          "pmcid": null,
+          "doi": "10.1016/j.numecd.2004.09.004",
+          "journal": "Nutrition, metabolism, and cardiovascular diseases : NMCD",
+          "purpose": "genetics"
+        },
+        "chars": 1386
+      },
+      {
+        "source_id": "announcement:illuminate",
+        "type": "press_release",
+        "title": "Pfizer press release Dec 2, 2006 (Exhibit 99 to Form 8-K): In Interests of Patient Safety, Pfizer Stops All Torcetrapib Clinical Trials",
+        "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800306000334/ex991202.htm",
+        "pub_date": "2006-12-02",
+        "access": "press_release",
+        "meta": {},
+        "chars": 8963
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 22,
+      "facts": 51,
+      "relationships": 21,
+      "events": 139,
+      "audit_entries": 139,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 14097,
+        "output_tokens": 5839,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 8493,
+        "output_tokens": 6102,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 2684,
+        "output_tokens": 2210,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 7675,
+        "output_tokens": 5446,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 8877,
+        "output_tokens": 9897,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4429,
+        "output_tokens": 1762,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

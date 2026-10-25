@@ -1,0 +1,1350 @@
+{
+  "run_id": "bt-omemi",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2020-11-15",
+  "backtest": true,
+  "readout_date": "2020-11-15",
+  "analysis_date": "2020-11-15",
+  "trial": {
+    "nct_id": "NCT01841944",
+    "acronym": "OMEMI",
+    "title": "Omega-3 Fatty Acids in Elderly Patients With Acute Myocardial Infarction",
+    "sponsor": "Oslo University Hospital",
+    "status": "COMPLETED",
+    "enrollment": 1027,
+    "phases": [
+      "NA"
+    ],
+    "conditions": [
+      "Myocardial Infarction",
+      "Heart Failure",
+      "Myocardial Revascularization",
+      "Atrial Fibrillation"
+    ],
+    "primary_completion": "2020-06-26"
+  },
+  "drug": {
+    "name": "omega-3 fatty acids",
+    "chembl_id": "CHEMBL4298065",
+    "aliases": [
+      "NDI 441",
+      "Omega 3 fatty acids",
+      "Omega-3",
+      "Omega-3 acid",
+      "Omega-3 acid triglycerides",
+      "Omega-3 acids",
+      "Omega-3 phospholipids",
+      "Omega-3 polyunsaturates",
+      "Omega-3 triglycerides",
+      "Omega-3-acid triglycerides",
+      "Phospholipids",
+      "dha",
+      "docosahexaenoic acid",
+      "eicosapentaenoic acid",
+      "epa",
+      "fish oil",
+      "fish oil concentrate",
+      "lovaza",
+      "marine n-3 polyunsaturated fatty acids",
+      "marine ω-3 fatty acids",
+      "n-3 fish oil",
+      "n-3 polyunsaturated fatty acids",
+      "n-3 pufa",
+      "n-3 pufas",
+      "o3fa",
+      "omacor",
+      "omacor fish oil",
+      "omarco",
+      "omega 3",
+      "omega-3 acid ethyl esters",
+      "omega-3 fa",
+      "omega-3 polyunsaturated fatty acids",
+      "omega-3 supplementation",
+      "omega-3-acid ethyl esters",
+      "omega-3fa",
+      "omegaven",
+      "polyunsaturated fatty acids",
+      "prescription omega-3 fatty acids",
+      "ω-3 fatty acids",
+      "ω3"
+    ],
+    "drug_type": "Unknown",
+    "mechanisms": [],
+    "targets": [],
+    "searched_as": "marine n-3 polyunsaturated fatty acids"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-omemi",
+  "log_file": "logs/trace-bt-omemi.jsonl",
+  "execution_time_seconds": 0.7,
+  "sample_mode": false,
+  "warnings": [
+    "no molecular target in Open Targets: the genetics check is skipped and reported as unknown"
+  ],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"Omega-3s did not reduce cardiac events in recent heart attack survivors (American Heart Association News, Scientific Sessions 2020 Late Brea\" (announcement:omemi)",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "off_target_harm",
+      "secondary_categories": [
+        "design_or_endpoint",
+        "population"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "triglycerides change not measured"
+    },
+    "report": {
+      "headline": "OMEMI found omega-3 fatty acids 1.8 g/day did not reduce the composite of death, non-fatal MI, stroke, revascularization, or HF hospitalization in 1,027 elderly post-MI patients (70–82 years) over 2 years (20% event rate in both arms), while new atrial fibrillation occurred nearly twice as often with omega-3 (7.2% vs 4.0%), suggesting off-target harm offset any potential benefit.",
+      "summary": "The OMEMI trial randomized 1,027 patients aged 70–82 years with recent acute myocardial infarction to omega-3 fatty acids 1.8 g/day or placebo. At 2 years median follow-up, the primary composite endpoint (total mortality, non-fatal MI, stroke, revascularization, or HF hospitalization) occurred in 20% of both groups, yielding a null result (HR ~1.0) far from the protocol's assumed 30% relative risk reduction. The trial was powered at 80% to detect HR 0.70, but the minimum detectable effect at 80% power was HR 0.676 (32.4% RRR). A clear safety signal emerged: new atrial fibrillation occurred in 7.2% of omega-3 patients versus 4.0% on placebo, a known dose-dependent off-target effect of omega-3 that could counteract cardiovascular benefit. The calculator could not compute a predicted effect because on-treatment triglyceride change was not measured in OMEMI. The primary explanation is off-target harm (atrial fibrillation), with secondary contributions from the broad composite endpoint (including revascularization driven by physician decision) and the elderly population where non-atherosclerotic events dominate. Confidence is medium.",
+      "key_evidence": [
+        "20% event rate in both omega-3 and placebo arms (HR ~1.0) — Omega-3s did not reduce cardiac events in recent heart attack survivors (American Heart Association News, Scientific Sessions 2020 Late Breaking Science LBS.04)",
+        "New atrial fibrillation 7.2% vs 4.0% (nearly 2-fold increase) — Omega-3s did not reduce cardiac events in recent heart attack survivors (American Heart Association News, Scientific Sessions 2020 Late Breaking Science LBS.04)",
+        "1,027 participants randomized, median follow-up 2 years — ClinicalTrials.gov NCT01841944 OMEMI",
+        "Dose 1.8 g/day omega-3 fatty acids — ClinicalTrials.gov NCT01841944 OMEMI",
+        "Assumed 30% RRR (HR 0.70) with 80% power; MDE HR at 80% power = 0.676 — Effects of ω3 supplementation in elderly patients with acute myocardial infarction: design of a prospective randomized placebo controlled study.; calculator",
+        "Primary endpoint: composite of total mortality, non-fatal MI, stroke, revascularization, HF hospitalization — ClinicalTrials.gov NCT01841944 OMEMI",
+        "Inclusion age 70–82 years — Effects of ω3 supplementation in elderly patients with acute myocardial infarction: design of a prospective randomized placebo controlled study."
+      ],
+      "what_would_change_this": "Measurement of on-treatment triglyceride levels from stored OMEMI samples to confirm biomarker engagement; component-specific hazard ratios to determine if AF events preceded or contributed to primary endpoint components; pre-specified subgroup analyses by age tertiles, baseline triglycerides, and frailty indices.",
+      "readthrough_note": ""
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "no genetics found",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "triglycerides",
+        "detail": "intended biomarker triglycerides is causal or unknown; LDL-equivalent change None mmol/L via triglycerides change not measured",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": null,
+        "detail": "not computable for this pathway",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "omemi",
+      "ldl_equivalent_mmol": null,
+      "basis": "triglycerides change not measured",
+      "time_factor": 0.636,
+      "expected_hr": null,
+      "causal_rrr": null,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": 0.676,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "triglycerides change not measured",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "no measured change in triglycerides: the effect is unknown, not zero"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "omemi",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "triglycerides",
+      "changes": [],
+      "followup_years": 2.0,
+      "events": 205,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "Open Targets shows no genetic evidence for omega-3 fatty acid targets and coronary artery disorder; target is well-studied but no causal genetic support found",
+      "intended_biomarker": "triglycerides",
+      "pathway": null,
+      "changes": [],
+      "followup_years": 2.0,
+      "followup_fact_ids": [
+        "f_0f7d054658de6c",
+        "f_fe7c753dfc004b"
+      ],
+      "events": 205,
+      "events_basis": "actual",
+      "events_fact_ids": [
+        "f_e6413a1f2484ed",
+        "f_0017a53b52959c",
+        "f_2e399f1ed2cdff"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_f577ffd25dc0ee",
+        "f_e6413a1f2484ed",
+        "f_0017a53b52959c"
+      ],
+      "missing": [
+        "LDL-C change",
+        "non-HDL-C change",
+        "apoB change",
+        "Lp(a) change",
+        "triglycerides change",
+        "observed_hr",
+        "observed_ci",
+        "sbp_change_mmhg"
+      ],
+      "notes": "No on-treatment lipid biomarker changes reported in verified facts for OMEMI trial. Event rates 20% in both arms (f_e6413a1f2484ed, f_0017a53b52959c) with 1027 randomized (f_2e399f1ed2cdff) imply ~205 total primary events and HR~1.0. Safety signal: new AF 7.2% vs 4.0% (f_bd3ae58ab0be9d). Assumed RRR 30% (f_48f3c297c30c42), alpha 0.05 (f_f35046d0ce89bb), power 80% (f_be7ba493e2317f). Median follow-up 2 years (f_0f7d054658de6c, f_fe7c753dfc004b)."
+    },
+    "hypotheses": [
+      {
+        "category": "off_target_harm",
+        "status": "supported",
+        "for": [
+          {
+            "text": "New atrial fibrillation occurred in almost twice as many patients in the omega-3 group vs placebo (7.2% vs 4.0%), a known dose-dependent off-target effect of omega-3 fatty acids that could offset any cardiovascular benefit.",
+            "refs": [
+              "f_bd3ae58ab0be9d"
+            ]
+          },
+          {
+            "text": "Observed clinical effect was null (20% event rate in both arms, HR ~1.0) rather than the assumed 30% RRR, consistent with harm offsetting benefit.",
+            "refs": [
+              "f_e6413a1f2484ed",
+              "f_0017a53b52959c",
+              "f_48f3c297c30c42"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Atrial fibrillation is not a component of the primary composite endpoint, so the direct causal link to the null primary result is inferential.",
+            "refs": [
+              "f_9a57c1da6be5c9"
+            ]
+          }
+        ],
+        "would_settle": "Adjudicated analysis of whether AF events preceded or contributed to primary endpoint components (stroke, HF hospitalization, death) in the omega-3 arm."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Primary endpoint is a broad composite including revascularization (driven by physician decision, not purely biological) and other components that omega-3 may not affect, diluting any true signal.",
+            "refs": [
+              "f_9a57c1da6be5c9",
+              "f_2a84d7276cf852"
+            ]
+          },
+          {
+            "text": "Follow-up of 2 years may be insufficient for omega-3's presumed atherosclerotic stabilization effects to fully manifest in elderly post-MI patients.",
+            "refs": [
+              "f_0f7d054658de6c",
+              "f_fe7c753dfc004b"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Similar composite endpoints have shown benefit in other omega-3 trials (e.g., REDUCE-IT, JELIS), though in different populations.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Component-specific hazard ratios for each element of the composite endpoint."
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Trial enrolled elderly patients (70-82 years) with recent MI; in this population, a larger fraction of events may arise from non-atherosclerotic processes (frailty, arrhythmia, non-cardiac death) less responsive to omega-3's lipid/anti-inflammatory mechanisms.",
+            "refs": [
+              "f_fc2c141027e224",
+              "f_2a84d7276cf852"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Omega-3's triglyceride-lowering and anti-inflammatory effects should theoretically operate regardless of age; no biological reason to expect complete loss of efficacy in elderly.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Pre-specified subgroup analyses by age tertiles, baseline triglycerides, and frailty indices."
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Reference table indicates triglycerides causal=uncertain for CAD (though triglycerides via apoB causal=yes), raising doubt about whether triglyceride lowering alone drives CV benefit.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Triglyceride change was NOT MEASURED in OMEMI, so we cannot confirm the drug moved its intended biomarker in this population.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Genetics evidence is 'uncertain' not 'not_causal'; omega-3 has multiple mechanisms beyond triglyceride lowering.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Measurement of on-treatment triglyceride levels from stored OMEMI samples (if available)."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "MDE HR at 80% power was 0.676 (32.4% RRR) vs protocol assumption of 30% RRR (HR 0.70), indicating the trial was slightly underpowered for its own assumption.",
+            "refs": [
+              "calculator",
+              "f_48f3c297c30c42",
+              "f_be7ba493e2317f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Observed HR ~1.0 (20% vs 20% event rates) is far from the MDE HR of 0.676; the effect is not merely 'too small to detect' but directionally null/harmful.",
+            "refs": [
+              "f_e6413a1f2484ed",
+              "f_0017a53b52959c"
+            ]
+          }
+        ],
+        "would_settle": "Individual patient data meta-analysis of all omega-3 post-MI trials."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator input target_genetics='uncertain' reflects lack of strong human genetic evidence linking omega-3's molecular targets to CAD reduction.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "'Uncertain' does not equal 'not causal'; omega-3 acts through multiple pathways (triglycerides, inflammation, membrane stabilization, ion channels) not captured by single-target genetics.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Mendelian randomization studies of omega-3 fatty acid levels and CAD outcomes."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "undetermined",
+        "for": [],
+        "against": [
+          {
+            "text": "No verified facts indicate poor adherence, early termination, sponsor business decision, or recruitment failure.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Trial conduct report (adherence rates, dropout, protocol deviations)."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Calculator could not compute expected effect because on-treatment triglyceride change was not measured/reported in OMEMI.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "In autopsy mode, we have the actual clinical outcome (null) and a clear safety signal (AF), allowing qualitative judgment beyond biomarker data.",
+            "refs": [
+              "f_f577ffd25dc0ee",
+              "f_bd3ae58ab0be9d"
+            ]
+          }
+        ],
+        "would_settle": "Publication of full OMEMI results with biomarker substudy."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator input 'events=200' appears inconsistent with verified randomization count (1027) and 20% event rate per arm, which would yield ~410 total events (205 per arm). The automatic check flags this discrepancy. Need exact total events from the primary publication.",
+            "target_agent": "case_builder",
+            "request": "Search for exact total primary endpoint events in OMEMI publication (NCT01841944). Terms: 'OMEMI trial total events primary endpoint', 'NCT01841944 results composite endpoint events'."
+          },
+          {
+            "severity": "high",
+            "issue": "Calculator inputs missing observed_hr and observed_ci despite autopsy mode where topline results are known. Verified facts show 20% event rate in both arms (f_e6413a1f2484ed, f_0017a53b52959c), implying HR ~1.0. These should be populated for proper calculator comparison.",
+            "target_agent": "case_builder",
+            "request": "Extract reported hazard ratio and confidence interval for primary endpoint from OMEMI primary publication or topline announcement. Terms: 'OMEMI trial hazard ratio primary endpoint', 'NCT01841944 HR 95% CI'."
+          },
+          {
+            "severity": "medium",
+            "issue": "All five biomarker changes (LDL-C, non-HDL-C, apoB, Lp(a), triglycerides) have method='not_reported_in_evidence' but empty source fields and no fact citations. In autopsy mode, the publication should be checked for on-treatment lipid measurements; if truly absent, a citation confirming non-reporting is needed.",
+            "target_agent": "mechanism",
+            "request": "Search OMEMI publication for on-treatment lipid biomarker changes (triglycerides, LDL-C, apoB, etc.). Terms: 'OMEMI trial lipid levels triglycerides EPA DHA', 'NCT01841944 biomarker substudy lipid changes'."
+          },
+          {
+            "severity": "medium",
+            "issue": "Follow-up definition ambiguity: f_fe7c753dfc004b confirms 24 months from registry; f_0f7d054658de6c says median follow-up 2 years from announcement; but f_a271bd24d3fef1 (Verifier) notes '2 years supplementation duration, not median follow-up' from the protocol paper. Need to clarify whether 2 years is median follow-up or fixed treatment duration.",
+            "target_agent": "case_builder",
+            "request": "Clarify OMEMI follow-up: median follow-up vs. treatment duration. Terms: 'OMEMI trial median follow-up months', 'NCT01841944 follow-up time primary outcome'."
+          },
+          {
+            "severity": "low",
+            "issue": "Primary hypothesis 'off_target_harm' may overclaim: the primary endpoint was neutral (HR~1.0), not harmful. While AF signal (7.2% vs 4.0%) is real, attributing the neutral result to off-target harm canceling benefit is speculative without mediation analysis showing AF events contributed to primary endpoint components.",
+            "target_agent": "investigator",
+            "request": "Temper language: present off-target harm as a plausible contributor alongside design/population factors, not the sole primary explanation. Note that AF is not a primary endpoint component."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator input 'pathway' is null. Omega-3's triglyceride-lowering pathway (via reduced hepatic VLDL synthesis, enhanced LPL activity) could be specified for completeness, even if biomarker change is unknown.",
+            "target_agent": "mechanism",
+            "request": "Add pathway description: 'triglyceride lowering via reduced hepatic VLDL production and enhanced lipoprotein lipase activity' if supported by mechanism literature."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator input events=205 does not cleanly match verified facts. Facts show 20% event rate in each arm (f_e6413a1f2484ed, f_0017a53b52959c) and n_randomized=1000 patients (f_3caabd77c605bd), implying ~200 total events. The alternate enrollment figure 1027 (f_2e399f1ed2cdff) was not confirmed by verifier (enrollment field rejected). Need definitive total event count from publication.",
+            "target_agent": "case_builder",
+            "request": "Search for OMEMI primary publication total primary endpoint events (both arms combined) or exact HR with CI to derive events. Search terms: 'OMEMI trial primary endpoint events', 'NCT01841944 results publication', 'omega-3 elderly MI 1.8g events'"
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator input changes=[] is empty. Per protocol, before outcome trial results are published, the accepted input is placebo-adjusted phase 2 biomarker change at the dose closest to the outcome trial's dose (1.8 g/day EPA/DHA). Missing phase 3 biomarker data is a caveat, not a reason to omit a quantified phase 2 input. This caused calculator to return 'not_computable'.",
+            "target_agent": "mechanism",
+            "request": "Provide placebo-adjusted on-treatment triglyceride change (mmol/L or % change) from phase 2 trials of omega-3 1.8 g/day EPA/DHA (or closest dose). If multiple phase 2 trials, use the most relevant (post-MI, elderly if available). Include source citation."
+          },
+          {
+            "severity": "medium",
+            "issue": "In autopsy mode, observed_hr and observed_ci are null despite trial announcement reporting 20% vs 20% event rates (implying HR≈1.0). The topline result is part of evidence in autopsy mode and should be entered as observed_hr/observed_ci if published HR/CI exists.",
+            "target_agent": "case_builder",
+            "request": "Search for OMEMI primary publication hazard ratio and 95% CI for primary composite endpoint. Search terms: 'OMEMI trial hazard ratio primary endpoint', 'NCT01841944 HR 95% CI', 'omega-3 elderly MI primary outcome HR'"
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'design_or_endpoint' cites REDUCE-IT and JELIS as showing benefit with similar composites but provides no fact references (refs: []). These trials used different formulations (icosapent ethyl, pure EPA) and populations, so the comparison needs qualification or removal.",
+            "target_agent": "investigator",
+            "request": "Either add verified fact references for REDUCE-IT/JELIS composite endpoint results, or qualify/remove the claim that 'similar composite endpoints have shown benefit in other omega-3 trials' since formulations and populations differ substantially."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'off_target_harm' correctly notes AF is not in primary endpoint, making causal link to null primary result inferential. The 'would_settle' asks for adjudicated analysis of whether AF preceded primary endpoint components — this is a reasonable research gap but should be noted as not currently available.",
+            "target_agent": "investigator",
+            "request": "No change needed; the inferential nature is already acknowledged in 'against'. Ensure final report language reflects this as a plausible but unproven mechanism."
+          }
+        ],
+        "verdict_ok": false
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_2e399f1ed2cdff",
+          "claim": "c1",
+          "used_as": "number of primary events",
+          "key": "n_randomized",
+          "value": 1027,
+          "unit": "participants",
+          "source_id": "ctgov:NCT01841944@2020-11-15",
+          "status": "not_found",
+          "found": "ERROR: enrollment field rejected",
+          "note": "Enrollment field not accessible per evidence cut-off",
+          "sql": "SELECT protocolSection.enrollmentInfo.count FROM registry LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_fe7c753dfc004b",
+          "claim": "c2",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 24,
+          "unit": "months",
+          "source_id": "ctgov:NCT01841944@2020-11-15",
+          "status": "confirmed",
+          "found": "24months",
+          "note": "Primary outcome timeFrame shows 24months",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.timeFrame LIKE '%24 months%' OR o.timeFrame LIKE '%24months%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 1,
+        "not_found": 1,
+        "contradicts": 0
+      },
+      "queries": 2
+    },
+    "readthrough": [],
+    "genetics": [],
+    "facts": [
+      {
+        "fact_id": "f_f35046d0ce89bb",
+        "entity": "trial:nct01841944",
+        "key": "alpha",
+        "value": 0.05,
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "Based on data from registries [3,29] and with an alpha of 0.05 and a power of 80%, 611 patients would be needed in each study group",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_48f3c297c30c42",
+        "entity": "trial:nct01841944",
+        "key": "assumed_rrr",
+        "value": 30,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "based on the assumption that the n-3 PUFA supplementation will reduce MACE with 30%",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_4b9fbb1909f242",
+        "entity": "trial:nct01841944",
+        "key": "ci_high",
+        "value": 1.16,
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "DHA + EPA vs placebo",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:23644932",
+        "quote": "0.97 [98.7% CI, 0.82-1.16]; P = .70 for DHA + EPA",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_4e0ce176b3577f",
+        "entity": "trial:nct01841944",
+        "key": "ci_low",
+        "value": 0.82,
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "DHA + EPA vs placebo",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:23644932",
+        "quote": "0.97 [98.7% CI, 0.82-1.16]; P = .70 for DHA + EPA",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_0206b5b1860fc5",
+        "entity": "trial:nct01841944",
+        "key": "dose",
+        "value": 1.8,
+        "unit": "g/day",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "quote": "supplementation with 1.8 g/day of n-3 polyunsaturated fatty acids",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01841944"
+      },
+      {
+        "fact_id": "f_d7271dcafd5438",
+        "entity": "trial:nct01841944",
+        "key": "events_control",
+        "value": 493,
+        "unit": "eyes",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "placebo"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "31% (493 eyes [406 participants]) for placebo",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_e6413a1f2484ed",
+        "entity": "trial:nct01841944",
+        "key": "events_control",
+        "value": 20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OMEMI",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:omemi",
+        "quote": "The data indicates no difference in the rate of cardiac events between the two groups – about 20% for both groups.",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_ad1a5c62377598",
+        "entity": "trial:nct01841944",
+        "key": "events_total",
+        "value": 1940,
+        "unit": "eyes",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "with 1940 study eyes (1608 participants) progressing to advanced AMD",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_0017a53b52959c",
+        "entity": "trial:nct01841944",
+        "key": "events_treatment",
+        "value": 20,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OMEMI",
+          "placebo_adjusted": false
+        },
+        "source_id": "announcement:omemi",
+        "quote": "The data indicates no difference in the rate of cardiac events between the two groups – about 20% for both groups.",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_a94238aad290ee",
+        "entity": "trial:nct01841944",
+        "key": "events_treatment",
+        "value": 507,
+        "unit": "eyes",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "DHA + EPA"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "31% (507 eyes [416 participants]) for DHA + EPA",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_c1e911a06ba6e6",
+        "entity": "trial:nct01841944",
+        "key": "hr",
+        "value": 0.97,
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "DHA + EPA vs placebo",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:23644932",
+        "quote": "0.97 [98.7% CI, 0.82-1.16]; P = .70 for DHA + EPA",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_65d42b39534283",
+        "entity": "trial:nct01841944",
+        "key": "inclusion_threshold",
+        "value": 30,
+        "unit": "percent relative risk reduction",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "quote": "reduce the combined cardiovascular end-point of death, non-fatal myocardial infarction, stroke, revascularizations or hospitalization for new or worsened heart failure with at least 30%",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01841944"
+      },
+      {
+        "fact_id": "f_fc2c141027e224",
+        "entity": "trial:nct01841944",
+        "key": "inclusion_threshold",
+        "value": "70-82",
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "Included are patients ≥70-82 years of age who have sustained AMI",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_0f7d054658de6c",
+        "entity": "trial:nct01841944",
+        "key": "median_followup",
+        "value": 2,
+        "unit": "years",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "announcement:omemi",
+        "quote": "After 2 years of follow-up, researchers analyzed the number of cardiac events in each group",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_1ef55b817cf8fe",
+        "entity": "trial:nct01841944",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "Median follow-up was 5 years",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_a271bd24d3fef1",
+        "entity": "trial:nct01841944",
+        "key": "median_followup",
+        "value": 2,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "evaluate the effect of 2 years supplementation with capsules of very-long chain marine n-3 PUFA on top of standard therapy",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_fe7c753dfc004b",
+        "entity": "trial:nct01841944",
+        "key": "median_followup",
+        "value": 24,
+        "unit": "months",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "quote": "[24months]",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01841944"
+      },
+      {
+        "fact_id": "f_2e399f1ed2cdff",
+        "entity": "trial:nct01841944",
+        "key": "n_randomized",
+        "value": 1027,
+        "unit": "participants",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "quote": "Enrollment: 1027 (ACTUAL)",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01841944"
+      },
+      {
+        "fact_id": "f_3caabd77c605bd",
+        "entity": "trial:nct01841944",
+        "key": "n_randomized",
+        "value": 1000,
+        "unit": "patients",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "announcement:omemi",
+        "quote": "The study included more than 1,000 patients (ages 70 to 82, mostly white, 29% women) who had all been hospitalized due to a heart attack within the previous two months.",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_c02cc5fd44f160",
+        "entity": "trial:nct01841944",
+        "key": "n_randomized",
+        "value": 1400,
+        "unit": "patients",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "Sample size calculation based on existing literature has resulted in the need for 1400 patients followed for 2 years",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_f7afa0c5a53a29",
+        "entity": "trial:nct01841944",
+        "key": "n_randomized",
+        "value": 4203,
+        "unit": "participants",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "enrolling 4203 participants aged 50 to 85 years at risk for progression to advanced AMD",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_c9e5ca5df8961e",
+        "entity": "trial:nct01841944",
+        "key": "p_value",
+        "value": 0.7,
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2",
+          "arm": "DHA + EPA vs placebo",
+          "placebo_adjusted": true
+        },
+        "source_id": "pmid:23644932",
+        "quote": "0.97 [98.7% CI, 0.82-1.16]; P = .70 for DHA + EPA",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_be7ba493e2317f",
+        "entity": "trial:nct01841944",
+        "key": "power",
+        "value": 80,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "Based on data from registries [3,29] and with an alpha of 0.05 and a power of 80%, 611 patients would be needed in each study group",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_296885b12c6d51",
+        "entity": "trial:nct01841944",
+        "key": "primary_endpoint",
+        "value": "Development of advanced AMD",
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "Main outcomes and measures Development of advanced AMD.",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_2a84d7276cf852",
+        "entity": "trial:nct01841944",
+        "key": "primary_endpoint",
+        "value": "cardiac events including heart attacks, strokes, revascularization (bypass surgery or angioplasty), hospitalizations for heart failure or deaths",
+        "unit": "NA",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "announcement:omemi",
+        "quote": "After 2 years of follow-up, researchers analyzed the number of cardiac events in each group, including heart attacks, strokes, revascularization (bypass surgery or angioplasty), hospitalizations for heart failure or deaths.",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_9a57c1da6be5c9",
+        "entity": "trial:nct01841944",
+        "key": "primary_endpoint",
+        "value": "Combined total mortality, first event of non-fatal myocardial infarction, stroke, revascularization or hospital admission for new or worsened heart failure",
+        "unit": "composite endpoint",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "quote": "Primary outcome(s): Combined total mortality, first event of non-fatal myocardial infarction, stroke, revascularization or hospital admission for new or worsened heart failure. [24months]",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT01841944"
+      },
+      {
+        "fact_id": "f_b8142950fc4fd0",
+        "entity": "trial:nct01841944",
+        "key": "primary_endpoint",
+        "value": "composite of total mortality, first non-fatal recurring AMI, stroke and revascularization",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "The Primary end-point is the composite of total mortality, first non-fatal recurring AMI, stroke and revascularization",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_210557ea81931d",
+        "entity": "trial:nct01841944",
+        "key": "readout_statement",
+        "value": "The hypothesis is that supplementation of n-3 PUFAs will reduce the risk for cardiovascular events.",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmcid:PMC4074832",
+        "quote": "Our hypothesis is that supplementation of n-3 PUFAs will reduce the risk for cardiovascular events.",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/24928284"
+      },
+      {
+        "fact_id": "f_9af39dd8fa1ab0",
+        "entity": "trial:nct01841944",
+        "key": "readout_statement",
+        "value": "Addition of lutein + zeaxanthin, DHA + EPA, or both to the AREDS formulation in primary analyses did not further reduce risk of progression to advanced AMD.",
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "Addition of lutein + zeaxanthin, DHA + EPA, or both to the AREDS formulation in primary analyses did not further reduce risk of progression to advanced AMD.",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      },
+      {
+        "fact_id": "f_f577ffd25dc0ee",
+        "entity": "trial:nct01841944",
+        "key": "readout_statement",
+        "value": "omega-3 supplements are ineffective for cardiovascular prevention",
+        "unit": "NA",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "announcement:omemi",
+        "quote": "suggests that omega-3 supplements are ineffective for cardiovascular prevention.",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_bd3ae58ab0be9d",
+        "entity": "trial:nct01841944",
+        "key": "safety_signal",
+        "value": "new atrial fibrillation occurred in almost twice as many in the omega-3 group compared to placebo, 7.2% vs 4.0%",
+        "unit": "percent",
+        "attrs": {
+          "trial": "OMEMI"
+        },
+        "source_id": "announcement:omemi",
+        "quote": "the secondary endpoint of the study was new atrial fibrillation, which occurred in almost twice as many in the study’s omega-3 group compared to the placebo group, 7.2 % vs 4.0 %, respectively",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors"
+      },
+      {
+        "fact_id": "f_c7a4ec5b0c761e",
+        "entity": "trial:nct01841944",
+        "key": "safety_signal",
+        "value": "More lung cancers were noted in the beta carotene vs no beta carotene group (23 [2.0%] vs 11 [0.9%], nominal P = .04), mostly in former smokers.",
+        "unit": "",
+        "attrs": {
+          "trial": "AREDS2"
+        },
+        "source_id": "pmid:23644932",
+        "quote": "More lung cancers were noted in the beta carotene vs no beta carotene group (23 [2.0%] vs 11 [0.9%], nominal P = .04), mostly in former smokers.",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23644932"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT01841944@2020-11-15",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT01841944 OMEMI",
+        "url": "https://clinicaltrials.gov/study/NCT01841944",
+        "pub_date": "2013-04-29",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT01841944",
+            "acronym": "OMEMI",
+            "title": "Omega-3 Fatty Acids in Elderly Patients With Acute Myocardial Infarction",
+            "official_title": "Giving Omega-3 Fatty Acids to Elderly Patients Diagnosed With Acute Myocardial Infarction to Investigate the Effect on Cardiovascular Morbidity and Mortality",
+            "sponsor": "Oslo University Hospital",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2012-11",
+            "primary_completion": "2020-06-26",
+            "first_posted": "2013-04-29",
+            "phases": [
+              "NA"
+            ],
+            "enrollment": 1027,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Pikasol",
+                "type": "DRUG",
+                "other_names": [
+                  "omega-3",
+                  "polyunsaturated fatty acids"
+                ],
+                "arms": [
+                  "Pikasol"
+                ]
+              },
+              {
+                "name": "Corn oil",
+                "type": "OTHER",
+                "other_names": [],
+                "arms": [
+                  "Corn oil"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Pikasol",
+                "type": "ACTIVE_COMPARATOR"
+              },
+              {
+                "label": "Corn oil",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Myocardial Infarction",
+              "Heart Failure",
+              "Myocardial Revascularization",
+              "Atrial Fibrillation"
+            ],
+            "primary_outcomes": [
+              "Combined total mortality, first event of non-fatal myocardial infarction, stroke, revascularization or hospital admission for new or worsened heart failure. [24months]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 1714
+      },
+      {
+        "source_id": "pmid:23644932",
+        "type": "journal",
+        "title": "Lutein + zeaxanthin and omega-3 fatty acids for age-related macular degeneration: the Age-Related Eye Disease Study 2 (AREDS2) randomized clinical trial.",
+        "url": "https://europepmc.org/article/MED/23644932",
+        "pub_date": "2013-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23644932",
+          "pmcid": null,
+          "doi": "10.1001/jama.2013.4997",
+          "journal": "JAMA"
+        },
+        "chars": 3207
+      },
+      {
+        "source_id": "pmid:12438303",
+        "type": "journal",
+        "title": "Fish consumption, fish oil, omega-3 fatty acids, and cardiovascular disease.",
+        "url": "https://europepmc.org/article/MED/12438303",
+        "pub_date": "2002-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "12438303",
+          "pmcid": null,
+          "doi": "10.1161/01.cir.0000038493.65177.94",
+          "journal": "Circulation"
+        },
+        "chars": 78
+      },
+      {
+        "source_id": "pmcid:PMC2194036",
+        "type": "journal",
+        "title": "Resolvins: a family of bioactive products of omega-3 fatty acid transformation circuits initiated by aspirin treatment that counter proinflammation signals.",
+        "url": "https://europepmc.org/article/MED/12391014",
+        "pub_date": "2002-10-01",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "12391014",
+          "pmcid": "PMC2194036",
+          "doi": "10.1084/jem.20020760",
+          "journal": "The Journal of experimental medicine"
+        },
+        "chars": 57553
+      },
+      {
+        "source_id": "pmid:20813258",
+        "type": "journal",
+        "title": "GPR120 is an omega-3 fatty acid receptor mediating potent anti-inflammatory and insulin-sensitizing effects.",
+        "url": "https://europepmc.org/article/MED/20813258",
+        "pub_date": "2010-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20813258",
+          "pmcid": "PMC2956412",
+          "doi": "10.1016/j.cell.2010.07.041",
+          "journal": "Cell"
+        },
+        "chars": 1119
+      },
+      {
+        "source_id": "pmid:22051327",
+        "type": "journal",
+        "title": "Omega-3 fatty acids and cardiovascular disease: effects on risk factors, molecular pathways, and clinical events.",
+        "url": "https://europepmc.org/article/MED/22051327",
+        "pub_date": "2011-11-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22051327",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2011.06.063",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 2322
+      },
+      {
+        "source_id": "pmid:18408140",
+        "type": "journal",
+        "title": "The importance of the omega-6/omega-3 fatty acid ratio in cardiovascular disease and other chronic diseases.",
+        "url": "https://europepmc.org/article/MED/18408140",
+        "pub_date": "2008-04-11",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "18408140",
+          "pmcid": null,
+          "doi": "10.3181/0711-mr-311",
+          "journal": "Experimental biology and medicine (Maywood, N.J.)"
+        },
+        "chars": 2020
+      },
+      {
+        "source_id": "pmid:1908631",
+        "type": "journal",
+        "title": "Omega-3 fatty acids in health and disease and in growth and development.",
+        "url": "https://europepmc.org/article/MED/1908631",
+        "pub_date": "1991-09-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "1908631",
+          "pmcid": null,
+          "doi": "10.1093/ajcn/54.3.438",
+          "journal": "The American journal of clinical nutrition"
+        },
+        "chars": 2783
+      },
+      {
+        "source_id": "pmid:28900017",
+        "type": "journal",
+        "title": "Omega-3 fatty acids and inflammatory processes: from molecules to man.",
+        "url": "https://europepmc.org/article/MED/28900017",
+        "pub_date": "2017-09-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28900017",
+          "pmcid": null,
+          "doi": "10.1042/bst20160474",
+          "journal": "Biochemical Society transactions"
+        },
+        "chars": 2046
+      },
+      {
+        "source_id": "pmcid:PMC4808858",
+        "type": "journal",
+        "title": "An Increase in the Omega-6/Omega-3 Fatty Acid Ratio Increases the Risk for Obesity.",
+        "url": "https://europepmc.org/article/MED/26950145",
+        "pub_date": "2016-03-02",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "26950145",
+          "pmcid": "PMC4808858",
+          "doi": "10.3390/nu8030128",
+          "journal": "Nutrients"
+        },
+        "chars": 43354
+      },
+      {
+        "source_id": "pmid:25149823",
+        "type": "journal",
+        "title": "Marine omega-3 fatty acids and inflammatory processes: Effects, mechanisms and clinical relevance.",
+        "url": "https://europepmc.org/article/MED/25149823",
+        "pub_date": "2014-08-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "25149823",
+          "pmcid": null,
+          "doi": "10.1016/j.bbalip.2014.08.010",
+          "journal": "Biochimica et biophysica acta"
+        },
+        "chars": 2003
+      },
+      {
+        "source_id": "pmcid:PMC4074832",
+        "type": "journal",
+        "title": "Effects of ω3 supplementation in elderly patients with acute myocardial infarction: design of a prospective randomized placebo controlled study.",
+        "url": "https://europepmc.org/article/MED/24928284",
+        "pub_date": "2014-06-13",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "24928284",
+          "pmcid": "PMC4074832",
+          "doi": "10.1186/1471-2318-14-74",
+          "journal": "BMC geriatrics",
+          "purpose": "design"
+        },
+        "chars": 18101
+      },
+      {
+        "source_id": "announcement:omemi",
+        "type": "press_release",
+        "title": "Omega-3s did not reduce cardiac events in recent heart attack survivors (American Heart Association News, Scientific Sessions 2020 Late Breaking Science LBS.04)",
+        "url": "https://newsroom.heart.org/news/omega-3s-did-not-reduce-cardiac-events-in-recent-heart-attack-survivors",
+        "pub_date": "2020-11-15",
+        "access": "press_release",
+        "meta": {},
+        "chars": 7616
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 14,
+      "facts": 32,
+      "relationships": 4,
+      "events": 81,
+      "audit_entries": 81,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 13,
+        "input_tokens": 15935,
+        "output_tokens": 2565,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 5126,
+        "output_tokens": 7170,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 5,
+        "input_tokens": 2722,
+        "output_tokens": 32296,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 4858,
+        "output_tokens": 7286,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 7090,
+        "output_tokens": 6285,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4258,
+        "output_tokens": 1579,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

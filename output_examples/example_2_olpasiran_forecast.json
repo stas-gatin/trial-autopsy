@@ -1,0 +1,1896 @@
+{
+  "run_id": "example-olpasiran",
+  "status": "success",
+  "mode": "forecast",
+  "as_of": null,
+  "backtest": false,
+  "readout_date": null,
+  "analysis_date": "2026-10-25",
+  "trial": {
+    "nct_id": "NCT05581303",
+    "acronym": null,
+    "title": "Olpasiran Trials of Cardiovascular Events and Lipoprotein(a) Reduction (OCEAN(a)) - Outcomes Trial",
+    "sponsor": "Amgen",
+    "status": "ACTIVE_NOT_RECRUITING",
+    "enrollment": 7297,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Atherosclerotic Cardiovascular Disease"
+    ],
+    "primary_completion": "2028-03-31"
+  },
+  "drug": {
+    "name": "olpasiran",
+    "chembl_id": "CHEMBL4650413",
+    "aliases": [
+      "AMG 890",
+      "AMG-890",
+      "Amg 890"
+    ],
+    "drug_type": "Oligonucleotide",
+    "mechanisms": [
+      "LPA mRNA rnai inhibitor"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000198670",
+        "symbol": "LPA",
+        "name": "lipoprotein(a)"
+      }
+    ],
+    "searched_as": "Olpasiran"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-example-olpasiran",
+  "log_file": "logs/trace-example-olpasiran.jsonl",
+  "execution_time_seconds": 0.6,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "not_computable",
+      "outcome_basis": "calculator forecast",
+      "predicted_outcome": "not_computable",
+      "consistency": "",
+      "primary_category": "insufficient_data",
+      "secondary_categories": [
+        "effect_too_small",
+        "population"
+      ],
+      "calculator_category": "insufficient_data",
+      "confidence": "medium",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "trial size (events) unknown"
+    },
+    "report": {
+      "headline": "The OCEAN(a) outcomes trial of olpasiran cannot be forecast due to insufficient data; enrollment is complete but the event count and on-treatment Lp(a) reduction at the phase 3 dose are unknown.",
+      "summary": "The phase 3 OCEAN(a) trial randomized 7,297 patients with Lp(a) ≥200 nmol/L to olpasiran or placebo, with a primary endpoint of time to CHD death, myocardial infarction, or urgent coronary revascularization over a planned 5-year median follow-up (ClinicalTrials.gov NCT05581303). Human genetics strongly support Lp(a) as causal for coronary disease (Open Targets LPA score 0.922; Mendelian randomization odds ratios 1.8–3.67) (opentargets:LPA; Genetic variants associated with Lp(a) lipoprotein level and coronary disease). Phase 2 data show potent but waning Lp(a) reduction: −97.4% at week 36 declining to −27.9% at week 96 for the 75 mg Q12W dose (Small Interfering RNA to Reduce Lipoprotein(a) in Cardiovascular Disease; The Off-Treatment Effects of Olpasiran on Lipoprotein(a) Lowering: OCEAN(a)-DOSE Extension Period Results). The phase 3 dose regimen is not confirmed in verified facts, and no placebo-adjusted phase 3 biomarker change is available. The calculator estimates an expected hazard ratio of 0.82 (18% relative risk reduction) but requires 796 events for 80% power; the actual event count is unknown because the trial has not read out (calculator). The forecast is therefore 'not_computable' with medium confidence, driven primarily by missing event and biomarker data rather than a demonstrated small treatment effect.",
+      "key_evidence": [
+        "7,297 participants randomized (ClinicalTrials.gov NCT05581303)",
+        "Inclusion threshold: Lp(a) ≥200 nmol/L (ClinicalTrials.gov NCT05581303)",
+        "Primary endpoint: time to CHD death, MI, or urgent coronary revascularization; ~5 years median follow-up (ClinicalTrials.gov NCT05581303)",
+        "Phase 2 biomarker effect wanes from −97.4% at week 36 to −27.9% at week 96 for 75 mg Q12W dose (Small Interfering RNA to Reduce Lipoprotein(a) in Cardiovascular Disease; The Off-Treatment Effects of Olpasiran on Lipoprotein(a) Lowering: OCEAN(a)-DOSE Extension Period Results)",
+        "Genetic evidence: Open Targets LPA score 0.922; Mendelian randomization ORs 1.8–3.67 for coronary disease (opentargets:LPA; Genetic variants associated with Lp(a) lipoprotein level and coronary disease)",
+        "Calculator output: expected HR 0.82, causal RRR 18%, category insufficient_data, weakest link trial size (events) unknown; 796 events needed for 80% power (calculator)"
+      ],
+      "what_would_change_this": "A placebo-adjusted Lp(a) reduction from phase 3 at the trial dose and background therapy, together with the total events accrued and observed hazard ratio with confidence interval at primary analysis.",
+      "readthrough_note": "Other Lp(a)-lowering programmes in outcomes trials include pelacarsen (Lp(a) antisense, HORIZON trial) and lepodisiran (LPA siRNA); their readouts will inform whether sustained Lp(a) reduction translates to cardiovascular benefit in high-Lp(a) populations."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "causal",
+        "detail": "Open Targets genetic association 0.922 for LPA",
+        "pass": true
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "Lp(a)",
+        "detail": "intended biomarker Lp(a) is causal or unknown; LDL-equivalent change 0.799 mmol/L via Lp(a)",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.18,
+        "detail": "expected HR 0.82 at 5.0 y (relative risk reduction 18.0%)",
+        "pass": true
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown; events needed for 80% power: 796",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "nct05581303",
+      "ldl_equivalent_mmol": 0.799,
+      "basis": "Lp(a)",
+      "time_factor": 1.0,
+      "expected_hr": 0.82,
+      "causal_rrr": 0.18,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "not_computable",
+      "category": "insufficient_data",
+      "secondary": [],
+      "weakest_link": "trial size (events) unknown",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [
+        "events needed for 80% power: 796"
+      ],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "nct05581303",
+      "mode": "forecast",
+      "target_genetics": "causal",
+      "intended_biomarker": "Lp(a)",
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -97.4,
+          "baseline": 83.3,
+          "method": "Placebo-adjusted percent change at week 36 from phase 2 OCEAN(a)-DOSE (75 mg Q12W dose); baseline derived from phase 3 OCEAN(a) Outcomes Trial entry threshold (200 nmol/L = 83.3 mg/dL using 2.4 nmol/L = 1 mg/dL conversion)",
+          "source": "ctgov:NCT05581303,pmid:36342163"
+        }
+      ],
+      "followup_years": 5.0,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "causal",
+      "target_genetics_rationale": "LPA genetic association score 0.922 with coronary artery disease (Open Targets), with 183 evidence items and 8 studies published before cutoff (GCST010479, FINNGEN_R12_I9_UAP, GCST90436075, GCST008370, GCST90013864, etc.). Score well above 0.5 threshold with coronary disease studies.",
+      "intended_biomarker": "Lp(a)",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "Lp(a)",
+          "abs_change": null,
+          "pct_change": -97.4,
+          "baseline": 83.3,
+          "unit": "mg/dL",
+          "method": "Placebo-adjusted percent change at week 36 from phase 2 OCEAN(a)-DOSE (75 mg Q12W dose); baseline derived from phase 3 OCEAN(a) Outcomes Trial entry threshold (200 nmol/L = 83.3 mg/dL using 2.4 nmol/L = 1 mg/dL conversion)",
+          "fact_ids": [
+            "f_8d84d4809e8094",
+            "f_deaf89093e4158"
+          ]
+        }
+      ],
+      "followup_years": 5.0,
+      "followup_fact_ids": [
+        "f_cccc70c0ad3b8c"
+      ],
+      "events": null,
+      "events_basis": "planned",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_74b22224d68598",
+        "f_227a384ed5a465"
+      ],
+      "missing": [
+        "phase_3_dose",
+        "phase_3_measured_baseline_Lp_a",
+        "planned_events_number",
+        "phase_3_biomarker_data",
+        "time_averaged_Lp_a_reduction"
+      ],
+      "notes": "Phase 3 dose not confirmed in verified facts; calculator uses phase 2 75 mg Q12W week 36 data (-97.4%) as best available proxy. Lp(a) reduction wanes substantially over time (week 60: -76.2%, week 72: -53.0%, week 84: -44.0%, week 96: -27.9% per f_8f280782644c42, f_8f049f03cf46be, f_7a3285f171f2ca, f_46b0c66e023873). Baseline uses phase 3 entry threshold (200 nmol/L = 83.3 mg/dL) as lower bound since phase 3 measured baseline not available. Phase 2 baseline was 260.3 nmol/L (108.5 mg/dL) with 150 nmol/L entry threshold. No LDL-C or apoB changes reported for olpasiran. Trial enrollment complete (7,297 randomized per f_227a384ed5a465) but follow-up ongoing; no readout yet."
+    },
+    "hypotheses": [
+      {
+        "category": "target_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "LPA genetic association score 0.922 with coronary artery disease from 183 studies",
+            "refs": [
+              "f_bbddc6c5c50370"
+            ]
+          },
+          {
+            "text": "Multiple Mendelian randomization studies show LPA variants associated with increased coronary disease risk (OR 1.8-3.67)",
+            "refs": [
+              "f_4acadea0e413c9",
+              "f_9efe57c23c1f23",
+              "f_d944124729f464",
+              "f_d954b811762c1a"
+            ]
+          },
+          {
+            "text": "LPA variant rs10455872 associated with aortic valve calcification",
+            "refs": [
+              "f_b9d19ed5371b01"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Lp(a) is the direct protein product of LPA gene; same genetic evidence supports Lp(a) as causal mediator",
+            "refs": [
+              "f_bbddc6c5c50370",
+              "f_4acadea0e413c9",
+              "f_9efe57c23c1f23",
+              "f_b9d19ed5371b01",
+              "f_d944124729f464",
+              "f_d954b811762c1a"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "effect_too_small",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Calculator estimates HR 0.82 (18% RRR) requiring 796 events for 80% power; actual event count unknown",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 2 biomarker effect wanes substantially over time: -97.4% at week 36 (f_8d84d4809e8094), -76.2% at week 60 (f_8f280782644c42), -53.0% at week 72 (f_8f049f03cf46be), -44.0% at week 84 (f_7a3285f171f2ca), -27.9% at week 96 (f_46b0c66e023873) for 75 mg Q12W dose",
+            "refs": [
+              "f_8d84d4809e8094",
+              "f_8f280782644c42",
+              "f_8f049f03cf46be",
+              "f_7a3285f171f2ca",
+              "f_46b0c66e023873"
+            ]
+          },
+          {
+            "text": "Phase 3 dose not confirmed in verified facts; calculator uses phase 2 75 mg Q12W data but phase 3 may use different dose",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Genetic calibration suggests larger effect possible per unit Lp(a) lowering",
+            "refs": [
+              "f_bbddc6c5c50370"
+            ]
+          },
+          {
+            "text": "Large sample size (7,297 randomized) and 5-year follow-up provide substantial person-years",
+            "refs": [
+              "f_227a384ed5a465",
+              "f_cccc70c0ad3b8c"
+            ]
+          },
+          {
+            "text": "High-risk population enriched for Lp(a) ≥200 nmol/L (phase 3 threshold)",
+            "refs": [
+              "f_deaf89093e4158"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Theoretical concern with RNAi therapeutics for off-target effects",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "Phase 1 trial reported 0 serious or fatal adverse events",
+            "refs": [
+              "f_007ed836a93bde"
+            ]
+          },
+          {
+            "text": "Phase 2 safety profile dominated by injection-site reactions (primarily pain)",
+            "refs": [
+              "f_03c54cb07a7990"
+            ]
+          },
+          {
+            "text": "Olpasiran reduced OxPL-apoB without significant effects on hs-CRP or hs-IL-6, suggesting no inflammatory signal",
+            "refs": [
+              "f_09b79a45f72ddf"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Phase 3 inclusion threshold Lp(a) ≥200 nmol/L (f_deaf89093e4158) vs phase 2 ≥150 nmol/L (f_1b0bb3bb19cc28, f_235812c2b923c3, f_2b12a2d6e14b08, f_cc487b137bd588) — different population risk profile",
+            "refs": [
+              "f_deaf89093e4158",
+              "f_1b0bb3bb19cc28",
+              "f_235812c2b923c3",
+              "f_2b12a2d6e14b08",
+              "f_cc487b137bd588"
+            ]
+          },
+          {
+            "text": "Phase 2 median baseline Lp(a) 260.3 nmol/L (f_a8ab77d6d6e252, f_b2009fc9a9094e); phase 3 mean baseline not reported, only entry threshold known",
+            "refs": [
+              "f_a8ab77d6d6e252",
+              "f_b2009fc9a9094e",
+              "f_deaf89093e4158"
+            ]
+          },
+          {
+            "text": "Calculator baseline derived from entry threshold (200 nmol/L = 83.3 mg/dL) as lower bound; actual mean baseline likely higher",
+            "refs": [
+              "calculator",
+              "f_deaf89093e4158"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Higher Lp(a) threshold may enrich for patients more likely to benefit from Lp(a) lowering",
+            "refs": [
+              "f_deaf89093e4158"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary endpoint includes urgent coronary revascularization, which may be influenced by non-atherothrombotic factors",
+            "refs": [
+              "f_74b22224d68598"
+            ]
+          },
+          {
+            "text": "5-year follow-up may be insufficient for full atherosclerotic benefit to accrue",
+            "refs": [
+              "f_cccc70c0ad3b8c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Primary endpoint (CHD death, MI, urgent coronary revascularization) is standard MACE-like composite",
+            "refs": [
+              "f_74b22224d68598"
+            ]
+          },
+          {
+            "text": "5-year median follow-up planned with 7,297 participants provides adequate person-time",
+            "refs": [
+              "f_cccc70c0ad3b8c",
+              "f_227a384ed5a465"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Enrollment complete (7,297 participants randomized)",
+            "refs": [
+              "f_227a384ed5a465"
+            ]
+          },
+          {
+            "text": "No conduct issues or early stopping reported in registry",
+            "refs": [
+              "f_227a384ed5a465"
+            ]
+          }
+        ]
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator outcome 'not_computable' because event count is unknown (trial has not read out)",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Phase 3 dose not confirmed in verified facts; biomarker input extrapolated from phase 2 75 mg Q12W dose",
+            "refs": [
+              "calculator",
+              "f_8d84d4809e8094"
+            ]
+          },
+          {
+            "text": "Phase 3 baseline Lp(a) not measured; only entry threshold (≥200 nmol/L) known",
+            "refs": [
+              "f_deaf89093e4158"
+            ]
+          },
+          {
+            "text": "Biomarker durability over 5 years unknown; phase 2 extension shows waning to -27.9% at 96 weeks",
+            "refs": [
+              "f_46b0c66e023873",
+              "f_7a3285f171f2ca",
+              "f_8f049f03cf46be",
+              "f_8f280782644c42"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Key design parameters (sample size, follow-up, endpoint, inclusion criteria) are known from registry",
+            "refs": [
+              "f_227a384ed5a465",
+              "f_cccc70c0ad3b8c",
+              "f_74b22224d68598",
+              "f_deaf89093e4158"
+            ]
+          }
+        ],
+        "would_settle": "Trial readout with event counts, HR, and on-treatment Lp(a) trajectory; confirmation of phase 3 dose regimen"
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Calculator baseline (83.3 mg/dL) derived from phase 3 entry threshold (≥200 nmol/L) rather than measured mean baseline; phase 2 median baseline was 260.3 nmol/L (108.5 mg/dL). Actual phase 3 mean baseline likely higher, making the LDL-equivalent (0.799 mmol/L) and expected HR (0.82) conservative. The population hypothesis notes this but the calculator input should flag the assumption more explicitly.",
+            "target_agent": "mechanism",
+            "request": "Add a note to calculator input assumptions that baseline is a lower-bound estimate from entry threshold; true mean baseline unknown but phase 2 median was 108.5 mg/dL."
+          },
+          {
+            "severity": "medium",
+            "issue": "Substantial biomarker waning in phase 2 extension: -97.4% at week 36 → -27.9% at week 96 (75 mg Q12W). Calculator uses week 36 value with time_factor=1.0 for a 5-year (260-week) trial, overstating sustained effect. This is the strongest driver of effect_too_small risk.",
+            "target_agent": "mechanism",
+            "request": "Document in calculator assumptions that time_factor=1.0 does not capture waning; average on-treatment effect over 5 years likely far lower than week 36 snapshot."
+          },
+          {
+            "severity": "medium",
+            "issue": "Phase 3 dose regimen not confirmed in verified facts. Calculator uses phase 2 75 mg Q12W data as proxy. Hypotheses (insufficient_data, effect_too_small) correctly flag this, but no verified fact establishes the phase 3 dose.",
+            "target_agent": "case_builder",
+            "request": "Search for phase 3 protocol publications, registry amendments, or sponsor disclosures confirming olpasiran dose and dosing interval in NCT05581303."
+          },
+          {
+            "severity": "low",
+            "issue": "execution_or_nonscientific hypothesis claims 'No conduct issues or early stopping reported in registry' citing f_227a384ed5a465, but that fact only reports n_randomized=7297. The registry record (ctgov:NCT05581303) would need to be checked for conduct issues; the citation does not directly support the claim.",
+            "target_agent": "case_builder",
+            "request": "Verify NCT05581303 registry history for any protocol amendments, enrollment pauses, or safety holds; update reference or remove claim if unsupported."
+          },
+          {
+            "severity": "low",
+            "issue": "effect_too_small against point 'Genetic calibration suggests larger effect possible per unit Lp(a) lowering' cites only f_bbddc6c5c50370 (genetic association score 0.922). The MR studies (f_4acadea0e413c9, f_9efe57c23c1f23, f_d944124729f464, f_d954b811762c1a) provide direct effect-size estimates per Lp(a) increase and are better evidence for this claim.",
+            "target_agent": "case_builder",
+            "request": "Update reference list for that against point to include the MR study facts."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_8d84d4809e8094",
+          "claim": "c1",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "biomarker_change",
+          "value": -97.4,
+          "unit": "percent",
+          "source_id": "pmid:36342163",
+          "status": "confirmed",
+          "found": "5% with the 10-mg dose, -97.4% with the 75-mg dose, -101",
+          "note": "Abstract contains the exact -97.4% figure for the 75-mg dose.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*97\\.4%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '36342163' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_deaf89093e4158",
+          "claim": "c2",
+          "used_as": "Lp(a) change used by the calculator",
+          "key": "inclusion_threshold",
+          "value": 200,
+          "unit": "nmol/L",
+          "source_id": "ctgov:NCT05581303",
+          "status": "confirmed",
+          "found": "Lp(a) ≥ 200 nmol/L during screening",
+          "note": "Registry inclusion criteria explicitly state Lp(a) ≥ 200 nmol/L during screening.",
+          "sql": "SELECT regexp_extract(protocolSection.eligibilityModule.eligibilityCriteria, '([^.]*200 nmol/L[^.]*)', 1) AS sentence FROM registry LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_cccc70c0ad3b8c",
+          "claim": "c3",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 5,
+          "unit": "years",
+          "source_id": "ctgov:NCT05581303",
+          "status": "confirmed",
+          "found": "Approximately 5 years",
+          "note": "Registry primary outcome timeFrame is 'Approximately 5 years', matching the claim.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Time to CHD death, myocardial infarction, or urgent coronary revascularization%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 3,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 3
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "LPA",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.591,
+        "genetic_association_score": 0.922,
+        "evidence_count": 183,
+        "top_evidence": [
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.944,
+            "study_id": "GCST010479",
+            "trait": "Coronary artery disease",
+            "n": 392241,
+            "publication_date": "2020-05-29",
+            "pmid": "32469254",
+            "variant": "rs56393506",
+            "beta": 0.13976194237515863,
+            "p": "5e-34",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "FINNGEN_R12_I9_UAP",
+            "trait": "Unstable angina pectoris",
+            "n": 460589,
+            "publication_date": null,
+            "pmid": "36653562",
+            "variant": "rs56393506",
+            "beta": 0.0880448597190566,
+            "p": "1.0360000133514404e-16",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "GCST90436075",
+            "trait": "Coronary atherosclerosis (PheCode 411.4)",
+            "n": 397126,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs56393506",
+            "beta": 0.011478900054015655,
+            "p": "9.762269973754883e-52",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.932,
+            "study_id": "GCST008370",
+            "trait": "Ischemic heart disease (PheCode 411)",
+            "n": 408458,
+            "publication_date": "2018-08-13",
+            "pmid": "30104761",
+            "variant": "rs56393506",
+            "beta": 0.010785575212149661,
+            "p": "1.2374534606933594e-44",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90013864",
+            "trait": "Coronary artery disease (Firth correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs56393506",
+            "beta": 0.01326871309476942,
+            "p": "1.9297810792922974e-56",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90693007",
+            "trait": "Coronary atherosclerosis (PheCode 411.4)",
+            "n": 414464,
+            "publication_date": "2025-09-18",
+            "pmid": "40968291",
+            "variant": "rs56393506",
+            "beta": 0.01327665168690646,
+            "p": "3.354611873626709e-65",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90013868",
+            "trait": "Coronary artery disease (SPA correction)",
+            "n": 352063,
+            "publication_date": "2021-05-20",
+            "pmid": "34017140",
+            "variant": "rs56393506",
+            "beta": 0.01337357867717055,
+            "p": "9.905274391174316e-55",
+            "published_before_cutoff": true
+          },
+          {
+            "datasource": "gwas_credible_sets",
+            "score": 0.928,
+            "study_id": "GCST90692990",
+            "trait": "ICD10 I25: Chronic ischaemic heart disease",
+            "n": 429407,
+            "publication_date": "2025-09-18",
+            "pmid": "40968291",
+            "variant": "rs56393506",
+            "beta": 0.012526833506364488,
+            "p": "1.0458709001541138e-62",
+            "published_before_cutoff": true
+          }
+        ],
+        "evidence_before_cutoff": 8
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_b1fc60f675d154",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 67.5,
+        "unit": "mg per deciliter",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "LDL-C",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:36342163",
+        "quote": "the median concentration of low-density lipoprotein cholesterol was 67.5 mg per deciliter",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_a8ab77d6d6e252",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 260.3,
+        "unit": "nmol per liter",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:36342163",
+        "quote": "the median concentration of lipoprotein(a) at baseline was 260.3 nmol per liter",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_b2009fc9a9094e",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": 260.3,
+        "unit": "nmol/L",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:39937508",
+        "quote": "Baseline median (IQR) Lp(a) concentration was 260.3 nmol/L (198.1-352.4)",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_f9ae75cc0f232f",
+        "entity": "biomarker:lp(a)",
+        "key": "baseline_level",
+        "value": null,
+        "unit": "nmol/L",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:35588897",
+        "quote": "established ASCVD and Lp(a) > 150 nmol/L",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35588897"
+      },
+      {
+        "fact_id": "f_10aaed78d42e2d",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": 99.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase1",
+          "timepoint": "day 57",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "225 mg",
+          "kind": "percent",
+          "trial": "NCT05581303 - OCEAN(a)"
+        },
+        "source_id": "pmid:35963802",
+        "quote": "The maximal Lp(a) reduction occurred at day 57, with mean (SD) Lp(a) percentage reductions from baseline ranging from 56.0% (21.0%) to 99.0% (0.2%).",
+        "pub_date": "2022-08-11",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35963802"
+      },
+      {
+        "fact_id": "f_1e2d660a791029",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -80.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "preclinical",
+          "timepoint": "5-8 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "single dose",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:35027752",
+        "quote": "Olpasiran reduced Lp(a) concentrations in transgenic mice and cynomolgus monkeys in a dose-responsive manner, achieving up to over 80% reduction from baseline for 5-8 weeks after administration of a single dose.",
+        "pub_date": "2022-01-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35027752"
+      },
+      {
+        "fact_id": "f_1f0b006fd79b64",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -101.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "225 mg every 12 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "-101.1% with the 225-mg dose administered every 12 weeks",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_257fd5e50e5510",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -70.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "10 mg every 12 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "placebo-adjusted mean percent changes of -70.5% with the 10-mg dose",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_46b0c66e023873",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -27.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "96 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg Q12W",
+          "kind": "percent",
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "For the 75 mg Q12W dose, the off-treatment placebo-adjusted mean percent change from baseline in Lp(a) was -76.2%, -53.0%, -44.0%, and -27.9% at 60, 72, 84, and 96 weeks, respectively",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_4a37e7521f185d",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -100.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "225 mg every 24 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "-100.5% with the 225-mg dose administered every 24 weeks",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_7a3285f171f2ca",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -44.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "84 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg Q12W",
+          "kind": "percent",
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "For the 75 mg Q12W dose, the off-treatment placebo-adjusted mean percent change from baseline in Lp(a) was -76.2%, -53.0%, -44.0%, and -27.9% at 60, 72, 84, and 96 weeks, respectively",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_8c15450db8f867",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -71.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase1",
+          "timepoint": "several months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "9 mg or higher",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:35027752",
+        "quote": "Participants tolerated single doses of olpasiran well and experienced a 71-97% reduction in Lp(a) concentration with effects persisting for several months after administration of doses of 9 mg or higher.",
+        "pub_date": "2022-01-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35027752"
+      },
+      {
+        "fact_id": "f_8d84d4809e8094",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -97.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg every 12 weeks",
+          "kind": "percent"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "-97.4% with the 75-mg dose",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_8f049f03cf46be",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -53.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "72 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg Q12W",
+          "kind": "percent",
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "For the 75 mg Q12W dose, the off-treatment placebo-adjusted mean percent change from baseline in Lp(a) was -76.2%, -53.0%, -44.0%, and -27.9% at 60, 72, 84, and 96 weeks, respectively",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_8f280782644c42",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -76.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "60 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg Q12W",
+          "kind": "percent",
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "For the 75 mg Q12W dose, the off-treatment placebo-adjusted mean percent change from baseline in Lp(a) was -76.2%, -53.0%, -44.0%, and -27.9% at 60, 72, 84, and 96 weeks, respectively",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_94efa83230ca82",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": -97.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase1",
+          "timepoint": "several months",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "9 mg or higher",
+          "kind": "percent",
+          "sign_set_by_code": "quote says decrease"
+        },
+        "source_id": "pmid:35027752",
+        "quote": "Participants tolerated single doses of olpasiran well and experienced a 71-97% reduction in Lp(a) concentration with effects persisting for several months after administration of doses of 9 mg or higher.",
+        "pub_date": "2022-01-13",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35027752"
+      },
+      {
+        "fact_id": "f_96b9def07d4855",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": 56.0,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "phase": "phase1",
+          "timepoint": "day 57",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "3 mg",
+          "kind": "percent",
+          "trial": "NCT05581303 - OCEAN(a)"
+        },
+        "source_id": "pmid:35963802",
+        "quote": "The maximal Lp(a) reduction occurred at day 57, with mean (SD) Lp(a) percentage reductions from baseline ranging from 56.0% (21.0%) to 99.0% (0.2%).",
+        "pub_date": "2022-08-11",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35963802"
+      },
+      {
+        "fact_id": "f_bfe12b8c0be69d",
+        "entity": "biomarker:lp(a)",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE",
+          "biomarker": "Lp(a)",
+          "phase": "phase2",
+          "timepoint": "36 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "kind": "percent"
+        },
+        "source_id": "pmid:35588897",
+        "quote": "The primary objective is to evaluate the effects of olpasiran dosed every 12 weeks compared with placebo on the percent change in Lp(a) from baseline at 36 weeks",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35588897"
+      },
+      {
+        "fact_id": "f_ffd4a409d137cb",
+        "entity": "biomarker:oxpl-apob",
+        "key": "baseline_level",
+        "value": 26.5,
+        "unit": "nmol/L",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:39937508",
+        "quote": "and median (IQR) OxPL-apoB concentration was 26.5 nmol/L (19.7-33.9).",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_1712d8e1dcf878",
+        "entity": "biomarker:oxpl-apob",
+        "key": "biomarker_change",
+        "value": -92.3,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "225 mg Q12W",
+          "kind": "percent"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "-92.3% (95% CI, -105.6% to -78.9%) for the 225-mg Q12W dose",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_1a47b4563739da",
+        "entity": "biomarker:oxpl-apob",
+        "key": "biomarker_change",
+        "value": -51.6,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "10 mg Q12W",
+          "kind": "percent"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "The placebo-adjusted mean percentage change in OxPL-apoB from baseline to week 36 was -51.6% (95% CI, -64.9% to -38.2%) for the 10-mg Q12W dose",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_dbe86283b2cbb0",
+        "entity": "biomarker:oxpl-apob",
+        "key": "biomarker_change",
+        "value": -93.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "225 mg Q24W",
+          "kind": "percent"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "-93.7% (95% CI, -107.1% to -80.3%) for the Q24W dose",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_e827313ada0be7",
+        "entity": "biomarker:oxpl-apob",
+        "key": "biomarker_change",
+        "value": -89.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "OxPL-apoB",
+          "phase": "phase2",
+          "timepoint": "week 36",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "75 mg Q12W",
+          "kind": "percent"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "-89.7% (95% CI, -103.0% to -76.4%) for the 75-mg Q12W dose",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_bbddc6c5c50370",
+        "entity": "target:lpa",
+        "key": "genetic_association_score",
+        "value": 0.922,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 183,
+          "evidence_before_cutoff": 8
+        },
+        "source_id": "opentargets:LPA",
+        "quote": "\"genetic_association_score\": 0.922",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000198670"
+      },
+      {
+        "fact_id": "f_1b0bb3bb19cc28",
+        "entity": "trial:nct05581303",
+        "key": "inclusion_threshold",
+        "value": 150,
+        "unit": "nmol per liter",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "a lipoprotein(a) concentration of more than 150 nmol per liter",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_235812c2b923c3",
+        "entity": "trial:nct05581303",
+        "key": "inclusion_threshold",
+        "value": 150,
+        "unit": "nmol/L",
+        "attrs": {
+          "biomarker": "Lp(a)",
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "enrolled 281 participants with atherosclerotic cardiovascular disease and Lp(a) >150 nmol/L",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_2b12a2d6e14b08",
+        "entity": "trial:nct05581303",
+        "key": "inclusion_threshold",
+        "value": 150,
+        "unit": "nmol/L",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:35588897",
+        "quote": "established ASCVD and Lp(a) > 150 nmol/L",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35588897"
+      },
+      {
+        "fact_id": "f_cc487b137bd588",
+        "entity": "trial:nct05581303",
+        "key": "inclusion_threshold",
+        "value": 150,
+        "unit": "nmol/L",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "A total of 281 patients with atherosclerotic cardiovascular disease and Lp(a) levels greater than 150 nmol/L were included.",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_deaf89093e4158",
+        "entity": "trial:nct05581303",
+        "key": "inclusion_threshold",
+        "value": 200,
+        "unit": "nmol/L",
+        "attrs": {
+          "trial": "OCEAN(a) - Outcomes Trial"
+        },
+        "source_id": "ctgov:NCT05581303",
+        "quote": "Lp(a) ≥ 200 nmol/L during screening",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05581303"
+      },
+      {
+        "fact_id": "f_cccc70c0ad3b8c",
+        "entity": "trial:nct05581303",
+        "key": "median_followup",
+        "value": 5,
+        "unit": "years",
+        "attrs": {
+          "trial": "OCEAN(a) - Outcomes Trial"
+        },
+        "source_id": "ctgov:NCT05581303",
+        "quote": "[Approximately 5 years]",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05581303"
+      },
+      {
+        "fact_id": "f_d9887a48963e49",
+        "entity": "trial:nct05581303",
+        "key": "median_followup",
+        "value": 86,
+        "unit": "weeks",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39168564",
+        "quote": "The median study exposure (treatment combined with off-treatment phases) was 86 weeks (Q1-Q3: 79-99 weeks).",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39168564"
+      },
+      {
+        "fact_id": "f_227a384ed5a465",
+        "entity": "trial:nct05581303",
+        "key": "n_randomized",
+        "value": 7297,
+        "unit": "participants",
+        "attrs": {
+          "trial": "OCEAN(a) - Outcomes Trial"
+        },
+        "source_id": "ctgov:NCT05581303",
+        "quote": "Enrollment: 7297 (ACTUAL)",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05581303"
+      },
+      {
+        "fact_id": "f_27449f72a48518",
+        "entity": "trial:nct05581303",
+        "key": "n_randomized",
+        "value": 281,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:35588897",
+        "quote": "a multicenter, randomized, double-blind, placebo-controlled dose-finding study in 281 subjects with established ASCVD and Lp(a) > 150 nmol/L",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35588897"
+      },
+      {
+        "fact_id": "f_4f579b0240ee0c",
+        "entity": "trial:nct05581303",
+        "key": "n_randomized",
+        "value": 281,
+        "unit": "patients",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "A total of 281 patients with atherosclerotic cardiovascular disease and Lp(a) levels greater than 150 nmol/L were included.",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_9383b8d91ddad7",
+        "entity": "trial:nct05581303",
+        "key": "n_randomized",
+        "value": 281,
+        "unit": "patients",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "Among the 281 enrolled patients",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_a641a5458742f7",
+        "entity": "trial:nct05581303",
+        "key": "n_randomized",
+        "value": 27,
+        "unit": "participants",
+        "attrs": {
+          "trial": "NCT05581303 - OCEAN(a)"
+        },
+        "source_id": "pmid:35963802",
+        "quote": "A total of 27 enrolled participants had a mean (SD) age of 48.0 (12.5) years.",
+        "pub_date": "2022-08-11",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35963802"
+      },
+      {
+        "fact_id": "f_3c05d44c1c0b5c",
+        "entity": "trial:nct05581303",
+        "key": "phase",
+        "value": 3,
+        "unit": "phase",
+        "attrs": {
+          "trial": "OCEAN(a) - Outcomes Trial"
+        },
+        "source_id": "ctgov:NCT05581303",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05581303"
+      },
+      {
+        "fact_id": "f_236e503b23ec2f",
+        "entity": "trial:nct05581303",
+        "key": "primary_endpoint",
+        "value": "percent change in lipoprotein(a) concentration from baseline to week 36",
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "The primary end point was the percent change in the lipoprotein(a) concentration from baseline to week 36",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_74b22224d68598",
+        "entity": "trial:nct05581303",
+        "key": "primary_endpoint",
+        "value": "Time to CHD death, myocardial infarction, or urgent coronary revascularization, whichever occurs first",
+        "unit": "time",
+        "attrs": {
+          "trial": "OCEAN(a) - Outcomes Trial"
+        },
+        "source_id": "ctgov:NCT05581303",
+        "quote": "Primary outcome(s): Time to CHD death, myocardial infarction, or urgent coronary revascularization, whichever occurs first [Approximately 5 years]",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT05581303"
+      },
+      {
+        "fact_id": "f_9ad6ed4ed21989",
+        "entity": "trial:nct05581303",
+        "key": "primary_endpoint",
+        "value": "placebo-adjusted change in OxPL-apoB from baseline to week 36",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "The primary outcome was placebo-adjusted change in OxPL-apoB from baseline to week 36.",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_bde3cd3008e895",
+        "entity": "trial:nct05581303",
+        "key": "primary_endpoint",
+        "value": "percent change in Lp(a) from baseline at 36 weeks",
+        "unit": "percent",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:35588897",
+        "quote": "The primary objective is to evaluate the effects of olpasiran dosed every 12 weeks compared with placebo on the percent change in Lp(a) from baseline at 36 weeks",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35588897"
+      },
+      {
+        "fact_id": "f_09b79a45f72ddf",
+        "entity": "trial:nct05581303",
+        "key": "readout_statement",
+        "value": "olpasiran led to a significant and sustained reduction in OxPL-apoB but no significant effects on hs-CRP or hs-IL-6",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:39937508",
+        "quote": "In the OCEAN(a)-DOSE multicenter randomized clinical trial, olpasiran led to a significant and sustained reduction in OxPL-apoB but no significant effects on hs-CRP or hs-IL-6.",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/39937508"
+      },
+      {
+        "fact_id": "f_007ed836a93bde",
+        "entity": "trial:nct05581303",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "serious or fatal adverse events",
+        "attrs": {
+          "trial": "NCT05581303 - OCEAN(a)"
+        },
+        "source_id": "pmid:35963802",
+        "quote": "All adverse events were mild in severity, with no serious or fatal adverse events.",
+        "pub_date": "2022-08-11",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/35963802"
+      },
+      {
+        "fact_id": "f_03c54cb07a7990",
+        "entity": "trial:nct05581303",
+        "key": "safety_signal",
+        "value": "injection-site reactions, primarily pain",
+        "unit": "adverse events",
+        "attrs": {
+          "trial": "OCEAN(a)-DOSE"
+        },
+        "source_id": "pmid:36342163",
+        "quote": "The most common olpasiran-related adverse events were injection-site reactions, primarily pain",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/36342163"
+      },
+      {
+        "fact_id": "f_4acadea0e413c9",
+        "entity": "trial:nct05581303",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "genotype score involving both LPA SNPs",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.8,
+          "ci_high": 3.67
+        },
+        "source_id": "pmid:20032323",
+        "quote": "and 2.57 (95% CI, 1.80 to 3.67) for two or more variants.",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_9efe57c23c1f23",
+        "entity": "trial:nct05581303",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "genotype score involving both LPA SNPs",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.38,
+          "ci_high": 1.66
+        },
+        "source_id": "pmid:20032323",
+        "quote": "A meta-analysis showed that with a genotype score involving both LPA SNPs, the odds ratios for coronary disease were 1.51 (95% CI, 1.38 to 1.66) for one variant",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_b9d19ed5371b01",
+        "entity": "trial:nct05581303",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs10455872",
+          "outcome": "aortic-valve calcification",
+          "direction": "harmful",
+          "effect_on_biomarker": "mediated by Lp(a) levels",
+          "n": 6942,
+          "ci_low": null,
+          "ci_high": null
+        },
+        "source_id": "pmid:23388002",
+        "quote": "One SNP in the lipoprotein(a) (LPA) locus (rs10455872) reached genomewide significance for the presence of aortic-valve calcification (odds ratio per allele, 2.05; P=9.0×10(-10))",
+        "pub_date": "2013-02-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/23388002"
+      },
+      {
+        "fact_id": "f_d944124729f464",
+        "entity": "trial:nct05581303",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs10455872",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.49,
+          "ci_high": 1.95
+        },
+        "source_id": "pmid:20032323",
+        "quote": "We identified a common variant (rs10455872) at the LPA locus with an odds ratio for coronary disease of 1.70 (95% confidence interval [CI], 1.49 to 1.95)",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      },
+      {
+        "fact_id": "f_d954b811762c1a",
+        "entity": "trial:nct05581303",
+        "key": "unknown",
+        "value": null,
+        "unit": "OR",
+        "attrs": {
+          "gene": "LPA",
+          "variant_or_score": "rs3798220",
+          "outcome": "coronary disease",
+          "direction": "harmful",
+          "effect_on_biomarker": "increased level of Lp(a) lipoprotein",
+          "n": null,
+          "ci_low": 1.48,
+          "ci_high": 2.49
+        },
+        "source_id": "pmid:20032323",
+        "quote": "and another independent variant (rs3798220) with an odds ratio of 1.92 (95% CI, 1.48 to 2.49)",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/20032323"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT05581303",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT05581303",
+        "url": "https://clinicaltrials.gov/study/NCT05581303",
+        "pub_date": "2022-10-14",
+        "access": "registry",
+        "meta": {
+          "design_only_view": false,
+          "summary": {
+            "nct_id": "NCT05581303",
+            "acronym": null,
+            "title": "Olpasiran Trials of Cardiovascular Events and Lipoprotein(a) Reduction (OCEAN(a)) - Outcomes Trial",
+            "official_title": "A Double-blind, Randomized, Placebo-controlled, Multicenter Study Assessing the Impact of Olpasiran on Major Cardiovascular Events in Participants With Atherosclerotic Cardiovascular Disease and Elevated Lipoprotein(a)",
+            "sponsor": "Amgen",
+            "status": "ACTIVE_NOT_RECRUITING",
+            "why_stopped": null,
+            "start_date": "2022-12-14",
+            "primary_completion": "2028-03-31",
+            "first_posted": "2022-10-14",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 7297,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Placebo"
+                ]
+              },
+              {
+                "name": "Olpasiran",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Olpasiran"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Placebo",
+                "type": "PLACEBO_COMPARATOR"
+              },
+              {
+                "label": "Olpasiran",
+                "type": "EXPERIMENTAL"
+              }
+            ],
+            "conditions": [
+              "Atherosclerotic Cardiovascular Disease"
+            ],
+            "primary_outcomes": [
+              "Time to CHD death, myocardial infarction, or urgent coronary revascularization, whichever occurs first [Approximately 5 years]"
+            ],
+            "has_results": false
+          }
+        },
+        "chars": 1986
+      },
+      {
+        "source_id": "pmid:39937508",
+        "type": "journal",
+        "title": "Olpasiran, Oxidized Phospholipids, and Systemic Inflammatory Biomarkers: Results From the OCEAN(a)-DOSE Trial.",
+        "url": "https://europepmc.org/article/MED/39937508",
+        "pub_date": "2025-05-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "39937508",
+          "pmcid": "PMC11822594",
+          "doi": "10.1001/jamacardio.2024.5433",
+          "journal": "JAMA cardiology"
+        },
+        "chars": 2271
+      },
+      {
+        "source_id": "pmid:39168564",
+        "type": "journal",
+        "title": "The Off-Treatment Effects of Olpasiran on Lipoprotein(a) Lowering: OCEAN(a)-DOSE Extension Period Results.",
+        "url": "https://europepmc.org/article/MED/39168564",
+        "pub_date": "2024-08-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "39168564",
+          "pmcid": null,
+          "doi": "10.1016/j.jacc.2024.05.058",
+          "journal": "Journal of the American College of Cardiology"
+        },
+        "chars": 1750
+      },
+      {
+        "source_id": "pmid:35588897",
+        "type": "journal",
+        "title": "Study design and rationale for the Olpasiran trials of Cardiovascular Events And lipoproteiN(a) reduction-DOSE finding study (OCEAN(a)-DOSE).",
+        "url": "https://europepmc.org/article/MED/35588897",
+        "pub_date": "2022-05-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35588897",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2022.05.004",
+          "journal": "American heart journal"
+        },
+        "chars": 1211
+      },
+      {
+        "source_id": "pmid:35963802",
+        "type": "journal",
+        "title": "Pharmacokinetics, Pharmacodynamics, and Tolerability of Olpasiran in Healthy Japanese and Non-Japanese Participants: Results from a Phase I, Single-dose, Open-label Study.",
+        "url": "https://europepmc.org/article/MED/35963802",
+        "pub_date": "2022-08-11",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35963802",
+          "pmcid": null,
+          "doi": "10.1016/j.clinthera.2022.07.008",
+          "journal": "Clinical therapeutics"
+        },
+        "chars": 2333
+      },
+      {
+        "source_id": "pmid:36342163",
+        "type": "journal",
+        "title": "Small Interfering RNA to Reduce Lipoprotein(a) in Cardiovascular Disease.",
+        "url": "https://europepmc.org/article/MED/36342163",
+        "pub_date": "2022-11-06",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "36342163",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa2211023",
+          "journal": "The New England journal of medicine"
+        },
+        "chars": 2309
+      },
+      {
+        "source_id": "pmid:35027752",
+        "type": "journal",
+        "title": "Preclinical development and phase 1 trial of a novel siRNA targeting lipoprotein(a).",
+        "url": "https://europepmc.org/article/MED/35027752",
+        "pub_date": "2022-01-13",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35027752",
+          "pmcid": null,
+          "doi": "10.1038/s41591-021-01634-w",
+          "journal": "Nature medicine"
+        },
+        "chars": 1463
+      },
+      {
+        "source_id": "pmid:20032323",
+        "type": "journal",
+        "title": "Genetic variants associated with Lp(a) lipoprotein level and coronary disease.",
+        "url": "https://europepmc.org/article/MED/20032323",
+        "pub_date": "2009-12-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20032323",
+          "pmcid": null,
+          "doi": "10.1056/nejmoa0902604",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 2120
+      },
+      {
+        "source_id": "pmid:23388002",
+        "type": "journal",
+        "title": "Genetic associations with valvular calcification and aortic stenosis.",
+        "url": "https://europepmc.org/article/MED/23388002",
+        "pub_date": "2013-02-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "23388002",
+          "pmcid": "PMC3766627",
+          "doi": "10.1056/nejmoa1109034",
+          "journal": "The New England journal of medicine",
+          "purpose": "genetics"
+        },
+        "chars": 1381
+      },
+      {
+        "source_id": "pmid:27005778",
+        "type": "journal",
+        "title": "Genome-wide study for circulating metabolites identifies 62 loci and reveals novel systemic effects of LPA.",
+        "url": "https://europepmc.org/article/MED/27005778",
+        "pub_date": "2016-03-23",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27005778",
+          "pmcid": "PMC4814583",
+          "doi": "10.1038/ncomms11122",
+          "journal": "Nature communications",
+          "purpose": "genetics"
+        },
+        "chars": 1312
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 16,
+      "facts": 50,
+      "relationships": 17,
+      "events": 128,
+      "audit_entries": 128,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 10,
+        "input_tokens": 9427,
+        "output_tokens": 5666,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 4130,
+        "output_tokens": 3058,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1470,
+        "output_tokens": 2144,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 3822,
+        "output_tokens": 3570,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 4845,
+        "output_tokens": 5257,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 4211,
+        "output_tokens": 2069,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

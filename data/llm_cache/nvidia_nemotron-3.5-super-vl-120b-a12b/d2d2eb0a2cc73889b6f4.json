@@ -1,0 +1,15 @@
+{
+  "key": "d2d2eb0a2cc73889b6f4",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T22:13:02+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: PREVAIL NCT05202509 - Cardiovascular Outcome Study to Evaluate the Effect of Obicetrapib in Patients With Cardiovascular Disease\nInvestigational drug: obicetrapib\nDocument: Exome-wide association study of plasma lipids in &gt;300,000 individuals. (journal, published 2017-10-30, source pmid:29083408)\n\n--- DOCUMENT TEXT ---\nExome-wide association study of plasma lipids in &gt;300,000 individuals.\n\nWe screened variants on an exome-focused genotyping array in >300,000 participants (replication in >280,000 participants) and identified 444 independent variants in 250 loci significantly associated with total cholesterol (TC), high-density-lipoprotein cholesterol (HDL-C), low-density-lipoprotein cholesterol (LDL-C), and/or triglycerides (TG). At two loci (JAK2 and A1CF), experimental analysis in mice showed lipid changes consistent with the human data. We also found that: (i) beta-thalassemia trait carriers displayed lower TC and were protected from coronary artery disease (CAD); (ii) excluding the CETP locus, there was not a predictable relationship between plasma HDL-C and risk for age-related macular degeneration; (iii) only some mechanisms of lowering LDL-C appeared to increase risk for type 2 diabetes (T2D); and (iv) TG-lowering alleles involved in hepatic production of TG-rich lipoproteins (TM6SF2 and PNPLA3) tracked with higher liver fat, higher risk for T2D, and lower risk for CAD, whereas TG-lowering alleles involved in peripheral lipolysis (LPL and ANGPTL4) had no effect on liver fat but decreased risks for both T2D and CAD.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 629,
+    "output_tokens": 7
+  }
+}

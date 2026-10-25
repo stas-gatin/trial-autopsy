@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A26481083&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*12,?705[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '26481083' LIMIT 5",
+ "rows": [
+  [
+   "<h4>Methods</h4>A total of 12,705 women 65 years or older and men 55 years or older with at least 1 CV risk factor, no known CV disease, and without any clear indication or contraindication to the study drugs were randomized to rosuvastatin 10 mg/d or placebo and to candesartan/hydrochlorothiazide 16/12"
+  ]
+ ],
+ "error": null
+}

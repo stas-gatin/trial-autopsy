@@ -1,0 +1,1298 @@
+{
+  "run_id": "bt-hps2_thrive",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2012-12-20",
+  "backtest": true,
+  "readout_date": "2012-12-20",
+  "analysis_date": "2012-12-20",
+  "trial": {
+    "nct_id": "NCT00461630",
+    "acronym": "HPS2-THRIVE",
+    "title": "Treatment of HDL to Reduce the Incidence of Vascular Events HPS2-THRIVE",
+    "sponsor": "University of Oxford",
+    "status": "COMPLETED",
+    "enrollment": 25673,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Cardiovascular Disease",
+      "Peripheral Arterial Disease",
+      "Diabetes Mellitus",
+      "Coronary Heart Disease"
+    ],
+    "primary_completion": "2012-10"
+  },
+  "drug": {
+    "name": "niacin",
+    "chembl_id": "CHEMBL573",
+    "aliases": [
+      "Acide nicotinique",
+      "Acido nicotinico",
+      "Acidum nicotinicum",
+      "NSC-169454",
+      "Niacin component of advicor",
+      "Niacin component of simcor",
+      "Niacin extended release",
+      "Niacin td",
+      "Niacor",
+      "Niaspan",
+      "Niaspan er",
+      "Niaspan titration starter pack",
+      "Nicangin",
+      "Nicolar",
+      "Nicotinate",
+      "Nicotinic acid",
+      "Vitamin b3",
+      "Wampocap",
+      "active placebo",
+      "controlled-ileal-release nicotinic acid",
+      "er niacin",
+      "ern",
+      "extended release niacin",
+      "extended release niacin/laropiprant",
+      "extended-release niacin",
+      "immediate-release niacin",
+      "mk-0524a",
+      "n-er",
+      "na",
+      "ner",
+      "niacin er",
+      "niacin-er",
+      "niacinamide",
+      "niaspan fct",
+      "nicotinamide",
+      "tredaptive"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [],
+    "targets": [],
+    "searched_as": "extended-release niacin"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-hps2_thrive",
+  "log_file": "logs/trace-bt-hps2_thrive.jsonl",
+  "execution_time_seconds": 0.5,
+  "sample_mode": false,
+  "warnings": [
+    "no molecular target in Open Targets: the genetics check is skipped and reported as unknown"
+  ],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"Merck Announces HPS2-THRIVE Study of TREDAPTIVE™ (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint - Merck.com Skip to \" (announcement:hps2_thrive)",
+      "predicted_outcome": "failure",
+      "consistency": "",
+      "primary_category": "biomarker_not_causal",
+      "secondary_categories": [
+        "off_target_harm"
+      ],
+      "calculator_category": "biomarker_not_causal",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": null,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "HPS2-THRIVE (25,673 patients, 3.9-year median follow-up) failed to meet its primary endpoint of Major Vascular Event; the niacin/laropiprant mechanism lacks genetic support and its primary biomarker (HDL-C) is non-causal, with a safety signal of increased non-fatal serious adverse events.",
+      "summary": "The HPS2-THRIVE trial randomized 25,673 high-risk vascular disease patients on statin therapy to extended-release niacin/laropiprant (TREDAPTIVE) or placebo and followed them for a median of 3.9 years. The study did not meet its primary endpoint — a composite of coronary death, non-fatal myocardial infarction, stroke, or revascularization (Major Vascular Event). The trial calculator assigns target_genetics = uncertain for niacin's molecular target (GPR109A/HM74A) and treats HDL-C as non-causal, yielding an expected hazard ratio of 1.0 and causal relative risk reduction of 0.0%. Phase 2 data showed a placebo-adjusted HDL-C increase of ~10.4% (ERN/LRPT 19.6% minus placebo 9.2%), but this biomarker change did not translate into clinical benefit. A safety signal was reported (statistically significant increase in some types of non-fatal serious adverse events). Confidence in this assessment is high.",
+      "key_evidence": [
+        "25,673 patients randomized (Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint; ClinicalTrials.gov NCT00461630 HPS2-THRIVE)",
+        "Median follow-up 3.9 years (ClinicalTrials.gov NCT00461630 HPS2-THRIVE; Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint)",
+        "Primary endpoint: Major Vascular Event — combination of coronary deaths, non-fatal heart attacks, strokes or revascularizations (ClinicalTrials.gov NCT00461630 HPS2-THRIVE; Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint)",
+        "Phase 2 placebo-adjusted HDL-C increase ~10.4% (ERN/LRPT 19.6% minus placebo 9.2%) (Effectiveness and safety of laropiprant on niacin-induced flushing)",
+        "Calculator: expected HR 1.0, causal RRR 0.0%, category biomarker_not_causal, weakest_link target genetics: uncertain (calculator)",
+        "Safety signal reported: statistically significant increase in some types of non-fatal serious adverse events (Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint)",
+        "Trial not stopped early, completed as planned (Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint)"
+      ],
+      "what_would_change_this": "Placebo-adjusted LDL-C and triglyceride changes from the HPS2-THRIVE phase 3 trial to quantify any causal lipid effect; detailed safety data from the final publication (infections, bleeding, diabetes incidence, discontinuation rates) to assess net clinical harm; human genetic studies of GPR109A variants and CVD outcomes.",
+      "readthrough_note": "The failure of HPS2-THRIVE, together with AIM-HIGH, reinforces that raising HDL-C pharmacologically does not reduce cardiovascular events when LDL-C is already well-controlled. Future programmes targeting HDL-C (e.g., CETP inhibitors) should require genetic validation of the target and demonstration of causal lipid effects beyond HDL-C."
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "no genetics found",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "HDL-C",
+        "detail": "intended biomarker HDL-C is NOT causal; LDL-equivalent change None mmol/L via no lipid change",
+        "pass": false
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.0,
+        "detail": "expected HR 1.0 at 3.9 y (relative risk reduction 0%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": null,
+        "detail": "planned events unknown",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "hps2_thrive",
+      "ldl_equivalent_mmol": null,
+      "basis": "no lipid change",
+      "time_factor": 0.866,
+      "expected_hr": 1.0,
+      "causal_rrr": 0.0,
+      "bp_factor": 1.0,
+      "power": null,
+      "mde_hr_80": null,
+      "outcome": "failure",
+      "category": "biomarker_not_causal",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "hps2_thrive",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "HDL-C",
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "%",
+          "pct_change": 10.4,
+          "baseline": null,
+          "method": "placebo-adjusted percent change from phase 2 HPS2-THRIVE (ERN/LRPT 2g/40mg, weeks 21-32); biomarker listed as 'other' in source but context indicates HDL-C; baseline HDL-C not in verified facts",
+          "source": "pmid:22683042"
+        }
+      ],
+      "followup_years": 3.9,
+      "events": null,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "No genetic evidence found for niacin's target (GPR109A/HM74A) and coronary artery disorder in Open Targets. Niacin is a well-studied target but genetics evidence is absent; per rule, uncertain.",
+      "intended_biomarker": "HDL-C",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": 10.4,
+          "baseline": null,
+          "unit": "%",
+          "method": "placebo-adjusted percent change from phase 2 HPS2-THRIVE (ERN/LRPT 2g/40mg, weeks 21-32); biomarker listed as 'other' in source but context indicates HDL-C; baseline HDL-C not in verified facts",
+          "fact_ids": [
+            "f_1028d3fa640965",
+            "f_ddabb94652c784"
+          ]
+        }
+      ],
+      "followup_years": 3.9,
+      "followup_fact_ids": [
+        "f_7f6ae1b71d6f98",
+        "f_9fec7107bd9b07"
+      ],
+      "events": null,
+      "events_basis": "actual",
+      "events_fact_ids": [],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_447551481271bf",
+        "f_ac0be40fe528a9",
+        "f_de32c6c19c1d75",
+        "f_d1d573d97d8cf4"
+      ],
+      "missing": [
+        "baseline_HDL_C",
+        "actual_primary_events",
+        "observed_hr",
+        "observed_ci",
+        "LDL_C_change",
+        "triglycerides_change",
+        "apoB_change",
+        "Lp(a)_change",
+        "sbp_change"
+      ],
+      "notes": "HPS2-THRIVE (NCT00461630) phase 3 trial of extended-release niacin/laropiprant 2g/40mg vs placebo in 25,673 patients with vascular disease. Primary endpoint: Major Vascular Event. Median follow-up 3.9 years. Primary endpoint not met per 2012-12-20 announcement. Safety signal present. Only biomarker change in verified facts is HDL-C from phase 2 sub-study (pmid:22683042) at weeks 21-32; placebo-adjusted increase 10.4% (19.6% drug vs 9.2% placebo). No baseline HDL-C, LDL-C, triglycerides, apoB, or Lp(a) changes in verified facts for this trial. Actual primary event count not reported in verified facts."
+    },
+    "hypotheses": [
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "The intended biomarker was HDL-C; the phase 2 HPS2-THRIVE data show a placebo-adjusted ~10.4% increase in HDL-C (ERN/LRPT 19.6% minus placebo 9.2%) at weeks 21-32.",
+            "refs": [
+              "f_1028d3fa640965",
+              "f_ddabb94652c784"
+            ]
+          },
+          {
+            "text": "Mendelian randomization and genetic evidence consistently show HDL-C is not a causal mediator of coronary artery disease; the calculator's reference table treats HDL-C as non-causal, yielding causal_rrr = 0.0 and expected_hr = 1.0.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "The trial failed to meet its primary endpoint (major vascular events) despite the HDL-C increase, consistent with a non-causal biomarker.",
+            "refs": [
+              "f_447551481271bf",
+              "f_de32c6c19c1d75"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Niacin also lowers LDL-C and triglycerides, which are causal lipids; however, no placebo-adjusted LDL-C or triglyceride changes for HPS2-THRIVE are present in the verified facts.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Placebo-adjusted LDL-C and triglyceride changes from the HPS2-THRIVE phase 3 trial to quantify any causal lipid effect."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "The Merck announcement explicitly notes a safety signal (safety_signal: True).",
+            "refs": [
+              "f_de32c6c19c1d75"
+            ]
+          },
+          {
+            "text": "Niacin/laropiprant is associated with adverse effects including flushing, gastrointestinal events, infections, bleeding, and new-onset diabetes, which could offset any modest lipid benefit.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "The safety signal is not quantified in the verified facts; the primary endpoint failure is more parsimoniously explained by lack of efficacy (non-causal biomarker) rather than harm offsetting benefit.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Detailed safety data from the final publication (infections, bleeding, diabetes incidence, discontinuation rates) to assess net clinical harm."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "The calculator rates target_genetics as 'uncertain' for niacin's target GPR109A/HM74A; no human genetic evidence supports this target for CVD prevention.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The rule states 'no genetic evidence at all for a well-studied target -> not_causal only if supported; otherwise uncertain.' The target is rated uncertain, not not_causal.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Niacin has pleiotropic effects (LDL-C lowering, TG lowering) beyond GPR109A, so target genetics alone may not capture the mechanism.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Human genetic studies of GPR109A variants and CVD outcomes, or a trial of a selective GPR109A agonist."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "If niacin's LDL-C and TG lowering were considered, the expected benefit might be too small to detect in this trial.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "No placebo-adjusted LDL-C or TG changes for HPS2-THRIVE are in the verified facts; the calculator's basis is 'no lipid change' (causal_rrr = 0.0) because HDL-C is non-causal.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "AIM-HIGH (niacin monotherapy) showed modest LDL-C (-12 mg/dL) and TG (-42 mg/dL) reductions, but those data are from a different trial and formulation, not in the verified facts for this case.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Placebo-adjusted LDL-C and TG changes from HPS2-THRIVE phase 3 to compute a causal LDL-equivalent effect."
+      },
+      {
+        "category": "population",
+        "status": "undetermined",
+        "for": [
+          {
+            "text": "Patients had established vascular disease and were on statin therapy (LDL-C already low); residual risk may be driven by processes not modified by HDL-C raising.",
+            "refs": []
+          }
+        ],
+        "against": [
+          {
+            "text": "No direct evidence in verified facts about baseline LDL-C or statin use in HPS2-THRIVE; this remains speculative.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Baseline lipid levels and statin use distribution in the HPS2-THRIVE population."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary endpoint includes revascularizations, which are softer and may not be prevented by lipid modification.",
+            "refs": [
+              "f_447551481271bf"
+            ]
+          },
+          {
+            "text": "Median follow-up 3.9 years; some lipid effects may require longer to accrue benefit.",
+            "refs": [
+              "f_7f6ae1b71d6f98",
+              "f_9fec7107bd9b07"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "3.9 years is standard for secondary prevention CVOTs; other statin and PCSK9 inhibitor trials showed benefit within this timeframe.",
+            "refs": []
+          },
+          {
+            "text": "The endpoint (major vascular events) is standard and was used successfully in other lipid-lowering trials.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Comparison of event curves by component (hard vs. soft endpoints) in the final publication."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [],
+        "against": [
+          {
+            "text": "Trial not stopped early (stopped_early: False), enrolled 25,673 patients as planned, and completed follow-up.",
+            "refs": [
+              "f_ac0be40fe528a9",
+              "f_d1d573d97d8cf4",
+              "f_d9541ea547d14c"
+            ]
+          }
+        ],
+        "would_settle": "Adherence and discontinuation rates from the final publication."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Only the top-line announcement is available as of 2012-12-20; full publication with event counts, HR, CI, and safety details is not yet public.",
+            "refs": [
+              "f_447551481271bf",
+              "f_de32c6c19c1d75"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The announcement is definitive: primary endpoint not met. Phase 2 biomarker data and trial design are known, allowing a strong mechanistic inference (biomarker_not_causal).",
+            "refs": [
+              "f_1028d3fa640965",
+              "f_ddabb94652c784",
+              "calculator"
+            ]
+          }
+        ],
+        "would_settle": "Full peer-reviewed publication with event counts, hazard ratios, and safety breakdown."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "Automatic check flags HDL-C pct_change=10.4 as not matching cited facts f_1028d3fa640965 (19.6%) and f_ddabb94652c784 (9.2%), but 10.4% is the correctly computed placebo-adjusted difference (19.6% - 9.2%). The check appears to compare the derived value directly to the within-arm source values rather than recognizing the calculation. This should be clarified or the check logic adjusted.",
+            "target_agent": "case_builder",
+            "request": "Verify that the calculator's method field ('placebo-adjusted percent change from phase 2 HPS2-THRIVE') correctly explains the derivation; if so, the automatic check is a false positive and can be noted as such."
+          },
+          {
+            "severity": "medium",
+            "issue": "No placebo-adjusted LDL-C or triglyceride changes from HPS2-THRIVE (phase 2 or phase 3) are present in the verified facts. Niacin lowers both causal lipids; omitting them forces the calculator basis to 'no lipid change' and causal_rrr=0.0, potentially understating any expected benefit from LDL-C/TG lowering.",
+            "target_agent": "case_builder",
+            "request": "Search for placebo-adjusted LDL-C and triglyceride changes from the HPS2-THRIVE phase 2 trial (pmid:22683042) or other pre-2012-12-20 sources at the ERN/LRPT 2g/40mg dose."
+          },
+          {
+            "severity": "low",
+            "issue": "Baseline HDL-C value is not in the verified facts for the phase 2 HPS2-THRIVE population. The calculator input has baseline: null. While percent change is usable without baseline, absolute change (mg/dL) would allow cross-trial comparison and LDL-equivalent conversion.",
+            "target_agent": "case_builder",
+            "request": "Search for baseline HDL-C in the HPS2-THRIVE phase 2 publication (pmid:22683042) or registry entry."
+          },
+          {
+            "severity": "low",
+            "issue": "Events and observed_hr/observed_ci are null. In autopsy mode the topline announcement (2012-12-20) is evidence; if the announcement or a contemporaneous conference presentation reported a hazard ratio or event counts, they should be captured as observed_hr/observed_ci and events.",
+            "target_agent": "case_builder",
+            "request": "Check the Merck announcement (announcement:hps2_thrive) and any 2012 conference abstracts (e.g., AHA, ESC) for reported hazard ratio, confidence interval, or event counts for the primary endpoint."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_1028d3fa640965",
+          "claim": "c1",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 19.6,
+          "unit": "%",
+          "source_id": "pmid:22683042",
+          "status": "confirmed",
+          "found": "001; ERN/LRPT 19.6%; ERN 48",
+          "note": "The abstract snippet shows ERN/LRPT 19.6% change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*19\\.6%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22683042' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_ddabb94652c784",
+          "claim": "c2",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 9.2,
+          "unit": "%",
+          "source_id": "pmid:22683042",
+          "status": "confirmed",
+          "found": "9%; placebo 9.2%)",
+          "note": "The abstract snippet shows placebo 9.2% change.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*9\\.2%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '22683042' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_7f6ae1b71d6f98",
+          "claim": "c3",
+          "used_as": "follow-up",
+          "key": "median_followup",
+          "value": 3.9,
+          "unit": "years",
+          "source_id": "ctgov:NCT00461630@2012-12-20",
+          "status": "confirmed",
+          "found": "During scheduled treatment period (median duration 3.9 years)",
+          "note": "The registry primary outcome timeFrame states median duration 3.9 years.",
+          "sql": "SELECT o.timeFrame FROM registry LATERAL VIEW explode(protocolSection.outcomesModule.primaryOutcomes) AS o WHERE o.measure LIKE '%Major Vascular Event%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 3,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 3
+    },
+    "readthrough": [],
+    "genetics": [],
+    "facts": [
+      {
+        "fact_id": "f_01e6d6f2438854",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 48.9,
+        "unit": "%",
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630",
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "weeks 21 to 32",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ERN 2 g/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22683042",
+        "quote": "ERN 48.9%",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_1028d3fa640965",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 19.6,
+        "unit": "%",
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630",
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "weeks 21 to 32",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "ERN/LRPT 2 g/40 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22683042",
+        "quote": "ERN/LRPT 19.6%",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_31d446a21f57dc",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "4 years",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "not stated",
+          "kind": "not stated"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "Changes in blood lipid, lipoprotein-cholesterol, and apolipoprotein levels were maintained",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_ddabb94652c784",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": 9.2,
+        "unit": "%",
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630",
+          "biomarker": "other",
+          "phase": "phase2",
+          "timepoint": "weeks 21 to 32",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "placebo",
+          "kind": "percent"
+        },
+        "source_id": "pmid:22683042",
+        "quote": "placebo 9.2%",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_7f6ae1b71d6f98",
+        "entity": "trial:nct00461630",
+        "key": "median_followup",
+        "value": 3.9,
+        "unit": "years",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "ctgov:NCT00461630@2012-12-20",
+        "quote": "Major Vascular Event [During scheduled treatment period (median duration 3.9 years)]",
+        "pub_date": "2007-04-18",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00461630"
+      },
+      {
+        "fact_id": "f_9fec7107bd9b07",
+        "entity": "trial:nct00461630",
+        "key": "median_followup",
+        "value": 3.9,
+        "unit": "years",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "announcement:hps2_thrive",
+        "quote": "Patients in the study were followed for a median of 3.9 years.",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/"
+      },
+      {
+        "fact_id": "f_54052a0b83e76a",
+        "entity": "trial:nct00461630",
+        "key": "n_randomized",
+        "value": 162,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "The Cholesterol Lowering Atherosclerosis Study (CLAS) was a randomized, placebo-controlled, angiographic trial testing combined colestipol-niacin therapy in 162 subjects.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_802291ed5c1677",
+        "entity": "trial:nct00461630",
+        "key": "n_randomized",
+        "value": 1152,
+        "unit": "patients",
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630"
+        },
+        "source_id": "pmid:22683042",
+        "quote": "A total of 1,152 dyslipidemic patients were randomized 2:2:1",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_abb28005f2f1a6",
+        "entity": "trial:nct00461630",
+        "key": "n_randomized",
+        "value": 103,
+        "unit": "subjects",
+        "attrs": {
+          "trial": "CLAS-II"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "We now describe a subgroup of 103 subjects treated for 4 years (CLAS-II).",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_d1d573d97d8cf4",
+        "entity": "trial:nct00461630",
+        "key": "n_randomized",
+        "value": 25673,
+        "unit": "patients",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "announcement:hps2_thrive",
+        "quote": "The study enrolled 25,673 patients considered to be at high risk for cardiovascular events.",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/"
+      },
+      {
+        "fact_id": "f_d9541ea547d14c",
+        "entity": "trial:nct00461630",
+        "key": "n_randomized",
+        "value": 25673,
+        "unit": "participants",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "ctgov:NCT00461630@2012-12-20",
+        "quote": "Enrollment: 25673 (ACTUAL)",
+        "pub_date": "2007-04-18",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00461630"
+      },
+      {
+        "fact_id": "f_2733f146f79204",
+        "entity": "trial:nct00461630",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": null,
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:22683042",
+        "quote": "p <0.001; ERN/LRPT 19.6%; ERN 48.9%; placebo 9.2%",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_3412aa962210da",
+        "entity": "trial:nct00461630",
+        "key": "p_value",
+        "value": 0.001,
+        "unit": null,
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmid:22683042",
+        "quote": "p <0.001",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_eeaa07b2ad7b0a",
+        "entity": "trial:nct00461630",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "ctgov:NCT00461630@2012-12-20",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2007-04-18",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00461630"
+      },
+      {
+        "fact_id": "f_1804f342105331",
+        "entity": "trial:nct00461630",
+        "key": "primary_endpoint",
+        "value": "Major Vascular Event",
+        "unit": "",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "ctgov:NCT00461630@2012-12-20",
+        "quote": "Primary outcome(s): Major Vascular Event [During scheduled treatment period (median duration 3.9 years)]",
+        "pub_date": "2007-04-18",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT00461630"
+      },
+      {
+        "fact_id": "f_225001000c2125",
+        "entity": "trial:nct00461630",
+        "key": "primary_endpoint",
+        "value": "coronary atherosclerosis progression/regression",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "The Cholesterol Lowering Atherosclerosis Study (CLAS) was a randomized, placebo-controlled, angiographic trial testing combined colestipol-niacin therapy in 162 subjects.",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_447551481271bf",
+        "entity": "trial:nct00461630",
+        "key": "primary_endpoint",
+        "value": "combination of coronary deaths, non-fatal heart attacks, strokes or revascularizations",
+        "unit": "",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "announcement:hps2_thrive",
+        "quote": "adding the combination of extended-release niacin and laropiprant to statin therapy did not significantly further reduce the risk of the combination of coronary deaths, non-fatal heart attacks, strokes or revascularizations compared to statin therapy.",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/"
+      },
+      {
+        "fact_id": "f_e537780a1d24a9",
+        "entity": "trial:nct00461630",
+        "key": "primary_endpoint",
+        "value": "number of days each week with a moderate or greater Global Flushing Severity Score (GFSS) ≥4",
+        "unit": "days per week",
+        "attrs": {
+          "trial": "HPS2-THRIVE NCT00461630"
+        },
+        "source_id": "pmid:22683042",
+        "quote": "The end points included the number of days each week with a moderate or greater Global Flushing Severity Score (GFSS) ≥4 (primary end point)",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/"
+      },
+      {
+        "fact_id": "f_50993618f26a18",
+        "entity": "trial:nct00461630",
+        "key": "readout_statement",
+        "value": "Significantly more drug-treated subjects demonstrated nonprogression (52% drug- vs 15% placebo-treated) and regression (18% drug- vs 6% placebo-treated) in native coronary artery lesions. Significantly fewer drug-treated subjects developed new lesions in native coronary arteries (14% drug- vs 40% placebo-treated) and bypass grafts (16% drug- vs 38% placebo-treated).",
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS-II"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "Significantly more drug-treated subjects demonstrated nonprogression (52% drug- vs 15% placebo-treated) and regression (18% drug- vs 6% placebo-treated) in native coronary artery lesions. Significantly fewer drug-treated subjects developed new lesions in native coronary arteries (14% drug- vs 40% placebo-treated) and bypass grafts (16% drug- vs 38% placebo-treated).",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_56069da320f20e",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": "1.0-6.0",
+        "unit": "g daily",
+        "attrs": {
+          "trial": "Niacin maculopathy"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "An additional 15 asymptomatic patients who were receiving high doses of oral niacin (1.0-6.0 g daily) for the treatment of hypercholesterolemia were evaluated for evidence of subclinical macular disease",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_664bb83efd4a72",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": 0.67,
+        "unit": "percent",
+        "attrs": {
+          "trial": "Niacin maculopathy"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Niacin causes a reversible toxic cystoid maculopathy that occurs in approximately 0.67% of patients taking high doses of the drug",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_66c7df14e6f331",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": null,
+        "unit": "not stated",
+        "attrs": {
+          "trial": "CLAS"
+        },
+        "source_id": "pmid:2243429",
+        "quote": "Beneficial effects of colestipol-niacin on coronary atherosclerosis. A 4-year follow-up",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/"
+      },
+      {
+        "fact_id": "f_908a07b1d574d3",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": "3.0-4.5",
+        "unit": "g daily",
+        "attrs": {
+          "trial": "Niacin maculopathy"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "All four patients had been taking high doses of niacin (3.0-4.5 g daily) before the onset of symptoms",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_dd995d55b418e9",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": "niacin-induced cystoid maculopathy",
+        "unit": "",
+        "attrs": {
+          "trial": "Niacin maculopathy"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Three patients with niacin-induced visual symptoms had cystoid maculopathy without leakage on fluorescein angiography",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_de32c6c19c1d75",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": true,
+        "unit": "",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "announcement:hps2_thrive",
+        "quote": "there was a statistically significant increase in the incidence of some types of non-fatal serious adverse events in the group that received extended-release niacin/laropiprant.",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/"
+      },
+      {
+        "fact_id": "f_f9ee178e8adf4e",
+        "entity": "trial:nct00461630",
+        "key": "safety_signal",
+        "value": "reversible",
+        "unit": "",
+        "attrs": {
+          "trial": "Niacin maculopathy"
+        },
+        "source_id": "pmid:3174043",
+        "quote": "Niacin causes a reversible toxic cystoid maculopathy",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/"
+      },
+      {
+        "fact_id": "f_ac0be40fe528a9",
+        "entity": "trial:nct00461630",
+        "key": "stopped_early",
+        "value": false,
+        "unit": "",
+        "attrs": {
+          "trial": "HPS2-THRIVE"
+        },
+        "source_id": "announcement:hps2_thrive",
+        "quote": "HPS2-THRIVE Study of TREDAPTIVE™ (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT00461630@2012-12-20",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT00461630 HPS2-THRIVE",
+        "url": "https://clinicaltrials.gov/study/NCT00461630",
+        "pub_date": "2007-04-18",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT00461630",
+            "acronym": "HPS2-THRIVE",
+            "title": "Treatment of HDL to Reduce the Incidence of Vascular Events HPS2-THRIVE",
+            "official_title": "A Randomized Trial of the Long-term Clinical Effects of Raising HDL Cholesterol With Extended Release Niacin/Laropiprant",
+            "sponsor": "University of Oxford",
+            "status": "COMPLETED",
+            "why_stopped": null,
+            "start_date": "2007-01",
+            "primary_completion": "2012-10",
+            "first_posted": "2007-04-18",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 25673,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "ER niacin/laropiprant",
+                "type": "DRUG",
+                "other_names": [
+                  "Tredaptive"
+                ],
+                "arms": [
+                  "ER niacin/laropiprant"
+                ]
+              },
+              {
+                "name": "simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "Zocor"
+                ],
+                "arms": [
+                  "ER niacin/laropiprant",
+                  "Placebo"
+                ]
+              },
+              {
+                "name": "ezetimibe/simvastatin",
+                "type": "DRUG",
+                "other_names": [
+                  "Inegy",
+                  "Vytorin"
+                ],
+                "arms": [
+                  "ER niacin/laropiprant",
+                  "Placebo"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "ER niacin/laropiprant",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Placebo",
+                "type": "ACTIVE_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Cardiovascular Disease",
+              "Peripheral Arterial Disease",
+              "Diabetes Mellitus",
+              "Coronary Heart Disease"
+            ],
+            "primary_outcomes": [
+              "Major Vascular Event [During scheduled treatment period (median duration 3.9 years)]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 4023
+      },
+      {
+        "source_id": "pmid:22683042",
+        "type": "journal",
+        "title": "Effectiveness and safety of laropiprant on niacin-induced flushing",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22683042/",
+        "pub_date": "2012-06-08",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "22683042",
+          "pmcid": null,
+          "doi": "10.1016/j.amjcard.2012.05.009",
+          "journal": "The American journal of cardiology"
+        },
+        "chars": 1803
+      },
+      {
+        "source_id": "pmid:2243429",
+        "type": "journal",
+        "title": "Beneficial effects of colestipol-niacin on coronary atherosclerosis. A 4-year follow-up",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2243429/",
+        "pub_date": "1990-12-19",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "2243429",
+          "pmcid": null,
+          "doi": null,
+          "journal": "JAMA"
+        },
+        "chars": 1117
+      },
+      {
+        "source_id": "pmid:1972218",
+        "type": "journal",
+        "title": "Kava-induced dermopathy: a niacin deficiency?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1972218/",
+        "pub_date": "1990-06-16",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "1972218",
+          "pmcid": null,
+          "doi": "10.1016/0140-6736(90)91458-m",
+          "journal": "Lancet (London, England)"
+        },
+        "chars": 862
+      },
+      {
+        "source_id": "pmid:21401825",
+        "type": "journal",
+        "title": "Niacin: the only vitamin that reduces cardiovascular events",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21401825/",
+        "pub_date": "2011-04-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "21401825",
+          "pmcid": null,
+          "doi": "10.1111/j.1742-1241.2011.02630.x",
+          "journal": "International journal of clinical practice"
+        },
+        "chars": 61
+      },
+      {
+        "source_id": "pmid:3174043",
+        "type": "journal",
+        "title": "Niacin maculopathy",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3174043/",
+        "pub_date": "1988-07-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "3174043",
+          "pmcid": null,
+          "doi": "10.1016/s0161-6420(88)33073-3",
+          "journal": "Ophthalmology"
+        },
+        "chars": 926
+      },
+      {
+        "source_id": "pmid:20079958",
+        "type": "journal",
+        "title": "Binder blinders-niacin of omission?",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20079958/",
+        "pub_date": "2010-01-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "20079958",
+          "pmcid": null,
+          "doi": "10.1053/j.ajkd.2009.12.015",
+          "journal": "American journal of kidney diseases : the official journal of the National Kidney Foundation"
+        },
+        "chars": 37
+      },
+      {
+        "source_id": "pmid:19812221",
+        "type": "journal",
+        "title": "Niacin status impacts chromatin structure",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19812221/",
+        "pub_date": "2009-10-07",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "19812221",
+          "pmcid": null,
+          "doi": "10.3945/jn.109.111757",
+          "journal": "The Journal of nutrition"
+        },
+        "chars": 1191
+      },
+      {
+        "source_id": "pmid:11988158",
+        "type": "journal",
+        "title": "[Niacin-induced hepatitis]",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11988158/",
+        "pub_date": "2002-04-20",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "11988158",
+          "pmcid": null,
+          "doi": null,
+          "journal": "Medicina clinica"
+        },
+        "chars": 28
+      },
+      {
+        "source_id": "pmid:9428949",
+        "type": "journal",
+        "title": "Safe use of niacin",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9428949/",
+        "pub_date": "1997-12-15",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "9428949",
+          "pmcid": null,
+          "doi": "10.1093/ajhp/54.24.2803",
+          "journal": "American journal of health-system pharmacy : AJHP : official journal of the American Society of Health-System Pharmacists"
+        },
+        "chars": 20
+      },
+      {
+        "source_id": "pmid:7847654",
+        "type": "journal",
+        "title": "Pharmacoepidemiology of niacin",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7847654/",
+        "pub_date": "1995-03-01",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "7847654",
+          "pmcid": null,
+          "doi": "10.7326/0003-4819-122-5-199503010-00014",
+          "journal": "Annals of internal medicine"
+        },
+        "chars": 32
+      },
+      {
+        "source_id": "announcement:hps2_thrive",
+        "type": "press_release",
+        "title": "Merck Announces HPS2-THRIVE Study of TREDAPTIVE (Extended-Release Niacin/Laropiprant) Did Not Achieve Primary Endpoint",
+        "url": "https://www.merck.com/news/merck-announces-hps2-thrive-study-of-tredaptive-extended-release-niacin-laropiprant-did-not-achieve-primary-endpoint/",
+        "pub_date": "2012-12-20",
+        "access": "press_release",
+        "meta": {},
+        "chars": 8517
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 14,
+      "facts": 28,
+      "relationships": 7,
+      "events": 75,
+      "audit_entries": 75,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 12,
+        "input_tokens": 10691,
+        "output_tokens": 2414,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 1,
+        "input_tokens": 2452,
+        "output_tokens": 2813,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 1450,
+        "output_tokens": 3064,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 1,
+        "input_tokens": 2381,
+        "output_tokens": 3095,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 1,
+        "input_tokens": 3475,
+        "output_tokens": 2173,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 3302,
+        "output_tokens": 1666,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

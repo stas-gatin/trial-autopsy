@@ -1,0 +1,823 @@
+{
+  "version": "2026-10-05",
+  "description": "Reference coefficients: clinical benefit per unit biomarker change. 'value_derived' = true when the value was computed from a percentage in the source (computation stated in note). Keep trial-scale (~5 y) and lifelong genetic scales separate.",
+  "entries": [
+    {
+      "id": "ldl_ctt_5y",
+      "biomarker": "LDL-C",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.78,
+        "ci_low": 0.76,
+        "ci_high": 0.8,
+        "per_unit": "1.0 mmol/L (38.7 mg/dL) LDL-C reduction (achieved at 1 year)",
+        "timescale": "~5 years in-trial (median follow-up 4.8-5.1 y)",
+        "outcome": "major vascular events (coronary death, non-fatal MI, coronary revascularisation, stroke)",
+        "value_derived": false
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R1"
+      ],
+      "quote": "similar proportional reductions in major vascular events per 1·0 mmol/L LDL cholesterol reduction were found in all types of patient studied (rate ratio [RR] 0·78, 95% CI 0·76-0·80; p<0·0001)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Trial-scale (CTT, ~5 y) and lifelong genetic (MR) coefficients differ ~2-3x; Ference 2012 (R2) reports lifelong genetic effect per mmol/L is 3-fold greater than statin-trial effect. Never mix scales.",
+        "CETP inhibitors: R3 reports that a direct LDL-C assay underestimated on-treatment LDL-C with anacetrapib (REVEAL direct assay -41% vs beta-quantification -17%) and likely overestimated reduction with evacetrapib; use beta-quantification or apoB. (Brief said 'Friedewald'; the verified source names the direct assay.)",
+        "Measured 'LDL-C' includes Lp(a)-cholesterol (general caveat, not from a cited source here); large Lp(a) lowering can shift reported LDL-C.",
+        "Coefficient is per ABSOLUTE mmol/L reduction at 1 year (placebo-adjusted), not per % reduction; 1 mmol/L = 38.67 mg/dL (R8)."
+      ],
+      "note": "Statin trials (26 RCTs, ~170,000 participants). All-cause mortality RR 0.90 (0.87-0.93) per 1.0 mmol/L (same abstract). Benchmark coefficient for the calculator."
+    },
+    {
+      "id": "ldl_ctt_year1",
+      "biomarker": "LDL-C",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.88,
+        "ci_low": null,
+        "ci_high": null,
+        "per_unit": "1.0 mmol/L LDL-C reduction (achieved at 1 year)",
+        "timescale": "first year after randomisation only",
+        "outcome": "major vascular events",
+        "value_derived": true
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R1"
+      ],
+      "quote": "the risk reduction was 22% (95% CI 20–24; p<0·0001) per 1·0 mmol/L reduction in LDL cholesterol at 1 year, with a significant 12% reduction during the first year after randomisation (p<0·0001) and highly significant reductions of about a quarter during each subsequent year (all p<0·0001; webappendix p 3 )",
+      "location": "Results (main text)",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Trial-scale (CTT, ~5 y) and lifelong genetic (MR) coefficients differ ~2-3x; Ference 2012 (R2) reports lifelong genetic effect per mmol/L is 3-fold greater than statin-trial effect. Never mix scales.",
+        "CETP inhibitors: R3 reports that a direct LDL-C assay underestimated on-treatment LDL-C with anacetrapib (REVEAL direct assay -41% vs beta-quantification -17%) and likely overestimated reduction with evacetrapib; use beta-quantification or apoB. (Brief said 'Friedewald'; the verified source names the direct assay.)",
+        "Measured 'LDL-C' includes Lp(a)-cholesterol (general caveat, not from a cited source here); large Lp(a) lowering can shift reported LDL-C.",
+        "Coefficient is per ABSOLUTE mmol/L reduction at 1 year (placebo-adjusted), not per % reduction; 1 mmol/L = 38.67 mg/dL (R8)."
+      ],
+      "note": "Year-1 attenuation. Value 0.88 derived from '12% reduction'; CI not given in main text (webappendix p3, not read) -> ci null. Subsequent years: 'about a quarter' (~RR 0.75 per mmol/L, approximate, per-year table NOT FOUND in main text). Short trials (<2 y) should expect markedly less than 22% per mmol/L."
+    },
+    {
+      "id": "ldl_genetic_lifelong",
+      "biomarker": "LDL-C",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.455,
+        "ci_low": 0.405,
+        "ci_high": 0.512,
+        "per_unit": "1 mmol/L (38.7 mg/dL) lower LDL-C",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": true
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R2"
+      ],
+      "quote": "naturally random allocation to long-term exposure to lower LDL-C was associated with a 54.5% (95% confidence interval: 48.8% to 59.5%) reduction in the risk of CHD for each mmol/l (38.7 mg/dl) lower LDL-C. This represents a 3-fold greater reduction in the risk of CHD per unit lower LDL-C than that observed during treatment with a statin",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Trial-scale (CTT, ~5 y) and lifelong genetic (MR) coefficients differ ~2-3x; Ference 2012 (R2) reports lifelong genetic effect per mmol/L is 3-fold greater than statin-trial effect. Never mix scales.",
+        "CETP inhibitors: R3 reports that a direct LDL-C assay underestimated on-treatment LDL-C with anacetrapib (REVEAL direct assay -41% vs beta-quantification -17%) and likely overestimated reduction with evacetrapib; use beta-quantification or apoB. (Brief said 'Friedewald'; the verified source names the direct assay.)",
+        "Measured 'LDL-C' includes Lp(a)-cholesterol (general caveat, not from a cited source here); large Lp(a) lowering can shift reported LDL-C.",
+        "Coefficient is per ABSOLUTE mmol/L reduction at 1 year (placebo-adjusted), not per % reduction; 1 mmol/L = 38.67 mg/dL (R8)."
+      ],
+      "note": "Value and CI derived as 1 - % reduction (0.455; 0.405-0.512). Measure in abstract is 'reduction in risk' (MR ratio). Use only for lifelong-scale comparisons, not to predict a 3-5 y trial."
+    },
+    {
+      "id": "apob_trial_reveal_improveit",
+      "biomarker": "apoB",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.932,
+        "ci_low": 0.9,
+        "ci_high": 0.97,
+        "per_unit": "12 mg/dL apoB reduction (on-treatment difference)",
+        "timescale": "~5 years in-trial (median 5.1 y pooled; REVEAL 4.6 y, IMPROVE-IT 6.1 y)",
+        "outcome": "major cardiovascular events (CV death, MI, ischemic stroke, coronary revascularization)",
+        "value_derived": false
+      },
+      "evidence_type": "meta_regression",
+      "source_ids": [
+        "R3"
+      ],
+      "quote": "Combined 24,292 24,301 4566 4899 5.1 12 0.932 (0.90, 0.97)",
+      "location": "Table 2 (row 'Combined'); REVEAL 0.934 (0.88, 0.99), IMPROVE-IT 0.931 (0.89, 0.98)",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Both trials happened to have a 12 mg/dL apoB difference, so this is effectively a two-trial pooled RR at one dose, not a fitted slope; scaling to other apoB differences assumes log-linearity.",
+        "apoB difference defined as on-treatment active minus placebo (Table 2 footnote).",
+        "Source is a narrative review (R3), not a formal systematic meta-regression; number verified in its Table 2."
+      ],
+      "note": "Brief's figure verified exactly. Implies ~0.75 per 1 mmol/L-equivalent only under assumptions; use per-12 mg/dL as published."
+    },
+    {
+      "id": "apob_genetic_lifelong",
+      "biomarker": "apoB",
+      "causal": "yes",
+      "effect": {
+        "measure": "OR",
+        "value": 0.782,
+        "ci_low": 0.72,
+        "ci_high": 0.845,
+        "per_unit": "10 mg/dL lower apoB",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R4"
+      ],
+      "quote": "a genetic score consisting of variants with naturally occurring discordance between levels of LDL-C and apoB was associated with a similar risk of CHD per unit change in apoB level (OR, 0.782 [95% CI, 0.720-0.845] vs 0.793 [95% CI, 0.774-0.812]; P = .79 for difference)",
+      "location": "Abstract; unit '10-mg/dL lower apoB' stated in Figure 2 legend and Results",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Lifelong genetic scale: roughly 2-3x larger than in-trial effect per unit (compare R1/R2, R8 Table 2).",
+        "INTERNAL DISCREPANCY: main-text Results report the discordant score as 'OR, 0.772 [95% CI, 0.701-0.844]' and concordant as 0.788 (0.769-0.807), vs abstract 0.782/0.793."
+      ],
+      "note": "0.782 is the discordant (LDL-C/apoB) score in external CARDIoGRAMplusC4D validation; the concordant LDL-C score gave 0.793 (0.774-0.812). Key point: risk tracks apoB, not LDL-C, when the two diverge (e.g., CETP inhibition)."
+    },
+    {
+      "id": "hdl_genetic",
+      "biomarker": "HDL-C",
+      "causal": "no",
+      "effect": {
+        "measure": "OR",
+        "value": 0.93,
+        "ci_low": 0.68,
+        "ci_high": 1.26,
+        "per_unit": "1 SD genetically HIGHER HDL-C (14-SNP genetic score)",
+        "timescale": "lifelong genetic",
+        "outcome": "myocardial infarction",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R7"
+      ],
+      "quote": "a 1 SD increase in HDL cholesterol due to genetic score was not associated with risk of myocardial infarction (OR 0·93, 95% CI 0·68-1·26, p=0·63)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Direction: per 1 SD INCREASE (raising), not reduction.",
+        "Observational estimate is strongly confounded: 'an increase of 1 SD in HDL cholesterol was associated with reduced risk of myocardial infarction (OR 0·62, 95% CI 0·58-0·66)' (R7 abstract) - do not use as a causal coefficient.",
+        "HDL-C rise from CETP inhibitors should be assigned zero benefit; score such drugs on apoB/non-HDL-C instead."
+      ],
+      "note": "LIPG Asn396Ser: expected OR 0.87 (0.84-0.91) but observed 0.99 (0.88-1.11) (R7 abstract). Calculator coefficient for HDL-C raising = null effect (OR 1.0)."
+    },
+    {
+      "id": "lpa_genetic",
+      "biomarker": "Lp(a)",
+      "causal": "yes",
+      "effect": {
+        "measure": "OR",
+        "value": 0.942,
+        "ci_low": 0.933,
+        "ci_high": 0.951,
+        "per_unit": "10 mg/dL lower Lp(a) mass concentration",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R8"
+      ],
+      "quote": "A 10-mg/dL lower genetically predicted Lp(a) concentration was associated with a 5.8% lower CHD risk (odds ratio [OR], 0.942; 95% CI, 0.933-0.951; P = 3 × 10-37)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "UNITS: coefficient is per mg/dL (mass). EAS consensus (R9): 'This panel does not recommend using a standard factor to convert between mg/dL and nmol/L, as assays vary extensively.' 2-2.5 is only a 'best guess' (mg/dL to nmol/L). Trials of antisense/siRNA agents usually report nmol/L.",
+        "Benefit is proportional to ABSOLUTE reduction (R8); % reductions in low-baseline populations yield tiny absolute changes.",
+        "Equivalence: 101.5 mg/dL (95% CI 71.0-137.0) Lp(a) change ~ 38.67 mg/dL (1 mmol/L) LDL-C change (R8 abstract).",
+        "Lifelong vs trial scale differ ~2x (see next entry)."
+      ],
+      "note": "Causal per genetics; as of these sources no completed outcome trial had confirmed benefit of Lp(a)-specific lowering (R9: 'Trials of specific Lp(a)-lowering treatments are critical to confirm clinical benefit')."
+    },
+    {
+      "id": "lpa_trial_projected",
+      "biomarker": "Lp(a)",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.763,
+        "ci_low": 0.676,
+        "ci_high": 0.822,
+        "per_unit": "100 mg/dL lower Lp(a) mass concentration",
+        "timescale": "~5 years in-trial (estimated by scaling to CTT statin effect)",
+        "outcome": "coronary heart disease",
+        "value_derived": true
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R8"
+      ],
+      "quote": "Table 2. Expected Clinical Benefit of Lowering Lp(a) ... 100 38.1 (28.4-54.5) 44.9 (39.7-49.8) 23.7 (17.8-32.4)",
+      "location": "Table 2 (row 100 mg/dL: LDL-C-equivalent 38.1 mg/dL; lifelong RRR 44.9%; estimated short-term trial RRR 23.7%)",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Same units pitfall as above (mg/dL, not nmol/L).",
+        "This is a model-based projection (MR estimate rescaled with CTT ~5-y statin data), not observed trial data."
+      ],
+      "note": "Value/CI derived as 1 - short-term RRR (23.7%, 17.8-32.4). Other rows of R8 Table 2: 50 mg/dL -> 12.6% (9.3-17.8); 30 mg/dL -> 7.8% (5.7-11.1). Lifelong RRR for 100 mg/dL is 44.9% vs 23.7% short-term (~1.9x)."
+    },
+    {
+      "id": "lppla2_genetic",
+      "biomarker": "Lp-PLA2 activity",
+      "causal": "no",
+      "effect": {
+        "measure": "RR",
+        "value": 0.95,
+        "ci_low": 0.88,
+        "ci_high": 1.03,
+        "per_unit": "65% lower Lp-PLA2 activity (PLA2G7 Val279Phe instrument)",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R10"
+      ],
+      "quote": "Causal risk ratios for coronary heart disease per 65% lower Lp-PLA2 activity were: 0.95 (0.88-1.03) with Val279Phe; 0.92 (0.74-1.16) with carriage of any loss-of-function variant; 1.01 (0.68-1.51) with Val379Ala; and 0.95 (0.89-1.02) with darapladib treatment.",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Coefficient is per % lower enzyme ACTIVITY (65% = darapladib 160 mg effect), not per mass concentration.",
+        "Observational Lp-PLA2 associations are confounded (marker travels with LDL particles)."
+      ],
+      "note": "Darapladib trials gave a concordant null: 0.95 (0.89-1.02) per 65% lower activity."
+    },
+    {
+      "id": "spla2_genetic",
+      "biomarker": "sPLA2-IIA mass",
+      "causal": "no",
+      "effect": {
+        "measure": "OR",
+        "value": 1.04,
+        "ci_low": 0.96,
+        "ci_high": 1.13,
+        "per_unit": "1-log-unit lower sPLA2-IIA mass",
+        "timescale": "lifelong genetic",
+        "outcome": "major vascular events (general population studies)",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R11"
+      ],
+      "quote": "the OR derived from the genetic instrumental variable analysis for MVE for a 1-log unit lower sPLA2-IIA mass was 1.04 (95% CI: 0.96 to 1.13), and differed from the non-genetic observational estimate (OR: 0.69; 95% CI: 0.61 to 0.79)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Instrument (PLA2G2A rs11573156) lowers sPLA2-IIA mass 38-44% but enzyme activity only 3-23% per allele; mass and activity are not interchangeable.",
+        "Observational OR 0.69 (0.61-0.79) is confounded; do not use."
+      ],
+      "note": "Varespladib phase III stopped for lack of efficacy (R11 background). ACS cohorts also null: per-allele OR 0.96 (0.90-1.03)."
+    },
+    {
+      "id": "nonhdl_trial",
+      "biomarker": "non-HDL-C",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.79,
+        "ci_low": 0.76,
+        "ci_high": 0.82,
+        "per_unit": "1 mmol/L non-HDL-C reduction (0.78 per 40 mg/dL)",
+        "timescale": "in-trial (statin + fibrate/niacin/omega-3 RCTs)",
+        "outcome": "major vascular events",
+        "value_derived": false
+      },
+      "evidence_type": "meta_regression",
+      "source_ids": [
+        "R6"
+      ],
+      "quote": "the RR per 1-mmol/L reduction in non-high-density lipoprotein cholesterol was 0.79 (95% CI, 0.76-0.82; P<0.0001; 0.78 per 40 mg/dL)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "1 mmol/L non-HDL-C = 38.67 mg/dL; R6 reports per 40 mg/dL separately (0.78).",
+        "non-HDL-C includes Lp(a)-C and remnant-C; with CETP inhibitors non-HDL-C/apoB is preferred to directly measured LDL-C (R3).",
+        "Trial-level meta-regression (49 trials, 374,358 participants) - ecological; dominated by statin trials."
+      ],
+      "note": "CTT 2010 (R1) does not report a non-HDL-C coefficient in its abstract; Marston 2019 used instead."
+    },
+    {
+      "id": "sbp_trial_ettehad",
+      "biomarker": "systolic blood pressure",
+      "causal": "yes",
+      "effect": {
+        "measure": "RR",
+        "value": 0.8,
+        "ci_low": 0.77,
+        "ci_high": 0.83,
+        "per_unit": "10 mmHg SBP reduction",
+        "timescale": "in-trial (123 RCTs)",
+        "outcome": "major cardiovascular disease events",
+        "value_derived": false
+      },
+      "evidence_type": "meta_regression",
+      "source_ids": [
+        "R12"
+      ],
+      "quote": "Every 10 mm Hg reduction in systolic blood pressure significantly reduced the risk of major cardiovascular disease events (relative risk [RR] 0·80, 95% CI 0·77-0·83)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Office SBP in trials; achieved between-arm difference (not % change).",
+        "Smaller proportional reductions in diabetes and CKD (R12 abstract); beta-blockers inferior for MACE/stroke.",
+        "Per-outcome: CHD 0.83 (0.78-0.88), stroke 0.73 (0.68-0.77), HF 0.72 (0.67-0.78) per 10 mmHg (R12 abstract)."
+      ],
+      "note": "Abstract-only access (Lancet paywalled)."
+    },
+    {
+      "id": "sbp_bpltc_primary_prev",
+      "biomarker": "systolic blood pressure",
+      "causal": "yes",
+      "effect": {
+        "measure": "HR",
+        "value": 0.91,
+        "ci_low": 0.89,
+        "ci_high": 0.94,
+        "per_unit": "5 mmHg SBP reduction (participants WITHOUT prior CVD)",
+        "timescale": "~4 years in-trial (median 4.15 y)",
+        "outcome": "major cardiovascular event (stroke, MI/IHD, HF death or hospitalisation)",
+        "value_derived": false
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R13"
+      ],
+      "quote": "Hazard ratios (HR) associated with a reduction of systolic blood pressure by 5 mm Hg for a major cardiovascular event were 0·91, 95% CI 0·89-0·94 for partipants without previous cardiovascular disease and 0·89, 0·86-0·92, for those with previous cardiovascular disease.",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Per 5 mmHg, not 10; squaring gives ~0.83/0.79 per 10 mmHg (approximation).",
+        "IPD from 48 RCTs; effect proportional to SBP reduction irrespective of baseline SBP."
+      ],
+      "note": "Quote contains original typo 'partipants'."
+    },
+    {
+      "id": "sbp_bpltc_secondary_prev",
+      "biomarker": "systolic blood pressure",
+      "causal": "yes",
+      "effect": {
+        "measure": "HR",
+        "value": 0.89,
+        "ci_low": 0.86,
+        "ci_high": 0.92,
+        "per_unit": "5 mmHg SBP reduction (participants WITH prior CVD)",
+        "timescale": "~4 years in-trial (median 4.15 y)",
+        "outcome": "major cardiovascular event",
+        "value_derived": false
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R13"
+      ],
+      "quote": "0·89, 0·86-0·92, for those with previous cardiovascular disease",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Per 5 mmHg."
+      ],
+      "note": "Secondary-prevention counterpart of the entry above."
+    },
+    {
+      "id": "tg_via_apob_genetic",
+      "biomarker": "triglycerides (via apoB)",
+      "causal": "yes",
+      "effect": {
+        "measure": "OR",
+        "value": 0.771,
+        "ci_low": 0.741,
+        "ci_high": 0.802,
+        "per_unit": "10 mg/dL lower apoB-containing lipoproteins via LPL variants (~69.9 mg/dL lower triglycerides)",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R5"
+      ],
+      "quote": "the LPL and LDLR scores were associated with similar lower risk of CHD per 10-mg/dL lower level of ApoB-containing lipoproteins (OR, 0.771 [95% CI, 0.741-0.802], P = 3.9 × 10-38 and OR, 0.773 [95% CI, 0.747-0.801], P = 1.1 × 10-46, respectively)",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Triglyceride benefit is mediated by apoB: per 10 mg/dL apoB the LPL score lowered TG by 69.9 mg/dL (68.1-71.6) vs LDLR score lowering LDL-C by 14.2 mg/dL (R5 abstract). Score TG drugs on apoB change, not TG change.",
+        "After adjusting for apoB in multivariable MR: TG OR 1.014 (0.965-1.065), LDL-C OR 1.010 (0.967-1.055), apoB OR 0.761 (0.723-0.798) (R5 abstract).",
+        "R5 full text: fibrate trials lowered TG only 20-50 mg/dL, 'a fraction of what would be needed to significantly reduce the risk of major vascular events within a short-term trial'.",
+        "Lifelong genetic scale."
+      ],
+      "note": "TG per se not independently causal once apoB accounted for; benefit of large TG lowering ~ apoB-equivalent. REDUCE-IT/JELIS benefit exceeded lipid-predicted effect (R5 discussion)."
+    },
+    {
+      "id": "tg_trial",
+      "biomarker": "triglycerides",
+      "causal": "uncertain",
+      "effect": {
+        "measure": "RR",
+        "value": 0.84,
+        "ci_low": 0.75,
+        "ci_high": 0.94,
+        "per_unit": "1 mmol/L TG reduction, adjusted for LDL-C (0.92 per 40 mg/dL)",
+        "timescale": "in-trial (statin, fibrate, niacin, omega-3 RCTs)",
+        "outcome": "major vascular events",
+        "value_derived": false
+      },
+      "evidence_type": "meta_regression",
+      "source_ids": [
+        "R6"
+      ],
+      "quote": "the RR was 0.80 (95% CI, 0.76-0.85; P<0.0001) per 1-mmol/L (0.79 per 40 mg/dL) reduction in LDL-C and 0.84 (95% CI, 0.75-0.94; P=0.0026) per 1-mmol/L (0.92 per 40 mg/dL) reduction in triglycerides",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Strongly driven by REDUCE-IT; excluding it: 0.91 (0.81-1.006) per 1 mmol/L TG (R6 abstract).",
+        "1 mmol/L TG = 88.5 mg/dL (standard conversion).",
+        "Omega-3 EPA benefit appears to exceed lipid effects (R6)."
+      ],
+      "note": "Marked uncertain: trial-level TG coefficient is fragile and confounded by EPA non-lipid effects."
+    },
+    {
+      "id": "crp_genetic",
+      "biomarker": "hsCRP",
+      "causal": "no",
+      "effect": {
+        "measure": "RR",
+        "value": 1.0,
+        "ci_low": 0.9,
+        "ci_high": 1.13,
+        "per_unit": "1 SD higher genetically raised ln CRP",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R14"
+      ],
+      "quote": "In a combined analysis, the risk ratio for coronary heart disease was 1.00 (0.90 to 1.13) per 1 SD higher genetically raised natural log (ln) concentration of C reactive protein.",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Observational RR 1.33 (1.23-1.43) per 1 SD higher ln CRP (R14 abstract) is not causal.",
+        "CRP is a downstream marker: CRP lowering via IL-6 pathway may still mark benefit from upstream causal inflammation (see IL-6 entry); do not credit CRP lowering per se."
+      ],
+      "note": "Direction: per 1 SD HIGHER; null either way."
+    },
+    {
+      "id": "il6r_asp358ala_genetic",
+      "biomarker": "IL-6 signalling (IL6R Asp358Ala)",
+      "causal": "yes",
+      "effect": {
+        "measure": "OR",
+        "value": 0.966,
+        "ci_low": 0.95,
+        "ci_high": 0.982,
+        "per_unit": "per copy of IL6R 358Ala minor allele (~7.5% lower CRP, 14.6% higher IL-6, 34.3% higher soluble IL6R)",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R15"
+      ],
+      "quote": "The odds ratio per minor allele was 0·966 (95% CI 0·950–0·982, p=4·5×10 −5 ).",
+      "location": "Figure 2 legend (full text); abstract: 'risk of coronary heart disease was reduced by 3·4% (1·8-5·0)' per copy",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Circulating IL-6 RISES with IL6R impairment (receptor blockade); IL-6 level is not a valid efficacy biomarker. Use CRP/fibrinogen as pathway readouts.",
+        "Per-allele coefficient, not per unit biomarker; scaling to drug effect (e.g., tocilizumab/ziltivekimab) requires CRP-based calibration (assumption)."
+      ],
+      "note": "Pathway-level causal evidence. Replication (R16): rs7529229 'per allele odds ratio 0·95, 95% CI 0·93-0·97, p=1·53×10(-5)' in 25,458 cases/100,740 controls."
+    },
+    {
+      "id": "il6r_rs7529229_genetic",
+      "biomarker": "IL-6 signalling (IL6R rs7529229)",
+      "causal": "yes",
+      "effect": {
+        "measure": "OR",
+        "value": 0.95,
+        "ci_low": 0.93,
+        "ci_high": 0.97,
+        "per_unit": "per IL6R rs7529229 allele (proxy for Asp358Ala; ~8.35% lower CRP per allele)",
+        "timescale": "lifelong genetic",
+        "outcome": "coronary heart disease",
+        "value_derived": false
+      },
+      "evidence_type": "mendelian_randomization",
+      "source_ids": [
+        "R16"
+      ],
+      "quote": "the IL6R rs7529229 SNP was associated with a decreased odds of coronary heart disease events (per allele odds ratio 0·95, 95% CI 0·93-0·97, p=1·53×10(-5))",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Same as above: IL-6 concentration increases per allele (9.45%) while CRP falls (8.35%)."
+      ],
+      "note": "Independent consortium replicating R15."
+    },
+    {
+      "id": "hba1c_ray2009",
+      "biomarker": "HbA1c (intensive glucose lowering)",
+      "causal": "uncertain",
+      "effect": {
+        "measure": "OR",
+        "value": 0.85,
+        "ci_low": 0.77,
+        "ci_high": 0.93,
+        "per_unit": "~0.9 percentage-point lower HbA1c (intensive vs standard)",
+        "timescale": "~5 years in-trial (~163,000 person-years, 5 RCTs)",
+        "outcome": "coronary heart disease events (fatal + non-fatal MI)",
+        "value_derived": false
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R17"
+      ],
+      "quote": "The mean haemoglobin A(1c) concentration (HbA(1c)) was 0.9% lower for participants given intensive treatment than for those given standard treatment. Intensive glycaemic control resulted in a 17% reduction in events of non-fatal myocardial infarction (odds ratio 0.83, 95% CI 0.75-0.93), and a 15% reduction in events of coronary heart disease (0.85, 0.77-0.93).",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "No effect on stroke 0.93 (0.81-1.06) or all-cause mortality 1.02 (0.87-1.19) (R17 abstract).",
+        "HbA1c difference is an average across heterogeneous regimens; drug-specific effects (hypoglycaemia, weight, non-glycaemic actions of SGLT2i/GLP-1RA) are not captured - do not attribute CVOT benefit of modern agents to HbA1c lowering (general caveat).",
+        "Single-dose comparison, not a fitted per-unit slope."
+      ],
+      "note": "Causal 'uncertain' for MACE: MI benefit modest, no mortality benefit, increased hypoglycaemia (R18)."
+    },
+    {
+      "id": "hba1c_control_group2009",
+      "biomarker": "HbA1c (intensive glucose lowering)",
+      "causal": "uncertain",
+      "effect": {
+        "measure": "HR",
+        "value": 0.91,
+        "ci_low": 0.84,
+        "ci_high": 0.99,
+        "per_unit": "more-intensive vs less-intensive glucose control (HbA1c difference NOT stated in abstract)",
+        "timescale": "~4.4 years in-trial",
+        "outcome": "major cardiovascular events",
+        "value_derived": false
+      },
+      "evidence_type": "trial_meta_analysis",
+      "source_ids": [
+        "R18"
+      ],
+      "quote": "Allocation to more-intensive, compared with less-intensive, glucose control reduced the risk of major cardiovascular events by 9% (HR 0.91, 95% CI 0.84-0.99), primarily because of a 15% reduced risk of myocardial infarction (HR 0.85, 95% CI 0.76-0.94).",
+      "location": "Abstract",
+      "verified_primary": true,
+      "measurement_pitfalls": [
+        "Per-unit HbA1c difference NOT FOUND in abstract (commonly cited ~0.88% is unverified here).",
+        "Major hypoglycaemia HR 2.48 (1.91-3.21); possible harm/no benefit in those with prior macrovascular disease (HR 1.00 vs 0.84, interaction p=0.04)."
+      ],
+      "note": "MACE-level estimate for the glucose-lowering entry; per_unit unresolved."
+    }
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "type": "journal",
+      "title": "Efficacy and safety of more intensive lowering of LDL cholesterol: a meta-analysis of data from 170,000 participants in 26 randomised trials (CTT Collaboration, Lancet 2010)",
+      "url": "https://doi.org/10.1016/S0140-6736(10)61350-5",
+      "doi": "10.1016/S0140-6736(10)61350-5",
+      "pmid": "21067804",
+      "pmcid": "PMC2988224",
+      "pub_date": "2010-11-08",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2988224/",
+      "note": ""
+    },
+    {
+      "id": "R2",
+      "type": "journal",
+      "title": "Effect of long-term exposure to lower low-density lipoprotein cholesterol beginning early in life on the risk of coronary heart disease: a Mendelian randomization analysis (Ference et al., JACC 2012)",
+      "url": "https://doi.org/10.1016/j.jacc.2012.09.017",
+      "doi": "10.1016/j.jacc.2012.09.017",
+      "pmid": "23083789",
+      "pmcid": null,
+      "pub_date": "2012-10-17",
+      "access": "abstract_only",
+      "open_full_text_url": null,
+      "note": ""
+    },
+    {
+      "id": "R3",
+      "type": "journal",
+      "title": "Cholesteryl Ester Transfer Protein Inhibition Reduces Major Adverse Cardiovascular Events by Lowering Apolipoprotein B Levels (Int J Mol Sci 2022, review)",
+      "url": "https://doi.org/10.3390/ijms23169417",
+      "doi": "10.3390/ijms23169417",
+      "pmid": "36012684",
+      "pmcid": "PMC9409323",
+      "pub_date": "2022-08-20",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9409323/",
+      "note": "Narrative review whose Table 2 pools REVEAL and IMPROVE-IT per apoB difference; not an independent systematic meta-regression. Review is written around obicetrapib development; treat as secondary-level synthesis."
+    },
+    {
+      "id": "R4",
+      "type": "journal",
+      "title": "Association of Genetic Variants Related to CETP Inhibitors and Statins With Lipoprotein Levels and Cardiovascular Risk (Ference et al., JAMA 2017)",
+      "url": "https://doi.org/10.1001/jama.2017.11467",
+      "doi": "10.1001/jama.2017.11467",
+      "pmid": "28846118",
+      "pmcid": "PMC5710502",
+      "pub_date": "2017-09-01",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5710502/",
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue). Full text via PMC author manuscript."
+    },
+    {
+      "id": "R5",
+      "type": "journal",
+      "title": "Association of Triglyceride-Lowering LPL Variants and LDL-C-Lowering LDLR Variants With Risk of Coronary Heart Disease (Ference et al., JAMA 2019)",
+      "url": "https://doi.org/10.1001/jama.2018.20045",
+      "doi": "10.1001/jama.2018.20045",
+      "pmid": "30694319",
+      "pmcid": "PMC6439767",
+      "pub_date": "2019-01-01",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6439767/",
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue). Full text via PMC author manuscript."
+    },
+    {
+      "id": "R6",
+      "type": "journal",
+      "title": "Association Between Triglyceride Lowering and Reduction of Cardiovascular Risk Across Multiple Lipid-Lowering Therapeutic Classes: A Systematic Review and Meta-Regression Analysis of Randomized Controlled Trials (Marston et al., Circulation 2019)",
+      "url": "https://doi.org/10.1161/CIRCULATIONAHA.119.041998",
+      "doi": "10.1161/CIRCULATIONAHA.119.041998",
+      "pmid": "31530008",
+      "pmcid": "PMC6791781",
+      "pub_date": "2019-09-18",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6791781/",
+      "note": "Numbers taken from abstract; PMC full text exists but was not read."
+    },
+    {
+      "id": "R7",
+      "type": "journal",
+      "title": "Plasma HDL cholesterol and risk of myocardial infarction: a mendelian randomisation study (Voight et al., Lancet 2012)",
+      "url": "https://doi.org/10.1016/S0140-6736(12)60312-2",
+      "doi": "10.1016/S0140-6736(12)60312-2",
+      "pmid": "22607825",
+      "pmcid": "PMC3419820",
+      "pub_date": "2012-05-17",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3419820/",
+      "note": ""
+    },
+    {
+      "id": "R8",
+      "type": "journal",
+      "title": "Association of LPA Variants With Risk of Coronary Disease and the Implications for Lipoprotein(a)-Lowering Therapies: A Mendelian Randomization Analysis (Burgess et al., JAMA Cardiol 2018)",
+      "url": "https://doi.org/10.1001/jamacardio.2018.1470",
+      "doi": "10.1001/jamacardio.2018.1470",
+      "pmid": "29926099",
+      "pmcid": "PMC6481553",
+      "pub_date": "2018-07-01",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6481553/",
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue). Full text via PMC author manuscript."
+    },
+    {
+      "id": "R9",
+      "type": "journal",
+      "title": "Lipoprotein(a) in atherosclerotic cardiovascular disease and aortic stenosis: a European Atherosclerosis Society consensus statement (Kronenberg et al., Eur Heart J 2022)",
+      "url": "https://doi.org/10.1093/eurheartj/ehac361",
+      "doi": "10.1093/eurheartj/ehac361",
+      "pmid": "36036785",
+      "pmcid": "PMC9639807",
+      "pub_date": "2022-10-01",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9639807/",
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue)."
+    },
+    {
+      "id": "R10",
+      "type": "journal",
+      "title": "Genetic invalidation of Lp-PLA2 as a therapeutic target: Large-scale study of five functional Lp-PLA2-lowering alleles (Gregson et al., Eur J Prev Cardiol 2017)",
+      "url": "https://doi.org/10.1177/2047487316682186",
+      "doi": "10.1177/2047487316682186",
+      "pmid": "27940953",
+      "pmcid": "PMC5460752",
+      "pub_date": "2016-12-08",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5460752/",
+      "note": ""
+    },
+    {
+      "id": "R11",
+      "type": "journal",
+      "title": "Secretory phospholipase A2-IIA and cardiovascular disease: a mendelian randomization study (Holmes et al., JACC 2013)",
+      "url": "https://doi.org/10.1016/j.jacc.2013.06.044",
+      "doi": "10.1016/j.jacc.2013.06.044",
+      "pmid": "23916927",
+      "pmcid": "PMC3826105",
+      "pub_date": "2013-07-31",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3826105/",
+      "note": ""
+    },
+    {
+      "id": "R12",
+      "type": "journal",
+      "title": "Blood pressure lowering for prevention of cardiovascular disease and death: a systematic review and meta-analysis (Ettehad et al., Lancet 2016)",
+      "url": "https://doi.org/10.1016/S0140-6736(15)01225-8",
+      "doi": "10.1016/S0140-6736(15)01225-8",
+      "pmid": "26724178",
+      "pmcid": null,
+      "pub_date": "2015-12-24",
+      "access": "abstract_only",
+      "open_full_text_url": null,
+      "note": ""
+    },
+    {
+      "id": "R13",
+      "type": "journal",
+      "title": "Pharmacological blood pressure lowering for primary and secondary prevention of cardiovascular disease across different levels of blood pressure: an individual participant-level data meta-analysis (BPLTTC, Lancet 2021)",
+      "url": "https://doi.org/10.1016/S0140-6736(21)00590-0",
+      "doi": "10.1016/S0140-6736(21)00590-0",
+      "pmid": "33933205",
+      "pmcid": "PMC8102467",
+      "pub_date": "2021-05-01",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8102467/",
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue). Numbers taken from abstract."
+    },
+    {
+      "id": "R14",
+      "type": "journal",
+      "title": "Association between C reactive protein and coronary heart disease: mendelian randomisation analysis based on individual participant data (CCGC, BMJ 2011)",
+      "url": "https://doi.org/10.1136/bmj.d548",
+      "doi": "10.1136/bmj.d548",
+      "pmid": "21325005",
+      "pmcid": "PMC3039696",
+      "pub_date": "2011-02-15",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3039696/",
+      "note": ""
+    },
+    {
+      "id": "R15",
+      "type": "journal",
+      "title": "Interleukin-6 receptor pathways in coronary heart disease: a collaborative meta-analysis of 82 studies (IL6R Genetics Consortium Emerging Risk Factors Collaboration, Lancet 2012)",
+      "url": "https://doi.org/10.1016/S0140-6736(11)61931-4",
+      "doi": "10.1016/S0140-6736(11)61931-4",
+      "pmid": "22421339",
+      "pmcid": "PMC3316940",
+      "pub_date": "2012-03-14",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3316940/",
+      "note": ""
+    },
+    {
+      "id": "R16",
+      "type": "journal",
+      "title": "The interleukin-6 receptor as a target for prevention of coronary heart disease: a mendelian randomisation analysis (IL6R MR Consortium, Lancet 2012)",
+      "url": "https://doi.org/10.1016/S0140-6736(12)60110-X",
+      "doi": "10.1016/S0140-6736(12)60110-X",
+      "pmid": "22421340",
+      "pmcid": "PMC3316968",
+      "pub_date": "2012-03-14",
+      "access": "open_full_text",
+      "open_full_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3316968/",
+      "note": "Numbers taken from abstract."
+    },
+    {
+      "id": "R17",
+      "type": "journal",
+      "title": "Effect of intensive control of glucose on cardiovascular outcomes and death in patients with diabetes mellitus: a meta-analysis of randomised controlled trials (Ray et al., Lancet 2009)",
+      "url": "https://doi.org/10.1016/S0140-6736(09)60697-8",
+      "doi": "10.1016/S0140-6736(09)60697-8",
+      "pmid": "19465231",
+      "pmcid": null,
+      "pub_date": "2009-05-01",
+      "access": "abstract_only",
+      "open_full_text_url": null,
+      "note": "pub_date = Europe PMC firstPublicationDate (may be month-level for print issue)."
+    },
+    {
+      "id": "R18",
+      "type": "journal",
+      "title": "Intensive glucose control and macrovascular outcomes in type 2 diabetes (Control Group / Turnbull et al., Diabetologia 2009)",
+      "url": "https://doi.org/10.1007/s00125-009-1470-0",
+      "doi": "10.1007/s00125-009-1470-0",
+      "pmid": "19655124",
+      "pmcid": null,
+      "pub_date": "2009-08-05",
+      "access": "abstract_only",
+      "open_full_text_url": null,
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,2578 @@
+{
+  "run_id": "bt-prominent",
+  "status": "success",
+  "mode": "autopsy",
+  "as_of": "2022-04-08",
+  "backtest": true,
+  "readout_date": "2022-04-08",
+  "analysis_date": "2022-04-08",
+  "trial": {
+    "nct_id": "NCT03071692",
+    "acronym": "PROMINENT",
+    "title": "Pemafibrate to Reduce Cardiovascular OutcoMes by Reducing Triglycerides IN patiENts With diabeTes (PROMINENT)",
+    "sponsor": "Kowa Research Institute, Inc.",
+    "status": "TERMINATED",
+    "enrollment": 10544,
+    "phases": [
+      "PHASE3"
+    ],
+    "conditions": [
+      "Type2 Diabetes",
+      "Dyslipidemia"
+    ],
+    "primary_completion": "2022-07-27"
+  },
+  "drug": {
+    "name": "pemafibrate",
+    "chembl_id": "CHEMBL247951",
+    "aliases": [
+      "(R)-K-13675",
+      "K-13675, (r)-",
+      "Pemafibrato",
+      "k-808",
+      "k-877",
+      "k-877 er",
+      "k-877 ir"
+    ],
+    "drug_type": "Small molecule",
+    "mechanisms": [
+      "Peroxisome proliferator-activated receptor alpha agonist"
+    ],
+    "targets": [
+      {
+        "id": "ENSG00000186951",
+        "symbol": "PPARA",
+        "name": "peroxisome proliferator activated receptor alpha"
+      }
+    ],
+    "searched_as": "pemafibrate"
+  },
+  "agents": [
+    {
+      "name": "Intake",
+      "role": "Resolves trial and drug, picks autopsy or forecast mode, checks scope"
+    },
+    {
+      "name": "CaseBuilder",
+      "role": "Collects registry, genetics and literature; extracts quoted facts into the World Model"
+    },
+    {
+      "name": "MechanismAnalyst",
+      "role": "Decides the causal pathway and turns verified facts into calculator inputs"
+    },
+    {
+      "name": "Calculator",
+      "role": "Deterministic four checks: causal effect, expected HR, power, verdict"
+    },
+    {
+      "name": "Verifier",
+      "role": "Checks the calculator's numbers against the registry and papers with SQL run in Zetaris"
+    },
+    {
+      "name": "Investigator",
+      "role": "Differential diagnosis including explanations no formula covers"
+    },
+    {
+      "name": "Critic",
+      "role": "Checks citations and numbers, sends work back when evidence is weak"
+    },
+    {
+      "name": "ReadThrough",
+      "role": "Forecasts other programmes on the same target"
+    },
+    {
+      "name": "Reporter",
+      "role": "Writes the analyst-facing report"
+    }
+  ],
+  "trace_id": "trace-bt-prominent",
+  "log_file": "logs/trace-bt-prominent.jsonl",
+  "execution_time_seconds": 1.5,
+  "sample_mode": false,
+  "warnings": [],
+  "output": {
+    "verdict": {
+      "outcome": "failure",
+      "outcome_basis": "readout: \"the DSMB concluded that the primary endpoint was unlikely to be met the DSMB concluded that the primary endpoint was unlikely to be met.\" (announcement:prominent)",
+      "predicted_outcome": "success",
+      "consistency": "calculator expected success with 53% probability; the actual result falls in the remaining 47%",
+      "primary_category": "biomarker_not_causal",
+      "secondary_categories": [
+        "target_not_causal",
+        "effect_too_small",
+        "population",
+        "insufficient_data"
+      ],
+      "calculator_category": "narrow_success",
+      "confidence": "high",
+      "verification": "done",
+      "probability_of_success": 0.529,
+      "weakest_link": "target genetics: uncertain"
+    },
+    "report": {
+      "headline": "PROMINENT trial of pemafibrate stopped for futility after 10,544 patients with type 2 diabetes and hypertriglyceridemia, despite 45% triglyceride lowering, because the DSMB concluded the primary endpoint was unlikely to be met.",
+      "summary": "The PROMINENT trial randomized 10,544 patients with type 2 diabetes and triglycerides 200–499 mg/dL to pemafibrate or placebo, targeting a composite of nonfatal MI, nonfatal ischemic stroke, coronary revascularization, or CV death. The trial was stopped early by the DSMB for futility after a median follow-up of 3.3 years, with the DSMB concluding the primary endpoint was unlikely to be met. The calculator predicted a narrow success (expected HR 0.884, 53% power) based on non-HDL-C reduction from a phase 2 NAFLD trial, not the intended triglyceride biomarker, and flagged uncertain target genetics (PPARA score 0.0). The failure supports that triglyceride lowering via PPARα agonism may not be causally linked to cardiovascular benefit in this population, the effect size was smaller than the 18% RRR assumed at design, and key on-treatment lipid data from PROMINENT itself were unavailable. Confidence in this assessment is high.",
+      "key_evidence": [
+        "10,544 participants randomized (ClinicalTrials.gov NCT03071692 PROMINENT)",
+        "TG 200–499 mg/dL inclusion threshold (Rationale and design of the Pemafibrate to Reduce Cardiovascular Outcomes by Reducing Triglycerides in Patients with Diabetes (PROMINENT) study)",
+        "Primary endpoint: composite of nonfatal MI, nonfatal ischemic stroke, coronary revascularization and CV death (KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) \"PROMINENT\" CARDIOVASCULAR OUTCOMES STUDY)",
+        "Median follow-up 3.3 years (ClinicalTrials.gov NCT03071692 PROMINENT)",
+        "Planned 1,092 adjudicated primary endpoints (Rationale and design of the Pemafibrate to Reduce Cardiovascular Outcomes by Reducing Triglycerides in Patients with Diabetes (PROMINENT) study)",
+        "TG reduction –45% at 24 weeks in phase 3 T2D+hyperTG trial (Effects of Pemafibrate, a Novel Selective PPARα Modulator, on Lipid and Glucose Metabolism in Patients With Type 2 Diabetes and Hypertriglyceridemia: A Randomized, Double-Blind, Placebo-Controlled, Phase 3 Trial)",
+        "Calculator expected HR 0.884 (11.6% RRR) with 53% power vs 90% design target (calculator)",
+        "PPARA genetic association score 0.0 (opentargets:PPARA)",
+        "DSMB concluded primary endpoint unlikely to be met (KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) \"PROMINENT\" CARDIOVASCULAR OUTCOMES STUDY)",
+        "No safety signal in PROMINENT (KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) \"PROMINENT\" CARDIOVASCULAR OUTCOMES STUDY)"
+      ],
+      "what_would_change_this": "Publication of PROMINENT primary results with on-treatment lipid changes and component-specific outcomes; Mendelian randomization studies specifically for PPARA-mediated TG lowering and CVD outcomes.",
+      "readthrough_note": ""
+    },
+    "checks": [
+      {
+        "check": "Target causes disease (human genetics)",
+        "result": "uncertain",
+        "detail": "Open Targets genetic association 0.0 for PPARA",
+        "pass": false
+      },
+      {
+        "check": "Drug moves a causal biomarker",
+        "result": "triglycerides",
+        "detail": "intended biomarker triglycerides is causal or unknown; LDL-equivalent change 0.624 mmol/L via non-HDL-C (triglyceride-lowering drug)",
+        "pass": true
+      },
+      {
+        "check": "Effect large enough",
+        "result": 0.116,
+        "detail": "expected HR 0.884 at 3.3 y (relative risk reduction 11.6%)",
+        "pass": false
+      },
+      {
+        "check": "Trial able to detect it",
+        "result": 0.529,
+        "detail": "power 53% with 1092 events; smallest detectable HR 0.844",
+        "pass": false
+      }
+    ],
+    "calculator": {
+      "case_id": "prominent",
+      "ldl_equivalent_mmol": 0.624,
+      "basis": "non-HDL-C (triglyceride-lowering drug)",
+      "time_factor": 0.794,
+      "expected_hr": 0.884,
+      "causal_rrr": 0.116,
+      "bp_factor": 1.0,
+      "power": 0.529,
+      "mde_hr_80": 0.844,
+      "outcome": "success",
+      "category": "narrow_success",
+      "secondary": [],
+      "weakest_link": "target genetics: uncertain",
+      "consistent_with_observed": null,
+      "assumptions": [],
+      "notes": [],
+      "partial_expected_hr": null
+    },
+    "calculator_inputs": {
+      "case_id": "prominent",
+      "mode": "autopsy",
+      "target_genetics": "uncertain",
+      "intended_biomarker": "triglycerides",
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -12.5,
+          "baseline": 3.4,
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_738e3a232d1854) applied to PROMINENT phase 3 LDL-C baseline (f_d2a47b76a4fdd2). Major caveats: population mismatch (NAFLD vs T2D+hyperTG), duration mismatch (1.4 vs 3.3 years median follow-up), and no placebo-adjusted LDL-C data in T2D+hyperTG population at longer duration.",
+          "source": "pmcid:PMC6005227,pmcid:PMC9292296"
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -11.9,
+          "baseline": 5.24,
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_5768a876c5e266) applied to derived non-HDL-C baseline (LDL-C 131.5 mg/dL + TG 355.6 mg/dL/5 = 202.6 mg/dL = 5.24 mmol/L; f_d2a47b76a4fdd2, f_8a387593738914). Major caveats: same population/duration mismatch as LDL-C; non-HDL-C baseline derived using TG/5 formula which is imprecise at high TG levels (200-499 mg/dL), introducing additional uncertainty.",
+          "source": "pmcid:PMC6005227,pmcid:PMC9292296"
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "unit": "mmol/L",
+          "pct_change": -7.4,
+          "baseline": 1.01,
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_10c5eb7b7c586f) applied to PROMINENT phase 3 HDL-C baseline (f_26bca4f3ebac8c). Caveats: population mismatch (NAFLD vs T2D+hyperTG) and duration mismatch (1.4 vs 3.3 years). HDL-C is not a causal biomarker per reference table.",
+          "source": "pmcid:PMC6005227,pmcid:PMC9292296"
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "unit": "mg/dL",
+          "pct_change": -45.0,
+          "baseline": 355.6,
+          "method": "Placebo-adjusted percent change from phase 3 T2D+hyperTG trial (pmid:29298800, n=166, f_98a2be6205cb0d) at 24 weeks, dose 0.2/0.4 mg/day. This is the only placebo-adjusted TG change in the relevant population. Caveat: 24-week duration vs PROMINENT median follow-up 3.3 years; TG lowering may attenuate over time (renal impairment trial f_cd3f3dd44ab2de shows -45.9% at week 52 but not placebo-adjusted).",
+          "source": "pmcid:PMC6005227,pmid:29298800"
+        }
+      ],
+      "followup_years": 3.3,
+      "events": 1092,
+      "alpha_two_sided": 0.05,
+      "pathway": null,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null
+    },
+    "mechanism": {
+      "target_genetics": "uncertain",
+      "target_genetics_rationale": "PPARA genetic association score 0.0 with 0 genetic evidence items for coronary artery disorder (f_79e77997a46f1a). PPARA is a well-studied target (fibrate class), but no genetic evidence supports causality for coronary disease; per rule, not_causal only if supported, otherwise uncertain.",
+      "intended_biomarker": "triglycerides",
+      "pathway": null,
+      "changes": [
+        {
+          "biomarker": "LDL-C",
+          "abs_change": null,
+          "pct_change": -12.5,
+          "baseline": 3.4,
+          "unit": "mmol/L",
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_738e3a232d1854) applied to PROMINENT phase 3 LDL-C baseline (f_d2a47b76a4fdd2). Major caveats: population mismatch (NAFLD vs T2D+hyperTG), duration mismatch (1.4 vs 3.3 years median follow-up), and no placebo-adjusted LDL-C data in T2D+hyperTG population at longer duration.",
+          "fact_ids": [
+            "f_d2a47b76a4fdd2",
+            "f_738e3a232d1854"
+          ]
+        },
+        {
+          "biomarker": "non-HDL-C",
+          "abs_change": null,
+          "pct_change": -11.9,
+          "baseline": 5.24,
+          "unit": "mmol/L",
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_5768a876c5e266) applied to derived non-HDL-C baseline (LDL-C 131.5 mg/dL + TG 355.6 mg/dL/5 = 202.6 mg/dL = 5.24 mmol/L; f_d2a47b76a4fdd2, f_8a387593738914). Major caveats: same population/duration mismatch as LDL-C; non-HDL-C baseline derived using TG/5 formula which is imprecise at high TG levels (200-499 mg/dL), introducing additional uncertainty.",
+          "fact_ids": [
+            "f_d2a47b76a4fdd2",
+            "f_8a387593738914",
+            "f_5768a876c5e266"
+          ]
+        },
+        {
+          "biomarker": "HDL-C",
+          "abs_change": null,
+          "pct_change": -7.4,
+          "baseline": 1.01,
+          "unit": "mmol/L",
+          "method": "Placebo-adjusted percent change from PEMA-FLY phase 2 NAFLD trial (week 72, f_10c5eb7b7c586f) applied to PROMINENT phase 3 HDL-C baseline (f_26bca4f3ebac8c). Caveats: population mismatch (NAFLD vs T2D+hyperTG) and duration mismatch (1.4 vs 3.3 years). HDL-C is not a causal biomarker per reference table.",
+          "fact_ids": [
+            "f_26bca4f3ebac8c",
+            "f_10c5eb7b7c586f"
+          ]
+        },
+        {
+          "biomarker": "triglycerides",
+          "abs_change": null,
+          "pct_change": -45.0,
+          "baseline": 355.6,
+          "unit": "mg/dL",
+          "method": "Placebo-adjusted percent change from phase 3 T2D+hyperTG trial (pmid:29298800, n=166, f_98a2be6205cb0d) at 24 weeks, dose 0.2/0.4 mg/day. This is the only placebo-adjusted TG change in the relevant population. Caveat: 24-week duration vs PROMINENT median follow-up 3.3 years; TG lowering may attenuate over time (renal impairment trial f_cd3f3dd44ab2de shows -45.9% at week 52 but not placebo-adjusted).",
+          "fact_ids": [
+            "f_8a387593738914",
+            "f_98a2be6205cb0d"
+          ]
+        }
+      ],
+      "followup_years": 3.3,
+      "followup_fact_ids": [
+        "f_be60e94141695c"
+      ],
+      "events": 1092,
+      "events_basis": "planned",
+      "events_fact_ids": [
+        "f_65eb7b8be957ff"
+      ],
+      "alpha_two_sided": 0.05,
+      "sbp_change_mmhg": null,
+      "observed_hr": null,
+      "observed_ci": null,
+      "outcome_fact_ids": [
+        "f_b646c75ba49230",
+        "f_d48788c58e31f2"
+      ],
+      "missing": [
+        "apoB_change",
+        "Lp(a)_change",
+        "Lp(a)_baseline",
+        "sbp_change_mmhg",
+        "observed_hr",
+        "observed_ci",
+        "actual_primary_events"
+      ],
+      "notes": "1) LDL-C, non-HDL-C, HDL-C changes sourced from PEMA-FLY phase 2 NAFLD trial (n=118) week 72, applied to PROMINENT phase 3 baselines. Population mismatch (NAFLD vs T2D+hyperTG) and duration mismatch (1.4 vs 3.3 years) introduce unknown translation error. 2) non-HDL-C baseline derived as LDL-C + TG/5 (Friedewald) rather than directly measured; formula imprecise at high TG (200-499 mg/dL), propagating error into ldl_equivalent_mmol and expected HR. 3) TG change uses 24-week placebo-adjusted data from phase 3 T2D+hyperTG trial (pmid:29298800, n=166); effect may attenuate over 3.3-year follow-up (no long-term placebo-adjusted TG data in this population). 4) No apoB, Lp(a), or SBP data available. 5) Trial stopped early for futility (f_b646c75ba49230, f_d48788c58e31f2); no observed HR/CI or actual event count reported in verified facts. 6) Planned primary events 1092 (f_65eb7b8be957ff). 7) PROMINENT dose: pemafibrate 0.2 mg twice daily (0.4 mg/day total)."
+    },
+    "hypotheses": [
+      {
+        "category": "biomarker_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "The calculator's expected HR 0.884 derives from non-HDL-C reduction (0.624 mmol/L), not TG reduction, implicitly acknowledging TG may not be the causal mediator. The intended_biomarker is 'triglycerides' but the basis is 'non-HDL-C (triglyceride-lowering drug)'.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "PPARA genetic association score is 0.0 (no evidence), suggesting the target itself lacks human genetics support for CVD benefit.",
+            "refs": [
+              "f_79e77997a46f1a"
+            ]
+          },
+          {
+            "text": "TG lowering of -45% at 24 weeks (f_98a2be6205cb0d) is large, but the calculator does not use it to predict benefit; it uses non-HDL-C change from a mismatched population (PEMA-FLY NAFLD trial).",
+            "refs": [
+              "f_98a2be6205cb0d",
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Fibrates as a class have shown CVD benefit in some trials (e.g., FIELD, ACCORD-Lipid subgroup), suggesting TG-rich lipoprotein reduction may have some causal role.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Mendelian randomization studies specifically for PPARA-mediated TG lowering and CVD outcomes; PROMINENT on-treatment TG and non-HDL-C changes correlated with outcomes."
+      },
+      {
+        "category": "target_not_causal",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Open Targets genetic association score for PPARA is 0.0 with 0 evidence count, indicating no human genetics support linking PPARA modulation to CVD outcomes.",
+            "refs": [
+              "f_79e77997a46f1a"
+            ]
+          },
+          {
+            "text": "The calculator flags 'target genetics: uncertain' as the weakest link.",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "PPARA agonists (fibrates) have been used for decades with some CVD benefit in meta-analyses, suggesting the target may have clinical effect even if genetics evidence is limited.",
+            "refs": []
+          }
+        ],
+        "would_settle": "Large-scale human genetics studies of PPARA variants and CVD outcomes; comparison with other PPARA agonists' genetics evidence."
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator shows only 53% power (vs 90% design target) with expected HR 0.884 (11.6% RRR) vs assumed 18% RRR at design (f_6b3264fbe7bc68, f_be85f565a54493).",
+            "refs": [
+              "calculator",
+              "f_6b3264fbe7bc68",
+              "f_be85f565a54493"
+            ]
+          },
+          {
+            "text": "MDE HR for 80% power is 0.844, but expected HR is 0.884 — the trial was underpowered for the effect size the biomarker data predict.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "Planned events 1092 (f_65eb7b8be957ff) with median follow-up 3.3 years (f_be60e94141695c) yielded insufficient events for the smaller-than-expected effect.",
+            "refs": [
+              "f_65eb7b8be957ff",
+              "f_be60e94141695c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The trial was designed for 90% power assuming 18% RRR; if the true effect were 18% RRR, the trial would have been adequately powered.",
+            "refs": [
+              "f_6b3264fbe7bc68",
+              "f_be85f565a54493"
+            ]
+          }
+        ],
+        "would_settle": "Actual observed HR and CI from PROMINENT (not yet published as of 2022-04-08); post-hoc power calculation with observed event rates."
+      },
+      {
+        "category": "population",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Calculator uses PEMA-FLY phase 2 NAFLD trial (n=118, f_6deb908a85d136) placebo-adjusted lipid changes at week 72 applied to PROMINENT phase 3 T2D+hyperTG population (n=10,544, f_59b6ab7fd91e10) baselines — major population mismatch noted in calculator inputs.",
+            "refs": [
+              "calculator",
+              "f_6deb908a85d136",
+              "f_59b6ab7fd91e10"
+            ]
+          },
+          {
+            "text": "TG change uses a different phase 3 trial in T2D+hyperTG (n=166, f_c5f1fdf621ab33) but only at 24 weeks vs PROMINENT's 3.3-year median follow-up; TG lowering may attenuate over time.",
+            "refs": [
+              "calculator",
+              "f_c5f1fdf621ab33",
+              "f_cd3f3dd44ab2de"
+            ]
+          },
+          {
+            "text": "PROMINENT patients have T2D + hyperTG (TG 200-499 mg/dL, f_a5c01b57bb620e) — a population where residual risk may be driven more by hyperglycemia, inflammation, and non-lipid factors than by TG alone.",
+            "refs": [
+              "f_a5c01b57bb620e"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "The phase 3 TG trial (pmid:29298800) is in the same T2D+hyperTG population and shows -45% TG reduction, confirming on-target effect in the relevant population.",
+            "refs": [
+              "f_98a2be6205cb0d"
+            ]
+          }
+        ],
+        "would_settle": "PROMINENT on-treatment lipid data by subgroup; comparison of event rates and lipid changes in PROMINENT vs prior fibrate trials."
+      },
+      {
+        "category": "design_or_endpoint",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Primary endpoint includes coronary revascularization (f_b759625d7926d1, f_c0d901621d225b, f_c5d7993882769d), which may be driven by physician discretion and not prevented by TG lowering.",
+            "refs": [
+              "f_b759625d7926d1",
+              "f_c0d901621d225b",
+              "f_c5d7993882769d"
+            ]
+          },
+          {
+            "text": "Median follow-up 3.3 years (f_be60e94141695c) may be insufficient for TG-lowering benefit to accrue if effect builds slowly.",
+            "refs": [
+              "f_be60e94141695c"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Other fibrate trials (FIELD, ACCORD) used similar composites and follow-up durations and showed benefit in subgroups.",
+            "refs": []
+          },
+          {
+            "text": "The DSMB stopped for futility, not because of endpoint dilution — the conditional power was too low regardless of endpoint composition.",
+            "refs": [
+              "f_d48788c58e31f2"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific HRs from PROMINENT; comparison with trials using harder endpoints (MI/stroke/CV death only)."
+      },
+      {
+        "category": "off_target_harm",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Pemafibrate showed favorable safety vs fenofibrate in phase 3 (f_389f770513aa3e) and no safety signal in PROMINENT announcement (f_72a5260002ad3f).",
+            "refs": [
+              "f_389f770513aa3e",
+              "f_72a5260002ad3f"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "No evidence of off-target harm (e.g., BP rise, creatinine increase, liver toxicity) that would offset lipid benefit. Renal impairment trial showed -45.9% TG at week 52 without placebo adjustment (f_cd3f3dd44ab2de) and favorable safety (f_0c19b83c754b8f, f_49d1f5a106712a, f_520b7617b22d5c).",
+            "refs": [
+              "f_cd3f3dd44ab2de",
+              "f_0c19b83c754b8f",
+              "f_49d1f5a106712a",
+              "f_520b7617b22d5c"
+            ]
+          }
+        ],
+        "would_settle": "Full PROMINENT safety data; comparison of adverse event profiles between arms."
+      },
+      {
+        "category": "execution_or_nonscientific",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "Trial stopped by DSMB for futility (f_d48788c58e31f2, f_b646c75ba49230), not sponsor business decision.",
+            "refs": [
+              "f_d48788c58e31f2",
+              "f_b646c75ba49230"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Recruitment completed (10,544 randomized, f_59b6ab7fd91e10); no reports of poor adherence or conduct issues.",
+            "refs": [
+              "f_59b6ab7fd91e10"
+            ]
+          }
+        ],
+        "would_settle": "DSMB charter and interim analysis details; adherence data from PROMINENT."
+      },
+      {
+        "category": "insufficient_data",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Key on-treatment biomarker data from PROMINENT itself (non-HDL-C, LDL-C, apoB changes) are not public; calculator relied on phase 2 NAFLD data (PEMA-FLY) for non-TG lipids.",
+            "refs": [
+              "calculator"
+            ]
+          },
+          {
+            "text": "TG change used is from a different phase 3 trial at 24 weeks (n=166), not PROMINENT's own on-treatment data at 3.3 years.",
+            "refs": [
+              "calculator",
+              "f_c5f1fdf621ab33"
+            ]
+          },
+          {
+            "text": "Non-HDL-C baseline is derived (LDL-C + TG/5) not directly measured, introducing error at high TG levels (200-499 mg/dL).",
+            "refs": [
+              "calculator"
+            ]
+          }
+        ],
+        "against": [
+          {
+            "text": "Sufficient data exist to evaluate main hypotheses: PPARA genetics (0.0), large TG lowering in relevant population, trial design parameters, and futility outcome.",
+            "refs": [
+              "f_79e77997a46f1a",
+              "f_98a2be6205cb0d",
+              "f_65eb7b8be957ff",
+              "f_d48788c58e31f2"
+            ]
+          }
+        ],
+        "would_settle": "Publication of PROMINENT primary results with on-treatment lipid changes and component-specific outcomes."
+      }
+    ],
+    "critic": [
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Calculator uses PEMA-FLY (NAFLD, n=118) placebo-adjusted percent changes for LDL-C, non-HDL-C, and HDL-C at week 72 applied to PROMINENT (T2D+hyperTG, n=10,544) phase 3 baselines. This population mismatch is explicitly noted in the calculator inputs but the magnitude of translation error is unknown and likely large. The Verifier could not confirm these numbers in abstracts (only in full-text verified facts), but the population difference (NAFLD vs T2D+hyperTG) means the lipid responses may not generalize.",
+            "target_agent": "mechanism",
+            "request": "Re-evaluate whether PEMA-FLY week 72 percent changes are appropriate for PROMINENT. Search for any pemafibrate lipid data in T2D+hyperTG populations at longer durations (e.g., 52-week renal impairment trial f_cd3f3dd44ab2de shows -45.9% TG at week 52). Consider if a different source or adjustment factor is needed."
+          },
+          {
+            "severity": "high",
+            "issue": "non-HDL-C baseline (5.24 mmol/L) is derived as LDL-C + TG/5 (131.5 + 355.6/5 = 202.6 mg/dL) rather than directly measured. This formula assumes VLDL-C = TG/5, which is imprecise at high TG levels (PROMINENT TG 200-499 mg/dL). The derived baseline propagates error into the ldl_equivalent_mmol (0.624) and expected HR (0.884).",
+            "target_agent": "mechanism",
+            "request": "Search for directly measured non-HDL-C baseline in the pemafibrate vs fenofibrate phase 3 trial (pmcid:PMC6005227) or PROMINENT design paper (pmid:30342298). If unavailable, flag the derivation uncertainty in assumptions."
+          },
+          {
+            "severity": "medium",
+            "issue": "TG change input uses 24-week data from a phase 3 T2D+hyperTG trial (pmid:29298800, n=166) at 0.2/0.4 mg/day, but PROMINENT follow-up was 3.3 years median. TG lowering may attenuate over time (PEMA-FLY shows -45.9% at week 52 in renal impairment trial f_cd3f3dd44ab2de). The calculator uses a single timepoint that may overestimate sustained effect.",
+            "target_agent": "mechanism",
+            "request": "Check if longer-duration TG data exists in T2D+hyperTG (e.g., 52-week renal impairment trial f_cd3f3dd44ab2de). If not, add assumption about potential attenuation of TG effect over 3.3 years."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator uses planned events (1092) but trial stopped early for futility at median 3.3 years with fewer events accrued. The power calculation (53%) and MDE HR (0.844) are based on 1092 events, overestimating actual power. The hypotheses note this but the calculator input should reflect actual events if known, or flag the discrepancy.",
+            "target_agent": "case_builder",
+            "request": "Search for actual number of primary events accrued at futility stop in PROMINENT announcement or CT.gov update. If not public, add assumption that actual events < 1092."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'insufficient_data' is marked 'weakened' but the 'for' argument states 'Key on-treatment biomarker data from PROMINENT itself (non-HDL-C, LDL-C, apoB changes) are not yet public; calculator relied on phase 2 NAFLD data for non-TG lipids.' This evidence supports the hypothesis; status should be 'supported' not 'weakened'. The 'against' argument acknowledges final publication will resolve gaps, but current data insufficiency is real.",
+            "target_agent": "investigator",
+            "request": "Change insufficient_data status from 'weakened' to 'supported' given the calculator had to use mismatched phase 2 data for non-TG lipids and PROMINENT on-treatment lipids are unpublished."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator result shows 'outcome': 'success', 'category': 'narrow_success' but trial was stopped for futility. This is expected in autopsy mode (calculator predicts, reality differs), but the departure should be explicitly noted in calculator assumptions or notes for transparency.",
+            "target_agent": "mechanism",
+            "request": "Add assumption/note to calculator output: 'Prediction based on non-HDL-C from mismatched phase 2 population; actual trial stopped for futility indicating true effect smaller than predicted.'"
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Dose mismatch for LDL-C, non-HDL-C, HDL-C changes: PEMA-FLY phase 2 trial used pemafibrate 0.2 mg twice daily (0.4 mg/day), but PROMINENT phase 3 likely uses 0.2 mg/day (per phase 3 TG trial testing both doses). The calculator applies 0.4 mg/day placebo-adjusted changes to 0.2 mg/day trial baselines, potentially overestimating lipid effects.",
+            "target_agent": "mechanism",
+            "request": "Verify PROMINENT dose from protocol/design paper (pmid:30342298 or ctgov) and confirm whether PEMA-FLY 0.4 mg/day data should be scaled or replaced with dose-matched data."
+          },
+          {
+            "severity": "high",
+            "issue": "Population mismatch for LDL-C, non-HDL-C, HDL-C changes: Calculator uses PEMA-FLY (NAFLD, n=118) placebo-adjusted percent changes at week 72 applied to PROMINENT (T2D+hyperTG, n=10,544) baselines. This is the accepted phase 2 input per guidelines, but the mismatch is severe and noted in calculator caveats. The report should emphasize this limitation.",
+            "target_agent": "investigator",
+            "request": "Ensure the autopsy report prominently discusses the population mismatch as a key limitation of the biomarker_not_causal and population hypotheses."
+          },
+          {
+            "severity": "medium",
+            "issue": "Non-HDL-C baseline derived (LDL-C + TG/5) not directly measured. At TG 355.6 mg/dL (high TG range 200-499 mg/dL), the TG/5 formula is imprecise, introducing error in the 5.24 mmol/L baseline and thus the 0.624 mmol/L ldl_equivalent_mmol.",
+            "target_agent": "mechanism",
+            "request": "Note the derived baseline limitation in assumptions; consider sensitivity analysis using direct non-HDL-C measurement if available in source papers."
+          },
+          {
+            "severity": "medium",
+            "issue": "TG change from 24-week phase 3 trial (n=166) not PROMINENT's own 3.3-year on-treatment data. TG lowering may attenuate over time (renal impairment trial shows -45.9% at week 52 but not placebo-adjusted). This is a medium-severity caveat per guidelines.",
+            "target_agent": "mechanism",
+            "request": "Confirm no placebo-adjusted TG data at longer duration exists in pemafibrate program; document attenuation risk in assumptions."
+          },
+          {
+            "severity": "low",
+            "issue": "Follow-up years discrepancy: calculator uses 3.3 years (ctgov) but design paper (pmid:30342298) reports 3.75 years median follow-up. Minor impact on time_factor (0.794).",
+            "target_agent": "case_builder",
+            "request": "Search 'PROMINENT median follow-up 3.75 years' to verify which value is correct for the event-driven design."
+          },
+          {
+            "severity": "medium",
+            "issue": "Target genetics input 'uncertain' but Open Targets PPARA score is 0.0 with 0 evidence count (f_79e77997a46f1a). This is stronger than 'uncertain' — it indicates no human genetics support. The calculator's weakest_link 'target genetics: uncertain' understates the evidence gap.",
+            "target_agent": "mechanism",
+            "request": "Update target_genetics input to reflect 'no_evidence' or 'refuted' if scale allows; adjust weakest_link description accordingly."
+          },
+          {
+            "severity": "low",
+            "issue": "Calculator predicts 'narrow_success' (expected HR 0.884, 53% power) but trial stopped for futility. The departure_from_calculator explains this well, but the report could more explicitly link the 53% power (vs 90% design) to the futility stop.",
+            "target_agent": "investigator",
+            "request": "Strengthen the effect_too_small hypothesis by explicitly connecting the calculator's 53% power to the DSMB's conditional power assessment that triggered futility stop."
+          }
+        ],
+        "verdict_ok": true
+      }
+    ],
+    "verification": {
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_d2a47b76a4fdd2",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 131.5,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC6005227",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 131.5 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*131\\.5[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC6005227' AND r.abstractText LIKE '%131.5%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_738e3a232d1854",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -12.5,
+          "unit": "percent",
+          "source_id": "pmcid:PMC9292296",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 12.5 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*12\\.5[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC9292296' AND r.abstractText LIKE '%12.5%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_8a387593738914",
+          "claim": "c3",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 355.6,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC6005227",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 355.6 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*355\\.6[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC6005227' AND r.abstractText LIKE '%355.6%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_5768a876c5e266",
+          "claim": "c4",
+          "used_as": "non-HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -11.9,
+          "unit": "percent",
+          "source_id": "pmcid:PMC9292296",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 11.9 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*11\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC9292296' AND r.abstractText LIKE '%11.9%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_26bca4f3ebac8c",
+          "claim": "c5",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "baseline_level",
+          "value": 38.9,
+          "unit": "mg/dL",
+          "source_id": "pmcid:PMC6005227",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 38.9 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*38\\.9[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC6005227' AND r.abstractText LIKE '%38.9%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_10c5eb7b7c586f",
+          "claim": "c6",
+          "used_as": "HDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -7.4,
+          "unit": "percent",
+          "source_id": "pmcid:PMC9292296",
+          "status": "not_found",
+          "found": "",
+          "note": "The abstract does not contain the number 7.4 in a captured sentence.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*7\\.4[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC9292296' AND r.abstractText LIKE '%7.4%' LIMIT 5",
+          "rows": 0
+        },
+        {
+          "fact_id": "f_98a2be6205cb0d",
+          "claim": "c7",
+          "used_as": "triglycerides change used by the calculator",
+          "key": "biomarker_change",
+          "value": -45,
+          "unit": "percent",
+          "source_id": "pmid:29298800",
+          "status": "confirmed",
+          "found": "The pemafibrate groups showed significantly reduced fasting serum triglyceride levels by ∼45% compared with the placebo group",
+          "note": "The abstract states ∼45% reduction in triglycerides.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*45%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '29298800' AND r.abstractText LIKE '%45%%' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_65eb7b8be957ff",
+          "claim": "c8",
+          "used_as": "number of primary events",
+          "key": "planned_events",
+          "value": 1092,
+          "unit": "adjudicated primary endpoints",
+          "source_id": "pmid:30342298",
+          "status": "confirmed",
+          "found": "This event-driven study will complete when 1092 adjudicated primary endpoints have accrued",
+          "note": "The abstract states 1092 adjudicated primary endpoints.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1092[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '30342298' AND r.abstractText LIKE '%1092%' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 2,
+        "not_found": 6,
+        "contradicts": 0
+      },
+      "queries": 8
+    },
+    "readthrough": [],
+    "genetics": [
+      {
+        "target": "PPARA",
+        "disease": "coronary artery disorder",
+        "disease_id": "MONDO_0005010",
+        "overall_score": 0.416,
+        "genetic_association_score": 0.0,
+        "evidence_count": 0,
+        "top_evidence": [],
+        "evidence_before_cutoff": 0
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "f_26bca4f3ebac8c",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 38.9,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "for HDL-C was 38.9 (5.2) mg/dL",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_46a9841a1b6810",
+        "entity": "biomarker:hdl-c",
+        "key": "baseline_level",
+        "value": 1.18,
+        "unit": "mmol/L",
+        "attrs": {
+          "biomarker": "HDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2–0.4 mg/day",
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "TG, HDL-C, and HbA1c levels were 2.82 ± 0.88 mmol/L, 1.18 ± 0.27 mmol/L, and 6.3 ± 0.9%, respectively.",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_10c5eb7b7c586f",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -7.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 72",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0] | −6.4 [−9.6, −3.2] | −7.4 [−10.9, −3.8]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_756ce50f653c11",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -11.9,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 144",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0] | −6.4 [−9.6, −3.2] | −7.4 [−10.9, −3.8] | −7.6 [−12.7, −2.5] | −10.2 [−14.7, −5.7] | −11.9 [−16.8, −6.9]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_960077f33b6a31",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -1.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 24",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_c2149de52d36e5",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -6.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 48",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0] | −6.4 [−9.6, −3.2]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_c278acc437a0cb",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -10.2,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 120",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0] | −6.4 [−9.6, −3.2] | −7.4 [−10.9, −3.8] | −7.6 [−12.7, −2.5] | −10.2 [−14.7, −5.7]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_e4c79e12e01107",
+        "entity": "biomarker:hdl-c",
+        "key": "biomarker_change",
+        "value": -7.6,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "HDL-C",
+          "timepoint": "week 96",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "HDL cholesterol | 5.9 [2.3, 9.5] | 3.8 [0.7, 7.0] | 4.5 [1.0, 7.9] | −1.7 [−5.3, 2.0] | −6.4 [−9.6, −3.2] | −7.4 [−10.9, −3.8] | −7.6 [−12.7, −2.5]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_d2a47b76a4fdd2",
+        "entity": "biomarker:ldl-c",
+        "key": "baseline_level",
+        "value": 131.5,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "LDL-C",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "and for LDL-C was 131.5 (35.4) mg/dL",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_2a2681871d50ff",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -13.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 96",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1] | −14.2 [−18.4, −10.1] | −12.5 [−16.8, −8.1] | −13.7 [−20.1, −7.2]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_738e3a232d1854",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -12.5,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 72",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1] | −14.2 [−18.4, −10.1] | −12.5 [−16.8, −8.1]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_92cf875a40dbc6",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -15.1,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 144",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1] | −14.2 [−18.4, −10.1] | −12.5 [−16.8, −8.1] | −13.7 [−20.1, −7.2] | −16.4 [−22.2, −10.5] | −15.1 [−21.2, −9.0]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_9b3e33c9e77e30",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -16.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 120",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1] | −14.2 [−18.4, −10.1] | −12.5 [−16.8, −8.1] | −13.7 [−20.1, −7.2] | −16.4 [−22.2, −10.5]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_ce71d619a92a62",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -14.7,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 24",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_e6bbd48430aa71",
+        "entity": "biomarker:ldl-c",
+        "key": "biomarker_change",
+        "value": -14.2,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "LDL-C",
+          "timepoint": "week 48",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "LDL cholesterol | −1.1 [−5.6, 3.5] | 2.1 [−1.9, 6.2] | 2.7 [−1.6, 6.9] | −14.7 [−19.3, −10.1] | −14.2 [−18.4, −10.1]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_0f8c7cab43c15b",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -15.8,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "non-HDL-C",
+          "timepoint": "week 120",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Non−HDL cholesterol | −1.0 [−4.6, 2.6] | 1.3 [−2.1, 4.6] | 3.9 [0.2, 7.5] | −13.8 [−17.5, −10.2] | −13.0 [−16.4, −9.5] | −11.9 [−15.7, −8.2] | −12.8 [−18.0, −7.7] | −14.2 [−19.1, −9.4] | −15.8 [−21.0, −10.6]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_209f00e102180f",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -13.0,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "non-HDL-C",
+          "timepoint": "week 48",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Non−HDL cholesterol | −1.0 [−4.6, 2.6] | 1.3 [−2.1, 4.6] | 3.9 [0.2, 7.5] | −13.8 [−17.5, −10.2] | −13.0 [−16.4, −9.5]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_265b9c527e7c74",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -13.8,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "non-HDL-C",
+          "timepoint": "week 24",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Non−HDL cholesterol | −1.0 [−4.6, 2.6] | 1.3 [−2.1, 4.6] | 3.9 [0.2, 7.5] | −13.8 [−17.5, −10.2]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_5768a876c5e266",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -11.9,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "non-HDL-C",
+          "timepoint": "week 72",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Non−HDL cholesterol | −1.0 [−4.6, 2.6] | 1.3 [−2.1, 4.6] | 3.9 [0.2, 7.5] | −13.8 [−17.5, −10.2] | −13.0 [−16.4, −9.5] | −11.9 [−15.7, −8.2]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_c6f67fd97d2bb4",
+        "entity": "biomarker:non-hdl-c",
+        "key": "biomarker_change",
+        "value": -14.2,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "non-HDL-C",
+          "timepoint": "week 96",
+          "method": "assay",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Non−HDL cholesterol | −1.0 [−4.6, 2.6] | 1.3 [−2.1, 4.6] | 3.9 [0.2, 7.5] | −13.8 [−17.5, −10.2] | −13.0 [−16.4, −9.5] | −11.9 [−15.7, −8.2] | −12.8 [−18.0, −7.7] | −14.2 [−19.1, −9.4]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_72f848a4823d0a",
+        "entity": "biomarker:other",
+        "key": "biomarker_change",
+        "value": -1.0,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "other",
+          "timepoint": "week 24",
+          "method": "MRI-PDFF",
+          "placebo_adjusted": true,
+          "kind": "percent",
+          "dose": "0.2 mg twice daily"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Pemafibrate −5.3% vs placebo −4.2%: least square mean difference of the percent change vs placebo, −1.0%, 95% CI −11.5 to 9.4 [P = 0.85]",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_8a387593738914",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 355.6,
+        "unit": "mg/dL",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "The mean (SD) level for TG was 355.6 (138.3) mg/dL",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_bcab6bd1d61530",
+        "entity": "biomarker:triglycerides",
+        "key": "baseline_level",
+        "value": 2.82,
+        "unit": "mmol/L",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "baseline",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2–0.4 mg/day",
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "TG, HDL-C, and HbA1c levels were 2.82 ± 0.88 mmol/L, 1.18 ± 0.27 mmol/L, and 6.3 ± 0.9%, respectively.",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_0af20e4c6025a2",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -6.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "0.4 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "and -6.2% (-11.6, -0.8) in pemafibrate 0.2 and 0.4 mg/d respectively",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_3304183d32f707",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -8.0,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "weeks 8, 10, and 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.1 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "−8.0% [95% CI: −14.7%, −1.3%], P = 0.020",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_707cea1fac15ca",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -8.4,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "weeks 8, 10, and 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "−8.4% [95% CI: −13.5%, −3.3%], P = 0.001",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_98a2be6205cb0d",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -45,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "0.2 mg/day and 0.4 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29298800",
+        "quote": "The pemafibrate groups showed significantly reduced fasting serum triglyceride levels by ∼45% compared with the placebo group",
+        "pub_date": "2018-01-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29298800"
+      },
+      {
+        "fact_id": "f_9da0bc3cb9a90d",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -0.3,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "weeks 8, 10, and 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.4 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "−0.3% [95% CI: −5.3%, 4.7%], P = 0.906",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_ac153e75e1dca3",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -13.6,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "weeks 8, 10, and 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.4 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "−13.6% [95% CI: −19.2%, −8.0%], P < 0.001",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_b6e03b89180b21",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -45.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.4 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "Pemafibrate 0.2, 0.4 mg/d and fenofibrate significantly reduced TG levels from baseline by -46.2%, -45.9%",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_cb2b9c4aff38ea",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -46.2,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "Pemafibrate 0.2, 0.4 mg/d and fenofibrate significantly reduced TG levels from baseline by -46.2%",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_cd3f3dd44ab2de",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -45.9,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "week 52",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2–0.4 mg/day",
+          "kind": "percent",
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "Triglyceride levels decreased by 45.9% at week 52 (last-observation-carried-forward).",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_da1ced1031908b",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -39.7,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "106.6 mg/d fenofibrate",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "Pemafibrate 0.2, 0.4 mg/d and fenofibrate significantly reduced TG levels from baseline by -46.2%, -45.9%, and -39.7%",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_e1b095b5c08479",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": 4.8,
+        "unit": "percent",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "weeks 8, 10, and 12",
+          "method": "not stated",
+          "placebo_adjusted": false,
+          "dose": "0.2 mg/day",
+          "kind": "percent"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "4.8% [95% CI: 0.4%, 9.3%], P = 0.033",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_fe8d5aff324fd5",
+        "entity": "biomarker:triglycerides",
+        "key": "biomarker_change",
+        "value": -6.5,
+        "unit": "%",
+        "attrs": {
+          "biomarker": "triglycerides",
+          "phase": "phase3",
+          "timepoint": "24 weeks",
+          "method": "not stated",
+          "placebo_adjusted": true,
+          "dose": "0.2 mg/d",
+          "kind": "percent"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "least squares mean differences (95% confidence intervals) in TG were -6.5% (-12.0, -1.1)",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_79e77997a46f1a",
+        "entity": "target:ppara",
+        "key": "genetic_association_score",
+        "value": 0.0,
+        "unit": "",
+        "attrs": {
+          "evidence_count": 0,
+          "evidence_before_cutoff": 0
+        },
+        "source_id": "opentargets:PPARA",
+        "quote": "\"genetic_association_score\": 0.0",
+        "pub_date": null,
+        "access": "database",
+        "url": "https://platform.opentargets.org/target/ENSG00000186951"
+      },
+      {
+        "fact_id": "f_3d5c8bb6c56eb8",
+        "entity": "trial:nct03071692",
+        "key": "alpha",
+        "value": 0.05,
+        "unit": "two-sided",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "a two‐sided 5% significance level",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_6b3264fbe7bc68",
+        "entity": "trial:nct03071692",
+        "key": "assumed_rrr",
+        "value": 18,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "to detect an 18% reduction in the primary endpoint",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_2396b1917ec103",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": 150,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "24-week phase 3 trial"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "high triglyceride (TG; ≥150 mg/dL",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_341b40d498c268",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": 2.5,
+        "unit": "kPa",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "other"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "liver stiffness of ≥2.5 kPa, by magnetic resonance elastography (MRE)",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_444539cbaaea09",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": 200,
+        "unit": "mg/dL",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "eligible if two consecutive tests showed a serum TG level of > 200 mg/dL",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_a5c01b57bb620e",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": "TG: 200-499 mg/dl; 2.26-5.64 mmol/l",
+        "unit": "mg/dl; mmol/l",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "mild-to-moderate hypertriglyceridemia (TG: 200-499 mg/dl; 2.26-5.64 mmol/l)",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_b81b0646e49e3e",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": 10,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2",
+          "biomarker": "other"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "liver fat content of ≥10% by magnetic resonance imaging‐estimated proton density fat fraction (MRI‐PDFF)",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_c1d0ec32f6a420",
+        "entity": "trial:nct03071692",
+        "key": "inclusion_threshold",
+        "value": 40,
+        "unit": "mg/dL",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "HDL-C ≤ 40 mg/dL (1.03 mmol/L) at Visit 1",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_53779213bc9999",
+        "entity": "trial:nct03071692",
+        "key": "median_followup",
+        "value": 3.75,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "with an average expected follow-up period of 3.75 years",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_be60e94141695c",
+        "entity": "trial:nct03071692",
+        "key": "median_followup",
+        "value": 3.3,
+        "unit": "years",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "[From Baseline to a Median of 3.3 Years]",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_23636292362c3c",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 10000,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "The PROMINENT study will randomly allocate approximately 10,000 participants",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_2bff5d1b7121bc",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": null,
+        "unit": null,
+        "attrs": {
+          "trial": "PROMINENT"
+        },
+        "source_id": "announcement:prominent",
+        "quote": "The PROMINENT study is an international, multi-center, double-blinded, placebo-controlled, randomized trial which included approximately 850 clinical sites in 24 countries.",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html"
+      },
+      {
+        "fact_id": "f_59b6ab7fd91e10",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 10544,
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "Enrollment: 10544 (ACTUAL)",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_6d4cd340e26261",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 526,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "Among 526 randomized patients, 489 completed the study",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_6deb908a85d136",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 118,
+        "unit": "patients",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "This double‐blind, placebo‐controlled, randomised multicentre, phase 2 trial randomised 118 patients (1:1) to either 0.2 mg Pemafibrate or placebo",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_703578723b1ce2",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 225,
+        "unit": "patients",
+        "attrs": {
+          "trial": "24-week phase 3 trial"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "225 patients with high triglyceride",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_c5f1fdf621ab33",
+        "entity": "trial:nct03071692",
+        "key": "n_randomized",
+        "value": 166,
+        "unit": "patients",
+        "attrs": {
+          "trial": "Effects of Pemafibrate, a Novel Selective PPARα Modulator, on Lipid and Glucose Metabolism in Patients With Type 2 Diabetes and Hypertriglyceridemia: A Randomized, Double-Blind, Placebo-Controlled, Phase 3 Trial"
+        },
+        "source_id": "pmid:29298800",
+        "quote": "Patients were randomly assigned to three groups and received placebo ( n = 57), 0.2 mg/day pemafibrate ( n = 54), or 0.4 mg/day pemafibrate ( n = 55) for 24 weeks",
+        "pub_date": "2018-01-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29298800"
+      },
+      {
+        "fact_id": "f_fc27c3b6a3ebee",
+        "entity": "trial:nct03071692",
+        "key": "phase",
+        "value": "phase3",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "Phase: PHASE3",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_65eb7b8be957ff",
+        "entity": "trial:nct03071692",
+        "key": "planned_events",
+        "value": 1092,
+        "unit": "adjudicated primary endpoints",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "This event-driven study will complete when 1092 adjudicated primary endpoints have accrued",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_33cedf9fc910c8",
+        "entity": "trial:nct03071692",
+        "key": "power",
+        "value": 90,
+        "unit": "percent",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "to achieve at least 90% power in the primary analysis",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_be85f565a54493",
+        "entity": "trial:nct03071692",
+        "key": "power",
+        "value": 90,
+        "unit": "percent",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "Statistical power is at least 90%",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_f4ee5296a96237",
+        "entity": "trial:nct03071692",
+        "key": "power",
+        "value": 80,
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "44 patients per group were required to ensure 80% power.",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_0392a32d9109d7",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "efficacy and safety of pemafibrate in patients with type 2 diabetes comorbid with hypertriglyceridemia",
+        "unit": "",
+        "attrs": {
+          "trial": "Effects of Pemafibrate, a Novel Selective PPARα Modulator, on Lipid and Glucose Metabolism in Patients With Type 2 Diabetes and Hypertriglyceridemia: A Randomized, Double-Blind, Placebo-Controlled, Phase 3 Trial"
+        },
+        "source_id": "pmid:29298800",
+        "quote": "This study aimed to evaluate the efficacy and safety of pemafibrate (K-877) in patients with type 2 diabetes comorbid with hypertriglyceridemia.",
+        "pub_date": "2018-01-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29298800"
+      },
+      {
+        "fact_id": "f_126a5ab112ee49",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "percent change in fasting serum triglyceride (TG) levels",
+        "unit": "percent",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "To verify the superiority of pemafibrate over placebo and the non-inferiority of pemafibrate to the maximum dose of fenofibrate for determining the percent change in fasting serum triglyceride (TG) levels",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_b759625d7926d1",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "composite of nonfatal myocardial infarction, nonfatal ischemic stroke, coronary revascularization and cardiovascular death",
+        "unit": null,
+        "attrs": {
+          "trial": "PROMINENT"
+        },
+        "source_id": "announcement:prominent",
+        "quote": "The primary endpoint is a composite of nonfatal myocardial infarction, nonfatal ischemic stroke, coronary revascularization and cardiovascular death.",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html"
+      },
+      {
+        "fact_id": "f_c0d901621d225b",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "composite of nonfatal myocardial infarction, nonfatal ischemic stroke, hospitalization for unstable angina requiring urgent coronary revascularization, and cardiovascular death",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "The primary endpoint is a composite of nonfatal myocardial infarction, nonfatal ischemic stroke, hospitalization for unstable angina requiring urgent coronary revascularization, and cardiovascular death",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      },
+      {
+        "fact_id": "f_c382414f5afdb4",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "percentage change in MRI-PDFF from baseline to week 24",
+        "unit": "percent",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "The primary endpoint was the percentage change in MRI‐PDFF from baseline to week 24.",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_c5d7993882769d",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "Number of Participants With First Occurrence of 4-component Composite Primary Endpoint (Nonfatal MI, Nonfatal Ischemic Stroke, Coronary Revascularization, or CV Death)",
+        "unit": "participants",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "Primary outcome(s): Number of Participants With First Occurrence of 4-component Composite Primary Endpoint (Nonfatal MI, Nonfatal Ischemic Stroke, Coronary Revascularization, or CV Death) [From Baseline to a Median of 3.3 Years]",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_d68fe61b53fa95",
+        "entity": "trial:nct03071692",
+        "key": "primary_endpoint",
+        "value": "serum TG-lowering effect",
+        "unit": "",
+        "attrs": {
+          "trial": "24-week phase 3 trial"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "superior to fenofibrate in terms of serum TG-lowering effect",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_389f770513aa3e",
+        "entity": "trial:nct03071692",
+        "key": "readout_statement",
+        "value": "The favorable safety profile of pemafibrate, with fewer adverse effects on kidney/liver-related laboratory tests and fewer AEs/ADRs, including those leading to treatment discontinuation, over fenofibrate 200 mg/day may justify the use of this novel and potent treatment option for reducing TG levels in a broader range of patients.",
+        "unit": "",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "The favorable safety profile of pemafibrate, with fewer adverse effects on kidney/liverrelated laboratory tests and fewer AEs/ADRs, including those leading to treatment discontinuation, over fenofibrate 200 mg/day may justify the use of this novel and potent treatment option for reducing TG levels in a broader range of patients.",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_859f281fedec65",
+        "entity": "trial:nct03071692",
+        "key": "readout_statement",
+        "value": "Pemafibrate did not decrease liver fat content but had significant reduction in MRE‐based liver stiffness.",
+        "unit": "none",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Pemafibrate did not decrease liver fat content but had significant reduction in MRE‐based liver stiffness.",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_d48788c58e31f2",
+        "entity": "trial:nct03071692",
+        "key": "readout_statement",
+        "value": "the DSMB concluded that the primary endpoint was unlikely to be met",
+        "unit": null,
+        "attrs": {
+          "trial": "PROMINENT"
+        },
+        "source_id": "announcement:prominent",
+        "quote": "the DSMB concluded that the primary endpoint was unlikely to be met.",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html"
+      },
+      {
+        "fact_id": "f_0c19b83c754b8f",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 8.5,
+        "unit": "%",
+        "attrs": {
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "Serious adverse events (SAEs) occurred in 8.5% (16/189) of the patients (Table 4 and Table 5).",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_42b425f70b7039",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 0,
+        "unit": "boolean",
+        "attrs": {
+          "trial": "Effects of Pemafibrate, a Novel Selective PPARα Modulator, on Lipid and Glucose Metabolism in Patients With Type 2 Diabetes and Hypertriglyceridemia: A Randomized, Double-Blind, Placebo-Controlled, Phase 3 Trial"
+        },
+        "source_id": "pmid:29298800",
+        "quote": "All groups displayed comparable rates of adverse events and drug reactions.",
+        "pub_date": "2018-01-03",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29298800"
+      },
+      {
+        "fact_id": "f_49d1f5a106712a",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 31.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "The incidences of adverse events and adverse drug reactions were 82.0% and 31.7%, respectively, and these were not associated with baseline eGFR.",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_520b7617b22d5c",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 82.0,
+        "unit": "%",
+        "attrs": {
+          "trial": "Pemafibrate renal impairment phase III trial"
+        },
+        "source_id": "pmcid:PMC6386904",
+        "quote": "The incidences of adverse events and adverse drug reactions were 82.0% and 31.7%, respectively, and these were not associated with baseline eGFR.",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/30736366"
+      },
+      {
+        "fact_id": "f_72a5260002ad3f",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": false,
+        "unit": null,
+        "attrs": {
+          "trial": "PROMINENT"
+        },
+        "source_id": "announcement:prominent",
+        "quote": "Notable safety concerns were not raised.",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html"
+      },
+      {
+        "fact_id": "f_72e85887cc0d84",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 23.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "24-week phase 3 trial",
+          "signal": "adverse drug reactions",
+          "arm": "fenofibrate"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "incidence rates of adverse drug reactions in pemafibrate groups (2.7% and 6.8%) were significantly lower than that in the fenofibrate group (23.7%)",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_91b8b331b91eba",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 6.8,
+        "unit": "%",
+        "attrs": {
+          "trial": "24-week phase 3 trial",
+          "signal": "adverse drug reactions",
+          "arm": "pemafibrate 0.4 mg/d"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "incidence rates of adverse drug reactions in pemafibrate groups (2.7% and 6.8%)",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_a3354cbca58b68",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": "Adverse events were comparable between the treatment groups and therapy was well tolerated",
+        "unit": "none",
+        "attrs": {
+          "trial": "PEMA-FLY (NCT03350165)",
+          "phase": "phase2"
+        },
+        "source_id": "pmcid:PMC9292296",
+        "quote": "Adverse events were comparable between the treatment groups and therapy was well tolerated.",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/34528723"
+      },
+      {
+        "fact_id": "f_e0cca1294d5c2a",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 26.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial",
+          "dose": "fenofibrate 200 mg/day"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "26.4% (37/140) in the fenofibrate 200 mg/day group",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_e33d528a320fd4",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 56.4,
+        "unit": "percent",
+        "attrs": {
+          "trial": "Pemafibrate vs fenofibrate phase III trial",
+          "dose": "fenofibrate 200 mg/day"
+        },
+        "source_id": "pmcid:PMC6005227",
+        "quote": "56.4% (79/140) in the fenofibrate 200 mg/day group",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "url": "https://europepmc.org/article/MED/29628483"
+      },
+      {
+        "fact_id": "f_e896ec38366a20",
+        "entity": "trial:nct03071692",
+        "key": "safety_signal",
+        "value": 2.7,
+        "unit": "%",
+        "attrs": {
+          "trial": "24-week phase 3 trial",
+          "signal": "adverse drug reactions",
+          "arm": "pemafibrate 0.2 mg/d"
+        },
+        "source_id": "pmid:29203092",
+        "quote": "incidence rates of adverse drug reactions in pemafibrate groups (2.7% and 6.8%)",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/29203092"
+      },
+      {
+        "fact_id": "f_b646c75ba49230",
+        "entity": "trial:nct03071692",
+        "key": "stopped_early",
+        "value": true,
+        "unit": null,
+        "attrs": {
+          "trial": "PROMINENT"
+        },
+        "source_id": "announcement:prominent",
+        "quote": "Kowa Research Institute, Inc. announces the decision not to continue the Phase 3 PROMINENT study, taking into consideration the recommendations of the Data Safety Monitoring Board (DSMB).",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html"
+      },
+      {
+        "fact_id": "f_05c43467b8b0ce",
+        "entity": "trial:nct03071692",
+        "key": "trial",
+        "value": "PROMINENT",
+        "unit": "",
+        "attrs": {},
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "quote": "Title: Pemafibrate to Reduce Cardiovascular OutcoMes by Reducing Triglycerides IN patiENts With diabeTes (PROMINENT)",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "url": "https://clinicaltrials.gov/study/NCT03071692"
+      },
+      {
+        "fact_id": "f_553dc788282ad5",
+        "entity": "trial:nct03071692",
+        "key": "trial",
+        "value": "PROMINENT",
+        "unit": "",
+        "attrs": {},
+        "source_id": "pmid:30342298",
+        "quote": "The PROMINENT study will randomly allocate approximately 10,000 participants",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "url": "https://europepmc.org/article/MED/30342298"
+      }
+    ],
+    "sources": [
+      {
+        "source_id": "ctgov:NCT03071692@2022-04-08",
+        "type": "registry",
+        "title": "ClinicalTrials.gov NCT03071692 PROMINENT",
+        "url": "https://clinicaltrials.gov/study/NCT03071692",
+        "pub_date": "2017-03-07",
+        "access": "registry",
+        "meta": {
+          "design_only_view": true,
+          "summary": {
+            "nct_id": "NCT03071692",
+            "acronym": "PROMINENT",
+            "title": "Pemafibrate to Reduce Cardiovascular OutcoMes by Reducing Triglycerides IN patiENts With diabeTes (PROMINENT)",
+            "official_title": "Pemafibrate to Reduce Cardiovascular OutcoMes by Reducing Triglycerides IN patiENts With diabeTes (PROMINENT)",
+            "sponsor": "Kowa Research Institute, Inc.",
+            "status": "TERMINATED",
+            "why_stopped": "The study was stopped for futility based on efficacy results at the interim analysis; no unexpected safety findings were observed.",
+            "start_date": "2017-03-23",
+            "primary_completion": "2022-07-27",
+            "first_posted": "2017-03-07",
+            "phases": [
+              "PHASE3"
+            ],
+            "enrollment": 10544,
+            "enrollment_type": "ACTUAL",
+            "interventions": [
+              {
+                "name": "K-877",
+                "type": "DRUG",
+                "other_names": [
+                  "pemafibrate"
+                ],
+                "arms": [
+                  "Treatment Group"
+                ]
+              },
+              {
+                "name": "Placebo",
+                "type": "DRUG",
+                "other_names": [],
+                "arms": [
+                  "Control Group"
+                ]
+              }
+            ],
+            "arm_groups": [
+              {
+                "label": "Treatment Group",
+                "type": "EXPERIMENTAL"
+              },
+              {
+                "label": "Control Group",
+                "type": "PLACEBO_COMPARATOR"
+              }
+            ],
+            "conditions": [
+              "Type2 Diabetes",
+              "Dyslipidemia"
+            ],
+            "primary_outcomes": [
+              "Number of Participants With First Occurrence of 4-component Composite Primary Endpoint (Nonfatal MI, Nonfatal Ischemic Stroke, Coronary Revascularization, or CV Death) [From Baseline to a Median of 3.3 Years]"
+            ],
+            "has_results": true
+          }
+        },
+        "chars": 3339
+      },
+      {
+        "source_id": "pmcid:PMC9292296",
+        "type": "journal",
+        "title": "Randomised clinical trial: Pemafibrate, a novel selective peroxisome proliferator-activated receptor α modulator (SPPARMα), versus placebo in patients with non-alcoholic fatty liver disease.",
+        "url": "https://europepmc.org/article/MED/34528723",
+        "pub_date": "2021-09-16",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "34528723",
+          "pmcid": "PMC9292296",
+          "doi": "10.1111/apt.16596",
+          "journal": "Alimentary pharmacology & therapeutics"
+        },
+        "chars": 48799
+      },
+      {
+        "source_id": "pmcid:PMC6386904",
+        "type": "journal",
+        "title": "Long-Term Efficacy and Safety of Pemafibrate, a Novel Selective Peroxisome Proliferator-Activated Receptor-α Modulator (SPPARMα), in Dyslipidemic Patients with Renal Impairment.",
+        "url": "https://europepmc.org/article/MED/30736366",
+        "pub_date": "2019-02-06",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "30736366",
+          "pmcid": "PMC6386904",
+          "doi": "10.3390/ijms20030706",
+          "journal": "International journal of molecular sciences"
+        },
+        "chars": 52457
+      },
+      {
+        "source_id": "pmid:29298800",
+        "type": "journal",
+        "title": "Effects of Pemafibrate, a Novel Selective PPARα Modulator, on Lipid and Glucose Metabolism in Patients With Type 2 Diabetes and Hypertriglyceridemia: A Randomized, Double-Blind, Placebo-Controlled, Phase 3 Trial.",
+        "url": "https://europepmc.org/article/MED/29298800",
+        "pub_date": "2018-01-03",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "29298800",
+          "pmcid": null,
+          "doi": "10.2337/dc17-1589",
+          "journal": "Diabetes care"
+        },
+        "chars": 1420
+      },
+      {
+        "source_id": "pmcid:PMC6005227",
+        "type": "journal",
+        "title": "Efficacy and Safety of Pemafibrate Versus Fenofibrate in Patients with High Triglyceride and Low HDL Cholesterol Levels: A Multicenter, Placebo-Controlled, Double-Blind, Randomized Trial.",
+        "url": "https://europepmc.org/article/MED/29628483",
+        "pub_date": "2018-04-07",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "29628483",
+          "pmcid": "PMC6005227",
+          "doi": "10.5551/jat.44412",
+          "journal": "Journal of atherosclerosis and thrombosis"
+        },
+        "chars": 55638
+      },
+      {
+        "source_id": "pmid:29203092",
+        "type": "journal",
+        "title": "Efficacy and safety of pemafibrate (K-877), a selective peroxisome proliferator-activated receptor α modulator, in patients with dyslipidemia: Results from a 24-week, randomized, double blind, active-controlled, phase 3 trial.",
+        "url": "https://europepmc.org/article/MED/29203092",
+        "pub_date": "2017-10-28",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "29203092",
+          "pmcid": null,
+          "doi": "10.1016/j.jacl.2017.10.006",
+          "journal": "Journal of clinical lipidology"
+        },
+        "chars": 1769
+      },
+      {
+        "source_id": "pmid:30342298",
+        "type": "journal",
+        "title": "Rationale and design of the Pemafibrate to Reduce Cardiovascular Outcomes by Reducing Triglycerides in Patients with Diabetes (PROMINENT) study.",
+        "url": "https://europepmc.org/article/MED/30342298",
+        "pub_date": "2018-09-29",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "30342298",
+          "pmcid": null,
+          "doi": "10.1016/j.ahj.2018.09.011",
+          "journal": "American heart journal"
+        },
+        "chars": 2121
+      },
+      {
+        "source_id": "pmcid:PMC6073532",
+        "type": "journal",
+        "title": "The Peroxisome Proliferator-Activated Receptor α (PPARα) Agonist Pemafibrate Protects against Diet-Induced Obesity in Mice.",
+        "url": "https://europepmc.org/article/MED/30041488",
+        "pub_date": "2018-07-23",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "30041488",
+          "pmcid": "PMC6073532",
+          "doi": "10.3390/ijms19072148",
+          "journal": "International journal of molecular sciences"
+        },
+        "chars": 42509
+      },
+      {
+        "source_id": "pmcid:PMC5307366",
+        "type": "journal",
+        "title": "Pemafibrate, a novel selective peroxisome proliferator-activated receptor alpha modulator, improves the pathogenesis in a rodent model of nonalcoholic steatohepatitis.",
+        "url": "https://europepmc.org/article/MED/28195199",
+        "pub_date": "2017-02-14",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "28195199",
+          "pmcid": "PMC5307366",
+          "doi": "10.1038/srep42477",
+          "journal": "Scientific reports"
+        },
+        "chars": 33198
+      },
+      {
+        "source_id": "pmid:27108950",
+        "type": "journal",
+        "title": "The novel selective PPARα modulator (SPPARMα) pemafibrate improves dyslipidemia, enhances reverse cholesterol transport and decreases inflammation and atherosclerosis.",
+        "url": "https://europepmc.org/article/MED/27108950",
+        "pub_date": "2016-03-04",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "27108950",
+          "pmcid": null,
+          "doi": "10.1016/j.atherosclerosis.2016.03.003",
+          "journal": "Atherosclerosis"
+        },
+        "chars": 1934
+      },
+      {
+        "source_id": "pmcid:PMC7210999",
+        "type": "journal",
+        "title": "Pemafibrate, a selective PPARα modulator, prevents non-alcoholic steatohepatitis development without reducing the hepatic triglyceride content.",
+        "url": "https://europepmc.org/article/MED/32385406",
+        "pub_date": "2020-05-08",
+        "access": "open_full_text",
+        "meta": {
+          "pmid": "32385406",
+          "pmcid": "PMC7210999",
+          "doi": "10.1038/s41598-020-64902-8",
+          "journal": "Scientific reports"
+        },
+        "chars": 41492
+      },
+      {
+        "source_id": "pmid:35220898",
+        "type": "journal",
+        "title": "Autophagy deficiency abolishes liver mitochondrial DNA segregation",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35220898/",
+        "pub_date": "2022-02-27",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "35220898",
+          "pmcid": "PMC9542960",
+          "doi": "10.1080/15548627.2022.2038501",
+          "journal": "Autophagy",
+          "purpose": "genetics"
+        },
+        "chars": 3692
+      },
+      {
+        "source_id": "pmid:28533386",
+        "type": "journal",
+        "title": "Metabolic basis to Sherpa altitude adaptation",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28533386/",
+        "pub_date": "2017-05-22",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "28533386",
+          "pmcid": "PMC5474778",
+          "doi": "10.1073/pnas.1700527114",
+          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+          "purpose": "genetics"
+        },
+        "chars": 1379
+      },
+      {
+        "source_id": "pmid:24976416",
+        "type": "journal",
+        "title": "A genetic variant of PPARA modulates cardiovascular risk biomarkers after milk consumption",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24976416/",
+        "pub_date": "2014-03-12",
+        "access": "abstract_only",
+        "meta": {
+          "pmid": "24976416",
+          "pmcid": null,
+          "doi": "10.1016/j.nut.2014.02.012",
+          "journal": "Nutrition (Burbank, Los Angeles County, Calif.)",
+          "purpose": "genetics"
+        },
+        "chars": 1957
+      },
+      {
+        "source_id": "announcement:prominent",
+        "type": "press_release",
+        "title": "KOWA TO DISCONTINUE K-877 (PEMAFIBRATE) \"PROMINENT\" CARDIOVASCULAR OUTCOMES STUDY",
+        "url": "https://www.prnewswire.com/news-releases/kowa-to-discontinue-k-877-pemafibrate-prominent-cardiovascular-outcomes-study-301520956.html",
+        "pub_date": "2022-04-08",
+        "access": "press_release",
+        "meta": {},
+        "chars": 2150
+      }
+    ],
+    "models_used": {
+      "Extraction": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
+    },
+    "meterless": {
+      "engine": "Meterless World Model (official reference implementation)",
+      "entities": 23,
+      "facts": 89,
+      "relationships": 22,
+      "events": 216,
+      "audit_entries": 216,
+      "state_shape_keys": 6
+    },
+    "usage": {
+      "Extraction": {
+        "calls": 15,
+        "input_tokens": 25447,
+        "output_tokens": 11717,
+        "estimated": false,
+        "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "provider": "nvidia"
+      },
+      "MechanismAnalyst": {
+        "calls": 2,
+        "input_tokens": 11819,
+        "output_tokens": 9426,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 4,
+        "input_tokens": 5517,
+        "output_tokens": 6350,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Investigator": {
+        "calls": 2,
+        "input_tokens": 11719,
+        "output_tokens": 7504,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Critic": {
+        "calls": 2,
+        "input_tokens": 15286,
+        "output_tokens": 8672,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Reporter": {
+        "calls": 1,
+        "input_tokens": 8339,
+        "output_tokens": 2769,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "project": "Trial Autopsy",
+  "tagline": "Why heart-drug trials fail, and what it means for the next drug.",
+  "event": "Open Agent Hackathon 2026",
+  "track": "The Agent That Can Explain Why",
+  "team": "CurrentSky",
+  "team_members": [
+    {
+      "name": "Stanislav Gatin",
+      "role": "solo builder"
+    }
+  ],
+  "sponsor_technology": {
+    "zetaris": {
+      "role": "Data layer and SQL fact checks",
+      "where": [
+        "app/tools/zetaris.py",
+        "app/tools/http.py",
+        "app/tools/europepmc.py",
+        "app/agents/verifier.py"
+      ],
+      "how": "ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through a local Zetaris instance: each request becomes a Zetaris REST session table read back with Lightning SQL. For the literature the as_of cut-off runs inside that SQL, so papers published after the cut-off never reach the agents. The Verifier has Nemotron write one Lightning SQL query per number the calculator used, over the registry record and the cited papers; code guards the SQL, Zetaris runs it, and Nemotron judges each number confirmed, not found or contradicts. A contradiction goes to the critic, which can send the work back. Across the 26 recorded analyses: 116 numbers checked, 69 confirmed, 43 not found, 4 contradictions."
+    },
+    "meterless": {
+      "role": "Power: Meterless Nightshift is the primary model provider. Build: the official World Model engine stores every source, entity and fact with provenance",
+      "engines": [
+        "World Model"
+      ],
+      "runtime": "Meterless Nightshift (Meterless Runtime provider contract)",
+      "where": [
+        "app/llm/meterless_runtime.py",
+        "app/llm/generator.py",
+        "services/meterless/",
+        "app/engines/meterless.py",
+        "app/engines/world_model.py"
+      ],
+      "how": "Nightshift: the app calls Nightshift's OpenAI-compatible endpoint with the runtime token, the meterless-app and meterless-scope headers and a routing mode chosen per step in Settings; the NVIDIA key stays in Nightshift. In the 41 recorded runs 373 of 377 reasoning calls went through Nightshift (the other 4 went to NVIDIA directly after Nightshift cut them twice), all answered by NVIDIA Nemotron. I also reported Nightshift's first-token limit, which Meterless is making configurable. I reported a Nightshift bug with its fix (github.com/Meterless/Meterless/issues/4), fixed by Meterless the same night, and documented the Nightshift settings a strict pipeline needs (tier-split off, app bound to fast; extraction calls NVIDIA directly because the reasoning switch is not passed on). World Model: the official reference engine, unchanged, passes its conformance suite 8/8 and runs as a local service; every source, entity and fact is stored with provenance (562 entities, 2,097 facts, 627 links across the 26 analyses)."
+    },
+    "nvidia": {
+      "role": "Models behind every AI step",
+      "models": {
+        "MechanismAnalyst": "Nemotron 3 Ultra via Meterless Nightshift (app bound to fast; Nightshift picks the lane)",
+        "Verifier": "Nemotron 3 Ultra via Meterless Nightshift (app bound to fast; Nightshift picks the lane)",
+        "Investigator": "Nemotron 3 Ultra via Meterless Nightshift (app bound to fast; Nightshift picks the lane)",
+        "Critic": "Nemotron 3 Ultra via Meterless Nightshift (app bound to fast; Nightshift picks the lane)",
+        "Reporter": "Nemotron 3 Ultra via Meterless Nightshift (app bound to fast; Nightshift picks the lane)",
+        "Extraction": "nvidia/nemotron-3.5-super-vl-120b-a12b, NVIDIA API, reasoning off",
+        "ReadThrough": "nvidia/nemotron-3.5-super-vl-120b-a12b, NVIDIA API, reasoning off"
+      },
+      "where": [
+        "app/config.py",
+        "app/llm/generator.py"
+      ],
+      "how": "Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super). Blind backtest on 36 finished trials: experts' main cause 26/36, cause among those named 35/36, outcome 16/22 where the trial could be sized, expected hazard ratio within 0.03 of the answer key 8/25; on the 6 trials added after the code freeze: main cause 4/6, cause named 6/6. Open models, so a company can run the same analysis on its own hardware, for example an NVIDIA DGX Spark."
+    },
+    "cursor": {
+      "role": "Development tool",
+      "how": "One of the tools the app was built with: the unit tests (tests/) were written and run in Cursor, and its Agent searched the codebase for bugs and gaps, which were then fixed.",
+      "where": [
+        "tests/"
+      ]
+    }
+  },
+  "open_source": {
+    "langgraph": "The pipeline graph (app/graph.py), with a conditional edge so the critic can send work back."
+  },
+  "run": {
+    "setup": "See README: pip install -r requirements.txt, npm --prefix services/meterless install, then python run.py; scripts/smoke_test.py checks every layer.",
+    "offline_demo": "SAMPLE_MODE=true replays the recorded runs with no keys and no network."
+  },
+  "explanation": "docs/SPONSOR_TECHNOLOGY.md",
+  "evidence": [
+    "logs/ (step logs and World Model audit logs of the 41 recorded runs)",
+    "docs/evidence/nightshift_runs.md",
+    "docs/evidence/meterless_world_model_conformance.txt",
+    "eval/results/backtest_2026-10-25.json",
+    "eval/results/backtest_2026-10-25_frozen6.json",
+    "eval/predictions/",
+    "scripts/check_replay.py"
+  ]
+}

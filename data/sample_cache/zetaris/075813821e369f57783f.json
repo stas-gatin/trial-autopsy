@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A12860216&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*89%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+ "rows": [
+  [
+   " Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3"
+  ]
+ ],
+ "error": null
+}

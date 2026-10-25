@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID%3APMC5064025&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*0\\\\.568[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+ "rows": [
+  [
+   " High-sensitivity C-reactive protein was significantly reduced by canakinumab compared with placebo at 3 months (geometric mean ratio [GMR]: 0.568; 95% confidence interval [CI]: 0"
+  ]
+ ],
+ "error": null
+}

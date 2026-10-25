@@ -1,0 +1,15 @@
+{
+  "key": "5230b7c7ede9948c6838",
+  "role": "extraction",
+  "provider": "nvidia",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "recorded_with": "live API",
+  "recorded_at": "2026-10-24T19:27:23+00:00",
+  "system": "You extract human genetic evidence about one drug target from one document.\n\nExtract only associations between variants in or near the target gene (or genetic scores for the target or its\nbiomarker) and coronary heart disease, myocardial infarction or major cardiovascular events, as stated in THIS\ndocument. No outside knowledge.\n\nEach fact: key \"genetic_association\", value = the effect estimate as a number (OR, RR or HR; null if only\ndirection is stated), unit = \"OR\" | \"RR\" | \"HR\" | \"direction\", attrs = {gene, variant_or_score, outcome,\ndirection (\"protective\" | \"harmful\" | \"null\"), effect_on_biomarker, n, ci_low, ci_high}, and \"quote\": an exact,\nverbatim span (8-300 characters) from the document that contains the estimate or the stated direction.\nIf the document has no such association, return {\"facts\": []}.\n\nReturn JSON only: {\"facts\": [...]}",
+  "prompt": "Trial: SOLID-TIMI 52 NCT01000727 - The Stabilization Of pLaques usIng Darapladib-Thrombolysis In Myocardial Infarction 52 Trial\nInvestigational drug: darapladib\nDocument: Sequencing of Lp-PLA2-encoding PLA2G7 gene in 2000 Europeans reveals several rare loss-of-function mutations (journal, published 2011-05-24, source pmid:21606947)\n\n--- DOCUMENT TEXT ---\nSequencing of Lp-PLA2-encoding PLA2G7 gene in 2000 Europeans reveals several rare loss-of-function mutations\n\nElevated plasma levels of lipoprotein-associated phospholipase A(2) (Lp-PLA2) activity have been shown to be associated with increased risk of coronary heart disease and an inhibitor of this enzyme is under development for the treatment of that condition. A Val279Phe null allele in this gene, that may influence patient eligibility for treatment, is relatively common in East Asians but has not been observed in Europeans. We investigated the existence and functional effects of low frequency alleles in a Western European population by re-sequencing the exons of PLA2G7 in 2000 samples. In all, 19 non-synonymous single-nucleotide polymorphisms (nsSNPs) were found, 14 in fewer than four subjects (minor allele frequency <0.1%). Lp-PLA2 activity was significantly lower in rare nsSNP carriers compared with non-carriers (167.8±63.2 vs 204.6±41.8, P=0.01) and seven variants had enzyme activities consistent with a null allele. The cumulative frequency of these null alleles was 0.25%, so <1 in 10,000 Europeans would be expected to be homozygous, and thus not potentially benefit from treatment with an Lp-PLA2 inhibitor.\n--- END ---\n\nExtract the facts.",
+  "response": "{\"facts\": []}",
+  "usage": {
+    "input_tokens": 659,
+    "output_tokens": 7
+  }
+}
