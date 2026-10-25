@@ -8,6 +8,8 @@
 
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
 
+**▶ [Try it live: trial-autopsy.onrender.com](https://trial-autopsy.onrender.com)** · **[Watch the 4-minute demo](https://youtu.be/CgPZ6zrE-NY)**
+
 [![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
 
 | | |
@@ -16,6 +18,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
 | **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
 | **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
+| **Live demo** | [trial-autopsy.onrender.com](https://trial-autopsy.onrender.com): the app with all 41 recorded analyses, offline and read-only. The free server sleeps when idle, so the first visit can take a minute |
 | **Demo video** | [Watch on YouTube, 4 minutes](https://youtu.be/CgPZ6zrE-NY) |
 
 > Research tool. Not medical or investment advice.
@@ -38,6 +41,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 
 | You want | Go to |
 |---|---|
+| Try it without installing anything | [Live demo](https://trial-autopsy.onrender.com) (offline, read-only) |
 | See it working in 4 minutes | [Demo video on YouTube](https://youtu.be/CgPZ6zrE-NY) |
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
