@@ -563,6 +563,17 @@ async function loadSettings() {
   delete pending.apply_recommended;
   $("setStatus").textContent = "";
   renderSettings();
+  if (settingsData.readonly) lockSettings();
+}
+
+// The public demo (DEMO_READONLY): everything stays visible, nothing can be changed or tested.
+function lockSettings() {
+  const view = $("settingsView");
+  if (!view.querySelector(".set-readonly")) {
+    view.querySelector(".settings-head").insertAdjacentHTML("beforeend", `<p class="set-readonly">This public demo is read-only:
+      settings cannot be saved or tested here. <a href="https://github.com/stas-gatin/trial-autopsy#quick-start">Run it locally</a> to change them.</p>`);
+  }
+  view.querySelectorAll("input, select, textarea, button").forEach((el) => { el.disabled = true; });
 }
 
 function renderSettings() {

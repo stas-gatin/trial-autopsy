@@ -95,6 +95,7 @@ def read() -> dict:
         "agents": _agents(),
         "run": {key: {**meta, "value": _run_value(key, meta)} for key, meta in RUN_OPTIONS.items()},
         "zetaris": _zetaris(),
+        "readonly": config.demo_readonly(),
     }
 
 
