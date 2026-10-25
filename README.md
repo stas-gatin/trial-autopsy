@@ -83,9 +83,9 @@ After the calculator runs, the **Verifier** has Nemotron write one Lightning SQL
 
 ### A critic that can send the work back
 
-The critic reviews the inputs and claims. A serious issue sends the analysis back for a targeted search and a second round, and the report shows what changed. In REDUCE-IT, the calculator first used a typical non-HDL-C baseline because the documents gave none, and expected a hazard ratio of 0.917 with a 41% chance of success. The critic flagged the assumption and asked for the trial's own baseline (LDL-C plus triglycerides/5); the second round expected 0.903, against 0.904 in the answer key, and the forecast turned from failure to success, which is what happened.
+The critic reviews the inputs and claims. A serious issue sends the analysis back for a targeted search and a second round, and the report shows what changed. In dal-OUTCOMES the analyst took "2.5 years" as the median follow-up. The Verifier's SQL in Zetaris brought back the source sentence: 80% of patients had been followed for *at least* 2.5 years, a minimum rather than the median. The critic raised it as a serious issue and sent the work back; the second round kept the diagnosis the experts gave: dalcetrapib raised HDL-C, which does not drive heart risk.
 
-![The critic changed the answer: round 1 expected HR 0.917 with a 41% chance to pass, the critic's serious issues, round 2 expected HR 0.903 with 53%](docs/images/critic_reduce_it.png)
+![The critic's review in dal-OUTCOMES: round 1, the serious issue citing the Verifier's finding in Zetaris, and round 2](docs/images/critic_dal_outcomes.png)
 
 ### Evidence you can follow end to end
 
@@ -212,6 +212,7 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 
 - Nightshift is the primary model provider (`app/llm/meterless_runtime.py`, Meterless Runtime provider contract): the app calls its OpenAI-compatible endpoint with the runtime token, the `meterless-app` and `meterless-scope` headers and a routing mode chosen per step on the Settings page. The NVIDIA key stays in Nightshift.
 - In the 41 recorded runs, 373 of 377 reasoning calls went through Nightshift; the other 4 went to NVIDIA directly after Nightshift cut them twice. Every answer came from NVIDIA Nemotron (361 from Nemotron 3 Ultra, 16 from Nemotron 3.5 Super) ([evidence](docs/evidence/nightshift_runs.md)). Each step's trace records the model that answered.
+- By the amount of model work, Nightshift is the main route: 2.54 million of the 3.6 million tokens (71%) and 76% of the generated tokens. By count, more calls go straight to NVIDIA (572 of 945): extraction reads each document in many short calls with reasoning off, which Nightshift cannot pass on yet (see the table below). When it can, extraction moves to Nightshift with one setting.
 - Settings has Auto Detect, connect-link paste and a connection test that names the Nemotron lane that answered.
 
 | | |
@@ -244,6 +245,10 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 <p align="center">
   <img src="docs/images/art/hardware.svg" width="100%" alt="The path to your own NVIDIA hardware: used, the NVIDIA API and Nightshift on a Mac; possible with one setting and not run, a Nightshift lane on a DGX Spark or an NVIDIA NIM on site">
 </p>
+
+### Cursor: development
+
+Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
 
 ---
 

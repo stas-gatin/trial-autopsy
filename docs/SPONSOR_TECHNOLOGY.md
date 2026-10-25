@@ -7,6 +7,7 @@ How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. 
 | **Zetaris** | Data layer: the trial registry, the literature and company filings are read through Zetaris with SQL, and the date cut-off runs inside the query. The Verifier has Nemotron write the SQL that checks every number the calculator uses against its source | `app/tools/zetaris.py`, `app/tools/http.py`, `app/tools/europepmc.py`, `app/agents/verifier.py` |
 | **Meterless** | Two roles. **Power:** Meterless Nightshift is the app's primary model provider. **Build:** the official World Model engine stores every source, entity and fact with its provenance | `app/llm/meterless_runtime.py`, `app/llm/generator.py`, `services/meterless/`, `app/engines/meterless.py`, `app/engines/world_model.py` |
 | **NVIDIA** | Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super) | `app/config.py`, `app/llm/generator.py` |
+| **Cursor** | Development: one of the tools the app was built with, used to write and test its modules and to find bugs and gaps | the whole repository |
 
 ## Zetaris: the data layer
 
@@ -56,7 +57,7 @@ A contradiction goes to the critic as a serious issue, and the critic can send t
 
 The provider keys stay in Nightshift. Each response's `model` field names the lane that answered, and the trace records it. Answers are stored under the model that actually answered, so one lane's answer is never replayed as another model's.
 
-**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 41 recorded runs 373 of the 377 calls went through Nightshift; the other 4 went to NVIDIA directly after Nightshift cut them twice. 361 answers came from Nemotron 3 Ultra and 16 from Nemotron 3.5 Super. A full live analysis took a median of 13 minutes (5 to 37). The per-run table is in `docs/evidence/nightshift_runs.md`.
+**Through Nightshift in the recorded runs.** Nightshift ran with two lanes on its NVIDIA provider, Nemotron 3 Ultra and Nemotron 3.5 Super, and served the five reasoning steps: the mechanism analyst, the Verifier, the investigator, the critic and the reporter. In the 41 recorded runs 373 of the 377 calls went through Nightshift; the other 4 went to NVIDIA directly after Nightshift cut them twice. 361 answers came from Nemotron 3 Ultra and 16 from Nemotron 3.5 Super. By the amount of model work Nightshift is the main route: 2.54 million of the 3.6 million tokens (71%) and 76% of the generated tokens; by count, more calls go straight to NVIDIA (572 of 945), because extraction reads each document in many short calls with reasoning off. A full live analysis took a median of 13 minutes (5 to 37). The per-run table is in `docs/evidence/nightshift_runs.md`.
 
 **What I learned running a pipeline through Nightshift.** Nightshift is built first for chat. A pipeline of strict steps needs a few settings, and I measured each:
 
@@ -135,6 +136,10 @@ The calculator's probability of success has a Brier score of 0.137 on the 18 tri
 - Settings page: every AI step shows the NVIDIA logo and its Nemotron route or model.
 - Each report's agent graph and *What this analysis used* panel show the model each step actually used.
 - `eval/results/` holds the scores; `logs/` holds every recorded run's step log, and `scripts/check_replay.py` replays each run offline and checks it reproduces the live result.
+
+## Cursor: development
+
+Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
 
 ## What is distinctive
 
