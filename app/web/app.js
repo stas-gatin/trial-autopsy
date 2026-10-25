@@ -1970,10 +1970,12 @@ async function renderCost(res) {
     return `<tr><td>${esc(agent)}</td><td class="mono">${u.calls}</td><td class="mono">${(u.input_tokens / 1000).toFixed(1)}k / ${(u.output_tokens / 1000).toFixed(1)}k</td>
       <td>${providerOf(u.model) ? logoImg(providerOf(u.model), 14) + " " : ""}${esc(modelName(u.model))}</td><td class="mono">$${c.toFixed(3)}</td></tr>`;
   }).join("");
-  const minutes = res.execution_time_seconds > 5 ? `${Math.max(1, Math.round(res.execution_time_seconds / 60))} min` : "replayed";
+  const liveSeconds = res.execution_time_seconds > 5 ? res.execution_time_seconds : res.first_live_run_seconds;
+  const minutes = liveSeconds ? `${Math.max(1, Math.round(liveSeconds / 60))} min` : "replayed";
+  const liveRun = res.execution_time_seconds > 5 ? "live run" : "first live run";
   box.innerHTML = `<div class="cost-tiles">
       <div class="acc-tile"><div class="acc-n">${Math.round((tokIn + tokOut) / 1000)}k</div><div class="acc-l">model tokens, ${calls} calls</div><div class="acc-s">${(tokIn / 1000).toFixed(0)}k read · ${(tokOut / 1000).toFixed(0)}k written</div></div>
-      <div class="acc-tile"><div class="acc-n">${esc(minutes)}</div><div class="acc-l">analysis time</div><div class="acc-s">${res.execution_time_seconds > 5 ? (viaMeterless ? "live run through Meterless Nightshift" : "live run on NVIDIA's API") : "opened from the recording"}</div></div>
+      <div class="acc-tile"><div class="acc-n">${esc(minutes)}</div><div class="acc-l">analysis time</div><div class="acc-s">${liveSeconds ? (viaMeterless ? `${liveRun} through Meterless Nightshift` : `${liveRun} on NVIDIA's API`) : "opened from the recording"}</div></div>
       <div class="acc-tile"><div class="acc-n">${onNvidia ? "Open" : "Mixed"}</div><div class="acc-l">${onNvidia ? "NVIDIA Nemotron models" : "models in this run"}</div><div class="acc-s">${onNvidia ? (viaMeterless ? "served by Meterless Nightshift, on a Mac or the company's own DGX Spark" : "NVIDIA's developer API, or the company's own hardware") : ""}</div></div>
       <div class="acc-tile"><div class="acc-n">$${refCost.toFixed(2)}</div><div class="acc-l">the same tokens at ${esc(modelName(ref))} list prices</div><div class="acc-s">for comparison only</div></div></div>
     <div class="cal-table-wrap"><table class="cal-table"><thead><tr><th>Agent</th><th>Calls</th><th>Tokens in / out</th><th>Model</th><th>At ${esc(modelName(ref))} prices</th></tr></thead>

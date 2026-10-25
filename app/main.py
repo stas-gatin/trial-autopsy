@@ -95,7 +95,12 @@ def run_status(run_id: str):
     for folder in (RUNS, REPLAYS, LIBRARY):
         path = folder / f"{run_id}.json"
         if path.exists():
-            return {"status": "done", "result": json.loads(path.read_text())}
+            result = json.loads(path.read_text())
+            recorded = LIBRARY / f"{run_id}.json"
+            if not result.get("first_live_run_seconds") and folder != LIBRARY and recorded.exists():
+                # a replay of a recorded analysis keeps showing how long its first live run took
+                result["first_live_run_seconds"] = json.loads(recorded.read_text()).get("first_live_run_seconds")
+            return {"status": "done", "result": result}
     raise HTTPException(404, "unknown run")
 
 
@@ -302,6 +307,8 @@ def benchmark():
             tokens.append(sum(u.get("input_tokens", 0) + u.get("output_tokens", 0) for u in usage.values()))
             if run.get("execution_time_seconds", 0) > 5:      # replays take a fraction of a second
                 times.append(run["execution_time_seconds"])
+            elif run.get("first_live_run_seconds"):           # a recorded run replayed: its first live run
+                times.append(run["first_live_run_seconds"])
         avg = lambda xs: round(sum(xs) / len(xs)) if xs else None
         return {"avg_tokens": avg(tokens), "avg_seconds": avg(times)}
 
