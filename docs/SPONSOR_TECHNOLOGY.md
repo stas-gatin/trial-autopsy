@@ -123,9 +123,9 @@ The run trace records each such step.
 | What is scored | All 36 | 6 added after the freeze |
 |---|---|---|
 | Experts' cause as the main cause | **26/36** | **4/6** |
-| Experts' cause among those named | **35/36** | **6/6** |
-| Success or failure called right, where the trial could be sized | **16/22** | **1/1** |
+| Success or failure forecast right, where the trial could be sized | **16/22** | **1/1** |
 | Expected hazard ratio within 0.03 of the answer key | 8/25 | 0/1 |
+| *Softer:* one of the causes named matches one of the experts' causes | 35/36 | 6/6 |
 
 The calculator's probability of success has a Brier score of 0.137 on the 18 trials it could size (0.250 for always saying 50%); all 9 trials it gave below 20% or above 80% went the way it said.
 

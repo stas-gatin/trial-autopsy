@@ -236,9 +236,9 @@ def pipeline() -> str:
 def results(scores: dict, numbers: dict) -> str:
     items = [
         (scores["category_correct"], scores["completed"], "experts' main cause", "named as the main cause", TEAL),
-        (scores["category_overlap"], scores["completed"], "experts' cause named", "among the causes given", TEAL),
-        (scores["prediction_correct"], scores["prediction_scored"], "outcomes called right", "where the trial could be sized", TEAL),
+        (scores["prediction_correct"], scores["prediction_scored"], "outcomes forecast right", "where the trial could be sized", TEAL),
         (scores["expected_hr_within_0_03"], scores["expected_hr_compared"], "effect size on target", "expected HR within 0.03", TEAL),
+        (scores["category_overlap"], scores["completed"], "a cause matches", "softer: any cause named", MUTED),
         (numbers["nightshift"], numbers["reasoning"], "reasoning calls", "through Meterless Nightshift", NV),
     ]
     cards = ""

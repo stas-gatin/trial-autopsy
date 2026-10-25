@@ -257,14 +257,13 @@ The honest test is the **blind backtest**: 36 finished trials replayed with only
 
 | What is scored | All 36 trials | 6 added after the code freeze |
 |---|---|---|
-| Experts' cause named as the main cause | **26 / 36** | **4 / 6** |
-| Experts' cause among the causes named | **35 / 36** | **6 / 6** |
-| Success or failure called right, where the trial could be sized | **16 / 22** | **1 / 1** |
-| Actual outcome read right from the announcement (autopsy) | **35 / 36** | **6 / 6** |
+| Experts' cause named as **the** main cause | **26 / 36** | **4 / 6** |
+| Success or failure forecast right, from documents before the readout (where the trial could be sized) | **16 / 22** | **1 / 1** |
 | Expected hazard ratio within 0.03 of the answer key | 8 / 25 | 0 / 1 |
+| *Softer:* one of the causes named (usually two or three) matches one of the experts' causes | 35 / 36 | 6 / 6 |
 | Every number used carries a verbatim quote that passed the code check | 100% | 100% |
 
-The explanation is the main output, so it is scored first. The expected hazard ratio is a stricter technical check: the agents often size the effect from a different, defensible number than the answer key (an earlier phase, another time point).
+The explanation is the main output, so it is scored first. In an autopsy the outcome itself is not forecast: code reads it from the announcement, and read it right in 35 of the 36 trials (all but SPIRE-2, below). The expected hazard ratio is a stricter technical check: the agents often size the effect from a different, defensible number than the answer key (an earlier phase, another time point).
 
 **How far to trust a forecast.** For the 18 trials the calculator could size, its probability of success scores a Brier score of 0.137 (always saying 50% scores 0.250). It is right where it is sure, and says so where it is not:
 
