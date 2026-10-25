@@ -34,8 +34,8 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | You want | Go to |
 |---|---|
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
+| NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | How each sponsor technology is used | [Sponsor technology](#sponsor-technology) · full write-up: [`docs/SPONSOR_TECHNOLOGY.md`](docs/SPONSOR_TECHNOLOGY.md) ([PDF](docs/SPONSOR_TECHNOLOGY.pdf)) |
-| NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | Zetaris and the Meterless World Model | [Zetaris](#zetaris-the-data-layer-and-the-fact-check) · [World Model](#meterless-world-model-the-evidence-store-build) · [conformance 8/8](docs/evidence/meterless_world_model_conformance.txt) |
 | Whether it works | [Results](#results): blind backtest on 36 trials · [`eval/results/`](eval/results/) · [pre-registered forecasts](eval/predictions/) |
 | What the agents did, step by step | [`logs/`](logs/) (a trace and a World Model audit per run) · [API and logs](#api-and-logs) |
@@ -177,19 +177,38 @@ Every report draws the same nine steps for its own run, with what each step prod
 
 The full write-up, with code paths and how to check each claim, is [`docs/SPONSOR_TECHNOLOGY.md`](docs/SPONSOR_TECHNOLOGY.md) (also as a PDF).
 
-### Zetaris: the data layer and the fact check
+### NVIDIA Nemotron: the models behind every AI step
 
-- ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through Zetaris: each request becomes a REST session table read back with Lightning SQL (`app/tools/zetaris.py`).
-- The blind-test cut-off runs in that SQL, so a paper from after the cut-off never reaches an agent.
-- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 41 recorded analyses it checked 146 numbers: 99 confirmed, 46 not found in the abstract or registry, 1 contradiction, which reached the critic.
-- If Zetaris is down, reads fall back to the source directly, the Verifier cannot run, and the report says its numbers were not independently verified.
+Every step that reads or reasons runs on NVIDIA Nemotron, and the whole blind backtest below was produced on it: 41 recorded analyses, 945 model calls, 3.6 million tokens.
 
-### Meterless World Model: the evidence store (Build)
+<p align="center">
+  <img src="docs/images/art/nemotron.svg" width="100%" alt="Built on NVIDIA Nemotron: the model calls of the recorded analyses by step, model and route">
+</p>
 
-- The official Meterless World Model reference engine, unchanged (Apache-2.0), runs as a local service in `services/meterless/`; `run.py` starts it.
-- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 41 analyses: 869 entities, 2,983 facts, 845 links, 7,440 audit entries, with each run's audit log in `logs/world-<run_id>.jsonl`.
-- The app's own store (`app/engines/world_model.py`) implements the same three services, WorldStore, IngestPipeline and ContextBuilder, and the analyst, calculator, Verifier and investigator build their context from it.
-- `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass ([evidence](docs/evidence/meterless_world_model_conformance.txt)).
+**Why Nemotron.** A drug company cannot send unpublished trial data to a closed cloud model. Nemotron is open, so the same agents can run on the company's own NVIDIA hardware (below), and the backtest shows how well they do before anyone trusts them with real data.
+
+**Which model does what, and why.**
+
+| Model | Steps | Why this model |
+|---|---|---|
+| **Nemotron 3 Ultra** (550B), reasoning on, through Meterless Nightshift | mechanism analyst, Verifier, investigator, critic, reporter: 361 of 377 reasoning calls | The decisions: which numbers describe this trial, the SQL that checks them, eleven competing explanations weighed against the evidence, the critic's review |
+| **Nemotron 3.5 Super** (120B), reasoning off, NVIDIA API | extraction and read-through: 568 calls | Copying every number with its exact sentence from each document. Measured on the same document: reasoning off found 9 facts in seconds, reasoning on 0 to 3 in minutes |
+
+**Engineering for Nemotron in a strict pipeline** (`app/llm/generator.py`):
+- **The reasoning switch per role.** `chat_template_kwargs.enable_thinking` is set for each step: on where the model must think, off where it must copy exactly.
+- **Reasoning kept out of the answer.** Nemotron's reasoning arrives as `<think>…</think>`; code keeps only the answer, even when a proxy drops the opening tag.
+- **Broken JSON repaired by the same model.** A reply cut off mid-thought gets one repair pass by the same model, so the content stays the model's own, or is asked once more.
+- **Long calls that cannot hang.** Reasoning calls stream; a watchdog closes a stream that goes silent, and after two cut-offs the call goes to NVIDIA directly (4 of 377 reasoning calls), named in the step log.
+- **One rate limit shared.** Nightshift calls NVIDIA with the same key, so the app paces every call, through either route, under one limit.
+- **The model never does arithmetic.** It finds and quotes numbers; code checks each quote word for word and computes every result.
+
+**Measured on Nemotron.** On 36 finished trials replayed blind, the experts' cause was among the causes the agents named in 35, and their main cause in 26. Success or failure was forecast right in 16 of the 22 trials that could be sized, and all 9 confident forecasts held ([Results](#results)). Every one of the 41 recorded analyses replays offline to the same result.
+
+**On your own NVIDIA hardware.** Every model call goes to an OpenAI-compatible endpoint. Pointing `NVIDIA_BASE_URL` at a local NVIDIA NIM that serves Nemotron, or giving Nightshift a lane on an NVIDIA DGX Spark, moves the whole analysis onto the company's own machine with no code change, and the unpublished data never leaves it. A single DGX Spark is rated for models up to about 200 billion parameters, enough for Nemotron 3.5 Super; Nemotron 3 Ultra needs a larger NVIDIA system. I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.
+
+<p align="center">
+  <img src="docs/images/art/hardware.svg" width="100%" alt="The path to your own NVIDIA hardware: used, the NVIDIA API and Nightshift on a Mac; possible with one setting and not run, a Nightshift lane on a DGX Spark or an NVIDIA NIM on site">
+</p>
 
 ### Meterless Nightshift: the model runtime (Power)
 
@@ -214,24 +233,23 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
 | A cloud request with no first token after 45 s is cut | Long reasoning prompts on a busy Nemotron 3 Ultra were cut | Streaming, retries, and a direct NVIDIA call after two cuts, recorded in the trace (needed 4 times in the final runs). I reported it, and Meterless is making the limit configurable |
 | An answer cache keyed on the last 4,000 characters of the prompt | A near-identical prompt got a previous run's answer back, and a repeated connection test was answered from the cache | Every request, and the connection test, carries a unique reference so the cache cannot replay a stale answer |
 
-### NVIDIA Nemotron: the models
+### Meterless World Model: the evidence store (Build)
 
-<p align="center">
-  <img src="docs/images/art/nemotron.svg" width="100%" alt="Built on NVIDIA Nemotron: the model calls of the recorded analyses by step, model and route">
-</p>
+- The official Meterless World Model reference engine, unchanged (Apache-2.0), runs as a local service in `services/meterless/`; `run.py` starts it.
+- Every source, entity and fact is written to it with provenance: the step that found it, the run, the source URL and the publication date. Across the 41 analyses: 869 entities, 2,983 facts, 845 links, 7,440 audit entries, with each run's audit log in `logs/world-<run_id>.jsonl`.
+- The app's own store (`app/engines/world_model.py`) implements the same three services, WorldStore, IngestPipeline and ContextBuilder, and the analyst, calculator, Verifier and investigator build their context from it.
+- `npm --prefix services/meterless run conformance` runs the official conformance suite: 8 of 8 checks pass ([evidence](docs/evidence/meterless_world_model_conformance.txt)).
 
-- Every AI step runs on NVIDIA Nemotron: Nemotron 3 Ultra (550B) and Nemotron 3.5 Super (120B). In the final runs Nightshift served the reasoning steps mostly from Ultra; extraction ran on 3.5 Super.
-- The critic has its own instructions and reviews the analyst's work, so the steps check each other; malformed JSON is repaired by the same model; calls are paced under the API's rate limit.
-- Open models matter here: a drug company cannot send unpublished trial data to a closed cloud model.
-- **On your own NVIDIA hardware.** Every model call goes to an OpenAI-compatible endpoint. Pointing `NVIDIA_BASE_URL` at a local NVIDIA NIM that serves Nemotron, or giving Nightshift a lane on an NVIDIA DGX Spark, moves the whole analysis onto the company's own machine with no code change, and the unpublished data never leaves it. The agents, prompts, checks and recordings stay the same. (I ran on NVIDIA's API and on Nightshift on a Mac, not on a DGX Spark.)
+### Zetaris: the data layer and the fact check
 
-<p align="center">
-  <img src="docs/images/art/hardware.svg" width="100%" alt="The path to your own NVIDIA hardware: used, the NVIDIA API and Nightshift on a Mac; possible with one setting and not run, a Nightshift lane on a DGX Spark or an NVIDIA NIM on site">
-</p>
+- ClinicalTrials.gov, Europe PMC and SEC EDGAR are read through Zetaris: each request becomes a REST session table read back with Lightning SQL (`app/tools/zetaris.py`).
+- The blind-test cut-off runs in that SQL, so a paper from after the cut-off never reaches an agent.
+- The Verifier's checks run only in Zetaris: Nemotron writes the SQL, code allows only one read-only `SELECT` over this analysis's tables, Zetaris runs it (`app/agents/verifier.py`). Across the 41 recorded analyses it checked 146 numbers: 99 confirmed, 46 not found in the abstract or registry, 1 contradiction, which reached the critic.
+- If Zetaris is down, reads fall back to the source directly, the Verifier cannot run, and the report says its numbers were not independently verified.
 
 ### Cursor: development
 
-Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
+Cursor was one of the tools I built the app with. I used it to write and run the unit tests (`tests/`), and its Agent to search the codebase for bugs and gaps, which I then fixed.
 
 ---
 
