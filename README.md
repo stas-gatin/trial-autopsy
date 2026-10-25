@@ -16,8 +16,13 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
 | **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
 | **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
+| **Demo video** | [Watch on YouTube, 4 minutes](https://youtu.be/CgPZ6zrE-NY) |
 
 > Research tool. Not medical or investment advice.
+
+<p align="center">
+  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="docs/images/video_thumbnail.jpg" width="640" alt="Demo video: Trial Autopsy, 4 minutes on YouTube"></a>
+</p>
 
 <p align="center">
   <a href="#quick-start"><b>Quick start</b></a> ·
@@ -33,6 +38,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 
 | You want | Go to |
 |---|---|
+| See it working in 4 minutes | [Demo video on YouTube](https://youtu.be/CgPZ6zrE-NY) |
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | Bugs found in Nightshift and reported with fixes | [Contributions back to Meterless](#meterless-nightshift-the-model-runtime-power) · [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4), [#5](https://github.com/Meterless/Meterless/issues/5) |
