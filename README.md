@@ -303,9 +303,15 @@ Other checks:
 
 ### One command (Docker)
 
+You need [Docker](https://docs.docker.com/get-docker/) (Docker Desktop on macOS and Windows) and Git. Clone the repository and start it:
+
 ```bash
+git clone https://github.com/stas-gatin/trial-autopsy.git
+cd trial-autopsy
 docker compose up --build
 ```
+
+The first build installs every dependency inside the image (Python packages and the Node.js service), so nothing else needs installing on your machine.
 
 Open http://localhost:8000. Nothing else is needed: with no `.env` the app runs **offline** (`SAMPLE_MODE=true`), and all 41 recorded analyses open and replay from the repository, with no keys and no network. Stop it with Ctrl+C.
 
@@ -320,7 +326,10 @@ docker compose exec trial-autopsy python scripts/check_replay.py    # all 41 ana
 
 ### Without Docker
 
+You need Python 3.12 and Node.js 20 or newer.
+
 ```bash
+git clone https://github.com/stas-gatin/trial-autopsy.git && cd trial-autopsy
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 npm --prefix services/meterless install      # the Meterless World Model service (Node.js 20+)
 SAMPLE_MODE=true .venv/bin/python run.py     # offline, no keys: web app and API on :8000, starts the Meterless service
