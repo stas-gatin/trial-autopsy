@@ -100,6 +100,25 @@ class AgentModelTests(SettingsTests):
         self.assertFalse(r.json()["zetaris"]["configured"])
         self.assertNotIn("ZETARIS_API_KEY", settings.ENV_PATH.read_text())
 
+    def test_public_demo_settings_are_read_only(self):
+        """DEMO_READONLY=true: nothing on the Settings page can write .env or call out; off, saving works as before."""
+        from fastapi.testclient import TestClient
+        from app.main import app
+        client = TestClient(app)
+        os.environ["DEMO_READONLY"] = "true"
+        before = settings.ENV_PATH.read_text()
+        self.assertTrue(client.get("/api/settings").json()["readonly"])
+        for path in ("/api/settings/test/provider/nvidia", "/api/settings/meterless/detect",
+                     "/api/settings/test/source/clinicaltrials"):
+            self.assertEqual(client.post(path).status_code, 403, path)
+        r = client.post("/api/settings", json={"run": {"SAMPLE_MODE": False}})
+        self.assertEqual(r.status_code, 403)
+        self.assertIn("read-only", r.json()["detail"])
+        self.assertEqual(settings.ENV_PATH.read_text(), before)
+        os.environ["DEMO_READONLY"] = "false"
+        self.assertFalse(client.get("/api/settings").json()["readonly"])
+        self.assertEqual(client.post("/api/settings", json={"run": {}}).status_code, 200)
+
     def test_nvidia_always_has_its_own_address(self):
         os.environ.pop("NVIDIA_BASE_URL", None)
         self.assertEqual(config.base_url("nvidia"), "https://integrate.api.nvidia.com/v1")

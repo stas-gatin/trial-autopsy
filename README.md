@@ -374,6 +374,8 @@ All of this is on the **Settings** page, which saves to the local `.env` (never 
 docker run --rm --network none -e SAMPLE_MODE=true trial-autopsy python scripts/check_offline.py
 ```
 
+For a public demo, `DEMO_READONLY=true` also makes the Settings page read-only: it can be viewed, but nothing can be saved or tested from it. [`render.yaml`](render.yaml) deploys the app this way on Render, offline and read-only.
+
 ### Tests
 
 ```bash
