@@ -7,6 +7,7 @@ How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. 
 | **Zetaris** | Data layer: the trial registry, the literature and company filings are read through Zetaris with SQL, and the date cut-off runs inside the query. The Verifier has Nemotron write the SQL that checks every number the calculator uses against its source | `app/tools/zetaris.py`, `app/tools/http.py`, `app/tools/europepmc.py`, `app/agents/verifier.py` |
 | **Meterless** | Two roles. **Power:** Meterless Nightshift is the app's primary model provider. **Build:** the official World Model engine stores every source, entity and fact with its provenance | `app/llm/meterless_runtime.py`, `app/llm/generator.py`, `services/meterless/`, `app/engines/meterless.py`, `app/engines/world_model.py` |
 | **NVIDIA** | Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super) | `app/config.py`, `app/llm/generator.py` |
+| **Cursor** | Development: one of the tools the app was built with, used to write and test its modules and to find bugs and gaps | the whole repository |
 
 ## Zetaris: the data layer
 
@@ -135,6 +136,10 @@ The calculator's probability of success has a Brier score of 0.137 on the 18 tri
 - Settings page: every AI step shows the NVIDIA logo and its Nemotron route or model.
 - Each report's agent graph and *What this analysis used* panel show the model each step actually used.
 - `eval/results/` holds the scores; `logs/` holds every recorded run's step log, and `scripts/check_replay.py` replays each run offline and checks it reproduces the live result.
+
+## Cursor: development
+
+Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
 
 ## What is distinctive
 

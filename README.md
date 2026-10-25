@@ -246,6 +246,10 @@ The full write-up, with code paths and how to check each claim, is [`docs/SPONSO
   <img src="docs/images/art/hardware.svg" width="100%" alt="The path to your own NVIDIA hardware: used, the NVIDIA API and Nightshift on a Mac; possible with one setting and not run, a Nightshift lane on a DGX Spark or an NVIDIA NIM on site">
 </p>
 
+### Cursor: development
+
+Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
+
 ---
 
 ## Results
