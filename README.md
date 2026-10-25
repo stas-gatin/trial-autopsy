@@ -398,7 +398,7 @@ The response holds the verdict, the report, the four checks, the calculator inpu
 
 Every step, handoff, query and send-back is a line in `logs/trace-<run_id>.jsonl`, in the hackathon's log format (timestamp, run_id, agent_name, action, input_summary, output_summary, target_agent, confidence, retry_count, status), mirrored to stdout as `[INFO] run_id=…`. The library keeps each recorded run's trace in `data/library/traces/`.
 
-The logs of the 41 recorded runs are committed in `logs/` (`trace-<run_id>.jsonl` for the steps, `world-<run_id>.jsonl` for the World Model audit). An offline replay writes its result and logs to `data/runs/replay/` and `logs/replay/`, so it never overwrites a live run.
+The logs of the 41 recorded runs are committed in `logs/` (`trace-<run_id>.jsonl` for the steps, `world-<run_id>.jsonl` for the World Model audit). They come from the final pass on 25 October, run with the Meterless World Model engine up: it reused the Nemotron answers recorded live on 24 and 25 October, so its model steps are marked `"cached": true` and the pass takes seconds. Each recording in `data/llm_cache/` keeps the provider, the model, the time and the token usage of its live call, and the time of each analysis's first full live run is in [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) and in its record (`first_live_run_seconds`). An offline replay writes its result and logs to `data/runs/replay/` and `logs/replay/`, so it never overwrites a live run.
 
 Examples: `input_examples/` (six requests: one autopsy, one backtest and four forecasts) and `output_examples/` (their responses, each with its `log_file`). Example 3 is the ACCELERATE blind backtest itself, the same run as `bt-accelerate`.
 
