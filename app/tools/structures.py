@@ -147,7 +147,8 @@ def target_profile(symbol: str, ensembl_id: str, drug_names: list[str]) -> dict:
         return profile
 
     try:
-        af = http.get_json(ALPHAFOLD.format(uniprot=uniprot), source="AlphaFold")[0]
+        af = http.get_json(ALPHAFOLD.format(uniprot=uniprot), source="AlphaFold")
+        af = af[0] if isinstance(af, list) else af          # the API answers with a list; read through Zetaris, the entry
         profile.update({"source": "alphafold", "id": af["entryId"], "url": af["pdbUrl"],
                         "label": f"AlphaFold predicted model {af['entryId']}", "chains": []})
         profile["links"]["structure"] = f"https://alphafold.ebi.ac.uk/entry/{uniprot}"
