@@ -1414,3 +1414,22 @@ svg.is-focus .sm-elabel { opacity: .3; }
 .lg-back { border-color: var(--warn); border-top-style: dashed; } .lg-wm { border-color: #0b6e79; } .lg-model { border-color: #5a8f00; }
 @media (max-width: 1000px) { .smap-wrap { grid-template-columns: minmax(0, 1fr); } .smap-info { position: static; } }
 @media (prefers-reduced-motion: reduce) { .sm-block, .sm-edge { transition: none; } }
+
+/* ---------- phones: the header on two rows with every menu item, nothing wider than the screen ---------- */
+@media (max-width: 760px) {
+  html, body { overflow-x: clip; }      /* a moment of over-wide content while a report loads must not widen the page (clip keeps the header sticky) */
+  .topbar { flex-wrap: wrap; row-gap: 8px; padding: 10px 14px; }
+  .brand { flex: 1 1 auto; min-width: 0; gap: 8px; }
+  .brand .pulse { display: none; }
+  .brand-name { font-size: 17px; }
+  .topnav { order: 3; flex: 1 0 100%; margin: 0; flex-wrap: wrap; gap: 4px; }
+  .topnav a[data-nav] { display: inline-block; flex: none; padding: 6px 10px; font-size: 14px; }   /* overrides the narrow-screen rules that hid items */
+  .topnav a[data-nav="settings"] { font-size: 14px; }
+  .topnav a[data-nav="settings"]::before { content: none; }
+  .an-table, .cal-table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* wide diagrams keep a readable size and scroll sideways inside their box instead of shrinking to a third */
+  .forest, .pathway, .agent-graph, .tm-chart, .ty-wrap, .smap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .forest > svg, .pathway > svg, .agent-graph > svg, .tm-chart > svg, .ty-wrap > svg, .smap > svg { min-width: 640px; }
+  .pb-step { grid-template-columns: minmax(0, 1fr); }
+  .pb-step > *, .registry-card { min-width: 0; max-width: 100%; }
+}

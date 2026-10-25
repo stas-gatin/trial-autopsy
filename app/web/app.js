@@ -1142,6 +1142,12 @@ function renderPoweredBy(o, events) {
   $("poweredBy").innerHTML = parts.length ? `<span class="pb-label">Powered by</span>${parts.join("")}` : "";
 }
 
+// On a phone the wide diagrams scroll sideways inside their box; start them centred, where the answer is.
+function centerWide(box, tries = 15) {
+  if (box.clientWidth && box.scrollWidth > box.clientWidth) box.scrollLeft = (box.scrollWidth - box.clientWidth) / 2;
+  else if (tries) setTimeout(() => centerWide(box, tries - 1), 200);   // not laid out yet (the report is still opening)
+}
+
 function render(res) {
   const o = res.output;
   graphModels = o.models_used || {};
@@ -2064,6 +2070,7 @@ function renderPathway(res) {
   const show = (id, isThis) => {
     const n = PATHWAY[id];
     $("pathway").innerHTML = pathwaySVG(id);
+    centerWide($("pathway"));
     $("pathwayNote").innerHTML = `<span class="pw-badge${isThis ? "" : " pw-other"}">${isThis ? `This trial: ${esc(res.drug.name)}` : "Other target"}</span>
       <b>${esc(n.name)}</b>${n.drugs ? ` <span class="muted">· ${esc(n.drugs)}</span>` : ""}<p>${esc(n.note)}</p>` +
       (isThis ? "" : `<button type="button" class="btn-small" id="pwBack">Back to ${esc(res.drug.name)}</button>`);
@@ -2351,6 +2358,7 @@ function drawForest(o) {
   }
   s += "</svg>";
   $("forest").innerHTML = s;
+  centerWide($("forest"));
   const items = [
     t && ["lg-bell", "where the result is likely to land if the drug works as expected"],
     c.expected_hr && ["lg-exp", `most likely result (expected HR ${num(c.expected_hr)})`],
