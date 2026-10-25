@@ -161,6 +161,10 @@ You give it a trial ID. Nine steps later you get a verdict in which every number
 
 ### What you see in the app
 
+![The system map on the app's Settings page: the data sources and Zetaris on the left, the nine steps in the middle, the Meterless World Model, Meterless Nightshift and NVIDIA Nemotron on the right](docs/images/system_map.png)
+
+**The system map** at the top of the app's Settings page is the same pipeline as the picture above, drawn with every connection. Left: the data sources and Zetaris, where the registry, papers and filings are read with SQL. Middle: the nine steps; each one shows the logos of what it uses and, for AI steps, the Nightshift route it asks for (deep or fast; Nightshift then picks the Nemotron lane). Right: every fact going into the Meterless World Model, and every reasoning step going through Meterless Nightshift to NVIDIA Nemotron. The dashed orange line is the critic sending the work back. In the app, pointing at any block shows what it does, what it reads and which model runs it.
+
 ![The agent graph of the pelacarsen report: the nine steps with the numbers each produced and the logos of the technology each ran on](docs/images/graph_nemotron.png)
 
 Every report draws the same nine steps for its own run, with what each step produced. This is pelacarsen: the case builder read 12 documents and kept 58 verbatim quotes; the calculator expected a hazard ratio of 0.877 and a 54% chance that the trial could show the benefit; the Verifier confirmed 7 numbers in Zetaris; the critic sent the work back once (the dashed arrow), and its last review still lists 8 notes, 2 of them serious. The logos on each step show the technology it ran on. The report's replay plays the steps back one by one.
