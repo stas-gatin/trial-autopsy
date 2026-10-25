@@ -1,0 +1,19 @@
+# One command: docker compose up --build, then open http://localhost:8000
+#
+# With no .env, the app runs offline (SAMPLE_MODE=true): every recorded analysis replays from the repository with no
+# keys and no network. For live runs, copy .env.example to .env, fill in the keys and set SAMPLE_MODE=false; Nightshift
+# and Zetaris on this machine are reached as host.docker.internal (see README, Quick start).
+services:
+  trial-autopsy:
+    build: .
+    image: trial-autopsy
+    ports:
+      - "${PORT:-8000}:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      SAMPLE_MODE: ${SAMPLE_MODE:-true}
+      PORT: "8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
