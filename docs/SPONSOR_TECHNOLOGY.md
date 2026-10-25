@@ -75,6 +75,12 @@ The provider keys stay in Nightshift. Each response's `model` field names the la
 - `scripts/smoke_test.py`: "Nemotron replies through Meterless Nightshift" passes only if a Nemotron model answered.
 - In a run's step log, every reasoning step shows `meterless:nvidia/nemotron-...`; the report's *What this analysis used* panel lists the models.
 
+**Contributions back to Meterless.** Running a full pipeline through Nightshift surfaced two problems in Nightshift itself. For both I traced the cause in the installed app and reported it to Meterless with the fix:
+- [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4): build 0.92.0 hid NVIDIA's models from the lane picker, so Nemotron could not be added to a lane at all. The cause was one provider name missing from the build settings (`byokProviders` in `web-env.js`). Meterless shipped the fix in 0.92.1 the same night.
+- [Meterless/Meterless#5](https://github.com/Meterless/Meterless/issues/5): long reasoning requests were cut before their first token. Nightshift learns a first-token budget from short calls (p95 × 1.5) and then applies it to long prompts that need 20–60 s. Meterless is making the limit configurable; meanwhile the app streams, retries and falls back to NVIDIA directly (4 of 377 reasoning calls).
+
+The table above is the rest of what I measured: the settings a strict pipeline needs (tier-split off, the app bound to `fast`, a unique reference per request against the answer cache), written down so other teams can run Nightshift the same way.
+
 ## Meterless World Model: the evidence store (Build)
 
 **What it does.** The official Meterless World Model reference engine (from github.com/Meterless/Meterless, unchanged, Apache-2.0) runs on the machine as a local service in `services/meterless/`. `run.py` starts it, and the Docker image includes it. Every source, entity and fact the agents produce is written to it, one namespace per run, with provenance:

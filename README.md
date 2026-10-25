@@ -35,6 +35,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 |---|---|
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
+| Bugs found in Nightshift and reported with fixes | [Contributions back to Meterless](#meterless-nightshift-the-model-runtime-power) · [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4), [#5](https://github.com/Meterless/Meterless/issues/5) |
 | How each sponsor technology is used | [Sponsor technology](#sponsor-technology) · full write-up: [`docs/SPONSOR_TECHNOLOGY.md`](docs/SPONSOR_TECHNOLOGY.md) ([PDF](docs/SPONSOR_TECHNOLOGY.pdf)) |
 | Zetaris and the Meterless World Model | [Zetaris](#zetaris-the-data-layer-and-the-fact-check) · [World Model](#meterless-world-model-the-evidence-store-build) · [conformance 8/8](docs/evidence/meterless_world_model_conformance.txt) |
 | Whether it works | [Results](#results): blind backtest on 36 trials · [`eval/results/`](eval/results/) · [pre-registered forecasts](eval/predictions/) |
@@ -236,6 +237,12 @@ Every step that reads or reasons runs on NVIDIA Nemotron, and the whole blind ba
 | For an identified app, the mode bound in Nightshift's Apps panel decides the routing | One routing mode for the whole app | The app is bound to `fast`; Nightshift picks the Nemotron lane |
 | A cloud request with no first token after 45 s is cut | Long reasoning prompts on a busy Nemotron 3 Ultra were cut | Streaming, retries, and a direct NVIDIA call after two cuts, recorded in the trace (needed 4 times in the final runs). I reported it, and Meterless is making the limit configurable |
 | An answer cache keyed on the last 4,000 characters of the prompt | A near-identical prompt got a previous run's answer back, and a repeated connection test was answered from the cache | Every request, and the connection test, carries a unique reference so the cache cannot replay a stale answer |
+
+**Contributions back to Meterless.** Running a full pipeline through Nightshift surfaced two problems in Nightshift itself. For both I traced the cause in the installed app and reported it to Meterless with the fix:
+- [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4): build 0.92.0 hid NVIDIA's models from the lane picker, so Nemotron could not be added to a lane at all. The cause was one provider name missing from the build settings (`byokProviders` in `web-env.js`). Meterless shipped the fix in 0.92.1 the same night.
+- [Meterless/Meterless#5](https://github.com/Meterless/Meterless/issues/5): long reasoning requests were cut before their first token. Nightshift learns a first-token budget from short calls (p95 × 1.5) and then applies it to long prompts that need 20–60 s. Meterless is making the limit configurable; meanwhile the app streams, retries and falls back to NVIDIA directly (4 of 377 reasoning calls).
+
+The table above is the rest of what I measured: the settings a strict pipeline needs (tier-split off, the app bound to `fast`, a unique reference per request against the answer cache), written down so other teams can run Nightshift the same way.
 
 ### Meterless World Model: the evidence store (Build)
 
