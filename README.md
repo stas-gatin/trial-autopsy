@@ -137,61 +137,15 @@ The report also has a replay of every step the agents took and a PDF export.
 
 ## How it works
 
+You give it a trial ID. Nine steps later you get a verdict in which every number links to the sentence it came from. Two kinds of step alternate: **AI steps** read and reason (NVIDIA Nemotron), and **code steps** do everything that must be exact: the arithmetic, the quote checks, the date cut-off.
+
 <p align="center">
   <img src="docs/images/art/pipeline.svg" width="100%" alt="The pipeline: data read through Zetaris, nine steps from intake to reporter, the Verifier's SQL in Zetaris, the critic's loop back, facts in the Meterless World Model and reasoning on NVIDIA Nemotron through Meterless Nightshift">
 </p>
 
-![System map from the Settings page: data sources and Zetaris on the left, the nine steps in the middle, the Meterless World Model, Meterless Nightshift and NVIDIA Nemotron on the right](docs/images/system_map.png)
+**How to read the picture.** The nine boxes are the steps, in order from left to right. A solid box is an AI step, a dashed box is plain code. Top left, **Zetaris** feeds the trial registry, the papers and the company filings into the case builder, and the Verifier later checks every number there with SQL (the dashed blue line). Top right, the **Meterless World Model** stores every verified fact; the analyst and the investigator build their context from it. The orange loop is the **critic** sending the work back to the mechanism analyst when it finds a serious problem. The bar at the bottom: every reasoning step runs on **NVIDIA Nemotron**, served through **Meterless Nightshift**.
 
-The map above is the top of the app's **Settings** page, live: point at a block to see what it does, what it reads and which model runs it. The same structure as a diagram:
-
-```mermaid
-flowchart LR
-  subgraph Data["Data"]
-    CT[ClinicalTrials.gov]
-    EP[Europe PMC]
-    SEC[SEC EDGAR]
-    OT[Open Targets]
-  end
-  ZT[("Zetaris<br/>Lightning SQL<br/>date cut-off in the query")]
-  CT --> ZT
-  EP --> ZT
-  SEC --> ZT
-
-  subgraph Pipeline["LangGraph pipeline"]
-    direction TB
-    I[Intake] --> CB[Case builder<br/>genetics, literature,<br/>extraction]
-    CB --> MA[Mechanism analyst]
-    MA --> CA[Calculator<br/>code]
-    CA --> VE[Verifier]
-    VE --> IN[Investigator]
-    IN --> CR[Critic]
-    CR -- serious issue --> RF[Refine] --> MA
-    CR -- accept --> RT[Read-through] --> RP[Reporter]
-  end
-
-  ZT --> I
-  ZT --> CB
-  ZT --> RT
-  OT --> I
-  OT --> CB
-  OT --> RT
-  VE <-- "SQL written by Nemotron" --> ZT
-
-  WM[("Meterless World Model<br/>sources, entities, facts<br/>with provenance")]
-  CB -- writes --> WM
-  WM -- context --> MA
-  WM -- context --> IN
-
-  NS["Meterless Nightshift<br/>model runtime"] --> NV["NVIDIA Nemotron<br/>3 Ultra · 3.5 Super"]
-  MA -.-> NS
-  VE -.-> NS
-  IN -.-> NS
-  CR -.-> NS
-  RP -.-> NS
-  CB -. "reasoning off" .-> NV
-  RT -. "reasoning off" .-> NV
-```
+### Step by step
 
 | Step | What it does | Runs on |
 |---|---|---|
@@ -204,6 +158,12 @@ flowchart LR
 | Critic | Reviews inputs and claims; a serious issue sends the work back (at most two rounds) | Nemotron through Nightshift |
 | Read-through | Finds rival drugs on the same target and forecasts them with the calculator | Nemotron 3.5 Super, NVIDIA API, reasoning off |
 | Reporter | Writes the report from the verified analysis; it may not add numbers | Nemotron through Nightshift |
+
+### What you see in the app
+
+![The agent graph of the pelacarsen report: the nine steps with the numbers each produced and the logos of the technology each ran on](docs/images/graph_nemotron.png)
+
+Every report draws the same nine steps for its own run, with what each step produced. This is pelacarsen: the case builder read 12 documents and kept 58 verbatim quotes; the calculator expected a hazard ratio of 0.877 and a 54% chance that the trial could show the benefit; the Verifier confirmed 7 numbers in Zetaris; the critic sent the work back once (the dashed arrow), and its last review still lists 8 notes, 2 of them serious. The logos on each step show the technology it ran on. The report's replay plays the steps back one by one.
 
 **Why it is an agent system, not a chain.** The critic and the Verifier can stop the line and send work back; code checks discard unverified quotes and flag numbers that do not match their facts. All steps share one state: the verified facts in the World Model and the run state in the LangGraph graph (`app/graph.py`).
 
