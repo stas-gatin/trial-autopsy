@@ -15,7 +15,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | **Input** | A ClinicalTrials.gov ID (and, if you have it, the topline press release) |
 | **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
 | **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
-| **Start** | `docker run` or `python run.py`, then open http://localhost:8000 ([Quick start](#quick-start)) |
+| **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
 
 > Research tool. Not medical or investment advice.
 
@@ -33,7 +33,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 
 | You want | Go to |
 |---|---|
-| Install and run, with or without keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) (no keys, no network) |
+| Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | How each sponsor technology is used | [Sponsor technology](#sponsor-technology) · full write-up: [`docs/SPONSOR_TECHNOLOGY.md`](docs/SPONSOR_TECHNOLOGY.md) ([PDF](docs/SPONSOR_TECHNOLOGY.pdf)) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | Zetaris and the Meterless World Model | [Zetaris](#zetaris-the-data-layer-and-the-fact-check) · [World Model](#meterless-world-model-the-evidence-store-build) · [conformance 8/8](docs/evidence/meterless_world_model_conformance.txt) |
@@ -322,23 +322,31 @@ Other checks:
 
 ## Quick start
 
-### Docker
+### One command (Docker)
 
 ```bash
-cp .env.example .env
-docker build -t trial-autopsy .
-docker run --rm -p 8000:8000 --env-file .env trial-autopsy
+docker compose up --build
 ```
 
-Open http://localhost:8000. With no keys at all, set `SAMPLE_MODE=true` and the recorded analyses replay offline.
+Open http://localhost:8000. Nothing else is needed: with no `.env` the app runs **offline** (`SAMPLE_MODE=true`), and all 41 recorded analyses open and replay from the repository, with no keys and no network. Stop it with Ctrl+C.
+
+Check that everything works offline, in a second terminal:
+
+```bash
+docker compose exec trial-autopsy python scripts/check_offline.py   # every page and recorded analysis, no network
+docker compose exec trial-autopsy python scripts/check_replay.py    # all 41 analyses reproduce their live result
+```
+
+**Live runs** (a new trial ID): `cp .env.example .env`, fill in the keys ([Connect the sponsor services](#connect-the-sponsor-services)), set `SAMPLE_MODE=false`, and run `docker compose up --build` again. Inside Docker, services on your own machine are reached as `host.docker.internal`, for example `METERLESS_BASE_URL=http://host.docker.internal:8088/v1` and `ZETARIS_REST_URL=http://host.docker.internal:8888/api/v1.0`.
 
 ### Without Docker
 
 ```bash
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 npm --prefix services/meterless install      # the Meterless World Model service (Node.js 20+)
-.venv/bin/python run.py                      # web app and API on :8000; starts the Meterless service
-.venv/bin/python scripts/smoke_test.py       # one PASS line per layer: Zetaris, the engine, Nemotron via Nightshift, Nemotron via NVIDIA
+SAMPLE_MODE=true .venv/bin/python run.py     # offline, no keys: web app and API on :8000, starts the Meterless service
+.venv/bin/python run.py                      # live, with the keys in .env
+.venv/bin/python scripts/smoke_test.py       # live setup check, one PASS line per layer: Zetaris, the engine, Nemotron via Nightshift, Nemotron via NVIDIA
 ```
 
 ### Connect the sponsor services
