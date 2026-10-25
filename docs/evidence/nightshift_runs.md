@@ -11,7 +11,7 @@ read-through called NVIDIA's API directly with reasoning off, because Nightshift
 Counts come from each run's step log, `logs/trace-<run>.jsonl`: every model call is one step that names the provider and
 the lane that answered (the `model` field of Nightshift's response).
 
-Time is the first full live run of each analysis (median 12 minutes, 5 to 36). Later passes reused the
+Time is the first full live run of each analysis (median 13 minutes, 5 to 37). Later passes reused the
 recorded answers of every call whose prompt had not changed (`LLM_REPLAY_FIRST`): after fixes to how the outcome of an
 autopsy is read and how a source's metadata is stored, and a final pass on 25 October with the Meterless World Model engine
 running. Those steps are marked `"cached": true` in the step log; each recording in `data/llm_cache/` keeps the provider,
