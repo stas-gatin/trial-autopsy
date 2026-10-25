@@ -344,9 +344,19 @@ def get_settings():
     return settings.read()
 
 
+READONLY = "This public demo is read-only: settings cannot be saved or tested here. Run it locally to change them."
+
+
+def _writable():
+    """DEMO_READONLY=true (the public demo) blocks every settings action that writes .env or calls out."""
+    if config.demo_readonly():
+        raise HTTPException(403, READONLY)
+
+
 @app.post("/api/settings")
 def save_settings(update: SettingsUpdate):
     from app import settings
+    _writable()
     try:
         return settings.update(update.model_dump(exclude_none=True))
     except ValueError as exc:
@@ -356,18 +366,21 @@ def save_settings(update: SettingsUpdate):
 @app.post("/api/settings/test/provider/{provider}")
 def test_provider(provider: str, model: str | None = None):
     from app import settings
+    _writable()
     return settings.test_provider(provider, model)
 
 
 @app.post("/api/settings/meterless/detect")
 def meterless_detect():
     from app import settings
+    _writable()
     return settings.meterless_detect()
 
 
 @app.post("/api/settings/test/source/{source}")
 def test_source(source: str):
     from app import settings
+    _writable()
     return settings.test_source(source)
 
 

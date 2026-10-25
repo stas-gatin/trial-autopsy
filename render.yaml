@@ -1,0 +1,16 @@
+# Public demo on Render (https://render.com): the Dockerfile, offline and read-only.
+# SAMPLE_MODE replays the recorded runs (no keys, no network); DEMO_READONLY keeps visitors from changing Settings.
+services:
+  - type: web
+    name: trial-autopsy
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: SAMPLE_MODE
+        value: "true"
+      - key: DEMO_READONLY
+        value: "true"

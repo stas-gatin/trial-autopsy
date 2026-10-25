@@ -46,6 +46,11 @@ def sample_mode() -> bool:
     return _flag("SAMPLE_MODE")
 
 
+def demo_readonly() -> bool:
+    """A public demo: settings can be viewed but not saved or tested from the page."""
+    return _flag("DEMO_READONLY")
+
+
 def runs_dir() -> pathlib.Path:
     """Where a finished run is saved. An offline replay (SAMPLE_MODE) goes to data/runs/replay/, so it can never
     overwrite the result of a live run."""
