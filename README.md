@@ -19,6 +19,29 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 
 > Research tool. Not medical or investment advice.
 
+<p align="center">
+  <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#when-something-goes-wrong">When something goes wrong</a> ·
+  <a href="#sponsor-technology">Sponsor technology</a> ·
+  <a href="#results">Results</a> ·
+  <a href="#api-and-logs">API and logs</a> ·
+  <a href="#scope-and-limitations">Limitations</a>
+</p>
+
+### Where to find what
+
+| You want | Go to |
+|---|---|
+| Install and run, with or without keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) (no keys, no network) |
+| How each sponsor technology is used | [Sponsor technology](#sponsor-technology) · full write-up: [`docs/SPONSOR_TECHNOLOGY.md`](docs/SPONSOR_TECHNOLOGY.md) ([PDF](docs/SPONSOR_TECHNOLOGY.pdf)) |
+| NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
+| Zetaris and the Meterless World Model | [Zetaris](#zetaris-the-data-layer-and-the-fact-check) · [World Model](#meterless-world-model-the-evidence-store-build) · [conformance 8/8](docs/evidence/meterless_world_model_conformance.txt) |
+| Whether it works | [Results](#results): blind backtest on 36 trials · [`eval/results/`](eval/results/) · [pre-registered forecasts](eval/predictions/) |
+| What the agents did, step by step | [`logs/`](logs/) (a trace and a World Model audit per run) · [API and logs](#api-and-logs) |
+| Sample inputs and outputs | [`input_examples/`](input_examples/) · [`output_examples/`](output_examples/) |
+| Submission metadata | [`metadata.json`](metadata.json) |
+
 ---
 
 ![The app's home page: the question and a live report card for pelacarsen](docs/images/home_hero.png)
