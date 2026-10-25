@@ -153,8 +153,8 @@ def hero(case: dict) -> str:
 def pipeline() -> str:
     steps = [("Intake", "code"), ("Case builder", "extraction"), ("Mechanism analyst", "Nemotron"),
              ("Calculator", "code"), ("Verifier", "SQL in Zetaris"), ("Investigator", "Nemotron"),
-             ("Critic", "can send back"), ("Reporter", "Nemotron")]
-    w, h, gap, x0, y0 = 136, 62, 16, 40, 168
+             ("Critic", "can send back"), ("Read-through", "rival drugs"), ("Reporter", "Nemotron")]
+    w, h, gap, x0, y0 = 124, 62, 10, 40, 168
     nodes, cx = "", []
     for i, (name, sub) in enumerate(steps):
         x = x0 + i * (w + gap)
@@ -164,7 +164,7 @@ def pipeline() -> str:
         nodes += f"""
     <g class="node" style="animation-delay:{i * 0.45:.2f}s">
       <rect x="{x}" y="{y0}" width="{w}" height="{h}" rx="12" fill="#ffffff" stroke="{stroke}" stroke-width="2"{' stroke-dasharray="5 4"' if not ai else ''}/>
-      <text x="{x + w / 2}" y="{y0 + 27}" class="t" font-size="13" font-weight="700" fill="{INK}" text-anchor="middle">{esc(name)}</text>
+      <text x="{x + w / 2}" y="{y0 + 27}" class="t" font-size="12.5" font-weight="700" fill="{INK}" text-anchor="middle">{esc(name)}</text>
       <text x="{x + w / 2}" y="{y0 + 46}" class="t" font-size="12" fill="{MUTED}" text-anchor="middle">{esc(sub)}</text>
     </g>"""
     line_y = y0 + h / 2
@@ -207,7 +207,7 @@ def pipeline() -> str:
       <text x="{x0 + 714}" y="{y0 + h + 126}" font-size="15" font-weight="700" fill="{NV}">Nemotron</text>
     </g>"""
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img"
-  aria-label="The pipeline: intake, case builder, mechanism analyst, calculator, Verifier with SQL in Zetaris, investigator, critic that can send the work back, reporter; facts in the Meterless World Model; reasoning on NVIDIA Nemotron through Meterless Nightshift.">
+  aria-label="The pipeline: intake, case builder, mechanism analyst, calculator, Verifier with SQL in Zetaris, investigator, critic that can send the work back, read-through to rival drugs, reporter; facts in the Meterless World Model; reasoning on NVIDIA Nemotron through Meterless Nightshift.">
   <defs>{logo_defs('nvidia-mark.svg', 'meterless.svg', 'zetaris-mark.svg')}<style>
     .t {{ font-family: {FONT}; }}
     .node {{ opacity: 0; animation: up 0.6s ease-out forwards; }}

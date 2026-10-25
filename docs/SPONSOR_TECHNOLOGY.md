@@ -7,7 +7,7 @@ How Zetaris, Meterless and NVIDIA are used, and what is distinctive about each. 
 | **Zetaris** | Data layer: the trial registry, the literature and company filings are read through Zetaris with SQL, and the date cut-off runs inside the query. The Verifier has Nemotron write the SQL that checks every number the calculator uses against its source | `app/tools/zetaris.py`, `app/tools/http.py`, `app/tools/europepmc.py`, `app/agents/verifier.py` |
 | **Meterless** | Two roles. **Power:** Meterless Nightshift is the app's primary model provider. **Build:** the official World Model engine stores every source, entity and fact with its provenance | `app/llm/meterless_runtime.py`, `app/llm/generator.py`, `services/meterless/`, `app/engines/meterless.py`, `app/engines/world_model.py` |
 | **NVIDIA** | Every AI step runs on NVIDIA Nemotron (3 Ultra and 3.5 Super) | `app/config.py`, `app/llm/generator.py` |
-| **Cursor** | Development: one of the tools the app was built with, used to write and test its modules and to find bugs and gaps | the whole repository |
+| **Cursor** | Development: the unit tests were written in it, and its Agent searched the codebase for bugs and gaps | `tests/` |
 
 ## Zetaris: the data layer
 
@@ -98,19 +98,23 @@ Across the 41 analyses the engine stored 869 entities, 2,983 facts, 845 links an
 
 | Step | Model in the recorded runs | Route | Reasoning |
 |---|---|---|---|
-| Mechanism analyst: picks the numbers the calculator uses | Nemotron 3 Ultra (550B) | Nightshift, deep route | on |
-| Verifier: writes the SQL that checks each number in Zetaris | Nemotron 3 Ultra (550B) | Nightshift, fast route | on |
-| Investigator: weighs every possible cause | Nemotron 3 Ultra (550B) | Nightshift, deep route | on |
-| Critic: checks the work and can send it back | Nemotron 3 Ultra (550B) | Nightshift, fast route | on |
-| Reporter | Nemotron 3 Ultra (550B) | Nightshift, fast route | requested off; Nightshift does not pass the switch |
+| Mechanism analyst: picks the numbers the calculator uses | Nemotron 3 Ultra (550B) | Nightshift | on |
+| Verifier: writes the SQL that checks each number in Zetaris | Nemotron 3 Ultra (550B) | Nightshift | on |
+| Investigator: weighs every possible cause | Nemotron 3 Ultra (550B) | Nightshift | on |
+| Critic: checks the work and can send it back | Nemotron 3 Ultra (550B) | Nightshift | on |
+| Reporter | Nemotron 3 Ultra (550B) | Nightshift | requested off; Nightshift does not pass the switch |
 | Extraction: copies numbers with verbatim quotes | Nemotron 3.5 Super (120B) | NVIDIA API | off |
 | Read-through: rival drugs on the same target | Nemotron 3.5 Super (120B) | NVIDIA API | off |
 
 Nightshift picks the lane for each request; with the app bound to `fast`, it served the reasoning steps almost entirely from Ultra.
 
-**Built for open models.**
-- The critic has its own instructions and reviews the analyst's work, and the Verifier checks the numbers against the sources, so the steps check each other.
-- Calls are paced under the API's rate limit; malformed JSON is repaired by the same model, and a reasoning reply that holds no JSON (one cut off mid-thought) is asked once more.
+**Engineering for Nemotron in a strict pipeline** (`app/llm/generator.py`):
+- **The reasoning switch per role.** `chat_template_kwargs.enable_thinking` is set for each step: on where the model must think, off where it must copy exactly. Measured on the same document: extraction with reasoning off found 9 facts in seconds, with reasoning on 0 to 3 in minutes.
+- **Reasoning kept out of the answer.** Nemotron's reasoning arrives as `<think>…</think>`; code keeps only the answer, even when a proxy drops the opening tag.
+- **Broken JSON repaired by the same model.** A reply cut off mid-thought gets one repair pass by the same model, so the content stays the model's own, or is asked once more.
+- **Long calls that cannot hang.** Reasoning calls stream; a watchdog closes a stream that goes silent, and after two cut-offs the call goes to NVIDIA directly (4 of 377 reasoning calls), named in the step log.
+- **One rate limit shared.** Nightshift calls NVIDIA with the same key, so the app paces every call, through either route, under one limit.
+- **The steps check each other.** The critic has its own instructions and reviews the analyst's work, and the Verifier checks the numbers against the sources.
 
 **Code does the checks a model could get wrong.** Numbers come from verified quotes, and code:
 - sets the direction of a change from the source's own words, reading the start of the sentence when a quote begins mid-sentence;
@@ -139,7 +143,7 @@ The calculator's probability of success has a Brier score of 0.137 on the 18 tri
 
 ## Cursor: development
 
-Cursor was one of the tools the app was built with: I used it to write and test the app's modules, and to find bugs and gaps.
+Cursor was one of the tools I built the app with. I used it to write and run the unit tests (`tests/`), and its Agent to search the codebase for bugs and gaps, which I then fixed.
 
 ## What is distinctive
 

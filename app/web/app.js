@@ -1825,7 +1825,12 @@ async function renderCriticReview(res) {
   const first = reviews[0], high = (first.issues || []).filter((x) => x.severity === "high");
   if (reviews.length > 1 && rounds.length > 1) {
     const [r1, r2] = [rounds[0], rounds[rounds.length - 1]];
-    const changed = r1.hr !== r2.hr || r1.power !== r2.power || (r1.primary || r1.category) !== (r2.primary || r2.category);
+    // A material change only: a new diagnosis, a different chance as shown (whole percent) or an HR that moved by 0.01
+    // or more. 1.033 -> 1.031 with the same 3% and the same diagnosis means the answer held.
+    const moved = (a, b, same) => (a === null) !== (b === null) || (a !== null && !same(a, b));
+    const changed = moved(r1.hr, r2.hr, (a, b) => Math.abs(a - b) < 0.01)
+      || moved(r1.power, r2.power, (a, b) => Math.round(a * 100) === Math.round(b * 100))
+      || (r1.primary || r1.category) !== (r2.primary || r2.category);
     $("criticTitle").textContent = changed ? "The critic changed the answer" : "The critic sent the work back; the answer held";
     $("criticReview").innerHTML = `<div class="cr-flow">
       ${roundBox(r1, 0)}
@@ -1833,7 +1838,7 @@ async function renderCriticReview(res) {
         ${high.slice(0, 2).map((x) => `<p>“${esc(x.issue)}”</p>`).join("")}</div>
       ${roundBox(r2, rounds.length - 1)}</div>
       <p class="cr-note">${changed ? "After the critic's objection the mechanism analyst re-read the evidence and the calculator ran again. "
-        : "The mechanism analyst re-checked the evidence; the numbers did not change. "}
+        : "The mechanism analyst re-checked the evidence; the diagnosis and the chance stayed the same. "}
       Second review: ${lastNotes(reviews[reviews.length - 1])}.</p>`;
   } else {
     const list = issues(first).slice(0, 3);
