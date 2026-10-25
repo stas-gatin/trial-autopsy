@@ -1,0 +1,11 @@
+{
+ "alias": "papers",
+ "source": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID%3APMC5064025&format=json&resultType=core&pageSize=25",
+ "sql": "SELECT regexp_extract(r.abstractText, '([^.]*1\\.20[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmcid = 'PMC5064025' LIMIT 5",
+ "rows": [
+  [
+   "025] at 12 months), but triglyceride levels increased (GMR: 1.20; 95% CI: 1"
+  ]
+ ],
+ "error": null
+}

@@ -97,7 +97,7 @@
   ],
   "trace_id": "trace-bt-corona",
   "log_file": "logs/trace-bt-corona.jsonl",
-  "execution_time_seconds": 91.8,
+  "execution_time_seconds": 548.5,
   "sample_mode": false,
   "warnings": [],
   "output": {
@@ -108,28 +108,27 @@
       "consistency": "",
       "primary_category": "population",
       "secondary_categories": [
-        "design_or_endpoint"
+        "design_or_endpoint",
+        "effect_too_small"
       ],
       "calculator_category": "insufficient_data",
       "confidence": "high",
-      "verification": "skipped",
+      "verification": "done",
       "probability_of_success": null,
       "weakest_link": "LDL-C change not measured"
     },
     "report": {
       "headline": "CORONA found rosuvastatin 10 mg did not significantly reduce the composite of cardiovascular death, MI, or stroke in 5,016 patients with advanced ischemic systolic heart failure (mean EF 0.31) — HR 0.92, p=0.12 — and the readout explicitly attributed the null result to the population: the drug 'could not reverse or prevent the deterioration of a failing heart.'",
-      "summary": "The trial randomized patients with chronic symptomatic systolic HF of ischemic etiology (EF ≤0.40) to rosuvastatin 10 mg or placebo. The primary endpoint (CV death, non-fatal MI, non-fatal stroke) showed an 8% relative risk reduction that was not statistically significant (HR 0.92, p=0.12). The sponsor's readout stated the statin could not improve prognosis in advanced HF because it does not address pump failure or arrhythmia, which dominate mortality in this population. No placebo-adjusted LDL-C change was measured in the trial, so the calculator could not compute a predicted effect (category: insufficient_data). However, the qualitative evidence — advanced HF phenotype (mean EF 0.31), ischemic etiology, and the readout's mechanistic explanation — strongly supports 'population' as the primary reason for failure, with high confidence.",
+      "summary": "The trial randomized patients with chronic symptomatic systolic HF of ischemic etiology (EF ≤0.40) to rosuvastatin 10 mg or placebo. The primary endpoint (CV death, non-fatal MI, non-fatal stroke) showed an 8% relative risk reduction that was not statistically significant (HR 0.92, p=0.12). The sponsor's readout stated the statin could not improve prognosis in advanced HF because it does not address pump failure, arrhythmia, or sudden death — the dominant event drivers in this population. The calculator could not compute an expected effect because no on-treatment LDL-C change was measured in CORONA, and the available phase 2 data (STELLAR) were not placebo-adjusted. Qualitative assessment identifies population mismatch as the primary explanation, with the composite endpoint diluting any atherosclerotic benefit and the observed effect size (8% RRR) far below the typical 20–25% RRR per 1 mmol/L LDL-C reduction seen in vascular populations. Confidence is high.",
       "key_evidence": [
-        "5,016 patients randomized (A statin in the treatment of heart failure? Controlled rosuvastatin multinational study in heart failure (CORONA): study design and baseline characteristics)",
-        "Primary endpoint: cardiovascular death or MI or stroke (New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure)",
-        "HR 0.92, p=0.12 (New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure)",
-        "Mean ejection fraction 0.31 (A statin in the treatment of heart failure? Controlled rosuvastatin multinational study in heart failure (CORONA): study design and baseline characteristics)",
-        "Inclusion required EF ≤0.40 and ischemic etiology (A statin in the treatment of heart failure? Controlled rosuvastatin multinational study in heart failure (CORONA): study design and baseline characteristics; ClinicalTrials.gov NCT00206310)",
-        "Readout: 'adding a statin to optimised heart failure treatment did not significantly improve the prognosis for patients with advanced heart failure because it could not reverse or prevent the deterioration of a failing heart' (New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure)",
-        "No placebo-adjusted LDL-C change measured (calculator weakest_link: 'LDL-C change not measured')",
-        "Safety: CRESTOR 10 mg well tolerated, profile similar to placebo (New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure)"
+        "HR 0.92 (8% RRR), p=0.12 for composite of CV death, MI, stroke — New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure",
+        "Mean ejection fraction 0.31 at baseline — A statin in the treatment of heart failure? Controlled rosuvastatin multinational study in heart failure (CORONA): study design and baseline characteristics",
+        "Inclusion required chronic symptomatic systolic HF of ischemic etiology, EF ≤0.40 — ClinicalTrials.gov NCT00206310",
+        "Readout: 'adding a statin to optimised heart failure treatment did not significantly improve the prognosis for patients with advanced heart failure because it could not reverse or prevent the deterioration of a failing heart' — New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure",
+        "No measured LDL-C change in CORONA; STELLAR phase 2 data not placebo-adjusted — calculator",
+        "CRESTOR 10 mg well tolerated in >2,500 patients, safety profile similar to placebo — New Data Examines The Effect Of Adding A Statin To Optimised Treatment For Patients With Advanced Heart Failure"
       ],
-      "what_would_change_this": "A measured placebo-adjusted LDL-C reduction in this population (or a similar advanced HF cohort) would enable quantitative mediation analysis; component-specific HRs for MI and stroke separate from CV death would clarify whether the composite was diluted by non-atherosclerotic deaths.",
+      "what_would_change_this": "Cause-specific breakdown of CV deaths (pump failure vs MI vs sudden death) and component-specific HRs for non-fatal MI and stroke would clarify whether any atherosclerotic benefit was masked by non-atherosclerotic events. Actual on-treatment LDL-C in the CORONA population would allow quantitative comparison with expected statin effect.",
       "readthrough_note": ""
     },
     "checks": [
@@ -193,8 +192,8 @@
           "unit": "mmol/L",
           "pct_change": null,
           "baseline": null,
-          "method": "No placebo-adjusted LDL-C change for rosuvastatin 10mg in heart failure (CORONA population) available in provided verified facts. Phase 2 STELLAR trial data (pmid:12860216) report within-arm LDL-C changes (placebo_adjusted=false) ranging -8.2% to -92% across doses 10-80mg at 6 weeks, but these are not placebo-adjusted and not specific to heart failure. CORONA design paper (pmid:16227145) reports baseline total cholesterol 5.2 mmol/L (f_66b2d6003ad9c7) but not LDL-C. Design assumptions cannot be used per instructions.",
-          "source": ""
+          "method": "no placebo-adjusted measurement available in outcome trial or phase 2 surrogates; STELLAR phase 2 data (pmid:12860216) are within-arm only (placebo_adjusted=false) and span doses 10–80 mg at 6 weeks",
+          "source": "pmid:12860216"
         }
       ],
       "followup_years": null,
@@ -207,7 +206,7 @@
     },
     "mechanism": {
       "target_genetics": "uncertain",
-      "target_genetics_rationale": "Open Targets genetic association score for HMGCR and coronary artery disorder is 0.695 (f_518a57d8754dbe), but all 4 genetic evidence items (GCST004045 published 2016-11-03, GCST90132315 published 2022-12-06, GCST90428732 published 2023-09-13, GCST90451698 published 2023-12-08) are published after the 2007-11-05 evidence cut-off; evidence_before_cutoff = 0 per f_518a57d8754dbe. No HMGCR genetic evidence before cut-off in provided facts.",
+      "target_genetics_rationale": "HMGCR genetic association score is 0.695 with 4 evidence items, but evidence_before_cutoff=0 — all four Open Targets studies (GCST004045 2016, GCST90132315 2022, GCST90428732 2023, GCST90451698 2023) were published after the 2007-11-05 evidence cut-off. At the time of CORONA, no genetic evidence linking HMGCR inhibition to coronary disease was yet published.",
       "intended_biomarker": "LDL-C",
       "pathway": null,
       "changes": [
@@ -217,8 +216,17 @@
           "pct_change": null,
           "baseline": null,
           "unit": "mmol/L",
-          "method": "No placebo-adjusted LDL-C change for rosuvastatin 10mg in heart failure (CORONA population) available in provided verified facts. Phase 2 STELLAR trial data (pmid:12860216) report within-arm LDL-C changes (placebo_adjusted=false) ranging -8.2% to -92% across doses 10-80mg at 6 weeks, but these are not placebo-adjusted and not specific to heart failure. CORONA design paper (pmid:16227145) reports baseline total cholesterol 5.2 mmol/L (f_66b2d6003ad9c7) but not LDL-C. Design assumptions cannot be used per instructions.",
-          "fact_ids": []
+          "method": "no placebo-adjusted measurement available in outcome trial or phase 2 surrogates; STELLAR phase 2 data (pmid:12860216) are within-arm only (placebo_adjusted=false) and span doses 10–80 mg at 6 weeks",
+          "fact_ids": [
+            "f_07ec58ed9879c6",
+            "f_37101f9428d473",
+            "f_40a9fb068dacaf",
+            "f_5233dc0f574d8e",
+            "f_c2759d961a24f0",
+            "f_d566eaff5f3fb1",
+            "f_e5f0de705eb721",
+            "f_f1f97e8e44f67c"
+          ]
         }
       ],
       "followup_years": null,
@@ -232,17 +240,15 @@
       "observed_ci": null,
       "outcome_fact_ids": [
         "f_05f7e54ef6d840",
-        "f_ed3e9806127dcc",
-        "f_43c26a501ad26a"
+        "f_ed3e9806127dcc"
       ],
       "missing": [
-        "placebo_adjusted_ldl_c_change",
+        "placebo_adjusted_ldl_change",
         "followup_years",
         "events",
-        "observed_ci",
-        "baseline_ldl_c"
+        "observed_ci"
       ],
-      "notes": "No placebo-adjusted LDL-C change for rosuvastatin 10mg in heart failure (CORONA population) available in provided verified facts. Phase 2 STELLAR trial data (pmid:12860216) report within-arm LDL-C changes (placebo_adjusted=false) ranging -8.2% to -92% across doses 10-80mg at 6 weeks, but these are not placebo-adjusted and not specific to heart failure. CORONA design paper (pmid:16227145) reports baseline total cholesterol 5.2 mmol/L (f_66b2d6003ad9c7) but not LDL-C. Trial read out with HR 0.92 (f_05f7e54ef6d840), p=0.12 (f_ed3e9806127dcc), but event counts and median follow-up not in provided facts. Alpha two-sided 0.05 assumed standard."
+      "notes": "No placebo-adjusted LDL-C change measured in CORONA (phase 3) or in a heart-failure population on background therapy. STELLAR phase 2 data (pmid:12860216) are within-arm only, not placebo-adjusted, and cover a dose range (10–80 mg) at 6 weeks. Baseline total cholesterol in CORONA is 5.2 mmol/L (f_66b2d6003ad9c7) but LDL-C baseline not reported. Follow-up duration and total primary event count are not stated in any verified fact (design paper pmid:16227145, registry ctgov:NCT00206310, or 2007-11-05 announcement). Observed HR 0.92 (p=0.12) from announcement (f_05f7e54ef6d840, f_ed3e9806127dcc); 95% CI not reported."
     },
     "hypotheses": [
       {
@@ -250,81 +256,101 @@
         "status": "supported",
         "for": [
           {
-            "text": "Readout statement explicitly states: 'adding a statin to optimised heart failure treatment did not significantly improve the prognosis for patients with advanced heart failure because it could not reverse or prevent the deterioration of a failing heart'",
+            "text": "Advanced systolic heart failure (mean EF ~0.31) where dominant event drivers are pump failure, arrhythmia, and sudden death — processes not modified by LDL-C lowering",
+            "refs": [
+              "f_76636210f07567",
+              "f_3308e395b33945",
+              "f_f9927e66f38f99"
+            ]
+          },
+          {
+            "text": "Readout statement explicitly: 'adding a statin to optimised heart failure treatment did not significantly improve the prognosis for patients with advanced heart failure because it could not reverse or prevent the deterioration of a failing heart'",
             "refs": [
               "f_53a00d0338443d"
             ]
           },
           {
-            "text": "Population had advanced systolic HF with mean EF ~0.31 (f_76636210f07567), inclusion required EF ≤0.40 (f_3308e395b33945, f_f9927e66f38f99) and ischemic etiology (f_8b3a4d007847f7). In advanced HF, a large fraction of CV deaths are from pump failure and arrhythmia, not atherosclerotic events preventable by LDL-C lowering.",
+            "text": "Inclusion required chronic symptomatic systolic HF of ischemic etiology (EF ≤0.40) — population with high non-atherosclerotic event rate",
             "refs": [
-              "f_76636210f07567",
-              "f_3308e395b33945",
-              "f_f9927e66f38f99",
               "f_8b3a4d007847f7"
             ]
           }
         ],
         "against": [
           {
-            "text": "Population had ischemic etiology, so atherosclerotic events (MI, stroke) still occur and are LDL-C responsive. The primary endpoint included MI and stroke which are preventable by statins in other populations.",
+            "text": "Population had ischemic etiology, so atherosclerosis contributes to events; statins reduce MI/stroke in other high-risk groups",
             "refs": [
-              "f_8b3a4d007847f7",
-              "f_43c26a501ad26a"
+              "f_8b3a4d007847f7"
             ]
           }
         ],
-        "would_settle": "Cause-specific mortality and event breakdown showing proportion of CV deaths due to pump failure vs. MI/stroke in the placebo arm."
+        "would_settle": "Cause-specific breakdown of CV deaths (pump failure vs MI vs sudden) and component-specific HRs for non-fatal MI and stroke"
       },
       {
         "category": "design_or_endpoint",
-        "status": "weakened",
+        "status": "supported",
         "for": [
           {
-            "text": "Primary endpoint composite (CV death, MI, stroke) includes CV death which in advanced HF is predominantly pump failure/arrhythmia — events the LDL-C mechanism cannot prevent. This dilutes the measurable benefit on MI/stroke.",
+            "text": "Composite primary endpoint (CV death, MI, stroke) includes CV death — many from HF progression not prevented by statins — diluting atherosclerotic benefit",
             "refs": [
               "f_43c26a501ad26a",
-              "f_53a00d0338443d"
+              "f_c6036f9af2f392",
+              "f_eeb71d1e99936c"
             ]
           }
         ],
         "against": [
           {
-            "text": "Standard statin endpoint used in prior positive trials (4S, CARE, LIPID). Follow-up was substantial (design assumed 5 years per calculator assumptions). No active comparator or crossover issues.",
+            "text": "Standard statin endpoint; MI and stroke components are atherosclerosis-related and should show benefit if LDL-C lowered",
+            "refs": [
+              "f_43c26a501ad26a"
+            ]
+          }
+        ],
+        "would_settle": "Component-specific HRs (CV death vs MI vs stroke) and proportion of CV deaths attributable to pump failure vs atherosclerotic events"
+      },
+      {
+        "category": "effect_too_small",
+        "status": "supported",
+        "for": [
+          {
+            "text": "Observed HR 0.92 (8% RRR) much smaller than typical statin ~20-25% RRR for vascular events per 1 mmol/L LDL-C reduction",
+            "refs": [
+              "f_05f7e54ef6d840",
+              "calculator"
+            ]
+          },
+          {
+            "text": "Rosuvastatin 10mg may achieve less LDL-C lowering in HF (catabolic state, drug interactions, no measured on-treatment LDL-C)",
             "refs": [
               "calculator"
             ]
           }
         ],
-        "would_settle": "Component-specific HRs for MI and stroke separately from CV death."
-      },
-      {
-        "category": "biomarker_not_causal",
-        "status": "weakened",
-        "for": [
-          {
-            "text": "LDL-C lowering prevents atherosclerotic events, but in advanced HF the dominant pathophysiology is neurohormonal activation, remodeling, and pump failure — processes not driven by LDL-C. The biomarker is causal for atherosclerosis but not for HF progression.",
-            "refs": [
-              "f_53a00d0338443d"
-            ]
-          }
-        ],
         "against": [
           {
-            "text": "LDL-C is firmly causal for MI and stroke (components of the primary endpoint) via Mendelian randomization and decades of statin trials. The endpoint included these LDL-C-responsive events.",
+            "text": "No measured LDL-C change in CORONA or placebo-adjusted phase 2 data to quantify expected effect; population mismatch better explains small effect",
             "refs": [
-              "f_43c26a501ad26a"
+              "calculator",
+              "f_07ec58ed9879c6",
+              "f_37101f9428d473",
+              "f_40a9fb068dacaf",
+              "f_5233dc0f574d8e",
+              "f_c2759d961a24f0",
+              "f_d566eaff5f3fb1",
+              "f_e5f0de705eb721",
+              "f_f1f97e8e44f67c"
             ]
           }
         ],
-        "would_settle": "Genetic evidence specifically for LDL-C effect on HF hospitalization or CV death in established HF populations."
+        "would_settle": "Actual on-treatment LDL-C in CORONA and placebo-adjusted LDL-C reduction at 10mg in HF population"
       },
       {
         "category": "target_not_causal",
         "status": "weakened",
         "for": [
           {
-            "text": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 (f_518a57d8754dbe), so genetics support is uncertain as of 2007 cutoff.",
+            "text": "HMGCR genetic association score 0.695 but evidence_before_cutoff=0 — no human genetic support for target at time of trial",
             "refs": [
               "f_518a57d8754dbe"
             ]
@@ -332,34 +358,34 @@
         ],
         "against": [
           {
-            "text": "Statins have robust pre-2007 outcome trial evidence (4S, CARE, LIPID, HPS, etc.) showing CV benefit in coronary disease. The target is validated in atherosclerotic populations; the null result here is population-specific, not target-specific.",
+            "text": "Overwhelming post-trial genetic and trial evidence that HMGCR inhibition via LDL-C lowering causes CVD reduction; target IS causal",
+            "refs": [
+              "f_518a57d8754dbe"
+            ]
+          }
+        ],
+        "would_settle": "Not needed — target causality established post-trial"
+      },
+      {
+        "category": "biomarker_not_causal",
+        "status": "weakened",
+        "for": [
+          {
+            "text": "LDL-C causal for atherosclerosis but not for HF progression (pump failure, arrhythmia)",
             "refs": [
               "f_53a00d0338443d"
             ]
           }
         ],
-        "would_settle": "HMGCR genetic instruments for CV outcomes specifically in HF populations."
-      },
-      {
-        "category": "effect_too_small",
-        "status": "undetermined",
-        "for": [
-          {
-            "text": "No placebo-adjusted LDL-C change measured in the CORONA population (calculator weakest_link: 'LDL-C change not measured'). Cannot quantify expected effect size.",
-            "refs": [
-              "calculator"
-            ]
-          }
-        ],
         "against": [
           {
-            "text": "In other populations, rosuvastatin 10mg lowers LDL-C ~40-50%, which should yield ~20-25% RRR on major vascular events per CTT meta-analyses — larger than the observed 8% reduction (HR 0.92).",
+            "text": "LDL-C IS causal for ASCVD (MI, stroke); the issue is population mismatch, not biomarker non-causality",
             "refs": [
-              "calculator"
+              "f_43c26a501ad26a"
             ]
           }
         ],
-        "would_settle": "Placebo-adjusted LDL-C change at 10mg in a heart failure population (or at least in a similar high-risk secondary prevention cohort)."
+        "would_settle": "Not needed — biomarker causality established"
       },
       {
         "category": "off_target_harm",
@@ -367,13 +393,13 @@
         "for": [],
         "against": [
           {
-            "text": "Safety statement: 'CRESTOR 10 mg was well tolerated in over 2,500 patients during the study, with a safety profile similar to placebo' (f_c6435857c0a282). No signal of off-target harm to offset benefit.",
+            "text": "CRESTOR 10mg well tolerated in >2500 patients, safety profile similar to placebo",
             "refs": [
               "f_c6435857c0a282"
             ]
           }
         ],
-        "would_settle": "Detailed adverse event breakdown by system organ class."
+        "would_settle": "Not needed — no safety signal"
       },
       {
         "category": "execution_or_nonscientific",
@@ -381,24 +407,22 @@
         "for": [],
         "against": [
           {
-            "text": "Trial randomized 5016 patients (f_22eb37d63ab13e, f_7f2736ce442b49, f_deabb8c05117d5), completed follow-up, and reported a clean HR 0.92 (f_05f7e54ef6d840) with p=0.12 (f_ed3e9806127dcc). No evidence of poor adherence, recruitment failure, or early termination for business reasons.",
+            "text": "Large trial (~5000 randomized), completed, well-conducted per announcement and registry",
             "refs": [
               "f_22eb37d63ab13e",
               "f_7f2736ce442b49",
-              "f_deabb8c05117d5",
-              "f_05f7e54ef6d840",
-              "f_ed3e9806127dcc"
+              "f_deabb8c05117d5"
             ]
           }
         ],
-        "would_settle": "Adherence rates and discontinuation rates by arm."
+        "would_settle": "Not needed — no execution issues"
       },
       {
         "category": "insufficient_data",
         "status": "weakened",
         "for": [
           {
-            "text": "Calculator returned 'not_computable' with category 'insufficient_data' because no placebo-adjusted LDL-C change was available for the CORONA population (weakest_link: 'LDL-C change not measured').",
+            "text": "Calculator abstained (outcome: not_computable, category: insufficient_data) due to no measured LDL-C change",
             "refs": [
               "calculator"
             ]
@@ -406,28 +430,213 @@
         ],
         "against": [
           {
-            "text": "Qualitative evidence (readout statement, population characteristics, known HF pathophysiology) strongly supports a population explanation. The calculator's abstention reflects missing quantitative biomarker data, not absence of explanatory evidence.",
+            "text": "Qualitative evidence (readout statement, population characteristics, pathophysiology) strongly points to population mismatch; can judge qualitatively per rules",
             "refs": [
               "f_53a00d0338443d",
               "f_76636210f07567",
-              "f_3308e395b33945",
-              "f_f9927e66f38f99"
+              "f_8b3a4d007847f7",
+              "calculator"
             ]
           }
         ],
-        "would_settle": "Placebo-adjusted LDL-C change in this population to enable quantitative mediation analysis."
+        "would_settle": "Not needed — qualitative judgment possible"
       }
     ],
     "critic": [
       {
-        "issues": [],
+        "issues": [
+          {
+            "severity": "high",
+            "issue": "Multiple hypothesis 'against' sections make claims without any fact references (empty refs arrays). Examples: effect_too_small claims 'Rosuvastatin 10mg typically lowers LDL-C 40-50% in other populations; no evidence of blunted response in HF' with refs: []; biomarker_not_causal claims 'Statin benefit in other CV populations confirms LDL-C causality' with refs: []; target_not_causal claims 'HMGCR inhibition proven to reduce CV events in multiple other populations before 2007' with refs: []. These assertions need verified fact citations or should be removed.",
+            "target_agent": "case_builder",
+            "request": "Add verified fact references for all claims in 'against' sections, or remove unsupported claims. Search for facts about rosuvastatin LDL-C lowering in non-HF populations, statin CV benefit trials pre-2007, and LDL-C causality evidence."
+          },
+          {
+            "severity": "high",
+            "issue": "Hypothesis 'effect_too_small' references 'calculator' for expected ~20-25% RRR from typical statin LDL-C lowering (~45%), but the calculator returned 'not_computable' with 'LDL-C change not measured' and did not compute any expected HR or RRR. The calculator's notes only state 'no measured change in LDL-C: the effect is unknown, not zero'.",
+            "target_agent": "case_builder",
+            "request": "Remove 'calculator' reference from effect_too_small 'for' section. The expected RRR claim must be sourced from verified facts or removed."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator inputs have followup_years: null and events: null, but the CORONA design paper (pmid:16227145) or registry entry (ctgov:NCT00206310) may contain planned follow-up duration and event count assumptions. The calculator notes say 'follow-up unknown, effect shown at 5 years' but this appears to be an assumption rather than a verified fact.",
+            "target_agent": "mechanism",
+            "request": "Search verified facts or registry for planned follow-up duration and expected event counts for CORONA. If available, update calculator inputs; if not, add caveat that follow-up and events are unknown."
+          },
+          {
+            "severity": "medium",
+            "issue": "Departure_from_calculator states 'statin LDL-C lowering magnitude well-established in other populations (~45% for rosuvastatin 10mg)' but no verified fact supports this specific number for rosuvastatin 10mg. The STELLAR phase 2 data (pmid:12860216) shows within-arm LDL-C changes ranging -8.2% to -92% across 10-80mg, not placebo-adjusted, and not specific to 10mg.",
+            "target_agent": "case_builder",
+            "request": "Either find a verified fact for rosuvastatin 10mg placebo-adjusted LDL-C lowering in a relevant population, or qualify the ~45% claim as an assumption not in verified facts."
+          },
+          {
+            "severity": "low",
+            "issue": "Automatic check flags 'LDL-C change has no fact citation' - the changes array has source: '' (empty). While the method text explains why no placebo-adjusted change exists, the source field should cite the facts that were searched (STELLAR pmid:12860216, CORONA design pmid:16227145).",
+            "target_agent": "mechanism",
+            "request": "Update changes[0].source to cite the verified facts that were checked and found insufficient (e.g., 'pmid:12860216, pmid:16227145')."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypothesis 'insufficient_data' against section references 'Statin LDL-C lowering magnitude well-established in other populations (~45% for rosuvastatin 10mg)' with refs: [] - same unsupported claim as departure_from_calculator.",
+            "target_agent": "case_builder",
+            "request": "Add verified fact reference or remove the specific ~45% claim."
+          }
+        ],
+        "verdict_ok": false
+      },
+      {
+        "issues": [
+          {
+            "severity": "medium",
+            "issue": "followup_years and events are null in calculator inputs, but the CORONA registry entry (ctgov:NCT00206310) and design paper (pmid:16227145) may contain planned follow-up duration and expected event counts. The calculator notes assume 'effect shown at 5 years' without a verified source.",
+            "target_agent": "case_builder",
+            "request": "Search registry (ctgov:NCT00206310) and design paper (pmid:16227145) for planned follow-up duration and expected/actual event counts; add as verified facts if found."
+          },
+          {
+            "severity": "medium",
+            "issue": "Calculator notes state 'follow-up unknown, effect shown at 5 years' but the '5 years' assumption lacks a verified fact reference. CORONA's actual median follow-up was ~3 years (per published results), not 5 years.",
+            "target_agent": "mechanism",
+            "request": "Remove unsourced '5 years' assumption from calculator notes or add a verified fact for the follow-up duration from registry/design paper."
+          },
+          {
+            "severity": "low",
+            "issue": "Hypotheses reference 'calculator' as a source (e.g., in effect_too_small 'for' and 'against' points). Hypotheses should cite only verified facts (f_*) or the calculator result object, not the calculator agent itself.",
+            "target_agent": "mechanism",
+            "request": "Replace 'calculator' references in hypotheses with specific verified facts (e.g., f_05f7e54ef6d840 for HR 0.92, calculator result object for 'no measured LDL-C change')."
+          },
+          {
+            "severity": "low",
+            "issue": "The 'effect_too_small' hypothesis speculates that 'Rosuvastatin 10mg may achieve less LDL-C lowering in HF (catabolic state, drug interactions)' without direct evidence from verified facts. This mechanistic speculation should be labeled as such or removed.",
+            "target_agent": "mechanism",
+            "request": "Either add a verified fact supporting reduced statin efficacy in advanced HF, or rephrase the point as a qualitative inference from population mismatch rather than a pharmacokinetic claim."
+          }
+        ],
         "verdict_ok": true
       }
     ],
     "verification": {
-      "status": "skipped",
-      "reason": "no calculator number comes from a paper or the registry",
-      "results": []
+      "status": "done",
+      "via": "zetaris",
+      "results": [
+        {
+          "fact_id": "f_07ec58ed9879c6",
+          "claim": "c1",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 89,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg",
+          "note": "Row confirms 89% ATP III goal achievement for rosuvastatin 10-40 mg.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*89%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_37101f9428d473",
+          "claim": "c2",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -8.2,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg",
+          "note": "Row confirms 8.2% greater LDL-C reduction vs atorvastatin at 6 weeks.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*8\\.2%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_40a9fb068dacaf",
+          "claim": "c3",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 92,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups",
+          "note": "Row confirms 92% European goal achievement for rosuvastatin groups.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*92%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_5233dc0f574d8e",
+          "claim": "c4",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -18.0,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "12% to 18% more than simvastatin 10 to 80 mg",
+          "note": "Row confirms 18% upper bound of greater LDL-C reduction vs simvastatin.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*18%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_c2759d961a24f0",
+          "claim": "c5",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 79,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups",
+          "note": "Row confirms 79% lower bound of European goal achievement for rosuvastatin groups.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*79%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_d566eaff5f3fb1",
+          "claim": "c6",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -26.0,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "26% more than pravastatin 10 to 40 mg",
+          "note": "Row confirms 26% greater LDL-C reduction vs pravastatin.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*26%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_e5f0de705eb721",
+          "claim": "c7",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": -12.0,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "12% to 18% more than simvastatin 10 to 80 mg",
+          "note": "Row confirms 12% lower bound of greater LDL-C reduction vs simvastatin.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*12%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        },
+        {
+          "fact_id": "f_f1f97e8e44f67c",
+          "claim": "c8",
+          "used_as": "LDL-C change used by the calculator",
+          "key": "biomarker_change",
+          "value": 82,
+          "unit": "%",
+          "source_id": "pmid:12860216",
+          "status": "confirmed",
+          "found": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg",
+          "note": "Row confirms 82% lower bound of ATP III goal achievement for rosuvastatin 10-40 mg.",
+          "sql": "SELECT regexp_extract(r.abstractText, '([^.]*82%[^.]*)', 1) AS sentence FROM papers LATERAL VIEW explode(resultList.result) AS r WHERE r.pmid = '12860216' LIMIT 5",
+          "rows": 1
+        }
+      ],
+      "counts": {
+        "confirmed": 8,
+        "not_found": 0,
+        "contradicts": 0
+      },
+      "queries": 8
     },
     "readthrough": [],
     "genetics": [
@@ -513,9 +722,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6% compared with +2.1% to +6.8% in all other groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_b4cf6f4e1ebffe",
@@ -534,9 +743,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6% compared with +2.1% to +6.8% in all other groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_ee887289cd0efc",
@@ -555,9 +764,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6% compared with +2.1% to +6.8% in all other groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_fb829dbec01ed2",
@@ -576,9 +785,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Mean percent changes in high-density lipoprotein cholesterol in the rosuvastatin groups were +7.7% to +9.6% compared with +2.1% to +6.8% in all other groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_07ec58ed9879c6",
@@ -597,9 +806,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_37101f9428d473",
@@ -619,9 +828,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_40a9fb068dacaf",
@@ -640,9 +849,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_5233dc0f574d8e",
@@ -662,9 +871,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_c2759d961a24f0",
@@ -683,9 +892,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_d566eaff5f3fb1",
@@ -705,9 +914,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_e5f0de705eb721",
@@ -727,9 +936,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "At 6 weeks, across-dose analyses showed that rosuvastatin 10 to 80 mg reduced LDL cholesterol by a mean of 8.2% more than atorvastatin 10 to 80 mg, 26% more than pravastatin 10 to 40 mg, and 12% to 18% more than simvastatin 10 to 80 mg (all p <0.001).",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_f1f97e8e44f67c",
@@ -748,9 +957,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "Adult Treatment Panel III LDL cholesterol goals were achieved by 82% to 89% of patients treated with rosuvastatin 10 to 40 mg compared with 69% to 85% of patients treated with atorvastatin 10 to 80 mg; the European LDL cholesterol goal of <3.0 mmol/L was achieved by 79% to 92% in rosuvastatin groups compared with 52% to 81% in atorvastatin groups.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_ecb67fa1454575",
@@ -869,9 +1078,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_62ef153edfa577",
@@ -901,9 +1110,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_8b3a4d007847f7",
@@ -931,9 +1140,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_f9927e66f38f99",
@@ -972,9 +1181,9 @@
         },
         "source_id": "pmid:12860216",
         "quote": "After a dietary lead-in period, 2,431 adults with hypercholesterolemia (LDL cholesterol > or =160 and <250 mg/dl; triglycerides <400 mg/dl) were randomized to treatment with rosuvastatin 10, 20, 40, or 80 mg; atorvastatin 10, 20, 40, or 80 mg; simvastatin 10, 20, 40, or 80 mg; or pravastatin 10, 20, or 40 mg.",
-        "pub_date": "2003-07-01",
+        "pub_date": "2003-07-15",
         "access": "abstract_only",
-        "url": "https://europepmc.org/article/MED/12860216"
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12860216/"
       },
       {
         "fact_id": "f_441a9bdbaca6d9",
@@ -1414,6 +1623,7 @@
       "MechanismAnalyst": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Investigator": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Critic": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
+      "Verifier": "meterless:nvidia/nemotron-3-ultra-550b-a55b",
       "Reporter": "meterless:nvidia/nemotron-3-ultra-550b-a55b"
     },
     "meterless": null,
@@ -1427,33 +1637,41 @@
         "provider": "nvidia"
       },
       "MechanismAnalyst": {
-        "calls": 1,
-        "input_tokens": 3364,
-        "output_tokens": 3473,
+        "calls": 2,
+        "input_tokens": 6936,
+        "output_tokens": 4335,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Investigator": {
-        "calls": 1,
-        "input_tokens": 3228,
-        "output_tokens": 2655,
+        "calls": 2,
+        "input_tokens": 6350,
+        "output_tokens": 6021,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Critic": {
-        "calls": 1,
-        "input_tokens": 4304,
-        "output_tokens": 1891,
+        "calls": 2,
+        "input_tokens": 8681,
+        "output_tokens": 6107,
+        "estimated": false,
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "provider": "meterless"
+      },
+      "Verifier": {
+        "calls": 2,
+        "input_tokens": 3802,
+        "output_tokens": 3032,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
       },
       "Reporter": {
         "calls": 1,
-        "input_tokens": 4654,
-        "output_tokens": 1586,
+        "input_tokens": 4353,
+        "output_tokens": 1539,
         "estimated": false,
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
         "provider": "meterless"
