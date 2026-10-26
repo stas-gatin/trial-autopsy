@@ -55,9 +55,12 @@ async function getJSON(url, opts) {
 
 /* ---------- intake ---------- */
 
+let sampleMode = false;   // offline demo: only recorded analyses can run
+
 async function refreshHealth() {
   try {
     const h = await getJSON("/health");
+    sampleMode = !!h.sample_mode;
     const chip = $("modeChip");
     chip.textContent = h.sample_mode ? "SAMPLE MODE · offline, recorded" : "LIVE · open data sources";
     chip.className = `chip ${h.sample_mode ? "chip-sample" : "chip-live"}`;
@@ -1095,6 +1098,22 @@ function renderLive(events) {
 
 function showError(err, res) {
   const box = $("errorBox");
+  // In the offline demo a trial without a recording cannot run; point to the finished analyses instead of an error.
+  if (sampleMode && (err.type === "ModelOutputNotRecorded" || err.type === "OfflineCacheMiss")) {
+    box.className = "panel offline-note";
+    box.innerHTML = `<h3>This demo runs offline</h3>
+      <p>No AI model is connected here, so only analyses that were recorded can run. Open one of the 41 finished analyses:
+        each opens instantly with the full report, the evidence and a step-by-step replay of the agents.</p>
+      <div class="offline-actions"><a class="btn-primary inline" href="#/analyses">Browse all analyses</a>
+        <a class="btn-ghost" href="#/run/example-pelacarsen">Open the pelacarsen example</a></div>
+      <p class="muted">To analyse any trial live, run Trial Autopsy on your own machine with your keys:
+        <a href="https://github.com/stas-gatin/trial-autopsy#quick-start">Quick start</a>.</p>`;
+    document.body.classList.add("has-report");
+    show("errorBox");
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  box.className = "panel error";
   let extra = "";
   if (err.type === "ModelOutputNotRecorded") extra = "<p>This request needs a live model. Add ANTHROPIC_API_KEY / NVIDIA_API_KEY to .env, or run a recorded case.</p>";
   if (err.type === "OutOfScope") extra = "<p>Trial Autopsy works only on phase 3 <b>cardiovascular outcome trials</b> " +
