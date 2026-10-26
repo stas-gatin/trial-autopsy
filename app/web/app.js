@@ -1142,6 +1142,12 @@ function renderPoweredBy(o, events) {
   $("poweredBy").innerHTML = parts.length ? `<span class="pb-label">Powered by</span>${parts.join("")}` : "";
 }
 
+// On a phone the wide diagrams scroll sideways inside their box; start them centred, where the answer is.
+function centerWide(box, tries = 15) {
+  if (box.clientWidth && box.scrollWidth > box.clientWidth) box.scrollLeft = (box.scrollWidth - box.clientWidth) / 2;
+  else if (tries) setTimeout(() => centerWide(box, tries - 1), 200);   // not laid out yet (the report is still opening)
+}
+
 function render(res) {
   const o = res.output;
   graphModels = o.models_used || {};
@@ -2064,6 +2070,7 @@ function renderPathway(res) {
   const show = (id, isThis) => {
     const n = PATHWAY[id];
     $("pathway").innerHTML = pathwaySVG(id);
+    centerWide($("pathway"));
     $("pathwayNote").innerHTML = `<span class="pw-badge${isThis ? "" : " pw-other"}">${isThis ? `This trial: ${esc(res.drug.name)}` : "Other target"}</span>
       <b>${esc(n.name)}</b>${n.drugs ? ` <span class="muted">· ${esc(n.drugs)}</span>` : ""}<p>${esc(n.note)}</p>` +
       (isThis ? "" : `<button type="button" class="btn-small" id="pwBack">Back to ${esc(res.drug.name)}</button>`);
@@ -2351,6 +2358,7 @@ function drawForest(o) {
   }
   s += "</svg>";
   $("forest").innerHTML = s;
+  centerWide($("forest"));
   const items = [
     t && ["lg-bell", "where the result is likely to land if the drug works as expected"],
     c.expected_hr && ["lg-exp", `most likely result (expected HR ${num(c.expected_hr)})`],
@@ -2360,23 +2368,54 @@ function drawForest(o) {
   $("chartLegend").innerHTML = items.map(([k, v]) => `<span><i class="lg ${k}"></i> ${esc(v)}</span>`).join("");
 }
 
+// Missing inputs are written by the model; show them in plain words.
+const plainInput = (t) => String(t).replace(/_/g, " ").replace(/\bldl c\b/gi, "LDL-C").replace(/\bsbp\b/gi, "blood pressure")
+  .replace(/\bmmhg\b/gi, "(mmHg)").replace(/\bobserved ci\b/gi, "observed confidence interval").replace(/\bhr\b/gi, "HR").trim();
+
+// Why the calculator gave no number, from its own basis line.
+function notComputedReason(c, ci) {
+  const basis = c.basis || "";
+  if (c.expected_hr === null || c.expected_hr === undefined) {
+    const m = basis.match(/^(.+?) change not measured$/);
+    if (m) return `It needs the drug's placebo-adjusted ${m[1]} change, and no verified value was in the documents published before the cut-off.`;
+    if (/no lipid change/.test(basis)) return "The drug works mainly through a pathway the calculator does not size, such as inflammation, so it gives no number rather than a misleading one.";
+    return "Its key input was not in the documents published before the cut-off.";
+  }
+  if (!ci.events) return "The expected effect is computed, but the trial's number of events was not public before the cut-off, so the chance to pass is not.";
+  return null;
+}
+
 function renderInputs(o) {
   const ci = o.calculator_inputs, c = o.calculator, m = o.mechanism || {};
+  const none = "not found before the cut-off";
   const rows = [
     ["Target genetics", ci.target_genetics],
     ["Intended biomarker", ci.intended_biomarker],
-    ...ci.changes.map((ch) => [`Δ ${ch.biomarker}`, [ch.abs_change !== null ? `${num(ch.abs_change)} (abs)` : null, ch.pct_change !== null ? `${num(ch.pct_change, 1)}%` : null, ch.baseline ? `baseline ${num(ch.baseline, 1)}` : null].filter(Boolean).join(" · ")]),
-    ["LDL-equivalent", `${num(c.ldl_equivalent_mmol)} mmol/L via ${c.basis}`],
+    ...ci.changes.map((ch) => [`Δ ${ch.biomarker}`, [ch.abs_change !== null ? `${num(ch.abs_change)} (abs)` : null, ch.pct_change !== null ? `${num(ch.pct_change, 1)}%` : null, ch.baseline ? `baseline ${num(ch.baseline, 1)}` : null].filter(Boolean).join(" · ") || none]),
+    ["LDL-equivalent", c.ldl_equivalent_mmol !== null && c.ldl_equivalent_mmol !== undefined ? `${num(c.ldl_equivalent_mmol)} mmol/L via ${c.basis}` : `not computed (${c.basis})`],
     ["Follow-up", ci.followup_years ? `${num(ci.followup_years, 2)} y` : "unknown (5 y shown)"],
     ["Events", ci.events ? `${ci.events}` : "unknown"],
     ["Alpha (two-sided)", num(ci.alpha_two_sided, 4)],
-    ["Expected HR", num(c.expected_hr)],
-    ["Power", pct(c.power)],
+    ["Expected HR", c.expected_hr !== null && c.expected_hr !== undefined ? num(c.expected_hr) : "not computed"],
+    ["Power", c.power !== null && c.power !== undefined ? pct(c.power) : "not computed"],
   ];
   if (ci.sbp_change_mmhg) rows.push(["Δ systolic BP", `${num(ci.sbp_change_mmhg, 1)} mmHg`]);
   if ((c.assumptions || []).length) rows.push(["Assumptions", c.assumptions.join("; ")]);
-  if ((m.missing || []).length) rows.push(["Missing", m.missing.join("; ")]);
+  if ((m.missing || []).length) rows.push(["Not found before the cut-off", m.missing.map(plainInput).join("; ")]);
   $("inputsTable").innerHTML = rows.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join("");
+  // Not computable: say so plainly instead of an empty gauge
+  const why = notComputedReason(c, ci);
+  document.querySelector("#tabInputs .gauge-row").classList.toggle("hidden", !!why);
+  let note = $("inputsNote");
+  if (!note) {
+    note = document.createElement("div");
+    note.id = "inputsNote";
+    note.className = "inputs-note";
+    $("inputsTable").before(note);
+  }
+  note.classList.toggle("hidden", !why);
+  const noEffect = c.expected_hr === null || c.expected_hr === undefined;
+  note.innerHTML = why ? `<b>${noEffect ? "Not computable." : "Chance not computed."}</b> ${esc(why)} The calculator does not guess${noEffect ? ": the diagnosis comes from the agents' review of the evidence" : ""}.` : "";
 }
 
 function refButtons(refs) {
