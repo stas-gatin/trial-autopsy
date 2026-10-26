@@ -9,9 +9,9 @@
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
 
 <p align="center">
-  <a href="https://trial-autopsy.onrender.com"><img src="https://img.shields.io/badge/Live_demo-try_it_now-0B6E79?style=for-the-badge&logo=render&logoColor=white" alt="Live demo: try it now"></a>
-  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="https://img.shields.io/badge/Demo_video-4_min-B42318?style=for-the-badge&logo=youtube&logoColor=white" alt="Demo video, 4 minutes"></a>
-  <a href="https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link"><img src="https://img.shields.io/badge/Pitch_deck-PDF-142133?style=for-the-badge&logo=googledrive&logoColor=white" alt="Pitch deck, PDF"></a>
+  <a href="https://trial-autopsy.onrender.com"><img src="docs/images/buttons/live.svg" height="64" alt="Try it live: trial-autopsy.onrender.com"></a>&nbsp;
+  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="docs/images/buttons/video.svg" height="64" alt="Watch the demo: 4 minutes on YouTube"></a>&nbsp;
+  <a href="https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link"><img src="docs/images/buttons/deck.svg" height="64" alt="Pitch deck: 29 slides, PDF"></a>
 </p>
 
 [![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
@@ -22,9 +22,6 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
 | **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
 | **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
-| **Live demo** | [trial-autopsy.onrender.com](https://trial-autopsy.onrender.com): the app with all 41 recorded analyses, offline and read-only. The free server sleeps when idle, so the first visit can take a minute |
-| **Demo video** | [Watch on YouTube, 4 minutes](https://youtu.be/CgPZ6zrE-NY) |
-| **Pitch deck** | [PDF, 29 slides](https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link) |
 
 > Research tool. Not medical or investment advice.
 
