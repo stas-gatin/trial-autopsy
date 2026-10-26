@@ -8,7 +8,11 @@
 
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
 
-**▶ [Try it live: trial-autopsy.onrender.com](https://trial-autopsy.onrender.com)** · **[Watch the 4-minute demo](https://youtu.be/CgPZ6zrE-NY)**
+<p align="center">
+  <a href="https://trial-autopsy.onrender.com"><img src="https://img.shields.io/badge/Live_demo-try_it_now-0B6E79?style=for-the-badge&logo=render&logoColor=white" alt="Live demo: try it now"></a>
+  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="https://img.shields.io/badge/Demo_video-4_min-B42318?style=for-the-badge&logo=youtube&logoColor=white" alt="Demo video, 4 minutes"></a>
+  <a href="https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link"><img src="https://img.shields.io/badge/Pitch_deck-PDF-142133?style=for-the-badge&logo=googledrive&logoColor=white" alt="Pitch deck, PDF"></a>
+</p>
 
 [![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
 
@@ -20,6 +24,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 | **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
 | **Live demo** | [trial-autopsy.onrender.com](https://trial-autopsy.onrender.com): the app with all 41 recorded analyses, offline and read-only. The free server sleeps when idle, so the first visit can take a minute |
 | **Demo video** | [Watch on YouTube, 4 minutes](https://youtu.be/CgPZ6zrE-NY) |
+| **Pitch deck** | [PDF, 29 slides](https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link) |
 
 > Research tool. Not medical or investment advice.
 
@@ -43,6 +48,7 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 |---|---|
 | Try it without installing anything | [Live demo](https://trial-autopsy.onrender.com) (offline, read-only) |
 | See it working in 4 minutes | [Demo video on YouTube](https://youtu.be/CgPZ6zrE-NY) |
+| The pitch in 29 slides | [Pitch deck (PDF)](https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link) |
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | Bugs found in Nightshift and reported with fixes | [Contributions back to Meterless](#meterless-nightshift-the-model-runtime-power) · [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4), [#5](https://github.com/Meterless/Meterless/issues/5) |
