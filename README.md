@@ -8,23 +8,10 @@
 
 Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team CurrentSky (Stanislav Gatin, solo)
 
-**▶ [Try it live: trial-autopsy.onrender.com](https://trial-autopsy.onrender.com)** · **[Watch the 4-minute demo](https://youtu.be/CgPZ6zrE-NY)**
-
-[![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
-
-| | |
-|---|---|
-| **Input** | A ClinicalTrials.gov ID (and, if you have it, the topline press release) |
-| **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
-| **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
-| **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
-| **Live demo** | [trial-autopsy.onrender.com](https://trial-autopsy.onrender.com): the app with all 41 recorded analyses, offline and read-only. The free server sleeps when idle, so the first visit can take a minute |
-| **Demo video** | [Watch on YouTube, 4 minutes](https://youtu.be/CgPZ6zrE-NY) |
-
-> Research tool. Not medical or investment advice.
-
 <p align="center">
-  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="docs/images/video_thumbnail.jpg" width="640" alt="Demo video: Trial Autopsy, 4 minutes on YouTube"></a>
+  <a href="https://trial-autopsy.onrender.com"><img src="docs/images/buttons/live.svg" height="64" alt="Try it live: trial-autopsy.onrender.com"></a>&nbsp;
+  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="docs/images/buttons/video.svg" height="64" alt="Watch the demo: 4 minutes on YouTube"></a>&nbsp;
+  <a href="https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link"><img src="docs/images/buttons/deck.svg" height="64" alt="Pitch deck: 29 slides, PDF"></a>
 </p>
 
 <p align="center">
@@ -37,12 +24,21 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
   <a href="#scope-and-limitations">Limitations</a>
 </p>
 
+[![CI](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml/badge.svg)](https://github.com/stas-gatin/trial-autopsy/actions/workflows/ci.yml)
+
+| | |
+|---|---|
+| **Input** | A ClinicalTrials.gov ID (and, if you have it, the topline press release) |
+| **Output** | A verdict, the main cause, four checks with their numbers, every competing explanation with evidence for and against, forecasts for rival drugs, and every fact with its verbatim quote |
+| **Runs on** | NVIDIA Nemotron through **Meterless Nightshift**, data read through **Zetaris**, facts stored in the **Meterless World Model** engine |
+| **Start** | `docker compose up --build`, then open http://localhost:8000: offline, no keys needed ([Quick start](#quick-start)) |
+
+> Research tool. Not medical or investment advice.
+
 ### Where to find what
 
 | You want | Go to |
 |---|---|
-| Try it without installing anything | [Live demo](https://trial-autopsy.onrender.com) (offline, read-only) |
-| See it working in 4 minutes | [Demo video on YouTube](https://youtu.be/CgPZ6zrE-NY) |
 | Install and run: one command, `docker compose up --build`, offline with no keys | [Quick start](#quick-start) · [Offline mode](#offline-mode) |
 | NVIDIA Nemotron and Meterless Nightshift | [Nemotron](#nvidia-nemotron-the-models-behind-every-ai-step) · [Nightshift](#meterless-nightshift-the-model-runtime-power) · per-run evidence: [`docs/evidence/nightshift_runs.md`](docs/evidence/nightshift_runs.md) |
 | Bugs found in Nightshift and reported with fixes | [Contributions back to Meterless](#meterless-nightshift-the-model-runtime-power) · [Meterless/Meterless#4](https://github.com/Meterless/Meterless/issues/4), [#5](https://github.com/Meterless/Meterless/issues/5) |
