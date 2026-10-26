@@ -10,8 +10,8 @@ Open Agent Hackathon 2026 · Track: *The Agent That Can Explain Why* · Team Cur
 
 <p align="center">
   <a href="https://trial-autopsy.onrender.com"><img src="docs/images/buttons/live.svg" height="64" alt="Try it live: trial-autopsy.onrender.com"></a>&nbsp;
-  <a href="https://youtu.be/CgPZ6zrE-NY"><img src="docs/images/buttons/video.svg" height="64" alt="Watch the demo: 4 minutes on YouTube"></a>&nbsp;
-  <a href="https://drive.google.com/file/d/1be-0M4MymRNaG_L8seYYF-hSGSak0q8A/view?usp=share_link"><img src="docs/images/buttons/deck.svg" height="64" alt="Pitch deck: 29 slides, PDF"></a>
+  <a href="https://youtu.be/glQQkSuQBOc"><img src="docs/images/buttons/video.svg" height="64" alt="Watch the demo: 4 minutes on YouTube"></a>&nbsp;
+  <a href="https://drive.google.com/file/d/1QqoAfkMMCE-P3kWbXzkrndXQvcwjsQ62/view?usp=share_link"><img src="docs/images/buttons/deck.svg" height="64" alt="Pitch deck: 29 slides, PDF"></a>
 </p>
 
 <p align="center">
